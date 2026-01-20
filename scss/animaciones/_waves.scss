@@ -1,0 +1,57 @@
+// components/_waves.scss
+
+// Asegúrate de importar las variables si las necesitas
+@use '../abstracts/variables' as v;
+
+.header {
+
+  &__wave{
+    position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  }
+  
+}
+
+.waves {
+  display: block;
+  width: 100%;
+  height: 15vh;      // Ajusta la altura según el diseño
+  min-height: 100px; // Altura mínima
+  max-height: 150px; // Altura máxima
+}
+
+/* Animación de las olas: cada <use> se mueve a diferentes velocidades */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+/* Keyframes para mover las olas de izquierda a derecha */
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}

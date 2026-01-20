@@ -1,0 +1,164 @@
+// layout/_footer.scss
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+
+.footer {
+  border-top: 4px solid v.$primary-color;
+  // background-color: v.$azul-marino;
+  background: linear-gradient(135deg,#0a4b8d 0%,#02427a 60%, #003366 100%);
+  padding-top: 1.5rem;
+  text-align: center;
+  color: v.$blanco;
+
+  &__contenedor {
+    width: 95%;
+    max-width: 120rem;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+  }
+
+  /* 
+    Este contenedor interno será el que maneje
+    la distribución en columna o fila 
+  */
+  &__contenido {
+    /* Por defecto (pantallas pequeñas): en columna */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; // separa un poco los elementos
+
+    /* A partir de 768px (versión escritorio): en fila */
+    @media (min-width: 768px) {
+      display: grid;
+      /* Tres columnas: una para nav, otra para el escudo y otra para las redes */
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center; /* Centra verticalmente */
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.6rem;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      justify-self: start;  // a la izquierda en escritorio
+    }
+  }
+  &__enlace.active,
+  &__enlace[aria-current="page"] {
+    background-color: #03315f !important;
+    color: v.$blanco !important; // O el color de texto que prefieras
+    border-color: rgba(255, 255, 255, 0.85) !important;
+    border-top-color: rgba(255, 255, 255, 0.85) !important;
+    box-shadow: none !important;
+    padding: 0.2rem 0.65rem !important;
+  }
+
+  &__enlace {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: v.$blanco;
+    border-radius: 0.3rem !important;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem !important;
+    min-height: 44px !important;
+    width: auto;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    border-top-color: rgba(255, 255, 255, 0.03) !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+    transition:
+      background-color 300ms ease,
+      color 300ms ease,
+      border-color 300ms ease,
+      box-shadow 300ms ease,
+      transform 300ms ease;
+    
+    &:hover {
+      background-color: v.$blanco !important;
+      color: v.$primary-color !important;
+      border-color: rgba(v.$primary-color, 0.40) !important;
+      border-top-color: rgba(v.$primary-color, 0.16) !important;
+      padding: 0.2rem 0.55rem !important;
+      transform: none !important;
+      box-shadow: inset 0 1px 0 rgba(v.$primary-color, 0.03) !important;
+    }
+
+    &:focus {
+      outline: 3px solid v.$blanco !important;
+      outline-offset: 3px;
+      transform: none !important;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25) !important;
+      border-color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    &:focus-visible {
+      outline: 3px solid v.$blanco !important;
+      outline-offset: 3px;
+      transform: none !important;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25) !important;
+      border-color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.3rem;
+      padding: 0.25rem 0.75rem !important;
+    }
+  }
+
+  body.modo-oscuro &__enlace.active,
+  body.modo-oscuro &__enlace[aria-current="page"] {
+    background-color: v.$gris-claro !important;
+    color: v.$negro !important;
+    border-color: v.$gris-medio-oscuro !important;
+    border-top-color: v.$gris-medio-oscuro !important;
+    box-shadow: none !important;
+  }
+
+  body.modo-oscuro &__enlace.active:hover,
+  body.modo-oscuro &__enlace[aria-current="page"]:hover {
+    background-color: v.$gris-claro !important;
+    color: v.$negro !important;
+    border-color: v.$gris-medio-oscuro !important;
+    border-top-color: v.$gris-medio-oscuro !important;
+    box-shadow: none !important;
+  }
+
+  &__escudo {
+    max-width: 5rem;
+    margin: 0 auto;
+    background: transparent !important;
+
+    @media (min-width: 768px) {
+      justify-self: center; 
+      max-width: 8rem;
+    }
+  }
+  body.modo-oscuro & {
+    background: #333 !important;
+  }
+  
+}
+
+
+
+.derechos {
+  font-size: 1.3rem;
+  margin: 0;
+  background-color: v.$primary-color;
+}

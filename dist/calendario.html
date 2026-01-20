@@ -1,0 +1,307 @@
+<!-- agenda.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Falla Suïssa - L'Alqueria del Favero - Calendario</title>
+  <meta name="description" content="Página de inicio de Fallas Suïssa - L'Alqueria del Favero. Descubre nuestros eventos, noticias y galería para vivir la experiencia completa de la falla.">
+  <meta name="keywords" content="fallas, tradición, suïssa, eventos, noticias, galería">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fallasuissa.es/calendario.html">
+  
+  <!-- Compatibilidad para IE -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Configuración para web apps en iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Color de tema para navegadores compatibles -->
+  <meta name="theme-color" content="#0a4b8d">
+  
+  <!-- Datos estructurados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://fallasuissa.es/calendario.html",
+    "url": "https://fallasuissa.es/calendario.html",
+    "name": "Calendario - Falla Suïssa - L'Alqueria del Favero",
+    "description": "Calendario de actividades y citas de la Falla Suïssa - L'Alqueria del Favero.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://fallasuissa.es/#website",
+      "url": "https://fallasuissa.es/",
+      "name": "Falla Suïssa - L'Alqueria del Favero"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://fallasuissa.es/#organization",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "url": "https://fallasuissa.es/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://fallasuissa.es/img/Escudo_falla.png"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Informacion general",
+        "email": "info@fallasuissa.es",
+        "availableLanguage": ["es", "va"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
+        "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
+        "https://tiktok.com/@fallasuissaalqueria"
+      ]
+    }
+  }
+  </script>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Calendario - Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:description" content="Descubre eventos, noticias y la galería de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta property="og:image" content="https://fallasuissa.es/img/og-share.png">
+  <meta property="og:image:secure_url" content="https://fallasuissa.es/img/og-share.png">
+  <meta property="og:url" content="https://fallasuissa.es/calendario.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calendario - Falla Suïssa - L'Alqueria del Favero">
+  <meta name="twitter:description" content="Descubre eventos y noticias de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta name="twitter:image" content="https://fallasuissa.es/img/og-share.png">
+  <meta name="twitter:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
+  <meta name="twitter:image:type" content="image/png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" crossorigin="anonymous">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  
+  <!-- Hojas de estilo -->
+  <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="css/main.css" media="print" onload="this.media='all'">
+</head>
+<body>
+  <!-- Skip link para navegación rápida -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <header class="header-inner">
+    <div class="header-inner__contenido contenedor">
+      <div class="header-inner__barra header-inner__barra--fixed">
+        <div class="header__botones">
+          <div class="header__lang">
+            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma" aria-expanded="false" tabindex="0">IDIOMA</button>
+            <div class="header__lang-options" id="langOptions" role="menu" aria-labelledby="langSwitcher">
+              <button class="header__lang-option" data-lang="es" role="menuitem" tabindex="-1">ESPAÑOL</button>
+              <button class="header__lang-option" data-lang="va" role="menuitem" tabindex="-1">VALENCIÀ</button>
+              <!-- <button class="header__lang-option" data-lang="en">English</button>
+              <button class="header__lang-option" data-lang="fr">Français</button> -->
+            </div>
+          </div>
+          <!-- Botón para alternar modo oscuro/claro -->
+          <button class="header__modo-boton" id="botonModoOscuro" aria-label="Cambiar a modo oscuro" aria-pressed="false" tabindex="0">
+            <!-- Icono Luna -->
+            <svg class="header__icon header__icon--moon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M21 12a9 9 0 01-9 9 7.5 7.5 0 01-6.88-4.4 7 7 0 0010.06-9.48A9 9 0 0121 12z"/>
+            </svg>
+          </button>
+
+        </div>
+        <div class="header__notificacion" id="notificacion" aria-live="polite" aria-atomic="true"></div>
+        <nav class="navegacion" role="navigation" aria-label="Navegación principal">
+          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html"></a>
+          <a class="navegacion__enlace active" data-i18n="nav.eventos" href="eventos.html" aria-current="page"></a>
+          <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html"></a>
+        </nav>
+      </div>
+        
+    </div>
+    <div class="header-inner__grid">
+        <div class="inner__titulo">
+          <picture>
+            <source srcset="img/Escudo_falla.avif" type="image/avif">
+            <source srcset="img/Escudo_falla.webp" type="image/webp">
+            <img class="header-inner__escudo" src="img/Escudo_falla.png" alt="Logo de la Falla Suïssa - L'Alqueria del Favero" loading="eager" decoding="sync" fetchpriority="high">
+          </picture>
+          
+          <h1 class="heading-inner" data-i18n="calendario.titulo"><span class="heading-inner__span">Calendario</span> </h1>
+        </div> 
+    </div>
+    
+  </header>
+  <div class="divisor-ancho"></div>
+  <!-- Contenedor de notificaciones -->
+  <div id="notificacion"></div>
+  <main class="cal" id="main-content">
+    <div class="calendario-eventos modo-sencillo" id="calendarioContenedor">
+      <div class="calendario-eventos__acciones">
+        <button class="calendario-eventos__boton-quitar" id="botonQuitarFiltros" data-i18n="calendario.quitar" aria-label="Limpiar todos los filtros del calendario" tabindex="0">Quitar Filtros (Alt+R)</button>
+        <button class="calendario-eventos__modo-boton" id="botonModo" data-i18n="calendario.avanzado" aria-label="Cambiar entre modo sencillo y avanzado" aria-pressed="false" tabindex="0">Cambiar a Modo Avanzado</button>
+        <!-- Botón para alternar Modo Oscuro -->
+        <!-- <button class="calendario-eventos__modo-boton" id="botonModoOscuro">Modo Oscuro</button> -->
+       
+      </div>
+      <!-- <header class="calendario-eventos__cabecera">
+        
+      </header> -->
+      <div class="calendario-eventos__controles">
+        <div class="calendario-eventos__fila fila-basica">
+          <div class="calendario-eventos__control">
+            <label for="filtro-busqueda" data-i18n="calendario.buscar">Buscar</label>
+            <input type="text" id="filtro-busqueda" class="calendario-eventos__control-busqueda" placeholder="Palabras clave">
+          </div>
+          <div class="calendario-eventos__control">
+            <label for="filtro-rango-fecha" data-i18n="calendario.rango">Rango de fechas</label>
+            <div class="calendario-eventos__control-fecha-wrapper">
+              <input type="text" id="filtro-rango-fecha" class="calendario-eventos__control-fecha" placeholder="dd-mm-aaaa a dd-mm-aaaa"  required>
+              <button id="borrar-rango-fecha" class="calendario-eventos__control-fecha-borrar">✕</button>
+            </div>
+          </div>
+          <div class="calendario-eventos__control">
+            <label for="filtro-categoria" data-i18n="calendario.categorias">Categoría</label>
+            <select id="filtro-categoria" class="calendario-eventos__control-texto">
+              <option value="" data-i18n="calendario.todas">Todas</option>
+              <option value="Festivo" data-i18n="calendario.festivo">Festivo</option>
+              <option value="Falla" data-i18n="calendario.falla">Falla</option>
+              <option value="Evento" data-i18n="calendario.evento">Evento</option>
+              <option value="Urgente" data-i18n="calendario.urgente">Urgente</option>
+              <option value="Informacion" data-i18n="calendario.informacion">Informacion</option>
+              <option value="Recordatorio" data-i18n="calendario.recordatorio">Recordatorio</option>
+            </select>
+          </div>
+        </div>
+        <div class="calendario-eventos__fila fila-avanzada avanzado">
+          <div class="calendario-eventos__control">
+            <label for="filtro-fecha" data-i18n="calendario.puntual">Fecha puntual</label>
+            <div class="calendario-eventos__control-fecha-wrapper">
+              <input type="date" id="filtro-fecha" class="calendario-eventos__control-fecha" placeholder="dd-mm-aaaa">
+              <button id="borrar-fecha" class="calendario-eventos__control-fecha-borrar">✕</button>
+            </div>
+          </div>
+        </div>
+        <div class="calendario-eventos__fila fila-avanzada avanzado">
+          <div class="calendario-eventos__control">
+            <label for="filtro-dia" data-i18n="calendario.dia">Día (2 dígitos)</label>
+            <div class="calendario-eventos__campo-wrapper">
+              <input type="text" id="filtro-dia" class="calendario-eventos__control-texto" placeholder="DD" maxlength="2" pattern="^\\d{1,2}$" inputmode="numeric" title="Día entre 01 y 31">
+              <button class="calendario-eventos__borrar-campo" id="borrar-dia">✕</button>
+            </div>
+          </div>
+          <div class="calendario-eventos__control">
+            <label for="filtro-mes" data-i18n="calendario.mes">Mes (2 dígitos)</label>
+            <div class="calendario-eventos__campo-wrapper">
+              <input type="text" id="filtro-mes" class="calendario-eventos__control-texto" placeholder="MM" maxlength="2" pattern="^\\d{1,2}$" inputmode="numeric" title="Mes entre 01 y 12">
+              <button class="calendario-eventos__borrar-campo" id="borrar-mes">✕</button>
+            </div>
+          </div>
+          <div class="calendario-eventos__control">
+            <label for="filtro-ano" data-i18n="calendario.anno">Año (4 dígitos)</label>
+            <div class="calendario-eventos__campo-wrapper">
+              <input type="text" id="filtro-ano" class="calendario-eventos__control-texto" placeholder="AAAA" maxlength="4" pattern="^\\d{4}$" inputmode="numeric" title="Introduzca 4 dígitos (p.ej. 2025)">
+              <button class="calendario-eventos__borrar-campo" id="borrar-ano">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="calendario-eventos__leyenda" id="info-mes"></div>
+      <div class="calendario-eventos__mini" id="mini-calendario"></div>
+      <!-- <div class="calendario-eventos__detalles-mes" id="descripcion-eventos-mes"></div>
+      <div class="calendario-eventos__lista" id="lista-anuncios"></div> -->
+          <!-- Contenedor para el encabezado con detalles del mes -->
+      <div class="calendario-eventos__detalles-mes" id="descripcion-eventos-mes" data-i18n="calendario.detallesMes"></div>
+
+      <!-- Contenedor para la lista de tarjetas de eventos -->
+      <div class="calendario-eventos__lista" id="lista-anuncios" data-i18n="calendario.listaAnuncios"></div>
+
+    </div>
+  </main>
+  
+
+  <!-- Modal ICS -->
+  <div id="icsModal" class="ics-modal oculto">
+    <div class="ics-modal__contenido">
+      <button class="ics-modal__cerrar" id="icsCerrarBtn">×</button>
+      <h2 id="icsModalTitulo" class="ics-modal__titulo" data-i18n="icsModal.titulo">Día {date} ({dayName})</h2>
+      <label for="icsEvento" class="ics-modal__label" data-i18n="icsModal.evento">Evento</label>
+      <!-- <input type="text" id="icsEvento" class="ics-modal__input" value=""> -->
+      <input type="text" id="icsEvento" class="ics-modal__input" data-i18n-placeholder="icsModal.placeholderEvento" placeholder="Introduzca el título del evento">
+      <label for="icsHoraInicio" class="ics-modal__label" data-i18n="icsModal.horaInicial">Hora inicial</label>
+      <input type="time" id="icsHoraInicio" class="ics-modal__input" value="00:00">
+      <label for="icsHoraFin" class="ics-modal__label" data-i18n="icsModal.horaFinal">Hora final</label>
+      <input type="time" id="icsHoraFin" class="ics-modal__input" value="23:59">
+      <label for="icsNotas" class="ics-modal__label" data-i18n="icsModal.notas">Notas</label>
+      <textarea id="icsNotas" class="ics-modal__textarea" data-i18n-placeholder="icsModal.placeholderNotas" placeholder="Introduzca sus notas"></textarea>
+      <button id="icsAceptarBtn" class="ics-modal__boton" data-i18n="icsModal.aceptar">ACEPTAR</button>
+    </div>
+  </div>
+  
+  
+
+  <footer class="footer">
+    <div class="footer__contenedor">
+      <div class="footer__contenido">
+        <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
+          <a class="footer__enlace" href="index.html" data-i18n="nav.inicio">Inicio</a>
+          <a class="footer__enlace" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
+          <a class="footer__enlace active" href="eventos.html" data-i18n="nav.eventos">Eventos</a>
+          <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Meteo</a>
+          <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a>
+          <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galería</a>
+        </nav>
+        <picture>
+          <source srcset="img/Escudo_falla.avif" type="image/avif">
+          <source srcset="img/Escudo_falla.webp" type="image/webp">
+          <img class="footer__escudo" src="img/Escudo_falla.png" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        </picture>
+
+        <nav class="sociales">
+          <a class="sociales__enlace" href="https://www.facebook.com/FallaSuissaLalqueriadelFavero">
+            <span class="sociales__accesible">Facebook</span>
+          </a>
+          <a class="sociales__enlace" href="https://www.instagram.com/fallasuissa_lalqueriadelfavero/">
+            <span class="sociales__accesible">Instagram</span>
+          </a>
+          <a class="sociales__enlace" href="https://youtube.com">
+            <span class="sociales__accesible">YouTube</span>
+          </a>
+          <a class="sociales__enlace" href="https://tiktok.com">
+            <span class="sociales__accesible">TikTok</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+    <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados.</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="js/dark.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/nav-menu.js"></script>
+  <script src="js/calendario.js"></script>
+  <script src="js/accessibility.js"></script>
+ 
+  
+</body>
+</html>

@@ -1,0 +1,74 @@
+// scss/components/_theme-compatibility.scss
+// Mejoras de compatibilidad para theme-color en diferentes navegadores iOS
+
+// Forzar color de barra de estado en modo claro
+:root {
+  --theme-color-light: #0a4b8d;
+  --theme-color-dark: #000000;
+}
+
+// Asegurar que el color del tema se propague correctamente
+html {
+  // Para WebKit (Safari iOS)
+  -webkit-theme-color: var(--theme-color-light);
+  
+  // Modo oscuro
+  &.modo-oscuro,
+  &:has(body.modo-oscuro) {
+    -webkit-theme-color: var(--theme-color-dark);
+  }
+}
+
+// Soporte adicional para modo oscuro
+@media (prefers-color-scheme: dark) {
+  :root:not(.modo-claro) {
+    --current-theme-color: var(--theme-color-dark);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not(.modo-oscuro) {
+    --current-theme-color: var(--theme-color-light);
+  }
+}
+
+// Para navegadores que soportan color-scheme
+html {
+  color-scheme: light;
+  
+  &.modo-oscuro,
+  &:has(body.modo-oscuro) {
+    color-scheme: dark;
+  }
+  
+  &.modo-claro,
+  &:has(body.modo-claro) {
+    color-scheme: light;
+  }
+}
+
+// Forzar repaint en iOS cuando cambia el tema
+body.modo-oscuro,
+body.modo-claro {
+  transform: none;
+  -webkit-transform: none;
+}
+
+// Mejoras específicas para iOS Safari standalone mode
+@media (display-mode: standalone) {
+  html {
+    // Asegurar que el color se aplique en modo standalone
+    background-color: var(--theme-color-light);
+    
+    &.modo-oscuro,
+    &:has(body.modo-oscuro) {
+      background-color: var(--theme-color-dark);
+    }
+  }
+}
+
+// Viewport meta refresh helper (para JavaScript)
+.theme-update-helper {
+  display: none;
+  content: var(--current-theme-color);
+}

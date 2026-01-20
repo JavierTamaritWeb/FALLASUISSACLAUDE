@@ -1,0 +1,188 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://fallasuissa.es/#organization",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "alternateName": ["Falla Suïssa", "Comisión Fallera Suïssa", "Falla #396"],
+      "description": "Comisión fallera valenciana fundada en 2024, dedicada a la preservación y promoción de las tradiciones valencianas. Participamos activamente en las Fallas de Valencia, festividad UNESCO Patrimonio Cultural Inmaterial de la Humanidad.",
+      "foundingDate": "2024",
+      "url": "https://fallasuissa.es",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://fallasuissa.es/img/Escudo_falla.png",
+        "width": 400,
+        "height": 400,
+        "caption": "Escudo oficial de la Falla Suïssa - L'Alqueria del Favero"
+      },
+      "image": "https://fallasuissa.es/img/Escudo_falla.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Suïssa",
+        "addressLocality": "Valencia",
+        "addressRegion": "Comunidad Valenciana",
+        "postalCode": "46024",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 39.4537245,
+        "longitude": -0.3376502
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "L'Alqueria del Favero, Valencia, España"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "info@fallasuissa.es",
+          "availableLanguage": ["es", "ca"],
+          "description": "Información general"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "event inquiries",
+          "email": "eventos@fallasuissa.es",
+          "availableLanguage": ["es", "ca"],
+          "description": "Consultas sobre eventos y actividades"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
+        "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
+        "https://tiktok.com/@fallasuissaalqueria",
+        "https://www.youtube.com/@fallasuissa"
+      ],
+      "knowsAbout": [
+        "Fallas de Valencia",
+        "Tradiciones valencianas",
+        "UNESCO Patrimonio Cultural Inmaterial",
+        "Cultura española",
+        "Turismo cultural Valencia",
+        "Festivales tradicionales España",
+        "Arte popular valenciano",
+        "Gastronomía valenciana",
+        "Pirotecnia tradicional",
+        "Artesanía fallera"
+      ],
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Junta Central Fallera",
+        "description": "Organismo coordinador de las Fallas de Valencia"
+      },
+      "award": [
+        "Premio a la tradición fallera",
+        "Reconocimiento actividad cultural",
+        "Premio participación comunitaria"
+      ],
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Junta Central Fallera (JCF)",
+        "url": "https://www.jcf.org"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://fallasuissa.es/#website",
+      "url": "https://fallasuissa.es",
+      "name": "WEBFALLASUISSA - Falla Suïssa L'Alqueria del Favero",
+      "description": "Web oficial de la Falla Suïssa - L'Alqueria del Favero. Información sobre eventos, tradiciones valencianas, Las Fallas de Valencia y actividades culturales.",
+      "publisher": {
+        "@id": "https://fallasuissa.es/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://fallasuissa.es/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": ["es-ES", "ca-ES"],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Turistas, valencianos, falleros, interesados en cultura española"
+      }
+    },
+    {
+      "@type": "CulturalEvent",
+      "@id": "https://fallasuissa.es/#las-fallas",
+      "name": "Las Fallas de Valencia",
+      "description": "Festividad tradicional valenciana declarada Patrimonio Cultural Inmaterial de la Humanidad por la UNESCO. Se celebra del 15 al 19 de marzo con monumentos artísticos, música y tradición.",
+      "startDate": "2025-03-15",
+      "endDate": "2025-03-19",
+      "location": {
+        "@type": "Place",
+        "name": "Valencia, España",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Valencia",
+          "addressCountry": "ES"
+        }
+      },
+      "organizer": {
+        "@id": "https://fallasuissa.es/#organization"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Público general, turistas, familias"
+      },
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode"
+    },
+    {
+      "@type": "Place",
+      "@id": "https://fallasuissa.es/#location",
+      "name": "Sede Falla Suïssa - L'Alqueria del Favero",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Suïssa",
+        "addressLocality": "Valencia",
+        "addressRegion": "Comunidad Valenciana",
+        "postalCode": "46024",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 39.4537245,
+        "longitude": -0.3376502
+      },
+      "containedInPlace": {
+        "@type": "City",
+        "name": "Valencia",
+        "containedInPlace": {
+          "@type": "AdministrativeArea",
+          "name": "Comunidad Valenciana",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "España"
+          }
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://fallasuissa.es/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Valencia",
+          "item": "https://fallasuissa.es/valencia"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Fallas",
+          "item": "https://fallasuissa.es/fallas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Falla Suïssa",
+          "item": "https://fallasuissa.es"
+        }
+      ]
+    }
+  ]
+}

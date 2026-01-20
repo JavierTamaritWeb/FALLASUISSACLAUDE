@@ -1,0 +1,90 @@
+// sociales/sociales.scss
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.sociales {
+    
+    /* Redes sociales */
+    display: flex;
+    gap: 1rem;
+    justify-content: center; // en móvil
+    align-items: center;
+  
+    @media (min-width: 768px) {
+      justify-self: end; // a la derecha en escritorio
+    }
+  
+    
+    @media screen and (min-width: 768px) {
+        flex: 1;
+        text-align: right;
+        justify-content: flex-end;
+    }
+
+    &__enlace::before{
+        content: '';
+        padding: 2rem;
+        display: inline-block;
+        transition: all 0.3s ease;
+        vertical-align: middle;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 1.6rem 1.6rem;
+    }
+
+    @media (min-width: 768px) {
+        &__enlace::before {
+            padding: 2.4rem;
+            background-size: 2.4rem 2.4rem;
+        }
+    }
+    // FACEBOOK
+    &__enlace[href*="facebook.com"]::before {
+        background-image: url(../img/icono_facebook1.svg);
+    
+    }
+    &__enlace[href*="facebook.com"]:hover::before {
+        background-image: url(../img/icono_facebook.svg);
+    }
+
+    // INSTAGRAM
+
+    &__enlace[href*="instagram.com"]::before {
+        background-image: url(../img/icono_instagram1.svg);
+    }
+    &__enlace[href*="instagram.com"]:hover::before {
+        background-image: url(../img/icono_instagram.svg);
+    }
+
+    // YOUTUBE
+    &__enlace[href*="youtube.com"]::before {
+       
+        background-image: url(../img/icono_youtube1.svg);
+    }
+    &__enlace[href*="youtube.com"]:hover::before {
+        background-image: url(../img/icono_youtube.svg);
+    }
+
+    // TIKTOK
+    &__enlace[href*="tiktok.com"]::before {
+        background-image: url(../img/icono_tiktok1.svg);
+    }
+    &__enlace[href*="tiktok.com"]:hover::before {
+        background-image: url(../img/icono_tiktok.svg);
+    }
+
+
+    &__accesible {
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        border: 0;
+        display: block;
+    }
+
+   
+}

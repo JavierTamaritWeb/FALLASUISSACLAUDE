@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Página de inicio -->
+    <url>
+      <loc>https://fallasuissa.es/</loc>
+    <image:image>
+      <image:loc>https://fallasuissa.es/img/Escudo_falla.png</image:loc>
+      <image:caption>Escudo de la Falla Suïssa - L'Alqueria del Favero</image:caption>
+      <image:title>Inicio</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Página La Falla -->
+  <url>
+    <loc>https://fallasuissa.es/lafalla.html</loc>
+    <image:image>
+      <image:loc>https://fallasuissa.es/img/pluma.png</image:loc>
+      <image:caption>Pluma usada en La Falla</image:caption>
+      <image:title>La Falla</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Página de Eventos -->
+  <url>
+    <loc>https://fallasuissa.es/eventos.html</loc>
+    <image:image>
+      <image:loc>https://fallasuissa.es/img/Eventos.PNG</image:loc>
+      <image:caption>Imagen representativa de Eventos</image:caption>
+      <image:title>Eventos</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Página de Meteo -->
+  <url>
+    <loc>https://fallasuissa.es/meteo.html</loc>
+    <image:image>
+      <image:loc>https://fallasuissa.es/img/termometro.png</image:loc>
+      <image:caption>Termómetro usado en la sección Meteo</image:caption>
+      <image:title>Meteo</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Página del Blog -->
+  <url>
+    <loc>https://fallasuissa.es/blog.html</loc>
+    <image:image>
+      <image:loc>https://fallasuissa.es/img/pluma.png</image:loc>
+      <image:caption>Pluma representativa del Blog</image:caption>
+      <image:title>Blog</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Página de Galerías -->
+  <url>
+    <loc>https://fallasuissa.es/galerias.html</loc>
+    <image:image>
+      <image:loc>https://fallasuissa.es/img/camara.png</image:loc>
+      <image:caption>Cámara de Galerías</image:caption>
+      <image:title>Galerías</image:title>
+    </image:image>
+  </url>
+  
+</urlset>

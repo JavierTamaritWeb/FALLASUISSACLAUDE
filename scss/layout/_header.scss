@@ -1,0 +1,897 @@
+// layout/_header.scss
+
+// ---------------------------------------------------------
+// Imports
+// ---------------------------------------------------------
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+// ---------------------------------------------------------
+// Estilos del Header Principal (.header)
+// ---------------------------------------------------------
+.header {
+  height: 45rem;
+  background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+  padding: 0;
+  position: relative;
+  padding-top: env(safe-area-inset-top);
+  
+
+  @media (min-width: 768px) {
+    height: 57rem;
+  }
+  @media (min-width: 1024px) {
+    height: 62rem;
+  }
+
+  &__contenido {
+    width: 95%;
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  &__barra {
+    text-align: center;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    padding-top: 7rem;
+    justify-items: center;
+    text-align: center;
+    
+    picture {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+
+  &__title {
+    margin: 2rem 0;
+    font-size: v.$font-size-medium;
+    font-weight: 900;
+    color: v.$primary-color;
+    text-transform: uppercase;
+    font-size: 3rem;
+
+    span {
+      color: v.$blanco;
+    }
+    
+    @media screen and (min-width: 768px) {
+      font-size: 4em;
+    }
+    @media screen and (min-width: 1024px) {
+      font-size: 7rem;
+    }
+  }
+
+  &__escudo {
+    max-width: 10rem;
+    animation: mostrarEscudo 1s ease-in-out;
+    background: transparent;
+    display: block;
+    margin: 0 auto;
+    
+    @media screen and (min-width: 768px) {
+      max-width: 12rem;
+    }
+    @media screen and (min-width: 1024px) {
+      max-width: 15rem;
+    }
+  }
+
+  &__waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+  &__botones {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    
+    @media (max-width: 767px) {
+      gap: 0.3rem; // Reducir espacio entre botones en móviles
+    }
+  }
+}
+
+// ---------------------------------------------------------
+// Estilos del Inner (.inner)
+// ---------------------------------------------------------
+.inner {
+  border-top: 1px solid v.$primary-color;
+  background-color: v.$naranja-suave;
+  padding: 20rem 0;
+
+  &__titulo {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+  }
+
+  @media (max-width: 480px) {
+    padding: 16rem 0;
+  }
+}
+
+// ---------------------------------------------------------
+// Animaciones
+// ---------------------------------------------------------
+@keyframes mostrarEscudo {
+  0% {
+    opacity: 0;
+    transform: translateY(-15rem);
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mostrarEscudoC {
+  0% {
+    opacity: 0;
+    transform: translateX(-6rem);
+  }
+  50% {
+    opacity: 0.3;
+  }
+  75% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0rem);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// ---------------------------------------------------------
+// Estilos de Navegación (Primera versión)
+// ---------------------------------------------------------
+.navegacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+
+  @media screen and (max-width: 767px) {
+    gap: 0.2rem; // Gap más pequeño en móviles
+  }
+
+  @media screen and (min-width: 768px) {
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  &__enlace {
+    color: v.$blanco;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 0.1rem 0.3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 0.3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    width: auto;
+    transition: background-color 200ms ease, color 200ms ease;
+    
+    @media (max-width: 767px) {
+      font-size: 1rem;        // Texto más pequeño en móviles
+      padding: 0.1rem 0.2rem; // Padding más compacto
+      min-height: 38px;       // Altura mínima reducida
+    }
+  
+   
+    &:hover {
+      background-color: v.$primary-color;
+    }
+    
+    @media (min-width: 768px) {
+      padding: 0.1rem 0.3rem;
+    }
+  }
+  
+  &__enlace.active,
+  &__enlace[aria-current="page"] {
+    background-color: #03315f;
+    color: v.$blanco;
+    
+    /* Otros estilos opcionales */
+  }
+  
+}
+
+// ---------------------------------------------------------
+// Olas del Header Principal (.waves)
+// ---------------------------------------------------------
+.waves {
+  position: relative;
+  display: block;
+  width: calc(150% + 1.3px);
+  height: 100px;
+}
+
+// ---------------------------------------------------------
+// Estilos del Header Interno (.header-inner)
+// ---------------------------------------------------------
+.header-inner {
+  background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+  padding: 0;
+  position: relative;
+
+  &__escudo {
+    height: auto;
+    width: 5rem;
+    background: transparent;
+    
+    @media (max-width: 767px) {
+      margin: 1rem 0;
+      padding: 2rem 0;
+      animation-name: mostrarEscudoC;
+      animation-timing-function: ease-in-out;
+      animation-duration: 3s;
+    }
+    
+    @media (min-width: 768px) {
+      width: 9rem;
+      margin: 0; // Sin margin en desktop para Grid
+      animation-name: mostrarEscudoC;
+      animation-timing-function: ease-in-out;
+      animation-duration: 3s;
+    }
+    @media (min-width: 1024px) {
+      max-width: 13rem;
+      animation-name: mostrarEscudoC;
+      animation-timing-function: ease-in-out;
+      animation-duration: 3s;
+    }
+  }
+
+  &__grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 7rem;
+    width: 100%;
+    
+    // Asegurar que el contenido interno se comporte correctamente
+    .inner__titulo {
+      width: auto; // Permitir que se ajuste al contenido
+      margin: 0;   // Sin margin adicional
+    }
+  }
+
+  &__barra {
+    text-align: center;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+
+// ---------------------------------------------------------
+// Estilos de Títulos Internos (.heading-inner)
+// ---------------------------------------------------------
+
+// Contenedor del título interno
+.inner__titulo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto; // Ajustar al contenido en lugar de 100%
+  gap: 2rem;
+  
+  // En móvil: reducir gap para pantallas pequeñas
+  @media (max-width: 767px) {
+    gap: 1.5rem;
+  }
+  
+  // En desktop: mantener el mismo layout pero con más espacio
+  @media (min-width: 768px) {
+    gap: 3rem;
+  }
+}
+
+.heading-inner {
+  color: v.$primary-color;
+  text-transform: uppercase;
+  display: inline-block; // Permite que se pongan en línea
+  margin-right: 1rem; // Espacio entre elementos
+  white-space: nowrap !important; // FUERZA el texto a permanecer en una línea
+  
+  
+
+  &__span {
+    color: v.$blanco;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    // display: block; // En móvil, uno debajo del otro
+    
+  }
+  @media (min-width: 768px) {
+    font-size: 5rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 7rem;
+  }
+}
+
+// ---------------------------------------------------------
+// Barras de Navegación Fijas para .header y .header-inner
+// ---------------------------------------------------------
+.header__barra,
+.header-inner__barra {
+  position: fixed;        // Barra fija en la parte superior
+  top: 1rem;
+  top: calc(env(safe-area-inset-top) + 1rem);
+  left: 0;
+  right: 0;               // Asegura que ocupe todo el ancho posible
+  max-width: 100rem;      // Nunca excede 120 rem
+  width: 100%;            // Se adapta a pantallas menores
+  margin: 0 auto;         // Se centra cuando la pantalla sea mayor de 120rem
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 2rem;
+  z-index: 1000;
+  
+  @media (max-width: 767px) {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "botones notificacion menu";
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 0.3rem !important;       // Padding más compacto en móviles
+    border-radius: 1.5rem; // Radio más pequeño
+  }
+
+  @media (min-width: 768px) {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 767px) {
+  // Móvil: notificación inline entre botones y menú (misma altura)
+  .header__barra .header__botones,
+  .header-inner__barra .header__botones {
+    grid-area: botones;
+    margin-left: 0;
+    padding-left: 0.35rem;
+  }
+
+  .header__barra .header__menu-toggle,
+  .header-inner__barra .header__menu-toggle {
+    grid-area: menu;
+    margin-right: 0.15rem;
+    justify-self: end;
+  }
+
+  .header__barra #notificacion,
+  .header-inner__barra #notificacion {
+    grid-area: notificacion;
+    // Desactivar comportamiento "toast" (fixed) en móvil y que no cree hueco si no se muestra
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    transform: none;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0 0.35rem;
+    padding: 0.35rem 0.75rem;
+    min-height: 44px;
+    border-radius: 0.8rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    justify-self: center;
+
+    background-color: rgba(0, 0, 0, 0.55);
+    color: v.$blanco;
+
+    // Evita el keyframe que usa translateX(-50%) del toast
+    animation: none;
+  }
+
+  .header__barra #notificacion.mostrar,
+  .header-inner__barra #notificacion.mostrar {
+    display: inline-flex;
+  }
+}
+
+
+.header__barra--fixed,
+.header-inner__barra--fixed {
+  position: fixed;
+  top: 1rem;
+  top: calc(env(safe-area-inset-top) + 1rem);
+  left: 0;
+  z-index: 1000;
+}
+
+// ---------------------------------------------------------
+// Botones de Modo Oscuro para .header y .header-inner
+// ---------------------------------------------------------
+.header__modo-boton,
+.header-inner__modo-boton {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 51, 102, 0.85);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  padding: 0.5rem;
+  min-height: 44px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--theme-transition), border-color var(--theme-transition), box-shadow var(--theme-transition);
+  outline: 2px solid transparent; // Outline personalizado más accesible
+  border-radius: 0.5rem;
+  
+  @media (max-width: 767px) {
+    padding: 0.3rem;      // Padding más compacto en móviles
+    
+    // Hacer el ícono más pequeño en móviles
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  &:hover {
+    background-color: rgba(0, 51, 102, 0.15);
+    border-color: rgba(0, 51, 102, 0.95);
+  }
+  
+  &:focus-visible {
+    background-color: rgba(0, 51, 102, 0.18);
+    outline: 2px solid rgba(0, 51, 102, 0.95); // Focus visible para accesibilidad
+    outline-offset: 2px;
+  }
+  
+  &:active {
+    transform: scale(0.95) translateY(2px); // Efecto de presionado
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35); // Sombra interior
+  }
+  
+  // Animación de "presionado" cuando cambia el modo
+  &.pressed {
+    animation: buttonPress 0.3s ease;
+  }
+}
+
+// ---------------------------------------------------------
+// Relieve de botones en modo oscuro
+// ---------------------------------------------------------
+body.modo-oscuro {
+  .header__modo-boton,
+  .header-inner__modo-boton,
+  .header__lang-switcher,
+  .header__menu-toggle {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(70, 70, 70, 0.95);
+    box-shadow:
+      0 2px 0 rgba(0, 0, 0, 0.5),
+      0 10px 20px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  .header__modo-boton:hover,
+  .header-inner__modo-boton:hover,
+  .header__lang-switcher:hover,
+  .header__menu-toggle:hover,
+  .header__modo-boton:focus-visible,
+  .header-inner__modo-boton:focus-visible,
+  .header__lang-switcher:focus-visible,
+  .header__menu-toggle:focus-visible {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(90, 90, 90, 0.95);
+  }
+
+  .header__modo-boton:focus-visible,
+  .header-inner__modo-boton:focus-visible {
+    outline-color: rgba(90, 90, 90, 0.95);
+  }
+
+  .header__modo-boton:active,
+  .header-inner__modo-boton:active,
+  .header__lang-switcher:active,
+  .header__menu-toggle:active {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .navegacion__enlace.active,
+  .navegacion__enlace[aria-current="page"] {
+    background-color: rgba(255, 255, 255, 0.75);
+    color: rgba(34, 34, 34, 0.95);
+  }
+
+  .navegacion__enlace.active:hover,
+  .navegacion__enlace.active:focus,
+  .navegacion__enlace[aria-current="page"]:hover,
+  .navegacion__enlace[aria-current="page"]:focus {
+    background-color: rgba(255, 255, 255, 0.85);
+    color: rgba(34, 34, 34, 0.95);
+  }
+}
+
+// Keyframe para el efecto de presionado
+@keyframes buttonPress {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9) translateY(3px);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
+
+// ---------------------------------------------------------
+// Notificaciones para .header y .header-inner
+// ---------------------------------------------------------
+.header__notificacion,
+.header-inner__notificacion {
+  color: v.$blanco;
+}
+
+// ---------------------------------------------------------
+// Estilos de Navegación (Segunda versión)
+// ---------------------------------------------------------
+.navegacion {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+// Botón hamburguesa (solo móvil)
+.header__menu-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(3, 49, 95, 0.95);
+  color: v.$blanco;
+  cursor: pointer;
+  padding: 0.45rem;
+  border-radius: 0.8rem;
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, background-color var(--theme-transition), box-shadow var(--theme-transition), border-color var(--theme-transition);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+
+  svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  &:focus {
+    outline: 2px solid v.$primary-color;
+  }
+
+  &:active {
+    transform: scale(0.96);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+  }
+
+  @media (max-width: 767px) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.navegacion__enlace {
+  color: v.$blanco;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  width: auto;
+  transition: background-color 200ms ease, color 200ms ease;
+  
+  &:hover,
+  &:focus {
+    background-color: v.$primary-color;
+    color: v.$blanco;
+  }
+
+  &.active,
+  &[aria-current="page"] {
+    background-color: rgba(255, 255, 255, 0.75);
+    color: rgba(3, 49, 95, 0.95);
+  }
+
+  &.active:hover,
+  &.active:focus,
+  &[aria-current="page"]:hover,
+  &[aria-current="page"]:focus {
+    background-color: rgba(255, 255, 255, 0.85);
+    color: rgba(3, 49, 95, 0.95);
+  }
+}
+
+// ---------------------------------------------------------
+// Ajustes Responsivos para Navegación
+// ---------------------------------------------------------
+.nav-backdrop {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .nav-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(2px);
+    z-index: 900;
+  }
+
+  .nav-backdrop.is-active {
+    display: block;
+  }
+
+  // Menú móvil como dropdown overlay bajo la barra
+  .navegacion {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+    padding: 0.6rem;
+    background: rgba(2, 66, 122, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 1.2rem;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28);
+    z-index: 1100;
+  }
+
+  .navegacion.is-open {
+    display: flex;
+  }
+
+  .navegacion__enlace {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.65rem 0.85rem;
+    border-radius: 0.9rem;
+  }
+
+  body.nav-open {
+    overflow: hidden;
+    touch-action: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .navegacion {
+    position: static;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+}
+
+
+
+
+// Contenedor del selector de idioma
+.header__lang {
+  position: relative;
+  margin-right: 1rem; // Espacio respecto al botón de modo oscuro
+  
+  @media (max-width: 767px) {
+    margin-right: 0.5rem; // Margen más pequeño en móviles
+  }
+}
+
+// Botón principal del selector
+.header__lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(3, 49, 95, 0.95);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  line-height: 1;
+  min-height: 44px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+  // Icono (globo) generado por CSS para no tocar el HTML
+  &::before {
+    content: "";
+    width: 1.15rem;
+    height: 1.15rem;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 2a10 10 0 100 20 10 10 0 000-20zm7.93 9h-3.18a15.9 15.9 0 00-1.36-6.05A8.02 8.02 0 0119.93 11zM12 4c1.2 1.64 2.05 4.08 2.3 7H9.7c.25-2.92 1.1-5.36 2.3-7zM4.07 13h3.18c.22 2.12.72 4.18 1.36 6.05A8.02 8.02 0 014.07 13zm3.18-2H4.07a8.02 8.02 0 014.72-6.05A15.9 15.9 0 007.25 11zM12 20c-1.2-1.64-2.05-4.08-2.3-7h4.6c-.25 2.92-1.1 5.36-2.3 7zm3.39-.95c.64-1.87 1.14-3.93 1.36-6.05h3.18a8.02 8.02 0 01-4.54 6.05z'/%3E%3C/svg%3E");
+  }
+  
+  @media (max-width: 767px) {
+    // Solo icono en móvil (el texto queda accesible vía aria-label)
+    font-size: 0;
+    padding: 0.45rem;
+    width: 2.6rem;
+    justify-content: center;
+  }
+  
+  &:hover,
+  &:focus-visible {
+    // background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 111, 97, 0.7);
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+  }
+}
+
+// Opciones desplegables
+.header__lang-options {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  z-index: 1000;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+
+  &.active {
+    display: block;
+  }
+}
+
+// Opciones individuales
+.header__lang-option {
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-transform: uppercase;
+  
+  &:hover {
+    // background-color: #f0f0f0;
+    background-color: v.$primary-color;
+    color: v.$blanco-hueso;
+    font-weight: bold;
+  }
+}
+
+
+
+
+// Fondo por defecto para la barra de navegación (modo claro)
+.header__barra,
+.header-inner__barra {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 75, 141, 0.5),
+    rgba(2, 66, 122, 0.5) 60%,
+    rgba(0, 51, 102, 0.5) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+// Fondo cuando se hace scroll (modo claro)
+// Usamos transparencias para lograr un efecto más ligero
+.header__barra--scrolled,
+.header-inner__barra--scrolled {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 75, 141, 0.5),
+    rgba(2, 66, 122, 0.5) 60%,
+    rgba(0, 51, 102, 0.5) 100%
+  );
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}

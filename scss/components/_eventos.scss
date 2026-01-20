@@ -1,0 +1,373 @@
+// components/_eventos.scss
+
+@use '../abstracts/variables' as v;
+
+
+
+.eventos {
+  border-top: 1px solid v.$primary-color;
+  background-color: v.$naranja-suave;
+  
+
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    
+  }
+  &__heading-texto {
+    font-weight: bold;
+    color: v.$primary-color;
+    @media (max-width:768px) {
+      font-size: v.$font-size-medium;
+      
+    }
+  }
+  &__titulo-calendario {
+    display: flex;
+    gap: 1rem;
+    justify-content: start;
+    align-items: center;
+    padding: auto;
+    @media (max-width:768px) {
+      padding: 0rem;
+      margin: 0 3rem;
+      
+    }
+    
+  }
+  &__calendario {
+    height: 4rem;
+    width: 4rem;
+    margin: 0rem 0;
+    @media (max-width:768px) {
+      height: 4rem;
+      width: 4rem;
+      margin: 2rem 0;
+      
+    }
+  }
+  &__icon{
+    height: 4rem;
+    width: 4rem;
+    margin: 2rem 0;
+  }
+  &__title {
+    font-size: v.$font-size-large;
+    color: v.$primary-color;
+    @media (max-width:768px) {
+      font-size: v.$font-size-medium;
+      
+    }
+  }
+  @media (max-width:480px) {
+    padding: 3rem 0;
+  }
+  @media (min-width:768px) {
+    padding: 10rem 0;
+  }
+  
+}
+.eventos-nota-calendario{
+  color: coral;
+  background-color: white;
+  font-size: 2rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2rem 6rem;
+  box-shadow: 5px 5px 10px 2px rgba(51, 51, 51, 0.5);
+  transition: all 0.3s;
+  
+  &:hover {
+    background-color: v.$primary-color;
+    color: v.$blanco;
+    transform: scale(1.1);
+  }
+  
+  // Responsive para pantallas pequeñas
+  @media (max-width: 767px) {
+    font-size: 1.4rem; // Texto más pequeño en móviles
+    padding: 1.5rem;   // Padding más compacto
+    margin: 1rem 2rem; // Márgenes más pequeños
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 1.8rem; // Texto mediano en tablets
+    padding: 1.8rem;
+    margin: 1.5rem 4rem;
+  }
+}
+
+.tablon-titulo {
+  font-size: 3rem;
+  color: v.$primary-color;
+  padding: 4rem 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  @media (max-width: 767px) {
+    padding-top:3rem;
+    padding-bottom:0;
+
+    
+  }
+}
+
+.marco-tablon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: v.$naranja-suave;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 0 6rem;
+  @media (max-width: 767px) {
+    margin-bottom: 0;
+    padding: 0;
+    
+  }
+}
+
+.board {
+  min-height: auto;
+  max-width: 90%;
+  padding: 3rem;
+  background: v.$gris-plateado;
+  display: grid;
+  gap: 2rem;
+  position: relative;
+  justify-content: center;
+  margin-top: 3rem;
+  border-radius: 1rem;
+  border: 1px solid v.$gris-medio-azulado;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+  &__note {
+    border-radius: .5rem;
+    background: v.$blanco;
+    margin: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    transform: rotate(0.5deg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: noteAppear 0.5s ease-out;
+  }
+  &__note{
+    &::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 25px;
+      background: 
+          linear-gradient(
+              160deg,
+              v.$gris-medio-azulado 50%,
+              v.$gris-oscuro-frio 50%
+          );
+      border-radius: 4px 4px 8px 8px;
+      box-shadow: 
+          0 3px 6px rgba(0,0,0,0.2),
+          inset 0 -2px 2px rgba(255,255,255,0.2);
+          z-index: 2;
+      }
+    &::after {
+      content: '';
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 15px;
+      background: 
+          linear-gradient(
+              to right,
+              transparent 45%,
+              v.$gris-oscuro-frio 45%,
+              v.$gris-oscuro-frio 55%,
+              transparent 55%
+          ),
+          radial-gradient(
+              circle at 50% 70%,
+              v.$gris-medio-azulado 30%,
+              v.$gris-oscuro-frio  30%
+          );
+      border-radius: 3px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .clamp-screw {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(
+        circle at 50% 30%,
+        v.$gris-plateado 20%,
+        #808080 20%
+      );
+      border-radius: 50%;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      z-index: 3;
+    }
+  
+    .clamp-spring {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 30px;
+      height: 4px;
+      background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 3px,
+          v.$gris-oscuro-frio 3px,
+          v.$gris-oscuro-frio 6px
+      );
+      transform: translateX(-50%);
+      opacity: 0.8;
+    }
+    .clamp-spring {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 30px;
+      height: 4px;
+      background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 3px,
+          v.$gris-oscuro-frio 3px,
+          v.$gris-oscuro-frio 6px
+      );
+      transform: translateX(-50%);
+      opacity: 0.8;
+    }
+    &:hover {
+      transform: rotate(-0.5deg) translateY(-3px);
+    }
+    &:hover::before {
+      transform: translateX(-50%) translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  }
+ 
+  
+ 
+  &__note-content {
+    font-family: 'Courier Prime', monospace;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    color: black;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  &__premarco{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  &__file{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+  }
+  &__file-text{
+    font-size: 1.4rem;
+    color: v.$primary-color;
+    background-color: v.$blanco;
+    border-radius: 1rem;
+    padding: 0.8rem 1.2rem;
+    text-align: left;
+    margin: 0;
+    white-space: nowrap;
+  }
+  /* Asegúrate de que el enlace y sus elementos internos tengan una transición suave */
+.board__file-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+  text-decoration: none;
+}
+
+.board__file-link i,
+.board__file-link p {
+  transition: transform 0.3s ease;
+}
+
+/* Quitar márgenes del párrafo para que no afecten la alineación */
+.board__file-link p {
+  margin: 0;
+}
+
+/* Forzar que el SVG se muestre como bloque para evitar desfases en la línea base */
+.board__file-link svg {
+  display: block;
+}
+
+/* Efecto zoom al hacer hover sobre el enlace */
+.board__file-link:hover {
+  transform: scale(1.1);
+}
+
+
+}
+
+.board__lista-pdfs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+
+@keyframes noteAppear {
+  from {
+      opacity: 0;
+      transform: translateY(20px) rotate(3deg);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0) rotate(0.5deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) { 
+  .board { 
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    max-width: 95%; // Aumentar el ancho máximo
+    margin: 2rem;
+    padding-top: 4rem; 
+  
+  }
+  
+  .marco-tablon {
+    margin: 2rem 2rem; // Reducir márgenes del contenedor padre
+  }
+}
+@media (min-width: 768px) { .board { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .board { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1200px) { .board { grid-template-columns: repeat(4, 1fr); } }

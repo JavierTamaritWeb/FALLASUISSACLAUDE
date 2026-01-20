@@ -1,0 +1,11 @@
+# robots.txt para https://fallasuissa.es
+User-agent: *
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /tests/
+Disallow: /*.map$
+Allow: /
+
+Sitemap: https://fallasuissa.es/sitemap-index.xml

@@ -1,0 +1,297 @@
+// components/_quieres.scss
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+/* Para navegadores basados en WebKit (Chrome, Safari) */
+::-webkit-input-placeholder {
+    color: v.$blanco; /* Color rojo coral */
+  }
+
+.quieres-mas {
+  
+  background: linear-gradient(135deg,#0a4b8d 0%,#02427a 60%, #003366 100%);
+  padding-top: .5rem;
+  text-align: center;
+  border-top: 1px solid v.$primary-color;
+
+  &__flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 0;
+  }
+
+  &__imagen {
+    height: 4rem;
+    width: 4rem;
+    margin: 0;
+  }
+
+  &__title {
+  
+    color: v.$primary-color;
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    @include m.transition(color 200ms);
+    display: inline-block;
+    cursor: pointer;
+    text-shadow: 1px 1px 0px rgba(255, 111, 97, 1);
+  
+    &:hover {
+      color: v.$dorado
+    }
+  }
+
+
+}
+
+/* Modal "quieres-mas" (usando el mismo estilo que el modal de día) */
+#modal-quieres {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  &.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+#modal-quieres .modal-content {
+  background-color: v.$blanco;
+  position: relative;
+  padding: 1.6rem;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 1rem;
+  border: 2px solid v.$primary-color;
+  animation: scaleIn 0.25s ease;
+  text-align: left;
+}
+
+#quieres-nombre{
+    background-color: v.$gris-medio-oscuro;
+    color: v.$blanco;
+    transition: background-color 0.3s ease;
+
+
+}
+#quieres-nombre:hover{
+  background-color: v.$azul-verdoso;
+  color: v.$blanco;
+}
+
+#quieres-telefono{
+    background-color: v.$gris-medio-oscuro;
+    color: v.$blanco;
+    transition: background-color 0.3s ease;
+}
+#quieres-telefono:hover{
+  background-color: v.$azul-verdoso;
+  color: v.$blanco;
+}
+
+#quieres-email{
+    background-color: v.$gris-medio-oscuro;
+    color: v.$blanco;
+    transition: background-color 0.3s ease;
+}
+#quieres-email:hover{
+  background-color: v.$azul-verdoso;
+  color: v.$blanco;
+}
+#quieres-mensaje{
+    background-color: v.$gris-medio-oscuro;
+    color: v.$blanco;
+    transition: background-color 0.3s ease;
+    
+}
+#quieres-mensaje:hover{
+  background-color: v.$azul-verdoso;
+  color: v.$blanco;
+}
+
+
+@keyframes scaleIn {
+  from { transform: scale(0.7); opacity: 0.7; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+#modal-quieres .close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1.8rem;
+  font-size: 3rem;
+  cursor: pointer;
+  color: v.$primary-color;
+}
+
+#modal-quieres .modal-title {
+  font-size: v.$font-size-medium;
+  color: v.$primary-color;
+  margin-bottom: 1rem;
+}
+
+
+/* Formulario */
+#quieres-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#quieres-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#quieres-form label {
+  font-size: v.$font-size-small;
+  color: v.$primary-color;
+  text-align: left; // Alinea el texto a la izquierda
+  width: 100%;
+}
+
+#quieres-form input,
+#quieres-form textarea {
+  font-size: v.$font-size-small;
+  padding: 0.5rem;
+  border: 1px solid v.$gris-claro;
+  border-radius: v.$border-radius;
+}
+
+#quieres-form input:focus,
+#quieres-form textarea:focus {
+  outline: none;
+  box-shadow: 1px 0 5px v.$primary-color;
+}
+
+.wrapper-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  
+/* Responsive */
+@media (max-width: 480px) {
+  #modal-quieres .modal-content {
+    width: 90%;
+    padding: 1rem;
+  }
+}
+
+
+#modal-quieres {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none; // Oculto por defecto
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  &.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-content {
+    position: relative;
+    background: v.$blanco-hueso;
+    max-width: 40rem; // Ancho máximo de 350px
+    width: 90%;
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    text-align: center; // Centra el contenido
+  }
+
+  .modal-header {
+    padding: 0.75rem;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .modal-body {
+    padding: 1rem;
+    text-align: center; // Centra el texto
+
+    img {
+      display: block;
+      margin: 0 auto 2rem;
+      max-width: 15rem; // Limita el ancho máximo de la imagen a 15rem
+      height: auto;
+    }
+  }
+
+  // Botón de cierre: ubicado en la esquina superior derecha, sin borde, con la "X" grande y en v.$primary-color
+  .close-modal,
+  .btn-close {
+    position: absolute;
+    top: 1rem; // Puedes ajustar este valor para que esté más arriba
+    right: 1rem; // Ajustado para que se posicione en la esquina superior derecha
+    font-size: 4rem !important;
+    color: v.$primary-color !important;
+    cursor: pointer;
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+    z-index: 9999;
+    
+  }
+  .modal-title {
+    font-size: v.$font-size-medium;
+    color: v.$primary-color;
+    margin-bottom: 1rem;
+    margin-right: 6rem; // Agrega este margen para separar el texto de la "X"
+  }
+}
+
+
+/* Clases adicionales para elementos comunes */
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.lead {
+  
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: v.$gris-medio-oscuro;
+}
+
+
+
+/* Responsive */
+@media (max-width: 480px) {
+  #modal-quieres .modal-content {
+    max-width: 35rem;
+    padding: 1rem;
+  }
+}

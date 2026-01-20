@@ -1,0 +1,33 @@
+{
+  "name": "web-falla",
+  "version": "2.0.0",
+  "description": "Proyecto Gulp para la Falla Suïssa - L'Alqueria del Favero",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build",
+    "seo:dist": "gulp seoDist",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:install": "playwright install"
+  },
+  "author": "TuNombre",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^5.1.15",
+    "glob": "^11.0.0",
+    "gulp": "^5.0.1",
+    "gulp-cli": "^3.1.0",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sass": "^6.0.1",
+    "postcss": "^8.4.49",
+    "sass": "^1.85.0",
+    "sharp": "^0.33.5"
+  },
+  "keywords": [],
+  "dependencies": {
+    "flatpickr": "^4.6.13"
+  }
+}

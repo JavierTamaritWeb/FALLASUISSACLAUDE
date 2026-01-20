@@ -1,0 +1,161 @@
+// components/_buttons.scss
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.boton {
+  background-color: v.$blanco;
+  border: 1px solid v.$primary-color;
+  border-radius: v.$border-radius;
+  padding: 1rem;
+  color: v.$primary-color;
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  @include m.transition(background-color 400ms, color 300ms);
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    background-color: v.$gris;
+    color: v.$blanco;
+  }
+  @media (min-width: 768px){
+    justify-content:center;
+  }
+}
+.boton:active {
+    background-color: v.$primary-color; /* Color cuando se mantiene pulsado */
+    border-color: v.$gris-muy-claro;
+  }
+
+/* Botón Modal*/
+
+
+
+.boton-modal {
+
+  display: inline-block; 
+  width: auto; 
+  white-space: nowrap;         // Opcional, para que el texto no se parta en varias líneas
+  
+  background-color: v.$blanco; 
+  border: 1px solid v.$primary-color;
+  border-radius: v.$border-radius;
+  padding: 0.5rem 1rem;
+  color: v.$primary-color;
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  @include m.transition(background-color, color);
+  cursor: pointer;
+
+  &:hover {
+    background-color: v.$primary-color;
+    color: v.$blanco;
+  }
+}
+
+
+/* Botones de dirección */
+.direccion-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10rem;
+  padding: 2rem;
+  background-color: v.$naranja-suave;
+}
+
+.btn-direccion {
+  position: relative;
+  background: linear-gradient(45deg, v.$rojo-coral, v.$dorado);
+  color: v.$blanco;
+  border: none;
+  padding: 1.5rem 3rem;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: v.$border-radius;
+  cursor: pointer;
+  @include m.transition(transform 0.3s ease, box-shadow 0.3s ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-direccion:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-direccion-left::before {
+  content: "";
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0.7rem solid transparent;
+  border-right: 0.7rem solid v.$dorado;
+}
+
+.btn-direccion-right::after {
+  content: "";
+  position: absolute;
+  right: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0.7rem solid transparent;
+  border-left: 0.7rem solid v.$dorado;
+}
+
+.btn-text {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.btn-direccion-left {
+  align-self: flex-start;
+}
+
+.btn-direccion-right {
+  align-self: flex-end;
+}
+
+
+// /* Estilo base para el botón */
+// button {
+  
+//   background-color: v.$blanco;
+//   border: 1px solid v.$primary-color !important;
+//   border-radius: v.$border-radius;
+//   padding: 1rem;
+//   color: v.$primary-color;
+//   margin-top: 1rem;
+//   font-size: 1.6rem;
+//   font-weight: 700;
+//   text-align: center;
+//   text-transform: uppercase;
+//   border: none;
+//   padding: 10px 20px;
+//   cursor: pointer;
+//   @include m.transition(background-color 400ms, color 300ms);
+//   display: inline-block;
+//   cursor: pointer;
+
+//   &:hover {
+//     background-color: v.$gris;
+//     color: v.$blanco;
+//   }
+//   @media (min-width: 768px){
+//     justify-content:center;
+//   }
+// }
+
+// /* Estado activo al mantener pulsado */
+// button:active {
+//   background-color: #ff6f61; /* Color cuando se mantiene pulsado */
+// }

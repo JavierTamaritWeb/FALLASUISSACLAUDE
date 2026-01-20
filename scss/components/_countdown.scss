@@ -1,0 +1,151 @@
+// components/_countdown.scss
+
+@use '../abstracts/variables' as v;
+
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  padding-bottom: 2rem;
+  margin-top: 0;
+  @media (min-width: 768px) {
+    padding-bottom: 6rem;
+    
+  }
+
+
+  &__contenedor {
+    width: 86%;
+    max-width: 80%;
+    margin: 0 auto;
+    background: linear-gradient(135deg,#0a4b8d 0%,#02427a 60%, #003366 100%);
+    border-radius: v.$border-radius;
+    box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.1);
+    
+   
+    
+
+    @media (min-width: 768px) {
+      width: 60%;
+    }
+    @media (min-width: 1024px) {
+      width: 37%;
+    }
+    @media (min-width: 1200px) {
+      width: 31%;
+    }
+
+
+  }
+  &__message {
+    
+    font-weight: 600;
+    color: v.$dorado;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    padding: .5rem 1rem;
+  
+    @media (min-width:768px) {
+      font-size: 2.4rem;
+      padding: 1rem 2rem;
+    }
+  }
+  &__clock {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0;
+    font-size: 1.6rem;
+    
+    @media (min-width: 768px) {
+      padding-bottom: 1rem;
+      
+    }
+  }
+  &__time-box {
+  
+    background-color: v.$blanco-hueso;
+    border-radius: v.$border-radius;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    box-shadow: v.$box-shadow;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: v.$primary-color;
+    min-width: 8rem;
+    
+    // Estilo para el texto descriptivo (Días, Horas, etc.)
+    span:not(.countdown__time-value) {
+      font-size: 1rem;
+      font-weight: 500;
+      color: v.$gris-medio-oscuro;
+      display: block;
+      margin-top: 0.2rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      min-width: 7rem;
+      
+      span:not(.countdown__time-value) {
+        font-size: 0.9rem;
+      }
+    }
+  }
+  &__time-value {
+    font-size: 1.6rem;
+    display:  block;
+  }
+  &__fallas-message {
+    font-size: v.$font-size-medium;
+    font-weight: bold;
+    color: v.$dorado;
+    margin-top: 2rem;
+    text-align: center;
+    display: none;
+  } 
+  @media (min-width: 768px) {
+  
+      padding-top: 10rem;
+  }
+  @media (min-width: 768px) {
+    &__time-box {
+      padding: .5rem;
+      margin: .5rem;
+      font-size: v.$font-size-medium;
+      min-width: 10rem; 
+      
+      span:not(.countdown__time-value) {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: v.$gris-medio-oscuro;
+      }
+    }
+    &__time-value {
+      font-size: v.$font-size-medium;
+    }
+    &__message {
+      font-size: v.$font-size-medium;
+      font-weight: 600;
+      color: v.$blanco-hueso;
+      padding-top: 1rem;
+      margin: 0;
+    }
+    &__fallas-message {
+      font-size: v.$font-size-large;
+      font-weight: bold;
+      color: v.$dorado;
+      margin-top: 2rem;
+      text-align: center;
+      display: none;
+    }
+  }
+}
+
+.cuenta-atras-fondo{
+  background-color: #fff;
+}
+
+

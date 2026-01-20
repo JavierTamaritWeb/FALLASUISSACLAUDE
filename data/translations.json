@@ -1,0 +1,850 @@
+{
+    "es": {
+      "nav": {
+        "inicio": "Inicio",
+        "lafalla": "La Falla",
+        "eventos": "Eventos",
+        "blog": "Blog",
+        "meteo": "Meteo",
+        "galeria": "Galería"
+      },
+      "countdown": {
+        "message": "Cuenta atrás para las Fallas",
+        "dias": "Días",
+        "horas": "Horas",
+        "minutos": "Minutos",
+        "segundos": "Segundos"
+      },
+      "falla":{
+        "lafalla":"La Falla",
+        "monumento":"El Monumento",
+        "nosotros": {
+            "titulo": "Nosotros",
+            "falleraM": "La Fallera Mayor",
+            "falleraMayor":{
+              "texto": ""
+            },
+            "presidente": "El Presidente",
+            "presidenteM":{
+              "texto": "Un ejemplo de liderazgo y dedicación que se manifiesta en cada paso que da. Su compromiso con la Falla es un faro que guía a todos hacia el éxito. Con su carisma y visión, inspira a cada miembro de la comisión a dar lo mejor de sí mismos. Su pasión por la tradición y su deseo de innovar hacen de él un líder excepcional."
+            },
+            "falleraMI": "La Fallera Mayor Infantil",
+            "falleramayoraI":{
+              "texto": ""
+            },
+            "presidenteI": "El Presidente Infantil",
+            "presiI":{
+              "texto": ""
+            },  
+
+            "directiva": "La Directiva",
+            "organigrama": "Organigrama",
+            "mapa": "Mapa",
+            "mapaInteractivo":{
+              "texto": "El mapa interactivo de la Falla Suïssa - L'Alqueria del Favero es una herramienta que permite a los visitantes explorar los diferentes puntos de interés de la falla. Incluye información sobre las ubicaciones de los monumentos, las casetas, los actos y otros eventos relacionados con las Fallas. Es una manera fácil y divertida de conocer mejor nuestra falla y participar en las celebraciones."
+            }
+        }
+      },
+      
+      "eventos": {
+        "titulo": "Eventos",
+        "calendario": "Calendario",
+        "tablon": "Tablón de Anuncios",
+        "tablonNotas": {
+            "nota1": "📌 IMPORTANTE 🛎️<br> 27-06-2025 a las 18:30h<br>📝 Proclamación Representantes 2026<br> 🛎️ Las Naves<br>Calle Juan Verdeguer, 16 - Valencia",
+            "nota2": "📌 RECORDATORIO <br> 18-01-2026 17:00h<br>📝 Cita<br> PRESENTACIÓN<br>Lugar: Falla Duc de Gaeta - POBLA DE FARNALS",
+            "nota3": "📌 RECORDATORIO <br> 00-00-0000 00:00 h<br>📝 Cita<br> Próxima cita",
+            "nota4": "📌 RECORDATORIO <br> 18-01-2026 <br>📝 Presentación de la Falla<br> Asuntos: Presentación de la Falla 2025-26",
+            "nota5": "📌 AVISO <br> Inscripción abierta hasta<br>30-09-2025 <br>🎳​ CAMPEONATO DE BOLOS<br> Asuntos: Abierta la inscripción hasta 30-09-2025<br><<<>>>",
+           
+            "nota6": "📌 AVISO <br> Mig any Fallas 2025<br> OKTOBER FALLEROFEST<br>Juegos Infantiles, Food Truck, Juegos y Actividades Bávaras, etc...<br> <<<>>>",
+            "nota7": "📌 AVISO<br> Inscripción del<br> 01-06-2025 al <br>30-09-2025<br>🎾 CAMPEONATO DE TENIS<br> Asuntos: Campeonato de Tenis Masculino y Femenino",
+            "nota8": "📌 AVISO<br>Inscripción del<br> 01-06-2025 al <br>30-09-2025<br>🏓 CAMPEONATO DE TENIS DE MESA<br>Asuntos: Campeonato de Tenis de Mesa<br> <<<>>>",
+            "nota9": "📌 AVISO<br>Inscripción del<br> 01-06-2025 al <br>20-06-2025<br> CAMPEONATO DE FUTBUL PLAYA<br>Asuntos: Campeonato de Futbol Playa 6x6",
+            "nota10": "📌 AVISO<br>Inscripción del<br> 06-06-2025 al <br>15-06-2025<br>  CAMPEONATO E-SPORT<br>Asuntos: Campeonato de <br>E-Sport",
+            "nota11": "📌 AVISO<br>Inscripción del<br> 15-06-2025 al <br>20-06-2025<br>🏐 CAMPEONATO DE VOLEIBOL<br>Asuntos: Campeonato de Voleibol Playa 6x6 ",
+            "nota12": "📌 AVISO<br>Inscripción del<br> 18-06-2025 al <br>25-09-2025<br> CAMPEONATO DE PETANCA<br>Asuntos: Campeonato Petanca"
+
+
+
+
+        }
+       
+      },
+      "quieres":{
+        "titulo": "¿Quieres saber mas sobre nuestra falla?",
+        "pregunta": "¿Quieres formar parte de nuestra falla?",
+        "nombre": "Nombre",
+        "telefono": "Teléfono",
+        "mensaje": "Mensaje",
+        "aceptar": "Aceptar",
+        "nombrePlaceholder": "Nombre y Apellidos",
+        "mensajePlaceholder": "Introduce un mensaje"
+      },
+      "blog": {
+        "titulo": "Blog de nuestra falla",
+        "articulo": "La Historia de las Fallas",
+        "fecha": "Publicado el 1 de marzo de 2025",
+        "descripcion": "Las Fallas son una fiesta tradicional que se celebra en Valencia, España, cada marzo. Esta celebración es conocida por sus impresionantes monumentos de cartón piedra, que son quemados en la noche de San José.",
+        "leermas": "Leer más"
+      },
+      "meteo": {
+        "titulo": "Meteo",
+        "donde": "En Valencia",
+        "humedad": "Humedad",
+        "presion": "Presión",
+        "nubosidad": "Nubosidad",
+        "visibilidad": "Visibilidad",
+        "viento": "Viento",
+        "direccion": "Dirección",
+        "lluvia1h": "Lluvia (1h)",
+        "lluvia3h": "Lluvia (3h)",
+        "nieve1h": "Nieve (1h)",
+        "nieve3h": "Nieve (3h)",
+        "amanecer": "Amanecer",
+        "atardecer": "Atardecer",
+        "pronostico": "Previsión Próximos 5 Días",
+        "sensacion": "Sensación Térmica",
+        "min": "Mín",
+        "max": "Máx"
+        
+      },
+      "galeria": {
+        "titulo": "Galería",
+        "galeria1": "Apuntá 2025-26",
+        "galeria1-texto": "Galería de imágenes de la Apuntá 2025-26",
+        "galeria2-eventos": "Fallera MI 2025-26",
+        "galeria2": "Fallera Mayor Infantil 2025-26",
+        "galeria2-texto": "Galerías de imágenes del Nombramiento de la Fallera Mayor Infantil 2025-26",
+        "galeria3": "Monumento 2025-26",
+        "galeria3-texto": "Galería de imágenes del Monumento 2025-26",
+        "galeria3-note1": "Imagen de la firma del contrato Monumento 2025-26",
+        "galeria3-note2": "Fin",
+        "galeria4": "Proclamación 2025-26",
+        "galeria4-texto": "Galería de imágenes de la Proclamación 2025-26"
+      },
+      "calendario":{
+        "titulo": "Calendario",
+        "quitar":"Quitar filtros",
+        "avanzado":"Cambiar a modo avanzado",
+        "buscar":"Buscar",
+        "rango":"Rango de fechas",
+        "categorias":"Categoría",
+        "todas": "Todas",
+        "festivo": "Festivo",
+        "falla": "Falla",
+        "evento": "Evento",
+        "urgente": "Urgente",
+        "informacion": "Información",
+        "recordatorio": "Recordatorio",
+        "puntual": "Fecha puntual",
+        "dia": "Día (2 Dígitos)",
+        "mes": "Mes (2 Dígitos)",
+        "anno": "Año (4 Dígitos)",
+        "detallesMes": "Detalles del mes",
+        "listaAnuncios": "Lista de anuncios",
+        "eventosMes": "Eventos de {month} {year}",
+        "nota1": "En nuestro calendario tenéis a vuestra disposición una práctica opción para incorporar cualquier evento a vuestra agenda personal. Además, podéis editar fácilmente la fecha, el título y añadir las observaciones que necesitéis.",
+        "nota2": "¡Todo está pensado para que mantener al día vuestra agenda fallera sea tan cómodo como ameno!"
+        
+      },
+      "calendarioEventos": {
+        "Festivo": "Festivo",
+        "Falla": "Falla",
+        "Celebración de Fallas": "Celebración de Fallas",
+        "Evento": "Evento",
+        "Urgente": "Urgente",
+        "Aviso urgente para todos": "Aviso urgente para todos",
+        "Informacion": "Información",
+        "Recordatorio": "Recordatorio",
+        "Información relevante sobre el evento": "Información relevante sobre el evento",
+        "Recordatorio de evento": "Recordatorio de evento",
+
+        "Año Nuevo": "Año Nuevo",
+        "Celebración del Año Nuevo": "Celebración del Año Nuevo",
+        "Epifanía del Señor": "Epifanía del Señor",
+        "Celebración de la Epifanía del Señor": "Celebración de la Epifanía del Señor",
+        "San Vicente Mártir": "San Vicente Mártir",
+        "Festividad en honor a San Vicente Mártir": "Festividad en honor a San Vicente Mártir",
+        "San José": "San José",
+        "Festividad en honor a San José": "Festividad en honor a San José",
+        "Viernes Santo": "Viernes Santo",
+        "Celebración del Viernes Santo": "Celebración del Viernes Santo",
+        "Lunes de Pascua": "Lunes de Pascua",
+        "Celebración del Lunes de Pascua": "Celebración del Lunes de Pascua",
+        "San Vicente Ferrer": "San Vicente Ferrer",
+        "Festividad en honor a San Vicente Ferrer": "Festividad en honor a San Vicente Ferrer",
+        "Fiesta del Trabajo": "Fiesta del Trabajo",
+        "Celebración del Día del Trabajo": "Celebración del Día del Trabajo",
+        "San Juan": "San Juan",
+        "Festividad en honor a San Juan": "Festividad en honor a San Juan",
+        "Asunción de la Virgen": "Asunción de la Virgen",
+        "Celebración de la Asunción": "Celebración de la Asunción",
+        "Día de la C. Valenciana": "Día de la C. Valenciana",
+        "Fiesta de la Comunidad Valenciana": "Fiesta de la Comunidad Valenciana",
+        "Todos los Santos": "Todos los Santos",
+        "Festividad de Todos los Santos": "Festividad de Todos los Santos",
+        "Día de la Constitución": "Día de la Constitución",
+        "Celebración de la Constitución": "Celebración de la Constitución",       
+        "Inmaculada Concepción": "Inmaculada Concepción",
+        "Celebración de la Inmaculada Concepción": "Celebración de la Inmaculada Concepción",
+        "Navidad": "Navidad",
+        "Celebración de la Navidad": "Celebración de la Navidad",
+
+        "Presentación Falleras Mayores": "Presentación Falleras Mayores",
+        "San Valentín": "San Valentín",
+        "Día de San Valentín": "Día de San Valentín",
+        "Día Internacional de la Mujer": "Día Internacional de la Mujer",
+        "Celebración del Día Internacional de la Mujer": "Celebración del Día Internacional de la Mujer",
+        "Aviso Urgente": "Aviso Urgente",
+        "Información Importante": "Información Importante",
+
+        "Reunión Mensual a las 18:30": "Reunión Mensual a las 18:30",
+        "Presentación de la Falla 2025-26": "Presentación de la Falla 2025-26"
+      },
+      "icsModal": {
+        "titulo": "Día {date} ({dayName})",
+        "evento": "Evento",
+        "placeholderEvento": "Introduzca el título del evento",
+        "horaInicial": "Hora inicial",
+        "horaFinal": "Hora final",
+        "notas": "Notas",
+        "placeholderNotas": "Introduzca sus notas",
+        "aceptar": "ACEPTAR"
+     },
+      "calendarioLeyenda": "Mostrando eventos de {mes} {anio}",
+      
+ 
+      "footer": {
+      "derechos": "@ 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados."
+    },
+      "notepad": {
+        "caption": "",
+        "indicator": "Página {current} de {total}"
+     },
+      "ver": "Ver más",
+      "anterior": "Anterior",
+      "siguiente": "Siguiente",
+      "modalexito":{
+        "title":"Mensaje Enviado",
+        "mensaje":"Mensaje enviado correctamente"
+      },
+      "modalerror":{
+        "title":"Error Enviando Mensaje",
+        "mensaje":"No se pudo enviar el mensaje. Por favor, inténtalo de nuevo."
+      },
+  
+      "historia": {
+        "titulo": "Historia",
+        "texto1": "Un día tuvimos un sueño que no sabíamos que compartíamos con más gente. Viviendo en el nuevo barrio de les Moreres y hablando con los vecinos, descubrimos que era un sueño compartido. Trabajamos para que se hiciera realidad.",
+        "texto2": "“Yo, de pequeña, fui fallera”, “Yo llevo toda la vida siendo fallero”, “Yo nunca lo he sido, pero me gustaría”. Estas eran algunas de las frases que compartíamos y escuchábamos hablar entre nosotros.",
+        "texto3":"“¡Venga, valientes, hay que intentarlo!” Con esa determinación, ocho personas ilusionadas —José, Marta, Paula, Rodrigo, Prados, Sara, Migue y David— comenzamos a reunirnos con un mismo objetivo: hacer realidad el sueño. Fundamos la directiva, creamos el escudo que nos identifica, redactamos los estatutos y emprendimos una lucha contra el tiempo y la burocracia.",
+        "texto4":"En el mes de junio fue cuando, desde la Junta Central Fallera, nos confirmaron que el sueño se estaba convirtiendo en realidad. Ya éramos falla, la número 396, la Falla Suïssa – L’Alquería del Favero. Ya podíamos formar una comisión que, a día de hoy, está compuesta ni más ni menos que por 113 falleros y falleras.",
+        "texto5":"¿El próximo objetivo? Plantar falla, nuestro primer monumento. En estos meses los artistas falleros ya tienen sus contratos firmados desde abril, pero como estamos soñando se hace la magia y conseguimos que los grandes Paco y David quieran trabajar con nosotros, ayudarnos y ser amigos de esta, nuestra comisión. Siempre les estaremos agradecidos. Este año plantaremos por huevos, como dice el lema de nuestra falla grande: “¡Sssshhhhh… silencio que se rueda!”; será la falla de la comisión infantil, que seguro enamora a Prados y Javier.",
+        "texto6":"Seguimos avanzando en este maravilloso sueño y tal vez llegue el momento de despertar y volver al presente, porque ha llegado el día de la exaltación de nuestras falleras mayores y la presentación de nuestros presidentes.",
+        "texto7":"Con todo ello, nos encontramos ante un sueño que ya es realidad, una realidad que hemos creado entre todos, con el esfuerzo y el cariño por nuestra tierra, nuestro barrio y nuestra tradición. Y ahora os invitamos a vivir con nosotros esta primera gran fiesta, a disfrutar de nuestra Falla y del barrio que nos acoge, porque, como un día soñamos juntos, hoy celebramos el comienzo de un camino que nunca olvidaremos. Bienvenidos a nuestras primeras e inolvidables Fallas.",
+        "archivos": {
+          "titulo": "Archivos",
+          "presentacion": "Presentación",
+          "fallas2026": " Fallas 2026"
+        }
+        
+      },
+      "directiva": {
+        "presidente": "Presidente",
+        "vicepresidentes": "Vicepresidentes",
+        "secretaria": "Secretaría",
+        "economica": "Área Económica",
+        "dinfantil": "Delegación Infantil"
+        
+      },
+      "organigrama": {
+        "titulo": "Organigrama de la Falla",
+        "presidente": "Presidente",
+        "vicepresidentes": "Vicepresidentes",
+        "secretaria": "Secretaría",
+        "economica": "Área Económica",
+        "dinfantil": "Delegación Infantil",
+        "eventos": "Eventos",
+        "protoc": "Protocolo y Deportes",
+        "festejos": "Festejos",
+        "web": "Delegado Web",
+        "loteria": "Delegada Lotería",
+        "deportes": "Delegado Deportes",
+        "leyenda": "Este es el organigrama de la falla, donde se pueden ver los diferentes cargos y sus respectivas funciones. En el ejercicio 2025-26, queda conformado de esta manera."
+      }
+      
+      
+    },
+    "va": {
+      "nav": {
+        "inicio": "Inici",
+        "lafalla": "La Falla",
+        "eventos": "Esdeveniments",
+        "blog": "Blog",
+        "meteo": "Oratge",
+        "galeria": "Galeria"
+      },
+      "countdown": {
+        "message": "Compte enrere per a les Fallas",
+        "dias": "Dies",
+        "horas": "Hores",
+        "minutos": "Minuts",
+        "segundos": "Segons"
+      },
+      "falla":{
+        "lafalla":"La Falla",
+        "monumento":"El Monument",
+        "nosotros": {
+            "titulo": "Nosaltres",
+            "falleraM": "La Fallera Major",
+            "falleraMayor":{
+              "texto": ""
+            },
+            "presidente": "El President",
+            "presidenteM":{
+              "texto": "Un exemple de lideratge i dedicació que es manifesta en cada pas que dóna. El seu compromís amb la Falla és un far que guia a tots cap a l'èxit. Amb el seu carisma i visió, inspira a cada membre de la comissió a donar el millor de si mateixos. La seva passió per la tradició i el seu desig d'innovar fan d'ell un líder excepcional."
+            },
+            "falleraMI": "La Fallera Major Infantil",
+            "falleramayoraI":{
+              "texto": ""
+            },
+            
+            "presidenteI": "El President Infantil",
+            "presiI":{
+              "texto": ""
+            },
+            "directiva": "La Directiva",
+            "organigrama": "Organigrama",
+            "mapa": "Mapa",
+            "mapaInteractivo":{
+              "texto": "El mapa interactiu de la Falla Suïssa - L'Alqueria del Favero és una eina que permet als visitants explorar els diferents punts d'interès de la falla. Inclou informació sobre les ubicacions dels monuments, les casetes, els actes i altres esdeveniments relacionats amb les Falles. És una manera fàcil i divertida de conèixer millor la nostra falla i participar en les celebracions."
+            }
+        }
+      },
+
+      "eventos": {
+        "titulo": "Esdeveniments",
+        "calendario": "Calendari",
+        "tablon": "Tauler d'Anuncis",
+        "tablonNotas": {
+            "nota1": "📌 IMPORTANTE 🛎️<br> 27-06-2025 a les 18:30h<br>📝 Proclamació Representants 2026<br> 🛎️ Les Naus<br>Carre Joan Verdeguer, 16 - València",
+            "nota2": "📌 RECORDATORI <br> 18-01-2026 17:00h<br>📝 Cita<br> PRESENTACIÓ<br>Lloc: Falla Duc de Gaeta - POBLA DE FARNALS",
+            "nota3": "📌 RECORDATORI <br> 00-00-0000 00:00 h<br>📝 Cita<br> Próxima cita",
+            "nota4": "📌 RECORDATORI <br> 18-01-2026 <br>📝 Presentació de la Falla<br> Assumptes: Presentació de la Falla",
+            "nota5": "📌 AVÍS <br> Inscripció oberta fins al<br>30-09-2025 <br>🎳​ CAMPIONAT DE BITLLES<br>Asumpte: Oberta la inscripció fins<br> 30-09-2025",
+            "nota6": "📌 AVÍS <br> Mig any Fallas 2025<br> OKTOBER FALLEROFEST<br>Jocs Infantils, Food Truck, Jocs y Activitats Bàvares, etc...<br> <<<>>>",
+            "nota7": "📌 AVÍS<br> Inscripció del<br> 01-06-2025 al <br>30-09-2025<br>🎾 CAMPIONAT DE TENIS<br> Assumpte: Campionat de Tennis Masculí i Femení",
+            "nota8": "📌 AVÍS<br>Inscripció del<br> 01-06-2025 al <br>30-09-2025<br>🏓 CAMPIONAT DE TENIS DE TAULA<br>Assumpte: Campionat de Tennis de Taula",
+            "nota9": "📌 AVÍS<br>Inscripció del<br> 01-06-2025 al <br>20-06-2025<br> CAMPIONAT DE FUTBOL PLATJA<br>Assumpte: Campionat de Futbol Platja 6x6",
+            "nota10": "📌 AVÍS<br>Inscripció del<br> 06-06-2025 al <br>15-06-2025<br>  CAMPIONAT E-SPORT<br>Assumpte: Campionat <br>d'E-Sport",
+            "nota11": "📌 AVÍS<br>Inscripció del<br> 01-06-2025 al <br>20-06-2025<br>🏐 CAMPIONAT DE VOLEIBOL<br>Assumpte: Campionat de Voleibol Platja 6x6",
+            "nota12": "📌 AVÍS<br>Inscripció del<br> 18-06-2025 al <br>25-09-2025<br> CAMPIONAT DE PETANCA <br>>Assumpte: Campionat de Petanca"
+        }
+      },
+      "quieres":{
+        "titulo": "Vols saber més sobre la nostra Falla?",
+        "pregunta": "Vols formar part de la nostra falla?",
+        "nombre": "Nom i Cognoms",
+        "telefono": "Telèfon",
+        "mensaje": "Missatge",
+        "aceptar": "Acceptar",
+        "nombrePlaceholder": "Nom i Cognoms",
+        "mensajePlaceholder": "Intodueix un missatge"
+      },
+      "blog": {
+        "titulo": "Blog de la nostra falla",
+        "articulo": "La Història de les Falles",
+        "fecha": "Publicat el 1 de març de 2025",
+        "descripcion": "Les Falles són una festa tradicional que se celebra a València, Espanya, cada març. Aquesta celebració és coneguda pels seus impressionants monuments de cartró pedra, que són cremats la nit de Sant Josep. ",
+        "leermas": "Llegir més"
+      },
+      "meteo": {
+        "titulo": "Oratge",
+        "donde": "A València",
+        "humedad": "Humitat",
+        "presion": "Pressió",
+        "nubosidad": "Nubositat",
+        "visibilidad": "Visibilitat",
+        "viento": "Vent",
+        "direccion": "Direcció",
+        "lluvia1h": "Pluja (1h)",
+        "lluvia3h": "Pluja (3h)",
+        "nieve1h": "Neu (1h)",
+        "nieve3h": "Neu (3h)",
+        "amanecer": "Alba",
+        "atardecer": "Posta de sol",
+        "pronostico": "Previsió Propers 5 Dies",
+        "sensacion": "Sensació Tèrmica",
+        "min": "Mín",
+        "max": "Máx"   
+    
+      },
+      "galeria": {
+        "titulo": "Galeria",
+        "galeria1": "Apuntà 2025-26",
+        "galeria1-texto": "Galeria d'imatges de l'Apuntà 2025-26",
+        "galeria2": "Fallera Major Infantil 2025-26",
+        "galeria2-eventos": "Fallera MI 2025-26",
+
+        "galeria2-texto": "Galeria d'imatges del Nombrament de la Fallera Major Infantil 2025-26",
+        "galeria3": "Monument 2025-26",
+        "galeria3-texto": "Galeria d'imatges del Monument 2025-26",
+        "galeria3-note1": "Imatge de la signatura del contracte del Monument 2025-26",
+        "galeria3-note2": "Fi",
+        "galeria4": "Proclamació 2025-26",
+        "galeria4-texto": "Galeria d'imatges de la Proclamació 2025-26"
+      },
+      "calendario":{
+        "titulo": "Calendari",
+        "quitar":"Treure filtres",
+        "avanzado":"Canvi a mode avançat",
+        "buscar":"Buscar",
+        "rango":"Rang de dates",
+        "categorias":"Categoria",
+        "todas": "Totes",
+        "festivo": "Festiu",
+        "falla": "Falla",
+        "evento": "Esdeveniment",
+        "urgente": "Urgent",
+        "informacion": "Informació",
+        "recordatorio": "Recordatori",
+        "puntual": "Data puntual",
+        "dia": "Dia (2 Dígits)",
+        "mes": "Mes (2 Dígits)",
+        "anno": "Any (4 Dígits)",
+        "detallesMes": "Detalls del mes",
+        "listaAnuncios": "Llista d'anuncis",
+        "eventosMes": "Esdeveniments de {month} {year}",
+        "nota1": "Al nostre calendari teniu a la vostra disposició una pràctica opció per incorporar qualsevol esdeveniment a la vostra agenda personal. A més, podeu editar fàcilment la data, el títol i afegir les observacions que necessiteu.",
+        "nota2": "Tot està pensat perquè mantenir al dia la vostra agenda fallera sigui tan còmode com amè!"  
+
+      },
+      "calendarioEventos": {
+        "Festivo": "Festiu", 
+        "Falla": "Falla",
+        "Celebración de Fallas": "Celebració de Falles",
+        "Evento": "Esdeveniment",
+        "Urgente": "Urgent",
+        "Aviso urgente para todos": "Avís urgent per a tots",
+        "Informacion": "Informació",
+        "Información relevante sobre el evento":"Informació relevant sobre l'esdeveniment",
+        "Recordatorio": "Recordatori",
+        "Recordatorio de evento": "Recordatori d'esdeveniment",
+
+        "Año Nuevo": "Any Nou",
+        "Celebración del Año Nuevo": "Celebració de l'Any Nou",
+        "Epifanía del Señor": "Epifania del Senyor",
+        "Celebración de la Epifanía del Señor": "Celebració de l'Epifania del Senyor",
+        "San Vicente Mártir": "Sant Vincent Màrtir",
+        "Festividad en honor a San Vicente Mártir": "Festivitat en honor a Sant Vincent Màrtir",
+        "San José": "Sant Josep",
+        "Festividad en honor a San José": "Festivitat en honor a Sant Josep",
+        "Viernes Santo": "Divendres Sant",
+        "Celebración del Viernes Santo": "Celebració del Divendres Sant",
+        "Lunes de Pascua": "Dilluns de Pasqua",
+        "Celebración del Lunes de Pascua": "Celebració del Dilluns de Pasqua",
+        "San Vicente Ferrer": "Sant Vincent Ferrer",
+        "Festividad en honor a San Vicente Ferrer": "Festivitat en honor a Sant Vincent Ferrer",
+        "Fiesta del Trabajo": "Festa del Treball",
+        "Celebración del Día del Trabajo": "Celebració del Dia del Treball",
+        "San Juan": "Sant Joan",
+        "Festividad en honor a San Juan": "Festivitat en honor a Sant Joan",
+        "Asunción de la Virgen": "Assumpció de la Verge",
+        "Celebración de la Asunción": "Celebració de l'Assumpció",  
+        "Día de la C. Valenciana": "Dia de la C. Valenciana",
+        "Fiesta de la Comunidad Valenciana": "Festa de la Comunitat Valenciana",
+        "Todos los Santos": "Tots els Sants",
+        "Festividad de Todos los Santos": "Festivitat de Tots els Sants",
+        "Día de la Constitución": "Dia de la Constitució",
+        "Celebración de la Constitución": "Celebració de la Constitució",
+        "Inmaculada Concepción": "Immaculada Concepció",
+        "Celebración de la Inmaculada Concepción": "Celebració de la Immaculada Concepció",
+        "Navidad": "Nadal",
+        "Celebración de la Navidad": "Celebració del Nadal",
+        "Presentación Falleras Mayores": "Presentació de les Falleres Majors",
+
+        "San Valentín": "Sant Valentí",
+        "Día de San Valentín": "Dia de Sant Valentí",
+        "Día Internacional de la Mujer": "Dia Internacional de la Dona",
+        "Celebración del Día Internacional de la Mujer": "Celebració del Dia Internacional de la Dona",
+
+        "Aviso Urgente": "Avís Urgent",
+        "Información Importante": "Informació Important",
+        "Reunión Mensual a las 18:30": "Reunió Mensual a les 18:30",
+        "Presentación de la Falla 2025-26": "Presentació de la Falla 2025-26"
+        
+      },
+      "icsModal": {
+        "titulo": "Dia {date} ({dayName})",
+        "evento": "Esdeveniment",
+        "placeholderEvento": "Introduïu el títol de l'esdeveniment",
+        "horaInicial": "Hora inicial", 
+        "horaFinal": "Hora final",
+        "notas": "Notes",
+        "placeholderNotas": "Introduïu les vostres notes",
+        "aceptar": "ACEPTAR"
+    },
+      "calendarioLeyenda": "Mostrant esdeveniments de {mes} {anio}",
+     "footer": {
+        "derechos": "@ 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats."
+    },
+      "notepad": {
+        "caption": "",
+        "indicator": "Pàgina {current} de {total}"
+      },
+      "ver": "Veure més",
+      "anterior": "Anterior",
+      "siguiente": "Següent",
+      "modalexito":{
+        "title":"Missatge Enviat",
+        "mensaje":"Missatge enviat correctament"
+      },
+      "modalerror":{
+        "title":"Error Enviant Missatge",
+        "mensaje":"No s'ha pogut enviar el missatge. Per favor, torna-ho a intentar."
+      },
+      "historia": {
+        "titulo": "Història",
+        "texto1": "Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint al nou barri de les Moreres i parlant amb els veïns, vam descobrir que era un somni compartit. Vam treballar perquè es fes realitat.",
+        "texto2": "“Jo, de petita, vaig ser fallera”, “Jo porto tota la vida sent faller”, “Jo mai ho he estat, però m'agradaria”. Aquestes eren algunes de les frases que compartíem i escoltàvem parlar entre nosaltres.",
+        "texto3":"“Vinga, valents, cal intentar-ho!” Amb aquesta determinació, vuit persones il·lusionades —José, Marta, Paula, Rodrigo, Prados, Sara, Migue i David— vam començar a reunir-nos amb un mateix objectiu: fer realitat el somni. Vam fundar la directiva, vam crear l'escut que ens identifica, vam redactar els estatuts i vam emprendre una lluita contra el temps i la burocràcia.",
+        "texto4":"Al mes de juny va ser quan, des de la Junta Central Fallera, ens van confirmar que el somni s'estava convertint en realitat. Ja érem falla, la número 396, la Falla Suïssa – L’Alqueria del Favero. Ja podíem formar una comissió que, a dia d'avui, està composta ni més ni menys que per 113 fallers i falleres.",
+        "texto5":"El pròxim objectiu? Plantar falla, el nostre primer monument. En aquests mesos els artistes fallers ja tenen els seus contractes signats des d'abril, però com estem somiant es fa la màgia i aconseguim que els grans Paco i David vulguin treballar amb nosaltres, ajudar-nos i ser amics d'aquesta, la nostra comissió. Sempre els estarem agraïts. Aquest any plantarem per ous, com diu el lema de la nostra falla gran: “¡Sssshhhhh… silenci que es roda!”; serà la falla de la comissió infantil, que segur enamora a Prados i Javier.",
+        "texto6":"Seguim avançant en aquest meravellós somni i tal vegada arribi el moment de despertar i tornar al present, perquè ha arribat el dia de l'exaltació de les nostres falleres majors i la presentació dels nostres presidents.", 
+        "texto7":"Amb tot això, ens trobem davant d'un somni que ja és realitat, una realitat que hem creat entre tots, amb l'esforç i l'afecte per la nostra terra, el nostre barri i la nostra tradició. I ara us convidem a viure amb nosaltres aquesta primera gran festa, a gaudir de la nostra Falla i del barri que ens acull, perquè, com un dia vam somiar junts, avui celebrem l'inici d'un camí que mai oblidarem. Benvinguts a les nostres primeres i inoblidables Falles." ,
+        "archivos": {
+          "titulo": "Arxius",
+          "presentacion": "Presentació",
+          "fallas2026": " Falles 2026"
+        }  
+
+        
+      },
+      "directiva": {
+        "presidente": "President",
+        "vicepresidentes": "Vicepresidents",
+        "secretaria": "Secretaria", 
+        "economica": "Àrea Econòmica",
+        "dinfantil": "Delegació Infantil"
+        
+        
+      },
+      "organigrama": {
+        "titulo": "Organigrama de la Falla",
+        "presidente": "President",
+        "vicepresidentes": "Vicepresidents",
+        "secretaria": "Secretaria",
+        "economica": "Àrea Econòmica",
+        "dinfantil": "Delegació Infantil",
+        "eventos": "Esdeveniments",
+        "protoc": "Protocol i Esports",
+        "festejos": "Festejos",
+        "web": "Delegat Web",
+        "loteria": "Delegada Loteria",
+        "deportes": "Delegat Esports",
+        "leyenda": "Aquest és l'organigrama de la falla, on es poden veure els diferents càrrecs i les seves respectives funcions. En l'exercici 2025-26, queda conformada d'aquesta manera."
+      }
+
+       
+    },
+    "en": {
+      "nav": {
+        "inicio": "Home",
+        "lafalla": "La Falla",
+        "eventos": "Events",
+        "blog": "Blog",
+        "meteo": "Weather",
+        "galeria": "Gallery"
+      },
+      "eventos": {
+        "titulo": "Events",
+        "calendario": "Calendar",
+        "tablon": "Notice Board",
+        "tablonNotas": {
+            "nota1": "📌 NEXT APPOINTMENT <br> 00-00-0000 00:00 h<br>📝 L'APUNTÀ<br>☕ Don't hesitate... Sign up!",
+            "nota2": "📌 COMMUNICATION <br> 00-00-0000 00:00 h<br>📝 Present progress Q3<br>☕ Bring product samples",
+            "nota3": "📌 REMINDER <br> 00-00-0000 00:00 h<br>📝 Present progress Q3<br>☕ Bring product samples",
+            "nota4": "📌 NOTES <br> 00-00-0000 00:00 h<br>📝 Present progress Q3<br>☕ Bring product samples"
+        }
+       
+      },
+      "calendario": {
+        "titulo": "Calendar",
+        "quitar": "Remove filters",
+        "avanzado": "Switch to Advanced Mode",
+        "buscar": "Search",
+        "rango": "Date range",
+        "categorias": "Category",
+        "todas": "All",
+        "festivo": "Holiday",
+        "falla": "Falla",
+        "evento": "Event",
+        "urgente": "Urgent",
+        "informacion": "Information",
+        "recordatorio": "Reminder",
+        "puntual": "Specific date",
+        "dia": "Day (2 digits)",
+        "mes": "Month (2 digits)",
+        "anno": "Year (4 digits)",
+        "detallesMes": "Month Details",
+        "listaAnuncios": "Announcements",
+        "eventosMes": "Events of {month} {year}",
+        "nota1": "In our calendar, you have a practical option to incorporate any event into your personal agenda. Additionally, you can easily edit the date, title, and add any notes you need.",
+        "nota2": "Everything is designed to make keeping your fallera agenda up to date as comfortable as it is enjoyable!"
+      },
+      "calendarioEventos": {
+        "Festivo": "Holiday",
+        "Falla": "Falla",
+        "Celebración de Fallas": "Fallas Celebration",
+        "Evento": "Event",
+        "Urgente": "Urgent",
+        "Aviso urgente para todos": "Urgent notice for everyone",
+        "Informacion": "Information",
+        "Información relevante sobre el evento": "Relevant information about the event",
+        "Recordatorio": "Reminder",
+        "Recordatorio de evento": "Event Reminder",
+        
+        "Año Nuevo": "New Year's Day",
+        "Celebración del Año Nuevo": "New Year's Celebration",
+        "Epifanía del Señor": "Epiphany",
+        "Celebración de la Epifanía del Señor": "Epiphany Celebration",
+        "San Vicente Mártir": "St. Vincent Martyr",
+        "Festividad en honor a San Vicente Mártir": "Feast in honor of St. Vincent Martyr",
+        "San José": "St. Joseph",
+        "Festividad en honor a San José": "Feast in honor of St. Joseph",
+        "Viernes Santo": "Good Friday",
+        "Celebración del Viernes Santo": "Good Friday Celebration",
+        "Lunes de Pascua": "Easter Monday",
+        "Celebración del Lunes de Pascua": "Easter Monday Celebration",
+        "San Vicente Ferrer": "St. Vincent Ferrer",
+        "Festividad en honor a San Vicente Ferrer": "Feast in honor of St. Vincent Ferrer",
+        "Fiesta del Trabajo": "Labor Day",
+        "San Juan": "St. John",
+        "Festividad en honor a San Juan": "Feast in honor of St. John",
+        "Asunción de la Virgen": "Assumption of Mary",
+        "Celebración de la Asunción": "Assumption Celebration",
+        "Día de la C. Valenciana": "Valencian Community Day",
+        "Fiesta de la Comunidad Valenciana": "Valencian Community Festival",
+        "Todos los Santos": "All Saints' Day",
+        "Festividad de Todos los Santos": "All Saints' Feast",
+        "Día de la Constitución": "Constitution Day",
+        "Celebración de la Constitución": "Constitution Celebration",
+        "Inmaculada Concepción": "Immaculate Conception",
+        "Celebración de la Inmaculada Concepción": "Immaculate Conception Celebration",
+        "Navidad": "Christmas",
+        "Celebración de la Navidad": "Christmas Celebration", 
+        "Presentación Falleras Mayores": "Presentation of the Major Falleras",
+
+        "San Valentín": "Valentine's Day",
+        "Día de San Valentín": "Valentine's Day",
+        "Día Internacional de la Mujer": "International Women's Day",
+        "Celebración del Día Internacional de la Mujer":"Celebration of International Women’s Day.",
+
+        "Aviso Urgente": "Urgent Notice",
+        "Información Importante": "Important Information"
+      },
+      "calendarioLeyenda": "Showing events for {mes} {year}",
+        "icsModal": {
+          "titulo": "Day {date} ({dayName})",
+          "evento": "Event",
+          "placeholderEvento": "Enter the event title",
+          "horaInicial": "Start time",
+          "horaFinal": "End time",
+          "notas": "Notes",
+          "placeholderNotas": "Enter your notes",
+          "aceptar": "ACCEPT"
+          },
+     "modalexito":{
+        "title":"Message Sent",
+        "mensaje":"Message sent successfully"
+      },
+      "modalerror":{
+        "title":"Error Sending Message",
+        "mensaje":"Could not send the message. Please try again."
+      },
+      "historia": {
+        "titulo": "History",
+        "texto1": "One day we had a dream that we didn't know we shared with more people. Living in the new neighborhood of les Moreres and talking to the neighbors, we discovered that it was a shared dream. We worked to make it come true.",
+        "texto2": "“I was a fallera when I was little”, “I have been a faller all my life”, “I have never been one, but I would like to be”. These were some of the phrases we shared and heard each other say.",
+        "texto3":"“Come on, brave ones, we have to try!” With that determination, eight excited people —José, Marta, Paula, Rodrigo, Prados, Sara, Migue and David— began to meet with a common goal: to make the dream come true. We founded the board, created the shield that identifies us, drafted the statutes and undertook a fight against time and bureaucracy.",
+        "texto4":"In June, we were confirmed by the Central Fallera Board that the dream was becoming a reality. We were already a falla, number 396, the Falla Suïssa – L’Alqueria del Favero. We could now form a commission that today is made up of no less than 113 fallers and falleras.",
+        "texto5":"The next objective? To plant a falla, our first monument. In these months the fallero artists already have their contracts signed since April, but as we are dreaming the magic happens and we manage to get the great Paco and David to want to work with us, help us and be friends of this, our commission. We will always be grateful to them. This year we will plant eggs, as the motto of our big falla says: “¡Sssshhhhh… silence that is rolled!”; it will be the falla of the children's commission, which surely enchants Prados and Javier.",
+        "texto6":"We continue to advance in this wonderful dream and perhaps the time will come to wake up and return to the present, because the day of the exaltation of our major falleras and the presentation of our presidents has arrived.",
+        "texto7":"With all this, we find ourselves before a dream that is already a reality, a reality that we have created together, with the effort and affection for our land, our neighborhood and our tradition. And now we invite you to live this first great party with us, to enjoy our Falla and the neighborhood that welcomes us, because, as one day we dreamed together, today we celebrate the beginning of a path that we will never forget. Welcome to our first unforgettable Fallas."
+      },
+      "directiva": {
+        "presidente": "President",
+        "vicepresidentes": "Vice Presidents",
+        "secretaria": "Secretary",
+        "economica": "Economic Area",
+        "dinfantil": "Children's Delegation"
+      },
+      "organigrama": {
+        "titulo": "Falla Organizational Chart",
+        "presidente": "President",
+        "vicepresidentes": "Vice Presidents",
+        "secretaria": "Secretary",
+        "economica": "Economic Area",
+        "dinfantil": "Children's Delegation",
+        "eventos": "Events",
+        "protoc": "Protocol and Sports",
+        "festejos": "Festivities",
+        "web": "Web Delegate",
+        "loteria": "Lottery Delegate",
+        "deportes": "Sports Delegate",
+        "leyenda": "This is the organizational chart of the falla, where you can see the different positions and their respective functions. In the 2025-26 exercise, it is configured this way."
+      }
+    },
+    "fr": {
+      "nav": {
+        "inicio": "Accueil",
+        "lafalla": "La Falla",
+        "eventos": "Événements",
+        "blog": "Blog",
+        "meteo": "Météo",
+        "galeria": "Galerie"
+      },
+      "eventos": {
+        "titulo": "Événements",
+        "calendario": "Calendrier",
+        "tablon": "Tableau d'Annonces",
+        "tablonNotas": {
+            "nota1": "📌 PROCHAINE RENCONTRE <br> 00-00-0000 00:00 h<br>📝 L'APUNTÀ<br>☕ N'hésitez pas... Inscrivez-vous!",
+            "nota2": "📌 COMMUNICATION <br> 00-00-0000 00:00 h<br>📝 Présenter les progrès du T3<br>☕ Apporter des échantillons de produit",
+            "nota3": "📌 RAPPEL <br> 00-00-0000 00:00 h<br>📝 Présenter les progrès du T3<br>☕ Apporter des échantillons de produit",
+            "nota4": "📌 NOTES <br> 00-00-0000 00:00 h<br>📝 Présenter les progrès du T3<br>☕ Apporter des échantillons de produit"
+        }
+      },
+      "calendario": {
+        "titulo": "Calendrier",
+        "quitar": "Supprimer les filtres",
+        "avanzado": "Passer en mode avancé",
+        "buscar": "Rechercher",
+        "rango": "Plage de dates",
+        "categorias": "Catégorie",
+        "todas": "Toutes",
+        "festivo": "Férié",
+        "falla": "Falla",
+        "evento": "Événement",
+        "urgente": "Urgent",
+        "informacion": "Information",
+        "recordatorio": "Rappel",
+        "puntual": "Date spécifique",
+        "dia": "Jour (2 chiffres)",
+        "mes": "Mois (2 chiffres)",
+        "anno": "Année (4 chiffres)",
+        "detallesMes": "Détails du mois",
+        "listaAnuncios": "Annonces",
+        "eventosMes": "Événements de {month} {year}",
+        "nota1": "Dans notre calendrier, vous disposez d'une option pratique pour incorporer tout événement dans votre agenda personnel. De plus, vous pouvez facilement modifier la date, le titre et ajouter toutes les notes dont vous avez besoin.",
+        "nota2": "Tout est conçu pour que la mise à jour de votre agenda fallera soit aussi agréable que confortable!"
+    },
+    "calendarioEventos": {
+      "Festivo": "Férié",
+      "Falla": "Falla",
+      "Celebración de Fallas": "Célébration de la Falla",
+      "Evento": "Événement",
+      "Urgente": "Urgent",
+      "Aviso urgente para todos": "Avis urgent pour tous", 
+      "Informacion": "Information",
+      "Información relevante sobre el evento": "Informations pertinentes sur l'événement",
+      "Recordatorio": "Rappel",
+      "Recordatorio de evento": "Rappel d'événement",
+
+      "Año Nuevo": "Nouvel An",
+      "Celebración del Año Nuevo": "Célébration du Nouvel An",
+      "Epifanía del Señor": "Épiphanie",
+      "Celebración de la Epifanía del Señor": "Célébration de l'Épiphanie",
+      "San Vicente Mártir": "Saint Vincent Martyr",
+      "Festividad en honor a San Vicente Mártir": "Fête en l'honneur de Saint Vincent Martyr",
+      "San José": "Saint Joseph",
+      "Festividad en honor a San José": "Fête en l'honneur de Saint Joseph",
+      "Viernes Santo": "Vendredi Saint",
+      "Celebración del Viernes Santo": "Célébration du Vendredi Saint",
+      "Lunes de Pascua": "Lundi de Pâques",
+      "Celebración del Lunes de Pascua": "Célébration du Lundi de Pâques",
+      "San Vicente Ferrer": "Saint Vincent Ferrer",
+      "Festividad en honor a San Vicente Ferrer": "Fête en l'honneur de Saint Vincent Ferrer",
+      "Fiesta del Trabajo": "Fête du Travail",
+      "Celebración del Día del Trabajo": "Célébration de la Fête du Travail",
+      "San Juan": "Saint Jean",
+      "Festividad en honor a San Juan": "Fête en l'honneur de Saint Jean",
+      "Asunción de la Virgen": "Assomption",
+      "Celebración de la Asunción": "Célébration de l'Assomption",
+      "Día de la C. Valenciana": "Jour de la Communauté Valencienne",
+      "Fiesta de la Comunidad Valenciana": "Fête de la Communauté Valencienne",
+      "Todos los Santos": "Tous les Saints",
+      "Festividad de Todos los Santos": "Fête de Tous les Saints",
+      "Día de la Constitución": "Jour de la Constitution",
+      "Celebración de la Constitución": "Célébration de la Constitution",
+      "Inmaculada Concepción": "Immaculée Conception",
+      "Celebración de la Inmaculada Concepción": "Célébration de l'Immaculée Conception",      
+      "Navidad": "Noël",
+      "Celebración de la Navidad": "Célébration de Noël",
+      "Presentación Falleras Mayores": "Présentation des Falleres Majeures",
+      
+      "San Valentín": "Saint Valentin",
+      "Día de San Valentín": "Saint Valentin",
+      "Día Internacional de la Mujer": "Journée Internationale de la Femme",
+      "Celebración del Día Internacional de la Mujer": "Célébration de la Journée Internationale de la Femme",
+
+      "Aviso Urgente": "Avis urgent",
+      "Información Importante": "Informations Importantes"
+    
+      },
+      "calendarioLeyenda": "Affichage des événements de {mes} {année}",
+      "icsModal": {
+        "titulo": "Jour {date} ({dayName})",
+        "evento": "Événement",
+        "placeholderEvento": "Entrez le titre de l'événement",
+        "horaInicial": "Heure de début",
+        "horaFinal": "Heure de fin",
+        "notas": "Notes",
+        "placeholderNotas": "Entrez vos notes",
+        "aceptar": "ACCEPTER"
+      },
+      "modalexito":{
+        "title":"Message Envoyé",
+        "mensaje":"Message envoyé avec succès"
+      },
+      "modalerror":{
+        "title":"Erreur d'Envoi de Message",
+        "mensaje":"Impossible d'envoyer le message. Veuillez réessayer."
+      },
+      "historia": {
+        "titulo": "Histoire",
+        "texto1": "Un jour, nous avons eu un rêve que nous ne savions pas partager avec d'autres. Vivant dans le nouveau quartier de les Moreres et parlant avec les voisins, nous avons découvert que c'était un rêve partagé. Nous avons travaillé pour le réaliser.",
+        "texto2": "« Moi, petite, j'étais fallera », « Je suis faller depuis toute ma vie », « Je ne l'ai jamais été, mais j'aimerais ». C'étaient quelques-unes des phrases que nous partagions et entendions parler entre nous.",
+        "texto3":"« Allez, courageux, il faut essayer ! » Avec cette détermination, huit personnes enthousiastes —José, Marta, Paula, Rodrigo, Prados, Sara, Migue et David— ont commencé à se réunir avec un même objectif : réaliser le rêve. Nous avons fondé la direction, créé le blason qui nous identifie, rédigé les statuts et entrepris une lutte contre le temps et la bureaucratie.",
+        "texto4":"Au mois de juin, la Junta Centrale Fallera nous a confirmé que le rêve devenait réalité. Nous étions déjà une falla, la numéro 396, la Falla Suïssa – L’Alqueria del Favero. Nous pouvions déjà former une commission qui, à ce jour, est composée de 113 fallers et falleras.",
+        "texto5":"Quel est le prochain objectif ? Planter la falla, notre premier monument. Au cours de ces mois, les artistes fallers ont déjà signé leurs contrats depuis avril, mais comme nous sommes en train de rêver, la magie opère et nous parvenons à ce que les grands Paco et David veuillent travailler avec nous, nous aider et être amis de cette commission. Nous leur en serons toujours reconnaissants. Cette année, nous planterons pour des œufs, comme le dit la devise de notre grande falla : « Sssshhhhh… silence ça tourne ! » ; ce sera la falla de la commission infantile, qui séduira sûrement Prados et Javier.",
+        "texto6":"Nous continuons d'avancer dans ce merveilleux rêve et peut-être viendra le moment de se réveiller et de revenir au présent, car le jour de l'exaltation de nos falleras majeures et de la présentation de nos présidents est arrivé.",
+        "texto7":"Avec tout cela, nous nous trouvons devant un rêve qui est déjà une réalité, une réalité que nous avons créée ensemble, avec l'effort et l'affection pour notre terre, notre quartier et notre tradition. Et maintenant, nous vous invitons à vivre avec nous cette première grande fête, à profiter de notre Falla et du quartier qui nous accueille, car, comme un jour nous avons rêvé ensemble, aujourd'hui nous célébrons le début d'un chemin que nous n'oublierons jamais. Bienvenue à nos premières et inoubliables Fallas."
+      },
+      "directiva": {
+        "presidente": "Président",
+        "vicepresidentes": "Vice-présidents",
+        "secretaria": "Secrétariat",
+        "economica": "Zone Économique",
+        "dinfantil": "Délégation Infantile"
+  
+       },
+      "organigrama": {
+        "titulo": "Organigramme de la Falla",
+        "presidente": "Président",
+        "vicepresidentes": "Vice-présidents",
+        "secretaria": "Secrétariat",
+        "economica": "Zone Économique",
+        "dinfantil": "Délégation Infantile",
+        "eventos": "Événements",
+        "protoc": "Protocole et Sports",
+        "festejos": "Festivités",
+        "web": "Délégué Web",
+        "loteria": "Déléguée Loterie",
+        "deportes": "Délégué Sports",
+        "leyenda": "Voici l'organigramme de la falla, où vous pouvez voir les différents postes et leurs fonctions respectives. Dans l'exercice 2025-26, il est configuré de cette manière."
+        
+      }
+    }
+} 

@@ -1,0 +1,99 @@
+// components/_blog.scss
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.blog {
+  
+  padding: 5rem 0;
+  background-color: v.$naranja-suave;
+  border-top: 1px solid v.$primary-color;
+
+  &__titulo {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+  }
+  &__pluma {
+    width: 5rem;
+    height: 8rem;
+    padding-bottom: 2rem;
+  }
+  &__title {
+    font-size: v.$font-size-large;
+    color: v.$primary-color;
+    margin-bottom: 2rem;
+    @media (max-width:768px) {
+      font-size: v.$font-size-medium;
+    }
+  }
+  &__posts {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 3rem;
+    max-width: 120rem;
+    margin: 0 auto;
+    @media (max-width:768px) {
+      margin: 0rem;
+      padding: 1rem;
+    }
+  }
+  
+  &__post {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: v.$blanco;
+    border-radius: v.$border-radius;
+    box-shadow: v.$box-shadow;
+    max-width: 60rem;
+    width: 100%;
+    text-align: left;
+    @media (max-width:768px) {
+      margin: 0rem;
+      padding: 1;
+    }
+  }
+  &__post-title {
+    font-size: v.$font-size-small;
+    color: v.$secondary-color;
+    margin-bottom: 5px;
+  }
+  &__date {
+    font-size: v.$font-size-small;
+    color: v.$primary-color;
+    margin-bottom: 1rem;
+  }
+  &__post-content {
+    font-size: v.$font-size-small;
+    color: v.$gris-medio-oscuro;
+    line-height: 1.6;
+  }
+ 
+
+  @media (min-width: 768px) {
+    padding: 10rem;
+    &__posts {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    &__posts {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+}
+
+
+.flex_button {
+  display: flex;
+  justify-content: center; 
+ 
+}
+
+
+
