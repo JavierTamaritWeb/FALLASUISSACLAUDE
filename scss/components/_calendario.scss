@@ -1,0 +1,794 @@
+
+// components/_agenda.scss
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.cal{
+  padding: 5rem 2rem;
+  
+}
+
+.calendario-eventos {
+    max-width: 100rem;
+    margin: 0 auto;
+    padding: 2rem 2rem !important;
+    background-color: v.$color-fondo;
+    border: 1px solid v.$color-borde;
+    border-radius: v.$radio-borde;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    &__boton-quitar {
+        background-color: v.$color-festivo;
+        color: v.$blanco;
+        border: none;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem !important;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color v.$transicion, color v.$transicion;
+
+        &:hover {
+        background-color: #444;
+        }
+    }
+    &__modo-boton {
+        background-color: v.$color-festivo;
+        color: v.$blanco;
+        border: none;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem !important;
+        text-transform: uppercase ;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color v.$transicion, color v.$transicion;
+
+        &:hover {
+        background-color: #444;
+        }
+    }
+
+    &__cabecera {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+
+        &-titulo {
+        font-size: 2.5rem;
+        color: v.$color-festivo;
+        margin: 0;
+        }
+    }
+
+    &__acciones {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+
+        .calendario-eventos__boton-quitar,
+        .calendario-eventos__modo-boton {
+        background-color: v.$blanco;
+        color: v.$color-texto;
+        border: 1px solid v.$color-texto;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: background-color v.$transicion, color v.$transicion;
+
+        &:hover {
+            background-color: #444;
+            color: v.$blanco;
+        }
+        }
+    }
+  
+    // Botón para activar modo oscuro (si se requiere)
+    #botonModoOscuro {
+      margin-left: 1rem;
+    }
+  
+    &__controles {
+      margin-bottom: 1.5rem;
+    }
+  
+    &__fila {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5rem;
+      margin-bottom: 1rem;
+    }
+  
+    &__control {
+        display: flex;
+        flex-direction: column;    // 1. El label se coloca encima del input
+        align-items: flex-start;
+        color: v.$primary-color;
+        font-weight: 700; 
+        text-transform: uppercase; 
+        font-size: 1.2rem; // 2. Alineación a la izquierda
+      
+        // Ajusta el margen entre el label y el input
+        label {
+          margin-bottom: 0.5rem; 
+          text-align: left;       // Asegura que el texto del label esté a la izquierda
+          width: 100%;            // (Opcional) El label ocupa el ancho completo del contenedor
+        }
+      
+        // Inputs y selects
+        &-texto,
+        &-fecha,
+        &-busqueda {
+         
+          width: 100%;
+          padding: 1rem 1rem;
+          font-size: 1.3rem;
+          border: 1px solid black;
+          border-radius: .5rem;
+          background-color: v.$gris-claro;
+          transition: background-color v.$transicion, color v.$transicion;
+          color: black;
+          text-transform: uppercase;
+          @media (min-width: 768px) {
+            padding: 1.75rem 1rem;
+            
+          }
+        }
+      
+        &:hover &-texto,
+        &:hover &-fecha,
+        &:hover &-busqueda {
+          background-color: v.$primary-color !important;
+          color: v.$blanco !important;
+        }
+      }
+  
+    &__borrar-campo {
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      color: v.$color-texto;
+      cursor: pointer;
+      transition: color v.$transicion;
+  
+      &:hover {
+        color: v.$blanco;
+      }
+    }
+  
+    &__campo-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      transition: background-color 300ms ease, color;
+    }
+  
+    &__control-fecha-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      width: 22rem;
+  
+      .calendario-eventos__control-fecha {
+        width: 100%;
+        padding-right: 4rem;
+  
+        &::-webkit-calendar-picker-indicator {
+          position: absolute;
+          right: 2.5rem;
+          cursor: pointer;
+          transition: filter v.$transicion;
+        }
+      }
+  
+      &:hover {
+        .calendario-eventos__control-fecha::-webkit-calendar-picker-indicator {
+          filter: invert(100%);
+        }
+  
+        .calendario-eventos__control-fecha-borrar {
+          color: v.$blanco;
+        }
+      }
+  
+      &__control-fecha-borrar {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        color: v.$color-texto;
+        cursor: pointer;
+        transition: color v.$transicion;
+      }
+    }
+  
+    &__leyenda {
+      margin: v.$espaciado 0;
+      font-size: 1.2rem;
+      color: v.$primary-color;
+      text-align: center;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    &__detalles-mes {
+      margin: v.$espaciado 0;
+      background-color: v.$blanco;
+      border: 1px solid #fdfdfd;
+      border-radius: 5px;
+      padding: v.$espaciado;
+      color: v.$color-texto;
+      text-align: left; 
+      h2 {
+        margin-top: 0;
+        font-size: 1.3rem;
+        color: v.$color-festivo;
+      }
+      p {
+        color: #000;
+      }
+  
+      ul {
+        margin-left: 1.5rem;
+        list-style: disc;
+  
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  
+    // MINI CALENDARIO
+    &__mini {
+      margin: v.$espaciado 0;
+      font-size: 1.6rem;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      text-align: center;
+      position: relative;
+      transition: opacity 0.5s ease;
+  
+      &-encabezado {
+        font-weight: bold;
+        color: v.$color-texto;
+      }
+  
+      &-dia {
+        position: relative;
+        padding: 0.5rem;
+        border-radius: 4px;
+        background-color: v.$blanco;
+        border: 1px solid #fdfdfd;
+        transition: background-color var(--transicion), color var(--transicion),
+          transform 0.3s ease;
+        cursor: pointer;
+  
+        &:hover {
+          transform: scale(1.05);
+        }
+  
+        &.seleccionado {
+          animation: pulse 0.5s ease-in-out;
+        }
+  
+        &.hoy {
+          outline: 2px solid blue;
+        }
+  
+        .calendario-eventos__tooltip {
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          bottom: 105%;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: rgba(0, 0, 0, 0.8);
+          color: v.$blanco;
+          padding: 0.5rem 1rem;
+          border-radius: 4px;
+          transition: opacity 0.3s ease;
+          z-index: 10;
+          white-space: nowrap;
+        }
+  
+        &:hover {
+          .calendario-eventos__tooltip {
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
+  
+      &-indicador {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+  
+      &-banda {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        border-radius: 0 0 4px 4px;
+      }
+    }
+  
+    &__lista {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+  
+    &__item {
+      background-color: v.$blanco;
+      border: 1px solid #fdfdfd;
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+  
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      }
+  
+      &-titulo {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: v.$color-festivo;
+      }
+  
+      &-contenido {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+  
+      &-meta {
+        font-size: 0.9rem;
+        color: #333;
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      &--festivo {
+        border-left: 6px solid v.$color-festivo;
+  
+        .calendario-eventos__item-meta {
+          span {
+            &:first-child {
+              color: v.$primary-color;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+            &:last-child {
+              color: v.$primary-color;
+              text-transform: uppercase;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+     &--festivo h2 {
+            color: v.$primary-color;
+     }
+      &--falla {
+        border-left: 6px solid v.$color-falla;
+        
+  
+        .calendario-eventos__item-meta {
+          span {
+            &:first-child {
+              color: v.$color-falla;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+            &:last-child {
+              color: v.$color-falla;
+              text-transform: uppercase;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+      &--falla h2 {
+        color: v.$color-falla;
+      }
+  
+      &--evento {
+        border-left: 6px solid v.$color-evento;
+  
+        .calendario-eventos__item-meta {
+          span {
+            &:first-child {
+              color: v.$color-evento;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+            &:last-child {
+              color: v.$color-evento;
+              text-transform: uppercase;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+      &--evento h2 {
+        color: v.$color-evento;
+      }
+      &--urgente {
+        border-left: 6px solid v.$color-urgente;
+  
+        .calendario-eventos__item-meta {
+          span {
+            &:first-child {
+              color: v.$color-urgente;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+            &:last-child {
+              color: v.$color-urgente;
+              text-transform: uppercase;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+      &--urgente h2 {
+        color: v.$color-urgente;
+      }
+      &--informacion {
+        border-left: 6px solid v.$color-informacion;
+        color: #000;
+  
+        .calendario-eventos__item-meta {
+          span {
+            &:first-child {
+              color: v.$color-informacion;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+            &:last-child {
+              color: v.$color-informacion;
+              text-transform: uppercase;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+        &--informacion h2 {
+            color: v.$color-informacion;
+        }
+  
+      &--recordatorio {
+        border-left: 6px solid v.$color-recordatorio;
+  
+        .calendario-eventos__item-meta {
+          span {
+            &:first-child {
+              color: v.$color-recordatorio;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+            &:last-child {
+              color: v.$color-recordatorio;
+              text-transform: uppercase;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+        &--recordatorio h2 {
+            color: v.$color-recordatorio;
+        }
+  
+      &__banda {
+        height: 4px;
+        width: 100%;
+        border-radius: 4px 4px 0 0;
+        margin-bottom: 0.5rem;
+      }
+    }
+  
+    &.modo-sencillo {
+      .avanzado {
+        display: none;
+      }
+    }
+}
+
+.calendario-eventos{
+
+    &__control{
+
+        &-busqueda{
+            &::-webkit-input-placeholder {
+                color: #333;
+            }
+            &:-ms-input-placeholder {
+                color: #333;
+            }
+            &::placeholder {
+                color: #333;
+                transition: color v.$transicion;
+            }
+            &:hover::placeholder {
+                color: v.$blanco;               /* Cambiar el color del placeholder */
+            }
+            :hover {
+                background-color: v.$primary-color;
+            }
+        }
+        &-texto{
+            &::-webkit-input-placeholder {
+                color: #333;
+            }
+            &:-ms-input-placeholder {
+                color: #333;
+            }
+            &::placeholder {
+                color: #333;
+                transition: color v.$transicion;
+            }
+            &:hover::placeholder {
+                color: v.$blanco;               /* Cambiar el color del placeholder */
+            }
+            &:hover {
+                background-color: v.$primary-color;
+            }
+
+        }
+        &-fecha{
+            &::-webkit-input-placeholder {
+                color: #333;
+            }
+            &:-ms-input-placeholder {
+                color: #333;
+            }
+            &::placeholder {
+                color: #333;
+                transition: color var(--transicion);
+            }
+            &:hover::placeholder {
+                color: v.$blanco;               /* Cambiar el color del placeholder */
+            }
+            &:hover {
+                background-color: v.$primary-color;
+            }
+        }
+    }
+}
+
+
+/* Sábado con fondo suave */
+.calendario-eventos__mini-dia.sabado {
+    background-color: #fae9e8; /* Color claro rosado */
+}
+
+/* Domingo con fondo suave y texto #FF6F61 */
+.calendario-eventos__mini-dia.domingo {
+    background-color: #fae9e8; 
+    color: v.$primary-color; /* Texto de los domingos en este color */
+}
+/* Asegúrate de no tener pointer-events: none; */
+.calendario-eventos__mini-dia {
+    cursor: pointer; /* opcional, para que el usuario sepa que es clicable */
+}
+
+
+.calendario-eventos__mini-dia:hover {
+    background-color: #00909E;      /* Fondo azul verdoso */
+    color: v.$blanco;                    /* Texto blanco */
+    font-weight: bold;              /* Texto en negrita */
+    transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
+}
+
+
+.ics-modal {
+    &.oculto {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(0);
+
+    &__contenido {
+        background-color: v.$blanco;
+        border-radius: 8px;
+        width: 300px;
+        position: relative;
+        padding: 1.5rem;
+        border: 1px solid v.$color-festivo;
+    }
+
+    &__cerrar {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: transparent;
+        border: none;
+        font-size: 2.2rem;
+        color: v.$color-festivo;
+        cursor: pointer;
+
+        &:hover {
+        color: #444;
+        }
+    }
+
+    &__titulo {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        color: v.$color-festivo;
+    }
+
+    &__label {
+        display: block;
+        margin-bottom: 0.3rem;
+        color: v.$color-festivo;
+        font-weight: bold;
+    }
+
+    &__input,
+    &__textarea {
+        width: 100%;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #333;
+        color: v.$blanco;
+        font-size: 1rem;
+        transition: background-color var(--transicion), color var(--transicion);
+
+        &::placeholder {
+        color: #aaa;
+        }
+
+        &:hover {
+        background-color: #00909E;
+        color: v.$negro;
+        }
+    }
+
+    &__boton {
+        background-color: v.$color-festivo;
+        color: v.$blanco;
+        border: none;
+        border-radius: 5px;
+        padding: 0.6rem 1rem;
+        cursor: pointer;
+        font-weight: bold;
+        display: block;
+        margin: 0 auto;
+        width: auto;
+        text-align: center;
+
+        &:hover {
+        background-color: #444;
+        }
+    }
+}
+.ics-modal__contenido {
+    text-align: left; /* Alinear a la izquierda */
+}
+.ics-modal__titulo {
+    text-align: center; /* Sobrescribe la alineación a la izquierda */
+}
+  
+/* Solo títulos, etiquetas y botón en mayúsculas */
+.ics-modal__titulo,
+.ics-modal__label,
+.ics-modal__boton {
+    text-transform: uppercase;
+}
+  
+// Media queries
+@media (max-width: 480px) {
+    .calendario-eventos__fila {
+        grid-template-columns: 1fr;
+    }
+
+    button {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+  
+@media (min-width: 481px) and (max-width: 768px) {
+    .calendario-eventos__fila {
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+    }
+    .calendario-eventos__lista {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+  
+@media (min-width: 769px) and (max-width: 1023px) {
+    .calendario-eventos__fila {
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+    }
+    .calendario-eventos__lista {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+  
+@media (min-width: 1024px) {
+    .calendario-eventos__fila {
+        grid-template-columns: repeat(4, minmax(150px, 1fr));
+        gap: 2rem;
+    }
+    .calendario-eventos__control-texto,
+    .calendario-eventos__control-fecha,
+    .calendario-eventos__control-busqueda {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.95rem;
+    }
+    .calendario-eventos__lista {
+        grid-template-columns:  repeat(4, 1fr);
+    }
+}
+  
+/* Notificaciones */
+#notificacion {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: v.$blanco;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    z-index: 10000;
+
+    &.mostrar {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+
+
+.flatpickr-calendar:not(.open) {
+  display: none !important;
+}

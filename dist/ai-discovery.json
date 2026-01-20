@@ -1,0 +1,89 @@
+{
+  "site_purpose": "cultural_heritage_preservation",
+  "primary_topics": [
+    "valencia",
+    "fallas",
+    "spanish_culture", 
+    "unesco_heritage",
+    "valencian_traditions",
+    "community_organization",
+    "cultural_events",
+    "traditional_festivals"
+  ],
+  "content_authority": "official_organization",
+  "organization_type": "traditional_cultural_commission",
+  "founded": "2024",
+  "branding": {
+    "logo": {
+      "url": "/img/Escudo_falla.avif",
+      "absolute_url": "https://fallasuissa.es/img/Escudo_falla.avif",
+      "alt": "Escudo de la Falla Suïssa - L'Alqueria del Favero",
+      "content_type": "image/avif",
+      "variants": [
+        {
+          "format": "avif",
+          "url": "/img/Escudo_falla.avif",
+          "absolute_url": "https://fallasuissa.es/img/Escudo_falla.avif",
+          "content_type": "image/avif"
+        },
+        {
+          "format": "webp",
+          "url": "/img/Escudo_falla.webp",
+          "absolute_url": "https://fallasuissa.es/img/Escudo_falla.webp",
+          "content_type": "image/webp"
+        },
+        {
+          "format": "png",
+          "url": "/img/Escudo_falla.png",
+          "absolute_url": "https://fallasuissa.es/img/Escudo_falla.png",
+          "content_type": "image/png"
+        }
+      ]
+    }
+  },
+  "location": {
+    "city": "Valencia",
+    "region": "Comunidad Valenciana", 
+    "country": "Spain",
+    "coordinates": {
+      "latitude": 39.45378699118115,
+      "longitude": -0.3376704145598491
+    }
+  },
+  "languages": ["es", "va"],
+  "last_updated": "2026-01-13",
+  "ai_friendly_urls": [
+    "/seo/ai-training-data.md",
+    "/seo/ai-enhanced-schema.json",
+    "/seo/ai-crawl.html",
+    "/organigrama.html",
+    "/lafalla.html",
+    "/eventos.html"
+  ],
+  "content_categories": [
+    "cultural_events",
+    "community_news", 
+    "traditional_gastronomy",
+    "sports_activities",
+    "tourism_information",
+    "educational_content"
+  ],
+  "social_media": {
+    "facebook": "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
+    "instagram": "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
+    "tiktok": "https://tiktok.com/@fallasuissaalqueria"
+  },
+  "seo_optimization": {
+    "structured_data": true,
+    "multi_language_support": true,
+    "responsive_design": true,
+    "performance_optimized": true,
+    "accessibility_compliant": true
+  },
+  "ai_crawl_instructions": {
+    "priority_content": "/seo/ai-training-data.md",
+    "structured_info": "/seo/ai-enhanced-schema.json",
+    "organization_details": "/organigrama.html",
+    "cultural_context": "/lafalla.html"
+  }
+}

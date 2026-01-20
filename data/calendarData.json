@@ -1,0 +1,64 @@
+{
+    "2025": {
+      "monthNames": [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+      ],
+      "namedHolidays": {
+        "01-01": "Año Nuevo",
+        "01-06": "Epifanía del Señor",
+        "01-22": "San Vicente Mártir",
+        "03-19": "San José",
+        "04-18": "Viernes Santo",
+        "04-21": "Lunes de Pascua",
+        "04-28": "San Vicente Ferrer",
+        "05-01": "Fiesta del Trabajo",
+        "06-24": "San Juan",
+        "08-15": "Asunción de la Virgen",
+        "10-09": "Día de la C. Valenciana",
+        "11-01": "Todos los Santos",
+        "12-06": "Día de la Constitución",
+        "12-08": "Inmaculada Concepción",
+        "12-25": "Navidad"
+      },
+      "fallaDays": [
+        "01-19", "03-15", "03-16", "03-17", "03-18", "03-19"
+      ],
+      "specialEvents": {
+        "01-19": "Presentación Falleras Mayores",
+        "02-14": "San Valentín",
+        "03-08": "Día Internacional de la Mujer"
+      }
+    },
+    "2026": {
+      "monthNames": [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+      ],
+      "namedHolidays": {
+        "01-01": "Año Nuevo",
+        "01-06": "Epifanía del Señor",
+        "01-22": "San Vicente Mártir",
+        "03-19": "San José y dia de padre",
+        "04-03": "Viernes Santo",
+        "04-06": "Lunes de Pascua",
+        "04-28": "San Vicente Ferrer",
+        "05-01": "Fiesta del Trabajo",
+        "06-24": "San Juan",
+        "08-15": "Asunción de la Virgen",
+        "10-09": "Día de la C. Valenciana",
+        "11-01": "Todos los Santos",
+        "12-06": "Día de la Constitución",
+        "12-08": "Inmaculada Concepción",
+        "12-25": "Navidad"
+      },
+      "fallaDays": [
+        "01-19", "03-15", "03-16", "03-17", "03-18", "03-19"
+      ],
+      "specialEvents": {
+    
+        "02-14": "San Valentín",
+        "03-08": "Día Internacional de la Mujer"
+      }
+    }
+}

@@ -1,0 +1,455 @@
+/*components/_meteo.scss */
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+/* ------------------------------------------------
+   Animaciones globales
+------------------------------------------------ */
+/* ------------------------------------------------
+   Estilos base de .meteo
+------------------------------------------------ */
+.meteo {
+  background-color: v.$blanco-hueso;
+  padding: 2.5rem 0;
+  padding-bottom: 5rem;
+
+  &__titulo {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+    
+  }
+}
+
+
+
+/* ------------------------------------------------
+   CLIMA ACTUAL (.weather-current)
+------------------------------------------------ */
+.weather-current {
+  padding: 1.5rem;
+  background-color: v.$melocotin-claro;
+  box-shadow: v.$box-shadow;
+  color: v.$blanco-hueso;
+  border-radius: 1rem;
+  margin-top: 2.5rem;
+
+  .current-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include m.fadeIn(1s, 0s);
+
+    .current-icon {
+      margin-bottom: 1rem;
+
+      img {
+        width: 60px;  // Reducido de 100px a 60px
+        height: 60px; // Reducido de 100px a 60px
+        
+        @media (max-width: 767px) {
+          width: 30px;  // Mucho más pequeño en móviles
+          height: 30px;
+        }
+        
+        @media (max-width: 480px) {
+          width: 25px;  // Aún más pequeño en pantallas muy pequeñas
+          height: 25px;
+        }
+      }
+    }
+
+    .current-info {
+      text-align: center;
+      margin-bottom: 1rem;
+
+      h3 {
+        font-size: 2rem !important;
+        margin: 0.5rem 0;
+      }
+     
+      &__portada-desc {
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin: 0.5rem 0;
+      }
+    }
+
+    &__humedad {
+      background-color: black;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .current-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+
+    div {
+      background-color: rgba(#000, 0.2);
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: transform 0.3s, background-color 0.3s;
+
+      &:hover {
+        transform: scale(1.05);
+        background-color: rgba(#000, 0.3);
+      }
+
+      strong {
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    &__humedad {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+/* ------------------------------------------------
+   TÍTULOS, ETIQUETAS Y OTRAS CLASES
+------------------------------------------------ */
+.clima-actual {
+  font-size: v.$font-size-medium;
+  color: v.$primary-color;
+  @media  (max-width: 768px) {
+    font-size: v.$font-size-regular;
+    
+  }
+
+}
+
+.pronostico {
+  font-size: v.$font-size-medium;
+  color: v.$primary-color;
+  text-transform: uppercase;
+}
+
+.etiqueta-pronostico {
+  color: v.$gris-oscuro;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------
+   PREVISIÓN 5 DÍAS (.weather-forecast)
+------------------------------------------------ */
+.weather-forecast {
+  padding: 1.5rem;
+
+  .forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .forecast-day {
+    background-color: #f7f7f7;
+    border: 1px solid v.$gris-muy-claro;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: v.$primary-color;
+      opacity: 0.1;
+      transform: skewX(-30deg);
+      transition: left 0.5s;
+    }
+
+    &:hover::after {
+      left: 100%;
+    }
+
+    h3 {
+      margin: 0.5rem 0;
+      color: v.$primary-color;
+    }
+
+    .forecast-icon {
+      margin: 0.5rem 0;
+
+      img {
+        width: 50px;  // Reducido de 80px a 50px
+        height: 50px; // Reducido de 80px a 50px
+        
+        @media (max-width: 767px) {
+          width: 80px;  // Mucho más pequeño en móviles
+          height: 80px;
+        }
+        
+        @media (max-width: 480px) {
+          width: 70px !important;  // Aún más pequeño en pantallas muy pequeñas
+          height: 70px !important;
+        }
+      }
+    }
+
+    .forecast-info {
+      color: #333 !important; // Para que contraste con #f7f7f7
+      p {
+        margin: 0.25rem 0;
+      }
+    }
+  }
+}
+
+/* ------------------------------------------------
+   ESTILOS PARA TEXTOS ESPECÍFICOS
+------------------------------------------------ */
+.actual-temp {
+  color: v.$primary-color;
+  font-size: 2.8rem;
+}
+
+.actual-desc {
+  color: v.$blanco;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.actual-feel-like {
+  color: v.$gris-oscuro;
+  font-size: 1.2rem;
+}
+.actual-minmax {
+  color: v.$gris-oscuro;
+  font-size: 1.2rem;
+}
+
+
+
+.current-details {
+  font-size: 1.2rem;
+  color: v.$gris-oscuro;
+}
+
+.etiqueta-humedad {
+  padding: 1rem 5rem !important;
+}
+
+.forecast-desc {
+  font-weight: bold;
+}
+
+.forecast-temp {
+  color: v.$primary-color !important;
+}
+
+.valor-pronostico {
+  color: #fff;
+}
+
+.prevision-diaria{
+  font-size: 2rem;
+}
+
+.forecast-temp{
+
+  font-size: 2.5rem;
+}
+#current-feels-like{
+  color: v.$secondary-color;
+}
+#current-minmax{
+  color: v.$secondary-color;
+}
+/* ------------------------------------------------
+   MEDIA QUERIES
+------------------------------------------------ */
+/* --- Hasta 480px --- */
+@media (max-width: 480px) {
+  .forecast-info {
+    font-size: 1.3rem;
+
+    p {
+      color: #333; // Contraste con el fondo
+    }
+  }
+}
+
+/* --- Entre 481px y 767px --- */
+@media (min-width: 481px) and (max-width: 767px) {
+  /* Iconos de pronóstico del mismo tamaño que pantallas grandes */
+  .forecast-icon img {
+    width: 100px !important;   // Mismo tamaño que pantallas >768px
+    height: 100px !important;
+  }
+}
+
+/* --- Desde 768px --- */
+@media (min-width: 768px) {
+  /* Títulos */
+  .pronostico {
+    font-size: v.$font-size-medium;
+    color: v.$primary-color !important;
+    margin: 3rem;
+    text-transform: capitalize;
+  }
+  .clima-actual {
+    font-size: v.$font-size-medium;
+    color: v.$primary-color;
+    margin: 3rem;
+    text-transform: capitalize;
+  }
+
+  /* Iconos de pronóstico más grandes en pantallas grandes */
+  .forecast-icon img {
+    width: 100px !important;   // Más grandes que el tamaño base de 50px
+    height: 100px !important;
+  }
+
+  /* forecast-info en pantallas >=768px */
+  .forecast-info {
+    font-size: 1.3rem;
+    p {
+      color: #333;
+    }
+  }
+
+  /* Ajustes de .actual-* */
+  .actual-temp {
+    font-size: 2.8rem;
+  }
+  .actual-desc {
+    font-size: 2.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .actual-feel-like {
+    font-size: 1.4rem;
+    color: v.$gris-oscuro !important;
+    padding-bottom: 0.5rem;
+  }
+  .actual-minmax {
+    font-size: 1.4rem;
+    color: v.$gris-oscuro !important;
+  }
+
+  /* Clima actual - mantener vertical pero centrado en pantallas grandes */
+  .weather-current .current-wrapper {
+    flex-direction: column;
+    align-items: center;
+    
+    .current-icon {
+      margin-bottom: 1rem;
+      margin-right: 0;
+      order: 1; /* El icono va primero */
+    }
+    
+    .current-info {
+      order: 2; /* La información va después */
+      text-align: center;
+    }
+  }
+}
+
+/* --- Icono principal grande (current-icon-img) --- */
+#current-icon-img {
+  width: 8rem;  // Tamaño para pantallas grandes (768px+)
+  height: auto;
+}
+
+@media (max-width: 767px) {
+  #current-icon-img {
+    width: 9rem;  // Mucho más pequeño en móviles
+  }
+}
+
+@media (max-width: 480px) {
+  #current-icon-img {
+    width: 7rem;  // Aún más pequeño en pantallas muy pequeñas
+  }
+}
+
+/* --- Desde 1024px --- */
+@media (min-width: 1024px) {
+  .forecast-info {
+    font-size: 1.3rem;
+    p {
+      color: #333;
+    }
+  }
+}
+.actual-temp {
+  font-size: 10rem !important;
+}
+/* --- Desde 1200px --- */
+@media (min-width: 1200px) {
+  #current-temp {
+    font-size: 5rem !important;
+    color: v.$primary-color;
+  }
+  #current-feels-like {
+    font-size: 1.6rem !important;
+    padding-bottom: 0.5rem;
+    
+  }
+
+  #current-minmax {
+    font-size: 1.4rem !important;
+    
+  }
+
+  .actual-temp {
+    font-size: 10rem !important;
+  }
+  .actual-desc {
+    font-size: 2.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .actual-feel-like {
+    font-size: 1.4rem;
+    color: v.$gris-oscuro !important;
+    padding-bottom: 0.5rem;
+  }
+  .actual-minmax {
+    font-size: 1.4rem;
+    color: v.$gris-oscuro;
+  }
+
+  .etiqueta-pronostico {
+    font-size: 1.3rem;
+    color: v.$gris-oscuro;
+  }
+  .current-details {
+    font-size: 1.3rem;
+  }
+  .forecast-info {
+    font-size: 1.3rem;
+    p {
+      color: #333;
+    }
+  }
+}
+
+
+
+

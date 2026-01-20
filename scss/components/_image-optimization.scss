@@ -1,0 +1,298 @@
+// components/_image-optimization.scss
+// Estilos para optimización y lazy loading de imágenes
+
+// ---------------------------------------------------------
+// Variables para imágenes
+// ---------------------------------------------------------
+$image-transition-duration: 0.3s;
+$image-skeleton-color-light: #f0f0f0;
+$image-skeleton-color-dark: #e0e0e0;
+$image-border-radius: 0.5rem;
+
+// ---------------------------------------------------------
+// Estilos base para imágenes optimizadas
+// ---------------------------------------------------------
+img {
+  transition: opacity $image-transition-duration ease;
+  border-radius: $image-border-radius;
+  
+  // Evitar layout shift
+  &[width], &[height] {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  // Aspecto ratio para imágenes sin dimensiones (excepto logos/escudos/iconos)
+  &:not([width]):not([height]):not(.header__escudo):not(.header-inner__escudo):not(.eventos__calendario):not(.forecast__termo):not(.blog__pluma):not(.galerias__camara):not(.quieres-mas__imagen):not(.footer__escudo) {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// ---------------------------------------------------------
+// Excepciones para logos y escudos (mantener tamaños específicos)
+// ---------------------------------------------------------
+.header__escudo,
+.header-inner__escudo {
+  border-radius: 0 !important; // Los logos no necesitan border-radius
+  width: auto !important; // Mantener dimensiones naturales o las definidas en el header
+  height: auto !important;
+  max-width: 8rem !important; // Tamaño reducido para mobile
+  animation: mostrarEscudo 1s ease-in-out;
+  background: transparent !important;
+  opacity: 1 !important; // Completamente opaco, no transparente
+  
+  @media screen and (min-width: 768px) {
+    max-width: 10rem !important; // Reducido de 12rem a 10rem
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: 12rem !important; // Reducido de 15rem a 12rem
+  }
+}
+
+// Regla específica para header-inner__escudo (páginas internas)
+.header-inner__escudo {
+  max-width: 6rem !important; // Aún más pequeño para páginas internas
+  opacity: 1 !important; // Completamente visible
+  
+  @media screen and (min-width: 768px) {
+    max-width: 8rem !important;
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: 10rem !important;
+  }
+}
+
+// ---------------------------------------------------------
+// Excepciones para iconos de calendario (mantener tamaños específicos)
+// ---------------------------------------------------------
+.eventos__calendario {
+  width: 4rem !important;
+  height: 4rem !important;
+  max-width: 4rem !important;
+  max-height: 4rem !important;
+  opacity: 1 !important; // Siempre completamente visible
+}
+
+// ---------------------------------------------------------
+// Excepciones para iconos específicos (mantener tamaños diseñados)
+// ---------------------------------------------------------
+.forecast__termo {
+  width: 3rem !important;
+  height: 6rem !important;
+  max-width: 3rem !important;
+  max-height: 6rem !important;
+  opacity: 1 !important;
+}
+
+.blog__pluma {
+  width: 5rem !important;
+  height: 8rem !important;
+  max-width: 5rem !important;
+  max-height: 8rem !important;
+  opacity: 1 !important;
+}
+
+.galerias__camara {
+  width: 4rem !important;
+  height: 3rem !important;
+  max-width: 4rem !important;
+  max-height: 3rem !important;
+  opacity: 1 !important;
+  
+  @media (min-width: 768px) {
+    width: 5rem !important;
+    height: 4rem !important;
+    max-width: 5rem !important;
+    max-height: 4rem !important;
+  }
+}
+
+.quieres-mas__imagen {
+  width: 4rem !important;
+  height: 4rem !important;
+  max-width: 4rem !important;
+  max-height: 4rem !important;
+  opacity: 1 !important;
+}
+
+.footer__escudo {
+  max-width: 5rem !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  
+  @media (min-width: 768px) {
+    max-width: 8rem !important;
+  }
+}
+
+// ---------------------------------------------------------
+// Estados de carga lazy
+// ---------------------------------------------------------
+img[loading="lazy"] {
+  &:not(.loaded):not(.eventos__calendario):not(.forecast__termo):not(.blog__pluma):not(.galerias__camara):not(.quieres-mas__imagen):not(.footer__escudo) {
+    opacity: 0.1;
+    background: linear-gradient(
+      90deg, 
+      $image-skeleton-color-light 25%, 
+      $image-skeleton-color-dark 50%, 
+      $image-skeleton-color-light 75%
+    );
+    background-size: 200% 100%;
+    animation: imageSkeletonLoading 1.5s infinite;
+  }
+  
+  &.loaded {
+    opacity: 1;
+    background: none;
+    animation: none;
+  }
+  
+  &.error {
+    opacity: 0.5;
+    filter: grayscale(100%);
+    background: none;
+    animation: none;
+    
+    &::after {
+      content: "⚠️";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      z-index: 1;
+    }
+  }
+}
+
+// ---------------------------------------------------------
+// Animación de skeleton loading
+// ---------------------------------------------------------
+@keyframes imageSkeletonLoading {
+  0% { 
+    background-position: 200% 0; 
+  }
+  100% { 
+    background-position: -200% 0; 
+  }
+}
+
+// ---------------------------------------------------------
+// Picture elements responsivos
+// ---------------------------------------------------------
+picture {
+  display: block;
+  width: 100%;
+  
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+// ---------------------------------------------------------
+// Contenedores de imágenes con aspecto ratio
+// ---------------------------------------------------------
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: $image-border-radius;
+  
+  // Ratios comunes
+  &--16-9 {
+    aspect-ratio: 16 / 9;
+  }
+  
+  &--4-3 {
+    aspect-ratio: 4 / 3;
+  }
+  
+  &--1-1 {
+    aspect-ratio: 1 / 1;
+  }
+  
+  &--3-2 {
+    aspect-ratio: 3 / 2;
+  }
+  
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0; // El contenedor ya tiene border-radius
+  }
+}
+
+// ---------------------------------------------------------
+// Imágenes críticas (above the fold)
+// ---------------------------------------------------------
+img[fetchpriority="high"] {
+  opacity: 1; // Siempre visibles
+  
+  &[loading="eager"] {
+    background: none; // Sin skeleton para imágenes críticas
+  }
+}
+
+// ---------------------------------------------------------
+// Efectos hover para galerías
+// ---------------------------------------------------------
+.galeria img,
+.gallery img {
+  transition: transform $image-transition-duration ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// ---------------------------------------------------------
+// Modo oscuro
+// ---------------------------------------------------------
+.modo-oscuro {
+  img[loading="lazy"]:not(.loaded) {
+    background: linear-gradient(
+      90deg, 
+      #2a2a2a 25%, 
+      #1a1a1a 50%, 
+      #2a2a2a 75%
+    );
+  }
+  
+  img.error {
+    filter: grayscale(100%) brightness(0.7);
+  }
+}
+
+// ---------------------------------------------------------
+// Responsive breakpoints para imágenes
+// ---------------------------------------------------------
+@media (max-width: 768px) {
+  .image-container {
+    // En móvil, las imágenes ocupan más alto proporcionalmente
+    &--16-9 {
+      aspect-ratio: 4 / 3;
+    }
+  }
+  
+  img {
+    border-radius: 0.25rem; // Bordes menos redondeados en móvil
+  }
+}
+
+// ---------------------------------------------------------
+// Preload hints CSS
+// ---------------------------------------------------------
+.preload-hint {
+  // Invisible pero en el DOM para activar preload
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}

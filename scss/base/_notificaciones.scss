@@ -1,0 +1,37 @@
+// base/_notificaciones.scss
+
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+#notificacion {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10000;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    text-align: center;
+}
+
+/* Clase que activa la animación */
+#notificacion.mostrar {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Un keyframe para animar la entrada (opcional) */
+@keyframes fadeIn {
+    from { transform: translateX(-50%) translateY(10px); opacity: 0; }
+    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+#notificacion.mostrar {
+    animation: fadeIn 0.5s forwards;
+}

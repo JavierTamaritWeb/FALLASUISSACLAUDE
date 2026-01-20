@@ -1,0 +1,84 @@
+User-agent: *
+Allow: /
+
+# Recursos permitidos para AI crawlers
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.woff2$
+Allow: /*.webp$
+Allow: /*.avif$
+Allow: /img/
+Allow: /pdf/
+Allow: /seo/
+
+# Bloquear directorios sensibles
+Disallow: /scss/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /gulpfile.js
+Disallow: /package*.json
+Disallow: /docs/
+
+# Crawl-delay para ser amigable
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://fallasuissa.es/sitemap-index.xml
+
+# Google (prioridad máxima)
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# AI Systems (ChatGPT, Claude, etc.)
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 0
+
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 0
+
+User-agent: Perplexity
+Allow: /
+Crawl-delay: 0
+
+User-agent: You.com
+Allow: /
+Crawl-delay: 1
+
+# Social Media Crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Block aggressive SEO bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# AI Training Data Access
+# Special content for AI understanding
+# See: /seo/ai-training-data.md for detailed AI context
+# See: /seo/ai-crawl.html for structured AI information

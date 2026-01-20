@@ -1,0 +1,50 @@
+// components/_forecast.scss
+
+@use '../abstracts/variables' as v;
+
+.eltiempo{
+  background-color: v.$blanco-hueso;
+  padding-bottom: 8rem;
+}
+
+
+.forecast {
+  
+
+  &__titulo {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+  }
+  &__termo {
+    width: 3rem;
+    height: 6rem;
+    margin: 1rem 0;
+  }
+  &__title {
+    font-size: v.$font-size-large;
+    color: v.$primary-color;
+    margin-top: 1rem;
+    text-align: center;
+    @media (max-width:768px) {
+      font-size: v.$font-size-medium;
+    }
+  }
+ 
+  @media (min-width:768px) {
+    &__termo {
+      width: 3rem;
+      height: 6rem;
+      margin: 5rem 0;
+    }
+  }
+
+  
+
+}
+.forecast-desc{
+  text-transform: uppercase;
+}
+

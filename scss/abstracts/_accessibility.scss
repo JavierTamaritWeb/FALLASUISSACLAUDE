@@ -1,0 +1,309 @@
+// scss/abstracts/_accessibility.scss
+// Mejoras de accesibilidad para WEBFALLASUISSA
+
+@use 'variables' as v;
+
+/* ===================================
+   FOCUS INDICATORS & KEYBOARD NAVIGATION
+   =================================== */
+
+// Estilo de foco visible personalizado
+:focus-visible {
+  outline: 3px solid v.$primary-color;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+// Remover outline por defecto solo cuando focus-visible está disponible
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// Skip links para navegación rápida
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: v.$primary-color;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 9999;
+  font-weight: bold;
+  
+  &:focus {
+    top: 6px;
+  }
+}
+
+/* ===================================
+   HIGH CONTRAST & VISIBILITY
+   =================================== */
+
+// Mejoras para modo de alto contraste
+@media (prefers-contrast: high) {
+  .header__modo-boton,
+  .header__lang-switcher,
+  .navegacion__enlace {
+    border: 2px solid currentColor;
+  }
+}
+
+// Respeto a la preferencia de movimiento reducido
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===================================
+   INTERACTIVE ELEMENTS
+   =================================== */
+
+// Estilos para elementos interactivos
+button, 
+.btn,
+a,
+input,
+textarea,
+select {
+  // Tamaño mínimo de toque para móviles
+  min-height: 44px;
+  min-width: 44px;
+  
+  // Mejoras de contraste en hover/focus
+  &:hover,
+  &:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Estados específicos para botones
+button {
+  cursor: pointer;
+  
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    
+    &:hover,
+    &:focus {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+/* ===================================
+   ARIA LIVE REGIONS
+   =================================== */
+
+// Estilos para regiones live
+[aria-live] {
+  position: relative;
+  
+  &[aria-live="polite"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+}
+
+// Notificaciones
+.header__notificacion {
+  &:not(:empty) {
+    animation: fadeInNotification 0.3s ease-in;
+  }
+}
+
+@keyframes fadeInNotification {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
+   DROPDOWN & MODAL ACCESSIBILITY
+   =================================== */
+
+// Menús desplegables
+.header__lang-options {
+  &[aria-expanded="false"] {
+    display: none;
+  }
+  
+  &[aria-expanded="true"] {
+    display: block;
+    animation: dropdownOpen 0.2s ease-out;
+  }
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Focus trap para modales
+.modal-open {
+  overflow: hidden;
+  
+  // El aria-hidden se aplicará via JavaScript
+  // no es una propiedad CSS válida
+}
+
+/* ===================================
+   SCREEN READER UTILITIES
+   =================================== */
+
+// Clase para contenido solo para screen readers
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Mostrar contenido sr-only cuando recibe foco
+.sr-only:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: inherit !important;
+  margin: inherit !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: inherit !important;
+  border: inherit !important;
+}
+
+/* ===================================
+   LOADING STATES & LAZY IMAGES
+   =================================== */
+
+// Placeholder para imágenes lazy loading
+img[loading="lazy"] {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  
+  &.loaded {
+    animation: none;
+    background: none;
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// Estados de carga para contenido dinámico
+.loading {
+  position: relative;
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ===================================
+   ERROR STATES
+   =================================== */
+
+// Estados de error para formularios
+.error {
+  border-color: #d32f2f !important;
+  background-color: #ffebee;
+  
+  &:focus {
+    outline-color: #d32f2f;
+    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
+  }
+}
+
+// Mensajes de error
+.error-message {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  
+  &::before {
+    content: '⚠ ';
+    font-weight: bold;
+  }
+}
+
+/* ===================================
+   PRINT STYLES
+   =================================== */
+
+@media print {
+  // Ocultar elementos no necesarios en impresión
+  .header__modo-boton,
+  .header__lang,
+  .skip-link,
+  .swiper-button-prev,
+  .swiper-button-next,
+  .swiper-pagination {
+    display: none !important;
+  }
+  
+  // Asegurar contraste en impresión
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  
+  // Mostrar URLs de enlaces
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.875rem;
+    color: #666;
+  }
+}

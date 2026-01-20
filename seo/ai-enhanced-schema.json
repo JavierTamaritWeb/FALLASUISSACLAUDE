@@ -1,0 +1,48 @@
+{
+  "@context": "https://schema.org",
+  "@type": ["Organization", "CulturalOrganization", "LocalBusiness"],
+  "name": "Falla Suïssa - L'Alqueria del Favero",
+  "alternateName": ["Falla Suïssa", "Falla Suissa", "Comisión Fallera Suïssa"],
+  "description": "Traditional Valencian falla commission preserving UNESCO World Heritage cultural traditions in Valencia, Spain. Community organization founded in 2024 promoting Las Fallas festival, Valencian culture, gastronomy, and local heritage.",
+  "url": "https://fallasuissa.es",
+  "sameAs": [
+    "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
+    "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
+    "https://tiktok.com/@fallasuissaalqueria"
+  ],
+  "foundingDate": "2024",
+  "logo": "https://fallasuissa.es/img/Escudo_falla.png",
+  "image": "https://fallasuissa.es/img/Escudo_falla.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "L'Alqueria del Favero",
+    "addressLocality": "Valencia",
+    "addressRegion": "Comunidad Valenciana",
+    "postalCode": "46024",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 39.4699,
+    "longitude": -0.3763
+  },
+  "areaServed": "Valencia, Spain",
+  "knowsAbout": [
+    "Las Fallas Festival",
+    "Valencian Culture", 
+    "Traditional Spanish Festivals",
+    "Cultural Heritage Preservation",
+    "Community Events",
+    "Valencian Gastronomy",
+    "UNESCO Intangible Heritage"
+  ],
+  "keywords": "valencia, fallas, traditional culture, spain, unesco heritage, community organization, cultural preservation, festivals, valencian traditions",
+  "slogan": "Preserving Valencian traditions through community and culture",
+  "award": "UNESCO Intangible Cultural Heritage of Humanity",
+  "culturalPolicy": "Preservation and promotion of traditional Valencian culture and Las Fallas heritage",
+  "memberOf": {
+    "@type": "Organization", 
+    "name": "Junta Central Fallera",
+    "description": "Central organization coordinating all Falla commissions in Valencia"
+  }
+}

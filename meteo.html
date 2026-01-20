@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Falla Suissa - L'Alqueria del Favero - Meteo</title>
+  <meta name="description" content="Página de inicio de Fallas Suïssa - L'Alqueria del Favero. Descubre nuestros eventos, noticias y galería para vivir la experiencia completa de la falla.">
+  <meta name="keywords" content="fallas, tradición, suïssa, eventos, noticias, galería">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fallasuissa.es/meteo.html">
+  
+  <!-- Compatibilidad para IE -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Configuración para web apps en iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Color de tema para navegadores compatibles -->
+  <meta name="theme-color" content="#0a4b8d">
+  
+  <!-- Datos estructurados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://fallasuissa.es/meteo.html",
+    "url": "https://fallasuissa.es/meteo.html",
+    "name": "Meteo - Falla Suïssa - L'Alqueria del Favero",
+    "description": "Información meteorológica y previsión para Valencia.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://fallasuissa.es/#website",
+      "url": "https://fallasuissa.es/",
+      "name": "Falla Suïssa - L'Alqueria del Favero"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://fallasuissa.es/#organization",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "url": "https://fallasuissa.es/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://fallasuissa.es/img/Escudo_falla.png"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Informacion general",
+        "email": "info@fallasuissa.es",
+        "availableLanguage": ["es", "va"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
+        "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
+        "https://tiktok.com/@fallasuissaalqueria"
+      ]
+    }
+  }
+  </script>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Meteo - Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:description" content="Descubre eventos, noticias y la galería de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta property="og:image" content="https://fallasuissa.es/img/og-share.png">
+  <meta property="og:image:secure_url" content="https://fallasuissa.es/img/og-share.png">
+  <meta property="og:url" content="https://fallasuissa.es/meteo.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meteo - Falla Suïssa - L'Alqueria del Favero">
+  <meta name="twitter:description" content="Descubre eventos y noticias de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta name="twitter:image" content="https://fallasuissa.es/img/og-share.png">
+  <meta name="twitter:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
+  <meta name="twitter:image:type" content="image/png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  
+  <!-- Hojas de estilo -->
+  <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet"  href="css/main.css">
+</head>
+<body>
+  <header class="header-inner">
+    <div class="header-inner__contenido contenedor">
+      <div class="header-inner__barra header-inner__barra--fixed">
+        <div class="header__botones">
+          <div class="header__lang">
+            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma">IDIOMA</button>
+            <div class="header__lang-options" id="langOptions">
+              <button class="header__lang-option" data-lang="es">ESPAÑOL</button>
+              <button class="header__lang-option" data-lang="va">VALENCIÀ</button>
+              <!-- <button class="header__lang-option" data-lang="en">English</button>
+              <button class="header__lang-option" data-lang="fr">Français</button> -->
+            </div>
+          </div>
+          <!-- Botón para alternar modo oscuro/claro -->
+          <button class="header__modo-boton" id="botonModoOscuro" aria-label="Cambiar a modo oscuro">
+            <!-- Icono Luna -->
+            <svg class="header__icon header__icon--moon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 12a9 9 0 01-9 9 7.5 7.5 0 01-6.88-4.4 7 7 0 0010.06-9.48A9 9 0 0121 12z"/>
+            </svg>
+          </button>
+
+        </div>
+        <div class="header__notificacion" id="notificacion"></div>
+        <nav class="navegacion" role="navigation" aria-label="Menú principal">
+          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html"></a>
+          <a class="navegacion__enlace active" data-i18n="nav.meteo" href="meteo.html" aria-current="page"></a>
+          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html"></a>
+        </nav>
+      </div>
+        
+    </div>
+    <div class="header-inner__grid">
+        <div class="inner__titulo">
+          <picture>
+            <source srcset="img/Escudo_falla.avif" type="image/avif">
+            <source srcset="img/Escudo_falla.webp" type="image/webp">
+            <img class="header-inner__escudo" src="img/Escudo_falla.png" alt="Escudo de la Falla" loading="lazy">
+          </picture>
+          <h1 class="heading-inner" data-i18n="meteo.titulo"><span class="heading-inner__span">Meteo</span> </h1>
+        </div>
+       
+        
+    </div>
+    
+  </header>
+
+  <div class="divisor-ancho"></div>
+
+  <main class="meteo">
+    <div class="contenedor">
+    
+         <!-- Sección Clima Actual -->
+    <section class="weather-current">
+        <h2 class="clima-actual" data-i18n="meteo.donde" >Clima Actual en Valencia</h2>
+        
+        <div class="current-wrapper">
+          <!-- Icono principal -->
+          <div class="current-icon">
+            <img id="current-icon-img" src="" alt="Icono Clima" />
+          </div>
+          
+          <!-- Información principal -->
+          <div class="current-info">
+            <h3 id="current-temp" class="actual-temp">--°C</h3>
+            <p id="current-desc" class="actual-desc">Descripción</p>
+            <p id="current-feels-like" class="actual-feel-like" data-i18n="meteo.sensacion">Sensación: --°C</p>
+            <p id="current-minmax" class="actual-minmax">Mín: --°C / Máx: --°C</p>
+          </div>
+        </div>
+        
+        <!-- Detalles adicionales -->
+        <div class="current-details">
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.humedad">Humedad</strong> <span id="current-humidity" class="valor-pronostico">--%</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.presion">Presión</strong> <span id="current-pressure" class="valor-pronostico">-- hPa</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.nubosidad">Nubosidad</strong> <span id="current-clouds" class="valor-pronostico">--%</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.visibilidad">Visibilidad</strong> <span id="current-visibility" class="valor-pronostico">-- km</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.viento">Viento</strong> <span id="current-wind-speed" class="valor-pronostico">-- m/s</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.direccion">Dirección</strong> <span id="current-wind-deg" class="valor-pronostico">--°</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.lluvia1h">Lluvia (1h)</strong> <span id="current-rain-1h" class="valor-pronostico">-- mm</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.lluvia3h">Lluvia (3h)</strong> <span id="current-rain-3h" class="valor-pronostico">-- mm</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.nieve1h">Nieve (1h)</strong> <span id="current-snow-1h" class="valor-pronostico">-- mm</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.nieve3h">Nieve (3h)</strong> <span id="current-snow-3h" class="valor-pronostico">-- mm</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.amanecer">Amanecer</strong> <span id="current-sunrise" class="valor-pronostico">--:--</span></div>
+          <div><strong class="etiqueta-pronostico" data-i18n="meteo.atardecer">Atardecer</strong> <span id="current-sunset" class="valor-pronostico">--:--</span></div>
+        </div>
+      </section>
+      
+      <!-- Sección Previsión 5 días -->
+      <section class="weather-forecast">
+        <h2 class="pronostico" data-i18n="meteo.pronostico">Previsión Próximos 5 Días</h2>
+        <div class="forecast-grid">
+          <!-- Creamos 5 tarjetas fijas (sin generar HTML desde JS) -->
+          <div class="forecast-day day-1">
+            <h3 id="forecast-day-1-date" class="prevision-diaria">Día 1</h3>
+            <div class="forecast-icon">
+              <img id="forecast-day-1-icon" src="" alt="Icono Día 1" />
+            </div>
+            <div class="forecast-info">
+              <p id="forecast-day-1-desc" class="forecast-desc">--</p>
+              <p id="forecast-day-1-temp" class="forecast-temp">--°C</p>
+              <p id="forecast-day-1-minmax" class="forecast-minmax">Mín: --°C / Máx: --°C</p>
+              <p id="forecast-day-1-wind" class="forecast-wind">Viento: -- m/s</p>
+              <p id="forecast-day-1-clouds" class="forecast-clouds">Nubes: --%</p>
+            </div>
+          </div>
+          <div class="forecast-day day-2">
+            <h3 id="forecast-day-2-date" class="prevision-diaria">Día 2</h3>
+            <div class="forecast-icon">
+              <img id="forecast-day-2-icon" src="" alt="Icono Día 2" />
+            </div>
+            <div class="forecast-info">
+              <p id="forecast-day-2-desc" class="forecast-desc">--</p>
+              <p id="forecast-day-2-temp" class="forecast-temp">--°C</p>
+              <p id="forecast-day-2-minmax" class="forecast-minmax">Mín: --°C / Máx: --°C</p>
+              <p id="forecast-day-2-wind" class="forecast-wind">Viento: -- m/s</p>
+              <p id="forecast-day-2-clouds" class="forecast-clouds">Nubes: --%</p>
+            </div>
+          </div>
+          <div class="forecast-day day-3">
+            <h3 id="forecast-day-3-date" class="prevision-diaria">Día 3</h3>
+            <div class="forecast-icon">
+              <img id="forecast-day-3-icon" src="" alt="Icono Día 3" />
+            </div>
+            <div class="forecast-info">
+              <p id="forecast-day-3-desc" class="forecast-desc">--</p>
+              <p id="forecast-day-3-temp" class="forecast-temp">--°C</p>
+              <p id="forecast-day-3-minmax" class="forecast-minmax">Mín: --°C / Máx: --°C</p>
+              <p id="forecast-day-3-wind" class="forecast-wind" >Viento: -- m/s</p>
+              <p id="forecast-day-3-clouds" class="forecast-clouds">Nubes: --%</p>
+            </div>
+          </div>
+          <div class="forecast-day day-4">
+            <h3 id="forecast-day-4-date" class="prevision-diaria">Día 4</h3>
+            <div class="forecast-icon">
+              <img id="forecast-day-4-icon" src="" alt="Icono Día 4" />
+            </div>
+            <div class="forecast-info">
+              <p id="forecast-day-4-desc" class="forecast-desc">--</p>
+              <p id="forecast-day-4-temp" class="forecast-temp">--°C</p>
+              <p id="forecast-day-4-minmax" class="forecast-minmax">Mín: --°C / Máx: --°C</p>
+              <p id="forecast-day-4-wind" class="forecast-wind">Viento: -- m/s</p>
+              <p id="forecast-day-4-clouds" class="forecast-clouds">Nubes: --%</p>
+            </div>
+          </div>
+          <div class="forecast-day day-5">
+            <h3 id="forecast-day-5-date" class="prevision-diaria">Día 5</h3>
+            <div class="forecast-icon">
+              <img id="forecast-day-5-icon" src="" alt="Icono Día 5" />
+            </div>
+            <div class="forecast-info">
+              <p id="forecast-day-5-desc" class="forecast-desc">--</p>
+              <p id="forecast-day-5-temp" class="forecast-temp">--°C</p>
+              <p id="forecast-day-5-minmax" class="forecast-minmax">Mín: --°C / Máx: --°C</p>
+              <p id="forecast-day-5-wind" class="forecast-wind">Viento: -- m/s</p>
+              <p id="forecast-day-5-clouds" class="forecast-clouds">Nubes: --%</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+  </main>
+
+  <footer class="footer">
+    <div class="footer__contenedor">
+      <div class="footer__contenido">
+        <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
+          <a class="footer__enlace" href="index.html" data-i18n="nav.inicio">Inicio</a>
+          <a class="footer__enlace" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
+          <a class="footer__enlace" href="eventos.html" data-i18n="nav.eventos">Eventos</a>
+          <a class="footer__enlace active" href="meteo.html" data-i18n="nav.meteo">Meteo</a>
+          <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a>
+          <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galería</a>
+        </nav>
+        <picture>
+          <source srcset="img/Escudo_falla.avif" type="image/avif">
+          <source srcset="img/Escudo_falla.webp" type="image/webp">
+          <img class="footer__escudo" src="img/Escudo_falla.png" alt="Escudo de la Falla" loading="lazy">
+        </picture>
+
+        <nav class="sociales">
+          <a class="sociales__enlace" href="https://www.facebook.com/FallaSuissaLalqueriadelFavero">
+            <span class="sociales__accesible">Facebook</span>
+          </a>
+          <a class="sociales__enlace" href="https://www.instagram.com/fallasuissa_lalqueriadelfavero/">
+            <span class="sociales__accesible">Instagram</span>
+          </a>
+          <a class="sociales__enlace" href="https://youtube.com">
+            <span class="sociales__accesible">YouTube</span>
+          </a>
+          <a class="sociales__enlace" href="https://tiktok.com">
+            <span class="sociales__accesible">TikTok</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+    <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados.</p>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="js/dark.js"></script>
+  <script src="js/meteo.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/nav-menu.js"></script>
+  
+</body>
+</html>

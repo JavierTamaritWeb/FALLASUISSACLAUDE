@@ -1,0 +1,84 @@
+// components/_swiper.scss
+
+@use '../abstracts/variables' as v;
+
+.swiper {
+  border-radius: 1rem;
+  width: 35rem;
+  height: 25rem;
+  @media (min-width: 768px) {
+      width: 70rem;
+      height: 45rem;
+  }
+  @media (min-width: 1200px) {
+      width: 100rem;
+      height: 70rem;
+  }
+}
+
+// Variante: Swiper con altura automática (p.ej. "El Monumento").
+// Ajusta el alto al slide activo y limita el ancho en pantallas grandes
+// (evita overflow horizontal cuando el Swiper base usa anchos fijos grandes).
+.swiper.swiper--autoheight {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 35rem;
+  margin-inline: auto;
+  height: auto;
+  overflow: hidden;
+  // Evita salto visual enorme si la imagen tarda en cargar.
+  min-height: 16rem;
+}
+
+@media (min-width: 768px) {
+  // En tablet/desktop: deja hueco lateral para los botones, sin tapar la imagen.
+  .swiper.swiper--autoheight {
+    max-width: 70rem;
+  }
+
+  // Importante: el padding en el contenedor puede desajustar el cálculo de tamaños de Swiper.
+  // Reservamos el espacio en cada slide para que la imagen se vea más grande y no "asome"
+  // la siguiente slide.
+  .swiper.swiper--autoheight .swiper-slide {
+    box-sizing: border-box;
+    // 3rem se queda justo: el botón puede invadir unos px el área de la imagen.
+    // 3.5rem deja margen suficiente para que no haya intersección.
+    padding-inline: 3.5rem;
+  }
+
+  .swiper.swiper--autoheight .swiper-button-prev {
+    left: 0.5rem;
+  }
+
+  .swiper.swiper--autoheight .swiper-button-next {
+    right: 0.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  // En pantallas grandes, mantenemos el Swiper más contenido (antes era 100rem).
+  .swiper.swiper--autoheight {
+    max-width: 64rem;
+  }
+}
+
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: v.$primary-color;
+}
+
+.swiper-pagination-bullet {
+  background-color: v.$blanco;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: v.$primary-color;
+}
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: contain; // Ajusta la imagen para mostrarla completa sin recortarla
+  display: block; // Elimina espacios o gaps adicionales
+  opacity: 1 !important; // Asegurar que las imágenes del slider no se vean difuminadas
+}

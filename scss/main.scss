@@ -1,0 +1,44 @@
+// scss/main.scss
+
+// 1. Abstracts
+@use 'abstracts/variables' as v;
+@use 'abstracts/mixins' as m;
+@use 'abstracts/normalize';
+@use 'abstracts/accessibility';
+
+// 2. Base
+@use 'base';
+
+// 3. Optimizations
+@use 'optimization';
+
+// 4. Layout
+@use 'layout';
+
+
+// 5. Animaciones
+@use 'animaciones';
+
+
+// 6. Components
+@use 'components';
+
+
+// 7. Sociales
+@use 'sociales';
+
+/* Utilidades Globales */
+.contenedor {
+  width: 95%;
+  max-width: 120rem;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+}
+
+.divisor {
+  border-top: 1px solid v.$primary-color;
+}
+
+.divisor-ancho {
+  border-top: 4px solid v.$primary-color;
+}

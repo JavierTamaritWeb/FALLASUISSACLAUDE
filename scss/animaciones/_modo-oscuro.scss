@@ -1,0 +1,560 @@
+// components/_modo-oscuro.scss
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+// Establece los estilos base para el body
+body {
+  --theme-transition: 2.4s ease-in-out;
+  --theme-transition-shadow: 2.4s ease-in-out;
+  --theme-transition-border: 2.4s ease-in-out;
+  --theme-transition-delay: 0ms;
+  background-color: v.$marfil;
+  color: v.$gris-muy-oscuro;
+  margin: 0;
+  padding: 0;
+  transition: background-color var(--theme-transition), color var(--theme-transition);
+}
+
+body.modo-claro {
+  --theme-transition: 3.6s ease-in-out;
+  --theme-transition-shadow: 3.6s ease-in-out;
+  --theme-transition-border: 3.6s ease-in-out;
+  --theme-transition-delay: 0ms;
+}
+
+body.transicion-a-claro,
+html.transicion-a-claro {
+  --theme-transition: 3.8s cubic-bezier(0.22, 1, 0.36, 1);
+  --theme-transition-shadow: 4.4s cubic-bezier(0.22, 1, 0.36, 1);
+  --theme-transition-border: 4.4s cubic-bezier(0.22, 1, 0.36, 1);
+  --theme-transition-delay: 140ms;
+}
+
+// Transiciones suaves entre modos
+body,
+.header,
+.header-inner,
+.header__barra,
+.header-inner__barra,
+.header__modo-boton,
+.header__lang-switcher,
+.header__menu-toggle,
+.footer,
+.countdown,
+.countdown__contenedor,
+.countdown__time-box,
+.countdown__message {
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition),
+    border-color var(--theme-transition-border) var(--theme-transition-delay),
+    box-shadow var(--theme-transition-shadow) var(--theme-transition-delay),
+    fill var(--theme-transition);
+}
+
+.header__waves .waves use {
+  transition: fill var(--theme-transition);
+}
+
+body.transicion-a-claro .header__barra,
+body.transicion-a-claro .header-inner__barra,
+body.transicion-a-claro .header__barra--scrolled,
+body.transicion-a-claro .header-inner__barra--scrolled {
+  transition:
+    background var(--theme-transition),
+    box-shadow var(--theme-transition-shadow) var(--theme-transition-delay),
+    border-color var(--theme-transition-border) var(--theme-transition-delay);
+}
+
+body.modo-oscuro {
+  background: v.$negro;
+  
+}
+
+// Estilos para el scroll en modo claro y transición en modo oscuro
+body.modo-oscuro::-webkit-scrollbar-thumb,
+body.modo-oscuro::-webkit-scrollbar-track {
+  transition: background-color 0.3s ease;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO HEADER
+------------------------------------------------ */
+body.modo-oscuro .header {
+  background: v.$negro !important;
+}
+
+body.modo-oscuro {
+  .header__waves {
+    .waves {
+      use {
+        &:nth-of-type(1) {
+          fill: rgba(192, 192, 192, 0.7) !important; // Gris medio con opacidad 70%
+        }
+        &:nth-of-type(2) {
+          fill: rgba(192, 192, 192, 0.5) !important; // Gris medio con opacidad 50%
+        }
+        &:nth-of-type(3) {
+          fill: rgba(192, 192, 192, 0.3) !important; // Gris medio con opacidad 30%
+        }
+        &:nth-of-type(4) {
+          fill: v.$gris-plateado !important; // Gris medio (definido en variables)
+        }
+      }
+    }
+  }
+}
+
+body.modo-oscuro .header-inner {
+  background: v.$negro !important;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO COUNTDOWN
+------------------------------------------------ */
+body.modo-oscuro .countdown {
+  background-color: v.$gris-plateado;
+}
+
+body.modo-oscuro .countdown__contenedor {
+  background: v.$negro;
+}
+
+body.modo-oscuro .countdown__message {
+  color: v.$gris-muy-claro !important;
+}
+
+body.modo-oscuro .countdown__time-box {
+  background-color: v.$gris-medio-claro;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO FOOTER
+------------------------------------------------ */
+body.modo-oscuro .footer {
+  background: v.$negro !important;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO CALENDARIO
+------------------------------------------------ */
+body.modo-oscuro .cal{
+    background-color: v.$gris-muy-oscuro;
+}
+
+body.modo-oscuro .calendario-eventos{
+    background-color: v.$gris-muy-oscuro;
+}
+
+body.modo-oscuro .calendario-eventos__mini-encabezado {
+  color: v.$primary-color;
+}
+
+body.modo-oscuro .calendario-eventos__mini-dia {
+  background-color: pink;
+}
+
+body.modo-oscuro .calendario-eventos__detalles-mes {
+  background-color: v.$gris-muy-oscuro;
+  color: v.$blanco;
+}
+
+body.modo-oscuro .calendario-eventos__mini-dia.sabado,
+body.modo-oscuro .calendario-eventos__mini-dia.domingo {
+  background-color: v.$gris-oscuro-medio;
+}
+
+body.modo-oscuro .calendario-eventos__mini-dia.domingo {
+  color: v.$primary-color; 
+}
+
+body.modo-oscuro .calendario-eventos__mini-dia:hover {
+  background-color: v.$naranja-quemado;
+  color: v.$blanco;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
+}
+
+body.modo-oscuro .calendario-eventos__detalles-mes p {
+  color: v.$blanco;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO MODAL ICS
+------------------------------------------------ */
+body.modo-oscuro .ics-modal__contenido {
+  background-color: v.$gris-muy-oscuro;
+  color: v.$blanco;
+}
+
+body.modo-oscuro .ics-modal__label {
+  color: v.$primary-color; /* O #fff, según preferencia */
+}
+
+body.modo-oscuro .ics-modal__input,
+body.modo-oscuro .ics-modal__textarea {
+  background-color: v.$gris-muy-oscuro;
+  color: v.$blanco;
+  border: 1px solid #666;
+}
+
+body.modo-oscuro .ics-modal__boton {
+  background-color: v.$primary-color;
+  color: v.$blanco;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO METEO
+------------------------------------------------ */
+body.modo-oscuro .eltiempo {
+  background-color: v.$negro;
+}
+
+body.modo-oscuro .header-meteo {
+  background: v.$negro;
+}
+
+body.modo-oscuro .meteo {
+  background: v.$negro;
+}
+
+body.modo-oscuro .weather-current {
+  background: v.$gris-oscuro;
+}
+
+body.modo-oscuro .forecast-day {
+  background: v.$gris-oscuro;
+}
+
+body.modo-oscuro .forecast-info {
+  color: v.$blanco;
+}
+
+body.modo-oscuro .forecast-temp {
+  color: v.$blanco;
+}
+
+body.modo-oscuro .forecast-desc {
+  color: v.$blanco;
+}
+
+body.modo-oscuro .actual-temp {
+  color: v.$primary-color;
+}
+
+body.modo-oscuro .actual-desc {
+  color: v.$blanco;
+}
+
+body.modo-oscuro .actual-feel-like {
+  color: v.$blanco !important;
+}
+
+body.modo-oscuro .actual-minmax {
+  color: v.$blanco !important;
+}
+
+body.modo-oscuro .current-details {
+  color: v.$primary-color !important;
+}
+
+body.modo-oscuro .etiqueta-pronostico {
+  color: v.$primary-color;
+}
+
+body.modo-oscuro .forecast-minmax {
+  color: v.$blanco-hueso;
+}
+
+body.modo-oscuro .forecast-wind {
+  color: v.$blanco-hueso;
+}
+
+body.modo-oscuro .forecast-clouds {
+  color: v.$blanco-hueso;
+}
+
+body.modo-oscuro #current-feels-like {
+    color: v.$blanco-hueso;
+}
+body.modo-oscuro #current-minmax {
+    color: v.$blanco-hueso;
+}
+body.modo-oscuro #current-humidity {
+    color: v.$blanco-hueso;
+}
+
+/* ----------------------------------------------
+   BARRA DE SCROLL
+------------------------------------------------ */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: v.$primary-color;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: v.$gris-claro;
+}
+
+html.modo-oscuro::-webkit-scrollbar-thumb,
+html:has(body.modo-oscuro)::-webkit-scrollbar-thumb {
+  background-color: v.$primary-color;
+}
+
+html.modo-oscuro::-webkit-scrollbar-track,
+html:has(body.modo-oscuro)::-webkit-scrollbar-track {
+  background-color: v.$negro-casi;
+}
+
+body.modo-oscuro::-webkit-scrollbar-thumb {
+  background-color: v.$primary-color;
+}
+
+body.modo-oscuro::-webkit-scrollbar-track {
+  background-color: v.$negro-casi;
+}
+
+body {
+  scrollbar-color: v.$primary-color v.$gris-claro;
+  scrollbar-width: thin;
+}
+
+html {
+  scrollbar-color: v.$primary-color v.$gris-claro;
+  scrollbar-width: thin;
+}
+
+body.modo-oscuro {
+  scrollbar-color: v.$primary-color v.$negro-casi;
+  scrollbar-width: thin;
+}
+
+html.modo-oscuro,
+html:has(body.modo-oscuro) {
+  scrollbar-color: v.$primary-color v.$negro-casi;
+  scrollbar-width: thin;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO FALLA
+------------------------------------------------ */
+body.modo-oscuro .falla {
+  background-color: v.$negro;
+}
+body.modo-oscuro .accordion__section {
+    background-color: v.$negro;
+}
+body.modo-oscuro .accordion__content {
+    background: v.$negro;
+}
+body.modo-oscuro .accordion__content-inner {
+    background-color: v.$negro;
+}
+body.modo-oscuro .accordion__titular {
+    background-color: v.$negro;
+
+}
+body.modo-oscuro .accordion__header {
+    color: v.$blanco-hueso;
+}
+body.modo-oscuro .accordion__icon {
+    color: v.$blanco-hueso;
+}
+body.modo-oscuro .accordion__icon--active {
+    color: v.$blanco-hueso;
+}
+body.modo-oscuro {
+  // Modal QUIERES (puedes ajustar el selector según tu estructura)
+  #modal-quieres {
+    .modal-content {
+      background-color: v.$secondary-color;  // Color oscuro de fondo
+      color: v.$blanco;                      // Color del texto para buena visibilidad
+    }
+    .modal-title {
+      color: v.$blanco-hueso;                // Ajusta el color del título
+    }
+    .modal-body {
+      color: v.$blanco;                      // Asegura que el texto del body sea legible
+    }
+    // Si usas botón de cierre, cambia su color para modo oscuro
+    .btn-close,
+    .close-modal {
+      color: v.$blanco !important;
+      // Puedes ajustar otros valores como font-size o posicionamiento si lo necesitas
+    }
+    .lead{
+      color: v.$blanco-hueso;
+    }
+  }
+}
+body.modo-oscuro .accordion__directiva {
+    background-color: v.$secondary-color;
+    color: v.$blanco-hueso;
+    border-left: 4px solid v.$blanco;
+    ul {
+    
+
+    li {
+      
+
+     
+
+      // Estilo para sublistas
+      ul {
+         // Usamos viñetas de lista para subnivel
+        li {
+          
+          color: v.$blanco-hueso;
+          
+          
+        }
+      }
+    }
+  }
+}
+// Organigrama
+body.modo-oscuro .organigrama {
+  background-color: v.$negro;
+}
+body.modo-oscuro .organigrama__title {
+  color: v.$blanco-hueso;
+  background-color: v.$negro;
+}
+body.modo-oscuro .organigrama__section {
+  background-color: v.$gris-plateado;
+  
+}
+
+body.modo-oscuro .historia__prologo {
+  background: v.$negro;
+}
+body.modo-oscuro .historia__archivos{
+  color: v.$blanco-hueso;
+  background: v.$negro;
+}
+body.modo-oscuro .historia__grid {
+  color: v.$blanco-hueso;
+  
+}
+body.modo-oscuro .historia__grid {
+  background: v.$negro;
+  border: 1px solid v.$gris-plateado;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO EVENTOS
+------------------------------------------------ */
+body.modo-oscuro .eventos {
+  background-color: v.$negro;
+}
+body.modo-oscuro .eventos-nota-calendario{
+    color:v.$blanco-hueso;
+    background-color: v.$gris-muy-oscuro;
+}
+body.modo-oscuro .marco-tablon{
+    background-color: v.$negro;
+}
+body.modo-oscuro .board {
+    background-color: v.$secondary-color;
+    border: 1px solid v.$blanco-hueso;
+}
+body.modo-oscuro .board__note {
+    background: v.$gris-plateado;
+}
+/* ----------------------------------------------
+   MODO OSCURO BLOG
+------------------------------------------------ */
+body.modo-oscuro .blog {
+  background-color: v.$negro;
+}
+body.modo-oscuro .blog__post {
+    background-color: v.$gris-muy-oscuro;
+}
+body.modo-oscuro .blog__post-title {
+    color: v.$blanco;
+}
+body.modo-oscuro .blog__post-content {
+    color: v.$blanco-hueso;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO GALERIAS
+------------------------------------------------ */
+body.modo-oscuro .galerias {
+  background-color: v.$negro;
+}
+body.modo-oscuro .galeria {
+    background-color: #444;
+}
+body.modo-oscuro .galeria__texto {
+    color: v.$blanco-hueso;
+}
+
+body.modo-oscuro .visor {
+    background-color: v.$secondary-color;
+}
+body.modo-oscuro .notepad__page {
+    background-color: v.$gris-medio-azulado;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO QUIERES
+------------------------------------------------ */
+body.modo-oscuro .quieres-mas {
+  background: v.$secondary-color;
+}
+
+
+/* ----------------------------------------------
+   MODO OSCURO BARRA DE NAVEGACION
+------------------------------------------------ */
+
+body.modo-oscuro .header__barra {
+    background: v.$secondary-color;
+}
+body.modo-oscuro .header-inner__barra {
+    background: v.$secondary-color;
+}
+
+
+// Para el modo oscuro, se puede definir un fondo por defecto distinto
+body.modo-oscuro .header__barra,
+body.modo-oscuro .header-inner__barra {
+//   background: linear-gradient(135deg, #333, #444 60%, #555 100%);
+background: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+body.modo-oscuro .header__barra--scrolled,
+body.modo-oscuro .header-inner__barra--scrolled {
+  background: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 767px) {
+  body.modo-oscuro .navegacion {
+    background: #000;
+  }
+}
+
+//  MODAL QUIERES
+
+body.modo-oscuro #modal-quieres-content{
+    background-color: v.$secondary-color;
+}
+
+// HISTORIA
+body.modo-oscuro .historia__leyenda {
+    background: v.$secondary-color;
+  
+}

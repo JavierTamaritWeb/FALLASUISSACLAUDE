@@ -1,0 +1,9 @@
+{
+    "openWeather": {
+      "apiKey": "9a16a8e5458b6fdb0d040e46ee221bca",
+      "city": "Valencia",
+      "units": "metric",
+      "lang": "es"
+    }
+  }
+  

@@ -1,0 +1,94 @@
+// abstracts/_variables.scss
+
+// Colores básicos y de acento
+$primary-color: #FF6F61;           // Color principal
+$secondary-color: #333;            // Color secundario
+$background-color: #F4F4F9;
+$naranja-suave: #fdf2e9; 
+         // Fondo de la página
+$blanco: #FFFFFF;
+$blanco-hueso: #F5F5F5;
+$blanco-rosado: #fdf4f6;
+$blanco-sutil-gris:#fdfdfd;
+
+$marfil: #fdf2e9;
+
+$negro: #000;
+$negro-casi: #111111;
+$color-azul-falla: #004BCF;      
+$dorado: #FFD700;
+$azul-marino: #000080;
+
+// Colores para el calendario
+$rojo-coral: #FF6F61;
+$rojo-coral-suave: #f4e0d8d0;
+$rojo-salmon: #FF8C7A;
+
+$naranja-quemado: #dd6502;
+
+$melocotin-claro: #ffccbc;
+
+$naranja-coral: #FF944F;
+$amarillo-anaranjado: #FFA947;
+
+$gris-muy-oscuro: #444;
+$gris-oscuro: #4A4A4A;
+$gris-oscuro-medio: #616060;
+$gris-medio-oscuro: #555;
+$gris: #888;
+$gris-medio-claro: #ccc;
+$gris-claro: #e3e2e2;
+$gris-muy-claro: #ddd;
+$gris-muy-claro-neutro: #e0e0e0;
+$gris-plateado:#c0c0c0;
+$gris-oscuro-frio:#525456;
+$gris-medio-azulado:#6e7072;
+
+
+$rosa-pastel: #FFD1DC;
+$rosado-palido: #faf4f4;
+
+$turquesa: #00909E;
+$azul-verdoso:#7FCFC9;
+$purpura:#BBA1CA;
+
+$beige-palido-rosado: #f4e0d8d0;
+
+// Calendario
+
+$color-urgente: #C13584;
+$color-recordatorio: #000080;
+$color-informacion: #FFD700;
+$color-festivo: #FF6F61;
+$color-falla: #00909E;
+$color-evento: #4A4A4A;
+
+// Color Redes Sociales
+$color-instagram:#C13584;
+$color-tiktok:  #FE2C55;
+$color-facebook: #1877F2;
+$color-youtube: #FF0000;
+
+// Colores del Calendario
+$espaciado: 1rem;
+$radio-borde: 8px;
+$transicion: 0.3s ease;
+$color-texto: #333;
+$color-fondo: #fdf2e9;
+$color-borde: #fdfdfd;
+
+// Otros
+$box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+$border-radius: 1rem;
+
+// Tipografía
+$font-family: "DM Sans", sans-serif;
+$font-family-secondary: "Dancing Script", cursive;
+$font-size-large: 4.2rem;
+$font-size-medium: 2.8rem;
+$font-size-regular: 2rem;
+$font-size-small: 1.6rem;
+
+// Rutas (relativas al CSS compilado en "css/")
+$img-path: "../img/";
+$favicon-path: "../favicon/";

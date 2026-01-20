@@ -1,0 +1,110 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Falla Suïssa - L'Alqueria del Favero",
+  "description": "Comisión fallera valenciana dedicada a preservar y promover las tradiciones de las Fallas de Valencia. Organizamos eventos culturales, cenas, actividades deportivas y la celebración anual de las Fallas.",
+  "url": "https://fallasuissa.es",
+  "telephone": "+34-XXX-XXX-XXX",
+  "email": "info@fallasuissa.es",
+  "foundingDate": "2024",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://fallasuissa.es/img/Escudo_falla.png",
+    "width": 400,
+    "height": 400
+  },
+  "image": "https://fallasuissa.es/img/Escudo_falla.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "L'Alqueria del Favero",
+    "addressLocality": "Valencia",
+    "addressRegion": "Comunidad Valenciana",
+    "postalCode": "46XXX",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "39.4699",
+    "longitude": "-0.3763"
+  },
+  "sameAs": [
+    "https://www.facebook.com/fallasuissa",
+    "https://www.instagram.com/fallasuissa",
+    "https://www.youtube.com/channel/UCxxxxxxx",
+    "https://www.tiktok.com/@fallasuissa"
+  ],
+  "keywords": "fallas valencia, tradición valenciana, comisión fallera, eventos valencia, cultura valencia, fallas suissa, alqueria del favero",
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card",
+  "openingHours": "Mo-Su 18:00-22:00",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios Falla Suïssa",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Event",
+          "name": "Celebración de las Fallas",
+          "description": "Celebración anual de las Fallas con monumentos, mascletás y actividades tradicionales"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Event",
+          "name": "Cenas y Eventos Gastronómicos",
+          "description": "Cenas tradicionales valencianas y eventos gastronómicos durante todo el año"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Event",
+          "name": "Actividades Deportivas",
+          "description": "Campeonatos de fútbol playa, voleibol, tenis y otras actividades deportivas"
+        }
+      }
+    ]
+  },
+  "member": [
+    {
+      "@type": "Person",
+      "name": "José Javier Tamayo Tamayo",
+      "jobTitle": "Presidente"
+    },
+    {
+      "@type": "Person", 
+      "name": "Amparo Soria Silvestre",
+      "jobTitle": "Fallera Mayor"
+    },
+    {
+      "@type": "Person",
+      "name": "Aitana Villalba Tamayo", 
+      "jobTitle": "Fallera Mayor Infantil"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Valencia Tradicional"
+      },
+      "datePublished": "2024-03-19",
+      "reviewBody": "Excelente comisión fallera que mantiene vivas las tradiciones valencianas con gran profesionalidad y dedicación.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      }
+    }
+  ]
+}
