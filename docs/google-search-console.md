@@ -91,4 +91,4 @@ Una vez verificado tendrás acceso a:
 
 ---
 
-*Última actualización: 17 de enero de 2026*
+*Última actualización: 21 de enero de 2026*

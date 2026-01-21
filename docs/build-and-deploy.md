@@ -45,7 +45,7 @@ npx gulp build
 - `dist/img/`: copia de `img/` + generación incremental de WebP/AVIF (para PNG/JPG/JPEG)
 - `dist/js/`, `dist/data/`, `dist/pdf/`, `dist/favicon_io/`
 - `dist/*.html` (páginas del root)
-- `dist/robots.txt`, `dist/sitemap*.xml`, `dist/manifest.json`, `dist/sw.js`, `dist/google*.html`
+- `dist/robots.txt`, `dist/sitemap*.xml`, `dist/manifest.json`, `dist/sw.js`, `dist/google*.html`, `dist/ai-discovery.json`, `dist/ai-info.html`
 - `dist/seo/` (copia de la carpeta `seo/`)
 
 ## 🧩 Tareas Gulp útiles
@@ -113,4 +113,4 @@ Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo 
 
 ---
 
-*Última actualización: 17 de enero de 2026*
+*Última actualización: 21 de enero de 2026*

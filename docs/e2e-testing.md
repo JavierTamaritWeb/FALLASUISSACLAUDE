@@ -75,6 +75,32 @@ Guía técnica:
 
 - [`i18n-translations.md`](./i18n-translations.md)
 
+### 🎨 Header bar background
+
+- Se valida que el fondo de la barra del header tiene el color y estilos correctos en modo claro/oscuro.
+
+Archivo de test:
+
+- `tests/header-bar-bg.e2e.spec.js`
+
+### 🛡️ SCSS Guardrails
+
+- Se valida que las variables SCSS eliminadas (como `$color-instagram`, `$color-falla`, etc.) no se reintroduzcan en el código.
+- Protege contra regresiones de refactorización SCSS.
+
+Archivo de test:
+
+- `tests/scss-guardrails.e2e.spec.js`
+
+### 📸 Visual Regression
+
+- Tests de regresión visual para componentes críticos.
+- Compara capturas de pantalla para detectar cambios no intencionados.
+
+Archivo de test:
+
+- `tests/visual-regression.e2e.spec.js`
+
 ## 📦 Requisitos
 
 - Node.js 18+ (recomendado 20+)
@@ -124,10 +150,13 @@ Configuración relacionada:
 - `scripts/serve-dist.mjs` (servidor estático local)
 - `tests/nav.e2e.spec.js` (navbar)
 - `tests/header-mobile-layout.e2e.spec.js` (layout móvil en una fila)
+- `tests/header-bar-bg.e2e.spec.js` (fondo de barra del header)
 - `tests/nav-transition.e2e.spec.js` (transición de enlaces navbar)
-- `tests/monumento-swiper.e2e.spec.js` (Swiper “El Monumento”)
+- `tests/monumento-swiper.e2e.spec.js` (Swiper "El Monumento")
 - `tests/scrollbar-theme.e2e.spec.js` (Scrollbar + modo oscuro Safari)
 - `tests/i18n.e2e.spec.js` (Sistema i18n)
+- `tests/scss-guardrails.e2e.spec.js` (Guardrails SCSS)
+- `tests/visual-regression.e2e.spec.js` (Regresión visual)
 
 ## 🧯 Troubleshooting
 
@@ -146,4 +175,4 @@ Configuración relacionada:
 
 ---
 
-*Última actualización: 17 de enero de 2026*
+*Última actualización: 21 de enero de 2026*
