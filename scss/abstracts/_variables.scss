@@ -1,87 +1,90 @@
 // abstracts/_variables.scss
+// Variables SCSS refactorizadas - Falla Suïssa
 
-// Colores básicos y de acento
-$primary-color: #FF6F61;           // Color principal
-$secondary-color: #333;            // Color secundario
-$background-color: #F4F4F9;
-$naranja-suave: #fdf2e9; 
-         // Fondo de la página
+// =============================================================================
+// COLORES DE MARCA
+// =============================================================================
+
+$primary-color: #FF6F61;      // Coral - Color principal de la falla
+$secondary-color: #333;        // Gris oscuro - Texto principal
+$color-azul-falla: #004BCF;   // Azul institucional
+$dorado: #FFD700;             // Dorado - Acentos
+
+// =============================================================================
+// ESCALA DE BLANCOS
+// =============================================================================
+
 $blanco: #FFFFFF;
-$blanco-hueso: #F5F5F5;
-$blanco-rosado: #fdf4f6;
-$blanco-sutil-gris:#fdfdfd;
+$blanco-hueso: #F5F5F5;       // Fondos sutiles
+$naranja-suave: #fdf2e9;      // Fondo cálido (antes: marfil, color-fondo)
 
-$marfil: #fdf2e9;
+// =============================================================================
+// ESCALA DE GRISES
+// =============================================================================
 
 $negro: #000;
 $negro-casi: #111111;
-$color-azul-falla: #004BCF;      
-$dorado: #FFD700;
-$azul-marino: #000080;
 
-// Colores para el calendario
-$rojo-coral: #FF6F61;
-$rojo-coral-suave: #f4e0d8d0;
-$rojo-salmon: #FF8C7A;
-
-$naranja-quemado: #dd6502;
-
-$melocotin-claro: #ffccbc;
-
-$naranja-coral: #FF944F;
-$amarillo-anaranjado: #FFA947;
-
+// Grises oscuros
 $gris-muy-oscuro: #444;
 $gris-oscuro: #4A4A4A;
 $gris-oscuro-medio: #616060;
+$gris-oscuro-frio: #525456;
 $gris-medio-oscuro: #555;
+$gris-medio-azulado: #6e7072;
+
+// Grises claros
 $gris: #888;
+$gris-plateado: #c0c0c0;
 $gris-medio-claro: #ccc;
-$gris-claro: #e3e2e2;
 $gris-muy-claro: #ddd;
 $gris-muy-claro-neutro: #e0e0e0;
-$gris-plateado:#c0c0c0;
-$gris-oscuro-frio:#525456;
-$gris-medio-azulado:#6e7072;
+$gris-claro: #e3e2e2;
 
+// =============================================================================
+// COLORES DE ACENTO
+// =============================================================================
 
+$rojo-salmon: #FF8C7A;
+$naranja-coral: #FF944F;
+$naranja-quemado: #dd6502;  // Hover en modo oscuro
+$amarillo-anaranjado: #FFA947;
+$melocotin-claro: #ffccbc;
 $rosa-pastel: #FFD1DC;
-$rosado-palido: #faf4f4;
-
 $turquesa: #00909E;
-$azul-verdoso:#7FCFC9;
-$purpura:#BBA1CA;
+$azul-verdoso: #7FCFC9;
+$azul-marino: #000080;
+$purpura: #BBA1CA;
 
-$beige-palido-rosado: #f4e0d8d0;
-
-// Calendario
+// =============================================================================
+// COLORES DEL CALENDARIO (semánticos)
+// =============================================================================
 
 $color-urgente: #C13584;
-$color-recordatorio: #000080;
-$color-informacion: #FFD700;
-$color-festivo: #FF6F61;
-$color-falla: #00909E;
-$color-evento: #4A4A4A;
+$color-falla: $turquesa;
+$color-evento: $gris-oscuro;
+$color-informacion: $dorado;
+$color-recordatorio: $azul-marino;
 
-// Color Redes Sociales
-$color-instagram:#C13584;
-$color-tiktok:  #FE2C55;
+// Variables de UI del calendario
+$color-texto: $secondary-color;
+$color-fondo: $naranja-suave;
+$color-borde: #fdfdfd;
+$radio-borde: 8px;
+
+// =============================================================================
+// REDES SOCIALES
+// =============================================================================
+
+$color-instagram: $color-urgente;
+$color-tiktok: #FE2C55;
 $color-facebook: #1877F2;
 $color-youtube: #FF0000;
 
-// Colores del Calendario
-$espaciado: 1rem;
-$radio-borde: 8px;
-$transicion: 0.3s ease;
-$color-texto: #333;
-$color-fondo: #fdf2e9;
-$color-borde: #fdfdfd;
+// =============================================================================
+// TIPOGRAFÍA
+// =============================================================================
 
-// Otros
-$box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-$border-radius: 1rem;
-
-// Tipografía
 $font-family: "DM Sans", sans-serif;
 $font-family-secondary: "Dancing Script", cursive;
 $font-size-large: 4.2rem;
@@ -89,6 +92,17 @@ $font-size-medium: 2.8rem;
 $font-size-regular: 2rem;
 $font-size-small: 1.6rem;
 
-// Rutas (relativas al CSS compilado en "css/")
+// =============================================================================
+// ESPACIADO Y BORDES
+// =============================================================================
+
+$espaciado: 1rem;
+$border-radius: 1rem;
+$box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+$transicion: 0.3s ease;
+
+// =============================================================================
+// RUTAS
+// =============================================================================
+
 $img-path: "../img/";
-$favicon-path: "../favicon/";
