@@ -392,18 +392,18 @@
             color: v.$primary-color;
      }
       &--falla {
-        border-left: 6px solid v.$color-falla;
+        border-left: 6px solid v.$turquesa;
         
   
         .calendario-eventos__item-meta {
           span {
             &:first-child {
-              color: v.$color-falla;
+              color: v.$turquesa;
               font-weight: bold;
               font-size: 0.8rem;
             }
             &:last-child {
-              color: v.$color-falla;
+              color: v.$turquesa;
               text-transform: uppercase;
               font-weight: bold;
               font-size: 0.8rem;
@@ -412,7 +412,7 @@
         }
       }
       &--falla h2 {
-        color: v.$color-falla;
+        color: v.$turquesa;
       }
   
       &--evento {
