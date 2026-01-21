@@ -74,4 +74,4 @@ La suite incluye una batería para asegurar que el slider de “El Monumento” 
 
 ---
 
-*Última actualización: 17 de enero de 2026*
+*Última actualización: 21 de enero de 2026*
