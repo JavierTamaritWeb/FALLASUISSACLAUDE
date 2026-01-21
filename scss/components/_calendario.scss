@@ -20,7 +20,7 @@
     position: relative;
 
     &__boton-quitar {
-        background-color: v.$color-festivo;
+        background-color: v.$primary-color;
         color: v.$blanco;
         border: none;
         border-radius: 5px;
@@ -36,7 +36,7 @@
         }
     }
     &__modo-boton {
-        background-color: v.$color-festivo;
+        background-color: v.$primary-color;
         color: v.$blanco;
         border: none;
         border-radius: 5px;
@@ -59,7 +59,7 @@
 
         &-titulo {
         font-size: 2.5rem;
-        color: v.$color-festivo;
+        color: v.$primary-color;
         margin: 0;
         }
     }
@@ -234,7 +234,7 @@
       h2 {
         margin-top: 0;
         font-size: 1.3rem;
-        color: v.$color-festivo;
+        color: v.$primary-color;
       }
       p {
         color: #000;
@@ -353,7 +353,7 @@
       &-titulo {
         font-size: 1.5rem;
         margin-bottom: 0.75rem;
-        color: v.$color-festivo;
+        color: v.$primary-color;
       }
   
       &-contenido {
@@ -370,7 +370,7 @@
       }
   
       &--festivo {
-        border-left: 6px solid v.$color-festivo;
+        border-left: 6px solid v.$primary-color;
   
         .calendario-eventos__item-meta {
           span {
@@ -634,7 +634,7 @@
         width: 300px;
         position: relative;
         padding: 1.5rem;
-        border: 1px solid v.$color-festivo;
+        border: 1px solid v.$primary-color;
     }
 
     &__cerrar {
@@ -644,7 +644,7 @@
         background: transparent;
         border: none;
         font-size: 2.2rem;
-        color: v.$color-festivo;
+        color: v.$primary-color;
         cursor: pointer;
 
         &:hover {
@@ -656,13 +656,13 @@
         margin-top: 0;
         margin-bottom: 1rem;
         font-size: 1.4rem;
-        color: v.$color-festivo;
+        color: v.$primary-color;
     }
 
     &__label {
         display: block;
         margin-bottom: 0.3rem;
-        color: v.$color-festivo;
+        color: v.$primary-color;
         font-weight: bold;
     }
 
@@ -689,7 +689,7 @@
     }
 
     &__boton {
-        background-color: v.$color-festivo;
+        background-color: v.$primary-color;
         color: v.$blanco;
         border: none;
         border-radius: 5px;
