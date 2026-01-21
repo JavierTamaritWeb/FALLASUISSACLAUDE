@@ -20,7 +20,7 @@ const paths = {
   scssAll: 'scss/**/*.scss',
   js: { src: 'js/**/*.js', dest: 'dist/js' },
   data: { src: 'data/**/*.json', dest: 'dist/data' },
-  pdf: { src: 'pdf/**/*.pdf', dest: 'dist/pdf' },
+  pdf: { src: 'pdf/**/*.{pdf,html}', dest: 'dist/pdf' },
   imgAll: 'img/**/*',
   imgRasterForConvert: 'img/**/*.{png,jpg,jpeg}',
   imgDest: 'dist/img',
