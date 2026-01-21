@@ -13,9 +13,9 @@
     max-width: 100rem;
     margin: 0 auto;
     padding: 2rem 2rem !important;
-    background-color: v.$color-fondo;
-    border: 1px solid v.$color-borde;
-    border-radius: v.$radio-borde;
+    background-color: v.$naranja-suave;
+    border: 1px solid #fdfdfd;
+    border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
 
@@ -73,8 +73,8 @@
         .calendario-eventos__boton-quitar,
         .calendario-eventos__modo-boton {
         background-color: v.$blanco;
-        color: v.$color-texto;
-        border: 1px solid v.$color-texto;
+        color: v.$secondary-color;
+        border: 1px solid v.$secondary-color;
         border-radius: 5px;
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
@@ -156,7 +156,7 @@
       background: transparent;
       border: none;
       font-size: 1.2rem;
-      color: v.$color-texto;
+      color: v.$secondary-color;
       cursor: pointer;
       transition: color v.$transicion;
   
@@ -208,7 +208,7 @@
         background: transparent;
         border: none;
         font-size: 1.2rem;
-        color: v.$color-texto;
+        color: v.$secondary-color;
         cursor: pointer;
         transition: color v.$transicion;
       }
@@ -229,7 +229,7 @@
       border: 1px solid #fdfdfd;
       border-radius: 5px;
       padding: v.$espaciado;
-      color: v.$color-texto;
+      color: v.$secondary-color;
       text-align: left; 
       h2 {
         margin-top: 0;
@@ -263,7 +263,7 @@
   
       &-encabezado {
         font-weight: bold;
-        color: v.$color-texto;
+        color: v.$secondary-color;
       }
   
       &-dia {
@@ -416,17 +416,17 @@
       }
   
       &--evento {
-        border-left: 6px solid v.$color-evento;
+        border-left: 6px solid v.$gris-oscuro;
   
         .calendario-eventos__item-meta {
           span {
             &:first-child {
-              color: v.$color-evento;
+              color: v.$gris-oscuro;
               font-weight: bold;
               font-size: 0.8rem;
             }
             &:last-child {
-              color: v.$color-evento;
+              color: v.$gris-oscuro;
               text-transform: uppercase;
               font-weight: bold;
               font-size: 0.8rem;
@@ -435,7 +435,7 @@
         }
       }
       &--evento h2 {
-        color: v.$color-evento;
+        color: v.$gris-oscuro;
       }
       &--urgente {
         border-left: 6px solid v.$color-urgente;
@@ -460,18 +460,18 @@
         color: v.$color-urgente;
       }
       &--informacion {
-        border-left: 6px solid v.$color-informacion;
+        border-left: 6px solid v.$dorado;
         color: #000;
   
         .calendario-eventos__item-meta {
           span {
             &:first-child {
-              color: v.$color-informacion;
+              color: v.$dorado;
               font-weight: bold;
               font-size: 0.8rem;
             }
             &:last-child {
-              color: v.$color-informacion;
+              color: v.$dorado;
               text-transform: uppercase;
               font-weight: bold;
               font-size: 0.8rem;
@@ -480,21 +480,21 @@
         }
       }
         &--informacion h2 {
-            color: v.$color-informacion;
+            color: v.$dorado;
         }
   
       &--recordatorio {
-        border-left: 6px solid v.$color-recordatorio;
+        border-left: 6px solid v.$azul-marino;
   
         .calendario-eventos__item-meta {
           span {
             &:first-child {
-              color: v.$color-recordatorio;
+              color: v.$azul-marino;
               font-weight: bold;
               font-size: 0.8rem;
             }
             &:last-child {
-              color: v.$color-recordatorio;
+              color: v.$azul-marino;
               text-transform: uppercase;
               font-weight: bold;
               font-size: 0.8rem;
@@ -503,7 +503,7 @@
         }
       }
         &--recordatorio h2 {
-            color: v.$color-recordatorio;
+            color: v.$azul-marino;
         }
   
       &__banda {
