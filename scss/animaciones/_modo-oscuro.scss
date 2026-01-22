@@ -69,6 +69,7 @@ body.transicion-a-claro .header-inner__barra--scrolled {
 
 body.modo-oscuro {
   background: v.$negro;
+  --header-bar-bg: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
   
 }
 

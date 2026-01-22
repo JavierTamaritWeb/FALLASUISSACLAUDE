@@ -180,13 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
      =================================== */
   
   function initFocusManagement() {
-    // Añadir skip link
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.className = 'skip-link';
-    skipLink.textContent = 'Saltar al contenido principal';
-    document.body.insertBefore(skipLink, document.body.firstChild);
-    
     // Añadir ID al contenido principal si no existe
     const mainContent = document.querySelector('main');
     if (mainContent && !mainContent.id) {
