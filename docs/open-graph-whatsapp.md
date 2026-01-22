@@ -16,7 +16,7 @@ WhatsApp suele fallar o no actualizar la imagen de previsualización por:
 - Estándar recomendado:
   - Tamaño: **1200×630**
   - Formato: **PNG**
-  - Fondo: **sólido** (evita problemas de transparencias y modo oscuro)
+  - Fondo: **sólido azul corporativo** `#0a4b8d` (evita problemas de transparencias y modo oscuro)
   - Peso objetivo: **< 300KB** (WhatsApp suele necesitarlo)
 
 ### Generar/actualizar la imagen
