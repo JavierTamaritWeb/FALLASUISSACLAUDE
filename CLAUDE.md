@@ -56,11 +56,13 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 ### Directory Structure
 - `scss/` - Modular SCSS: abstracts/, base/, layout/, components/, animaciones/, optimization/, sociales/
 - `js/` - 21 modules: dark.js (theme), lang.js (i18n), calendario.js, meteo.js, galeria_[1-4].js, nav-menu.js, swiper.js, pwa-manager.js, etc.
+- `scripts/` - Node.js utilities: generate-og-image.mjs, serve-dist.mjs
 - `data/` - JSON files: translations.json, eventos.json, calendarData.json, fallas.json, config.json, dataPages[1-4].json
 - `dist/` - Production build output (DO NOT edit directly)
 - `tests/` - Playwright E2E tests (12 suites)
 - `docs/` - Technical documentation (Markdown)
 - `seo/` - AI/SEO optimization files (sitemaps, schema, robots variants)
+- `pdf/` - PDF files with HTML wrappers for favicon/social preview support
 
 ### Key Systems
 
@@ -70,7 +72,7 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 
 **Gulp Pipeline**: Watches src files, compiles SCSS with sourcemaps, optimizes images to WebP/AVIF, copies to dist/.
 
-**Open Graph (WhatsApp/Social)**: Image `img/og-share.png` (1200×630, <300KB) with cache-buster `?v=YYYYMMDD`. See `docs/open-graph-whatsapp.md`.
+**Open Graph (WhatsApp/Social)**: Image `img/og-share.png` (1200×630, <300KB, blue background #0a4b8d) with cache-buster `?v=YYYYMMDD`. Generated from `img/Escudo_falla.avif`. See `docs/open-graph-whatsapp.md`.
 
 ## Key SCSS Variables
 
