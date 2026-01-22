@@ -6,6 +6,7 @@
 |-----------|-------------|---------------|
 | [`build-and-deploy.md`](./build-and-deploy.md) | Guía de build, `dist/` y despliegue | 22/01/2026 |
 | [`e2e-testing.md`](./e2e-testing.md) | Tests end-to-end (Playwright): 9 suites | 22/01/2026 |
+| [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter: `og-share.png`, cache-buster `?v=...` y tests anti-regresión | 22/01/2026 |
 | [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación: header fijo, menú móvil, layout móvil en una fila, accesibilidad y Safari/iOS | 22/01/2026 |
 | [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping + autoheight | 22/01/2026 |
 | [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar (thumb/track) + modo oscuro, compat Safari/WebKit | 22/01/2026 |
@@ -19,6 +20,7 @@
 - **Google Search Console:** Verificación paso a paso
 - **Robots.txt:** Configuración optimizada para bots
 - **Sitemaps:** Generación y publicación (ver guía de build/despliegue)
+- **Open Graph/WhatsApp:** Imagen `og-share.png`, cache-buster `?v=...` y tests (ver guía dedicada)
 
 Índice SEO/IA (carpeta `seo/`): [`../seo/README.md`](../seo/README.md)
 

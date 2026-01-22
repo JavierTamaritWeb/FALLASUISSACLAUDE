@@ -101,6 +101,18 @@ Archivo de test:
 
 - `tests/visual-regression.e2e.spec.js`
 
+### 🟦 Open Graph (WhatsApp)
+
+- La imagen `img/og-share.png` debe existir, pesar < 300KB y medir 1200×630.
+- Ningún HTML debe referenciar `og-share.png` sin cache-buster `?v=...` (evita problemas de caché en WhatsApp).
+- El build en `dist/` también debe contener la URL versionada.
+
+Archivos de test:
+
+- `tests/og-image.e2e.spec.js`
+- `tests/og-meta-cachebust.e2e.spec.js`
+- `tests/og-meta-cachebust-dist.e2e.spec.js`
+
 ## 📦 Requisitos
 
 - Node.js 18+ (recomendado 20+)
@@ -157,6 +169,9 @@ Configuración relacionada:
 - `tests/i18n.e2e.spec.js` (Sistema i18n)
 - `tests/scss-guardrails.e2e.spec.js` (Guardrails SCSS)
 - `tests/visual-regression.e2e.spec.js` (Regresión visual)
+- `tests/og-image.e2e.spec.js` (Validación imagen OG)
+- `tests/og-meta-cachebust.e2e.spec.js` (Cache-buster OG en HTML fuente)
+- `tests/og-meta-cachebust-dist.e2e.spec.js` (Cache-buster OG en dist/)
 
 ## 🧯 Troubleshooting
 

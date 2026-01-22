@@ -102,6 +102,28 @@ Guía completa: [`e2e-testing.md`](./e2e-testing.md).
 
 Guía técnica (modo oscuro + scrollbar Safari/WebKit): [`scrollbar-theme.md`](./scrollbar-theme.md).
 
+## 🟦 Open Graph (WhatsApp): imagen y cache-buster
+
+WhatsApp cachea de forma muy agresiva la URL de `og:image`. Por eso:
+
+- La imagen de Open Graph del proyecto es `img/og-share.png`.
+- Los HTML deben referenciarla con un query param `?v=...` (por ejemplo `?v=20260122`) para forzar recacheo.
+
+Flujo recomendado cuando cambie la imagen OG:
+
+```bash
+# Regenera la imagen (1200×630, fondo sólido, <300KB)
+npm run generate:og
+
+# Rebuild de dist/
+npm run build
+
+# Ejecuta tests
+npm run test:e2e
+```
+
+Guía completa: [`open-graph-whatsapp.md`](./open-graph-whatsapp.md).
+
 ## 📄 PDFs
 
 Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo (por ejemplo `pdf/Presentaciones/Prensentacion_Fallera_2026.pdf`), solo necesitas ejecutar `npm run build` para que aparezca en `dist/`.
