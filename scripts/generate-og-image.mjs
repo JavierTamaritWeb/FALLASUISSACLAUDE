@@ -9,6 +9,9 @@ const __dirname = path.dirname(__filename);
 const inputPath = path.join(__dirname, '../img/Escudo_falla.avif');
 const outputPath = path.join(__dirname, '../img/og-share.png');
 
+// Azul corporativo (coincide con meta theme-color del sitio)
+const FALLA_BLUE = { r: 10, g: 75, b: 141, alpha: 1 }; // #0a4b8d
+
 async function generateOgImage() {
   try {
     console.log('Generando og-share.png optimizado para WhatsApp...');
@@ -24,9 +27,9 @@ async function generateOgImage() {
         width: 1200,
         height: 630,
         fit: 'contain',
-        background: { r: 255, g: 255, b: 255, alpha: 1 }
+        background: FALLA_BLUE
       })
-      .flatten({ background: { r: 255, g: 255, b: 255 } }) // Fondo blanco sólido
+      .flatten({ background: { r: FALLA_BLUE.r, g: FALLA_BLUE.g, b: FALLA_BLUE.b } })
       .png({
         quality: 80,
         compressionLevel: 9,
@@ -45,8 +48,8 @@ async function generateOgImage() {
       console.warn('⚠️ ADVERTENCIA: La imagen supera o está muy cerca de los 300KB. WhatsApp podría no mostrarla. Intentando recomprimir...');
       // Reintentar con menor calidad si sale muy grande
        await sharp(inputPath)
-        .resize({ width: 1200, height: 630, fit: 'contain', background: 'white' })
-        .flatten({ background: 'white' })
+        .resize({ width: 1200, height: 630, fit: 'contain', background: FALLA_BLUE })
+        .flatten({ background: { r: FALLA_BLUE.r, g: FALLA_BLUE.g, b: FALLA_BLUE.b } })
         .png({ quality: 60, compressionLevel: 9 })
         .toFile(outputPath);
         
