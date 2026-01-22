@@ -69,6 +69,12 @@ Guía técnica: [`docs/i18n-translations.md`](./docs/i18n-translations.md)
 - **Datos estructurados** - JSON-LD para mejor indexación
 - **Analytics ready** - Preparado para Google Analytics
 
+### 🟦 **Open Graph (WhatsApp/Facebook/Twitter)**
+- Imagen OG optimizada `img/og-share.png` (1200×630, fondo sólido, <300KB)
+- Cache-buster `?v=...` para evitar problemas de caché en WhatsApp
+
+Guía técnica: [`docs/open-graph-whatsapp.md`](./docs/open-graph-whatsapp.md)
+
 ## 🏗️ Stack Tecnológico
 
 ### **Frontend**
