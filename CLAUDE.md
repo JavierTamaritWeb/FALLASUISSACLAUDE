@@ -17,6 +17,7 @@ WEBFALLASUISSA is the official website for Falla Suïssa - L'Alqueria del Favero
 - ALWAYS run `npm run test:e2e` after CSS/JS changes
 - NEVER edit files in `dist/` directly (they are generated)
 - NEVER remove SCSS variables without checking `tests/scss-guardrails.e2e.spec.js`
+- NEVER reference `og-share.png` without cache-buster `?v=YYYYMMDD` (WhatsApp caching)
 - When adding translations: update `data/translations.json` for BOTH `es` and `va`
 - Comments in code are written in Spanish
 
@@ -39,6 +40,9 @@ npx gulp css                # Compile SCSS
 npx gulp images             # Optimize images (WebP/AVIF)
 npx gulp js                 # Copy JavaScript
 npx gulp html               # Process HTML
+
+# Open Graph image
+npm run generate:og         # Regenerate img/og-share.png (1200x630)
 ```
 
 ## Architecture
@@ -54,7 +58,7 @@ npx gulp html               # Process HTML
 - `js/` - 21 modules: dark.js (theme), lang.js (i18n), calendario.js, meteo.js, galeria_[1-4].js, nav-menu.js, swiper.js, pwa-manager.js, etc.
 - `data/` - JSON files: translations.json, eventos.json, calendarData.json, fallas.json, config.json, dataPages[1-4].json
 - `dist/` - Production build output (DO NOT edit directly)
-- `tests/` - Playwright E2E tests (9 suites)
+- `tests/` - Playwright E2E tests (12 suites)
 - `docs/` - Technical documentation (Markdown)
 - `seo/` - AI/SEO optimization files (sitemaps, schema, robots variants)
 
@@ -65,6 +69,8 @@ npx gulp html               # Process HTML
 **Dark Mode**: CSS custom properties for theming, localStorage persistence, Safari scrollbar compatibility. See `docs/scrollbar-theme.md`.
 
 **Gulp Pipeline**: Watches src files, compiles SCSS with sourcemaps, optimizes images to WebP/AVIF, copies to dist/.
+
+**Open Graph (WhatsApp/Social)**: Image `img/og-share.png` (1200×630, <300KB) with cache-buster `?v=YYYYMMDD`. See `docs/open-graph-whatsapp.md`.
 
 ## Key SCSS Variables
 
@@ -114,6 +120,12 @@ Existing wrappers:
 - `pdf/Llibrets/Llibret_2025-26.html`
 - `pdf/Presentaciones/Presentacion_Fallera_2026.html`
 
+### Updating Open Graph image (WhatsApp preview)
+1. Run `npm run generate:og` to regenerate `img/og-share.png`
+2. Update cache-buster `?v=YYYYMMDD` in ALL HTML files (og:image, twitter:image, image_src)
+3. Run `npm run build`
+4. Run `npm run test:e2e` (validates image size and cache-buster presence)
+
 ## Testing Workflow
 
 Run `npm run test:e2e` after changes to:
@@ -121,6 +133,7 @@ Run `npm run test:e2e` after changes to:
 - **Navbar/header** - Validates mobile layout, transitions, backgrounds
 - **Translations** - Validates i18n persistence across pages
 - **Swiper** - Validates carousel behavior
+- **Open Graph** - Validates og-share.png (size, dimensions) and cache-buster in HTML
 
 ## Code Style
 
@@ -132,7 +145,8 @@ Run `npm run test:e2e` after changes to:
 
 Technical docs in `/docs/`:
 - `build-and-deploy.md` - Build process and deployment
-- `e2e-testing.md` - Playwright testing (9 test suites)
+- `e2e-testing.md` - Playwright testing (12 test suites)
+- `open-graph-whatsapp.md` - Open Graph image, WhatsApp cache-buster, social previews
 - `navigation-bar.md` - Header/mobile nav implementation
 - `i18n-translations.md` - Language system
 - `swiper-monumento.md` - Carousel details
