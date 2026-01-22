@@ -2,7 +2,6 @@
 // Mejoras de accesibilidad para WEBFALLASUISSA
 
 @use 'variables' as v;
-@use 'sass:color';
 
 /* ===================================
    FOCUS INDICATORS & KEYBOARD NAVIGATION
@@ -18,37 +17,6 @@
 // Remover outline por defecto solo cuando focus-visible está disponible
 :focus:not(:focus-visible) {
   outline: none;
-}
-
-// Skip links para navegación rápida
-.skip-link {
-  position: absolute;
-  top: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: v.$color-azul-falla;
-  color: v.$blanco;
-  padding: 12px 24px;
-  text-decoration: none;
-  border-radius: 8px;
-  z-index: 9999;
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border: 2px solid v.$blanco;
-  transition: top 0.3s ease, box-shadow 0.3s ease;
-
-  &:focus {
-    top: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    outline: 3px solid v.$dorado;
-    outline-offset: 2px;
-  }
-
-  &:hover {
-    background: color.adjust(v.$color-azul-falla, $lightness: -10%);
-  }
 }
 
 /* ===================================
@@ -300,7 +268,6 @@ img[loading="lazy"] {
   // Ocultar elementos no necesarios en impresión
   .header__modo-boton,
   .header__lang,
-  .skip-link,
   .swiper-button-prev,
   .swiper-button-next,
   .swiper-pagination {
