@@ -175,4 +175,4 @@ Configuración relacionada:
 
 ---
 
-*Última actualización: 21 de enero de 2026*
+*Última actualización: 22 de enero de 2026*

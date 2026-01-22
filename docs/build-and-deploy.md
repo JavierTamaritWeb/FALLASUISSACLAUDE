@@ -113,4 +113,4 @@ Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo 
 
 ---
 
-*Última actualización: 21 de enero de 2026*
+*Última actualización: 22 de enero de 2026*

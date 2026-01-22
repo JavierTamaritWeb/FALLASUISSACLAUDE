@@ -102,6 +102,18 @@ Used consistently in CSS (`@media`) and JS (`matchMedia`).
 2. Run `npm run build` or `npx gulp css`
 3. Run `npm run test:e2e` to validate
 
+### Adding a PDF with favicon and social preview
+PDFs linked directly don't show favicon or social previews. Use HTML wrappers:
+1. Create HTML wrapper in `pdf/[folder]/[name].html` (see existing wrappers as template)
+2. Include: favicon links, Open Graph tags, Twitter Card tags, Safari link preview
+3. Embed PDF with `<object>` tag and fallback download button
+4. Link to `.html` wrapper instead of `.pdf` in pages
+
+Existing wrappers:
+- `pdf/Llibrets/Llibret_2024-25.html`
+- `pdf/Llibrets/Llibret_2025-26.html`
+- `pdf/Presentaciones/Presentacion_Fallera_2026.html`
+
 ## Testing Workflow
 
 Run `npm run test:e2e` after changes to:
