@@ -14,7 +14,8 @@
       "Bash(npx playwright test:*)",
       "Bash(grep:*)",
       "Bash(git push:*)",
-      "Bash(node -e:*)"
+      "Bash(node -e:*)",
+      "Bash(tr:*)"
     ]
   }
 }

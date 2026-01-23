@@ -83,7 +83,7 @@ Si en macOS tienes "Mostrar barras de desplazamiento: Automáticamente", el trac
 
 ## 🔗 Relacionado
 
-- [`global-styles.md`](./global-styles.md) - Fondo del sitio (gradiente en modo claro, negro en modo oscuro)
+- [`global-styles.md`](./global-styles.md) - Fondo del sitio (`background-image` en body, gradiente en modo claro, negro con `background-image: none` en modo oscuro)
 
 ---
 
