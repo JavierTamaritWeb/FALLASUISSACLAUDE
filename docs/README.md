@@ -13,6 +13,7 @@
 | [`i18n-translations.md`](./i18n-translations.md) | i18n: `data-i18n` + `translations.json` (saltos de línea, claves, textos con markup) | 23/01/2026 |
 | [`google-search-console.md`](./google-search-console.md) | Verificación Google Search Console | 23/01/2026 |
 | [`robots-configuration.md`](./robots-configuration.md) | Configuración robots.txt y variantes | 23/01/2026 |
+| [`global-styles.md`](./global-styles.md) | Estilos globales: reset CSS, fondo gradiente y modo oscuro | 23/01/2026 |
 
 ## 🎯 Documentos por Categoría
 
