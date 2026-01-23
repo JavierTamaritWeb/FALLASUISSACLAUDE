@@ -147,7 +147,7 @@ Run `npm run test:e2e` after changes to:
 
 Technical docs in `/docs/`:
 - `build-and-deploy.md` - Build process and deployment
-- `e2e-testing.md` - Playwright testing (12 test suites)
+- `e2e-testing.md` - Playwright testing (13 test suites)
 - `open-graph-whatsapp.md` - Open Graph image, WhatsApp cache-buster, social previews
 - `navigation-bar.md` - Header/mobile nav implementation
 - `i18n-translations.md` - Language system
