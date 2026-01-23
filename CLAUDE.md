@@ -66,9 +66,11 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 
 ### Key Systems
 
+**Global Styles**: `scss/abstracts/_globales.scss` contains CSS reset and background gradient via `body::before` pseudo-element. Dark mode switches to `$negro` background.
+
 **Multi-Language (i18n)**: `data/translations.json` contains Spanish (es) and Valenciano (va). Elements use `data-i18n` attributes, managed by `js/lang.js`.
 
-**Dark Mode**: CSS custom properties for theming, localStorage persistence, Safari scrollbar compatibility. See `docs/scrollbar-theme.md`.
+**Dark Mode**: CSS custom properties for theming, localStorage persistence, Safari scrollbar compatibility. Background handled via `body::before` pseudo-element (gradient → black). See `docs/scrollbar-theme.md`.
 
 **Gulp Pipeline**: Watches src files, compiles SCSS with sourcemaps, optimizes images to WebP/AVIF, copies to dist/.
 

@@ -79,7 +79,11 @@ npm run test:e2e
 
 ## 📝 Nota sobre macOS (overlay scrollbars)
 
-Si en macOS tienes “Mostrar barras de desplazamiento: Automáticamente”, el track puede no dibujarse siempre de forma constante (solo aparece durante el scroll). Esto puede afectar a la percepción visual, pero no invalida la regla CSS.
+Si en macOS tienes "Mostrar barras de desplazamiento: Automáticamente", el track puede no dibujarse siempre de forma constante (solo aparece durante el scroll). Esto puede afectar a la percepción visual, pero no invalida la regla CSS.
+
+## 🔗 Relacionado
+
+- [`global-styles.md`](./global-styles.md) - Fondo del sitio (gradiente en modo claro, negro en modo oscuro)
 
 ---
 
