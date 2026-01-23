@@ -59,7 +59,7 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 - `scripts/` - Node.js utilities: generate-og-image.mjs, serve-dist.mjs
 - `data/` - JSON files: translations.json, eventos.json, calendarData.json, fallas.json, config.json, dataPages[1-4].json
 - `dist/` - Production build output (DO NOT edit directly)
-- `tests/` - Playwright E2E tests (12 suites)
+- `tests/` - Playwright E2E tests (13 suites)
 - `docs/` - Technical documentation (Markdown)
 - `seo/` - AI/SEO optimization files (sitemaps, schema, robots variants)
 - `pdf/` - PDF files with HTML wrappers for favicon/social preview support

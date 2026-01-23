@@ -113,6 +113,18 @@ Archivos de test:
 - `tests/og-meta-cachebust.e2e.spec.js`
 - `tests/og-meta-cachebust-dist.e2e.spec.js`
 
+### ⏱️ Countdown (Cuenta atrás)
+
+- Verifica el cálculo de fechas de inicio/fin del ciclo de Fallas.
+- **Excepción 2026**: inicio el 1 de marzo a las 20:00 (en lugar del último domingo de febrero).
+- Años normales: último domingo de febrero a las 21:00.
+- Fin siempre el 20 de marzo a las 00:00.
+- Valida que la UI del countdown muestra valores numéricos correctos.
+
+Archivo de test:
+
+- `tests/countdown.e2e.spec.js`
+
 ## 📦 Requisitos
 
 - Node.js 18+ (recomendado 20+)
@@ -172,6 +184,7 @@ Configuración relacionada:
 - `tests/og-image.e2e.spec.js` (Validación imagen OG)
 - `tests/og-meta-cachebust.e2e.spec.js` (Cache-buster OG en HTML fuente)
 - `tests/og-meta-cachebust-dist.e2e.spec.js` (Cache-buster OG en dist/)
+- `tests/countdown.e2e.spec.js` (Countdown de Fallas)
 
 ## 🧯 Troubleshooting
 
