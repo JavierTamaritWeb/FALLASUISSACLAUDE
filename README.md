@@ -19,7 +19,7 @@
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-**🆕 Última actualización:** 17 de enero de 2026 - Header móvil en una sola fila (botones izq, notificación centrada, menú dcha) + tests E2E de regresión
+**🆕 Última actualización:** 23 de enero de 2026 - Sistema de fondo simplificado (gradiente en `body` con `background-image`) + documentación actualizada
 
 </div>
 

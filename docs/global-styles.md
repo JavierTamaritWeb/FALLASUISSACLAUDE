@@ -26,22 +26,28 @@ El proyecto usa un reset universal que normaliza todos los elementos:
 
 ## 🖼️ Fondo con Gradiente
 
-El fondo del sitio se implementa con un pseudo-elemento `::before` fijo:
+El fondo del sitio se implementa directamente en `body` usando `background-image`:
 
 ```scss
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  background-color: #0a4b8d;
+  background-image: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 ```
 
-**Por qué usar `::before` en lugar de `background` directo:**
-- `position: fixed` asegura que el fondo cubra todo el viewport
-- Evita problemas de altura en páginas cortas
-- El gradiente no se repite ni se corta al hacer scroll
+**Por qué esta implementación:**
+- `html { height: 100% }` + `body { min-height: 100% }` asegura que el fondo cubra todo el viewport
+- `background-size: cover` + `background-repeat: no-repeat` evita que el gradiente se corte o repita
+- `background-color` actúa como fallback mientras carga el gradiente
+- Más simple y directo que usar pseudo-elementos
 - Compatible con todos los navegadores modernos
 
 ### Colores del gradiente (modo claro)
@@ -54,15 +60,16 @@ body::before {
 
 ## 🌙 Modo Oscuro
 
-En modo oscuro, el fondo cambia a negro sólido:
+En modo oscuro, el fondo cambia a negro sólido eliminando el gradiente:
 
 ```scss
-body.modo-oscuro::before {
-  background: v.$negro; // #000
+body.modo-oscuro {
+  background-color: v.$negro; // #000
+  background-image: none;
 }
 ```
 
-La transición entre modos se gestiona automáticamente por `js/dark.js`.
+La transición entre modos se gestiona automáticamente por `js/dark.js` y se anima con las variables CSS de transición definidas en `_modo-oscuro.scss`.
 
 ## 🧩 Integración con otros archivos
 
@@ -74,28 +81,28 @@ El archivo `_globales.scss` se importa en `main.scss` después de `normalize`:
 @use 'abstracts/accessibility';
 ```
 
-**Importante:** No definir `background` en otros archivos para evitar conflictos. Los backgrounds duplicados fueron eliminados de:
-- `scss/base/_typography.scss`
-- `scss/animaciones/_modo-oscuro.scss`
+**Importante:** No definir `background-image` en otros archivos para evitar conflictos. El modo oscuro define `background-image: none` en `scss/animaciones/_modo-oscuro.scss` para anular el gradiente.
 
 ## ⚠️ Consideraciones
 
 ### Orden de cascada
-El archivo `_globales.scss` se carga temprano. Si defines backgrounds en archivos posteriores, sobrescribirán el gradiente.
+El archivo `_globales.scss` se carga temprano. El archivo `_modo-oscuro.scss` se carga después y sobrescribe el fondo cuando se activa `.modo-oscuro`.
 
-### z-index
-El pseudo-elemento usa `z-index: -1` para quedar detrás del contenido. No uses `z-index` negativos en otros elementos que deban verse.
+### Altura del contenido
+- `html` debe tener `height: 100%` 
+- `body` debe tener `min-height: 100%` (no `height: 100%`) para permitir que el contenido crezca
+- Esto asegura que páginas cortas muestren el gradiente completo
 
 ### Safari/iOS
-El uso de `position: fixed` en el pseudo-elemento es compatible con Safari/iOS sin problemas de `transform`.
+Esta implementación es totalmente compatible con Safari/iOS sin necesidad de hacks adicionales.
 
 ## 🧪 Verificación
 
 Para verificar que el fondo funciona correctamente:
 
-1. Modo claro: debe verse el gradiente azul
+1. Modo claro: debe verse el gradiente azul diagonal (135°)
 2. Modo oscuro: debe verse fondo negro sólido
-3. Scroll: el fondo debe permanecer fijo
+3. Scroll: el fondo debe cubrir todo el contenido sin repetirse
 
 ```bash
 npm run build

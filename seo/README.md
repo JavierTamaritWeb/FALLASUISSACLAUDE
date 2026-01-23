@@ -63,4 +63,4 @@ Build recomendado:
 
 ---
 
-*Última actualización: 15 de enero de 2026*
+*Última actualización: 23 de enero de 2026*
