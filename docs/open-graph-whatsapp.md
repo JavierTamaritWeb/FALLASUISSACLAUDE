@@ -105,4 +105,4 @@ npm run test:e2e
 
 ---
 
-*Última actualización: 22 de enero de 2026*
+*Última actualización: 23 de enero de 2026*
