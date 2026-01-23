@@ -1,0 +1,30 @@
+// scss/abstracts/_globales.scss
+// Reset global y estilos base para html/body
+
+@use 'variables' as v;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+}
+body.modo-oscuro::before {
+  background: v.$negro;
+}
+
