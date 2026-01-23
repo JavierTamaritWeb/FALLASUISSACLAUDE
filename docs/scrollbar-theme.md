@@ -83,4 +83,4 @@ Si en macOS tienes “Mostrar barras de desplazamiento: Automáticamente”, el 
 
 ---
 
-*Última actualización: 22 de enero de 2026*
+*Última actualización: 23 de enero de 2026*

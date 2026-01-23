@@ -190,4 +190,4 @@ Configuración relacionada:
 
 ---
 
-*Última actualización: 22 de enero de 2026*
+*Última actualización: 23 de enero de 2026*
