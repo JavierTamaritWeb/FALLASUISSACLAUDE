@@ -64,13 +64,23 @@
    *
    * - La fecha de inicio se calcula como el último domingo de febrero de ese año, a las 21:00.
    * - La fecha de fin se fija en el 20 de marzo del mismo año a las 00:00.
+   * - EXCEPCIÓN 2026: El inicio es el 1 de marzo a las 20:00.
    *
    * @param {number} year - Año para el que calcular el ciclo.
    * @returns {Object} - Objeto con propiedades "start" y "end", ambas de tipo Date.
    */
   function getCycleDates(year) {
-    const start = getLastSundayOfFebruary(year);
-    start.setHours(21, 0, 0, 0); // Establece la hora de inicio a las 21:00.
+    let start;
+
+    // Excepción para 2026: inicio el 1 de marzo a las 20:00
+    if (year === 2026) {
+      start = new Date(year, 2, 1); // 1 de marzo (mes 2 = marzo)
+      start.setHours(20, 0, 0, 0);
+    } else {
+      start = getLastSundayOfFebruary(year);
+      start.setHours(21, 0, 0, 0); // Establece la hora de inicio a las 21:00.
+    }
+
     const end = new Date(year, 2, 20, 0, 0, 0); // 20 de marzo a las 00:00 (mes 2 = marzo)
     return { start, end };
   }
