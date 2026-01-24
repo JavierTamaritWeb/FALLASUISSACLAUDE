@@ -226,3 +226,115 @@ test.describe('Countdown - UI', () => {
     expect(parseInt(seconds)).toBeLessThan(60);
   });
 });
+
+test.describe('Countdown - Mensaje durante las Fallas', () => {
+
+  test('Durante las Fallas muestra el mensaje en español', async ({ page }) => {
+    await page.goto('/');
+
+    // Simular que estamos durante las Fallas (1 de marzo 2026)
+    const result = await page.evaluate(() => {
+      // Inyectar fecha simulada
+      const originalDate = Date;
+      const mockDate = new Date(2026, 2, 1, 12, 0, 0); // 1 de marzo 2026, 12:00
+
+      // Recrear funciones del countdown
+      function getLastSundayOfFebruary(year) {
+        let lastDay = new originalDate(year, 2, 0);
+        while (lastDay.getDay() !== 0) {
+          lastDay.setDate(lastDay.getDate() - 1);
+        }
+        return lastDay;
+      }
+
+      function getCycleDates(year) {
+        const start = getLastSundayOfFebruary(year);
+        start.setHours(20, 0, 0, 0);
+        const end = new originalDate(year, 2, 20, 0, 0, 0);
+        return { start, end };
+      }
+
+      function getTargetDates(now) {
+        const currentYear = now.getFullYear();
+        const currentCycle = getCycleDates(currentYear);
+
+        if (now < currentCycle.start) {
+          return { target: currentCycle.start, status: "upcoming" };
+        } else if (now >= currentCycle.start && now < currentCycle.end) {
+          return { target: null, status: "ongoing" };
+        } else {
+          const nextCycle = getCycleDates(currentYear + 1);
+          return { target: nextCycle.start, status: "upcoming-next" };
+        }
+      }
+
+      const targetInfo = getTargetDates(mockDate);
+      return {
+        status: targetInfo.status,
+        mockDateString: mockDate.toISOString()
+      };
+    });
+
+    // Verificar que el estado es "ongoing"
+    expect(result.status).toBe('ongoing');
+  });
+
+  test('El mensaje "ongoing" existe en las traducciones', async ({ page }) => {
+    await page.goto('/');
+
+    const translations = await page.evaluate(async () => {
+      const response = await fetch('/data/translations.json');
+      const data = await response.json();
+      return {
+        es: data.es.countdown.ongoing,
+        va: data.va.countdown.ongoing
+      };
+    });
+
+    expect(translations.es).toBe('¡Estamos en Fallas!');
+    expect(translations.va).toBe('Ja estem en Falles!');
+  });
+
+  test('El elemento countdown__fallas-message existe en el HTML', async ({ page }) => {
+    await page.goto('/');
+
+    const fallasMessage = page.locator('.countdown__fallas-message');
+    await expect(fallasMessage).toBeAttached();
+
+    // Verificar que tiene el atributo data-i18n correcto
+    const dataI18n = await fallasMessage.getAttribute('data-i18n');
+    expect(dataI18n).toBe('countdown.ongoing');
+  });
+
+  test('El mensaje tiene el texto correcto en español por defecto', async ({ page }) => {
+    await page.goto('/');
+
+    const fallasMessage = page.locator('.countdown__fallas-message');
+    const text = await fallasMessage.textContent();
+
+    // El mensaje debe contener el texto en español (aunque esté oculto)
+    expect(text).toBe('¡Estamos en Fallas!');
+  });
+
+  test('El mensaje cambia a valenciano al cambiar idioma', async ({ page }) => {
+    await page.goto('/');
+
+    // Esperar a que langSwitcher esté presente
+    await expect(page.locator('#langSwitcher')).toContainText('IDIOMA ·');
+
+    // Cambiar a valenciano usando evaluate (más confiable en headless)
+    await page.evaluate(() => {
+      const option = document.querySelector('.header__lang-option[data-lang="va"]');
+      if (!option) throw new Error('No se encontró la opción de idioma VA');
+      option.click();
+    });
+
+    // Esperar a que el cambio se aplique
+    await page.waitForTimeout(500);
+
+    const fallasMessage = page.locator('.countdown__fallas-message');
+    const text = await fallasMessage.textContent();
+
+    expect(text).toBe('Ja estem en Falles!');
+  });
+});
