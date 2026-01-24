@@ -4,17 +4,19 @@
  * Este script calcula de forma dinámica las fechas de inicio y fin de las Fallas para cualquier año,
  * sin depender de un JSON externo. La lógica es:
  *
- * 1. El inicio de Fallas (La Crida) para un año dado es siempre el 22 de febrero a las 20:00.
+ * 1. El inicio de Fallas (La Crida) se calcula como el último domingo de febrero a las 20:00.
+ *    - Se toma el último día de febrero y se retrocede hasta encontrar un domingo.
  *
  * 2. El fin de Fallas es fijo: el 20 de marzo a las 00:00 del mismo año.
  *
  * Comportamiento del countdown:
  *   - Si la fecha actual (now) es anterior al inicio del ciclo de Fallas para el año actual,
- *     se muestra la cuenta regresiva hasta esa fecha.
+ *     se muestra la cuenta regresiva hasta esa fecha (La Crida).
  *   - Si now está entre el inicio y el fin de Fallas (es decir, durante el evento),
  *     se muestra el mensaje "¡Fallas en curso!".
- *   - Si now es posterior al fin del ciclo, se calcula el ciclo para el año siguiente
- *     y se muestra la cuenta regresiva hasta su inicio.
+ *   - Si now es posterior al fin del ciclo (después del 20 de marzo a las 00:00),
+ *     se calcula el ciclo para el año siguiente y se muestra la cuenta regresiva
+ *     hasta el inicio del siguiente año (reinicio automático).
  *
  * Para comprobar que la cuenta atrás funcione correctamente:
  *   - Abre la consola del navegador (F12) y añade console.log() dentro de la función de cálculo
@@ -36,18 +38,39 @@
   const secondsSpan = clock.querySelector('[data-time="seconds"]');
 
   /**
+   * getLastSundayOfFebruary(year)
+   * Calcula el último domingo de febrero para el año dado.
+   *
+   * Se crea una fecha para el último día de febrero usando:
+   *    new Date(year, 2, 0)
+   * (recordando que los meses son 0-indexados: 0 = enero, 1 = febrero, 2 = marzo).
+   * Luego se retrocede día a día hasta encontrar un domingo (getDay() === 0).
+   *
+   * @param {number} year - Año (ej. 2026)
+   * @returns {Date} - Fecha del último domingo de febrero para ese año.
+   */
+  function getLastSundayOfFebruary(year) {
+    // new Date(year, 2, 0) devuelve el último día de febrero.
+    let lastDay = new Date(year, 2, 0);
+    while (lastDay.getDay() !== 0) { // 0 = domingo
+      lastDay.setDate(lastDay.getDate() - 1);
+    }
+    return lastDay;
+  }
+
+  /**
    * getCycleDates(year)
    * Calcula las fechas de inicio y fin del ciclo de Fallas para el año dado.
    *
-   * - La fecha de inicio (La Crida) es siempre el 22 de febrero a las 20:00.
+   * - La fecha de inicio (La Crida) se calcula como el último domingo de febrero a las 20:00.
    * - La fecha de fin se fija en el 20 de marzo del mismo año a las 00:00.
    *
    * @param {number} year - Año para el que calcular el ciclo.
    * @returns {Object} - Objeto con propiedades "start" y "end", ambas de tipo Date.
    */
   function getCycleDates(year) {
-    // La Crida: 22 de febrero a las 20:00
-    const start = new Date(year, 1, 22); // 22 de febrero (mes 1 = febrero, 0-indexed)
+    // La Crida: último domingo de febrero a las 20:00
+    const start = getLastSundayOfFebruary(year);
     start.setHours(20, 0, 0, 0);
 
     const end = new Date(year, 2, 20, 0, 0, 0); // 20 de marzo a las 00:00 (mes 2 = marzo)
