@@ -121,22 +121,25 @@
   function updateCountdown() {
     const { target, status } = getTargetDates();
     const now = new Date();
-    
-    // Obtenemos la traducción deseada para el mensaje
+
+    // Obtenemos las traducciones
     const translatedMessage = getNestedTranslation("countdown.message");
-  
+    const ongoingMessage = getNestedTranslation("countdown.ongoing");
+
     if (status === "ongoing") {
-      // Si ya estamos en Fallas, forzamos la traducción (podrías dejarlo sin actualizar si ya está correcto)
-      if (countdownMessage.textContent !== translatedMessage) {
-        countdownMessage.textContent = translatedMessage;
-      }
+      // Estamos en Fallas: ocultamos el reloj y mostramos el mensaje traducido
+      if (countdownMessage) countdownMessage.style.display = "none";
       if (clock) clock.style.display = "none";
-      if (fallasMessage) fallasMessage.style.display = "block";
+      if (fallasMessage) {
+        fallasMessage.textContent = ongoingMessage;
+        fallasMessage.style.display = "block";
+      }
       return;
     } else if (target) {
-      // Solo actualizamos el mensaje si no coincide ya
-      if (countdownMessage.textContent !== translatedMessage) {
+      // Mostramos la cuenta regresiva
+      if (countdownMessage) {
         countdownMessage.textContent = translatedMessage;
+        countdownMessage.style.display = "block";
       }
       if (clock) clock.style.display = "flex";
       if (fallasMessage) fallasMessage.style.display = "none";
@@ -167,4 +170,13 @@
 
   // Actualiza la cuenta atrás cada segundo.
   setInterval(updateCountdown, 1000);
+
+  // Escuchar cambios de idioma para actualizar el mensaje de "ongoing"
+  document.addEventListener('langChanged', () => {
+    const { status } = getTargetDates();
+    if (status === "ongoing" && fallasMessage) {
+      const ongoingMessage = getNestedTranslation("countdown.ongoing");
+      fallasMessage.textContent = ongoingMessage;
+    }
+  });
 });
