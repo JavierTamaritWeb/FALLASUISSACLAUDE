@@ -59,7 +59,7 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 - `scripts/` - Node.js utilities: generate-og-image.mjs, serve-dist.mjs
 - `data/` - JSON files: translations.json, eventos.json, calendarData.json, fallas.json, config.json, dataPages[1-4].json
 - `dist/` - Production build output (DO NOT edit directly)
-- `tests/` - Playwright E2E tests (13 suites)
+- `tests/` - Playwright E2E tests (14 suites)
 - `docs/` - Technical documentation (Markdown)
 - `seo/` - AI/SEO optimization files (sitemaps, schema, robots variants)
 - `pdf/` - PDF files with HTML wrappers for favicon/social preview support
@@ -149,7 +149,7 @@ Run `npm run test:e2e` after changes to:
 
 Technical docs in `/docs/`:
 - `build-and-deploy.md` - Build process and deployment
-- `e2e-testing.md` - Playwright testing (13 test suites)
+- `e2e-testing.md` - Playwright testing (14 test suites)
 - `open-graph-whatsapp.md` - Open Graph image, WhatsApp cache-buster, social previews
 - `navigation-bar.md` - Header/mobile nav implementation
 - `i18n-translations.md` - Language system

@@ -125,6 +125,44 @@ Archivo de test:
 
 - `tests/countdown.e2e.spec.js`
 
+### 🎨 Background Gradient (Fondo degradado)
+
+- Verifica que el gradiente azul se aplica correctamente en modo claro
+- Valida que el fondo es negro sólido en modo oscuro (después de la transición CSS)
+- Comprueba que el fondo cubre todo el viewport (height completo)
+- Valida que el gradiente se mantiene al hacer scroll
+- Verifica que el CSS compilado contiene las reglas necesarias
+
+El gradiente está implementado directamente en `body` usando `background-image` (no pseudo-elemento):
+
+```scss
+body {
+  background-color: #0a4b8d;
+  background-image: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+```
+
+En modo oscuro se elimina el gradiente:
+
+```scss
+body.modo-oscuro {
+  background-color: #000;
+  background-image: none;
+}
+```
+
+**Nota importante sobre transiciones:** El modo oscuro tiene una transición CSS de 2.4s, por lo que los tests esperan 3s para validar el color final.
+
+Archivo de test:
+
+- `tests/background-gradient.e2e.spec.js`
+
+Guía técnica:
+
+- [`global-styles.md`](./global-styles.md)
+
 ## 📦 Requisitos
 
 - Node.js 18+ (recomendado 20+)
@@ -184,6 +222,7 @@ Configuración relacionada:
 - `tests/og-image.e2e.spec.js` (Validación imagen OG)
 - `tests/og-meta-cachebust.e2e.spec.js` (Cache-buster OG en HTML fuente)
 - `tests/og-meta-cachebust-dist.e2e.spec.js` (Cache-buster OG en dist/)
+- `tests/background-gradient.e2e.spec.js` (Background gradient)
 - `tests/countdown.e2e.spec.js` (Countdown de Fallas)
 
 ## 🧯 Troubleshooting
@@ -203,4 +242,4 @@ Configuración relacionada:
 
 ---
 
-*Última actualización: 23 de enero de 2026*
+*Última actualización: 24 de enero de 2026*
