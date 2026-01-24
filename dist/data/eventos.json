@@ -49,7 +49,9 @@
       { "id": 47, "title": "Día Internacional de la Mujer", "description": "Celebración del Día Internacional de la Mujer", "date": "2026-03-08", "category": "Evento" },
       { "id": 48, "title": "Aviso Urgente", "description": "Prueba", "date": "2025-05-15", "category": "Urgente" },
       { "id": 49, "title": "Reunión de la Falla", "description": "Reunión Mensual a las 18:30", "date": "2025-05-30", "category": "Falla" },
-      { "id": 50, "title": "Presentación de la Falla", "description": "Presentación de la Falla 2025-26", "date": "2026-01-18", "category": "Falla" }
+      { "id": 50, "title": "Presentación de la Falla", "description": "Presentación de la Falla 2025-26", "date": "2026-01-18", "category": "Falla" },
+      { "id": 51, "title": "Crida de La Punta", "description": "Crida de La Punta", "date": "2026-02-15", "category": "Falla" },
+      { "id": 52, "title": "Crida de Valencia", "description": "Crida de Valencia", "date": "2026-02-22", "category": "Falla" }
       
     ],
     "MESES": [
