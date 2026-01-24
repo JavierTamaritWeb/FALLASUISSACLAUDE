@@ -120,10 +120,20 @@ Archivos de test:
 - **Fin**: 20 de marzo a las 00:00 (fecha fija).
 - **Reinicio**: después del 20 de marzo, se reinicia automáticamente para contar hacia el año siguiente.
 - Valida que la UI del countdown muestra valores numéricos correctos.
+- **Mensaje bilingüe durante las Fallas**:
+  - Español: "¡Estamos en Fallas!"
+  - Valenciano: "Ja estem en Falles!"
+  - Cambio de idioma actualiza el mensaje automáticamente.
 
-Ejemplos:
+Ejemplos de fechas:
 - 2026: La Crida el 22 de febrero a las 20:00 (domingo)
 - 2027: La Crida el 28 de febrero a las 20:00 (domingo)
+- 2028: La Crida el 27 de febrero a las 20:00 (domingo)
+
+Tests (11 en total):
+- Cálculo de fechas (4): 2026, 2027, fin de Fallas, reinicio automático
+- UI (2): countdown visible, valores numéricos
+- Mensaje bilingüe (5): status ongoing, traducciones, elemento HTML, texto español, cambio a valenciano
 
 Archivo de test:
 
