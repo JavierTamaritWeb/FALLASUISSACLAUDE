@@ -116,8 +116,7 @@ Archivos de test:
 ### ⏱️ Countdown (Cuenta atrás)
 
 - Verifica el cálculo de fechas de inicio/fin del ciclo de Fallas.
-- **Excepción 2026**: inicio el 1 de marzo a las 20:00 (en lugar del último domingo de febrero).
-- Años normales: último domingo de febrero a las 21:00.
+- **La Crida** (inicio): siempre el 22 de febrero a las 20:00.
 - Fin siempre el 20 de marzo a las 00:00.
 - Valida que la UI del countdown muestra valores numéricos correctos.
 
