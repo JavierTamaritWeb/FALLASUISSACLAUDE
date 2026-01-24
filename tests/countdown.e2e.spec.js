@@ -5,29 +5,15 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Countdown - Cálculo de fechas', () => {
 
-  test('2026 debe iniciar el 1 de marzo a las 20:00 (excepción)', async ({ page }) => {
+  test('2026 debe iniciar el 22 de febrero a las 20:00 (La Crida)', async ({ page }) => {
     await page.goto('/');
 
     // Ejecutar la función getCycleDates en el contexto del navegador
     const result = await page.evaluate(() => {
-      // Recrear las funciones del countdown para testear
-      function getLastSundayOfFebruary(year) {
-        let lastDay = new Date(year, 2, 0);
-        while (lastDay.getDay() !== 0) {
-          lastDay.setDate(lastDay.getDate() - 1);
-        }
-        return lastDay;
-      }
-
+      // Recrear la función del countdown para testear
       function getCycleDates(year) {
-        let start;
-        if (year === 2026) {
-          start = new Date(year, 2, 1);
-          start.setHours(20, 0, 0, 0);
-        } else {
-          start = getLastSundayOfFebruary(year);
-          start.setHours(21, 0, 0, 0);
-        }
+        const start = new Date(year, 1, 22); // 22 de febrero (mes 1 = febrero, 0-indexed)
+        start.setHours(20, 0, 0, 0);
         const end = new Date(year, 2, 20, 0, 0, 0);
         return { start, end };
       }
@@ -35,39 +21,25 @@ test.describe('Countdown - Cálculo de fechas', () => {
       const cycle2026 = getCycleDates(2026);
       return {
         startDay: cycle2026.start.getDate(),
-        startMonth: cycle2026.start.getMonth(), // 0-indexed: 2 = marzo
+        startMonth: cycle2026.start.getMonth(), // 0-indexed: 1 = febrero
         startHour: cycle2026.start.getHours(),
         startYear: cycle2026.start.getFullYear()
       };
     });
 
     expect(result.startYear).toBe(2026);
-    expect(result.startMonth).toBe(2); // Marzo (0-indexed)
-    expect(result.startDay).toBe(1);
+    expect(result.startMonth).toBe(1); // Febrero (0-indexed)
+    expect(result.startDay).toBe(22);
     expect(result.startHour).toBe(20);
   });
 
-  test('2027 debe iniciar el último domingo de febrero a las 21:00 (normal)', async ({ page }) => {
+  test('2027 debe iniciar el 22 de febrero a las 20:00 (La Crida)', async ({ page }) => {
     await page.goto('/');
 
     const result = await page.evaluate(() => {
-      function getLastSundayOfFebruary(year) {
-        let lastDay = new Date(year, 2, 0);
-        while (lastDay.getDay() !== 0) {
-          lastDay.setDate(lastDay.getDate() - 1);
-        }
-        return lastDay;
-      }
-
       function getCycleDates(year) {
-        let start;
-        if (year === 2026) {
-          start = new Date(year, 2, 1);
-          start.setHours(20, 0, 0, 0);
-        } else {
-          start = getLastSundayOfFebruary(year);
-          start.setHours(21, 0, 0, 0);
-        }
+        const start = new Date(year, 1, 22); // 22 de febrero (mes 1 = febrero, 0-indexed)
+        start.setHours(20, 0, 0, 0);
         const end = new Date(year, 2, 20, 0, 0, 0);
         return { start, end };
       }
@@ -77,39 +49,23 @@ test.describe('Countdown - Cálculo de fechas', () => {
         startDay: cycle2027.start.getDate(),
         startMonth: cycle2027.start.getMonth(),
         startHour: cycle2027.start.getHours(),
-        startYear: cycle2027.start.getFullYear(),
-        dayOfWeek: cycle2027.start.getDay() // 0 = domingo
+        startYear: cycle2027.start.getFullYear()
       };
     });
 
     expect(result.startYear).toBe(2027);
     expect(result.startMonth).toBe(1); // Febrero (0-indexed)
-    expect(result.startDay).toBe(28); // Último domingo de febrero 2027
-    expect(result.startHour).toBe(21);
-    expect(result.dayOfWeek).toBe(0); // Domingo
+    expect(result.startDay).toBe(22);
+    expect(result.startHour).toBe(20);
   });
 
   test('El fin de Fallas siempre es el 20 de marzo a las 00:00', async ({ page }) => {
     await page.goto('/');
 
     const result = await page.evaluate(() => {
-      function getLastSundayOfFebruary(year) {
-        let lastDay = new Date(year, 2, 0);
-        while (lastDay.getDay() !== 0) {
-          lastDay.setDate(lastDay.getDate() - 1);
-        }
-        return lastDay;
-      }
-
       function getCycleDates(year) {
-        let start;
-        if (year === 2026) {
-          start = new Date(year, 2, 1);
-          start.setHours(20, 0, 0, 0);
-        } else {
-          start = getLastSundayOfFebruary(year);
-          start.setHours(21, 0, 0, 0);
-        }
+        const start = new Date(year, 1, 22); // 22 de febrero (mes 1 = febrero, 0-indexed)
+        start.setHours(20, 0, 0, 0);
         const end = new Date(year, 2, 20, 0, 0, 0);
         return { start, end };
       }

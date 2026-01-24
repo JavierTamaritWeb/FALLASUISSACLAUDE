@@ -4,9 +4,7 @@
  * Este script calcula de forma dinámica las fechas de inicio y fin de las Fallas para cualquier año,
  * sin depender de un JSON externo. La lógica es:
  *
- * 1. El inicio de Fallas para un año dado se calcula como el último domingo de febrero, a las 21:00.
- *    - Para ello, se toma el último día de febrero (new Date(year, 2, 0)) y se retrocede día a día hasta
- *      encontrar un domingo (getDay() === 0).
+ * 1. El inicio de Fallas (La Crida) para un año dado es siempre el 22 de febrero a las 20:00.
  *
  * 2. El fin de Fallas es fijo: el 20 de marzo a las 00:00 del mismo año.
  *
@@ -38,48 +36,19 @@
   const secondsSpan = clock.querySelector('[data-time="seconds"]');
 
   /**
-   * getLastSundayOfFebruary(year)
-   * Calcula el último domingo de febrero para el año dado.
-   *
-   * Se crea una fecha para el último día de febrero usando:
-   *    new Date(year, 2, 0)
-   * (recordando que los meses son 0-indexados: 0 = enero, 1 = febrero, 2 = marzo).
-   * Luego se retrocede día a día hasta encontrar un domingo (getDay() === 0).
-   *
-   * @param {number} year - Año (ej. 2026)
-   * @returns {Date} - Fecha del último domingo de febrero para ese año.
-   */
-  function getLastSundayOfFebruary(year) {
-    // new Date(year, 2, 0) devuelve el último día de febrero.
-    let lastDay = new Date(year, 2, 0);
-    while (lastDay.getDay() !== 0) { // 0 = domingo
-      lastDay.setDate(lastDay.getDate() - 1);
-    }
-    return lastDay;
-  }
-
-  /**
    * getCycleDates(year)
    * Calcula las fechas de inicio y fin del ciclo de Fallas para el año dado.
    *
-   * - La fecha de inicio se calcula como el último domingo de febrero de ese año, a las 21:00.
+   * - La fecha de inicio (La Crida) es siempre el 22 de febrero a las 20:00.
    * - La fecha de fin se fija en el 20 de marzo del mismo año a las 00:00.
-   * - EXCEPCIÓN 2026: El inicio es el 1 de marzo a las 20:00.
    *
    * @param {number} year - Año para el que calcular el ciclo.
    * @returns {Object} - Objeto con propiedades "start" y "end", ambas de tipo Date.
    */
   function getCycleDates(year) {
-    let start;
-
-    // Excepción para 2026: inicio el 1 de marzo a las 20:00
-    if (year === 2026) {
-      start = new Date(year, 2, 1); // 1 de marzo (mes 2 = marzo)
-      start.setHours(20, 0, 0, 0);
-    } else {
-      start = getLastSundayOfFebruary(year);
-      start.setHours(21, 0, 0, 0); // Establece la hora de inicio a las 21:00.
-    }
+    // La Crida: 22 de febrero a las 20:00
+    const start = new Date(year, 1, 22); // 22 de febrero (mes 1 = febrero, 0-indexed)
+    start.setHours(20, 0, 0, 0);
 
     const end = new Date(year, 2, 20, 0, 0, 0); // 20 de marzo a las 00:00 (mes 2 = marzo)
     return { start, end };
