@@ -13,7 +13,8 @@
         "dias": "Días",
         "horas": "Horas",
         "minutos": "Minutos",
-        "segundos": "Segundos"
+        "segundos": "Segundos",
+        "ongoing": "¡Estamos en Fallas!"
       },
       "falla":{
         "lafalla":"La Falla",
@@ -289,7 +290,8 @@
         "dias": "Dies",
         "horas": "Hores",
         "minutos": "Minuts",
-        "segundos": "Segons"
+        "segundos": "Segons",
+        "ongoing": "Ja estem en Falles!"
       },
       "falla":{
         "lafalla":"La Falla",
