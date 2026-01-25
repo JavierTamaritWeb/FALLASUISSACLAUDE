@@ -3,8 +3,33 @@
 @use '../abstracts/variables' as v;
 
 .eltiempo{
-  background-color: v.$blanco-hueso;
+  // background-color: v.$blanco-hueso;
+  text-align: left;
+  // Configuración de fondo para soportar transición de modo oscuro
+  position: relative;
+  // Solo la imagen aquí (sin overlay degradado), el overlay va en ::before
+  background: url('../img/fondo_traje.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   padding-bottom: 8rem;
+
+  // Overlay para el color de fondo (transición suave)
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(245, 245, 245, 0.85); // Modo claro
+    transition: background-color var(--theme-transition, 2.4s ease-in-out);
+    z-index: 0;
+  }
+
+  // Asegurar que el contenido esté por encima del overlay
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 
