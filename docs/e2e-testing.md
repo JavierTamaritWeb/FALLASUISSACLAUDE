@@ -177,6 +177,43 @@ Guía técnica:
 
 - [`global-styles.md`](./global-styles.md)
 
+### 🎬 Gradient Transition (Transición de gradiente en Footer)
+
+- Verifica que el footer tiene un pseudo-elemento `::before` para el gradiente
+- Valida que la opacidad del pseudo-elemento es 1 en modo claro
+- Valida que la opacidad del pseudo-elemento es 0 en modo oscuro
+- Comprueba que la transición está configurada con `opacity`
+- Valida transición bidireccional (claro→oscuro y oscuro→claro) de forma gradual
+
+El footer usa un pseudo-elemento para permitir transiciones suaves entre el gradiente azul y el fondo negro:
+
+```scss
+.footer {
+  position: relative;
+  background-color: #02427a; // Color sólido de base
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    z-index: 0;
+    opacity: 1;
+    transition: opacity var(--theme-transition, 2.4s ease-in-out);
+  }
+}
+
+body.modo-oscuro .footer::before {
+  opacity: 0;
+}
+```
+
+**Nota:** El header no usa pseudo-elementos para evitar conflictos de z-index con la navegación móvil (`.nav-backdrop`). Solo el footer tiene transición suave del gradiente.
+
+Archivo de test:
+
+- `tests/gradient-transition.e2e.spec.js`
+
 ## 📦 Requisitos
 
 - Node.js 18+ (recomendado 20+)
@@ -237,6 +274,7 @@ Configuración relacionada:
 - `tests/og-meta-cachebust.e2e.spec.js` (Cache-buster OG en HTML fuente)
 - `tests/og-meta-cachebust-dist.e2e.spec.js` (Cache-buster OG en dist/)
 - `tests/background-gradient.e2e.spec.js` (Background gradient)
+- `tests/gradient-transition.e2e.spec.js` (Transición de gradiente en footer)
 - `tests/countdown.e2e.spec.js` (Countdown de Fallas)
 
 ## 🧯 Troubleshooting
@@ -256,4 +294,4 @@ Configuración relacionada:
 
 ---
 
-*Última actualización: 24 de enero de 2026*
+*Última actualización: 25 de enero de 2026*
