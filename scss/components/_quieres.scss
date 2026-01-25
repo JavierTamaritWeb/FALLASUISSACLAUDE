@@ -64,6 +64,7 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  z-index: 1000;
 
   &.active {
     display: flex;
@@ -82,6 +83,11 @@
   border: 2px solid v.$primary-color;
   animation: scaleIn 0.25s ease;
   text-align: left;
+  transition: 
+    background-color var(--theme-transition, 2.4s ease-in-out),
+    border-color var(--theme-transition, 2.4s ease-in-out),
+    box-shadow var(--theme-transition, 2.4s ease-in-out),
+    color var(--theme-transition, 2.4s ease-in-out);
 }
 
 #quieres-nombre{
@@ -193,105 +199,6 @@
 @media (max-width: 480px) {
   #modal-quieres .modal-content {
     width: 90%;
-    padding: 1rem;
-  }
-}
-
-
-#modal-quieres {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: none; // Oculto por defecto
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-
-  &.active {
-    display: flex;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .modal-content {
-    position: relative;
-    background: v.$blanco-hueso;
-    max-width: 40rem; // Ancho máximo de 350px
-    width: 90%;
-    padding: 1.5rem;
-    border-radius: 8px;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 0 auto;
-    text-align: center; // Centra el contenido
-  }
-
-  .modal-header {
-    padding: 0.75rem;
-    border-bottom: 1px solid #eaeaea;
-  }
-
-  .modal-body {
-    padding: 1rem;
-    text-align: center; // Centra el texto
-
-    img {
-      display: block;
-      margin: 0 auto 2rem;
-      max-width: 15rem; // Limita el ancho máximo de la imagen a 15rem
-      height: auto;
-    }
-  }
-
-  // Botón de cierre: ubicado en la esquina superior derecha, sin borde, con la "X" grande y en v.$primary-color
-  .close-modal,
-  .btn-close {
-    position: absolute;
-    top: 1rem; // Puedes ajustar este valor para que esté más arriba
-    right: 1rem; // Ajustado para que se posicione en la esquina superior derecha
-    font-size: 4rem !important;
-    color: v.$primary-color !important;
-    cursor: pointer;
-    border: none !important;
-    background: transparent !important;
-    outline: none !important;
-    z-index: 9999;
-    
-  }
-  .modal-title {
-    font-size: v.$font-size-medium;
-    color: v.$primary-color;
-    margin-bottom: 1rem;
-    margin-right: 6rem; // Agrega este margen para separar el texto de la "X"
-  }
-}
-
-
-/* Clases adicionales para elementos comunes */
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-
-.lead {
-  
-  font-size: 1.25rem;
-  font-weight: 300;
-  color: v.$gris-medio-oscuro;
-}
-
-
-
-/* Responsive */
-@media (max-width: 480px) {
-  #modal-quieres .modal-content {
-    max-width: 35rem;
     padding: 1rem;
   }
 }

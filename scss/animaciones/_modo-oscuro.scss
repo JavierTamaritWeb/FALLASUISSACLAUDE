@@ -98,7 +98,6 @@ body,
 // Modales
 .ics-modal__contenido,
 #modal-quieres,
-#modal-quieres .modal-content,
 #modal-quieres-content,
 // Navegación móvil
 .navegacion {
@@ -120,8 +119,7 @@ body.transicion-a-claro .header-inner__barra,
 body.transicion-a-claro .header__barra--scrolled,
 body.transicion-a-claro .header-inner__barra--scrolled,
 body.transicion-a-claro .header,
-body.transicion-a-claro .header-inner,
-body.transicion-a-claro #modal-quieres .modal-content {
+body.transicion-a-claro .header-inner {
   transition:
     background var(--theme-transition),
     background-color var(--theme-transition),
@@ -292,7 +290,10 @@ body.modo-oscuro .ics-modal__boton {
    MODO OSCURO METEO
 ------------------------------------------------ */
 body.modo-oscuro .eltiempo {
-  background-color: v.$negro;
+   // Solo cambiamos el color del overlay en el pseudo-elemento para mantener la imagen de fondo
+   &::before {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
 }
 
 body.modo-oscuro .header-meteo {
@@ -300,7 +301,10 @@ body.modo-oscuro .header-meteo {
 }
 
 body.modo-oscuro .meteo {
-  background: v.$negro;
+   // Solo cambiamos el color del overlay en el pseudo-elemento para mantener la imagen de fondo
+   &::before {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
 }
 
 body.modo-oscuro .weather-current {
@@ -573,11 +577,18 @@ body.modo-oscuro .blog__post-content {
    MODO OSCURO GALERIAS
 ------------------------------------------------ */
 body.modo-oscuro .galerias {
-  background-color: v.$negro;
+  // background-color: v.$negro; // Eliminado para no tapar la imagen de fondo
+   &::before {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
 }
-body.modo-oscuro .galeria {
-    background-color: #444;
-}
+// body.modo-oscuro .galeria {
+//    // Solo cambiamos el color del overlay en el pseudo-elemento para mantener la imagen de fondo
+//    &::before {
+//     background-color: rgba(0, 0, 0, 0.85);
+//   }
+// }
+
 body.modo-oscuro .galeria__texto {
     color: v.$blanco-hueso;
 }
