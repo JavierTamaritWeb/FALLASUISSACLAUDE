@@ -22,6 +22,12 @@
   background-attachment: fixed;
   padding: 2.5rem 0;
   padding-bottom: 5rem;
+  
+  @media (max-width: 1024px) {
+    background-attachment: scroll;
+    background-size: auto;
+    background-repeat: repeat;
+  }
 
   // Overlay para el color de fondo (transición suave)
   &::before {

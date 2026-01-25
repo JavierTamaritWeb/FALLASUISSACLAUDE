@@ -11,6 +11,14 @@
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  // padding no tiene conflicto aquí, pero moveremos el media query al final del bloque de background si hubiera otras propiedades
+
+  @media (max-width: 1024px) {
+    background-attachment: scroll;
+    background-size: auto; // Evitar estiramiento en páginas largas
+    background-repeat: repeat; // Repetir el patrón
+  }
+
 
   // Overlay para el color de fondo (transición suave)
   &::before {

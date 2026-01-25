@@ -414,7 +414,7 @@
   background: var(--header-bar-bg);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
-  z-index: 1000;
+  z-index: 2000;
   
   @media (max-width: 767px) {
     display: grid;
@@ -495,7 +495,7 @@
   top: 1rem;
   top: calc(env(safe-area-inset-top) + 1rem);
   left: 0;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 // ---------------------------------------------------------
@@ -682,6 +682,8 @@ body.modo-oscuro {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 2600; // Asegurar que el botón esté por encima del menú y el backdrop
   }
 }
 
@@ -731,9 +733,10 @@ body.modo-oscuro {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.28);
-    backdrop-filter: blur(2px);
-    z-index: 900;
+    // Hacemos el backdrop invisible visualmente pero funcional para clicks
+    background: transparent;
+    backdrop-filter: none;
+    z-index: 1500; // Capa intermedia
   }
 
   .nav-backdrop.is-active {
@@ -751,11 +754,12 @@ body.modo-oscuro {
     align-items: stretch;
     gap: 0.25rem;
     padding: 0.6rem;
-    background: rgba(2, 66, 122, 0.95);
-    backdrop-filter: blur(8px);
+    background: #02427a; // Fondo sólido para evitar problemas de transparencias en iOS
+    backdrop-filter: none; // Desactivar desenfoque para mejorar legibilidad y rendimiento
+    -webkit-backdrop-filter: none; 
     border-radius: 1.2rem;
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28);
-    z-index: 1100;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+    z-index: 2500; // MENU SIEMPRE ARRIBA DE TODO (Superior al backdrop 1500 y al header 2000)
   }
 
   .navegacion.is-open {
@@ -910,7 +914,16 @@ body.modo-oscuro {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  // Eliminado translate3d para evitar stacking context bugs en móviles con z-index
+  z-index: 2000; // Elevado para asegurar que esté por encima del backdrop (z-index: 1500)
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  // FIX IOS: Desactivar backdrop-filter en móvil para evitar conflictos de renderizado con el menú
+  @media (max-width: 767px) {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #0a4b8d; // Color sólido (primer color del gradiente pero opaco)
+  }
 }
 
 // Fondo cuando se hace scroll (modo claro)
@@ -925,4 +938,11 @@ body.modo-oscuro {
   );
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.22);
+
+  // FIX IOS: Mantener fondo sólido y sin desenfoque también al hacer scroll
+  @media (max-width: 767px) {
+    background: #0a4b8d;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
