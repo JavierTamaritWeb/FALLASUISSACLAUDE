@@ -29,6 +29,7 @@ html.transicion-a-claro {
 }
 
 // Transiciones suaves entre modos
+// Header, footer y countdown
 body,
 .header,
 .header-inner,
@@ -41,9 +42,67 @@ body,
 .countdown,
 .countdown__contenedor,
 .countdown__time-box,
-.countdown__message {
+.countdown__message,
+// Sección Falla
+.falla,
+.accordion__section,
+.accordion__content,
+.accordion__content-inner,
+.accordion__titular,
+.accordion__header,
+.accordion__icon,
+.accordion__directiva,
+// Sección Eventos
+.eventos,
+.eventos-nota-calendario,
+.marco-tablon,
+.board,
+.board__note,
+// Sección Blog
+.blog,
+.blog__post,
+.blog__post-title,
+.blog__post-content,
+// Sección Galerías
+.galerias,
+.galeria,
+.galeria__texto,
+.visor,
+.notepad__page,
+// Sección Meteo
+.eltiempo,
+.header-meteo,
+.meteo,
+.weather-current,
+.forecast-day,
+.forecast-info,
+.forecast-temp,
+.forecast-desc,
+// Calendario
+.cal,
+.calendario-eventos,
+.calendario-eventos__mini-encabezado,
+.calendario-eventos__mini-dia,
+.calendario-eventos__detalles-mes,
+// Quieres más
+.quieres-mas,
+// Historia y Organigrama
+.historia__prologo,
+.historia__archivos,
+.historia__grid,
+.historia__leyenda,
+.organigrama,
+.organigrama__title,
+.organigrama__section,
+// Modales
+.ics-modal__contenido,
+#modal-quieres,
+#modal-quieres-content,
+// Navegación móvil
+.navegacion {
   transition:
     background-color var(--theme-transition),
+    background var(--theme-transition),
     color var(--theme-transition),
     border-color var(--theme-transition-border) var(--theme-transition-delay),
     box-shadow var(--theme-transition-shadow) var(--theme-transition-delay),
@@ -342,7 +401,11 @@ html:has(body.modo-oscuro) {
    MODO OSCURO FALLA
 ------------------------------------------------ */
 body.modo-oscuro .falla {
-  background-color: v.$negro;
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('../img/fondo_traje.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 body.modo-oscuro .accordion__section {
     background-color: v.$negro;

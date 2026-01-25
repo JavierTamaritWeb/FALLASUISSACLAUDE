@@ -96,6 +96,51 @@ El archivo `_globales.scss` se carga temprano. El archivo `_modo-oscuro.scss` se
 ### Safari/iOS
 Esta implementación es totalmente compatible con Safari/iOS sin necesidad de hacks adicionales.
 
+## 👗 Fondo de Sección Falla (Traje Regional)
+
+La sección `.falla` (página principal con información de la Falla) tiene un fondo con imagen de traje regional valenciano (`img/fondo_traje.png`).
+
+### Modo claro
+
+```scss
+.falla {
+  background: linear-gradient(rgba(245, 245, 245, 0.85), rgba(245, 245, 245, 0.85)), url('../img/fondo_traje.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+```
+
+**Implementación:**
+- Gradiente semitransparente blanco (85% opacidad) sobre la imagen
+- `background-attachment: fixed` crea efecto parallax suave
+- La imagen se centra y cubre toda la sección
+
+### Modo oscuro
+
+```scss
+body.modo-oscuro .falla {
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('../img/fondo_traje.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+```
+
+**Implementación:**
+- Gradiente semitransparente negro (85% opacidad) sobre la misma imagen
+- Mantiene la coherencia visual pero adaptado al tema oscuro
+
+### Archivos relacionados
+
+| Archivo | Contenido |
+|---------|-----------|
+| `scss/components/_falla.scss` | Estilos modo claro |
+| `scss/animaciones/_modo-oscuro.scss` | Estilos modo oscuro |
+| `img/fondo_traje.png` | Imagen de fondo (traje regional) |
+
 ## 🧪 Verificación
 
 Para verificar que el fondo funciona correctamente:
@@ -103,6 +148,7 @@ Para verificar que el fondo funciona correctamente:
 1. Modo claro: debe verse el gradiente azul diagonal (135°)
 2. Modo oscuro: debe verse fondo negro sólido
 3. Scroll: el fondo debe cubrir todo el contenido sin repetirse
+4. Sección Falla: debe verse la imagen de traje con overlay semitransparente
 
 ```bash
 npm run build
@@ -111,4 +157,4 @@ npm run test:e2e
 
 ---
 
-*Última actualización: 23 de enero de 2026*
+*Última actualización: 25 de enero de 2026*

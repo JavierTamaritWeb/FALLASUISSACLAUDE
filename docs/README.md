@@ -13,7 +13,7 @@
 | [`i18n-translations.md`](./i18n-translations.md) | i18n: `data-i18n` + `translations.json` (saltos de línea, claves, textos con markup) | 23/01/2026 |
 | [`google-search-console.md`](./google-search-console.md) | Verificación Google Search Console | 23/01/2026 |
 | [`robots-configuration.md`](./robots-configuration.md) | Configuración robots.txt y variantes | 23/01/2026 |
-| [`global-styles.md`](./global-styles.md) | Estilos globales: reset CSS, fondo gradiente y modo oscuro | 23/01/2026 |
+| [`global-styles.md`](./global-styles.md) | Estilos globales: reset CSS, fondo gradiente, modo oscuro y fondo sección Falla (traje regional) | 25/01/2026 |
 
 ## 🎯 Documentos por Categoría
 
@@ -60,4 +60,4 @@ Actualiza estos documentos cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 23 de enero de 2026*
+*Última actualización: 25 de enero de 2026*
