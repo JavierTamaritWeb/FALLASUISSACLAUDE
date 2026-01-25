@@ -72,7 +72,7 @@
       backdrop = document.createElement('div');
       backdrop.className = 'nav-backdrop';
       backdrop.setAttribute('aria-hidden', 'true');
-      document.body.appendChild(backdrop);
+      headerBar.appendChild(backdrop);
     }
 
     function setOpen(open) {
