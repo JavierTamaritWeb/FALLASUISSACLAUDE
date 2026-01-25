@@ -3,7 +3,12 @@
 
 .falla {
   text-align: left;
-  background-color: v.$blanco-hueso;
+  // background-color: v.$blanco-hueso;
+  background: linear-gradient(rgba(245, 245, 245, 0.85), rgba(245, 245, 245, 0.85)), url('../img/fondo_traje.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 
   &__title {
     font-size:v.$font-size-regular; ;
