@@ -258,13 +258,13 @@ botonModoOscuro.addEventListener('click', () => {
     botonModoOscuro.classList.remove('pressed');
   }, 300);
 
-  // Limpiar la clase temporal cuando termine la transición a claro
+  // Limpiar la clase temporal cuando termine la transición a claro (2.4s + margen)
   if (wasDark) {
     transicionAClaroTimeoutId = setTimeout(() => {
       document.body.classList.remove('transicion-a-claro');
       document.documentElement.classList.remove('transicion-a-claro');
       transicionAClaroTimeoutId = undefined;
-    }, 5200);
+    }, 2800);
   }
 });
 
