@@ -4,12 +4,30 @@
 
 
 .footer {
+  position: relative;
   border-top: 4px solid v.$primary-color;
-  // background-color: v.$azul-marino;
-  background: linear-gradient(135deg,#0a4b8d 0%,#02427a 60%, #003366 100%);
+  background-color: #02427a; // Color sólido de base para transición
   padding-top: 1.5rem;
   text-align: center;
   color: v.$blanco;
+
+  // Pseudo-elemento para el gradiente con transición de opacidad
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    z-index: 0;
+    opacity: 1;
+    transition: opacity var(--theme-transition, 2.4s ease-in-out);
+    pointer-events: none;
+  }
+
+  // Asegurar que los hijos estén por encima del pseudo-elemento
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
 
   &__contenedor {
     width: 95%;
@@ -148,9 +166,6 @@
       justify-self: center; 
       max-width: 8rem;
     }
-  }
-  body.modo-oscuro & {
-    background: #333 !important;
   }
   
 }
