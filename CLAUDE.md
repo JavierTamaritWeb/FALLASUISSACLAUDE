@@ -66,13 +66,14 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 
 ### Key Systems
 
-**Global Styles**: `scss/abstracts/_globales.scss` contains CSS reset and background gradient via `background-image` on `body`. Dark mode switches to `$negro` background with `background-image: none`. See `docs/global-styles.md`.
+**Global Styles**: `scss/abstracts/_globales.scss` establishes the base layout. The site background uses a **Overlay Pattern** (`body::before`) to hold the gradient. This allows smooth opacity transitions to black in Dark Mode. See `docs/global-styles.md`.
 
 **Multi-Language (i18n)**: `data/translations.json` contains Spanish (es) and Valenciano (va). Elements use `data-i18n` attributes, managed by `js/lang.js`.
 
 **Dark Mode**: CSS custom properties for theming, localStorage persistence, Safari scrollbar compatibility. 
-- **Body**: Background gradient is set on `body` via `background-image` and removed in dark mode.
-- **Header**: Uses a `::before` pseudo-element for the gradient background to allow smooth opacity transitions (fading out the gradient to reveal black background) instead of abrupt background changes. See `docs/navigation-bar.md` and `docs/scrollbar-theme.md`.
+- **Body**: Background gradient is set on `body::before` to allow smooth cross-fade to black.
+- **Header**: Uses `::before` pseudo-element for gradient background transitions.
+- **Section Backgrounds**: Components like `.falla` separate the background image (on element) from color overlay (on `::before`) to animate overlay color. See `docs/global-styles.md` and `docs/navigation-bar.md`.
 
 **Gulp Pipeline**: Watches src files, compiles SCSS with sourcemaps, optimizes images to WebP/AVIF, copies to dist/.
 

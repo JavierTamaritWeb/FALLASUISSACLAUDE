@@ -24,52 +24,81 @@ El proyecto usa un reset universal que normaliza todos los elementos:
 - Elimina márgenes y paddings por defecto de los navegadores
 - Usa `border-box` para un modelo de caja más predecible
 
-## 🖼️ Fondo con Gradiente
+## 🖼️ Fondo con Gradiente (Transición Suave Dark Mode)
 
-El fondo del sitio se implementa directamente en `body` usando `background-image`:
+Para permitir transiciones suaves de opacidad entre el modo claro (gradiente) y oscuro (negro), **NO** se aplica el fondo directamente al `body` (CSS no puede animar `background-image` a `none`).
+
+**Implementación (Patrón Overlay `::before`):**
+
+1.  **Body**:
+    *   Actúa como contenedor base con un color de fondo de respaldo (`#0a4b8d`).
+    *   Tiene `position: relative`.
+
+2.  **Pseudo-elemento `::before`**:
+    *   Contiene el gradiente lineal.
+    *   `position: fixed` (para que no scrollee y cubra todo).
+    *   `transition: opacity var(--theme-transition)`.
 
 ```scss
-html {
-  height: 100%;
-  scroll-behavior: smooth;
-}
-
 body {
-  min-height: 100%;
-  background-color: #0a4b8d;
-  background-image: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
-  background-repeat: no-repeat;
-  background-size: cover;
+  // Configuración base
+  background-color: #0a4b8d; 
+  position: relative;
+  
+  // Capa del gradiente
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -100;
+    pointer-events: none;
+    
+    // Gradiente Original
+    background-image: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    background-size: cover;
+    
+    // Transición suave
+    transition: opacity 2.4s ease-in-out;
+  }
 }
 ```
 
-**Por qué esta implementación:**
-- `html { height: 100% }` + `body { min-height: 100% }` asegura que el fondo cubra todo el viewport
-- `background-size: cover` + `background-repeat: no-repeat` evita que el gradiente se corte o repita
-- `background-color` actúa como fallback mientras carga el gradiente
-- Más simple y directo que usar pseudo-elementos
-- Compatible con todos los navegadores modernos
+### Comportamiento en Modo Oscuro
 
-### Colores del gradiente (modo claro)
+En `scss/animaciones/_modo-oscuro.scss`:
 
-| Posición | Color | Descripción |
-|----------|-------|-------------|
-| 0% | `#0a4b8d` | Azul corporativo |
-| 60% | `#02427a` | Azul medio |
-| 100% | `#003366` | Azul oscuro |
+1.  El `body` cambia su color de fondo a negro (`v.$negro`).
+2.  El pseudo-elemento `::before` (gradiente) cambia a `opacity: 0`.
 
-## 🌙 Modo Oscuro
+Resultado: El gradiente se desvanece suavemente revelando el fondo negro que hay detrás.
 
-En modo oscuro, el fondo cambia a negro sólido eliminando el gradiente:
+## 🌙 Módulos con Fondo e Imagen (Ej: .falla)
+
+Para secciones que combinan una imagen de fondo + un overlay de color (como la sección `.falla` con el fondo del traje), se usa el mismo patrón de capas para animar el cambio de color del overlay.
+
+**Estructura:**
+- **.falla**: Contiene la **imagen** de fondo (`url(...)`).
+- **.falla::before**: Contiene el **overlay de color** con opacidad (`background-color: rgba(...)`) y la transición.
 
 ```scss
-body.modo-oscuro {
-  background-color: v.$negro; // #000
-  background-image: none;
+.falla {
+  background: url('../img/fondo_traje.png'); // Imagen fija
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(245, 245, 245, 0.85); // Overlay claro
+    transition: background-color 2.4s ease-in-out;
+  }
+}
+
+// En modo oscuro
+body.modo-oscuro .falla::before {
+  background-color: rgba(0, 0, 0, 0.85); // Overlay oscuro
 }
 ```
-
-La transición entre modos se gestiona automáticamente por `js/dark.js` y se anima con las variables CSS de transición definidas en `_modo-oscuro.scss`.
 
 ## 🧩 Integración con otros archivos
 
