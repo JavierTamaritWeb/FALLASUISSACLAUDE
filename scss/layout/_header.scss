@@ -11,10 +11,22 @@
 // ---------------------------------------------------------
 .header {
   height: 45rem;
-  background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+  background-color: transparent; // Fondo base transparente, el color lo pone el pseudo-elemento
   padding: 0;
   position: relative;
   padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
+  z-index: 10; // Asegurar contexto de apilamiento
+  
+  // Pseudo-elemento para el fondo gradiente azul (modo claro)
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    z-index: -1;
+    transition: opacity var(--theme-transition);
+    opacity: 1; // Visible por defecto (modo claro)
+  }
   
 
   @media (min-width: 768px) {
@@ -249,10 +261,24 @@
 // Estilos del Header Interno (.header-inner)
 // ---------------------------------------------------------
 .header-inner {
-  background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+  // Configuración base con transición suave para modo oscuro
+  background-color: transparent;
   padding: 0;
   position: relative;
+  z-index: 10;
   padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
+
+  // Pseudo-elemento para el gradiente azul (transición suave)
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    z-index: -1;
+    opacity: 1;
+    transition: opacity var(--theme-transition);
+    pointer-events: none;
+  }
 
   &__escudo {
     height: auto;

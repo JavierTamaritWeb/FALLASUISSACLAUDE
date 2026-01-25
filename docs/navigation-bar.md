@@ -100,6 +100,30 @@ Se usa `env(safe-area-inset-top)` para que la barra no se meta debajo de la zona
 
 ---
 
+## 🌓 Transición de Tema (Dark/Light Mode)
+
+Para lograr una transición suave entre el modo claro (gradiente azul) y el modo oscuro (fondo negro), se utiliza una técnica específica para evitar cambios bruscos, ya que CSS no puede animar directamente entre `linear-gradient` y `background-color`.
+
+**Técnica Implementada (Pseudo-elemento `::before`):**
+
+1.  **Contenedor (`.header` / `.header-inner`)**:
+    *   Tiene `background-color: transparent` (o negro en modo oscuro).
+    *   `position: relative` y `z-index: 10`.
+
+2.  **Gradiente (`::before`)**:
+    *   Se crea un pseudo-elemento `&::before` que ocupa todo el tamaño (`inset: 0`).
+    *   Contiene el `background: linear-gradient(...)`.
+    *   Tiene `z-index: -1` para quedar detrás del contenido.
+    *   Tiene `transition: opacity var(--theme-transition)`.
+
+3.  **Comportamiento**:
+    *   **Modo Claro**: El `::before` tiene `opacity: 1`. Vemos el gradiente.
+    *   **Modo Oscuro**: El contenedor pasa a tener fondo negro (`background-color: v.$negro`), y el `::before` pasa a `opacity: 0`. Esto crea un efecto de "fundido" (cross-fade) suave en lugar de un cambio de golpe.
+
+Esta lógica se aplica tanto en el header principal (`.header`) como en las cabeceras internas (`.header-inner`) en `scss/layout/_header.scss` y `scss/animaciones/_modo-oscuro.scss`.
+
+---
+
 ## 🧊 Estilo “glass” (claro y oscuro)
 
 La barra y el dropdown móvil usan:
