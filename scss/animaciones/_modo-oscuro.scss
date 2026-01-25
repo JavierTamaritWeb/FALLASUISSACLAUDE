@@ -131,8 +131,12 @@ body.transicion-a-claro #modal-quieres .modal-content {
 
 body.modo-oscuro {
   background-color: v.$negro;
-  background-image: none;
   --header-bar-bg: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
+
+  // Desvanecer el gradiente del body
+  &::before {
+    opacity: 0;
+  }
 }
 
 // Estilos para el scroll en modo claro y transición en modo oscuro
@@ -424,11 +428,10 @@ html:has(body.modo-oscuro) {
    MODO OSCURO FALLA
 ------------------------------------------------ */
 body.modo-oscuro .falla {
-  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('../img/fondo_traje.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  // Solo cambiamos el color del overlay en el pseudo-elemento
+  &::before {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
 }
 body.modo-oscuro .accordion__section {
     background-color: v.$negro;
