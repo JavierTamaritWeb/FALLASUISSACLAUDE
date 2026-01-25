@@ -191,7 +191,12 @@ body.modo-oscuro .countdown__time-box {
    MODO OSCURO FOOTER
 ------------------------------------------------ */
 body.modo-oscuro .footer {
-  background: v.$negro !important;
+  background-color: v.$negro !important;
+
+  // Ocultar el gradiente del pseudo-elemento con transición
+  &::before {
+    opacity: 0;
+  }
 }
 
 /* ----------------------------------------------
