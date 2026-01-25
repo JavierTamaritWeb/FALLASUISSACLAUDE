@@ -15,7 +15,12 @@
       "Bash(grep:*)",
       "Bash(git push:*)",
       "Bash(node -e:*)",
-      "Bash(tr:*)"
+      "Bash(tr:*)",
+      "Bash(git stash show:*)",
+      "Bash(git checkout:*)",
+      "Bash(git reset:*)",
+      "Bash(git stash:*)",
+      "Bash(ls:*)"
     ]
   }
 }

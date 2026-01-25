@@ -98,6 +98,7 @@ body,
 // Modales
 .ics-modal__contenido,
 #modal-quieres,
+#modal-quieres .modal-content,
 #modal-quieres-content,
 // Navegación móvil
 .navegacion {
@@ -117,9 +118,13 @@ body,
 body.transicion-a-claro .header__barra,
 body.transicion-a-claro .header-inner__barra,
 body.transicion-a-claro .header__barra--scrolled,
-body.transicion-a-claro .header-inner__barra--scrolled {
+body.transicion-a-claro .header-inner__barra--scrolled,
+body.transicion-a-claro .header,
+body.transicion-a-claro .header-inner,
+body.transicion-a-claro #modal-quieres .modal-content {
   transition:
     background var(--theme-transition),
+    background-color var(--theme-transition),
     box-shadow var(--theme-transition-shadow) var(--theme-transition-delay),
     border-color var(--theme-transition-border) var(--theme-transition-delay);
 }
@@ -140,7 +145,14 @@ body.modo-oscuro::-webkit-scrollbar-track {
    MODO OSCURO HEADER
 ------------------------------------------------ */
 body.modo-oscuro .header {
-  background: v.$negro !important;
+  // Fondo negro base
+  background-color: v.$negro !important;
+  background-image: none !important; // Asegurar que no hay imagen de fondo en el contenedor
+}
+
+// Ocultar el gradiente azul (pseudo-elemento) en modo oscuro con transición suave
+body.modo-oscuro .header::before {
+  opacity: 0;
 }
 
 body.modo-oscuro {
@@ -165,7 +177,12 @@ body.modo-oscuro {
 }
 
 body.modo-oscuro .header-inner {
-  background: v.$negro !important;
+  background-color: v.$negro !important;
+
+  // Ocultar gradiente suavemente
+  &::before {
+    opacity: 0;
+  }
 }
 
 /* ----------------------------------------------
