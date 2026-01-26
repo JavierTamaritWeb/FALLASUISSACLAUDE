@@ -186,4 +186,4 @@ npm run test:e2e
 
 ---
 
-*Última actualización: 25 de enero de 2026*
+*Última actualización: 26 de enero de 2026*

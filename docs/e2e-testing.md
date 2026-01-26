@@ -214,6 +214,58 @@ Archivo de test:
 
 - `tests/gradient-transition.e2e.spec.js`
 
+### 🔄 Theme Transition (Transición de tema)
+
+- Verifica que la clase `transicion-a-claro` se aplica al cambiar de oscuro a claro
+- Valida que el header tiene la duración de transición correcta (2.4s)
+- Comprueba que el modal-content también tiene la transición configurada
+
+Archivo de test:
+
+- `tests/theme-transition.e2e.spec.js`
+
+### 🎭 Modal Transition (Transición del modal)
+
+Tests para verificar las transiciones suaves del modal "¿Quieres formar parte?":
+
+- **modal-transition.e2e.spec.js**: Verifica que el modal tiene la propiedad `transition` configurada y que el color de fondo cambia al cambiar tema
+- **modal-transition-duration.e2e.spec.js**: Valida que la duración es 2.4s y que el cambio es gradual (no instantáneo)
+- **modal-dark-to-light.e2e.spec.js**: Test específico para la transición oscuro→claro, verificando colores intermedios
+
+Archivos de test:
+
+- `tests/modal-transition.e2e.spec.js`
+- `tests/modal-transition-duration.e2e.spec.js`
+- `tests/modal-dark-to-light.e2e.spec.js`
+
+### 🖼️ Background Transition (Transición de fondo)
+
+- Verifica que `body::before` tiene el gradiente y transición de opacidad
+- Valida que la sección `.falla` usa `::before` para el overlay con imagen de fondo
+- Comprueba que el overlay cambia de color gradualmente en modo oscuro
+
+El patrón de overlay permite transiciones suaves entre el gradiente azul (claro) y el fondo negro (oscuro):
+
+```scss
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(...);
+  opacity: 1;
+  transition: opacity var(--theme-transition);
+  z-index: -1;
+}
+
+body.modo-oscuro::before {
+  opacity: 0;
+}
+```
+
+Archivo de test:
+
+- `tests/background-transition.e2e.spec.js`
+
 ## 📦 Requisitos
 
 - Node.js 18+ (recomendado 20+)
@@ -274,7 +326,12 @@ Configuración relacionada:
 - `tests/og-meta-cachebust.e2e.spec.js` (Cache-buster OG en HTML fuente)
 - `tests/og-meta-cachebust-dist.e2e.spec.js` (Cache-buster OG en dist/)
 - `tests/background-gradient.e2e.spec.js` (Background gradient)
+- `tests/background-transition.e2e.spec.js` (Transición de fondo body/falla)
 - `tests/gradient-transition.e2e.spec.js` (Transición de gradiente en footer)
+- `tests/theme-transition.e2e.spec.js` (Transición de tema oscuro/claro)
+- `tests/modal-transition.e2e.spec.js` (Transición del modal)
+- `tests/modal-transition-duration.e2e.spec.js` (Duración transición modal)
+- `tests/modal-dark-to-light.e2e.spec.js` (Modal oscuro a claro)
 - `tests/countdown.e2e.spec.js` (Countdown de Fallas)
 
 ## 🧯 Troubleshooting
@@ -294,4 +351,4 @@ Configuración relacionada:
 
 ---
 
-*Última actualización: 25 de enero de 2026*
+*Última actualización: 26 de enero de 2026*
