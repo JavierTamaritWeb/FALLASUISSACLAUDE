@@ -67,7 +67,9 @@ body,
 // Sección Galerías
 .galerias,
 .galeria,
+.galeria__title,
 .galeria__texto,
+.galeria .boton,
 .visor,
 .notepad__page,
 // Sección Meteo
@@ -577,20 +579,37 @@ body.modo-oscuro .blog__post-content {
    MODO OSCURO GALERIAS
 ------------------------------------------------ */
 body.modo-oscuro .galerias {
-  // background-color: v.$negro; // Eliminado para no tapar la imagen de fondo
-   &::before {
+  // El overlay oscuro se aplica via ::before
+  &::before {
     background-color: rgba(0, 0, 0, 0.85);
   }
 }
-// body.modo-oscuro .galeria {
-//    // Solo cambiamos el color del overlay en el pseudo-elemento para mantener la imagen de fondo
-//    &::before {
-//     background-color: rgba(0, 0, 0, 0.85);
-//   }
-// }
+
+// Tarjetas de galería en modo oscuro
+body.modo-oscuro .galeria {
+  background-color: v.$gris-muy-oscuro;
+  border-color: v.$gris-medio-oscuro;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.modo-oscuro .galeria__title {
+  color: v.$primary-color;
+}
 
 body.modo-oscuro .galeria__texto {
-    color: v.$blanco-hueso;
+  color: v.$blanco-hueso;
+}
+
+// Botón "Ver" en modo oscuro
+body.modo-oscuro .galeria .boton {
+  background-color: v.$gris-muy-oscuro;
+  color: v.$primary-color;
+  border-color: v.$primary-color;
+
+  &:hover {
+    background-color: v.$primary-color;
+    color: v.$blanco;
+  }
 }
 
 body.modo-oscuro .visor {
