@@ -351,4 +351,4 @@ Configuración relacionada:
 
 ---
 
-*Última actualización: 26 de enero de 2026*
+*Última actualización: 26 de enero de 2026 - v4.0.0*

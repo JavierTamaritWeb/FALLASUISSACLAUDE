@@ -19,7 +19,7 @@
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-**🆕 Última actualización:** 23 de enero de 2026 - Sistema de fondo simplificado (gradiente en `body` con `background-image`) + documentación actualizada
+**🆕 Última actualización:** 26 de enero de 2026 - v4.0.0 - Menú móvil corregido (contexto de apilamiento z-index) + documentación actualizada
 
 </div>
 
@@ -528,11 +528,24 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 
 ## 📝 Changelog y Actualizaciones
 
-### 🧪 **Unreleased**
+### 🆕 **[v4.0.0] - 26 de enero de 2026 - Corrección crítica menú móvil + documentación completa**
 
-- ✅ Navbar mejorada: menú móvil overlay (hamburguesa + backdrop) y cierre accesible
-- ✅ Selector de idioma mejorado: etiqueta “IDIOMA · …” en desktop y modo icon-only en móvil
-- ✅ Tests E2E con Playwright (navbar en múltiples páginas y breakpoints)
+#### 🐛 **Corrección Crítica**
+- ✅ **Menú móvil funcional en pantallas <768px**: Corregido problema de contexto de apilamiento (z-index)
+  - El backdrop se inserta ahora dentro de `.header__barra` en lugar del `body`
+  - Esto asegura que el menú (z-index: 2500) esté siempre por encima del backdrop (z-index: 1500)
+  - Botón de menú elevado a z-index: 2600 en móvil para garantizar accesibilidad
+
+#### 📚 **Documentación Actualizada**
+- ✅ Toda la documentación actualizada a v4.0.0
+- ✅ Fechas actualizadas en todos los archivos `.md` (26/01/2026)
+- ✅ `CLAUDE.md` actualizado con información del fix del menú móvil
+- ✅ Guías técnicas sincronizadas con el estado actual del código
+
+#### 🧪 **Tests E2E**
+- ✅ Navbar validada en múltiples páginas y breakpoints
+- ✅ Tests de regresión para menú móvil
+- ✅ Validación de z-index y contextos de apilamiento
 
 ### 🆕 **[v2.0.0] - 12 de enero de 2026 - Build actualizado y documentación alineada**
 
