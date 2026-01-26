@@ -9,11 +9,33 @@
   }
 
 .quieres-mas {
-  
-  background: linear-gradient(135deg,#0a4b8d 0%,#02427a 60%, #003366 100%);
+  // Color base para modo oscuro (transicionable)
+  background-color: v.$secondary-color;
   padding-top: .5rem;
   text-align: center;
   border-top: 1px solid v.$primary-color;
+  position: relative;
+
+  // Gradiente en pseudo-elemento para poder transicionar con opacity
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    opacity: 1;
+    transition: opacity 2.4s ease-in-out;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  // Asegurar que el contenido esté por encima del pseudo-elemento
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 
   &__flex {
     display: flex;
@@ -83,53 +105,30 @@
   border: 2px solid v.$primary-color;
   animation: scaleIn 0.25s ease;
   text-align: left;
-  transition: 
-    background-color var(--theme-transition, 2.4s ease-in-out),
-    border-color var(--theme-transition, 2.4s ease-in-out),
-    box-shadow var(--theme-transition, 2.4s ease-in-out),
-    color var(--theme-transition, 2.4s ease-in-out);
+  // Transición explícita con valores fijos para máxima compatibilidad
+  transition:
+    background-color 2.4s ease-in-out,
+    border-color 2.4s ease-in-out,
+    box-shadow 2.4s ease-in-out,
+    color 2.4s ease-in-out;
 }
 
-#quieres-nombre{
-    background-color: v.$gris-medio-oscuro;
-    color: v.$blanco;
-    transition: background-color 0.3s ease;
-
-
-}
-#quieres-nombre:hover{
-  background-color: v.$azul-verdoso;
+// Inputs del formulario con transición de tema (valores explícitos)
+#quieres-nombre,
+#quieres-telefono,
+#quieres-email,
+#quieres-mensaje {
+  background-color: v.$gris-medio-oscuro;
   color: v.$blanco;
-}
+  transition:
+    background-color 2.4s ease-in-out,
+    color 2.4s ease-in-out,
+    border-color 2.4s ease-in-out;
 
-#quieres-telefono{
-    background-color: v.$gris-medio-oscuro;
+  &:hover {
+    background-color: v.$azul-verdoso;
     color: v.$blanco;
-    transition: background-color 0.3s ease;
-}
-#quieres-telefono:hover{
-  background-color: v.$azul-verdoso;
-  color: v.$blanco;
-}
-
-#quieres-email{
-    background-color: v.$gris-medio-oscuro;
-    color: v.$blanco;
-    transition: background-color 0.3s ease;
-}
-#quieres-email:hover{
-  background-color: v.$azul-verdoso;
-  color: v.$blanco;
-}
-#quieres-mensaje{
-    background-color: v.$gris-medio-oscuro;
-    color: v.$blanco;
-    transition: background-color 0.3s ease;
-    
-}
-#quieres-mensaje:hover{
-  background-color: v.$azul-verdoso;
-  color: v.$blanco;
+  }
 }
 
 
@@ -145,12 +144,14 @@
   font-size: 3rem;
   cursor: pointer;
   color: v.$primary-color;
+  transition: color 2.4s ease-in-out;
 }
 
 #modal-quieres .modal-title {
   font-size: v.$font-size-medium;
   color: v.$primary-color;
   margin-bottom: 1rem;
+  transition: color 2.4s ease-in-out;
 }
 
 
@@ -172,6 +173,7 @@
   color: v.$primary-color;
   text-align: left; // Alinea el texto a la izquierda
   width: 100%;
+  transition: color 2.4s ease-in-out;
 }
 
 #quieres-form input,

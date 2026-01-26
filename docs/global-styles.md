@@ -170,6 +170,84 @@ body.modo-oscuro .falla {
 | `scss/animaciones/_modo-oscuro.scss` | Estilos modo oscuro |
 | `img/fondo_traje.png` | Imagen de fondo (traje regional) |
 
+## 🔄 Transición de Gradiente a Color Sólido
+
+**Problema:** CSS **no puede transicionar** entre `linear-gradient` y un color sólido (`background-color`). Si intentas cambiar directamente de gradiente a color, el cambio será instantáneo.
+
+**Solución:** Usar el **patrón de overlay con pseudo-elemento `::before`**:
+
+1. El elemento base tiene el `background-color` del modo oscuro (transicionable)
+2. El gradiente está en `::before` con `opacity: 1`
+3. En modo oscuro, `::before` tiene `opacity: 0` (desvanece el gradiente)
+4. La transición es suave porque `opacity` SÍ es animable
+
+### Componentes que usan este patrón
+
+| Componente | Archivo SCSS | Color base | Gradiente |
+|------------|--------------|------------|-----------|
+| `.quieres-mas` | `_quieres.scss` | `$secondary-color` (#333) | Azul diagonal |
+| `.countdown__contenedor` | `_countdown.scss` | `$negro` | Azul diagonal |
+
+### Implementación
+
+```scss
+// Ejemplo: .quieres-mas
+.quieres-mas {
+  background-color: v.$secondary-color; // Color modo oscuro
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    opacity: 1;
+    transition: opacity 2.4s ease-in-out;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  // Contenido por encima del pseudo-elemento
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Modo oscuro: desvanecer el gradiente
+body.modo-oscuro .quieres-mas::before {
+  opacity: 0;
+}
+```
+
+### Reglas importantes
+
+1. **NUNCA** cambiar el gradiente a color sólido directamente - usar `opacity`
+2. **SIEMPRE** añadir `position: relative` al elemento padre
+3. **SIEMPRE** añadir `z-index: 1` a los hijos directos (`> *`)
+4. **SIEMPRE** añadir el `::before` a la lista de transiciones en `_modo-oscuro.scss`
+5. Para elementos con `border-radius`, añadir `overflow: hidden` al padre
+
+### Forzar reflow en JavaScript
+
+En `js/dark.js`, se fuerza un reflow antes de cambiar las clases de modo para asegurar que la transición se aplique correctamente en todos los navegadores:
+
+```javascript
+if (wasDark) {
+  document.body.classList.add('transicion-a-claro');
+  document.documentElement.classList.add('transicion-a-claro');
+  // Forzar reflow para que el navegador aplique la transición
+  void document.body.offsetHeight;
+}
+```
+
+### Tests E2E
+
+Los tests verifican que las transiciones sean graduales (no instantáneas):
+
+- `tests/quieres-mas-transition.e2e.spec.js`
+- `tests/countdown-transition.e2e.spec.js`
+
 ## 🧪 Verificación
 
 Para verificar que el fondo funciona correctamente:
@@ -178,6 +256,7 @@ Para verificar que el fondo funciona correctamente:
 2. Modo oscuro: debe verse fondo negro sólido
 3. Scroll: el fondo debe cubrir todo el contenido sin repetirse
 4. Sección Falla: debe verse la imagen de traje con overlay semitransparente
+5. **Transiciones:** Los cambios de modo deben ser graduales (2.4s), nunca instantáneos
 
 ```bash
 npm run build
@@ -186,4 +265,4 @@ npm run test:e2e
 
 ---
 
-*Última actualización: 26 de enero de 2026 - v4.0.0*
+*Última actualización: 26 de enero de 2026 - v4.1.0*

@@ -1,5 +1,7 @@
 # 🧪 Tests E2E (Playwright)
 
+**24 test suites** | **116+ tests**
+
 Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto y qué validan.
 
 ## ✅ Qué se valida
@@ -266,6 +268,52 @@ Archivo de test:
 
 - `tests/background-transition.e2e.spec.js`
 
+### 🔄 Gradient-to-Solid Transitions (Transiciones de gradiente a color sólido)
+
+Verifica que los componentes con gradientes transicionan correctamente usando el patrón de overlay `::before`:
+
+**`.quieres-mas`** (Sección "¿Quieres formar parte?"):
+- Verifica estructura CSS: `position: relative`, `::before` con gradiente
+- Valida que `opacity` del `::before` es 1 en modo claro y 0 en modo oscuro
+- Comprueba transición gradual (2.4s) en ambas direcciones
+
+**`.countdown__contenedor`** (Caja del countdown):
+- Mismas validaciones que `.quieres-mas`
+- Incluye `overflow: hidden` para respetar `border-radius`
+
+**Patrón CSS:**
+
+```scss
+.componente {
+  background-color: $color-oscuro; // Color base para modo oscuro
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(...);
+    opacity: 1;
+    transition: opacity 2.4s ease-in-out;
+    z-index: 0;
+  }
+
+  > * { position: relative; z-index: 1; }
+}
+
+body.modo-oscuro .componente::before {
+  opacity: 0;
+}
+```
+
+**Importante:** CSS no puede transicionar entre `linear-gradient` y color sólido. Por eso usamos `opacity` en el pseudo-elemento.
+
+Archivos de test:
+
+- `tests/quieres-mas-transition.e2e.spec.js`
+- `tests/countdown-transition.e2e.spec.js`
+- `tests/modal-quieres-elements.e2e.spec.js` (diagnóstico de elementos del modal)
+
 ## 📦 Requisitos
 
 - Node.js 18+ (recomendado 20+)
@@ -332,6 +380,10 @@ Configuración relacionada:
 - `tests/modal-transition.e2e.spec.js` (Transición del modal)
 - `tests/modal-transition-duration.e2e.spec.js` (Duración transición modal)
 - `tests/modal-dark-to-light.e2e.spec.js` (Modal oscuro a claro)
+- `tests/modal-quieres-elements.e2e.spec.js` (Diagnóstico elementos modal)
+- `tests/modal-transition-debug.e2e.spec.js` (Debug visual transición modal)
+- `tests/quieres-mas-transition.e2e.spec.js` (Transición gradiente quieres-mas)
+- `tests/countdown-transition.e2e.spec.js` (Transición gradiente countdown)
 - `tests/countdown.e2e.spec.js` (Countdown de Fallas)
 
 ## 🧯 Troubleshooting
@@ -351,4 +403,4 @@ Configuración relacionada:
 
 ---
 
-*Última actualización: 26 de enero de 2026 - v4.0.0*
+*Última actualización: 26 de enero de 2026 - v4.1.0 (24 test suites)*

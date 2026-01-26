@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Version:** 4.0.0  
+**Version:** 4.1.0
 **Last Updated:** 26 de enero de 2026
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -21,9 +21,11 @@ WEBFALLASUISSA is the official website for Falla Suïssa - L'Alqueria del Favero
 - NEVER edit files in `dist/` directly (they are generated)
 - NEVER remove SCSS variables without checking `tests/scss-guardrails.e2e.spec.js`
 - NEVER reference `og-share.png` without cache-buster `?v=YYYYMMDD` (WhatsApp caching)
+- NEVER change gradient backgrounds to solid colors directly - use the `::before` opacity pattern (see `docs/global-styles.md`)
 - When adding translations: update `data/translations.json` for BOTH `es` and `va`
 - Comments in code are written in Spanish
 - **Mobile menu fix (v4.0.0):** The backdrop is inserted inside `.header__barra` (not `body`) to ensure proper z-index stacking context. Menu z-index: 2500, backdrop: 1500, menu button: 2600
+- **Gradient transitions (v4.1.0):** `.quieres-mas` and `.countdown__contenedor` use `::before` pseudo-element for gradient. Dark mode fades opacity to 0. Tests: `quieres-mas-transition.e2e.spec.js`, `countdown-transition.e2e.spec.js`
 
 ## Build Commands
 
@@ -63,7 +65,7 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 - `scripts/` - Node.js utilities: generate-og-image.mjs, serve-dist.mjs
 - `data/` - JSON files: translations.json, eventos.json, calendarData.json, fallas.json, config.json, dataPages[1-4].json
 - `dist/` - Production build output (DO NOT edit directly)
-- `tests/` - Playwright E2E tests (20 suites)
+- `tests/` - Playwright E2E tests (24 suites)
 - `docs/` - Technical documentation (Markdown)
 - `seo/` - AI/SEO optimization files (sitemaps, schema, robots variants)
 - `pdf/` - PDF files with HTML wrappers for favicon/social preview support
@@ -74,10 +76,11 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 
 **Multi-Language (i18n)**: `data/translations.json` contains Spanish (es) and Valenciano (va). Elements use `data-i18n` attributes, managed by `js/lang.js`.
 
-**Dark Mode**: CSS custom properties for theming, localStorage persistence, Safari scrollbar compatibility. 
+**Dark Mode**: CSS custom properties for theming, localStorage persistence, Safari scrollbar compatibility.
 - **Body**: Background gradient is set on `body::before` to allow smooth cross-fade to black.
 - **Header**: Uses `::before` pseudo-element for gradient background transitions.
-- **Section Backgrounds**: Components like `.falla` separate the background image (on element) from color overlay (on `::before`) to animate overlay color. See `docs/global-styles.md` and `docs/navigation-bar.md`.
+- **Section Backgrounds**: Components like `.falla` separate the background image (on element) from color overlay (on `::before`) to animate overlay color.
+- **Gradient-to-Solid Transitions**: Components with gradients (`.quieres-mas`, `.countdown__contenedor`) use `::before` pseudo-element with `opacity` transition. CSS cannot animate between `linear-gradient` and solid color directly. See `docs/global-styles.md`.
 
 **Gulp Pipeline**: Watches src files, compiles SCSS with sourcemaps, optimizes images to WebP/AVIF, copies to dist/.
 
