@@ -5,7 +5,7 @@
 | Documento | Descripción | Actualización |
 |-----------|-------------|---------------|
 | [`build-and-deploy.md`](./build-and-deploy.md) | Guía de build, `dist/` y despliegue | 23/01/2026 |
-| [`e2e-testing.md`](./e2e-testing.md) | Tests end-to-end (Playwright): 15 suites | 25/01/2026 |
+| [`e2e-testing.md`](./e2e-testing.md) | Tests end-to-end (Playwright): 20 suites | 26/01/2026 |
 | [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter: `og-share.png`, cache-buster `?v=...` y tests anti-regresión | 23/01/2026 |
 | [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación: header fijo, menú móvil, layout móvil en una fila, accesibilidad y Safari/iOS | 23/01/2026 |
 | [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping + autoheight | 23/01/2026 |
