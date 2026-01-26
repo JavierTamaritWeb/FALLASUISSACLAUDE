@@ -158,5 +158,22 @@ Technical docs in `/docs/`:
 - `i18n-translations.md` - Language system
 - `swiper-monumento.md` - Carousel details
 - `scrollbar-theme.md` - Scrollbar theming and Safari compatibility
+- `global-styles.md` - Background gradient, overlay pattern, dark mode transitions
 - `robots-configuration.md` - robots.txt configuration
 - `google-search-console.md` - Google Search Console verification
+
+## Run Single Test
+
+```bash
+# Run a specific test file
+npx playwright test tests/nav.e2e.spec.js
+
+# Run tests matching a pattern
+npx playwright test -g "mobile"
+
+# Run with headed browser (visible)
+npx playwright test --headed
+
+# Debug mode
+npx playwright test --debug
+```
