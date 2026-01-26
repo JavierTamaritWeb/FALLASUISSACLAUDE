@@ -93,4 +93,4 @@ Guía de ejecución: [`e2e-testing.md`](./e2e-testing.md)
 
 ---
 
-*Última actualización: 23 de enero de 2026*
+*Última actualización: 26 de enero de 2026 - v4.0.0*

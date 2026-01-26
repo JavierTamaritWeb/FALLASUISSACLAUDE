@@ -1,5 +1,8 @@
 # CLAUDE.md
 
+**Version:** 4.0.0  
+**Last Updated:** 26 de enero de 2026
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
@@ -20,6 +23,7 @@ WEBFALLASUISSA is the official website for Falla Suïssa - L'Alqueria del Favero
 - NEVER reference `og-share.png` without cache-buster `?v=YYYYMMDD` (WhatsApp caching)
 - When adding translations: update `data/translations.json` for BOTH `es` and `va`
 - Comments in code are written in Spanish
+- **Mobile menu fix (v4.0.0):** The backdrop is inserted inside `.header__barra` (not `body`) to ensure proper z-index stacking context. Menu z-index: 2500, backdrop: 1500, menu button: 2600
 
 ## Build Commands
 
