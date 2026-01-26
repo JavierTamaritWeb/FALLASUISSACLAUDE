@@ -125,6 +125,8 @@ body,
   transition: fill var(--theme-transition);
 }
 
+// Transición de oscuro a claro para header y barra de navegación
+// Valores explícitos (no CSS variables) para máxima compatibilidad con Safari
 body.transicion-a-claro .header__barra,
 body.transicion-a-claro .header-inner__barra,
 body.transicion-a-claro .header__barra--scrolled,
@@ -132,10 +134,17 @@ body.transicion-a-claro .header-inner__barra--scrolled,
 body.transicion-a-claro .header,
 body.transicion-a-claro .header-inner {
   transition:
-    background var(--theme-transition),
-    background-color var(--theme-transition),
-    box-shadow var(--theme-transition-shadow) var(--theme-transition-delay),
-    border-color var(--theme-transition-border) var(--theme-transition-delay);
+    background 2.4s ease-in-out,
+    background-color 2.4s ease-in-out,
+    box-shadow 2.4s ease-in-out,
+    border-color 2.4s ease-in-out !important;
+}
+
+// Transición para el menú desplegable en móvil
+@media (max-width: 767px) {
+  body.transicion-a-claro .navegacion {
+    transition: background 2.4s ease-in-out !important;
+  }
 }
 
 // Transición de oscuro a claro para el modal "quieres"
@@ -684,13 +693,20 @@ body.modo-oscuro .header-inner__barra {
 // Para el modo oscuro, se puede definir un fondo por defecto distinto
 body.modo-oscuro .header__barra,
 body.modo-oscuro .header-inner__barra {
-//   background: linear-gradient(135deg, #333, #444 60%, #555 100%);
-background: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
+  background: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  // Transición sincronizada con el tema (2.4s)
+  transition: background 2.4s ease-in-out, box-shadow 2.4s ease-in-out, border-color 2.4s ease-in-out;
+
+  // Móvil: mantener translúcido en modo oscuro
+  @media (max-width: 767px) {
+    background: rgba(51, 51, 51, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 }
 
 body.modo-oscuro .header__barra--scrolled,
@@ -698,11 +714,21 @@ body.modo-oscuro .header-inner__barra--scrolled {
   background: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.08);
+
+  // Móvil: mantener translúcido en modo oscuro al hacer scroll
+  @media (max-width: 767px) {
+    background: rgba(51, 51, 51, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 }
 
+// Menú desplegable translúcido en modo oscuro (móvil)
 @media (max-width: 767px) {
   body.modo-oscuro .navegacion {
-    background: #000;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 }
 
