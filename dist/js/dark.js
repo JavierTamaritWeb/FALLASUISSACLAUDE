@@ -222,11 +222,15 @@ botonModoOscuro.addEventListener('click', () => {
     if (transicionAClaroTimeoutId) {
       clearTimeout(transicionAClaroTimeoutId);
     }
+    // IMPORTANTE: Forzar reflow para que el navegador aplique la transición
+    // antes de cambiar las clases de modo. Sin esto, algunos navegadores
+    // (especialmente Safari) no detectan la transición.
+    void document.body.offsetHeight;
   }
 
   // Añadir efecto de presionado
   botonModoOscuro.classList.add('pressed');
-  
+
   // Cambiar el modo
   document.body.classList.toggle('modo-oscuro');
   document.documentElement.classList.toggle('modo-oscuro', document.body.classList.contains('modo-oscuro'));

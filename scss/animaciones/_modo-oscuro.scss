@@ -42,6 +42,7 @@ body,
 .footer,
 .countdown,
 .countdown__contenedor,
+.countdown__contenedor::before,
 .countdown__time-box,
 .countdown__message,
 // Sección Falla
@@ -89,6 +90,7 @@ body,
 .calendario-eventos__detalles-mes,
 // Quieres más
 .quieres-mas,
+.quieres-mas::before,
 // Historia y Organigrama
 .historia__prologo,
 .historia__archivos,
@@ -101,6 +103,13 @@ body,
 .ics-modal__contenido,
 #modal-quieres,
 #modal-quieres-content,
+.modal-title,
+.close-modal,
+#quieres-form label,
+#quieres-nombre,
+#quieres-telefono,
+#quieres-email,
+#quieres-mensaje,
 // Navegación móvil
 .navegacion {
   transition:
@@ -127,6 +136,33 @@ body.transicion-a-claro .header-inner {
     background-color var(--theme-transition),
     box-shadow var(--theme-transition-shadow) var(--theme-transition-delay),
     border-color var(--theme-transition-border) var(--theme-transition-delay);
+}
+
+// Transición de oscuro a claro para el modal "quieres"
+// Usamos valores explícitos (no CSS variables) para máxima compatibilidad con Safari
+body.transicion-a-claro #modal-quieres-content,
+body.transicion-a-claro #modal-quieres .modal-content,
+body.transicion-a-claro #modal-quieres .modal-title,
+body.transicion-a-claro #modal-quieres .close-modal,
+body.transicion-a-claro #quieres-form label,
+body.transicion-a-claro #quieres-nombre,
+body.transicion-a-claro #quieres-telefono,
+body.transicion-a-claro #quieres-email,
+body.transicion-a-claro #quieres-mensaje {
+  transition:
+    background-color 2.4s ease-in-out,
+    color 2.4s ease-in-out,
+    border-color 2.4s ease-in-out !important;
+}
+
+// Transición de oscuro a claro para la sección .quieres-mas
+body.transicion-a-claro .quieres-mas::before {
+  transition: opacity 2.4s ease-in-out !important;
+}
+
+// Transición de oscuro a claro para .countdown__contenedor
+body.transicion-a-claro .countdown__contenedor::before {
+  transition: opacity 2.4s ease-in-out !important;
 }
 
 body.modo-oscuro {
@@ -197,7 +233,10 @@ body.modo-oscuro .countdown {
 }
 
 body.modo-oscuro .countdown__contenedor {
-  background: v.$negro;
+  // El color base ya está en el elemento, solo desvanecemos el gradiente
+  &::before {
+    opacity: 0;
+  }
 }
 
 body.modo-oscuro .countdown__message {
@@ -623,7 +662,10 @@ body.modo-oscuro .notepad__page {
    MODO OSCURO QUIERES
 ------------------------------------------------ */
 body.modo-oscuro .quieres-mas {
-  background: v.$secondary-color;
+  // El color base ya está en el elemento, solo desvanecemos el gradiente
+  &::before {
+    opacity: 0;
+  }
 }
 
 
@@ -666,8 +708,22 @@ body.modo-oscuro .header-inner__barra--scrolled {
 
 //  MODAL QUIERES
 
-body.modo-oscuro #modal-quieres-content{
-    background-color: v.$secondary-color;
+body.modo-oscuro #modal-quieres-content {
+  background-color: v.$secondary-color;
+}
+
+// Estilos del formulario en modo oscuro
+body.modo-oscuro #quieres-form label {
+  color: v.$blanco-hueso;
+}
+
+body.modo-oscuro #quieres-nombre,
+body.modo-oscuro #quieres-telefono,
+body.modo-oscuro #quieres-email,
+body.modo-oscuro #quieres-mensaje {
+  background-color: v.$gris-muy-oscuro;
+  color: v.$blanco;
+  border-color: v.$gris-medio-oscuro;
 }
 
 // HISTORIA
