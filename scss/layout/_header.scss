@@ -691,6 +691,7 @@ body.modo-oscuro {
   color: v.$blanco;
   text-decoration: none;
   font-size: 1.2rem;
+  font-weight: 700; // Más grueso para mejor legibilidad
   padding: 0.1rem 0.3rem;
   border-radius: 0.3rem;
   display: inline-flex;
@@ -698,7 +699,9 @@ body.modo-oscuro {
   justify-content: center;
   min-height: 44px;
   width: auto;
-  transition: background-color 200ms ease, color 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease, text-shadow 200ms ease;
+  // Sombra más definida para legibilidad sobre fondo translúcido azul
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   
   &:hover,
   &:focus {
@@ -710,6 +713,7 @@ body.modo-oscuro {
   &[aria-current="page"] {
     background-color: rgba(255, 255, 255, 0.75);
     color: rgba(3, 49, 95, 0.95);
+    text-shadow: none; // No necesita sombra con fondo blanco
   }
 
   &.active:hover,
@@ -784,7 +788,8 @@ body.modo-oscuro {
 
 @media (min-width: 768px) {
   .navegacion {
-    position: static;
+    position: relative; // Cambiado de static a relative para gestionar z-index
+    z-index: 5;         // Asegurar que esté por encima del ::before (overlay)
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-end;
@@ -905,47 +910,78 @@ body.modo-oscuro {
 
 
 // Fondo por defecto para la barra de navegación (modo claro)
+// Usa patrón overlay (::before) para transiciones suaves entre gradiente y color sólido
 .header__barra,
 .header-inner__barra {
-  background: linear-gradient(
-    135deg,
-    rgba(10, 75, 141, 0.5),
-    rgba(2, 66, 122, 0.5) 60%,
-    rgba(0, 51, 102, 0.5) 100%
-  );
+  // Fondo transparente en modo claro - solo se ve el gradiente del ::before
+  background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 2000;
+  // NO usar overflow:hidden - recorta el menú desplegable en móvil
   // Transición sincronizada con el tema (2.4s)
   transition: background 2.4s ease-in-out, box-shadow 2.4s ease-in-out, border-color 2.4s ease-in-out;
 
-  // Móvil: mantener translúcido con backdrop-filter
+  // Pseudo-elemento con gradiente azul translúcido para modo claro
+  // Opacidad 0.85 para buen contraste con texto blanco
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 75, 141, 0.85),
+      rgba(2, 66, 122, 0.85) 60%,
+      rgba(0, 51, 102, 0.85) 100%
+    );
+    border-radius: inherit;
+    opacity: 1;
+    transition: opacity 2.4s ease-in-out;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  // Asegurar que el contenido esté por encima del pseudo-elemento
+  // Excluimos .navegacion porque necesita position:absolute en móvil
+  > *:not(.navegacion) {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Móvil: mismo comportamiento translúcido
   @media (max-width: 767px) {
-    background: rgba(10, 75, 141, 0.75);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+
+    &::before {
+      background: rgba(10, 75, 141, 0.85);
+    }
   }
 }
 
 // Fondo cuando se hace scroll (modo claro)
-// Usamos transparencias para lograr un efecto más ligero
+// Gradiente ligeramente más opaco para mejor legibilidad
 .header__barra--scrolled,
 .header-inner__barra--scrolled {
-  background: linear-gradient(
-    135deg,
-    rgba(10, 75, 141, 0.5),
-    rgba(2, 66, 122, 0.5) 60%,
-    rgba(0, 51, 102, 0.5) 100%
-  );
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.22);
 
-  // Móvil: mantener translúcido también al hacer scroll
+  // Gradiente más opaco al hacer scroll para mejor contraste
+  &::before {
+    background: linear-gradient(
+      135deg,
+      rgba(10, 75, 141, 0.9),
+      rgba(2, 66, 122, 0.9) 60%,
+      rgba(0, 51, 102, 0.9) 100%
+    );
+  }
+
+  // Móvil: mismo comportamiento
   @media (max-width: 767px) {
-    background: rgba(10, 75, 141, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    &::before {
+      background: rgba(10, 75, 141, 0.9);
+    }
   }
 }

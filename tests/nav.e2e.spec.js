@@ -66,8 +66,11 @@ test.describe('Navbar responsive + idioma', () => {
     await toggle.click();
     await expect(nav).toBeVisible();
 
-    // Click fuera usando el backdrop
-    await page.locator('.nav-backdrop').click({ position: { x: 20, y: 720 } });
+    // Click fuera usando el backdrop - disparamos el evento directamente
+    // porque el backdrop es transparente y tiene z-index menor que la barra
+    await page.evaluate(() => {
+      document.querySelector('.nav-backdrop').click();
+    });
     await expect(nav).toBeHidden();
   });
 

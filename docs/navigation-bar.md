@@ -12,6 +12,7 @@ Esta guía documenta **exactamente** cómo funciona la barra de navegación (nav
 - **Menú móvil + scroll state (JS):** `js/nav-menu.js`
 - **Modo oscuro/claro (JS) + compat iOS:** `js/dark.js`
 - **Compatibilidad theme/iOS (SCSS):** `scss/components/_theme-compatibility.scss`
+- **Modo oscuro (SCSS):** `scss/animaciones/_modo-oscuro.scss`
 - **Artefacto compilado:** `dist/css/main.css` y `dist/*.html`
 
 ---
@@ -96,47 +97,117 @@ Esto está en `scss/layout/_header.scss` dentro del bloque:
 
 Se usa `env(safe-area-inset-top)` para que la barra no se meta debajo de la zona del notch.
 
-**Nota:** si en un futuro se cambia el padding del header, no hay que “compensar” el notch manualmente en JS: debe mantenerse vía CSS.
+**Nota:** si en un futuro se cambia el padding del header, no hay que "compensar" el notch manualmente en JS: debe mantenerse vía CSS.
+
+---
+
+## 🔮 Barra Translúcida (Patrón Overlay)
+
+**IMPORTANTE:** La barra de navegación usa un patrón específico para ser translúcida Y permitir transiciones suaves entre modos claro/oscuro.
+
+### Por qué se usa este patrón
+
+CSS no puede animar directamente entre `linear-gradient` y `background-color`. Para lograr transiciones suaves, usamos el **patrón overlay con `::before`**.
+
+### Implementación
+
+```scss
+.header__barra,
+.header-inner__barra {
+  // 1. Fondo transparente en modo claro (el gradiente está en ::before)
+  background: transparent;
+  backdrop-filter: blur(10px);
+
+  // 2. Pseudo-elemento con gradiente translúcido
+  // Opacidad 0.85 para buen contraste con texto blanco
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 75, 141, 0.85),
+      rgba(2, 66, 122, 0.85) 60%,
+      rgba(0, 51, 102, 0.85) 100%
+    );
+    border-radius: inherit;
+    opacity: 1;
+    transition: opacity 2.4s ease-in-out;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  // 3. CRÍTICO: Excluir .navegacion del selector > *
+  // para no romper position:absolute del menú móvil
+  > *:not(.navegacion) {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// 4. Modo oscuro: fondo translúcido oscuro + ocultar ::before
+body.modo-oscuro .header__barra,
+body.modo-oscuro .header-inner__barra {
+  background: rgba(51, 51, 51, 0.7);
+
+  &::before {
+    opacity: 0;
+  }
+}
+```
+
+### Reglas críticas
+
+1. **NUNCA usar `overflow: hidden`** en `.header__barra` - recorta el menú desplegable móvil
+2. **SIEMPRE excluir `.navegacion`** del selector `> *` con `:not(.navegacion)` - el menú móvil necesita `position: absolute`
+3. **Fondo base `transparent`** en modo claro - el gradiente viene del `::before`
+4. **Transición de 2.4s** sincronizada con `--theme-transition`
 
 ---
 
 ## 🌓 Transición de Tema (Dark/Light Mode)
 
-Para lograr una transición suave entre el modo claro (gradiente azul) y el modo oscuro (fondo negro), se utiliza una técnica específica para evitar cambios bruscos, ya que CSS no puede animar directamente entre `linear-gradient` y `background-color`.
+Para lograr una transición suave entre el modo claro (gradiente azul) y el modo oscuro (fondo oscuro), se utiliza una técnica específica.
 
 **Técnica Implementada (Pseudo-elemento `::before`):**
 
-1.  **Contenedor (`.header` / `.header-inner`)**:
-    *   Tiene `background-color: transparent` (o negro en modo oscuro).
-    *   `position: relative` y `z-index: 10`.
+1.  **Modo Claro**:
+    *   Elemento: `background: transparent`
+    *   `::before`: gradiente azul translúcido con `opacity: 1`
+    *   Resultado: barra azul translúcida con blur
 
-2.  **Gradiente (`::before`)**:
-    *   Se crea un pseudo-elemento `&::before` que ocupa todo el tamaño (`inset: 0`).
-    *   Contiene el `background: linear-gradient(...)`.
-    *   Tiene `z-index: -1` para quedar detrás del contenido.
-    *   Tiene `transition: opacity var(--theme-transition)`.
+2.  **Modo Oscuro**:
+    *   Elemento: `background: rgba(51, 51, 51, 0.7)` (gris translúcido)
+    *   `::before`: `opacity: 0` (gradiente oculto)
+    *   Resultado: barra gris translúcida con blur
 
-3.  **Comportamiento**:
-    *   **Modo Claro**: El `::before` tiene `opacity: 1`. Vemos el gradiente.
-    *   **Modo Oscuro**: El contenedor pasa a tener fondo negro (`background-color: v.$negro`), y el `::before` pasa a `opacity: 0`. Esto crea un efecto de "fundido" (cross-fade) suave en lugar de un cambio de golpe.
+3.  **Transición**:
+    *   El `::before` anima su `opacity` de 1 → 0 (o viceversa)
+    *   El elemento anima su `background` de transparent → gris
+    *   Ambas transiciones duran 2.4s = transición suave
 
-Esta lógica se aplica tanto en el header principal (`.header`) como en las cabeceras internas (`.header-inner`) en `scss/layout/_header.scss` y `scss/animaciones/_modo-oscuro.scss`.
+Esta lógica se aplica en `scss/layout/_header.scss` y `scss/animaciones/_modo-oscuro.scss`.
 
 ---
 
-## 🧊 Estilo “glass” (claro y oscuro)
+## 🧊 Estilo "glass" (claro y oscuro)
 
 La barra y el dropdown móvil usan:
 
 - fondos con alpha (`rgba(...)`)
-- `backdrop-filter: blur(...)` (donde aplica)
+- `backdrop-filter: blur(...)` para efecto de cristal
 - sombra y borde suave
 
-En modo oscuro se aplican overrides dentro de:
+**Valores de opacidad:**
 
-```scss
-body.modo-oscuro { ... }
-```
+| Elemento | Modo Claro | Modo Oscuro |
+|----------|------------|-------------|
+| Barra (::before) | 0.85 | 0 (oculto) |
+| Barra scroll (::before) | 0.9 | 0 (oculto) |
+| Barra (elemento) | transparent | 0.7 |
+| Menú móvil | 0.85 (azul) | 0.85 (negro) |
+
+**Nota:** La opacidad de 0.85 en el gradiente garantiza buen contraste con el texto blanco de los enlaces de navegación.
 
 ---
 
@@ -153,9 +224,9 @@ Los controles interactivos principales cumplen objetivo táctil:
 
 **Regla clave:** `min-height: 44px`
 
-### Foco: `:focus-visible` (no “naranja pegado”)
+### Foco: `:focus-visible` (no "naranja pegado")
 
-Para evitar que al hacer click quede un estado persistente “tipo hover”, se prioriza `:focus-visible` frente a `:focus`.
+Para evitar que al hacer click quede un estado persistente "tipo hover", se prioriza `:focus-visible` frente a `:focus`.
 
 - Mouse/touch: normalmente no muestra el foco persistente.
 - Teclado: sí muestra el foco (accesibilidad).
@@ -176,7 +247,7 @@ El enlace activo se define por:
 ### En modo claro
 
 - Fondo: blanco translúcido (`rgba(255,255,255,0.75)`)
-- Texto: tono azul oscuro de la barra (`rgba(3,49,95,0.95)`) 
+- Texto: tono azul oscuro de la barra (`rgba(3,49,95,0.95)`)
 
 ### En modo oscuro
 
@@ -219,9 +290,40 @@ Toda la lógica está en `js/nav-menu.js`.
 
 En `scss/layout/_header.scss` (bloque responsive móvil):
 
-- `.navegacion` pasa a `position: absolute` bajo la barra
-- `.nav-backdrop` es `position: fixed; inset: 0; ...`
-- `body.nav-open { overflow: hidden; touch-action: none; }`
+```scss
+@media (max-width: 767px) {
+  .navegacion {
+    display: none;
+    position: absolute;      // ⚠️ CRÍTICO: necesario para dropdown
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: rgba(2, 66, 122, 0.85);  // Azul translúcido
+    backdrop-filter: blur(12px);
+    border-radius: 1.2rem;
+    z-index: 2500;
+  }
+
+  .navegacion.is-open {
+    display: flex;
+  }
+}
+```
+
+### Z-index layering (móvil)
+
+| Elemento | z-index | Descripción |
+|----------|---------|-------------|
+| `.nav-backdrop` | 1500 | Capa para clicks fuera |
+| `.header__barra` | 2000 | Barra de navegación |
+| `.navegacion` | 2500 | Menú desplegable |
+| `.header__menu-toggle` | 2600 | Botón hamburguesa |
+
+### Backdrop transparente
+
+El `.nav-backdrop` es **intencionalmente transparente** (`background: transparent`) para no oscurecer la página, pero sigue siendo funcional para detectar clicks fuera del menú.
+
+**Nota para tests:** Como el backdrop es transparente, Playwright no puede hacer click directo. Los tests usan `page.evaluate(() => document.querySelector('.nav-backdrop').click())`.
 
 ---
 
@@ -242,7 +344,7 @@ En móvil, la barra usa un layout de 3 columnas (tipo grid) para evitar que el h
 
 Esto vive en `scss/layout/_header.scss`.
 
-### Notificación: inline (no “toast” flotante)
+### Notificación: inline (no "toast" flotante)
 
 El proyecto tiene estilos globales tipo toast para `#notificacion` (centrado abajo, `position: fixed`) en:
 
@@ -258,7 +360,7 @@ Para el header móvil, se sobreescribe esa presentación para que `#notificacion
 
 ### Problema típico
 
-En Safari/iOS (WebKit), si un ancestro (o el propio `body`) tiene `transform`, puede crear un nuevo contexto de composición y **romper** el comportamiento de `position: fixed` (se vuelve “relative” a ese contexto o se comporta de forma inconsistente).
+En Safari/iOS (WebKit), si un ancestro (o el propio `body`) tiene `transform`, puede crear un nuevo contexto de composición y **romper** el comportamiento de `position: fixed` (se vuelve "relative" a ese contexto o se comporta de forma inconsistente).
 
 ### Regla del proyecto
 
@@ -269,13 +371,13 @@ Esto se refuerza en:
 - `scss/components/_theme-compatibility.scss`:
   - `body.modo-oscuro, body.modo-claro { transform: none; -webkit-transform: none; }`
 - `js/dark.js`:
-  - cuando necesita “empujón” en iOS, fuerza reflow con `void document.body.offsetHeight;` en lugar de transforms.
+  - cuando necesita "empujón" en iOS, fuerza reflow con `void document.body.offsetHeight;` en lugar de transforms.
 
 ---
 
 ## 🧰 Depuración rápida en iPhone/Safari
 
-Si notas que en iOS la barra no se comporta como esperas (se mueve, deja de ser fija, “tiembla” o el overlay no coincide):
+Si notas que en iOS la barra no se comporta como esperas (se mueve, deja de ser fija, "tiembla" o el overlay no coincide):
 
 ### 1) Confirmar que estás viendo el build correcto
 
@@ -287,7 +389,7 @@ Si notas que en iOS la barra no se comporta como esperas (se mueve, deja de ser 
 Checklist:
 
 - No debe existir `transform` en `body`/`html` (ni en contenedores que envuelvan la barra).
-- Evita introducir hacks tipo `translateZ(0)` para “suavizar scroll” en iOS.
+- Evita introducir hacks tipo `translateZ(0)` para "suavizar scroll" en iOS.
 
 ### 3) Verificar safe area
 
@@ -320,7 +422,11 @@ Si el menú móvil no abre/cierra bien:
 Los tests E2E validan la navbar (desktop vs móvil) y el comportamiento del overlay:
 
 - Guía: `docs/e2e-testing.md`
-- Suite: `tests/nav.e2e.spec.js`
+- Suites:
+  - `tests/nav.e2e.spec.js` - Comportamiento general
+  - `tests/header-bar-bg.e2e.spec.js` - Fondo translúcido y transiciones
+  - `tests/header-mobile-layout.e2e.spec.js` - Layout móvil
+  - `tests/nav-transition.e2e.spec.js` - Transiciones de enlaces
 
 Recomendación de flujo:
 
@@ -342,6 +448,8 @@ npm run test:e2e
 5) **¿Móvil?** Si cambias breakpoints, actualiza **CSS y JS**:
    - CSS usa `@media (max-width: 767px)`
    - JS usa `matchMedia('(max-width: 767px)')`
+6) **¿Patrón overlay?** No usar `overflow: hidden` en la barra
+7) **¿Selector `> *`?** Siempre excluir `.navegacion` con `:not(.navegacion)`
 
 ### Recompilar
 
@@ -362,10 +470,38 @@ npm run build
 ## 🧯 Troubleshooting rápido
 
 - **La barra no se queda fija en iPhone:** busca `transform` aplicado a `body/html` o ancestros.
-- **El hover “naranja pegado” vuelve:** revisa que los estilos estén en `:focus-visible` y no en `:focus`.
+- **El hover "naranja pegado" vuelve:** revisa que los estilos estén en `:focus-visible` y no en `:focus`.
 - **No se ven cambios:** asegúrate de estar sirviendo `dist/` y de haber ejecutado `npm run build` o `npx gulp css`.
 - **El menú móvil no abre:** confirma que `js/nav-menu.js` se carga en esa página y que existe `.navegacion` dentro de `.header__barra`/`.header-inner__barra`.
+- **El menú móvil no se despliega (queda cortado):** verifica que NO hay `overflow: hidden` en `.header__barra`.
+- **El menú aparece con posición incorrecta:** verifica que el selector `> *` excluye `.navegacion` con `:not(.navegacion)`.
+- **La transición de la barra es instantánea:** verifica que el `::before` tiene `transition: opacity 2.4s` y que `transicion-a-claro` está configurado.
 
 ---
 
-*Última actualización: 26 de enero de 2026 - v4.0.0*
+## 🐞 Historial de Bugs Visuales (Stacking Context)
+
+### v4.1.1 - Visibilidad texto menú Desktop >768px (Light Mode)
+
+**Problema:** En modo claro y pantalla escritorio, el texto de navegación (`.navegacion`) se veía deslavado o con poca nitidez a pesar de tener el color correcto.
+**Causa:** El contenedor `.navegacion` tenía `position: static` por defecto. El fondo "glassmorphism" (`.header__barra::before`) es un elemento posicionado absolutamente con opacidad. Debido al contexto de apilamiento (stacking context), el texto estático se renderizaba visualmente "debajo" o mezclado incorrectamente con el filtro del pseudo-elemento, perdiendo contraste.
+**Solución:** Se forzó un nuevo contexto de apilamiento para la navegación en desktop:
+
+```scss
+// scss/layout/_header.scss
+@media (min-width: 768px) {
+  .navegacion {
+    position: relative; // Antes static
+    z-index: 5;         // Elevar sobre el ::before (fondo)
+    // ...
+  }
+}
+```
+
+### v4.0.0 - Menú Móvil Backdrop
+**Problema:** El backdrop oscurecía el propio menú.
+**Solución:** Se movió el backdrop dentro de `.header__barra` y se asignaron z-index explícitos: Botón (2600) > Menú (2500) > Backdrop (1500).
+
+---
+
+*Última actualización: 27 de enero de 2026 - v4.1.1*

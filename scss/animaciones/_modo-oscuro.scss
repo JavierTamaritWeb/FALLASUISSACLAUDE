@@ -130,14 +130,24 @@ body,
 body.transicion-a-claro .header__barra,
 body.transicion-a-claro .header-inner__barra,
 body.transicion-a-claro .header__barra--scrolled,
-body.transicion-a-claro .header-inner__barra--scrolled,
+body.transicion-a-claro .header-inner__barra--scrolled {
+  transition:
+    background 2.4s ease-in-out,
+    box-shadow 2.4s ease-in-out,
+    border-color 2.4s ease-in-out !important;
+}
+
 body.transicion-a-claro .header,
 body.transicion-a-claro .header-inner {
   transition:
-    background 2.4s ease-in-out,
-    background-color 2.4s ease-in-out,
     box-shadow 2.4s ease-in-out,
     border-color 2.4s ease-in-out !important;
+}
+
+// Transición del pseudo-elemento ::before de la barra de navegación
+body.transicion-a-claro .header__barra::before,
+body.transicion-a-claro .header-inner__barra::before {
+  transition: opacity 2.4s ease-in-out !important;
 }
 
 // Transición para el menú desplegable en móvil
@@ -682,45 +692,26 @@ body.modo-oscuro .quieres-mas {
    MODO OSCURO BARRA DE NAVEGACION
 ------------------------------------------------ */
 
-body.modo-oscuro .header__barra {
-    background: v.$secondary-color;
-}
-body.modo-oscuro .header-inner__barra {
-    background: v.$secondary-color;
-}
-
-
-// Para el modo oscuro, se puede definir un fondo por defecto distinto
+// Para el modo oscuro, desvanecemos el gradiente del ::before
+// y mostramos el fondo translúcido oscuro en el elemento
 body.modo-oscuro .header__barra,
 body.modo-oscuro .header-inner__barra {
-  background: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
+  // Fondo translúcido oscuro (transiciona desde transparent)
+  background: rgba(51, 51, 51, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  // Transición sincronizada con el tema (2.4s)
-  transition: background 2.4s ease-in-out, box-shadow 2.4s ease-in-out, border-color 2.4s ease-in-out;
 
-  // Móvil: mantener translúcido en modo oscuro
-  @media (max-width: 767px) {
-    background: rgba(51, 51, 51, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+  // Desvanecer el gradiente azul del ::before
+  &::before {
+    opacity: 0;
   }
 }
 
 body.modo-oscuro .header__barra--scrolled,
 body.modo-oscuro .header-inner__barra--scrolled {
-  background: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
+  background: rgba(51, 51, 51, 0.8);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.08);
-
-  // Móvil: mantener translúcido en modo oscuro al hacer scroll
-  @media (max-width: 767px) {
-    background: rgba(51, 51, 51, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
 }
 
 // Menú desplegable translúcido en modo oscuro (móvil)
