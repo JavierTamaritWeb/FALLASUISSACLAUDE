@@ -1,6 +1,6 @@
 # 🧪 Tests E2E (Playwright)
 
-**24 test suites** | **116+ tests**
+**25 test suites** | **130+ tests**
 
 Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto y qué validan.
 
@@ -385,6 +385,30 @@ Configuración relacionada:
 - `tests/quieres-mas-transition.e2e.spec.js` (Transición gradiente quieres-mas)
 - `tests/countdown-transition.e2e.spec.js` (Transición gradiente countdown)
 - `tests/countdown.e2e.spec.js` (Countdown de Fallas)
+- `tests/nav-mobile-dropdown.e2e.spec.js` (Menú móvil desplegable)
+
+### 📱 Menú móvil desplegable
+
+- Verifica que `.navegacion` tiene `position: absolute` en móvil
+- Valida que `.header__barra` NO tiene `overflow: hidden` (recortaría el menú)
+- Comprueba fondos translúcidos en modo claro (azul) y oscuro (negro)
+- Valida transiciones graduales del patrón overlay `::before`
+- Verifica que solo el enlace activo tiene fondo blanco
+
+**Reglas críticas protegidas por estos tests:**
+
+1. **NO usar `overflow: hidden`** en `.header__barra`
+2. **Excluir `.navegacion`** del selector `> *` con `:not(.navegacion)`
+3. **Fondo `transparent`** en modo claro (gradiente en `::before`)
+4. **Transición de 2.4s** sincronizada con el tema
+
+Archivo de test:
+
+- `tests/nav-mobile-dropdown.e2e.spec.js`
+
+Guía técnica:
+
+- [`navigation-bar.md`](./navigation-bar.md)
 
 ## 🧯 Troubleshooting
 
@@ -403,4 +427,4 @@ Configuración relacionada:
 
 ---
 
-*Última actualización: 26 de enero de 2026 - v4.1.0 (24 test suites)*
+*Última actualización: 27 de enero de 2026 - v4.1.0 (25 test suites)*

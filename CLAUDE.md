@@ -1,7 +1,7 @@
 # CLAUDE.md
 
-**Version:** 4.1.0
-**Last Updated:** 26 de enero de 2026
+**Version:** 4.1.1
+**Last Updated:** 27 de enero de 2026
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -26,6 +26,7 @@ WEBFALLASUISSA is the official website for Falla Suïssa - L'Alqueria del Favero
 - Comments in code are written in Spanish
 - **Mobile menu fix (v4.0.0):** The backdrop is inserted inside `.header__barra` (not `body`) to ensure proper z-index stacking context. Menu z-index: 2500, backdrop: 1500, menu button: 2600
 - **Gradient transitions (v4.1.0):** `.quieres-mas` and `.countdown__contenedor` use `::before` pseudo-element for gradient. Dark mode fades opacity to 0. Tests: `quieres-mas-transition.e2e.spec.js`, `countdown-transition.e2e.spec.js`
+- **Desktop navigation visibility fix (v4.1.1):** Added `position: relative` and `z-index: 5` to `.navegacion` (desktop >768px) to raise text above the glassmorphism background overlay.
 
 ## Build Commands
 
