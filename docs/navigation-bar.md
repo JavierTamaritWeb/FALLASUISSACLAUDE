@@ -119,16 +119,16 @@ CSS no puede animar directamente entre `linear-gradient` y `background-color`. P
   backdrop-filter: blur(10px);
 
   // 2. Pseudo-elemento con gradiente translúcido
-  // Opacidad 0.85 para buen contraste con texto blanco
+  // Opacidad 0.25 para efecto glassmorphism translúcido
   &::before {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       135deg,
-      rgba(10, 75, 141, 0.85),
-      rgba(2, 66, 122, 0.85) 60%,
-      rgba(0, 51, 102, 0.85) 100%
+      rgba(10, 75, 141, 0.25),
+      rgba(2, 66, 122, 0.25) 60%,
+      rgba(0, 51, 102, 0.25) 100%
     );
     border-radius: inherit;
     opacity: 1;
@@ -202,12 +202,12 @@ La barra y el dropdown móvil usan:
 
 | Elemento | Modo Claro | Modo Oscuro |
 |----------|------------|-------------|
-| Barra (::before) | 0.85 | 0 (oculto) |
-| Barra scroll (::before) | 0.9 | 0 (oculto) |
+| Barra (::before) | 0.25 | 0 (oculto) |
+| Barra scroll (::before) | 0.30 | 0 (oculto) |
 | Barra (elemento) | transparent | 0.7 |
 | Menú móvil | 0.85 (azul) | 0.85 (negro) |
 
-**Nota:** La opacidad de 0.85 en el gradiente garantiza buen contraste con el texto blanco de los enlaces de navegación.
+**Nota:** La opacidad de 0.25/0.30 en el gradiente permite translucidez mientras mantiene buen contraste con el texto blanco gracias al efecto glassmorphism (`backdrop-filter: blur`).
 
 ---
 
@@ -504,4 +504,4 @@ npm run build
 
 ---
 
-*Última actualización: 27 de enero de 2026 - v4.1.1*
+*Última actualización: 27 de enero de 2026 - v4.1.2*
