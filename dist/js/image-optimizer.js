@@ -184,7 +184,7 @@ style.textContent = `
     transition: opacity 0.3s ease;
   }
   
-  img[loading="lazy"]:not(.loaded) {
+  img[loading="lazy"]:not(.loaded):not(.animate-icon) {
     opacity: 0.1;
   }
   
@@ -198,7 +198,7 @@ style.textContent = `
   }
   
   /* Skeleton loading para imágenes */
-  img:not(.loaded):not(.error) {
+  img:not(.loaded):not(.error):not(.animate-icon) {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
     animation: loading 1.5s infinite;

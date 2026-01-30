@@ -1,0 +1,32 @@
+
+
+/* BLOCK: frieze */
+@use '../abstracts/variables' as v;
+
+
+
+.frieze {
+  width: 100%;
+  height: v.$frieze-size;
+  background-image: v.$frieze-img;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: center;
+  background-color: v.$frieze-bg; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 10;
+
+  /* MODIFIER: frieze--bordered */
+  &--bordered {
+    border-top: 2px solid v.$primary-color;
+    border-bottom: 2px solid v.$primary-color;
+    box-sizing: border-box; 
+  }
+  @media (max-width: 768px) {
+        $frieze-size: 30px; 
+    }
+
+  @media (min-width: 768px) {
+        $frieze-size: 50px; 
+    }
+}

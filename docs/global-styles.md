@@ -263,6 +263,21 @@ npm run build
 npm run test:e2e
 ```
 
+## 🎗️ Cenefa Decorativa (Frieze)
+
+La web incluye una banda decorativa (`.frieze`) que se utiliza como separador visual o elemento de marca.
+
+- **Fuente:** `scss/base/_frieze.scss`
+- **Variables:** `scss/abstracts/_variables.scss`
+
+### Variables Clave
+
+| Variable | Valor Defecto | Descripción |
+| :--- | :--- | :--- |
+| `$frieze-img` | `url('../img/cenefa_sin_fondo.svg')` | Imagen SVG de la cenefa |
+| `$frieze-bg` | `$blanco-hueso` (#F5F5F5) | Color de fondo de la banda (v4.1.3 cambio de transparent a hueso) |
+| `$frieze-size` | `clamp(30px, 8vw, 50px)` | Altura responsive |
+
 ---
 
-*Última actualización: 26 de enero de 2026 - v4.1.0*
+*Última actualización: 30 de enero de 2026 - v4.1.3*

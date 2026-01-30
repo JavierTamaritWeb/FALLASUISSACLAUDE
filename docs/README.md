@@ -11,6 +11,8 @@
 | [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping + autoheight | 26/01/2026 |
 | [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar (thumb/track) + modo oscuro, compat Safari/WebKit | 26/01/2026 |
 | [`i18n-translations.md`](./i18n-translations.md) | i18n: `data-i18n` + `translations.json` (saltos de línea, claves, textos con markup) | 26/01/2026 |
+| [`gestion-tablon.md`](./gestion-tablon.md) | Gestión de contenido dinámico para el Tablón de Anuncios (`data/board.json`) | 30/01/2026 |
+| [`meteo-ui.md`](./meteo-ui.md) | Animaciones y responsividad del icono meteorológico (CSS Transitions/Keyframes) | 30/01/2026 |
 | [`google-search-console.md`](./google-search-console.md) | Verificación Google Search Console | 26/01/2026 |
 | [`robots-configuration.md`](./robots-configuration.md) | Configuración robots.txt y variantes | 26/01/2026 |
 | [`global-styles.md`](./global-styles.md) | Estilos globales: reset CSS, fondo gradiente, modo oscuro y fondo sección Falla (traje regional) | 25/01/2026 |
@@ -60,4 +62,4 @@ Actualiza estos documentos cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 26 de enero de 2026 - v4.0.0*
+*Última actualización: 30 de enero de 2026 - v4.1.2*

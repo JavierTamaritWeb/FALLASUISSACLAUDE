@@ -617,6 +617,63 @@ body.modo-oscuro .board {
 body.modo-oscuro .board__note {
     background: v.$gris-plateado;
 }
+
+// Pinzas del tablón en modo oscuro
+body.modo-oscuro .board__note::before {
+    background: linear-gradient(
+        160deg,
+        v.$gris-oscuro-medio 50%,
+        v.$gris-muy-oscuro 50%
+    );
+}
+
+body.modo-oscuro .board__note::after {
+    background:
+        linear-gradient(
+            to right,
+            transparent 45%,
+            v.$gris-muy-oscuro 45%,
+            v.$gris-muy-oscuro 55%,
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 50% 70%,
+            v.$gris-oscuro-medio 30%,
+            v.$gris-muy-oscuro 30%
+        );
+}
+
+body.modo-oscuro .board__note .clamp-screw {
+    background: radial-gradient(
+        circle at 50% 30%,
+        v.$gris-medio-oscuro 20%,
+        v.$gris-oscuro 20%
+    );
+}
+
+body.modo-oscuro .board__note .clamp-spring {
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 3px,
+        v.$gris-muy-oscuro 3px,
+        v.$gris-muy-oscuro 6px
+    );
+}
+
+// Nombre de archivo en modo oscuro
+body.modo-oscuro .board__file-name,
+body.modo-oscuro .board__file-text {
+    color: v.$primary-color;
+    background-color: v.$gris-muy-oscuro;
+}
+
+// Hover en archivos en modo oscuro
+body.modo-oscuro .board__file-link:hover .board__file-name,
+body.modo-oscuro .board__file-link:hover .board__file-text {
+    color: v.$blanco;
+}
+
 /* ----------------------------------------------
    MODO OSCURO BLOG
 ------------------------------------------------ */

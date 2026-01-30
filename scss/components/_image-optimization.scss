@@ -142,7 +142,7 @@ img[loading="lazy"] {
     animation: imageSkeletonLoading 1.5s infinite;
   }
   
-  &.loaded {
+  &.loaded:not(.animate-icon) {
     opacity: 1;
     background: none;
     animation: none;
