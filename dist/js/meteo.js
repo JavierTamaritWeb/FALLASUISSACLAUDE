@@ -166,12 +166,31 @@ function updateCurrentWeather(data) {
   const sunsElem      = document.getElementById('current-sunset');
 
   if (iconImg) {
+    // Reset classes state
+    iconImg.classList.remove('error');
+    iconImg.classList.remove('loaded');
+    iconImg.classList.remove('animate-icon'); // Remove old class
+    iconImg.classList.remove('weather-animate-in'); // Ensure defined start state
+
+    const handleImageLoad = () => {
+      iconImg.classList.add('loaded');
+      // Trigger new specific animation
+      iconImg.classList.remove('weather-animate-in');
+      void iconImg.offsetWidth; // Force reflow
+      iconImg.classList.add('weather-animate-in');
+      
+      iconImg.removeEventListener('load', handleImageLoad);
+    };
+
+    // Set new source
     iconImg.src = iconUrl;
     iconImg.alt = desc;
-    // Reiniciar la animación del icono meteorológico
-    iconImg.classList.remove('animate-icon');
-    void iconImg.offsetWidth;
-    iconImg.classList.add('animate-icon');
+
+    if (iconImg.complete) {
+      handleImageLoad();
+    } else {
+      iconImg.addEventListener('load', handleImageLoad);
+    }
   }
   if (tempElem)      { tempElem.textContent = `${Math.round(temp)}°C`; }
   if (descElem)      { descElem.textContent = capitalize(desc); }

@@ -50,26 +50,7 @@
       "eventos": {
         "titulo": "Eventos",
         "calendario": "Calendario",
-        "tablon": "Tablón de Anuncios",
-        "tablonNotas": {
-            "nota1": "📌 IMPORTANTE 🛎️<br> 27-06-2025 a las 18:30h<br>📝 Proclamación Representantes 2026<br> 🛎️ Las Naves<br>Calle Juan Verdeguer, 16 - Valencia",
-            "nota2": "📌 RECORDATORIO <br> 15-02-2026 19:00 h<br>📝 Cita<br> Crida de La Punta",
-            "nota3": "📌 RECORDATORIO <br> 22-02-2026 19:00 h<br>📝 Cita<br> Crida de Valencia",
-            "nota4": "📌 RECORDATORIO <br> 18-01-2026 <br>📝 Presentación de la Falla<br> Asuntos: Presentación de la Falla 2025-26",
-            "nota5": "📌 AVISO <br> Inscripción abierta hasta<br>30-09-2025 <br>🎳​ CAMPEONATO DE BOLOS<br> Asuntos: Abierta la inscripción hasta 30-09-2025<br><<<>>>",
-            "nota6": "📌 AVISO <br> Mig any Fallas 2025<br> OKTOBER FALLEROFEST<br>Juegos Infantiles, Food Truck, Juegos y Actividades Bávaras, etc...<br> <<<>>>",
-            "nota7": "📌 AVISO<br> Inscripción del<br> 01-06-2025 al <br>30-09-2025<br>🎾 CAMPEONATO DE TENIS<br> Asuntos: Campeonato de Tenis Masculino y Femenino",
-            "nota8": "📌 AVISO<br>Inscripción del<br> 01-06-2025 al <br>30-09-2025<br>🏓 CAMPEONATO DE TENIS DE MESA<br>Asuntos: Campeonato de Tenis de Mesa<br> <<<>>>",
-            "nota9": "📌 AVISO<br>Inscripción del<br> 01-06-2025 al <br>20-06-2025<br> CAMPEONATO DE FUTBUL PLAYA<br>Asuntos: Campeonato de Futbol Playa 6x6",
-            "nota10": "📌 AVISO<br>Inscripción del<br> 06-06-2025 al <br>15-06-2025<br>  CAMPEONATO E-SPORT<br>Asuntos: Campeonato de <br>E-Sport",
-            "nota11": "📌 AVISO<br>Inscripción del<br> 15-06-2025 al <br>20-06-2025<br>🏐 CAMPEONATO DE VOLEIBOL<br>Asuntos: Campeonato de Voleibol Playa 6x6 ",
-            "nota12": "📌 AVISO<br>Inscripción del<br> 18-06-2025 al <br>25-09-2025<br> CAMPEONATO DE PETANCA<br>Asuntos: Campeonato Petanca"
-
-
-
-
-        }
-       
+        "tablon": "Tablón de Anuncios"
       },
       "quieres":{
         "titulo": "¿Quieres saber mas sobre nuestra falla?",
@@ -327,21 +308,7 @@
       "eventos": {
         "titulo": "Esdeveniments",
         "calendario": "Calendari",
-        "tablon": "Tauler d'Anuncis",
-        "tablonNotas": {
-            "nota1": "📌 IMPORTANTE 🛎️<br> 27-06-2025 a les 18:30h<br>📝 Proclamació Representants 2026<br> 🛎️ Les Naus<br>Carre Joan Verdeguer, 16 - València",
-            "nota2": "📌 RECORDATORI <br> 15-02-2026 19:00 h<br>📝 Cita<br> Crida de La Punta",
-            "nota3": "📌 RECORDATORI <br> 22-02-2026 19:30 h<br>📝 Cita<br> Crida de València",
-            "nota4": "📌 RECORDATORI <br> 18-01-2026 <br>📝 Presentació de la Falla<br> Assumptes: Presentació de la Falla",
-            "nota5": "📌 AVÍS <br> Inscripció oberta fins al<br>30-09-2025 <br>🎳​ CAMPIONAT DE BITLLES<br>Asumpte: Oberta la inscripció fins<br> 30-09-2025",
-            "nota6": "📌 AVÍS <br> Mig any Fallas 2025<br> OKTOBER FALLEROFEST<br>Jocs Infantils, Food Truck, Jocs y Activitats Bàvares, etc...<br> <<<>>>",
-            "nota7": "📌 AVÍS<br> Inscripció del<br> 01-06-2025 al <br>30-09-2025<br>🎾 CAMPIONAT DE TENIS<br> Assumpte: Campionat de Tennis Masculí i Femení",
-            "nota8": "📌 AVÍS<br>Inscripció del<br> 01-06-2025 al <br>30-09-2025<br>🏓 CAMPIONAT DE TENIS DE TAULA<br>Assumpte: Campionat de Tennis de Taula",
-            "nota9": "📌 AVÍS<br>Inscripció del<br> 01-06-2025 al <br>20-06-2025<br> CAMPIONAT DE FUTBOL PLATJA<br>Assumpte: Campionat de Futbol Platja 6x6",
-            "nota10": "📌 AVÍS<br>Inscripció del<br> 06-06-2025 al <br>15-06-2025<br>  CAMPIONAT E-SPORT<br>Assumpte: Campionat <br>d'E-Sport",
-            "nota11": "📌 AVÍS<br>Inscripció del<br> 01-06-2025 al <br>20-06-2025<br>🏐 CAMPIONAT DE VOLEIBOL<br>Assumpte: Campionat de Voleibol Platja 6x6",
-            "nota12": "📌 AVÍS<br>Inscripció del<br> 18-06-2025 al <br>25-09-2025<br> CAMPIONAT DE PETANCA <br>>Assumpte: Campionat de Petanca"
-        }
+        "tablon": "Tauler d'Anuncis"
       },
       "quieres":{
         "titulo": "Vols saber més sobre la nostra Falla?",
@@ -561,14 +528,7 @@
       "eventos": {
         "titulo": "Events",
         "calendario": "Calendar",
-        "tablon": "Notice Board",
-        "tablonNotas": {
-            "nota1": "📌 NEXT APPOINTMENT <br> 00-00-0000 00:00 h<br>📝 L'APUNTÀ<br>☕ Don't hesitate... Sign up!",
-            "nota2": "📌 COMMUNICATION <br> 00-00-0000 00:00 h<br>📝 Present progress Q3<br>☕ Bring product samples",
-            "nota3": "📌 REMINDER <br> 00-00-0000 00:00 h<br>📝 Present progress Q3<br>☕ Bring product samples",
-            "nota4": "📌 NOTES <br> 00-00-0000 00:00 h<br>📝 Present progress Q3<br>☕ Bring product samples"
-        }
-       
+        "tablon": "Notice Board"
       },
       "calendario": {
         "titulo": "Calendar",
@@ -709,13 +669,7 @@
       "eventos": {
         "titulo": "Événements",
         "calendario": "Calendrier",
-        "tablon": "Tableau d'Annonces",
-        "tablonNotas": {
-            "nota1": "📌 PROCHAINE RENCONTRE <br> 00-00-0000 00:00 h<br>📝 L'APUNTÀ<br>☕ N'hésitez pas... Inscrivez-vous!",
-            "nota2": "📌 COMMUNICATION <br> 00-00-0000 00:00 h<br>📝 Présenter les progrès du T3<br>☕ Apporter des échantillons de produit",
-            "nota3": "📌 RAPPEL <br> 00-00-0000 00:00 h<br>📝 Présenter les progrès du T3<br>☕ Apporter des échantillons de produit",
-            "nota4": "📌 NOTES <br> 00-00-0000 00:00 h<br>📝 Présenter les progrès du T3<br>☕ Apporter des échantillons de produit"
-        }
+        "tablon": "Tableau d'Annonces"
       },
       "calendario": {
         "titulo": "Calendrier",

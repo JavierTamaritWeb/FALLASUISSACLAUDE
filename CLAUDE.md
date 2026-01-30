@@ -1,9 +1,9 @@
 # CLAUDE.md
 
-**Version:** 4.1.1
-**Last Updated:** 27 de enero de 2026
+**Version:** 4.1.3
+**Last Updated:** 30 de enero de 2026
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with the code in this repository.
 
 ## Project Overview
 
@@ -27,6 +27,9 @@ WEBFALLASUISSA is the official website for Falla Suïssa - L'Alqueria del Favero
 - **Mobile menu fix (v4.0.0):** The backdrop is inserted inside `.header__barra` (not `body`) to ensure proper z-index stacking context. Menu z-index: 2500, backdrop: 1500, menu button: 2600
 - **Gradient transitions (v4.1.0):** `.quieres-mas` and `.countdown__contenedor` use `::before` pseudo-element for gradient. Dark mode fades opacity to 0. Tests: `quieres-mas-transition.e2e.spec.js`, `countdown-transition.e2e.spec.js`
 - **Desktop navigation visibility fix (v4.1.1):** Added `position: relative` and `z-index: 5` to `.navegacion` (desktop >768px) to raise text above the glassmorphism background overlay.
+- **Dynamic Bulletin Board (v4.1.2):** The "Tablón de Anuncios" in `eventos.html` is dynamically populated from `data/board.json` via `js/board.js`. See `docs/gestion-tablon.md`.
+- **Weather Icon Animation (v4.1.2):** The main weather icon (`#current-icon-img`) uses a composite animation (`weatherIconFade` + `weatherIconSway`). The sway is horizontal (`translateX`) and smooth. Width is set to `20rem` on screens >1200px. See `docs/meteo-ui.md`.
+- **Frieze Background (v4.1.3):** The decorative frieze now uses `$blanco-hueso` background instead of transparent. Defined in `scss/abstracts/_variables.scss`. See `docs/global-styles.md`.
 
 ## Build Commands
 
@@ -62,9 +65,9 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 
 ### Directory Structure
 - `scss/` - Modular SCSS: abstracts/, base/, layout/, components/, animaciones/, optimization/, sociales/
-- `js/` - 21 modules: dark.js (theme), lang.js (i18n), calendario.js, meteo.js, galeria_[1-4].js, nav-menu.js, swiper.js, pwa-manager.js, etc.
+- `js/` - Modules: `board.js` (dynamic bulletin), `meteo.js` (weather logic), plus previous modules (dark.js, lang.js, etc.)
 - `scripts/` - Node.js utilities: generate-og-image.mjs, serve-dist.mjs
-- `data/` - JSON files: translations.json, eventos.json, calendarData.json, fallas.json, config.json, dataPages[1-4].json
+- `data/` - JSON files: `board.json` (bulletin board content), translations.json, eventos.json, calendarData.json, fallas.json, config.json, dataPages[1-4].json
 - `dist/` - Production build output (DO NOT edit directly)
 - `tests/` - Playwright E2E tests (24 suites)
 - `docs/` - Technical documentation (Markdown)

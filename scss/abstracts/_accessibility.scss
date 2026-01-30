@@ -199,7 +199,7 @@ img[loading="lazy"] {
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
   
-  &.loaded {
+  &.loaded:not(.animate-icon) {
     animation: none;
     background: none;
   }

@@ -4,8 +4,41 @@
 @use '../abstracts/mixins' as m;
 
 /* ------------------------------------------------
-   Animaciones globales
+   Animaciones locales
 ------------------------------------------------ */
+@keyframes weatherIconSway {
+  0% {
+    transform: translateX(0);
+    animation-timing-function: ease-out;
+  }
+  25% {
+    transform: translateX(-10px);
+    animation-timing-function: ease-in-out;
+  }
+  75% {
+    transform: translateX(10px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes weatherIconFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.weather-animate-in {
+  animation: 
+    weatherIconFade 1s ease-out forwards,
+    weatherIconSway 4s infinite;
+}
+
 /* ------------------------------------------------
    Estilos base de .meteo
 ------------------------------------------------ */
@@ -406,6 +439,12 @@
 #current-icon-img {
   width: 8rem;  // Tamaño para pantallas grandes (768px+)
   height: auto;
+}
+
+@media (min-width: 1200px) {
+  #current-icon-img {
+    width: 20rem; // Doble de tamaño en pantallas muy grandes
+  }
 }
 
 @media (max-width: 767px) {

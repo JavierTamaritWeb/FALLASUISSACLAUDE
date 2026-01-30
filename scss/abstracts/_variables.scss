@@ -95,3 +95,10 @@ $transicion: 0.3s ease;
 // =============================================================================
 
 $img-path: "../img/";
+
+
+//FRIEZE
+
+$frieze-img: url('../img/cenefa_sin_fondo.svg');
+$frieze-bg: $blanco-hueso;
+$frieze-size: clamp(30px, 8vw, 50px);

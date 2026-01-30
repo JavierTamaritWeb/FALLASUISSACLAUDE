@@ -1,0 +1,294 @@
+// components/_board.scss
+// Estilos del tablón de anuncios dinámico
+
+@use '../abstracts/variables' as v;
+
+// Variables locales para colores de iconos de archivo
+$icon-pdf-color: #E03F3F;
+$icon-img-color: v.$turquesa;
+
+// Contenedor principal del tablón
+.board {
+  min-height: auto;
+  max-width: 90%;
+  padding: 3rem;
+  background: v.$gris-plateado;
+  display: grid;
+  gap: 2rem;
+  position: relative;
+  justify-content: center;
+  margin-top: 3rem;
+  border-radius: 1rem;
+  border: 1px solid v.$gris-medio-azulado;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+  // Mensaje cuando no hay notas
+  &__empty {
+    font-size: 1.6rem;
+    color: v.$gris-medio-oscuro;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  // Tarjeta contenedora (nota + adjuntos)
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Nota individual
+  &__note {
+    border-radius: .5rem;
+    background: v.$blanco;
+    margin: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    transform: rotate(0.5deg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: noteAppear 0.5s ease-out;
+
+    // Pinza superior (gradiente)
+    &::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 25px;
+      background:
+          linear-gradient(
+              160deg,
+              v.$gris-medio-azulado 50%,
+              v.$gris-oscuro-frio 50%
+          );
+      border-radius: 4px 4px 8px 8px;
+      box-shadow:
+          0 3px 6px rgba(0,0,0,0.2),
+          inset 0 -2px 2px rgba(255,255,255,0.2);
+      z-index: 2;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    // Detalle inferior de la pinza
+    &::after {
+      content: '';
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 15px;
+      background:
+          linear-gradient(
+              to right,
+              transparent 45%,
+              v.$gris-oscuro-frio 45%,
+              v.$gris-oscuro-frio 55%,
+              transparent 55%
+          ),
+          radial-gradient(
+              circle at 50% 70%,
+              v.$gris-medio-azulado 30%,
+              v.$gris-oscuro-frio 30%
+          );
+      border-radius: 3px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    // Tornillo de la pinza
+    .clamp-screw {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(
+        circle at 50% 30%,
+        v.$gris-plateado 20%,
+        #808080 20%
+      );
+      border-radius: 50%;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      z-index: 3;
+      transition: background 0.3s ease;
+    }
+
+    // Muelle de la pinza
+    .clamp-spring {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 30px;
+      height: 4px;
+      background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 3px,
+          v.$gris-oscuro-frio 3px,
+          v.$gris-oscuro-frio 6px
+      );
+      transform: translateX(-50%);
+      opacity: 0.8;
+      transition: background 0.3s ease;
+    }
+
+    // Hover en nota
+    &:hover {
+      transform: rotate(-0.5deg) translateY(-3px);
+    }
+
+    &:hover::before {
+      transform: translateX(-50%) translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  }
+
+  // Contenido de texto de la nota
+  &__note-content {
+    font-family: 'Courier Prime', monospace;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    color: black;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  // Contenedor de archivos adjuntos
+  &__file {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  // Lista de adjuntos múltiples
+  &__attachments {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    list-style: none;
+    padding: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  // Enlace de archivo
+  &__file-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    // Asegurar alineación de elementos internos
+    svg {
+      display: block;
+    }
+  }
+
+  // Icono SVG de archivo
+  &__file-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+
+    // Fondo del icono (path principal)
+    path:first-child {
+      transition: fill 0.3s ease;
+    }
+
+    // Variante PDF (rojo)
+    &--pdf path:first-child {
+      fill: $icon-pdf-color;
+    }
+
+    // Variante IMG (turquesa)
+    &--img path:first-child {
+      fill: $icon-img-color;
+    }
+  }
+
+  // Nombre del archivo (traducible)
+  &__file-name {
+    font-size: 1.4rem;
+    color: v.$primary-color;
+    background-color: v.$blanco;
+    border-radius: v.$border-radius;
+    padding: 0.8rem 1.2rem;
+    margin: 0;
+    white-space: nowrap;
+    transition: color 0.3s ease, background-color 0.3s ease;
+  }
+
+  // Compatibilidad con clase antigua .board__file-text
+  &__file-text {
+    font-size: 1.4rem;
+    color: v.$primary-color;
+    background-color: v.$blanco;
+    border-radius: 1rem;
+    padding: 0.8rem 1.2rem;
+    text-align: left;
+    margin: 0;
+    white-space: nowrap;
+    transition: color 0.3s ease, background-color 0.3s ease;
+  }
+}
+
+// Animación de aparición de nota
+@keyframes noteAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) rotate(3deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0.5deg);
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  .board {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    max-width: 95%;
+    margin: 2rem;
+    padding-top: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .board {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .board {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
