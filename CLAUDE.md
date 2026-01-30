@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Version:** 4.1.3
+**Version:** 4.2.0
 **Last Updated:** 30 de enero de 2026
 
 This file provides guidance to Claude Code (claude.ai/code) when working with the code in this repository.
