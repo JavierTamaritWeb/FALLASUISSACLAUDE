@@ -13,6 +13,13 @@
   background-size: auto 100%;
   background-position: center;
   background-color: v.$frieze-bg; 
+  
+  transition: background-color var(--theme-transition, 2.4s ease-in-out), border-color var(--theme-transition, 2.4s ease-in-out);
+
+  body.modo-oscuro & {
+    background-color: v.$frieze-bg-dark;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   z-index: 10;
 

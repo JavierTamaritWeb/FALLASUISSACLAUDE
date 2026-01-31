@@ -281,3 +281,49 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 ---
 
 *Última actualización: 30 de enero de 2026 - v4.1.3*
+
+## 🏛️ Componente Frieze (Cenefa)
+
+La cenefa (`.frieze`) es un elemento decorativo que utiliza transiciones suaves para adaptarse al cambio de tema.
+
+- **Archivo fuente**: `scss/base/_frieze.scss`
+- **Función**: Borde decorativo superior/inferior.
+
+### Colores y Comportamiento
+
+| Tema | Variable SCSS | Color |
+|------|--------------|-------|
+| Claro | `$frieze-bg` | `$blanco-hueso` (#F5F5F5) |
+| Oscuro | `$frieze-bg-dark` | `$gris-muy-oscuro` (#444) |
+
+### Implementación Técnica
+
+Utiliza `var(--theme-transition)` (2.4s) para sincronizarse con el fade del fondo global.
+
+```scss
+.frieze {
+  background-color: v.$frieze-bg;
+  
+  // Transición sincronizada
+  transition: background-color var(--theme-transition, 2.4s ease-in-out);
+
+  // Sobrescritura para modo oscuro
+  body.modo-oscuro & {
+    background-color: v.$frieze-bg-dark;
+  }
+}
+```
+
+### Implementación SCSS
+
+```scss
+.frieze {
+  // Propiedades base
+  transition: background-color var(--theme-transition, 2.4s ease-in-out);
+
+  // Selector de contexto para modo oscuro
+  body.modo-oscuro & {
+    background-color: v.$frieze-bg-dark;
+  }
+}
+```
