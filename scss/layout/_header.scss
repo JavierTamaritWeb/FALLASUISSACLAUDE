@@ -14,6 +14,7 @@
   background-color: transparent; // Fondo base transparente, el color lo pone el pseudo-elemento
   padding: 0;
   position: relative;
+  overflow: hidden; // Recorte imagen monumento
   padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
   z-index: 10; // Asegurar contexto de apilamiento
   
@@ -105,6 +106,56 @@
     }
   }
 
+  &__monumento {
+    position: absolute;
+    bottom: 4rem; // Un poco más arriba
+    left: -2rem;  // Un poco a la izquierda
+    width: 20rem; // Más pequeño en móvil (<768px)
+    height: auto;
+    z-index: 1; // Detrás de las olas
+    pointer-events: none;
+    
+    // Contenedor interno relativo para posicionar imágenes absolute
+    // Esto da altura al contenedor si fuera necesario, pero como son absolute, no.
+    
+    &-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: opacity var(--theme-transition);
+      
+      &--light {
+        opacity: 0.8;
+        mix-blend-mode: overlay; // Effect requested
+        // Fallback or adjustment: if invisible, try 'screen' or 'soft-light'
+      }
+      &--dark {
+        position: absolute; // Stack firmly on top
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
+    }
+
+    // Dark Mode Toggle
+    body.modo-oscuro & {
+      .header__monumento-img--light { opacity: 0; }
+      .header__monumento-img--dark { opacity: 1; }
+    }
+    
+    // Responsive
+    @media (min-width: 768px) {
+      width: 38rem;
+      left: -4rem;
+      bottom: -2rem; // Más abajo en tablet
+    }
+    @media (min-width: 1200px) {
+      width: 48rem;
+      left: -6rem;
+      bottom: -5rem; // Más abajo en desktop
+    }
+  }
+
   &__waves {
     position: absolute;
     bottom: 0;
@@ -112,6 +163,7 @@
     width: 100%;
     overflow: hidden;
     line-height: 0;
+    z-index: 5; // Asegurar que estén por encima de la fallera
   }
   &__botones {
     display: flex;
