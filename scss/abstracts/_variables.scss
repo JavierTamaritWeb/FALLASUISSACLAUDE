@@ -103,3 +103,13 @@ $frieze-img: url('../img/cenefa_sin_fondo.svg');
 $frieze-bg: $blanco-hueso;
 $frieze-bg-dark: $gris-muy-oscuro;
 $frieze-size: clamp(30px, 8vw, 50px);
+
+// =============================================================================
+// METEO / FALLERET
+// =============================================================================
+
+$falleret-size-mobile: 55%;   // Ocupa un buen espacio en móvil
+$falleret-size-tablet: 30%;   // Proporcional en tablet
+$falleret-size-desktop: 25%;  // Proporcional en escritorio
+$falleret-size-large: 50%;    // Pantallas grandes (>1200px)
+
