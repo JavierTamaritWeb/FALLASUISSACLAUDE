@@ -93,6 +93,7 @@
 /* ------------------------------------------------
    CLIMA ACTUAL (.weather-current)
 ------------------------------------------------ */
+
 .weather-current {
   padding: 1.5rem;
   background-color: v.$melocotin-claro;
@@ -100,19 +101,72 @@
   color: v.$blanco-hueso;
   border-radius: 1rem;
   margin-top: 2.5rem;
+  position: relative;
+  overflow: hidden;
+
+  // IMAGEN DECORATIVA FALLERET
+  .current-falleret {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); // Centrado verticalmente
+    left: 2%; // Pegado a la izquierda
+    
+    // Dimensiones proporcionales y responsivas
+    width: v.$falleret-size-mobile !important;
+    min-width: 140px; // Asegura que nunca sea demasiado pequeño
+    max-width: 250px; // Evita que sea gigantesco en pantallas normales
+    height: auto !important;
+    max-height: 90%; // Evita que se salga por arriba/abajo si el widget es bajo
+    object-fit: contain;
+    
+    z-index: 1;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
+    opacity: 1; // Un poco más visible
+    
+    @media (min-width: 768px) {
+       width: v.$falleret-size-tablet !important;
+       left: 5%;
+    }
+
+    @media (min-width: 1024px) {
+      width: v.$falleret-size-desktop !important;
+      left: 10%; // Más centrado en el espacio negativo
+    }
+
+    @media (min-width: 1200px) {
+      width: v.$falleret-size-large !important;
+      max-width: 500px; // Doble del límite original
+      left: 5%; // Ajustar posición si es necesario
+    }
+  }
 
   .current-wrapper {
+    position: relative; // Para z-index
+    z-index: 2;         // Texto por encima de la imagen
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-end; // Alinea el contenido a la derecha
+    padding-right: 1.5rem; // Margen derecho para que no toque el borde
+    width: 100%;
+    
     @include m.fadeIn(1s, 0s);
+
+    .current-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center; // Centra los elementos internos (icono, texto) entre sí
+      text-align: center;
+      width: 60%; // Limita el ancho para dejar espacio a la izquierda para el Falleret
+    }
 
     .current-icon {
       margin-bottom: 1rem;
 
       img {
-        width: 60px;  // Reducido de 100px a 60px
-        height: 60px; // Reducido de 100px a 60px
+        width: 60px;
+        height: 60px;
         
         @media (max-width: 767px) {
           width: 30px;  // Mucho más pequeño en móviles
@@ -418,6 +472,7 @@
   }
 
   /* Clima actual - mantener vertical pero centrado en pantallas grandes */
+  /*
   .weather-current .current-wrapper {
     flex-direction: column;
     align-items: center;
@@ -425,14 +480,15 @@
     .current-icon {
       margin-bottom: 1rem;
       margin-right: 0;
-      order: 1; /* El icono va primero */
+      order: 1; // El icono va primero
     }
     
     .current-info {
-      order: 2; /* La información va después */
+      order: 2; // La información va después
       text-align: center;
     }
   }
+  */
 }
 
 /* --- Icono principal grande (current-icon-img) --- */
