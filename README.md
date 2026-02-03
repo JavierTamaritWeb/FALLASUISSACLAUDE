@@ -19,7 +19,7 @@
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-**🆕 Última actualización:** 27 de enero de 2026 - v4.1.1 - Corrección de visibilidad en menú desktop (Light Mode) + mejoras de transición de gradientes
+**🆕 Última actualización:** 28 de enero de 2026 - v4.1.2 - Corrección de notificaciones duplicadas (Debounce) + mejoras de documentación
 
 </div>
 

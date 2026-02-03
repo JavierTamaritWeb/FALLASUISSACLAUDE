@@ -188,6 +188,12 @@ Para lograr una transición suave entre el modo claro (gradiente azul) y el modo
 
 Esta lógica se aplica en `scss/layout/_header.scss` y `scss/animaciones/_modo-oscuro.scss`.
 
+### 🔔 Notificación de cambio de tema (Toast)
+
+Al alternar el modo oscuro/claro, aparece una notificación breve (`#notificacion`).
+- **Lógica de protección (Debounce):** En `js/dark.js`, se verifica si la notificación ya está visible (`.mostrar`) para evitar solapamientos o duplicados.
+- **Limpieza:** Se eliminó código redundante en `js/lang.js` que causaba conflictos de inicialización (doble disparo al cargar).
+
 ---
 
 ## 🧊 Estilo "glass" (claro y oscuro)
