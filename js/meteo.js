@@ -230,6 +230,41 @@ function updateCurrentWeather(data) {
   if (sunsElem)      { 
     sunsElem.textContent = `${translate("meteo.atardecer") || "Atardecer"}: ${sunsetTime}`; 
   }
+
+  // --- NUEVO CÓDIGO: Cambiar imagen .current-falleret según lluvia ---
+  const falleretImg = document.querySelector('.current-falleret');
+  if (falleretImg) {
+    const weatherMain = weather && weather[0] ? weather[0].main : '';
+    // Detectar lluvia si condition es Rain, Drizzle, Thunderstorm o existe objeto 'rain'
+    const isRaining = (weatherMain === 'Rain' || weatherMain === 'Drizzle' || weatherMain === 'Thunderstorm' || (typeof rain !== 'undefined'));
+    
+    // Rutas relativas desde index.html
+    const targetSrc = isRaining ? 'img/decoracion/falleretPlora.svg' : 'img/decoracion/falleretPro.svg';
+
+    // Añadir transición para suavidad
+    falleretImg.style.transition = 'opacity 0.5s ease';
+
+    // Verificar si la imagen necesita cambiar (comparamos con el final de la URL actual)
+    // Esto evita reiniciar la animación si ya está la imagen correcta
+    if (!falleretImg.src.endsWith(targetSrc.split('/').pop())) {
+       // 1. Desvanecer
+       falleretImg.style.opacity = '0';
+       
+       setTimeout(() => {
+          // 2. Cambiar fuente
+          falleretImg.src = targetSrc;
+          
+          // 3. Reaparecer cuando cargue
+          falleretImg.onload = () => {
+             falleretImg.style.opacity = '1';
+          };
+          // Fallback por seguridad
+          setTimeout(() => { falleretImg.style.opacity = '1'; }, 200);
+       }, 500); // Esperar a que termine la opacidad (0.5s)
+    } else {
+        falleretImg.style.opacity = '1';
+    }
+  }
 }
 
 /**
