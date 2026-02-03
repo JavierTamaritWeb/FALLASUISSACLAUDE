@@ -143,30 +143,12 @@ if (langSwitcher && langOptions) {
 // Inicialización al cargar la página
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    // Ejemplo: Si usas modo oscuro, lo aplicas según lo guardado en localStorage
-    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
-    if (darkModeEnabled) {
-      document.body.classList.add('modo-oscuro');
-      document.documentElement.classList.add('modo-oscuro');
-      document.body.classList.remove('modo-claro');
-      document.documentElement.classList.remove('modo-claro');
-    } else {
-      document.documentElement.classList.remove('modo-oscuro');
-      document.body.classList.add('modo-claro');
-      document.documentElement.classList.add('modo-claro');
-    }
-    
     // Cargar las traducciones y actualizar el contenido transable
     await loadTranslations();
     updateTranslations();
 
     // Pintar el label del botón de idioma según el idioma actual
     actualizarLabelIdioma();
-
-    // Si existe una función para actualizar el icono del modo (modo oscuro/claro), se llama
-    if (typeof actualizarIcono === "function") {
-      actualizarIcono();
-    }
     
     // Aquí se pueden inicializar otras funciones (por ejemplo, fetchCurrentWeather, initAnimations, etc.)
   } catch (error) {

@@ -46,9 +46,7 @@ Se aplica la clase `modo-oscuro` tanto en `document.body` como en `document.docu
 - `js/dark.js`
   - Al cargar: respeta `localStorage.darkMode`
   - Al hacer click: sincroniza `html` con el estado real de `body`
-
-- `js/lang.js`
-  - En su inicialización también aplica la clase, para evitar inconsistencias según el orden de carga.
+  - Nota: Ya no se utiliza `js/lang.js` para esta tarea para evitar race conditions.
 
 ## 🧪 Tests (para que no se rompa)
 

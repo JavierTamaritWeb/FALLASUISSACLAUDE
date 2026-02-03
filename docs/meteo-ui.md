@@ -38,7 +38,20 @@ El icono utiliza una combinación de dos animaciones CSS simultáneas para logra
     *   **75% -> 100%:** Retorno al centro (`ease-out`).
 
 > **Nota de Diseño:** Se reemplazó la antigua animación de rotación (`rotate`) por `translateX` para ofrecer un movimiento más fluido ("suave") y menos mecánico.
+### 🌧️ Lógica de Lluvia (Falleret)
 
+El widget incluye una imagen decorativa ("Falleret" - *falleretPro.svg*) que reacciona a las condiciones meteorológicas en tiempo real.
+
+- **Condición Normal:** Se muestra `falleretPro.svg`.
+- **Lluvia/Tormenta:** Si la API devuelve un código de condición de lluvia, llovizna o tormenta, la imagen cambia suavemente a `falleretPlora.svg` (Falleret llorando/triste).
+- **Dimensiones:** Ambas imágenes mantienen dimensiones idénticas para evitar saltos de layout (CLS).
+
+```javascript
+/* Lógica simplificada (js/meteo.js) */
+const isRaining = ['Rain', 'Drizzle', 'Thunderstorm'].includes(mainCondition);
+const newSrc = isRaining ? 'img/decoracion/falleretPlora.svg' : 'img/decoracion/falleretPro.svg';
+// Se aplica con una transición de opacidad (fade-out -> src change -> fade-in)
+```
 ```scss
 .weather-animate-in {
   animation: 

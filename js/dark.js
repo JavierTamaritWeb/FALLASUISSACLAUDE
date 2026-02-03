@@ -202,12 +202,12 @@ function actualizarIcono() {
   if (document.body.classList.contains('modo-oscuro')) {
     // Modo oscuro => icono del sol
     botonModoOscuro.innerHTML = getSunIcon();
-    mostrarNotificacion("Modo oscuro activado");
+    // Notificación se maneja en el evento click
     botonModoOscuro.setAttribute('aria-label', 'Alternar modo claro');
   } else {
     // Modo claro => icono de la luna
     botonModoOscuro.innerHTML = getMoonIcon();
-    mostrarNotificacion("Modo claro activado");
+    // Notificación se maneja en el evento click
     botonModoOscuro.setAttribute('aria-label', 'Alternar modo oscuro');
   }
 }
@@ -244,6 +244,13 @@ botonModoOscuro.addEventListener('click', () => {
   localStorage.setItem('darkMode', document.body.classList.contains('modo-oscuro'));
   actualizarThemeColor();
   actualizarIcono();
+  
+  // Mostrar notificación solo al hacer clic
+  if (document.body.classList.contains('modo-oscuro')) {
+    mostrarNotificacion("Modo oscuro activado");
+  } else {
+    mostrarNotificacion("Modo claro activado");
+  }
   
   // Forzar actualización específica para iOS
   if (document.documentElement.classList.contains('ios-device')) {
@@ -294,14 +301,25 @@ function forzarActualizacionTema() {
   }, 50);
 }
 
+let notificationTimeout;
+
 /**
  * Muestra una notificación temporal.
  */
 function mostrarNotificacion(mensaje, duracion = 4000) {
   const notificacion = document.getElementById('notificacion');
+  
+  // Evitar duplicados inmediatos del mismo mensaje
+  if (notificacion.classList.contains('mostrar') && notificacion.textContent === mensaje) {
+    return;
+  }
+  
+  if (notificationTimeout) clearTimeout(notificationTimeout);
+  
   notificacion.textContent = mensaje;
   notificacion.classList.add('mostrar');
-  setTimeout(() => {
+  
+  notificationTimeout = setTimeout(() => {
     notificacion.classList.remove('mostrar');
   }, duracion);
 }

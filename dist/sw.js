@@ -1,7 +1,7 @@
 // Service Worker para WEBFALLASUISSA
 // Cache crítico y estrategias de performance
 
-const CACHE_NAME = 'falla-suissa-v2.0.1';
+const CACHE_NAME = 'falla-suissa-v2.0.3';
 const CRITICAL_CACHE = 'falla-critical-v2';
 
 // Recursos críticos para cache inmediato

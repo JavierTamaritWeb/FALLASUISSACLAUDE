@@ -7,9 +7,9 @@
 | [`build-and-deploy.md`](./build-and-deploy.md) | Guía de build, `dist/` y despliegue | 26/01/2026 |
 | [`e2e-testing.md`](./e2e-testing.md) | Tests end-to-end (Playwright): 20 suites | 26/01/2026 |
 | [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter: `og-share.png`, cache-buster `?v=...` y tests anti-regresión | 26/01/2026 |
-| [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación: header fijo, menú móvil/desktop (fix z-index v4.0.0 y v4.1.1) | 27/01/2026 |
+| [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación: header fijo, menú móvil/desktop (fix duplicate notifications v4.1.2) | 28/01/2026 |
 | [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping + autoheight | 26/01/2026 |
-| [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar (thumb/track) + modo oscuro, compat Safari/WebKit | 26/01/2026 |
+| [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar (thumb/track) + modo oscuro, compat Safari/WebKit (updated ref) | 28/01/2026 |
 | [`i18n-translations.md`](./i18n-translations.md) | i18n: `data-i18n` + `translations.json` (saltos de línea, claves, textos con markup) | 26/01/2026 |
 | [`gestion-tablon.md`](./gestion-tablon.md) | Gestión de contenido dinámico para el Tablón de Anuncios (`data/board.json`) | 30/01/2026 |
 | [`meteo-ui.md`](./meteo-ui.md) | Animaciones y responsividad del icono meteorológico (CSS Transitions/Keyframes) | 30/01/2026 |
