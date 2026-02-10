@@ -1,5 +1,12 @@
 # Apache .htaccess para Falla Suïssa
 # Configuración optimizada para performance y SEO
+RewriteEngine On
+
+# Forzar HTTPS y dominio canónico (sin www) en una sola redirección
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\.fallasuissa\.es$ [NC]
+RewriteRule ^ https://fallasuissa.es%{REQUEST_URI} [R=301,L]
+
 
 # =======================================================================
 # COMPRESIÓN GZIP
