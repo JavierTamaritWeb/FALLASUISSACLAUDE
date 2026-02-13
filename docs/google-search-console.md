@@ -17,10 +17,10 @@
    - Elige "Archivo HTML" como método de verificación
    - Google generará un archivo como: `googleXXXXXXXXXXXXXXXX.html`
 
-4. **Reemplazar Archivo Template:**
-   - Descarga el archivo que Google te proporciona
-   - Reemplaza `google12345678901234567890.html` con tu archivo real
-   - **No modifiques el contenido** del archivo de Google
+4. **Disponer el Archivo HTML:**
+   - Descarga el archivo que Google te proporciona (ej: `googleXXXXXXXXXXXXXXXX.html`)
+   - Colócalo en la raíz del proyecto
+   - **Nota:** El archivo `google-site-verification.html` presente en el repositorio contiene solo instrucciones, no lo uses para verificar.
 
 5. **Verificar Acceso:**
    - Asegúrate de que el archivo sea accesible en:
@@ -91,4 +91,4 @@ Una vez verificado tendrás acceso a:
 
 ---
 
-*Última actualización: 26 de enero de 2026 - v4.0.0*
+*Última actualización: 13 de febrero de 2026 - v4.2.9 - Rename y clarificación de instrucciones*

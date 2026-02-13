@@ -1,7 +1,7 @@
 # CLAUDE.md
 
-**Version:** 4.2.7
-**Last Updated:** 4 de febrero de 2026
+**Version:** 4.2.9
+**Last Updated:** 13 de febrero de 2026
 
 This file provides guidance to Claude Code (claude.ai/code) when working with the code in this repository.
 
@@ -31,6 +31,8 @@ WEBFALLASUISSA is the official website for Falla Suïssa - L'Alqueria del Favero
 - **Weather Icon Animation (v4.1.2):** The main weather icon (`#current-icon-img`) uses a composite animation (`weatherIconFade` + `weatherIconSway`). The sway is horizontal (`translateX`) and smooth. Width is set to `20rem` on screens >1200px. See `docs/meteo-ui.md`.
 - **Frieze Background (v4.1.3):** The decorative frieze now uses `$blanco-hueso` background instead of transparent. Defined in `scss/abstracts/_variables.scss`. See `docs/global-styles.md`.
 - **Dark Mode Notification Fix (v4.2.7):** Removed duplicate animation rule for `.header__notificacion:not(:empty)` in `_accessibility.scss` that conflicted with `#notificacion.mostrar` animation in `_notificaciones.scss`. The conflict caused a "ghost notification" to briefly appear after the main notification faded out.
+- **.htaccess Optimization (v4.2.8):** Updated `.htaccess` with enhanced security headers, Gzip compression, browser caching, and friendly URL redirects.
+- **Google Verification (v4.2.9):** Renamed verification file to `google-site-verification.html` for better project organization.
 
 ## Build Commands
 

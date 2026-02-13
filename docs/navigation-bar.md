@@ -510,4 +510,4 @@ npm run build
 
 ---
 
-*Última actualización: 27 de enero de 2026 - v4.1.2*
+*Última actualización: 13 de febrero de 2026 - v4.2.9*
