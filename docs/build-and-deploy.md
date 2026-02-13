@@ -70,7 +70,19 @@ El build ejecuta `updateDistSitemapsLastmod` para actualizar `lastmod` en:
 
 La fecha se calcula usando el `mtime` real de los archivos en `dist/`.
 
-## 🌐 Despliegue (opciones)
+## � Configuración del Servidor (.htaccess)
+
+El proyecto incluye un archivo `.htaccess` optimizado para servidores Apache. Este archivo se debe subir a la raíz del servidor (`dist/` incluye el contenido que debe ir al servidor, pero asegúrate de que el archivo `.htaccess` oculto se copie también).
+
+**Funcionalidades principales (v4.2.8):**
+- **HTTPS y Rutas:** Redirección forzada a HTTPS y eliminación de `www`.
+- **Compresión:** Gzip activado para HTML, CSS, JS, fuentes e imágenes SVG.
+- **Caché:** Políticas de expiración eficientes para assets estáticos.
+- **Seguridad:** Cabeceras de seguridad como `X-Content-Type-Options`, `X-Frame-Options` y `Permissions-Policy`.
+- **Tipos MIME:** Soporte para WebP, AVIF y ficheros webmanifest.
+- **URLs Amigables:** Redirección automática de URLs sin extensión a `.html`.
+
+## �🌐 Despliegue (opciones)
 
 Este repo mantiene `dist/` versionado. Eso permite desplegar en hosts simples (FTP/hosting estático) sin necesidad de Node en el servidor.
 
@@ -135,4 +147,4 @@ Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo 
 
 ---
 
-*Última actualización: 26 de enero de 2026 - v4.0.0*
+*Última actualización: 13 de febrero de 2026 - v4.2.9 - Actualización de .htaccess y verificaciones*

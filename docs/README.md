@@ -62,4 +62,4 @@ Actualiza estos documentos cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 30 de enero de 2026 - v4.1.2*
+*Última actualización: 13 de febrero de 2026 - v4.2.9*

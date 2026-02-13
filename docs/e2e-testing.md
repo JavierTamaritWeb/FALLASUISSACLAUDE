@@ -427,4 +427,4 @@ Guía técnica:
 
 ---
 
-*Última actualización: 27 de enero de 2026 - v4.1.0 (25 test suites)*
+*Última actualización: 13 de febrero de 2026 - v4.2.9*

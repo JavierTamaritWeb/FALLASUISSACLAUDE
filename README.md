@@ -19,7 +19,7 @@
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-**🆕 Última actualización:** 28 de enero de 2026 - v4.1.2 - Corrección de notificaciones duplicadas (Debounce) + mejoras de documentación
+**🆕 Última actualización:** 13 de febrero de 2026 - v4.2.9 - Optimización de .htaccess y mejora en verificación de Google.
 
 </div>
 
