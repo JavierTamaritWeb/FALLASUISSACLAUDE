@@ -1,6 +1,9 @@
 
 // js/envia.js
 
+// Inicializar EmailJS con el User ID
+emailjs.init("2sroeCfiZ4SiH-ZyX");
+
 document.addEventListener("DOMContentLoaded", function() {
 
   const openModalBtn = document.getElementById('open-quieres-modal');
