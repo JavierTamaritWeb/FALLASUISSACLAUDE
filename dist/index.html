@@ -141,7 +141,19 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  
+
+  <!-- Banner de subvención (solo primera visita) -->
+  <div id="banner-subvencion" class="banner-subvencion oculto" role="dialog" aria-label="Información de subvención" aria-modal="true">
+    <div class="banner-subvencion__contenido">
+      <button class="banner-subvencion__cerrar" aria-label="Cerrar banner">&times;</button>
+      <picture>
+        <source srcset="img/subvencion.avif" type="image/avif">
+        <source srcset="img/subvencion.webp" type="image/webp">
+        <img class="banner-subvencion__imagen" src="img/subvencion.png" alt="Información de subvención">
+      </picture>
+    </div>
+  </div>
+
   <header class="header">
     
     <div class="header__contenido contenedor">
@@ -1066,5 +1078,6 @@
     }
   </script>
   <script src="js/envia.js"></script>
+  <script src="js/banner-subvencion.js"></script>
 </body>
 </html>

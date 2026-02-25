@@ -228,6 +228,41 @@ body.modo-oscuro .quieres-mas::before {
 4. **SIEMPRE** añadir el `::before` a la lista de transiciones en `_modo-oscuro.scss`
 5. Para elementos con `border-radius`, añadir `overflow: hidden` al padre
 
+## 🖼️ Inversión de Imagen con CSS Filter (Banner Subvención)
+
+**Problema:** El banner de subvención muestra una imagen SVG (cargada como `<img>`) con texto negro sobre fondo blanco. En modo oscuro, CSS `color` no afecta al contenido interno de un SVG cargado como `<img>`.
+
+**Solución:** Usar `filter: invert(1) hue-rotate(180deg)` en modo oscuro:
+
+- `invert(1)`: Invierte todos los colores (blanco→negro, negro→blanco)
+- `hue-rotate(180deg)`: Rota el tono 180° para restaurar los rojos (el escudo del Ajuntament se mantiene rojo)
+
+**Importante:** No usar `invert(1)` solo — convierte el rojo del escudo en verde.
+
+### Implementación
+
+```scss
+// En _banner-subvencion.scss
+.banner-subvencion__imagen {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  transition: filter 2.4s ease-in-out;
+}
+
+// En _modo-oscuro.scss
+body.modo-oscuro .banner-subvencion__imagen {
+  filter: invert(1) hue-rotate(180deg);
+}
+```
+
+### Archivos relacionados
+
+| Archivo | Contenido |
+|---------|-----------|
+| `scss/components/_banner-subvencion.scss` | Estilos base + transición filter |
+| `scss/animaciones/_modo-oscuro.scss` | Regla `filter: invert(1) hue-rotate(180deg)` |
+
 ### Forzar reflow en JavaScript
 
 En `js/dark.js`, se fuerza un reflow antes de cambiar las clases de modo para asegurar que la transición se aplique correctamente en todos los navegadores:

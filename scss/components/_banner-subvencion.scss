@@ -1,0 +1,64 @@
+@use '../abstracts/variables' as v;
+
+// Banner de subvención - overlay modal
+.banner-subvencion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1100;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &.oculto {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
+.banner-subvencion__contenido {
+  background-color: v.$blanco;
+  position: relative;
+  padding: 2rem;
+  width: 90%;
+  max-width: 700px;
+  border-radius: v.$border-radius;
+  border: 2px solid v.$primary-color;
+  animation: scaleIn 0.25s ease;
+  text-align: center;
+  transition: background-color 2.4s ease-in-out, border-color 2.4s ease-in-out, color 2.4s ease-in-out;
+}
+
+.banner-subvencion__cerrar {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 3rem;
+  cursor: pointer;
+  color: v.$primary-color;
+  background: none;
+  border: none;
+  line-height: 1;
+  transition: color 2.4s ease-in-out;
+}
+
+.banner-subvencion__imagen {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  transition: filter 2.4s ease-in-out;
+}
+
+// Responsive móvil
+@media (max-width: 767px) {
+  .banner-subvencion__contenido {
+    width: 95%;
+    padding: 1.5rem 1rem;
+  }
+}

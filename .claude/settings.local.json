@@ -23,7 +23,12 @@
       "Bash(ls:*)",
       "Bash(npm run dev)",
       "Bash(xargs:*)",
-      "Bash(gh auth switch:*)"
+      "Bash(gh auth switch:*)",
+      "WebSearch",
+      "WebFetch(domain:caniuse.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:bugs.webkit.org)",
+      "WebFetch(domain:ethanclevenger.com)"
     ]
   }
 }
