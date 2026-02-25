@@ -18,7 +18,17 @@ module.exports = defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:4173',
     trace: 'on-first-retry',
-    screenshot: 'only-on-failure'
+    screenshot: 'only-on-failure',
+    // Ocultar el banner de subvención en tests (el script lee esta clave y hace remove())
+    contextOptions: {
+      storageState: {
+        cookies: [],
+        origins: [{
+          origin: 'http://127.0.0.1:4173',
+          localStorage: [{ name: 'bannerSubvencionCerrado', value: 'true' }]
+        }]
+      }
+    }
   },
   webServer: {
     command: 'node scripts/serve-dist.mjs --port 4173 --root dist',

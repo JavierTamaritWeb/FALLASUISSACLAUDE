@@ -314,6 +314,18 @@ Archivos de test:
 - `tests/countdown-transition.e2e.spec.js`
 - `tests/modal-quieres-elements.e2e.spec.js` (diagnóstico de elementos del modal)
 
+### 🏷️ Banner de subvención
+
+El banner de subvención (`#banner-subvencion`) se muestra en cada carga de página y solo se oculta al cerrarlo durante esa sesión (no persiste en `localStorage`).
+
+Para evitar que interfiera con los tests, `playwright.config.js` pre-setea `localStorage.bannerSubvencionCerrado = 'true'` via `storageState`. El script `banner-subvencion.js` lee esa clave y hace `banner.remove()` antes de mostrarlo.
+
+**Importante:** El cierre del banner por el usuario NO escribe en `localStorage`. La clave solo la setean los tests.
+
+Configuración relevante:
+
+- `playwright.config.js` → `contextOptions.storageState` (líneas 22-31)
+
 ## 📦 Requisitos
 
 - Node.js 18+ (recomendado 20+)

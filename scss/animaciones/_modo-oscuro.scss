@@ -110,6 +110,10 @@ body,
 #quieres-telefono,
 #quieres-email,
 #quieres-mensaje,
+// Banner subvención
+.banner-subvencion__contenido,
+.banner-subvencion__cerrar,
+.banner-subvencion__imagen,
 // Navegación móvil
 .navegacion {
   transition:
@@ -155,6 +159,17 @@ body.transicion-a-claro .header-inner__barra::before {
   body.transicion-a-claro .navegacion {
     transition: background 2.4s ease-in-out !important;
   }
+}
+
+// Transición de oscuro a claro para el banner subvención
+body.transicion-a-claro .banner-subvencion__contenido,
+body.transicion-a-claro .banner-subvencion__cerrar,
+body.transicion-a-claro .banner-subvencion__imagen {
+  transition:
+    background-color 2.4s ease-in-out,
+    color 2.4s ease-in-out,
+    border-color 2.4s ease-in-out,
+    filter 2.4s ease-in-out !important;
 }
 
 // Transición de oscuro a claro para el modal "quieres"
@@ -798,6 +813,22 @@ body.modo-oscuro #quieres-mensaje {
   background-color: v.$gris-muy-oscuro;
   color: v.$blanco;
   border-color: v.$gris-medio-oscuro;
+}
+
+/* ----------------------------------------------
+   MODO OSCURO BANNER SUBVENCION
+------------------------------------------------ */
+body.modo-oscuro .banner-subvencion__contenido {
+  background-color: v.$secondary-color;
+  color: v.$blanco;
+}
+
+body.modo-oscuro .banner-subvencion__cerrar {
+  color: v.$blanco;
+}
+
+body.modo-oscuro .banner-subvencion__imagen {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 // HISTORIA
