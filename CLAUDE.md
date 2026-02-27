@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.2.12
+**Version:** 4.2.13
 **Last Updated:** 25 de febrero de 2026
 
 ## Project Overview
@@ -16,7 +16,7 @@ WEBFALLASUISSA is the official website for Falla Suïssa - L'Alqueria del Favero
 
 ## Version Note
 
-`package.json` version (4.2.0) is out of sync with the actual release version (4.2.11). The CLAUDE.md version reflects the real release state.
+`package.json` version (4.2.0) is out of sync with the actual release version (4.2.13). The CLAUDE.md version reflects the real release state.
 
 ## Important Rules
 
@@ -38,7 +38,8 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 - **Desktop navigation z-index (v4.1.1):** `.navegacion` needs `position: relative` and `z-index: 5` (desktop >768px) to stay above the glassmorphism background overlay.
 - **Notification animations (v4.2.7):** Only ONE animation rule for notifications must exist. `_notificaciones.scss` owns the `#notificacion.mostrar` animation. Do NOT add a competing rule in `_accessibility.scss` for `.header__notificacion:not(:empty)` — it causes a ghost notification flash.
 - **Banner subvención per-session (v4.2.11):** `banner-subvencion.js` does NOT persist closure to `localStorage`. The banner shows on every page load and only hides for the current session when closed. The `localStorage.getItem('bannerSubvencionCerrado')` check exists solely for Playwright tests (`playwright.config.js` pre-sets this key via `storageState`). Do NOT re-add `localStorage.setItem` in `cerrarBanner()`.
-- **Banner subvención dark mode image (v4.2.12):** The banner SVG image (loaded via `<img>`) uses `filter: invert(1) hue-rotate(180deg)` in dark mode. `invert(1)` flips white↔black, and `hue-rotate(180deg)` restores red tones (Ajuntament crest). Do NOT use `invert(1)` alone — it turns the red crest green.
+- **Banner subvención dark mode image (v4.2.12):** The banner image uses `filter: invert(1) hue-rotate(180deg)` in dark mode. `invert(1)` flips white↔black, and `hue-rotate(180deg)` restores red tones (Ajuntament crest). Do NOT use `invert(1)` alone — it turns the red crest green.
+- **Banner subvención Safari fix (v4.2.13):** The banner image uses `<picture>` with AVIF/WebP/PNG sources instead of SVG. Safari has a WebKit bug ([Bug 246106](https://bugs.webkit.org/show_bug.cgi?id=246106)) where CSS `filter` on `<img>` loading an SVG with internal `<filter>` elements (feColorMatrix, masks) does not compose correctly. Raster formats avoid this bug. Do NOT revert to `<img src="subvencion.svg">`.
 
 ## Build Commands
 
@@ -88,7 +89,7 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 - **Core UI**: `dark.js` (dark mode toggle + localStorage), `lang.js` (i18n management), `nav-menu.js` (mobile hamburger + backdrop), `initTranslations.js` (bootstrap translations on page load)
 - **Content**: `board.js` (bulletin board from `data/board.json`), `meteo.js` (OpenWeather API), `calendario.js` (Flatpickr calendar), `countdown.js` (Fallas countdown timer)
 - **Galleries**: `swiper.js` (Swiper.js carousel), `galeria_1.js`–`galeria_4.js` (gallery-specific logic), `fullscreen.js` (full-screen image viewing)
-- **Overlays**: `banner-subvencion.js` (modal banner shown on every page load, closeable per session; image inverts in dark mode via CSS filter)
+- **Overlays**: `banner-subvencion.js` (modal banner shown on every page load, closeable per session; image inverts in dark mode via CSS filter; uses `<picture>` with AVIF/WebP/PNG for Safari compatibility)
 - **Utilities**: `acc.js` (accordions), `envia.js` (form submission), `mapa.js` (map interactions), `image-optimizer.js` (responsive loading), `performance-optimizer.js` (lazy loading), `pwa-manager.js` (service worker), `accessibility.js` (WCAG features), `miboton.js` (custom button interactions)
 
 ### Key Systems
@@ -102,7 +103,7 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 - **Header**: Uses `::before` pseudo-element for gradient background transitions.
 - **Section Backgrounds**: Components like `.falla` separate the background image (on element) from color overlay (on `::before`) to animate overlay color.
 - **Gradient-to-Solid Transitions**: Components with gradients (`.quieres-mas`, `.countdown__contenedor`) use `::before` pseudo-element with `opacity` transition. CSS cannot animate between `linear-gradient` and solid color directly. See `docs/global-styles.md`.
-- **Image Color Inversion**: `.banner-subvencion__imagen` uses `filter: invert(1) hue-rotate(180deg)` in dark mode to flip white↔black while preserving red hues. Transition: `filter 2.4s ease-in-out`.
+- **Image Color Inversion**: `.banner-subvencion__imagen` uses `filter: invert(1) hue-rotate(180deg)` in dark mode to flip white↔black while preserving red hues. Transition: `filter 2.4s ease-in-out`. Uses `<picture>` with AVIF/WebP/PNG (not SVG) to avoid Safari WebKit filter compositing bug.
 
 **Gulp Pipeline**: Watches src files, compiles SCSS with sourcemaps, optimizes images to WebP/AVIF, copies to dist/.
 
@@ -118,7 +119,7 @@ npm run generate:og         # Regenerate img/og-share.png (1200x630)
 
 **Dark mode flow**: `js/dark.js` reads localStorage → applies `.modo-oscuro`/`.modo-claro` classes → CSS variables + `::before` opacity transitions handle gradient-to-solid changes.
 
-**Banner subvención flow**: `index.html` `#banner-subvencion` (hidden with `.oculto`) → `js/banner-subvencion.js` checks `localStorage.getItem('bannerSubvencionCerrado')` (only set by Playwright tests, never by user interaction) → if not set, removes `.oculto` class to show banner → closing the banner only hides it for the current session (no `localStorage.setItem`), so it reappears on every page reload. In dark mode, `.banner-subvencion__imagen` applies `filter: invert(1) hue-rotate(180deg)` to adapt the SVG poster (white bg → black, black text → white, red crest preserved).
+**Banner subvención flow**: `index.html` `#banner-subvencion` (hidden with `.oculto`) → `js/banner-subvencion.js` checks `localStorage.getItem('bannerSubvencionCerrado')` (only set by Playwright tests, never by user interaction) → if not set, removes `.oculto` class to show banner → closing the banner only hides it for the current session (no `localStorage.setItem`), so it reappears on every page reload. Image served via `<picture>` (AVIF/WebP/PNG) to avoid Safari WebKit filter bug with SVGs. In dark mode, `.banner-subvencion__imagen` applies `filter: invert(1) hue-rotate(180deg)` to adapt the poster (white bg → black, black text → white, red crest preserved).
 
 **Build flow**: Source files → `npm run build` (Gulp tasks) → `dist/` → Playwright tests serve `dist/` on port 4173.
 

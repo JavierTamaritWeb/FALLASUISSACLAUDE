@@ -23,7 +23,7 @@
             "titulo": "Nosotros",
             "falleraM": "La Fallera Mayor",
             "falleraMayor":{
-              "texto": ""
+              "texto": "Rosario es sentimiento en estado puro. Vive cada acto con el corazón en la mano, emocionándose en cada detalle y dejando que la intensidad de la fiesta la envuelva por completo. No puede escuchar el himno de la Comunitat Valenciana sin que se le quiebren la voz y las lágrimas asomen, porque para ella ser Fallera Mayor es un orgullo que se siente muy dentro.\nFamiliar, cercana y auténtica, transmite cariño en cada gesto y hace que todos se sientan parte de algo especial. Rosario no solo representa a nuestra falla: la vive, la siente y la abraza con el alma."
             },
             "presidente": "El Presidente",
             "presidenteM":{
@@ -31,11 +31,11 @@
             },
             "falleraMI": "La Fallera Mayor Infantil",
             "falleramayoraI":{
-              "texto": ""
+              "texto": "Daniela es ilusión, dulzura y alegría. Representa la esencia más pura de nuestra comisión infantil: esa mezcla de nervios, sonrisas infinitas y amor sincero por la fiesta. Con su mirada brillante y su carácter cercano, vive cada acto con emoción y orgullo, llevando el nombre de nuestra falla con elegancia y naturalidad.\nEs la ternura que emociona, la energía que contagia y el reflejo del futuro que estamos construyendo juntos."
             },
             "presidenteI": "El Presidente Infantil",
             "presiI":{
-              "texto": ""
+              "texto": "Diego es energía, compañerismo y entusiasmo. Apasionado del fútbol y del espíritu de equipo, lleva en el corazón los valores del esfuerzo, la constancia y el juego limpio, cualidades que también lo definen como Presidente Infantil.\nVive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra comisión, demostrando que liderar también es animar, sumar y hacer piña. Con su sonrisa y su pasión, Diego es fuerza e ilusión para nuestro presente y nuestro futuro."
             },  
 
             "directiva": "La Directiva",
@@ -281,7 +281,7 @@
             "titulo": "Nosaltres",
             "falleraM": "La Fallera Major",
             "falleraMayor":{
-              "texto": ""
+              "texto": "Rosario és sentiment en estat pur. Viu cada acte amb el cor en la mà, emocionant-se amb cada detall i deixant que la intensitat de la festa l’abrace per complet. No pot escoltar l’Himne de la Comunitat Valenciana sense que se li trenque la veu i li brollen les llàgrimes, perquè per a ella ser Fallera Major és un orgull que se sent ben endins.\nFamiliar, pròxima i autèntica, transmet afecte en cada gest i fa que tots se senten part d’alguna cosa especial. Rosario no sols representa la nostra falla: la viu, la sent i l’abraça amb l’ànima."
             },
             "presidente": "El President",
             "presidenteM":{
@@ -289,12 +289,12 @@
             },
             "falleraMI": "La Fallera Major Infantil",
             "falleramayoraI":{
-              "texto": ""
+              "texto": "Daniela és il·lusió, dolçor i alegria. Representa l'essència més pura de la nostra comissió infantil: aquella barreja de nervis, somriures infinits i amor sincer per la festa. Amb la seva mirada brillant i el seu caràcter proper, viu cada acte amb emoció i orgull, portant el nom de la nostra falla amb elegància i naturalitat.\nÉs la tendresa que emociona, l'energia que contagia i el reflex del futur que estem construint junts."
             },
             
             "presidenteI": "El President Infantil",
             "presiI":{
-              "texto": ""
+              "texto": "Diego és energia, companyerisme i entusiasme. Apassionat del futbol i de l'esperit d'equip, porta al cor els valors de l'esforç, la constància i el joc net, qualitats que també el defineixen com a President Infantil.\nViu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra comissió, demostrant que liderar també és animar, sumar i fer pinya. Amb el seu somriure i la seva passió, Diego és força i il·lusió per al nostre present i el nostre futur."
             },
             "directiva": "La Directiva",
             "organigrama": "Organigrama",
