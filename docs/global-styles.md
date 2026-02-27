@@ -230,7 +230,7 @@ body.modo-oscuro .quieres-mas::before {
 
 ## 🖼️ Inversión de Imagen con CSS Filter (Banner Subvención)
 
-**Problema:** El banner de subvención muestra una imagen SVG (cargada como `<img>`) con texto negro sobre fondo blanco. En modo oscuro, CSS `color` no afecta al contenido interno de un SVG cargado como `<img>`.
+**Problema:** El banner de subvención muestra una imagen con texto negro sobre fondo blanco. En modo oscuro, CSS `color` no afecta al contenido interno de una imagen raster.
 
 **Solución:** Usar `filter: invert(1) hue-rotate(180deg)` en modo oscuro:
 
@@ -256,12 +256,27 @@ body.modo-oscuro .banner-subvencion__imagen {
 }
 ```
 
+### Formato de imagen: `<picture>` con AVIF/WebP/PNG
+
+Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de WebKit ([Bug 246106](https://bugs.webkit.org/show_bug.cgi?id=246106)) donde CSS `filter` no se compone correctamente sobre un `<img>` que carga un SVG con filtros internos (`feColorMatrix`, máscaras). La solución es usar formatos raster mediante `<picture>`:
+
+```html
+<picture>
+  <source srcset="img/subvencion.avif" type="image/avif">
+  <source srcset="img/subvencion.webp" type="image/webp">
+  <img class="banner-subvencion__imagen" src="img/subvencion.png" alt="Información de subvención">
+</picture>
+```
+
+**Importante:** No revertir a `<img src="subvencion.svg">` — rompe el filtro en Safari.
+
 ### Archivos relacionados
 
 | Archivo | Contenido |
 |---------|-----------|
 | `scss/components/_banner-subvencion.scss` | Estilos base + transición filter |
 | `scss/animaciones/_modo-oscuro.scss` | Regla `filter: invert(1) hue-rotate(180deg)` |
+| `index.html` | `<picture>` con fuentes AVIF/WebP/PNG |
 
 ### Forzar reflow en JavaScript
 
