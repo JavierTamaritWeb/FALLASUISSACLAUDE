@@ -260,6 +260,15 @@ body.modo-oscuro .banner-subvencion__imagen {
 
 Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de WebKit ([Bug 246106](https://bugs.webkit.org/show_bug.cgi?id=246106)) donde CSS `filter` no se compone correctamente sobre un `<img>` que carga un SVG con filtros internos (`feColorMatrix`, máscaras). La solución es usar formatos raster mediante `<picture>`:
 
+**Mejora de rendimiento:**
+
+| Formato | Tamaño | Reducción vs SVG |
+|---------|--------|-----------------|
+| SVG (original) | 289 KB | — |
+| AVIF | 25 KB | -91% |
+| WebP | 61 KB | -79% |
+| PNG (fallback) | 159 KB | -45% |
+
 ```html
 <picture>
   <source srcset="img/subvencion.avif" type="image/avif">
