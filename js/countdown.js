@@ -30,12 +30,20 @@
   const countdownMessage = document.querySelector('.countdown__message');
   const clock = document.querySelector('.countdown__clock');
   const fallasMessage = document.querySelector('.countdown__fallas-message');
-  
+
+  if (!clock) {
+    return;
+  }
+
   // Seleccionamos los elementos donde se mostrarán los días, horas, minutos y segundos.
   const daysSpan = clock.querySelector('[data-time="days"]');
   const hoursSpan = clock.querySelector('[data-time="hours"]');
   const minutesSpan = clock.querySelector('[data-time="minutes"]');
   const secondsSpan = clock.querySelector('[data-time="seconds"]');
+
+  if (!daysSpan || !hoursSpan || !minutesSpan || !secondsSpan) {
+    return;
+  }
 
   /**
    * getLastSundayOfFebruary(year)
@@ -167,6 +175,9 @@
       if (fallasMessage) fallasMessage.style.display = "none";
     }
   }
+
+  // Renderiza el estado correcto sin esperar un segundo y sigue actualizando después.
+  updateCountdown();
 
   // Actualiza la cuenta atrás cada segundo.
   setInterval(updateCountdown, 1000);
