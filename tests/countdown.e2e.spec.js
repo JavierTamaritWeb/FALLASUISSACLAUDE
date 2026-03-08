@@ -2,6 +2,7 @@
 // Tests E2E para verificar el countdown de Fallas
 
 const { test, expect } = require('@playwright/test');
+const { freezeTime } = require('./helpers/deterministic-env');
 
 test.describe('Countdown - Cálculo de fechas', () => {
 
@@ -182,6 +183,10 @@ test.describe('Countdown - Cálculo de fechas', () => {
 
 test.describe('Countdown - UI', () => {
 
+  test.beforeEach(async ({ page }) => {
+    await freezeTime(page, '2026-02-15T12:00:00+01:00');
+  });
+
   test('El countdown se muestra en la página principal', async ({ page }) => {
     await page.goto('/');
 
@@ -204,7 +209,7 @@ test.describe('Countdown - UI', () => {
     await page.goto('/');
 
     // Esperar a que el countdown se actualice
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(200);
 
     const days = await page.locator('[data-time="days"]').textContent();
     const hours = await page.locator('[data-time="hours"]').textContent();

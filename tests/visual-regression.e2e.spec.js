@@ -1,5 +1,11 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
+const {
+  freezeTime,
+  setDeterministicClientState,
+  mockWeatherApi,
+  mockMapTiles
+} = require('./helpers/deterministic-env');
 
 /**
  * Tests de regresión visual para verificar que la UI no cambia
@@ -27,7 +33,30 @@ const VIEWPORTS = [
   { name: 'mobile', width: 375, height: 667 }
 ];
 
+async function prepareDeterministicPage(page) {
+  await setDeterministicClientState(page);
+  await freezeTime(page);
+  await mockWeatherApi(page);
+  await mockMapTiles(page);
+}
+
+async function waitForVisualPageReady(page, pageName) {
+  await page.waitForLoadState('networkidle');
+
+  if (pageName === 'meteo') {
+    await expect(page.locator('#langSwitcher')).toContainText('Español');
+    await expect(page.locator('#current-temp')).toHaveText(/\d+°C/);
+    await expect
+      .poll(async () => page.locator('#forecast-day-1-icon').getAttribute('src'))
+      .toContain('@2x.png');
+  }
+}
+
 test.describe('Visual Regression - Light Mode', () => {
+  test.beforeEach(async ({ page }) => {
+    await prepareDeterministicPage(page);
+  });
+
   for (const page of PAGES) {
     for (const viewport of VIEWPORTS) {
       test(`${page.name} - ${viewport.name}`, async ({ page: browserPage }) => {
@@ -35,7 +64,7 @@ test.describe('Visual Regression - Light Mode', () => {
         await browserPage.goto(page.path);
 
         // Esperar a que carguen las fuentes y estilos
-        await browserPage.waitForLoadState('networkidle');
+        await waitForVisualPageReady(browserPage, page.name);
         await browserPage.waitForTimeout(500);
 
         // Capturar screenshot de la página completa
@@ -49,6 +78,10 @@ test.describe('Visual Regression - Light Mode', () => {
 });
 
 test.describe('Visual Regression - Dark Mode', () => {
+  test.beforeEach(async ({ page }) => {
+    await prepareDeterministicPage(page);
+  });
+
   for (const page of PAGES) {
     for (const viewport of VIEWPORTS) {
       test(`${page.name} - ${viewport.name} (dark)`, async ({ page: browserPage }) => {
@@ -56,7 +89,7 @@ test.describe('Visual Regression - Dark Mode', () => {
         await browserPage.goto(page.path);
 
         // Esperar a que cargue
-        await browserPage.waitForLoadState('networkidle');
+        await waitForVisualPageReady(browserPage, page.name);
 
         // Activar modo oscuro
         const darkToggle = browserPage.locator('#darkModeToggle');
@@ -75,6 +108,10 @@ test.describe('Visual Regression - Dark Mode', () => {
 });
 
 test.describe('Visual Regression - Components', () => {
+  test.beforeEach(async ({ page }) => {
+    await prepareDeterministicPage(page);
+  });
+
   test('Header - desktop', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/index.html');
@@ -126,6 +163,10 @@ test.describe('Visual Regression - Components', () => {
 });
 
 test.describe('Visual Regression - Color Critical Elements', () => {
+  test.beforeEach(async ({ page }) => {
+    await prepareDeterministicPage(page);
+  });
+
   test('Primary color buttons and links', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/index.html');

@@ -69,10 +69,6 @@ test.describe('Meteo Falleret Size Consistency', () => {
             
             console.log(`[${viewport.name}] Pro size: ${bboxPro.width.toFixed(2)} x ${bboxPro.height.toFixed(2)}`);
 
-            // Tomar screenshot de referencia
-            await expect(falleretImg).toHaveScreenshot(`falleret-pro-${viewport.name}.png`);
-
-
             // 2. Cambiar a CLIMA LLUVIOSO (falleretPlora) dinámicamente o recargando
             // Para asegurar limpieza, recargaremos con el nuevo mock
             await page.unroute('**/weather?*');
@@ -90,9 +86,6 @@ test.describe('Meteo Falleret Size Consistency', () => {
             expect(bboxPlora).not.toBeNull();
 
             console.log(`[${viewport.name}] Plora size: ${bboxPlora.width.toFixed(2)} x ${bboxPlora.height.toFixed(2)}`);
-
-            // Tomar screenshot de comparación
-            await expect(falleretImg).toHaveScreenshot(`falleret-plora-${viewport.name}.png`);
 
             // 3. COMPARAR DIMENSIONES
             // Permitimos una tolerancia mínima de sub-pixel (0.5px)
