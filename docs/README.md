@@ -4,18 +4,18 @@
 
 | Documento | Descripción | Actualización |
 |-----------|-------------|---------------|
-| [`build-and-deploy.md`](./build-and-deploy.md) | Guía de build, `dist/` y despliegue | 26/01/2026 |
-| [`e2e-testing.md`](./e2e-testing.md) | Tests end-to-end (Playwright): 20 suites | 26/01/2026 |
-| [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter: `og-share.png`, cache-buster `?v=...` y tests anti-regresión | 26/01/2026 |
-| [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación: header fijo, menú móvil/desktop (fix duplicate notifications v4.1.2) | 28/01/2026 |
-| [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping + autoheight | 26/01/2026 |
-| [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar (thumb/track) + modo oscuro, compat Safari/WebKit (updated ref) | 28/01/2026 |
-| [`i18n-translations.md`](./i18n-translations.md) | i18n: `data-i18n` + `translations.json` (saltos de línea, claves, textos con markup) | 26/01/2026 |
+| [`build-and-deploy.md`](./build-and-deploy.md) | Guía de build, `dist/` y despliegue | 09/03/2026 |
+| [`e2e-testing.md`](./e2e-testing.md) | Tests end-to-end (Playwright): 34 suites, visual regression y casos específicos | 09/03/2026 |
+| [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter: `og-share.png`, cache-buster `?v=...` y tests anti-regresión | 09/03/2026 |
+| [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación: header fijo, menú móvil/desktop (fix duplicate notifications v4.1.2) | 09/03/2026 |
+| [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping + autoheight | 09/03/2026 |
+| [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar (thumb/track) + modo oscuro, compat Safari/WebKit (updated ref) | 09/03/2026 |
+| [`i18n-translations.md`](./i18n-translations.md) | i18n: `data-i18n` + `translations.json` (saltos de línea, claves, textos con markup) | 09/03/2026 |
 | [`gestion-tablon.md`](./gestion-tablon.md) | Gestión de contenido dinámico para el Tablón de Anuncios (`data/board.json`) | 30/01/2026 |
 | [`meteo-ui.md`](./meteo-ui.md) | Animaciones y responsividad del icono meteorológico (CSS Transitions/Keyframes) | 30/01/2026 |
-| [`google-search-console.md`](./google-search-console.md) | Verificación Google Search Console | 26/01/2026 |
-| [`robots-configuration.md`](./robots-configuration.md) | Configuración robots.txt y variantes | 26/01/2026 |
-| [`global-styles.md`](./global-styles.md) | Estilos globales: reset CSS, fondo gradiente, modo oscuro y fondo sección Falla (traje regional) | 25/01/2026 |
+| [`google-search-console.md`](./google-search-console.md) | Verificación Google Search Console | 09/03/2026 |
+| [`robots-configuration.md`](./robots-configuration.md) | Configuración robots.txt y variantes | 09/03/2026 |
+| [`global-styles.md`](./global-styles.md) | Estilos globales: reset CSS, fondo gradiente, modo oscuro y fondo sección Falla (traje regional) | 09/03/2026 |
 
 ## 🎯 Documentos por Categoría
 
@@ -57,9 +57,11 @@ Actualiza estos documentos cuando cambies:
 - Integración de sliders (Swiper) y sus tests E2E
 - Sistema de tema (modo oscuro) y compatibilidad de scrollbar (Safari/WebKit)
 - Transición oscuro→claro (clase temporal `transicion-a-claro` y variables de transición)
+- Sección de Colaboraciones, layout HOPE y `js/colaboraciones-lightbox.js`
+- Ciclo de visibilidad del banner de subvención (primera carga por pestaña + reaparición en recarga)
 - PDF wrappers (`pdf/*/[nombre].html`) con Open Graph, Twitter Cards y favicon
 
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 13 de febrero de 2026 - v4.2.9*
+*Última actualización: 9 de marzo de 2026 - v4.2.16*

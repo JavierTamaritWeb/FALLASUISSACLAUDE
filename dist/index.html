@@ -185,6 +185,7 @@
         <nav class="navegacion" role="navigation" aria-label="Navegación principal">
           <a class="navegacion__enlace active" data-i18n="nav.inicio" href="index.html" aria-current="page"></a>
           <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html"></a>
           <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html"></a>
           <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html"></a>
           <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html"></a>
@@ -785,6 +786,91 @@
     </div>
   </main>
 
+  <!-- Sección de Colaboraciones -->
+  <section class="colaboraciones">
+    <div class="contenedor">
+      <div class="colaboraciones__heading">
+        <img class="colaboraciones__imagen" src="img/colaboracion/hope/colaboracion.png"
+             alt="Icono de colaboraciones de la Falla Suïssa" width="64" height="64" loading="eager" decoding="async">
+        <h2 class="colaboraciones__heading-texto" data-i18n="colaboraciones.titulo">Colaboraciones</h2>
+      </div>
+
+      <div class="colaboraciones__accordion">
+        <div class="falleros">
+          <div class="falleros__nosotros">
+            <div class="accordion">
+              <section class="accordion__section active">
+                <div class="accordion__titular">
+                  <h3 class="accordion__header" data-i18n="colaboraciones.hope.titulo">HOPE</h3>
+                  <span class="accordion__icon accordion__icon--active">&#9660;</span>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content-inner">
+                    <img class="colaboraciones-page__logo" src="img/colaboracion/hope/hope.svg" alt="Logo HOPE" loading="lazy" decoding="async">
+                    <p class="colaboraciones-page__texto" data-i18n="colaboraciones.hope.texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <div class="colaboraciones-mosaic">
+                      <div class="colaboraciones-mosaic__item">
+                        <button class="colaboraciones-mosaic__trigger" type="button">
+                          <img src="img/colaboracion/hope/hope-001.jpeg" alt="Colaboración HOPE 1" loading="lazy" decoding="async">
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                        </button>
+                      </div>
+                      <div class="colaboraciones-mosaic__item">
+                        <button class="colaboraciones-mosaic__trigger" type="button">
+                          <img src="img/colaboracion/hope/hope-002.jpeg" alt="Colaboración HOPE 2" loading="lazy" decoding="async">
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                        </button>
+                      </div>
+                      <div class="colaboraciones-mosaic__item">
+                        <button class="colaboraciones-mosaic__trigger" type="button">
+                          <img src="img/colaboracion/hope/hope-003.jpeg" alt="Colaboración HOPE 3" loading="lazy" decoding="async">
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                        </button>
+                      </div>
+                      <div class="colaboraciones-mosaic__item">
+                        <button class="colaboraciones-mosaic__trigger" type="button">
+                          <img src="img/colaboracion/hope/hope-004.jpeg" alt="Colaboración HOPE 4" loading="lazy" decoding="async">
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                        </button>
+                      </div>
+                      <div class="colaboraciones-mosaic__item">
+                        <button class="colaboraciones-mosaic__trigger" type="button">
+                          <img src="img/colaboracion/hope/hope-005.jpeg" alt="Colaboración HOPE 5" loading="lazy" decoding="async">
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                        </button>
+                      </div>
+                      <div class="colaboraciones-mosaic__item">
+                        <button class="colaboraciones-mosaic__trigger" type="button">
+                          <img src="img/colaboracion/hope/hope-006.jpg" alt="Colaboración HOPE 6" loading="lazy" decoding="async">
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="colaboraciones-lightbox" id="colaboracionesLightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="colaboracionesLightboxTitle">
+      <div class="colaboraciones-lightbox__dialog">
+        <h2 class="visually-hidden" id="colaboracionesLightboxTitle" data-i18n="colaboraciones.lightbox.titulo">Imagen ampliada de HOPE</h2>
+        <button class="colaboraciones-lightbox__close" type="button">
+          <span aria-hidden="true">&times;</span>
+          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.cerrar">Cerrar imagen ampliada</span>
+        </button>
+        <div class="colaboraciones-lightbox__frame">
+          <img class="colaboraciones-lightbox__image" src="" alt="">
+          <p class="colaboraciones-lightbox__caption"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Sección de Eventos, Forecast, Blog y Galería (si aplica) -->
   <section class="eventos">
       <div class="contenedor">
@@ -1009,6 +1095,7 @@
         <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
           <a class="footer__enlace active" href="index.html" data-i18n="nav.inicio">Inicio</a>
           <a class="footer__enlace" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
+          <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Colaboraciones</a>
           <a class="footer__enlace" href="eventos.html" data-i18n="nav.eventos">Eventos</a>
           <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Meteo</a>
           <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a>
@@ -1054,6 +1141,7 @@
   <script src="js/acc.js"></script>
   <script src="js/miboton.js"></script>
   <script src="js/initTranslations.js"></script>
+  <script src="js/colaboraciones-lightbox.js"></script>
   <script src="js/accessibility.js"></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene

@@ -6,7 +6,8 @@
         "eventos": "Eventos",
         "blog": "Blog",
         "meteo": "Meteo",
-        "galeria": "Galería"
+        "galeria": "Galería",
+        "colaboraciones": "Colaboraciones"
       },
       "countdown": {
         "message": "Cuenta atrás para las Fallas",
@@ -253,9 +254,19 @@
         "loteria": "Delegada Lotería",
         "deportes": "Delegado Deportes",
         "leyenda": "Este es el organigrama de la falla, donde se pueden ver los diferentes cargos y sus respectivas funciones. En el ejercicio 2025-26, queda conformado de esta manera."
+      },
+      "colaboraciones": {
+        "titulo": "Colaboraciones",
+        "hope": {
+          "titulo": "HOPE",
+          "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        "lightbox": {
+          "titulo": "Imagen ampliada de HOPE",
+          "abrir": "Abrir imagen ampliada",
+          "cerrar": "Cerrar imagen ampliada"
+        }
       }
-      
-      
     },
     "va": {
       "nav": {
@@ -264,7 +275,8 @@
         "eventos": "Esdeveniments",
         "blog": "Blog",
         "meteo": "Oratge",
-        "galeria": "Galeria"
+        "galeria": "Galeria",
+        "colaboraciones": "Col·laboracions"
       },
       "countdown": {
         "message": "Compte enrere per a les Fallas",
@@ -512,9 +524,19 @@
         "loteria": "Delegada Loteria",
         "deportes": "Delegat Esports",
         "leyenda": "Aquest és l'organigrama de la falla, on es poden veure els diferents càrrecs i les seves respectives funcions. En l'exercici 2025-26, queda conformada d'aquesta manera."
+      },
+      "colaboraciones": {
+        "titulo": "Col·laboracions",
+        "hope": {
+          "titulo": "HOPE",
+          "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        "lightbox": {
+          "titulo": "Imatge ampliada de HOPE",
+          "abrir": "Obrir imatge ampliada",
+          "cerrar": "Tancar imatge ampliada"
+        }
       }
-
-       
     },
     "en": {
       "nav": {

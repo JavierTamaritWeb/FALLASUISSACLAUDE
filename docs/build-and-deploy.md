@@ -147,4 +147,4 @@ Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo 
 
 ---
 
-*Última actualización: 13 de febrero de 2026 - v4.2.9 - Actualización de .htaccess y verificaciones*
+*Última actualización: 9 de marzo de 2026 - v4.2.16*

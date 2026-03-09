@@ -1,6 +1,6 @@
 # 🧪 Tests E2E (Playwright)
 
-**25 test suites** | **130+ tests**
+**34 test suites** | **220+ tests**
 
 Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto y qué validan.
 
@@ -76,6 +76,31 @@ Archivo de test:
 Guía técnica:
 
 - [`i18n-translations.md`](./i18n-translations.md)
+
+### 🤝 Colaboraciones (HOPE)
+
+- La home y `colaboraciones.html` reutilizan el mismo bloque visual para HOPE.
+- Se valida el grid tradicional responsive, la ausencia de recortes en miniaturas y la apertura/cierre del lightbox accesible.
+- En móvil también se comprueba el acordeón integrado en la portada.
+
+Archivo de test:
+
+- `tests/index-colaboraciones.e2e.spec.js`
+
+### 🏷️ Banner de subvención
+
+El banner de subvención (`#banner-subvencion`) se muestra la primera vez que se carga `index.html` en una pestaña. Si el usuario navega a otra página y vuelve en esa misma pestaña, ya no reaparece. Si hace una recarga real, vuelve a mostrarse.
+
+El comportamiento del usuario no persiste en `localStorage`: el script solo usa `sessionStorage` para recordar que el banner ya se mostró en esa pestaña.
+
+Para evitar que interfiera con los tests generales, `playwright.config.js` pre-setea `localStorage.bannerSubvencionCerrado = 'true'` via `storageState`. El script `banner-subvencion.js` lee esa clave y hace `banner.remove()` antes de mostrarlo.
+
+**Importante:** El cierre del banner por el usuario NO escribe en `localStorage`. La clave solo la setean los tests.
+
+Archivos de test:
+
+- `tests/banner-subvencion.e2e.spec.js`
+- `tests/index-colaboraciones.e2e.spec.js` (convive con la home)
 
 ### 🎨 Header bar background
 
@@ -314,18 +339,6 @@ Archivos de test:
 - `tests/countdown-transition.e2e.spec.js`
 - `tests/modal-quieres-elements.e2e.spec.js` (diagnóstico de elementos del modal)
 
-### 🏷️ Banner de subvención
-
-El banner de subvención (`#banner-subvencion`) se muestra en cada carga de página y solo se oculta al cerrarlo durante esa sesión (no persiste en `localStorage`).
-
-Para evitar que interfiera con los tests, `playwright.config.js` pre-setea `localStorage.bannerSubvencionCerrado = 'true'` via `storageState`. El script `banner-subvencion.js` lee esa clave y hace `banner.remove()` antes de mostrarlo.
-
-**Importante:** El cierre del banner por el usuario NO escribe en `localStorage`. La clave solo la setean los tests.
-
-Configuración relevante:
-
-- `playwright.config.js` → `contextOptions.storageState` (líneas 22-31)
-
 ## 📦 Requisitos
 
 - Node.js 18+ (recomendado 20+)
@@ -439,4 +452,4 @@ Guía técnica:
 
 ---
 
-*Última actualización: 13 de febrero de 2026 - v4.2.9*
+*Última actualización: 9 de marzo de 2026 - v4.2.16*
