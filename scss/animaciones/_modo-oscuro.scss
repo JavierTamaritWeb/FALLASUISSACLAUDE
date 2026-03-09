@@ -88,6 +88,9 @@ body,
 .calendario-eventos__mini-encabezado,
 .calendario-eventos__mini-dia,
 .calendario-eventos__detalles-mes,
+// Colaboraciones
+.colaboraciones,
+.colaboraciones::before,
 // Quieres más
 .quieres-mas,
 .quieres-mas::before,
@@ -187,6 +190,11 @@ body.transicion-a-claro #quieres-mensaje {
     background-color 2.4s ease-in-out,
     color 2.4s ease-in-out,
     border-color 2.4s ease-in-out !important;
+}
+
+// Transición de oscuro a claro para la sección .colaboraciones
+body.transicion-a-claro .colaboraciones::before {
+  transition: opacity 2.4s ease-in-out !important;
 }
 
 // Transición de oscuro a claro para la sección .quieres-mas
@@ -759,6 +767,14 @@ body.modo-oscuro .quieres-mas {
   }
 }
 
+/* ----------------------------------------------
+   MODO OSCURO COLABORACIONES
+------------------------------------------------ */
+body.modo-oscuro .colaboraciones {
+  &::before {
+    opacity: 0;
+  }
+}
 
 /* ----------------------------------------------
    MODO OSCURO BARRA DE NAVEGACION

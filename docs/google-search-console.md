@@ -91,4 +91,4 @@ Una vez verificado tendrás acceso a:
 
 ---
 
-*Última actualización: 13 de febrero de 2026 - v4.2.9 - Rename y clarificación de instrucciones*
+*Última actualización: 9 de marzo de 2026 - v4.2.16*

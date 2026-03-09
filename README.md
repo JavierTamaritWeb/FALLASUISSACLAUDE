@@ -19,7 +19,7 @@
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-**🆕 Última actualización:** 13 de febrero de 2026 - v4.2.9 - Optimización de .htaccess y mejora en verificación de Google.
+**🆕 Última actualización:** 9 de marzo de 2026 - v4.2.16 - Página de Colaboraciones, grid tradicional HOPE y ajuste del banner de subvención.
 
 </div>
 
@@ -39,6 +39,8 @@
 - **Animaciones fluidas** - Transiciones suaves y efectos visuales atractivos
 - **Accesibilidad WCAG** - Cumple estándares de accesibilidad web
 - **Footer optimizado** - Navegación tipo “chips” (bordes sutiles), enlace activo legible en oscuro e iconos sociales responsive (más pequeños en móvil, más grandes en desktop)
+- **Colaboraciones integradas** - Sección HOPE compartida entre la home y una página dedicada con lightbox accesible
+- **Banner institucional por pestaña** - Se muestra en la primera carga de la pestaña y reaparece al recargar, sin persistencia de cierre en `localStorage`
 
 #### 🧭 Barra de navegación (Header fijo)
 
@@ -120,11 +122,13 @@ WEBFALLASUISSA/
 │   ├── dark.js                # Modo oscuro/claro
 │   ├── lang.js                # Sistema multiidioma
 │   ├── nav-menu.js            # Menú móvil (hamburguesa + overlay)
+│   ├── banner-subvencion.js   # Modal institucional con control por pestaña/recarga
+│   ├── colaboraciones-lightbox.js # Lightbox accesible para HOPE
 │   ├── meteo.js               # Integración meteorológica
 │   ├── galeria_[1-4].js       # Galerías especializadas
 │   └── swiper.js              # Carruseles y sliders
 ├── 📂 data/                   # Datos JSON estructurados
-│   ├── translations.json      # 846 líneas de traducciones
+│   ├── translations.json      # Traducciones ES/VA y textos compartidos
 │   ├── eventos.json           # Gestión de eventos
 │   ├── calendarData.json      # Datos del calendario
 │   ├── fallas.json            # Información de fallas
@@ -145,8 +149,9 @@ WEBFALLASUISSA/
 
 | Página | Descripción | Funcionalidades |
 |--------|-------------|-----------------|
-| `index.html` | Página principal | Historia, organigrama, cuenta atrás |
+| `index.html` | Página principal | Historia, organigrama, cuenta atrás, colaboraciones, banner institucional |
 | `lafalla.html` | Información detallada | Falleras mayores, presidentes |
+| `colaboraciones.html` | Colaboraciones | Proyecto HOPE, grid fotográfico y lightbox |
 | `eventos.html` | Sistema de eventos | Calendario, tablón, PDFs |
 | `calendario.html` | Calendario interactivo | Exportación ICS, filtros |
 | `meteo.html` | Meteorología | Tiempo actual, pronóstico 5 días |

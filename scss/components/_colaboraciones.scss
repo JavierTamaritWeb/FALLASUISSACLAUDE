@@ -1,0 +1,339 @@
+// components/_colaboraciones.scss
+// Estilos para la sección de colaboraciones (index.html) y página colaboraciones.html
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+// Sección teaser en index.html
+.colaboraciones {
+  // Color base para modo oscuro (transicionable)
+  background-color: v.$secondary-color;
+  padding: 3rem 0 4rem;
+  text-align: center;
+  border-top: 1px solid v.$primary-color;
+  position: relative;
+
+  // Gradiente en pseudo-elemento para poder transicionar con opacity
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    opacity: 1;
+    transition: opacity 2.4s ease-in-out;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  // Asegurar que el contenido esté por encima del pseudo-elemento
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.6rem;
+    flex-wrap: nowrap;
+  }
+
+  &__heading-texto {
+    font-weight: bold;
+    color: v.$primary-color;
+    font-size: clamp(2.8rem, 4vw, 4.2rem);
+    @media (max-width: 768px) {
+      font-size: v.$font-size-medium;
+    }
+  }
+
+  &__imagen {
+    width: clamp(5.4rem, 6vw, 6.4rem);
+    height: auto;
+    display: block;
+    max-width: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__accordion {
+    margin-top: 2.5rem;
+
+    .falleros {
+      margin: 0;
+      padding: 0 !important;
+    }
+
+    .falleros__nosotros {
+      padding: 2rem 1.5rem;
+    }
+
+    .accordion {
+      margin: 0;
+      max-width: 100%;
+    }
+
+    .accordion__section.active .accordion__content {
+      max-height: 220rem;
+    }
+
+    .accordion__content-inner {
+      width: 100%;
+    }
+
+    .colaboraciones-page__texto {
+      max-width: 72rem;
+      margin: 0 auto;
+      font-size: 1.6rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    &__accordion {
+      .falleros__nosotros {
+        padding: 1rem 0.75rem;
+      }
+
+      .accordion__section.active .accordion__content {
+        max-height: 260rem;
+      }
+    }
+  }
+
+  &__link {
+    color: v.$primary-color;
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    @include m.transition(color 200ms);
+    display: inline-block;
+    cursor: pointer;
+    text-shadow: 1px 1px 0px rgba(255, 111, 97, 1);
+    text-decoration: none;
+
+    &:hover {
+      color: v.$dorado;
+    }
+  }
+}
+
+// Página colaboraciones.html
+.colaboraciones-page__logo {
+  display: block;
+  margin: 1rem auto;
+  max-width: 300px;
+  width: 80%;
+
+  @media (min-width: 768px) {
+    max-width: 400px;
+  }
+}
+
+.colaboraciones-page__texto {
+  color: v.$blanco !important;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: clamp(1.5rem, 1.6vw, 1.8rem);
+  line-height: 1.6;
+}
+
+// Mosaico de imágenes
+.colaboraciones-mosaic {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2.4rem auto 0;
+  max-width: 110rem;
+  padding: 1rem 0 0;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+  }
+
+  @media (min-width: 1100px) {
+    gap: 1.35rem;
+  }
+
+  &__item {
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.08) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 1.4rem;
+    box-shadow: 0 16px 34px rgba(1, 25, 52, 0.22);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 22px 42px rgba(1, 25, 52, 0.3);
+      transform: translateY(-0.3rem);
+    }
+  }
+
+  &__trigger {
+    appearance: none;
+    align-items: center;
+    background: rgba(5, 24, 46, 0.16);
+    border: 0;
+    cursor: zoom-in;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    overflow: hidden;
+    padding: clamp(0.85rem, 2vw, 1.2rem);
+    position: relative;
+    width: 100%;
+
+    &::after {
+      align-items: center;
+      background: rgba(4, 26, 50, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      border-radius: 999px;
+      box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+      color: v.$blanco;
+      content: '+';
+      display: flex;
+      font-size: 2rem;
+      font-weight: 300;
+      height: 3.2rem;
+      justify-content: center;
+      position: absolute;
+      right: 0.85rem;
+      top: 0.85rem;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      width: 3.2rem;
+      z-index: 2;
+    }
+
+    &:hover::after,
+    &:focus-visible::after {
+      background: rgba(255, 111, 97, 0.78);
+      transform: scale(1.06);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(5, 24, 46, 0.24);
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba(255, 215, 0, 0.95);
+      outline-offset: -0.4rem;
+    }
+
+    img {
+      display: block;
+      filter: drop-shadow(0 12px 18px rgba(1, 25, 52, 0.14));
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      transition: transform 0.35s ease;
+      width: 100%;
+    }
+
+    &:hover img,
+    &:focus-visible img {
+      transform: scale(1.03);
+    }
+  }
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.colaboraciones-lightbox {
+  align-items: center;
+  background: rgba(1, 12, 28, 0.88);
+  backdrop-filter: blur(14px);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  opacity: 0;
+  padding: clamp(1.2rem, 3vw, 2.8rem);
+  pointer-events: none;
+  position: fixed;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  visibility: hidden;
+  z-index: 3200;
+
+  &.open,
+  &[aria-hidden='false'] {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  &__dialog {
+    position: relative;
+    width: min(100%, 108rem);
+  }
+
+  &__frame {
+    background: linear-gradient(180deg, rgba(7, 28, 54, 0.96) 0%, rgba(4, 18, 35, 0.96) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 1.8rem;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.48);
+    display: grid;
+    gap: 1rem;
+    overflow: hidden;
+    padding: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  &__close {
+    align-items: center;
+    background: rgba(4, 18, 35, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    color: v.$blanco;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 3rem;
+    height: 4.4rem;
+    justify-content: center;
+    position: absolute;
+    right: clamp(0.8rem, 2vw, 1.2rem);
+    top: clamp(0.8rem, 2vw, 1.2rem);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    width: 4.4rem;
+    z-index: 2;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(255, 111, 97, 0.92);
+      transform: scale(1.04);
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba(255, 215, 0, 0.95);
+      outline-offset: 0.2rem;
+    }
+  }
+
+  &__image {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 1.2rem;
+    display: block;
+    max-height: 80vh;
+    object-fit: contain;
+    width: 100%;
+  }
+
+  &__caption {
+    color: rgba(245, 245, 245, 0.92);
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 72rem;
+    text-align: center;
+  }
+}

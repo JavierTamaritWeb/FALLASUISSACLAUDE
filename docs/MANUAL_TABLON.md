@@ -1,7 +1,7 @@
 # Manual del Tablón de Anuncios Dinámico
 
 **Version:** 1.0.0
-**Última actualización:** 30 de enero de 2026
+**Última actualización:** 9 de marzo de 2026
 
 ## Descripción
 
