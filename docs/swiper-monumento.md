@@ -69,7 +69,7 @@ La solución aquí se basa en:
 
 La suite incluye una batería para asegurar que el slider de “El Monumento” no se recorta ni se desborda en viewports típicos.
 
-- Ejecuta: `npm run test:e2e`
+- Ejecuta: `npm run test:e2e:full`
 - Nota: los tests se ejecutan contra `dist/`, así que conviene hacer `npm run build` antes.
 
 ---

@@ -319,7 +319,7 @@ Para verificar que el fondo funciona correctamente:
 
 ```bash
 npm run build
-npm run test:e2e
+npm run test:e2e:full
 ```
 
 ## 🎗️ Cenefa Decorativa (Frieze)

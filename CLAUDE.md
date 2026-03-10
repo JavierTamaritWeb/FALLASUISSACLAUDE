@@ -17,9 +17,11 @@ WEBFALLASUISSA is the official website for Falla Suissa - L'Alqueria del Favero 
 ```bash
 npm run dev              # Build + watch for changes
 npm run build            # Production build (outputs to dist/)
-npm run test:e2e         # Run all Playwright E2E tests
+npm run test:e2e         # Run the smoke Playwright E2E suite
+npm run test:e2e:full    # Run the complete Playwright E2E suite
+npm run test:e2e:visual  # Run visual regression snapshots only
 npm run test:e2e:install # Install Playwright browsers (first time)
-npm run test:e2e:ui      # Interactive test UI
+npm run test:e2e:ui      # Interactive smoke test UI
 
 # Individual Gulp tasks
 npx gulp css             # Compile SCSS only
@@ -42,6 +44,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 - ALWAYS run `npm run build` before committing
 - ALWAYS run `npm run test:e2e` after CSS/JS changes
+- Run `npm run test:e2e:full` when touching navigation, dark mode, gradient transitions, OG metadata, meteo UI, Swiper, or visual snapshots
 - NEVER edit files in `dist/` directly (they are generated)
 - NEVER remove SCSS variables without checking `tests/scss-guardrails.e2e.spec.js`
 - NEVER reference `og-share.png` without cache-buster `?v=YYYYMMDD` (WhatsApp caching)
@@ -55,7 +58,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 - **Build**: Gulp 5 + Dart Sass + PostCSS (autoprefixer) + CSSNano + Sharp
 - **Frontend**: HTML5, SCSS (BEM), ES6+ JavaScript modules
 - **Libraries**: Swiper.js (carousels), Flatpickr (dates), DOMPurify
-- **Testing**: Playwright E2E (33 tests in `tests/`)
+- **Testing**: Playwright E2E (29 suites in the full matrix, 7 smoke suites by default)
 
 ### Directory Structure
 - `scss/` - Modular SCSS (imports order in `main.scss`: abstracts > base > optimization > layout > animaciones > components > sociales)
@@ -114,7 +117,7 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 ### Updating Open Graph image
 1. Run `npm run generate:og`
 2. Update cache-buster `?v=YYYYMMDD` in ALL HTML files (og:image, twitter:image, image_src)
-3. Run `npm run build` then `npm run test:e2e`
+3. Run `npm run build` then `npm run test:e2e:full`
 
 ### Adding a PDF with social preview
 Use HTML wrappers (see `pdf/Llibrets/` for examples). Include favicon, Open Graph, Twitter Card tags. Embed PDF with `<object>` and fallback download button. Link to `.html` wrapper instead of `.pdf`.

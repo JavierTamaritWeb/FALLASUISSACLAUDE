@@ -72,7 +72,7 @@ npm run build
 3) Ejecuta tests:
 
 ```bash
-npm run test:e2e
+npm run test:e2e:full
 ```
 
 ## 📝 Nota sobre macOS (overlay scrollbars)

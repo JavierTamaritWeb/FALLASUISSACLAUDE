@@ -106,8 +106,11 @@ Esto es especialmente importante para cambios de **tema/modo oscuro** y **scroll
 # Instala navegadores (una vez por máquina)
 npm run test:e2e:install
 
-# Ejecuta tests
+# Ejecuta la smoke suite diaria
 npm run test:e2e
+
+# Ejecuta la suite completa si el cambio toca tema, navegación, OG o meteo
+npm run test:e2e:full
 ```
 
 Guía completa: [`e2e-testing.md`](./e2e-testing.md).
@@ -130,8 +133,11 @@ npm run generate:og
 # Rebuild de dist/
 npm run build
 
-# Ejecuta tests
+# Ejecuta la smoke suite diaria
 npm run test:e2e
+
+# Ejecuta la suite completa si has tocado navegación, tema, gradientes, OG, meteo o snapshots
+npm run test:e2e:full
 ```
 
 Guía completa: [`open-graph-whatsapp.md`](./open-graph-whatsapp.md).
