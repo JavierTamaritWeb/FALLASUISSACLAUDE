@@ -74,9 +74,9 @@ Valida que ningún HTML (excluyendo `dist/`) referencia `og-share.png` **sin** `
 
 ### 3) Validación de metatags (artefacto `dist/`)
 
-Archivo: `tests/og-meta-cachebust-dist.e2e.spec.js`
+Archivo: `tests/og-meta-cachebust.e2e.spec.js`
 
-Valida que el build en `dist/` también contiene la URL versionada.
+Valida que el build en `dist/` también contiene la URL versionada, dentro del mismo spec.
 
 ## 🏗️ Flujo recomendado (antes de desplegar)
 
@@ -95,7 +95,7 @@ npm run build
 3) Ejecuta tests:
 
 ```bash
-npm run test:e2e
+npm run test:e2e:full
 ```
 
 ## 📌 Verificación en producción

@@ -249,7 +249,9 @@ npm run seo:dist
 
 # 🧪 Tests E2E (Playwright)
 npm run test:e2e:install
-npm run test:e2e
+npm run test:e2e         # smoke suite por defecto
+npm run test:e2e:full    # suite completa
+npm run test:e2e:visual  # regresión visual
 npm run test:e2e:ui
 
 # 🎯 Tareas Gulp individuales (coinciden con gulpfile.js)
@@ -273,13 +275,18 @@ Como `dist/` está versionado y los tests E2E validan el artefacto real, antes d
 # 1) Regenera dist/
 npm run build
 
-# 2) Ejecuta la suite E2E
+# 2) Ejecuta la smoke suite diaria
 npm run test:e2e
+
+# 3) Si tocas navegación, dark mode, gradientes, Open Graph, meteo, swiper o snapshots
+npm run test:e2e:full
 ```
 
 Notas:
 
-- Si te pasa algo raro al lanzar `npm run test:e2e` (por ejemplo, estás fuera de la raíz del repo), ejecuta Playwright directamente: `npx playwright test`.
+- `npm run test:e2e` ahora ejecuta la smoke suite mínima contra `dist/`.
+- Usa `npm run test:e2e:full` para la matriz completa de regresión.
+- Si te pasa algo raro al lanzar la smoke suite, ejecuta Playwright directamente: `npx playwright test -c playwright.smoke.config.js`.
 - Guía técnica Safari/scrollbar: [`docs/scrollbar-theme.md`](./docs/scrollbar-theme.md)
 
 ## 🧭 Navbar (UX/UI)
@@ -446,8 +453,11 @@ Los tests E2E validan la navbar (desktop/móvil) en varias páginas y comprueban
 # Instala navegadores (una vez por máquina)
 npm run test:e2e:install
 
-# Ejecuta los tests
+# Ejecuta la smoke suite diaria
 npm run test:e2e
+
+# Ejecuta la suite completa si el cambio afecta layout/tema/OG/meteo
+npm run test:e2e:full
 
 # UI interactiva
 npm run test:e2e:ui

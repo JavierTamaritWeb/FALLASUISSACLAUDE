@@ -7,8 +7,11 @@
     "dev": "gulp",
     "build": "gulp build",
     "seo:dist": "gulp seoDist",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
+    "test:e2e": "playwright test -c playwright.smoke.config.js",
+    "test:e2e:full": "playwright test",
+    "test:e2e:ui": "playwright test -c playwright.smoke.config.js --ui",
+    "test:e2e:ui:full": "playwright test --ui",
+    "test:e2e:visual": "playwright test tests/visual-regression.e2e.spec.js",
     "test:e2e:install": "playwright install",
     "generate:og": "node scripts/generate-og-image.mjs"
   },

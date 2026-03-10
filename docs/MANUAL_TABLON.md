@@ -186,8 +186,11 @@ npm run build
 # Ejecutar tests del tablón
 npx playwright test tests/board.e2e.spec.js
 
-# O ejecutar todos los tests
+# O ejecutar la smoke suite diaria
 npm run test:e2e
+
+# O la suite completa si el cambio se mezcla con layout/tema global
+npm run test:e2e:full
 ```
 
 ## Solución de problemas

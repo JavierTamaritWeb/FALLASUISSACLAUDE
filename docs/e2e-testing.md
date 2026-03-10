@@ -1,6 +1,6 @@
 # 🧪 Tests E2E (Playwright)
 
-**34 test suites** | **220+ tests**
+**Smoke por defecto: 7 suites** | **Suite completa: 29 suites**
 
 Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto y qué validan.
 
@@ -138,7 +138,6 @@ Archivos de test:
 
 - `tests/og-image.e2e.spec.js`
 - `tests/og-meta-cachebust.e2e.spec.js`
-- `tests/og-meta-cachebust-dist.e2e.spec.js`
 
 ### ⏱️ Countdown (Cuenta atrás)
 
@@ -255,14 +254,12 @@ Archivo de test:
 
 Tests para verificar las transiciones suaves del modal "¿Quieres formar parte?":
 
-- **modal-transition.e2e.spec.js**: Verifica que el modal tiene la propiedad `transition` configurada y que el color de fondo cambia al cambiar tema
-- **modal-transition-duration.e2e.spec.js**: Valida que la duración es 2.4s y que el cambio es gradual (no instantáneo)
+- **modal-transition.e2e.spec.js**: Verifica que el modal tiene la propiedad `transition` configurada, conserva la duración 2.4s y que el color de fondo cambia al cambiar tema
 - **modal-dark-to-light.e2e.spec.js**: Test específico para la transición oscuro→claro, verificando colores intermedios
 
 Archivos de test:
 
 - `tests/modal-transition.e2e.spec.js`
-- `tests/modal-transition-duration.e2e.spec.js`
 - `tests/modal-dark-to-light.e2e.spec.js`
 
 ### 🖼️ Background Transition (Transición de fondo)
@@ -366,6 +363,28 @@ Ejecución estándar (headless):
 npm run test:e2e
 ```
 
+Smoke suite por defecto:
+
+- `tests/nav.e2e.spec.js`
+- `tests/i18n.e2e.spec.js`
+- `tests/board.e2e.spec.js`
+- `tests/countdown.e2e.spec.js`
+- `tests/banner-subvencion.e2e.spec.js`
+- `tests/index-colaboraciones.e2e.spec.js`
+- `tests/scss-guardrails.e2e.spec.js`
+
+Suite completa:
+
+```bash
+npm run test:e2e:full
+```
+
+Regresión visual aislada:
+
+```bash
+npm run test:e2e:visual
+```
+
 Modo UI (útil para depurar):
 
 ```bash
@@ -396,29 +415,23 @@ Configuración relacionada:
 - `tests/scss-guardrails.e2e.spec.js` (Guardrails SCSS)
 - `tests/visual-regression.e2e.spec.js` (Regresión visual)
 - `tests/og-image.e2e.spec.js` (Validación imagen OG)
-- `tests/og-meta-cachebust.e2e.spec.js` (Cache-buster OG en HTML fuente)
-- `tests/og-meta-cachebust-dist.e2e.spec.js` (Cache-buster OG en dist/)
+- `tests/og-meta-cachebust.e2e.spec.js` (Cache-buster OG en HTML fuente y en dist/)
 - `tests/background-gradient.e2e.spec.js` (Background gradient)
 - `tests/background-transition.e2e.spec.js` (Transición de fondo body/falla)
 - `tests/gradient-transition.e2e.spec.js` (Transición de gradiente en footer)
 - `tests/theme-transition.e2e.spec.js` (Transición de tema oscuro/claro)
 - `tests/modal-transition.e2e.spec.js` (Transición del modal)
-- `tests/modal-transition-duration.e2e.spec.js` (Duración transición modal)
 - `tests/modal-dark-to-light.e2e.spec.js` (Modal oscuro a claro)
 - `tests/modal-quieres-elements.e2e.spec.js` (Diagnóstico elementos modal)
-- `tests/modal-transition-debug.e2e.spec.js` (Debug visual transición modal)
 - `tests/quieres-mas-transition.e2e.spec.js` (Transición gradiente quieres-mas)
 - `tests/countdown-transition.e2e.spec.js` (Transición gradiente countdown)
 - `tests/countdown.e2e.spec.js` (Countdown de Fallas)
-- `tests/nav-mobile-dropdown.e2e.spec.js` (Menú móvil desplegable)
 
 ### 📱 Menú móvil desplegable
 
-- Verifica que `.navegacion` tiene `position: absolute` en móvil
-- Valida que `.header__barra` NO tiene `overflow: hidden` (recortaría el menú)
-- Comprueba fondos translúcidos en modo claro (azul) y oscuro (negro)
-- Valida transiciones graduales del patrón overlay `::before`
-- Verifica que solo el enlace activo tiene fondo blanco
+- La cobertura crítica del dropdown móvil se integra ahora en `tests/nav.e2e.spec.js`.
+- Ahí se valida `position: absolute`, ausencia de `overflow: hidden` en `.header__barra`, fondo translúcido correcto y visibilidad real de enlaces.
+- Los checks específicos de fondo/tema de la barra siguen complementados por `tests/header-bar-bg.e2e.spec.js` y `tests/nav-transition.e2e.spec.js` dentro de la suite completa.
 
 **Reglas críticas protegidas por estos tests:**
 
@@ -426,10 +439,6 @@ Configuración relacionada:
 2. **Excluir `.navegacion`** del selector `> *` con `:not(.navegacion)`
 3. **Fondo `transparent`** en modo claro (gradiente en `::before`)
 4. **Transición de 2.4s** sincronizada con el tema
-
-Archivo de test:
-
-- `tests/nav-mobile-dropdown.e2e.spec.js`
 
 Guía técnica:
 
@@ -442,10 +451,11 @@ Guía técnica:
 
 - Cambios no reflejados en tests:
   - Ejecuta `npm run build` antes de `npm run test:e2e`
+  - Si el cambio toca layout, dark mode, OG, meteo o snapshots, ejecuta también `npm run test:e2e:full`
 
 - El comando no ejecuta Playwright (o parece ejecutar otra cosa):
   - Asegúrate de estar en la **raíz** del repo (donde está `package.json`).
-  - Como alternativa directa, ejecuta: `npx playwright test`
+  - Como alternativa directa a la smoke suite, ejecuta: `npx playwright test -c playwright.smoke.config.js`
 
 - Conflictos de puerto (si el servidor no arranca):
   - Revisa el puerto configurado en `playwright.config.js`.

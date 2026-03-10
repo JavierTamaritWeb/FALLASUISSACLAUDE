@@ -64,7 +64,7 @@ const newSrc = isRaining ? 'img/decoracion/falleretPlora.svg' : 'img/decoracion/
 
 Existen pruebas E2E (Playwright) para asegurar que estos estilos no sufran regresiones:
 
-*   **Archivo:** `tests/meteo-animation.spec.js`
+*   **Archivo:** `tests/meteo-animation.e2e.spec.js`
 *   **Verificaciones:**
     1.  Carga correcta de la clase `.weather-animate-in`.
     2.  Existencia de ambas animaciones (`Fade` y `Sway`) en las propiedades computadas.
@@ -72,5 +72,5 @@ Existen pruebas E2E (Playwright) para asegurar que estos estilos no sufran regre
 
 Para ejecutar los tests:
 ```bash
-npx playwright test tests/meteo-animation.spec.js
+npx playwright test tests/meteo-animation.e2e.spec.js
 ```
