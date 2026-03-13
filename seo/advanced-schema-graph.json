@@ -66,7 +66,10 @@
         "Arte popular valenciano",
         "Gastronomía valenciana",
         "Pirotecnia tradicional",
-        "Artesanía fallera"
+        "Artesanía fallera",
+        "Proyecto HOPE - INCLIVA",
+        "Investigación Linfoma No Hodgkin Pediátrico",
+        "Colaboraciones solidarias en Valencia"
       ],
       "memberOf": {
         "@type": "Organization",
@@ -103,6 +106,36 @@
         "@type": "Audience",
         "audienceType": "Turistas, valencianos, falleros, interesados en cultura española"
       }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://hope-incliva.com/#website",
+      "url": "https://hope-incliva.com/",
+      "name": "HOPE",
+      "alternateName": "HOPE - INCLIVA",
+      "description": "Proyecto solidario vinculado a INCLIVA que destina parte de los beneficios de su merchandising al estudio del Linfoma No Hodgkin Pediátrico.",
+      "inLanguage": ["es-ES"]
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://fallasuissa.es/colaboraciones.html#hope-collaboration",
+      "name": "Colaboración con HOPE-INCLIVA",
+      "url": "https://fallasuissa.es/colaboraciones.html",
+      "description": "Iniciativa solidaria reflejada en la página de colaboraciones de Falla Suïssa - L'Alqueria del Favero con mención técnica a HOPE e INCLIVA.",
+      "about": [
+        {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        {
+          "@id": "https://hope-incliva.com/#website"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "https://hope-incliva.com/#website"
+        }
+      ],
+      "inLanguage": "es-ES"
     },
     {
       "@type": "CulturalEvent",

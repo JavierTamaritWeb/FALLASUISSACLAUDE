@@ -37,6 +37,20 @@
     "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
     "https://tiktok.com/@fallasuissaalqueria"
   ],
+  "subjectOf": [
+    {
+      "@type": "WebPage",
+      "url": "https://fallasuissa.es/colaboraciones.html",
+      "name": "Colaboración con HOPE-INCLIVA | Falla Suïssa - L'Alqueria del Favero",
+      "description": "Página de colaboraciones de la comisión fallera con referencia técnica al proyecto HOPE-INCLIVA."
+    },
+    {
+      "@type": "WebSite",
+      "url": "https://hope-incliva.com/",
+      "name": "HOPE",
+      "description": "Proyecto solidario vinculado a INCLIVA que apoya la investigación del Linfoma No Hodgkin Pediátrico."
+    }
+  ],
   "member": [
     {
       "@type": "Person",
@@ -118,7 +132,10 @@
     "Fallas",
     "Cultura popular",
     "Artesanía",
-    "Eventos culturales"
+    "Eventos culturales",
+    "Proyecto HOPE - INCLIVA",
+    "Investigación Linfoma No Hodgkin Pediátrico",
+    "Colaboraciones solidarias en Valencia"
   ],
   "serviceArea": {
     "@type": "GeoCircle",
