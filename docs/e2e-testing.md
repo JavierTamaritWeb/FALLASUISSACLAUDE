@@ -2,7 +2,19 @@
 
 **Smoke por defecto: 7 suites** | **Suite completa: 29 suites**
 
-Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto y qué validan.
+Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto, qué validan y qué cobertura mínima se espera cuando cambias SEO técnico, scrollbars, navegación o componentes sensibles.
+
+## 🌐 Cobertura mínima por motor
+
+- **Chromium:** base rápida para layout, navegación, i18n y smoke diaria.
+- **WebKit:** obligatorio cuando tocas scrollbars, iPhone emulado, overlay visual o compatibilidad Safari.
+- **Firefox:** fallback importante cuando dependes de `scrollbar-color`, `scrollbar-width` o diferencias de motor.
+
+Regla práctica:
+
+- cambios de SEO/head: `npm run build` + spec enfocada
+- cambios de scrollbar del llibret: WebKit + Chromium + Firefox sobre su spec dedicada
+- cambios de navegación, tema, gradientes, OG, meteo o snapshots: `npm run test:e2e:full`
 
 ## ✅ Qué se valida
 
@@ -48,16 +60,27 @@ Guía técnica del slider: [`swiper-monumento.md`](./swiper-monumento.md)
 
 Referencia técnica de implementación (CSS/JS, breakpoints, iOS/Safari): [`navigation-bar.md`](./navigation-bar.md)
 
-### 🧾 Scrollbar (modo oscuro) — Safari/WebKit
+### 🧾 Scrollbar global (modo oscuro) — Safari/WebKit
 
 - El thumb debe mantenerse en `#FF6F61`.
-- En modo oscuro, el track del viewport debe poder forzarse a `#111` también cuando Safari asocia el scrollbar a `html` (no solo a `body`).
+- En modo oscuro, el track del viewport debe poder forzarse a `#111` también cuando Safari asocia el scrollbar a `html` y no solo a `body`.
 
-Nota: por limitaciones reales de WebKit (pseudo-elementos de scrollbar) y por la variabilidad de los “overlay scrollbars” en macOS, estos checks se hacen validando el CSS compilado en `dist/` y el estado de clase en `<html>`.
+Nota: por limitaciones reales de WebKit y por la variabilidad de los overlay scrollbars en macOS, estos checks se hacen validando el CSS compilado en `dist/` y el estado de clase en `<html>`.
 
 Archivo de test:
 
 - `tests/scrollbar-theme.e2e.spec.js`
+
+### 📘 Scrollbar del llibret digital 2026
+
+- `llibret_2026.html` usa una implementación distinta al resto del sitio.
+- El thumb es dorado (`#FFD700`) y el track permanece en gris claro.
+- La estructura de CSS separa WebKit y fallback estándar con `@supports`.
+- En WebKit se valida también la vista iPhone emulada; en Chromium y Firefox ese caso se omite por diseño del spec.
+
+Archivo de test:
+
+- `tests/llibret-scrollbar.e2e.spec.js`
 
 Guía técnica:
 
@@ -79,13 +102,29 @@ Guía técnica:
 
 ### 🤝 Colaboraciones (HOPE)
 
+#### Validación visual y UX
+
 - La home y `colaboraciones.html` reutilizan el mismo bloque visual para HOPE.
-- Se valida el grid tradicional responsive, la ausencia de recortes en miniaturas y la apertura/cierre del lightbox accesible.
+- Se valida el grid tradicional responsive, la ausencia de recortes en miniaturas, `object-fit: contain` y la apertura/cierre del lightbox accesible.
 - En móvil también se comprueba el acordeón integrado en la portada.
 
 Archivo de test:
 
 - `tests/index-colaboraciones.e2e.spec.js`
+
+#### Validación SEO técnica
+
+- `index.html` debe mencionar HOPE-INCLIVA en descripción y Open Graph.
+- El JSON-LD de la home debe incluir la referencia a `https://hope-incliva.com/#website` dentro de `about` y `mentions`.
+- `colaboraciones.html` debe dedicar su SEO técnico a HOPE-INCLIVA y enlazar el nodo principal de colaboración con `mainEntity`.
+
+Archivo de test:
+
+- `tests/hope-seo.e2e.spec.js`
+
+Guía técnica:
+
+- [`structured-data.md`](./structured-data.md)
 
 ### 🏷️ Banner de subvención
 
@@ -152,11 +191,13 @@ Archivos de test:
   - Cambio de idioma actualiza el mensaje automáticamente.
 
 Ejemplos de fechas:
+
 - 2026: La Crida el 22 de febrero a las 20:00 (domingo)
 - 2027: La Crida el 28 de febrero a las 20:00 (domingo)
 - 2028: La Crida el 27 de febrero a las 20:00 (domingo)
 
 Tests (11 en total):
+
 - Cálculo de fechas (4): 2026, 2027, fin de Fallas, reinicio automático
 - UI (2): countdown visible, valores numéricos
 - Mensaje bilingüe (5): status ongoing, traducciones, elemento HTML, texto español, cambio a valenciano
@@ -295,11 +336,13 @@ Archivo de test:
 Verifica que los componentes con gradientes transicionan correctamente usando el patrón de overlay `::before`:
 
 **`.quieres-mas`** (Sección "¿Quieres formar parte?"):
+
 - Verifica estructura CSS: `position: relative`, `::before` con gradiente
 - Valida que `opacity` del `::before` es 1 en modo claro y 0 en modo oscuro
 - Comprueba transición gradual (2.4s) en ambas direcciones
 
 **`.countdown__contenedor`** (Caja del countdown):
+
 - Mismas validaciones que `.quieres-mas`
 - Incluye `overflow: hidden` para respetar `border-radius`
 
@@ -462,4 +505,4 @@ Guía técnica:
 
 ---
 
-*Última actualización: 9 de marzo de 2026 - v4.2.16*
+Última actualización: 13 de marzo de 2026 - v4.2.16

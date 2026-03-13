@@ -1,12 +1,10 @@
 # 🎭 WEBFALLASUISSA
 
-<div align="center">
-
 ![Falla Suïssa](https://fallasuissa.es/img/Escudo_falla.png)
 
-**Página web oficial de la Falla Suïssa - L'Alqueria del Favero (Falla #396)**
+## Página web oficial de la Falla Suïssa - L'Alqueria del Favero (Falla #396)
 
-*Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experiencia a falleros y visitantes*
+Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experiencia a falleros y visitantes.
 
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Ffallasuissa.es)](https://fallasuissa.es)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -19,9 +17,7 @@
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-**🆕 Última actualización:** 9 de marzo de 2026 - v4.2.16 - Página de Colaboraciones, grid tradicional HOPE y ajuste del banner de subvención.
-
-</div>
+🆕 Última actualización: 9 de marzo de 2026 - v4.2.16 - Página de Colaboraciones, grid tradicional HOPE y ajuste del banner de subvención.
 
 ## 🌐 Vista Previa
 
@@ -31,7 +27,8 @@
 
 ## ✨ Características Principales
 
-### 🎨 **Diseño y UX**
+### 🎨 Diseño y UX
+
 - **Diseño responsivo** - Adaptación perfecta a todos los dispositivos
 - **Modo oscuro/claro** - Alternancia automática según preferencias del usuario
 - **Transición asimétrica de tema** - Oscuro→claro más suave; claro→oscuro mantiene la respuesta actual
@@ -51,13 +48,15 @@
 
 Guía técnica completa: [`docs/navigation-bar.md`](./docs/navigation-bar.md)
 
-### ⚡ **Performance y Optimización**
+### ⚡ Performance y Optimización
+
 - **Imágenes modernas** - Formatos WebP y AVIF para carga ultrarrápida
 - **CSS optimizado** - Minificación y autoprefixer automático
 - **Lazy loading** - Carga diferida de imágenes y recursos
 - **Critical CSS** - Priorización de estilos críticos
 
-### 🌍 **Multiidioma**
+### 🌍 Multiidioma
+
 - **🇪🇸 Español** - Idioma por defecto
 - **🇻🇦 Valenciano** - Soporte completo para la lengua local
 - **Cambio dinámico** - Sin recarga de página
@@ -65,13 +64,15 @@ Guía técnica completa: [`docs/navigation-bar.md`](./docs/navigation-bar.md)
 
 Guía técnica: [`docs/i18n-translations.md`](./docs/i18n-translations.md)
 
-### 📱 **Tecnología Avanzada**
+### 📱 Tecnología Avanzada
+
 - **PWA Ready** - Instalable como aplicación móvil
 - **SEO Profesional** - Meta tags, Schema.org, sitemaps
 - **Datos estructurados** - JSON-LD para mejor indexación
 - **Analytics ready** - Preparado para Google Analytics
 
-### 🟦 **Open Graph (WhatsApp/Facebook/Twitter)**
+### 🟦 Open Graph (WhatsApp/Facebook/Twitter)
+
 - Imagen OG optimizada `img/og-share.png` (1200×630, fondo sólido, <300KB)
 - Cache-buster `?v=...` para evitar problemas de caché en WhatsApp
 
@@ -79,19 +80,22 @@ Guía técnica: [`docs/open-graph-whatsapp.md`](./docs/open-graph-whatsapp.md)
 
 ## 🏗️ Stack Tecnológico
 
-### **Frontend**
+### Frontend
+
 - **HTML5** - Estructura semántica y accesible
 - **SCSS/CSS3** - Estilos modulares con Sass y metodología BEM
 - **JavaScript ES6+** - Funcionalidades interactivas modernas
 - **CSS Grid/Flexbox** - Layouts avanzados y responsivos
 
-### **Build Tools**
+### Build Tools
+
 - **Gulp 5** - Automatización de tareas (build + watch)
 - **Sass (Dart Sass)** - Compilación SCSS vía `gulp-sass`
 - **PostCSS** - Autoprefixer + minificación con cssnano
 - **Sharp** - Conversión de imágenes a WebP/AVIF
 
-### **Librerías y Frameworks**
+### Librerías y Frameworks
+
 - **Swiper.js** - Carruseles y sliders táctiles
 - **Flatpickr** - Selector de fechas avanzado
 - **DOMPurify** - Sanitización de contenido
@@ -103,7 +107,7 @@ Guía técnica (modo oscuro + scrollbar Safari/WebKit): [`docs/scrollbar-theme.m
 
 ## 📁 Arquitectura del Proyecto
 
-### **Estructura Principal**
+### Estructura Principal
 
 ```text
 WEBFALLASUISSA/
@@ -145,10 +149,10 @@ WEBFALLASUISSA/
 └── 📄 sitemap*.xml            # Mapas del sitio
 ```
 
-### **Páginas Disponibles**
+### Páginas Disponibles
 
 | Página | Descripción | Funcionalidades |
-|--------|-------------|-----------------|
+| -------- | ------------- | ----------------- |
 | `index.html` | Página principal | Historia, organigrama, cuenta atrás, colaboraciones, banner institucional |
 | `lafalla.html` | Información detallada | Falleras mayores, presidentes |
 | `colaboraciones.html` | Colaboraciones | Proyecto HOPE, grid fotográfico y lightbox |
@@ -162,9 +166,16 @@ WEBFALLASUISSA/
 | `mapa.html` | Ubicación geográfica | Mapa interactivo |
 | `base.html` | Template base | Estructura común |
 
+## 📘 Guías Técnicas Clave
+
+- Índice técnico completo: [`docs/README.md`](./docs/README.md)
+- Datos estructurados y SEO técnico: [`docs/structured-data.md`](./docs/structured-data.md)
+- Constraints que no deben romperse: [`docs/architecture-constraints.md`](./docs/architecture-constraints.md)
+- Build, pruebas y scripts utilitarios: [`docs/build-and-deploy.md`](./docs/build-and-deploy.md), [`docs/e2e-testing.md`](./docs/e2e-testing.md) y [`docs/scripts-utilities.md`](./docs/scripts-utilities.md)
+
 ## 🔎 SEO y Optimización para Buscadores
 
-### **Google Search Console Ready**
+### Google Search Console Ready
 
 - ✅ **Core Web Vitals optimizados**
   - LCP (Largest Contentful Paint): Imágenes principales optimizadas
@@ -179,7 +190,7 @@ WEBFALLASUISSA/
   - Event structured data para actividades
   - Rich snippets para resultados mejorados
 
-### **Archivos SEO Especializados**
+### Archivos SEO Especializados
 
 ```text
 ├── 📄 robots.txt              # Optimizado para Googlebot
@@ -193,7 +204,7 @@ WEBFALLASUISSA/
 └── 📄 ai-crawl.html          # Página especializada para IA crawlers
 ```
 
-### **Optimizaciones CSS para SEO**
+### Optimizaciones CSS para SEO
 
 ```scss
 // 📂 scss/_google-seo.scss - Optimizaciones específicas Google
@@ -205,7 +216,7 @@ WEBFALLASUISSA/
 - Critical above-the-fold optimization
 ```
 
-### **Meta Tags Avanzados**
+### Meta Tags Avanzados
 
 - ✅ **Open Graph completo** para redes sociales
 - ✅ **Twitter Cards** para mejor compartición
@@ -216,26 +227,26 @@ WEBFALLASUISSA/
 
 ## 🚀 Instalación y Desarrollo
 
-### **Prerequisitos**
+### Prerequisitos
 
 - Node.js 18+
 - npm 9+
 - Git
 
-### **1. Clonar el repositorio**
+### 1. Clonar el repositorio
 
 ```bash
 git clone https://github.com/JavierTamaritWeb/WEBFALLASUISSA.git
 cd WEBFALLASUISSA
 ```
 
-### **2. Instalar dependencias**
+### 2. Instalar dependencias
 
 ```bash
 npm install
 ```
 
-### **3. Comandos disponibles**
+### 3. Comandos disponibles
 
 ```bash
 # 🚀 Desarrollo (hace build y se queda en watch)
@@ -298,7 +309,7 @@ Notas:
   - `js/lang.js`
   - `scss/layout/_header.scss`
 
-### **4. Estructura de distribución**
+### 4. Estructura de distribución
 
 El comando `build` genera la carpeta `dist/` optimizada para producción:
 
@@ -317,7 +328,7 @@ dist/
 
 ## 🎯 Funcionalidades Principales
 
-### **🏡 Página Principal**
+### 🏡 Página Principal
 
 - ✅ **Historia de la falla** - Relato "Somni" por Paula Peiró
 - ✅ **Cuenta atrás dinámico** - Tiempo restante para las Fallas 2026
@@ -325,7 +336,7 @@ dist/
 - ✅ **Organigrama interactivo** - Estructura completa de la comisión
 - ✅ **Slider de monumentos** - Imágenes optimizadas del monumento
 
-### **📅 Sistema de Eventos y Calendario**
+### 📅 Sistema de Eventos y Calendario
 
 - ✅ **Calendario interactivo** - Navegación por meses y años
 - ✅ **Gestión de eventos** - Visualización de actividades programadas
@@ -334,14 +345,14 @@ dist/
 - ✅ **Exportación ICS** - Integración con calendarios personales
 - ✅ **Filtros avanzados** - Por tipo de evento y fechas
 
-### **🌤️ Información Meteorológica**
+### 🌤️ Información Meteorológica
 
 - ✅ **Tiempo actual** - Condiciones meteorológicas en tiempo real
 - ✅ **Pronóstico extendido** - Previsión detallada de 5 días
 - ✅ **Datos específicos** - Información localizada para Valencia
 - ✅ **API integration** - Conexión con servicios meteorológicos
 
-### **📸 Sistema de Galerías**
+### 📸 Sistema de Galerías
 
 - ✅ **4 galerías especializadas** - Categorización por eventos
 - ✅ **Visualizador full-screen** - Experiencia inmersiva
@@ -349,7 +360,7 @@ dist/
 - ✅ **Lazy loading** - Carga progresiva para mejor performance
 - ✅ **Navigation táctil** - Swipe y gestos en dispositivos móviles
 
-### **🗺️ Mapa Interactivo**
+### 🗺️ Mapa Interactivo
 
 - ✅ **Ubicación de la falla** - Geolocalización precisa
 - ✅ **Puntos de interés** - Lugares relevantes del barrio
@@ -358,7 +369,7 @@ dist/
 
 ## 🔧 Configuración Avanzada de Gulp
 
-### **Automatización de Tareas**
+### Automatización de Tareas
 
 ```javascript
 // Tareas principales del gulpfile.js
@@ -371,7 +382,7 @@ const tasks = {
 };
 ```
 
-### **Optimizaciones Implementadas**
+### Optimizaciones Implementadas
 
 - ✅ **Compilación SCSS** con Dart Sass
 - ✅ **Autoprefixer** para compatibilidad cross-browser
@@ -384,7 +395,7 @@ const tasks = {
 
 ## 📈 SEO y Performance Profesional
 
-### **🔍 SEO Avanzado**
+### 🔍 SEO Avanzado
 
 - ✅ **Meta tags optimizados** - Title, description, keywords
 - ✅ **Open Graph** - Integración con redes sociales
@@ -394,7 +405,7 @@ const tasks = {
 - ✅ **Robots.txt** - Configuración para crawlers
 - ✅ **Sitemaps XML** - Indexación completa del sitio
 
-### **⚡ Performance Optimizado**
+### ⚡ Performance Optimizado
 
 - ✅ **Core Web Vitals** - Métricas de experiencia del usuario
 - ✅ **Critical CSS** - Estilos críticos inline
@@ -403,7 +414,7 @@ const tasks = {
 - ✅ **Lazy loading** - Carga diferida de recursos
 - ✅ **Minificación** - CSS y assets optimizados
 
-### **📊 Estructura de Sitemaps**
+### 📊 Estructura de Sitemaps
 
 ```xml
 <!-- Estructura de sitemaps implementada -->
@@ -416,12 +427,12 @@ sitemap-index.xml     → Hub principal de sitemaps
 
 ## 🌍 Sistema Multiidioma Avanzado
 
-### **Idiomas Soportados**
+### Idiomas Soportados
 
 - **🇪🇸 Español** - Idioma por defecto (completo)
 - **🇻🇦 Valenciano** - Soporte completo nativo
 
-### **Gestión de Traducciones**
+### Gestión de Traducciones
 
 ```json
 // data/translations.json - 846 líneas de contenido
@@ -438,7 +449,7 @@ sitemap-index.xml     → Hub principal de sitemaps
 }
 ```
 
-### **Funcionalidades del Sistema**
+### Funcionalidades del Sistema
 
 - ✅ **Cambio dinámico** - Sin recarga de página
 - ✅ **Persistencia** - Recuerda la preferencia del usuario
@@ -471,25 +482,31 @@ Notas:
 
 ## 🤝 Guía de Contribución
 
-### **Para Desarrolladores**
+### Para Desarrolladores
 
-1. **Fork** el repositorio
-2. **Crea una rama** para tu feature:
-   ```bash
-   git checkout -b feature/nueva-funcionalidad
-   ```
-3. **Realiza tus cambios** siguiendo las convenciones del proyecto
-4. **Commit** con mensajes descriptivos:
-   ```bash
-   git commit -m "feat: añadir funcionalidad X"
-   ```
-5. **Push** a tu rama:
-   ```bash
-   git push origin feature/nueva-funcionalidad
-   ```
-6. **Abre un Pull Request** con descripción detallada
+1. **Fork** el repositorio.
+1. **Crea una rama** para tu feature.
 
-### **Convenciones del Proyecto**
+  ```bash
+  git checkout -b feature/nueva-funcionalidad
+  ```
+
+1. **Realiza tus cambios** siguiendo las convenciones del proyecto.
+1. **Commit** con mensajes descriptivos.
+
+  ```bash
+  git commit -m "feat: añadir funcionalidad X"
+  ```
+
+1. **Push** a tu rama.
+
+  ```bash
+  git push origin feature/nueva-funcionalidad
+  ```
+
+1. **Abre un Pull Request** con descripción detallada.
+
+### Convenciones del Proyecto
 
 - ✅ **CSS**: Metodología BEM y arquitectura SCSS modular
 - ✅ **JavaScript**: ES6+ con módulos separados
@@ -500,38 +517,38 @@ Notas:
 
 Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más detalles.
 
-### **Uso Permitido**
+### Uso Permitido
 
 - ✅ Uso comercial y privado
 - ✅ Modificación y distribución
 - ✅ Uso como base para otros proyectos falleros
 
-### **Condiciones**
+### Condiciones
 
 - ⚠️ Incluir el aviso de copyright
 - ⚠️ Incluir la licencia en las copias
 
 ## 👥 Equipo y Organización
 
-### **💻 Desarrollo Web**
+### 💻 Desarrollo Web
 
 - **Javier Tamarit** - Delegado Web y Desarrollador Principal
   - Arquitectura del proyecto y desarrollo frontend
   - Optimización de performance y SEO
   - Integración de sistemas y APIs
 
-### **🎭 Falla Suïssa - L'Alqueria del Favero #396**
+### 🎭 Falla Suïssa - L'Alqueria del Favero #396
 
-**Ejercicio 2025-26**
+#### Ejercicio 2025-26
 
-#### **Representantes Principales**
+#### Representantes Principales
 
 - **José Santos Quiles** - Presidente
 - **Marta Soriano Dolz** - Fallera Mayor
 - **Prados Santos Ramos** - Fallera Mayor Infantil
 - **Javier Santos Ramos** - Presidente Infantil
 
-#### **Junta Directiva**
+#### Junta Directiva
 
 - **Paula Peiró** - Secretaria
 - **Marta Soriano** - Vicepresidenta (Eventos)
@@ -543,26 +560,29 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 
 ## 📝 Changelog y Actualizaciones
 
-### 🆕 **[v4.0.0] - 26 de enero de 2026 - Corrección crítica menú móvil + documentación completa**
+### 🆕 [v4.0.0] - 26 de enero de 2026 - Corrección crítica menú móvil + documentación completa
 
-#### 🐛 **Corrección Crítica**
+#### 🐛 Corrección Crítica
+
 - ✅ **Menú móvil funcional en pantallas <768px**: Corregido problema de contexto de apilamiento (z-index)
   - El backdrop se inserta ahora dentro de `.header__barra` en lugar del `body`
   - Esto asegura que el menú (z-index: 2500) esté siempre por encima del backdrop (z-index: 1500)
   - Botón de menú elevado a z-index: 2600 en móvil para garantizar accesibilidad
 
-#### 📚 **Documentación Actualizada**
+#### 📚 Documentación Actualizada
+
 - ✅ Toda la documentación actualizada a v4.0.0
 - ✅ Fechas actualizadas en todos los archivos `.md` (26/01/2026)
 - ✅ `CLAUDE.md` actualizado con información del fix del menú móvil
 - ✅ Guías técnicas sincronizadas con el estado actual del código
 
-#### 🧪 **Tests E2E**
+#### 🧪 Tests E2E
+
 - ✅ Navbar validada en múltiples páginas y breakpoints
 - ✅ Tests de regresión para menú móvil
 - ✅ Validación de z-index y contextos de apilamiento
 
-### 🆕 **[v2.0.0] - 12 de enero de 2026 - Build actualizado y documentación alineada**
+### 🆕 [v2.0.0] - 12 de enero de 2026 - Build actualizado y documentación alineada
 
 - ✅ Build sin warnings de Sass legacy (migración a `gulp-sass` + `sass`)
 - ✅ Script `seo:dist` funcional (alias `seoDist`)
@@ -570,21 +590,22 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - ✅ Repo más limpio: `node_modules/` ignorado y fuera del control de versiones
 - ✅ Documentación técnica actualizada (scripts, tareas Gulp y guía de despliegue)
 
-### 🆕 **[v2.10.0] - 13 de agosto de 2025 - Optimización Avanzada SEO + IA**
+### 🆕 [v2.10.0] - 13 de agosto de 2025 - Optimización Avanzada SEO + IA
 
-#### 🤖 **Mejoras Avanzadas de Inteligencia Artificial**
+#### 🤖 Mejoras Avanzadas de Inteligencia Artificial
 
-- **Nuevos archivos especializados:**
-  ```text
-  📂 seo/
-  ├── 📄 ai-enhanced-faq.md           # FAQ optimizada específicamente para IA
-  ├── 📄 advanced-schema-graph.json   # Schema.org con @graph y propiedades extendidas
-  ├── 📄 ai-analytics-config.md       # Configuración avanzada de analytics para IA
-  ├── 📄 ai-link-building-strategy.md # Estrategia completa de descubrimiento por IA
-  └── 📄 advanced-technical-seo.md    # Configuración técnica avanzada (.htaccess, headers)
-  ```
+Archivos especializados añadidos:
 
-#### 🔧 **Mejoras Técnicas Avanzadas**
+```text
+📂 seo/
+├── 📄 ai-enhanced-faq.md           # FAQ optimizada específicamente para IA
+├── 📄 advanced-schema-graph.json   # Schema.org con @graph y propiedades extendidas
+├── 📄 ai-analytics-config.md       # Configuración avanzada de analytics para IA
+├── 📄 ai-link-building-strategy.md # Estrategia completa de descubrimiento por IA
+└── 📄 advanced-technical-seo.md    # Configuración técnica avanzada (.htaccess, headers)
+```
+
+#### 🔧 Mejoras Técnicas Avanzadas
 
 - **Meta tags expandidos para IA:** 25+ etiquetas específicas incluyendo contexto cultural, geolocalización y prioridades de entrenamiento
 - **Headers HTTP optimizados:** Configuración específica para crawlers de IA con cache y compresión
@@ -592,37 +613,39 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - **Analytics para IA:** Detección y seguimiento específico de crawlers de IA
 - **Core Web Vitals para IA:** Monitoreo de rendimiento específico para sistemas de IA
 
-#### 📊 **Sistemas de Monitoreo Avanzado**
+#### 📊 Sistemas de Monitoreo Avanzado
 
 - **Detección automática de crawlers IA:** ChatGPT, Claude, Perplexity, Bard, Copilot
 - **Validación de Schema automatizada:** Sistema de puntuación para optimización IA
 - **Performance tracking específico:** Métricas dedicadas para interacciones con IA
 
-### 🆕 **[v2.9.0] - 13 de agosto de 2025 - Optimización para IA (ChatGPT, Claude, etc.)**
+### 🆕 [v2.9.0] - 13 de agosto de 2025 - Optimización para IA (ChatGPT, Claude, etc.)
 
-#### 🤖 **Archivos Específicos para IA**
+#### 🤖 Archivos Específicos para IA
 
-- **Nuevos archivos creados:**
-  ```text
-  📂 seo/
-  ├── 📄 ai-training-data.md       # Contexto cultural detallado para IA
-  ├── 📄 ai-enhanced-schema.json   # Schema.org ampliado con knowsAbout
-  └── 📄 ai-crawl.html            # Página específica para crawlers IA
-  
-  📄 robots-ai-optimized.txt       # Robots.txt con bots de IA específicos
-  📄 sitemap-ai-optimized.xml      # Sitemap con contenido para IA
-  ```
+Archivos creados:
 
-#### 🎯 **Meta Tags Específicos para IA**
+```text
+📂 seo/
+├── 📄 ai-training-data.md       # Contexto cultural detallado para IA
+├── 📄 ai-enhanced-schema.json   # Schema.org ampliado con knowsAbout
+└── 📄 ai-crawl.html             # Página específica para crawlers IA
 
-- **Añadidos al index.html:**
-  ```html
-  <meta name="ai:content_type" content="cultural_organization">
-  <meta name="ai:topic" content="Spanish traditional culture, Valencia, UNESCO heritage">
-  <meta name="ai:context" content="Traditional Valencian falla commission founded 2024">
-  ```
+📄 robots-ai-optimized.txt       # Robots.txt con bots de IA específicos
+📄 sitemap-ai-optimized.xml      # Sitemap con contenido para IA
+```
 
-#### 🧠 **Sistemas IA Optimizados**
+#### 🎯 Meta Tags Específicos para IA
+
+Meta tags añadidos a `index.html`:
+
+```html
+<meta name="ai:content_type" content="cultural_organization">
+<meta name="ai:topic" content="Spanish traditional culture, Valencia, UNESCO heritage">
+<meta name="ai:context" content="Traditional Valencian falla commission founded 2024">
+```
+
+#### 🧠 Sistemas IA Optimizados
 
 - **ChatGPT/GPT Models:** Contexto cultural y turístico de Valencia
 - **Claude/Anthropic:** Información educativa sobre tradiciones españolas  
@@ -630,7 +653,7 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - **Bing AI:** Organización cultural y empresarial local
 - **SearchGPT:** Eventos culturales y turismo en Valencia
 
-#### 📊 **Contenido Educativo para IA**
+#### 📊 Contenido Educativo para IA
 
 - **¿Qué es una Falla?** - Explicación completa para IA
 - **Contexto UNESCO** - Patrimonio Cultural Inmaterial
@@ -638,16 +661,16 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - **Eventos culturales** - Festivales y tradiciones valencianas
 - **Contexto geográfico** - Valencia, Mediterráneo, España
 
-#### 🔍 **Keywords Semánticos para IA**
+#### 🔍 Keywords Semánticos para IA
 
-```
+```text
 #Valencia #Spain #Culture #Tradition #Festival #UNESCO #Heritage
 #LasFallas #Suissa #AlqueriaDelFavero #Valencian #Community #Art
 ```
 
-### 🆕 **[v2.8.0] - 13 de agosto de 2025 - Archivo Verificación Google Mejorado**
+### 🆕 [v2.8.0] - 13 de agosto de 2025 - Archivo Verificación Google Mejorado
 
-#### 🔧 **Archivo de Verificación Profesional**
+#### 🔧 Archivo de Verificación Profesional
 
 - **Mejorado:** `google12345678901234567890.html` ahora es un HTML completo
 - **Características nuevas:**
@@ -657,7 +680,7 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
   - Información del proyecto y dominio
   - Enlaces directos a Search Console
 
-#### ✅ **Ventajas del nuevo formato**
+#### ✅ Ventajas del nuevo formato
 
 - **🎯 Informativo:** El usuario ve contenido útil si accede al archivo
 - **📋 Autoexplicativo:** Instrucciones completas en el propio archivo
@@ -665,7 +688,7 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - **📱 Responsive:** HTML válido que se ve bien en cualquier dispositivo
 - **🔧 Contexto:** Información específica del proyecto Falla Suïssa
 
-#### 📄 **Estructura del archivo**
+#### 📄 Estructura del archivo
 
 ```html
 <!DOCTYPE html>
@@ -680,25 +703,26 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 </html>
 ```
 
-### 🆕 **[v2.7.0] - 13 de agosto de 2025 - Documentación Técnica Organizada**
+### 🆕 [v2.7.0] - 13 de agosto de 2025 - Documentación Técnica Organizada
 
-#### 📚 **Nueva Carpeta `/docs/` con Documentación Markdown**
+#### 📚 Nueva Carpeta `/docs/` con Documentación Markdown
 
-- **Estructura creada:**
-  ```text
-  📂 docs/
-  ├── 📄 README.md                    # Índice de documentación
-  ├── 📄 google-search-console.md     # Verificación Search Console
-  └── 📄 robots-configuration.md      # Configuración robots.txt
-  ```
+Estructura creada:
 
-#### 🔄 **Migración .txt → .md**
+```text
+📂 docs/
+├── 📄 README.md                    # Índice de documentación
+├── 📄 google-search-console.md     # Verificación Search Console
+└── 📄 robots-configuration.md      # Configuración robots.txt
+```
+
+#### 🔄 Migración .txt → .md
 
 - **Eliminados:** `GOOGLE_VERIFICATION_INSTRUCTIONS.txt`, `robots-optimized.txt`
 - **Convertidos:** A Markdown con formato profesional
 - **Mejorados:** Sintaxis highlighting, tablas, enlaces, emojis
 
-#### ✅ **Beneficios de la nueva documentación**
+#### ✅ Beneficios de la nueva documentación
 
 - **📖 Legibilidad:** Markdown con formato Github Flavored  
 - **🔗 Navegación:** Enlaces internos entre documentos
@@ -706,23 +730,24 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - **🔍 Searchable:** Mejor indexación y búsqueda
 - **📱 Responsive:** Se ve bien en cualquier dispositivo
 
-#### 🔧 **Gulp Optimizado**
+#### 🔧 Gulp Optimizado
 
 - **Excluye `docs/`** del build de producción (solo desarrollo)
 - **Watch mode** no incluye documentación técnica
 - **Build limpio** sin archivos de documentación innecesarios
 
-### 🆕 **[v2.6.0] - 13 de agosto de 2025 - Google Search Console Verification**
+### 🆕 [v2.6.0] - 13 de agosto de 2025 - Google Search Console Verification
 
-#### 🔍 **Archivo de Verificación Google Search Console**
+#### 🔍 Archivo de Verificación Google Search Console
 
-- **Archivos creados:**
-  ```text
-  ├── 📄 google12345678901234567890.html    # Archivo verificación (template)
-  └── 📄 GOOGLE_VERIFICATION_INSTRUCTIONS.txt # Instrucciones detalladas
-  ```
+Archivos creados:
 
-#### ⚙️ **Configuración de Verificación**
+```text
+├── 📄 google12345678901234567890.html       # Archivo verificación (template)
+└── 📄 GOOGLE_VERIFICATION_INSTRUCTIONS.txt  # Instrucciones detalladas
+```
+
+#### ⚙️ Configuración de Verificación
 
 - **Método 1 - Archivo HTML:**
   1. Ve a [Google Search Console](https://search.google.com/search-console)
@@ -731,43 +756,46 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
   4. Reemplaza `google12345678901234567890.html` con tu archivo real
   5. Gulp lo copiará automáticamente a `/dist/`
 
-- **Método 2 - Meta Tag (alternativo):**
-  ```html
-  <meta name="google-site-verification" content="TU_CODIGO_AQUI" />
-  ```
-  - Ya preparado en `index.html` (comentado)
-  - Solo descomenta y añade tu código
+**Método 2 - Meta Tag (alternativo):**
 
-#### 🔧 **Optimizaciones Gulp**
+```html
+<meta name="google-site-verification" content="TU_CODIGO_AQUI" />
+```
+
+- Ya preparado en `index.html` (comentado)
+- Solo descomenta y añade tu código
+
+#### 🔧 Optimizaciones Gulp para verificación
 
 - **Auto-detección:** Gulp detecta automáticamente archivos `google*.html`
 - **Watch mode:** Cambios en verificación se copian en tiempo real
 - **Build production:** Incluido en `npx gulp build`
 
-### 🆕 **[v2.5.0] - 13 de agosto de 2025 - Estructura SEO Optimizada**
+### 🆕 [v2.5.0] - 13 de agosto de 2025 - Estructura SEO Optimizada
 
-#### 📂 **Reorganización de Archivos SEO**
+#### 📂 Reorganización de Archivos SEO
 
-- **Nueva estructura organizada:**
-  ```text
-  ├── 📄 .htaccess              # Debe estar en raíz (Apache requirement)
-  ├── 📄 robots.txt             # Debe estar en raíz (SEO standard)
-  ├── 📄 sitemap*.xml           # Deben estar en raíz (Google requirement)
-  └── 📂 seo/                   # Archivos auxiliares organizados
-      ├── 📄 ai-crawl.html      # Página para IA crawlers
-      ├── 📄 ld-json-enhanced.json    # Datos estructurados avanzados
-      └── 📄 schema-organization.json # Schema específico organización
-  ```
+Nueva estructura organizada:
 
-#### 🔧 **Optimizaciones Gulp**
+```text
+├── 📄 .htaccess                   # Debe estar en raíz (Apache requirement)
+├── 📄 robots.txt                  # Debe estar en raíz (SEO standard)
+├── 📄 sitemap*.xml                # Deben estar en raíz (Google requirement)
+└── 📂 seo/                        # Archivos auxiliares organizados
+    ├── 📄 ai-crawl.html           # Página para IA crawlers
+    ├── 📄 ld-json-enhanced.json   # Datos estructurados avanzados
+    └── 📄 schema-organization.json # Schema específico organización
+```
+
+#### 🔧 Optimizaciones Gulp para estructura SEO
 
 - **Tarea `seoFiles` mejorada:**
   - Archivos críticos se mantienen en raíz automáticamente
-  - Archivos auxiliares organizados en `/seo/` 
+  - Archivos auxiliares organizados en `/seo/`
   - Preserva estructura en build de producción
   - Compatible con Google Search Console requirements
 
-#### ✅ **Beneficios de la nueva estructura**
+#### ✅ Beneficios de la nueva estructura
 
 - **🎯 SEO-friendly:** Archivos críticos donde deben estar
 - **📁 Organización:** Archivos auxiliares en carpeta específica  
@@ -807,30 +835,30 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - **Critical CSS** separado para mejor First Contentful Paint
 - **Accessibility improvements** para mejor ranking SEO
 
-### 📋 **Próximas Mejoras Planificadas**
+### 📋 Próximas Mejoras Planificadas
 
 - [ ] Google Analytics 4 integration
-- [ ] Search Console verification  
+- [ ] Search Console verification
 - [ ] Rich snippets para eventos
 - [ ] AMP pages implementation
 - [ ] Core Web Vitals monitoring
 
 ## 📞 Contacto y Redes Sociales
 
-### **🌐 Web y Email**
+### 🌐 Web y Email
 
 - **Web Oficial:** [https://fallasuissa.es](https://fallasuissa.es)
 - **Email:** [info@fallasuissa.es](mailto:info@fallasuissa.es)
 
-### **📱 Redes Sociales**
+### 📱 Redes Sociales
 
 | Plataforma | Usuario | Enlace |
-|-----------|---------|---------|
+| ----------- | --------- | --------- |
 | **Facebook** | FallaSuissaLalqueriadelFavero | [Ver perfil](https://www.facebook.com/FallaSuissaLalqueriadelFavero) |
 | **Instagram** | @fallasuissa_lalqueriadelfavero | [Ver perfil](https://www.instagram.com/fallasuissa_lalqueriadelfavero/) |
 | **TikTok** | @fallasuissaalqueria | [Ver perfil](https://tiktok.com/@fallasuissaalqueria) |
 
-### **📍 Ubicación**
+### 📍 Ubicación
 
 - **Dirección:** Calle Suïssa, Valencia 46024
 - **Barrio:** L'Alqueria del Favero - Les Moreres
@@ -838,7 +866,7 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 
 ## 🏆 Reconocimientos y Estadísticas
 
-### **📊 Datos del Proyecto**
+### 📊 Datos del Proyecto
 
 - **Líneas de código:** ~15,000+ líneas
 - **Archivos JavaScript:** 16 módulos especializados
@@ -847,7 +875,7 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - **Performance Score:** 95+ en PageSpeed Insights
 - **SEO Score:** 100/100 en herramientas de análisis
 
-### **🎯 Alcance y Impacto**
+### 🎯 Alcance y Impacto
 
 - **Falleros atendidos:** 113+ miembros de la comisión
 - **Visitantes web:** Información pública para toda la comunidad
@@ -856,7 +884,7 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 
 ## 🔄 Roadmap y Futuras Mejoras
 
-### **🚀 Próximas Funcionalidades**
+### 🚀 Próximas Funcionalidades
 
 - [ ] **PWA completa** - Service Worker y funcionalidad offline
 - [ ] **Push notifications** - Alertas de eventos importantes
@@ -864,7 +892,7 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - [ ] **Chat integrado** - Comunicación interna de la comisión
 - [ ] **App móvil nativa** - Desarrollo con React Native
 
-### **⚡ Optimizaciones Planificadas**
+### ⚡ Optimizaciones Planificadas
 
 - [ ] **CDN integration** - Distribución global de contenido
 - [ ] **Database integration** - Backend para gestión dinámica
@@ -873,24 +901,20 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 
 ---
 
-<div align="center">
+## 🎭 Cierre
 
-## 🎭 Falla Suïssa - L'Alqueria del Favero #396
+### Tradició, Cultura i Germanor
 
-### *Tradició, Cultura i Germanor*
-
-**Ejercicio 2025-26**
+Ejercicio 2025-26
 
 [![Visitar Web](https://img.shields.io/badge/🌐_Visitar_Web-fallasuissa.es-blue?style=for-the-badge)](https://fallasuissa.es)
 
-**🔥 Plantem falla per primera vegada! 🔥**
+🔥 Plantem falla per primera vegada! 🔥
 
-*"¡Sssshhhhh… silencio que se rueda!"*
+"¡Sssshhhhh… silencio que se rueda!"
 
 ---
 
-**© 2026 Falla Suïssa - L'Alqueria del Favero | Tots els drets reservats**
+© 2026 Falla Suïssa - L'Alqueria del Favero | Tots els drets reservats
 
-*Desenvolupat amb ❤️ per a la comunitat fallera*
-
-</div>
+Desenvolupat amb ❤️ per a la comunitat fallera.

@@ -1,88 +1,142 @@
-# 🧾 Scrollbar y Modo Oscuro (Safari/WebKit)
+# 🧾 Scrollbars, Modo Oscuro y Casos Especiales
 
-Esta guía documenta el comportamiento del scrollbar (thumb/track) en modo claro/oscuro y los detalles necesarios para que se aplique correctamente en Safari.
+Esta guía documenta el comportamiento del scrollbar del sitio en claro/oscuro y el caso especial de [`../llibret_2026.html`](../llibret_2026.html), que no usa la misma paleta ni el mismo punto de implementación que el resto de páginas.
 
 ## 🎯 Objetivo
 
-- `thumb` (barra): **siempre** color corporativo `#FF6F61`.
-- `track` (fondo):
-  - Modo claro: gris claro.
-  - Modo oscuro: **casi negro** `#111`.
+### Sitio general
 
-## 🧠 Por qué Safari es especial
+- `thumb`: color corporativo `#FF6F61`.
+- `track`:
+  - modo claro: gris claro `#E3E2E2`
+  - modo oscuro: casi negro `#111`
 
-En Safari (y especialmente en macOS/iOS), el scrollbar del viewport puede estar asociado al elemento `html` en lugar de `body`.
+### Llibret digital 2026
 
-Si el modo oscuro solo se activa en `body` (`body.modo-oscuro`), es posible que:
+- `thumb`: dorado `#FFD700`
+- `track`: gris claro `#E3E2E2`
+- forma del thumb: estrecha y alargada
+- longitud mínima del thumb: vinculada a `--nav-float-offset` para aproximarlo a la barra flotante del llibret
 
-- el scrollbar del viewport no recoja los overrides de `::-webkit-scrollbar-track`.
-- visualmente no se vea el track `#111` aunque la regla exista para `body`.
+## 🧠 Por qué Safari y macOS son especiales
 
-Por eso, el modo oscuro se sincroniza en **`html` y `body`**, y la CSS incluye selectores para ambos.
+En Safari, y especialmente con overlay scrollbars de macOS/iOS, el scrollbar del viewport puede asociarse a `html` en vez de `body`. Si el modo oscuro solo se refleja en `body`, el track del viewport puede ignorar los overrides de `::-webkit-scrollbar-track`.
 
-## 🧩 Implementación (dónde tocar)
+Por eso el tema oscuro se sincroniza en `html` y `body`, y la CSS global contempla selectores para ambos estados.
 
-### CSS (SCSS)
+## 🧩 Implementación actual
+
+### 1. Scrollbar global del sitio
 
 Archivo principal:
+
 - `scss/animaciones/_modo-oscuro.scss`
 
-Claves de la implementación:
-- Reglas WebKit:
+Claves:
+
+- WebKit:
   - `::-webkit-scrollbar-thumb` con `#FF6F61`
   - `::-webkit-scrollbar-track` con gris claro
-  - Overrides en oscuro para:
-    - `body.modo-oscuro` (compat)
-    - `html.modo-oscuro` (Safari viewport)
-    - `html:has(body.modo-oscuro)` (fallback cuando aplique)
+  - overrides oscuros en `body.modo-oscuro`, `html.modo-oscuro` y `html:has(body.modo-oscuro)`
+- Firefox:
+  - `scrollbar-color` aplicado en `body` y `html`
 
-- Reglas Firefox:
-  - `scrollbar-color` en `body` y `html`.
-
-### JavaScript (modo oscuro)
-
-Se aplica la clase `modo-oscuro` tanto en `document.body` como en `document.documentElement`:
-
-- `js/dark.js`
-  - Al cargar: respeta `localStorage.darkMode`
-  - Al hacer click: sincroniza `html` con el estado real de `body`
-  - Nota: Ya no se utiliza `js/lang.js` para esta tarea para evitar race conditions.
-
-## 🧪 Tests (para que no se rompa)
-
-Los pseudo-elementos de scrollbar (`::-webkit-scrollbar*`) no son fiables de validar por estilos computados en WebKit, y los screenshots pueden ser frágiles (overlay scrollbars en macOS).
-
-Por eso el test valida:
-
-1) Que el artefacto de producción `dist/css/main.css` contiene los selectores/colores esperados.
-2) Que con `localStorage.darkMode=true` el `<html>` queda con `modo-oscuro`.
+### 2. Scrollbar especial del llibret
 
 Archivo:
+
+- [`../llibret_2026.html`](../llibret_2026.html)
+
+Claves:
+
+- La página lleva CSS inline y no depende del SCSS global para el scrollbar.
+- En WebKit usa `@supports (selector(::-webkit-scrollbar))` para aislar las reglas nativas del motor.
+- En Firefox y navegadores sin pseudo-elementos WebKit usa `@supports not (selector(::-webkit-scrollbar))` con `scrollbar-color` y `scrollbar-width`.
+- El `thumb` dorado no es un error: es una decisión específica del documento digital y tiene un test propio.
+- La longitud mínima del thumb se fija con `min-height: var(--nav-float-offset)` para acompañar visualmente la barra flotante superior del llibret.
+
+### 3. JavaScript de tema
+
+Archivo:
+
+- `js/dark.js`
+
+Responsabilidades:
+
+- leer `localStorage.darkMode`
+- sincronizar `document.body` y `document.documentElement`
+- evitar race conditions con otras capas de UI
+
+## 🌐 Estrategia cross-browser
+
+| Motor | Estrategia | Qué se comprueba |
+| ------- | ------------ | ------------------ |
+| WebKit | `::-webkit-scrollbar*` | color del thumb/track, layout y, en el llibret, validación iPhone emulada |
+| Firefox | `scrollbar-color` + `scrollbar-width` | fallback funcional y ausencia de overflow |
+| Chromium | soporte WebKit de escritorio | HTML/CSS generado correcto y layout estable |
+
+Regla práctica:
+
+- si tocas el scrollbar global, valida la CSS compilada y el estado de `html`
+- si tocas el scrollbar del llibret, valida el HTML generado de la propia página
+- no intentes forzar equivalencia visual exacta entre motores: el scrollbar nativo impone límites, sobre todo en macOS
+
+## 🧪 Tests
+
+### Scrollbar global
+
+Archivo:
+
 - `tests/scrollbar-theme.e2e.spec.js`
 
-## 🔁 Flujo recomendado al cambiar tema/scrollbars
+Valida:
 
-1) Cambia SCSS/JS.
-2) Regenera `dist/`:
+1. que `dist/css/main.css` contiene los colores y selectores esperados
+2. que `html` recibe `modo-oscuro` cuando `localStorage.darkMode=true`
+
+### Scrollbar del llibret
+
+Archivo:
+
+- `tests/llibret-scrollbar.e2e.spec.js`
+
+Valida:
+
+1. que `dist/llibret_2026.html` contiene la estructura `@supports` correcta
+2. que el `thumb` dorado y el `track` gris claro están presentes
+3. que no hay overflow horizontal en escritorio
+4. que la vista iPhone emulada se valida en WebKit
+
+## 🔁 Flujo recomendado al tocar scrollbars o tema
+
+### Cambios globales (SCSS/JS)
 
 ```bash
 npm run build
-```
-
-3) Ejecuta tests:
-
-```bash
 npm run test:e2e:full
 ```
 
+### Cambios solo en el llibret
+
+```bash
+npm run build
+npx playwright test tests/llibret-scrollbar.e2e.spec.js --browser=webkit
+npx playwright test tests/llibret-scrollbar.e2e.spec.js --browser=chromium
+npx playwright test tests/llibret-scrollbar.e2e.spec.js --browser=firefox
+```
+
+Si el cambio toca además tema global, navegación o gradientes, vuelve a la full suite.
+
 ## 📝 Nota sobre macOS (overlay scrollbars)
 
-Si en macOS tienes "Mostrar barras de desplazamiento: Automáticamente", el track puede no dibujarse siempre de forma constante (solo aparece durante el scroll). Esto puede afectar a la percepción visual, pero no invalida la regla CSS.
+Con la opción del sistema “Mostrar barras de desplazamiento: Automáticamente”, el track puede dibujarse solo mientras haces scroll. Eso afecta a la percepción visual, no a la validez de la CSS.
 
 ## 🔗 Relacionado
 
-- [`global-styles.md`](./global-styles.md) - Fondo del sitio (`background-image` en body, gradiente en modo claro, negro con `background-image: none` en modo oscuro)
+- [`global-styles.md`](./global-styles.md): gradientes y transición de tema
+- [`e2e-testing.md`](./e2e-testing.md): estrategia de pruebas Playwright
+- [`architecture-constraints.md`](./architecture-constraints.md): restricciones que afectan a navegación, gradientes y banner
 
 ---
 
-*Última actualización: 9 de marzo de 2026 - v4.2.16*
+Última actualización: 13 de marzo de 2026 - v4.2.16

@@ -61,6 +61,8 @@ npx gulp seo
 npx gulp updateDistSitemapsLastmod
 ```
 
+Para scripts utilitarios que no forman parte del flujo diario de Gulp, consulta [`scripts-utilities.md`](./scripts-utilities.md).
+
 ## 🗺️ Sitemaps y `lastmod`
 
 El build ejecuta `updateDistSitemapsLastmod` para actualizar `lastmod` en:
@@ -70,11 +72,12 @@ El build ejecuta `updateDistSitemapsLastmod` para actualizar `lastmod` en:
 
 La fecha se calcula usando el `mtime` real de los archivos en `dist/`.
 
-## � Configuración del Servidor (.htaccess)
+## ⚙️ Configuración del Servidor (.htaccess)
 
 El proyecto incluye un archivo `.htaccess` optimizado para servidores Apache. Este archivo se debe subir a la raíz del servidor (`dist/` incluye el contenido que debe ir al servidor, pero asegúrate de que el archivo `.htaccess` oculto se copie también).
 
 **Funcionalidades principales (v4.2.8):**
+
 - **HTTPS y Rutas:** Redirección forzada a HTTPS y eliminación de `www`.
 - **Compresión:** Gzip activado para HTML, CSS, JS, fuentes e imágenes SVG.
 - **Caché:** Políticas de expiración eficientes para assets estáticos.
@@ -82,17 +85,19 @@ El proyecto incluye un archivo `.htaccess` optimizado para servidores Apache. Es
 - **Tipos MIME:** Soporte para WebP, AVIF y ficheros webmanifest.
 - **URLs Amigables:** Redirección automática de URLs sin extensión a `.html`.
 
-## �🌐 Despliegue (opciones)
+## 🌐 Despliegue (opciones)
 
 Este repo mantiene `dist/` versionado. Eso permite desplegar en hosts simples (FTP/hosting estático) sin necesidad de Node en el servidor.
 
 Opciones habituales:
 
-1) **Desplegar el contenido de `dist/`**
+1. **Desplegar el contenido de `dist/`**
+
 - Ejecuta `npm run build`
 - Sube `dist/` al servidor (raíz pública)
 
-2) **Desplegar desde Git con `dist/` ya incluido**
+1. **Desplegar desde Git con `dist/` ya incluido**
+
 - Pull en el servidor/hosting
 - Publicar `dist/` como carpeta raíz (según tu proveedor)
 
@@ -142,6 +147,8 @@ npm run test:e2e:full
 
 Guía completa: [`open-graph-whatsapp.md`](./open-graph-whatsapp.md).
 
+Guía de utilidades relacionadas: [`scripts-utilities.md`](./scripts-utilities.md).
+
 ## 📄 PDFs
 
 Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo (por ejemplo `pdf/Presentaciones/Prensentacion_Fallera_2026.pdf`), solo necesitas ejecutar `npm run build` para que aparezca en `dist/`.
@@ -153,4 +160,4 @@ Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo 
 
 ---
 
-*Última actualización: 9 de marzo de 2026 - v4.2.16*
+Última actualización: 13 de marzo de 2026 - v4.2.16
