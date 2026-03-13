@@ -228,7 +228,14 @@
         "archivos": {
           "titulo": "Archivos",
           "presentacion": "Presentación",
-          "fallas2026": " Fallas 2026"
+          "fallas2026": " Fallas 2026",
+          "edicion202425": "Edición 2024-25",
+          "edicion202526": "Edición 2025-26",
+          "llibretDigital": "Llibret dig. traducido.",
+          "presentacionAria": "Ver Presentación Fallera 2026 en una pestaña nueva",
+          "llibret202425Aria": "Ver Llibret 2024-25 en una pestaña nueva",
+          "llibret202526Aria": "Ver Llibret 2025-26 en una pestaña nueva",
+          "llibretDigitalAria": "Abrir Llibret digital 2025-2026 en una pestaña nueva"
         }
         
       },
@@ -496,7 +503,14 @@
         "archivos": {
           "titulo": "Arxius",
           "presentacion": "Presentació",
-          "fallas2026": " Falles 2026"
+          "fallas2026": " Falles 2026",
+          "edicion202425": "Edició 2024-25",
+          "edicion202526": "Edició 2025-26",
+          "llibretDigital": "Llibret dig. traduït",
+          "presentacionAria": "Veure Presentació Fallera 2026 en una pestanya nova",
+          "llibret202425Aria": "Veure Llibret 2024-25 en una pestanya nova",
+          "llibret202526Aria": "Veure Llibret 2025-26 en una pestanya nova",
+          "llibretDigitalAria": "Obrir Llibret digital 2025-2026 en una pestanya nova"
         }  
 
         

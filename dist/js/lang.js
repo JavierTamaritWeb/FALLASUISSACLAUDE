@@ -44,11 +44,15 @@ function updateTranslations () {
     }
   });
 
-  // placeholders de inputs/textarea
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
-    const key = elem.getAttribute('data-i18n-placeholder');
-    const translation = getNestedTranslation(key);
-    if (translation) elem.placeholder = translation;
+  [
+    ['[data-i18n-placeholder]', 'data-i18n-placeholder', 'placeholder'],
+    ['[data-i18n-aria-label]', 'data-i18n-aria-label', 'aria-label']
+  ].forEach(([selector, keyAttribute, targetAttribute]) => {
+    document.querySelectorAll(selector).forEach(elem => {
+      const key = elem.getAttribute(keyAttribute);
+      const translation = getNestedTranslation(key);
+      if (translation) elem.setAttribute(targetAttribute, translation);
+    });
   });
 }
 

@@ -21,6 +21,9 @@ test.describe('i18n: sistema de traducciones', () => {
 
     await expect(page.locator('[data-i18n="historia.archivos.presentacion"]').first()).toHaveText('Presentación');
     await expect(page.locator('[data-i18n="historia.archivos.fallas2026"]').first()).toHaveText(' Fallas 2026');
+    await expect(page.locator('[data-i18n="historia.archivos.edicion202425"]').first()).toHaveText('Edición 2024-25');
+    await expect(page.locator('[data-i18n="historia.archivos.edicion202526"]').first()).toHaveText('Edición 2025-26');
+    await expect(page.locator('a[href="llibret_2026.html"]').first()).toHaveAttribute('aria-label', 'Abrir Llibret digital 2025-2026 en una pestaña nueva');
   });
 
   test('Cambiar a VA: actualiza textos, persiste y aplica en otras páginas', async ({ page }) => {
@@ -45,6 +48,9 @@ test.describe('i18n: sistema de traducciones', () => {
 
     await expect(page.locator('[data-i18n="historia.archivos.presentacion"]').first()).toHaveText('Presentació');
     await expect(page.locator('[data-i18n="historia.archivos.fallas2026"]').first()).toHaveText(' Falles 2026');
+    await expect(page.locator('[data-i18n="historia.archivos.edicion202425"]').first()).toHaveText('Edició 2024-25');
+    await expect(page.locator('[data-i18n="historia.archivos.edicion202526"]').first()).toHaveText('Edició 2025-26');
+    await expect(page.locator('a[href="llibret_2026.html"]').first()).toHaveAttribute('aria-label', 'Obrir Llibret digital 2025-2026 en una pestanya nova');
 
     await expect
       .poll(async () => page.evaluate(() => localStorage.getItem('lang')))
@@ -55,6 +61,9 @@ test.describe('i18n: sistema de traducciones', () => {
     await expect(page.locator('[data-i18n="historia.archivos.titulo"]').first()).toHaveText('Arxius');
     await expect(page.locator('[data-i18n="historia.archivos.presentacion"]').first()).toHaveText('Presentació');
     await expect(page.locator('[data-i18n="historia.archivos.fallas2026"]').first()).toHaveText(' Falles 2026');
+    await expect(page.locator('[data-i18n="historia.archivos.edicion202425"]').first()).toHaveText('Edició 2024-25');
+    await expect(page.locator('[data-i18n="historia.archivos.edicion202526"]').first()).toHaveText('Edició 2025-26');
+    await expect(page.locator('a[href="llibret_2026.html"]').first()).toHaveAttribute('aria-label', 'Obrir Llibret digital 2025-2026 en una pestanya nova');
 
     await page.reload();
     await expect(page.locator('[data-i18n="nav.inicio"]').first()).toHaveText('Inici');

@@ -22,6 +22,16 @@
       <image:title>La Falla</image:title>
     </image:image>
   </url>
+
+  <!-- Página del llibret digital -->
+  <url>
+    <loc>https://fallasuissa.es/llibret_2026.html</loc>
+    <image:image>
+      <image:loc>https://fallasuissa.es/img/Escudo_falla.png</image:loc>
+      <image:caption>Portada del llibret digital 2025-2026 de la Falla Suïssa</image:caption>
+      <image:title>Llibret digital 2025-2026</image:title>
+    </image:image>
+  </url>
   
   <!-- Página de Eventos -->
   <url>
