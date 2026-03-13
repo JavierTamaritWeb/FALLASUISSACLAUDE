@@ -567,6 +567,33 @@
             word-wrap: break-word;
         }
 
+        /* ── Scrollbar ── */
+        @supports (selector(::-webkit-scrollbar)) {
+          ::-webkit-scrollbar {
+            width: 12px;
+          }
+
+          ::-webkit-scrollbar-thumb {
+            background-color: #FFD700;
+            border: 0;
+            min-height: var(--nav-float-offset);
+            border-radius: 4px;
+          }
+
+          ::-webkit-scrollbar-track {
+            background-color: #E3E2E2;
+            border-radius: 4px;
+          }
+        }
+
+        @supports not (selector(::-webkit-scrollbar)) {
+          html,
+          body {
+            scrollbar-color: #FFD700 #E3E2E2;
+            scrollbar-width: thin;
+          }
+        }
+
         /* ── Reduced Motion ── */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
