@@ -1,6 +1,6 @@
 # 🧱 Constraints de Arquitectura
 
-Esta guía resume las restricciones técnicas del repositorio que no deben romperse al tocar navegación, gradientes, notificaciones, banner institucional o scroll visual.
+Esta guía resume las restricciones técnicas del repositorio que no deben romperse al tocar navegación, gradientes, reveal on scroll, notificaciones, banner institucional o scroll visual.
 
 Si esta guía y `CLAUDE.md` se contradicen, prevalece `CLAUDE.md`.
 
@@ -80,7 +80,52 @@ npx playwright test tests/quieres-mas-transition.e2e.spec.js
 npx playwright test tests/countdown-transition.e2e.spec.js
 ```
 
-## 4. Animación de notificaciones: una sola fuente
+## 4. Reveal on Scroll: opt-in, exclusiones y refresco
+
+Regla:
+
+El reveal on scroll debe seguir siendo **opt-in** mediante `.reveal`. No se debe convertir en un selector global agresivo que afecte a todo el layout.
+
+Qué debe quedar fuera:
+
+- `header`, navegación fija y footer
+- modales, backdrops, lightboxes y overlays
+- internals de Swiper
+- `#map` y sus capas internas
+- `.forecast-day`, porque `js/meteo.js` ya anima esas tarjetas
+
+Contenido dinámico:
+
+Si un bloque se re-renderiza por JavaScript tras la carga inicial, hay que llamar a `window.scrollReveal.refresh(root)`.
+
+Casos ya cubiertos:
+
+- `js/board.js`
+- `js/calendario.js`
+
+Accesibilidad:
+
+Con `prefers-reduced-motion: reduce`, el sistema no puede dejar contenido oculto esperando al observer.
+
+Archivos implicados:
+
+- `js/scroll-reveal.js`
+- `scss/animaciones/_reveal.scss`
+- `js/board.js`
+- `js/calendario.js`
+- HTML de las páginas que usan `.reveal`
+
+Verificación recomendada:
+
+```bash
+npm run build
+npx playwright test tests/reveal-on-scroll.e2e.spec.js
+npx playwright test tests/visual-regression.e2e.spec.js --workers=1
+```
+
+Si además tocas tema, layout compartido o snapshots, ejecuta `npm run test:e2e:full`.
+
+## 5. Animación de notificaciones: una sola fuente
 
 Regla:
 
@@ -100,7 +145,7 @@ Verificación recomendada:
 - revisión manual del panel de notificación en home y páginas internas
 - smoke suite si el cambio afecta al header
 
-## 5. Banner de subvención: persistencia y renderizado
+## 6. Banner de subvención: persistencia y renderizado
 
 Persistencia:
 
@@ -152,7 +197,7 @@ npx playwright test tests/banner-subvencion.e2e.spec.js
 
 Si además tocas navegación, tema o snapshots, ejecuta `npm run test:e2e:full`.
 
-## 6. Qué hacer antes de tocar una zona sensible
+## 7. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
 
@@ -172,4 +217,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 13 de marzo de 2026 - v4.2.16
+Última actualización: 15 de marzo de 2026 - v4.2.16

@@ -1,10 +1,12 @@
-# 🎨 Estilos Globales (Reset y Fondo)
+# 🎨 Estilos Globales (Reset, Fondo y Reveal)
 
-Esta guía documenta el sistema de estilos globales del proyecto, incluyendo el reset CSS y el fondo con gradiente.
+Esta guía documenta el sistema de estilos globales del proyecto, incluyendo el reset CSS, el fondo con gradiente y el reveal on scroll global.
 
-## 📁 Archivo fuente
+## 📁 Archivos fuente
 
 - `scss/abstracts/_globales.scss`
+- `scss/animaciones/_reveal.scss`
+- `js/scroll-reveal.js`
 
 ## 🔄 Reset CSS
 
@@ -118,49 +120,93 @@ El archivo `_globales.scss` se importa en `main.scss` después de `normalize`:
 El archivo `_globales.scss` se carga temprano. El archivo `_modo-oscuro.scss` se carga después y sobrescribe el fondo cuando se activa `.modo-oscuro`.
 
 ### Altura del contenido
-- `html` debe tener `height: 100%` 
+
+- `html` debe tener `height: 100%`
 - `body` debe tener `min-height: 100%` (no `height: 100%`) para permitir que el contenido crezca
 - Esto asegura que páginas cortas muestren el gradiente completo
 
 ### Safari/iOS
+
 Esta implementación es totalmente compatible con Safari/iOS sin necesidad de hacks adicionales.
+
+## ✨ Reveal on Scroll Global
+
+El proyecto usa un sistema de reveal on scroll **opt-in**. No se aplica de forma automática a todo el DOM: cada bloque que participa debe declararse explícitamente con clases `.reveal`.
+
+### Contrato CSS/JS
+
+- `.reveal`: marca el bloque que entra en el sistema.
+- `.reveal--soft`: reduce distancia y duración para piezas más ligeras.
+- `.reveal--slow`: alarga la duración del efecto.
+- `.reveal-ready`: estado preparado; lo añade `js/scroll-reveal.js`.
+- `.is-visible`: estado visible; lo gestiona el `IntersectionObserver`.
+- `data-reveal-once`: deja el bloque visible tras su primera entrada en viewport.
+- `data-reveal-skip`: excluye un nodo aunque comparta árbol con otros bloques reveal.
+
+### Comportamiento
+
+- `js/scroll-reveal.js` usa `IntersectionObserver` con `threshold: 0.15` y `rootMargin: 0px 0px -10% 0px`.
+- El reveal es repetible: al salir del viewport se quita `.is-visible`, salvo que exista `data-reveal-once`.
+- `html.has-scroll-reveal` activa el contrato visual en CSS para no dejar estados intermedios cuando el script no ha arrancado todavía.
+- Si el usuario tiene `prefers-reduced-motion: reduce`, el sistema fuerza todos los bloques a visibles y no deja contenido oculto esperando al observer.
+
+### Contenido dinámico
+
+Si un bloque se renderiza o re-renderiza después del primer `DOMContentLoaded`, hay que llamar a:
+
+```js
+window.scrollReveal.refresh(root);
+```
+
+Actualmente ya lo hacen:
+
+- `js/board.js`
+- `js/calendario.js`
+
+### Exclusiones importantes
+
+No apliques `.reveal` de forma indiscriminada a zonas frágiles o con animación propia:
+
+- `header`, navegación fija, footer, modales, backdrops, lightboxes u overlays
+- internals de Swiper
+- `#map` y sus capas internas
+- `.forecast-day`, porque `js/meteo.js` ya anima esas tarjetas
 
 ## 👗 Fondo de Sección Falla (Traje Regional)
 
 La sección `.falla` (página principal con información de la Falla) tiene un fondo con imagen de traje regional valenciano (`img/fondo_traje.png`).
 
-### Modo claro
+### Implementación actual
 
 ```scss
 .falla {
-  background: linear-gradient(rgba(245, 245, 245, 0.85), rgba(245, 245, 245, 0.85)), url('../img/fondo_traje.png');
+  background: url('../img/fondo_traje.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(245, 245, 245, 0.85);
+    transition: background-color var(--theme-transition, 2.4s ease-in-out);
+  }
+}
+
+body.modo-oscuro .falla::before {
+  background-color: rgba(0, 0, 0, 0.85);
 }
 ```
 
 **Implementación:**
-- Gradiente semitransparente blanco (85% opacidad) sobre la imagen
+
+- La imagen vive en el propio bloque `.falla`
+- El overlay claro/oscuro vive en `.falla::before`
 - `background-attachment: fixed` crea efecto parallax suave
-- La imagen se centra y cubre toda la sección
-
-### Modo oscuro
-
-```scss
-body.modo-oscuro .falla {
-  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('../img/fondo_traje.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-```
-
-**Implementación:**
-- Gradiente semitransparente negro (85% opacidad) sobre la misma imagen
-- Mantiene la coherencia visual pero adaptado al tema oscuro
+- La imagen se centra y cubre toda la sección sin duplicar declaraciones entre temas
 
 ### Archivos relacionados
 
@@ -339,7 +385,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 ---
 
-*Última actualización: 9 de marzo de 2026 - v4.2.16*
+Última actualización: 15 de marzo de 2026 - v4.2.16
 
 ## 🏛️ Componente Frieze (Cenefa)
 

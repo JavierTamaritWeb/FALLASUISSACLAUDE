@@ -1,6 +1,6 @@
 # 🧪 Tests E2E (Playwright)
 
-**Smoke por defecto: 7 suites** | **Suite completa: 29 suites**
+**Smoke por defecto: 8 suites** | **Suite completa: 32 suites**
 
 Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto, qué validan y qué cobertura mínima se espera cuando cambias SEO técnico, scrollbars, navegación o componentes sensibles.
 
@@ -14,7 +14,7 @@ Regla práctica:
 
 - cambios de SEO/head: `npm run build` + spec enfocada
 - cambios de scrollbar del llibret: WebKit + Chromium + Firefox sobre su spec dedicada
-- cambios de navegación, tema, gradientes, OG, meteo o snapshots: `npm run test:e2e:full`
+- cambios de navegación, tema, gradientes, reveal, OG, meteo o snapshots: `npm run test:e2e:full`
 
 ## ✅ Qué se valida
 
@@ -169,14 +169,48 @@ Archivo de test:
 
 - `tests/scss-guardrails.e2e.spec.js`
 
+### ✨ Reveal on Scroll Global
+
+- Valida que el sistema reveal es **opt-in**, repetible y compatible con contenido dinámico.
+- Comprueba que un bloque puede ocultarse al salir del viewport y volver a mostrarse al reentrar.
+- Protege el refresco tras rerender en piezas que pintan HTML por JavaScript.
+- Verifica que `prefers-reduced-motion: reduce` no deje contenido oculto esperando al observer.
+- Mantiene exclusiones delicadas como `.forecast-day`, que conserva su animación propia en `js/meteo.js`.
+
+Archivo de test:
+
+- `tests/reveal-on-scroll.e2e.spec.js`
+
+Cobertura concreta:
+
+- `index.html`: reentrada en viewport de un bloque estático
+- `eventos.html`: rerender del tablón al cambiar idioma
+- `calendario.html`: rerender tras filtrar y limpiar
+- `meteo.html`: reveal de wrappers y exclusión de `.forecast-day`
+
 ### 📸 Visual Regression
 
 - Tests de regresión visual para componentes críticos.
 - Compara capturas de pantalla para detectar cambios no intencionados.
+- Usa estado determinista: hora congelada, mocks de meteo/mapa y tema inicial por `localStorage`.
+- En modo oscuro no se hace click sobre el toggle: la página arranca ya en oscuro para evitar ruido de transición o notificación.
+- Antes de capturar, la suite fuerza todos los `.reveal` a visibles y limpia `#notificacion` para que las capturas no dependan del scroll ni de estados efímeros.
 
 Archivo de test:
 
 - `tests/visual-regression.e2e.spec.js`
+
+Snapshots:
+
+- `tests/snapshots/visual-regression.e2e.spec.js/`
+
+Si el cambio visual es intencional:
+
+```bash
+npm run build
+npx playwright test tests/visual-regression.e2e.spec.js --update-snapshots --workers=1
+npx playwright test tests/visual-regression.e2e.spec.js --workers=1
+```
 
 ### 🟦 Open Graph (WhatsApp)
 
@@ -225,14 +259,24 @@ Archivo de test:
 - Valida que el gradiente se mantiene al hacer scroll
 - Verifica que el CSS compilado contiene las reglas necesarias
 
-El gradiente está implementado directamente en `body` usando `background-image` (no pseudo-elemento):
+El gradiente base está implementado con el patrón de overlay en `body::before`, no cambiando directamente de `background-image` a negro. Así la transición real a modo oscuro se hace con opacidad.
 
 ```scss
 body {
   background-color: #0a4b8d;
-  background-image: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
-  background-repeat: no-repeat;
-  background-size: cover;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -100;
+    pointer-events: none;
+    background-image: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: opacity var(--theme-transition, 2.4s ease-in-out);
+  }
 }
 ```
 
@@ -241,7 +285,10 @@ En modo oscuro se elimina el gradiente:
 ```scss
 body.modo-oscuro {
   background-color: #000;
-  background-image: none;
+}
+
+body.modo-oscuro::before {
+  opacity: 0;
 }
 ```
 
@@ -505,7 +552,12 @@ Guía técnica:
 
 - Cambios no reflejados en tests:
   - Ejecuta `npm run build` antes de `npm run test:e2e`
-  - Si el cambio toca layout, dark mode, OG, meteo o snapshots, ejecuta también `npm run test:e2e:full`
+  - Si el cambio toca layout, dark mode, reveal, OG, meteo o snapshots, ejecuta también `npm run test:e2e:full`
+
+- Snapshots visuales desfasados tras un cambio intencional:
+  - Ejecuta `npm run build`
+  - Regenera la baseline con `npx playwright test tests/visual-regression.e2e.spec.js --update-snapshots --workers=1`
+  - Revalida con `npx playwright test tests/visual-regression.e2e.spec.js --workers=1`
 
 - El comando no ejecuta Playwright (o parece ejecutar otra cosa):
   - Asegúrate de estar en la **raíz** del repo (donde está `package.json`).

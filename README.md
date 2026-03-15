@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 9 de marzo de 2026 - v4.2.16 - Página de Colaboraciones, grid tradicional HOPE y ajuste del banner de subvención.
+🆕 Última actualización: 15 de marzo de 2026 - v4.2.16 - Reveal on scroll global, snapshots visuales estabilizados y documentación técnica sincronizada.
 
 ## 🌐 Vista Previa
 
@@ -34,6 +34,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 - **Transición asimétrica de tema** - Oscuro→claro más suave; claro→oscuro mantiene la respuesta actual
 - **Scrollbar consistente** - Thumb corporativo + track oscuro `#111` (Safari/WebKit incluido)
 - **Animaciones fluidas** - Transiciones suaves y efectos visuales atractivos
+- **Reveal on scroll global** - Activación progresiva con soporte para contenido dinámico y preferencia de reduced motion
 - **Accesibilidad WCAG** - Cumple estándares de accesibilidad web
 - **Footer optimizado** - Navegación tipo “chips” (bordes sutiles), enlace activo legible en oscuro e iconos sociales responsive (más pequeños en móvil, más grandes en desktop)
 - **Colaboraciones integradas** - Sección HOPE compartida entre la home y una página dedicada con lightbox accesible
@@ -126,6 +127,7 @@ WEBFALLASUISSA/
 │   ├── dark.js                # Modo oscuro/claro
 │   ├── lang.js                # Sistema multiidioma
 │   ├── nav-menu.js            # Menú móvil (hamburguesa + overlay)
+│   ├── scroll-reveal.js       # Reveal on scroll global
 │   ├── banner-subvencion.js   # Modal institucional con control por pestaña/recarga
 │   ├── colaboraciones-lightbox.js # Lightbox accesible para HOPE
 │   ├── meteo.js               # Integración meteorológica
@@ -260,9 +262,9 @@ npm run seo:dist
 
 # 🧪 Tests E2E (Playwright)
 npm run test:e2e:install
-npm run test:e2e         # smoke suite por defecto
-npm run test:e2e:full    # suite completa
-npm run test:e2e:visual  # regresión visual
+npm run test:e2e         # smoke suite por defecto (8 specs)
+npm run test:e2e:full    # suite completa (32 specs)
+npm run test:e2e:visual  # regresión visual y snapshots
 npm run test:e2e:ui
 
 # 🎯 Tareas Gulp individuales (coinciden con gulpfile.js)
@@ -289,14 +291,14 @@ npm run build
 # 2) Ejecuta la smoke suite diaria
 npm run test:e2e
 
-# 3) Si tocas navegación, dark mode, gradientes, Open Graph, meteo, swiper o snapshots
+# 3) Si tocas navegación, dark mode, gradientes, reveal, Open Graph, meteo, swiper o snapshots
 npm run test:e2e:full
 ```
 
 Notas:
 
 - `npm run test:e2e` ahora ejecuta la smoke suite mínima contra `dist/`.
-- Usa `npm run test:e2e:full` para la matriz completa de regresión.
+- Usa `npm run test:e2e:full` para la matriz completa de regresión cuando el cambio afecta reveal, layout, tema o snapshots.
 - Si te pasa algo raro al lanzar la smoke suite, ejecuta Playwright directamente: `npx playwright test -c playwright.smoke.config.js`.
 - Guía técnica Safari/scrollbar: [`docs/scrollbar-theme.md`](./docs/scrollbar-theme.md)
 
@@ -467,8 +469,11 @@ npm run test:e2e:install
 # Ejecuta la smoke suite diaria
 npm run test:e2e
 
-# Ejecuta la suite completa si el cambio afecta layout/tema/OG/meteo
+# Ejecuta la suite completa si el cambio afecta layout/tema/reveal/OG/meteo/snapshots
 npm run test:e2e:full
+
+# Regresión visual aislada
+npm run test:e2e:visual
 
 # UI interactiva
 npm run test:e2e:ui

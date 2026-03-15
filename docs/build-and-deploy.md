@@ -114,8 +114,15 @@ npm run test:e2e:install
 # Ejecuta la smoke suite diaria
 npm run test:e2e
 
-# Ejecuta la suite completa si el cambio toca tema, navegación, OG o meteo
+# Ejecuta la suite completa si el cambio toca tema, navegación, reveal, OG, meteo o snapshots
 npm run test:e2e:full
+```
+
+Si el cambio visual es intencional y la regresión visual necesita nueva baseline:
+
+```bash
+npx playwright test tests/visual-regression.e2e.spec.js --update-snapshots --workers=1
+npx playwright test tests/visual-regression.e2e.spec.js --workers=1
 ```
 
 Guía completa: [`e2e-testing.md`](./e2e-testing.md).
@@ -141,7 +148,7 @@ npm run build
 # Ejecuta la smoke suite diaria
 npm run test:e2e
 
-# Ejecuta la suite completa si has tocado navegación, tema, gradientes, OG, meteo o snapshots
+# Ejecuta la suite completa si has tocado navegación, tema, gradientes, reveal, OG, meteo o snapshots
 npm run test:e2e:full
 ```
 
@@ -160,4 +167,4 @@ Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo 
 
 ---
 
-Última actualización: 13 de marzo de 2026 - v4.2.16
+Última actualización: 15 de marzo de 2026 - v4.2.16
