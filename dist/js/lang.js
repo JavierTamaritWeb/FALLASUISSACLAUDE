@@ -28,6 +28,28 @@ function loadTranslations() {
     .catch(error => console.error('Error loading translations:', error));
 }
 
+function renderParagraphTranslation(elem, translation) {
+  const blocks = translation
+    .split(/\n+/)
+    .map(block => block.replace(/\u0008/g, '').trim())
+    .filter(Boolean);
+
+  if (blocks.length === 0) {
+    elem.textContent = '';
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  blocks.forEach(block => {
+    const paragraph = document.createElement('p');
+    paragraph.textContent = block;
+    fragment.appendChild(paragraph);
+  });
+
+  elem.replaceChildren(fragment);
+}
+
 
 // Función que actualiza el contenido de los elementos transables
 function updateTranslations () {
@@ -36,7 +58,9 @@ function updateTranslations () {
     const translation = getNestedTranslation(key);
     if (translation) {
       // Notas del tablón con saltos de línea (<br>)
-      if (elem.classList.contains('board__note-content')) {
+      if (elem.getAttribute('data-i18n-format') === 'paragraphs') {
+        renderParagraphTranslation(elem, translation);
+      } else if (elem.classList.contains('board__note-content')) {
         elem.innerHTML = translation;        // permite HTML
       } else {
         elem.textContent = translation;      // seguro, sin HTML

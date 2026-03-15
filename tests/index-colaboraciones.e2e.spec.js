@@ -1,5 +1,44 @@
 const { test, expect } = require('@playwright/test');
 
+async function expectHopeCopy(section, { minUsageRatio = 0.78 } = {}) {
+  await expect(section.locator('.colaboraciones-page__logo')).toBeVisible();
+  await expect(section.locator('.colaboraciones-page__texto p').nth(1)).toBeVisible();
+
+  const copyMetrics = await section.locator('.colaboraciones-page__intro').evaluate((intro) => {
+    const parent = intro.parentElement;
+    const mosaic = parent?.querySelector('.colaboraciones-mosaic');
+    const text = intro.querySelector('.colaboraciones-page__texto');
+    const paragraphs = text ? Array.from(text.querySelectorAll('p')) : [];
+    const firstParagraph = paragraphs[0] ?? null;
+    const introRect = intro.getBoundingClientRect();
+    const mosaicRect = mosaic?.getBoundingClientRect() ?? { width: 0 };
+    const parentRect = parent?.getBoundingClientRect() ?? { width: 0 };
+    const textRect = text?.getBoundingClientRect() ?? { width: 0 };
+    const textStyles = text ? window.getComputedStyle(text) : null;
+    const paragraphStyles = firstParagraph ? window.getComputedStyle(firstParagraph) : null;
+
+    return {
+      hasOverflow: text ? text.scrollWidth > text.clientWidth + 1 : true,
+      indent: paragraphStyles?.textIndent ?? '0px',
+      introWidth: Math.round(introRect.width),
+      mosaicWidth: Math.round(mosaicRect.width),
+      paragraphCount: paragraphs.length,
+      parentWidth: Math.round(parentRect.width),
+      textAlign: textStyles?.textAlign ?? '',
+      textWidth: Math.round(textRect.width),
+    };
+  });
+
+  expect(copyMetrics.paragraphCount).toBeGreaterThan(1);
+  expect(copyMetrics.hasOverflow).toBeFalsy();
+  expect(copyMetrics.textAlign).toBe('justify');
+  expect(copyMetrics.indent).not.toBe('0px');
+  expect(Math.abs(copyMetrics.introWidth - copyMetrics.textWidth)).toBeLessThanOrEqual(4);
+  expect(Math.abs(copyMetrics.introWidth - copyMetrics.mosaicWidth)).toBeLessThanOrEqual(4);
+  expect(copyMetrics.parentWidth).toBeGreaterThan(0);
+  expect(copyMetrics.introWidth / copyMetrics.parentWidth).toBeGreaterThanOrEqual(minUsageRatio);
+}
+
 async function expectMosaicoHope(section) {
   await expect(section).toBeVisible();
   await expect(section.locator('.accordion')).toBeVisible();
@@ -79,6 +118,7 @@ test.describe('Colaboraciones en home', () => {
 
     const section = page.locator('.colaboraciones');
     await expectMosaicoHope(section);
+    await expectHopeCopy(section);
     await expectLightbox(page, section, 'button');
 
     const iconBox = await section.locator('.colaboraciones__imagen').boundingBox();
@@ -91,6 +131,7 @@ test.describe('Colaboraciones en home', () => {
 
     const section = page.locator('main.falla');
     await expectMosaicoHope(section);
+    await expectHopeCopy(section);
     await expectLightbox(page, section, 'escape');
   });
 
@@ -108,6 +149,7 @@ test.describe('Colaboraciones en home', () => {
 
     await header.click();
     await expect(accordionSection).toHaveClass(/active/);
+    await expectHopeCopy(section, { minUsageRatio: 0.9 });
 
     const iconBox = await section.locator('.colaboraciones__imagen').boundingBox();
     expect(iconBox?.width ?? 0).toBeGreaterThan(50);

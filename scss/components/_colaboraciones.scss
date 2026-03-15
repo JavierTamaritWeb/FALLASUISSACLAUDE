@@ -85,12 +85,6 @@
     .accordion__content-inner {
       width: 100%;
     }
-
-    .colaboraciones-page__texto {
-      max-width: 72rem;
-      margin: 0 auto;
-      font-size: 1.6rem;
-    }
   }
 
   @media (max-width: 767px) {
@@ -125,6 +119,20 @@
 }
 
 // Página colaboraciones.html
+.colaboraciones-page__intro {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  margin: 0 auto 1rem;
+  max-width: 110rem;
+  width: 100%;
+
+  @media (max-width: 767px) {
+    gap: 1.4rem;
+  }
+}
+
 .colaboraciones-page__logo {
   display: block;
   margin: 1rem auto;
@@ -138,10 +146,28 @@
 
 .colaboraciones-page__texto {
   color: v.$blanco !important;
-  text-align: center;
-  padding: 1rem 0;
   font-size: clamp(1.5rem, 1.6vw, 1.8rem);
-  line-height: 1.6;
+  hyphens: auto;
+  line-height: 1.8;
+  padding: 0;
+  text-align: justify;
+  text-align-last: left;
+  width: 100%;
+
+  p {
+    margin: 0;
+    text-indent: clamp(1.2rem, 1.8vw, 2.4rem);
+  }
+
+  p + p {
+    margin-top: 1.35rem;
+  }
+
+  @media (max-width: 767px) {
+    p {
+      text-indent: 1.2rem;
+    }
+  }
 }
 
 // Mosaico de imágenes
