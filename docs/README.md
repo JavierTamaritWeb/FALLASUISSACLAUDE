@@ -5,7 +5,7 @@
 | Documento | Descripción | Actualización |
 | ----------- | ------------- | --------------- |
 | [`build-and-deploy.md`](./build-and-deploy.md) | Build con Gulp, contenido de `dist/`, despliegue y relación con los tests | 13/03/2026 |
-| [`e2e-testing.md`](./e2e-testing.md) | Estrategia Playwright: smoke suite, full suite, validación HOPE, scrollbars y regressions clave | 13/03/2026 |
+| [`e2e-testing.md`](./e2e-testing.md) | Estrategia Playwright: smoke suite, full suite, validación HOPE, copy responsive y regressions clave | 15/03/2026 |
 | [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar general del sitio, caso especial de `llibret_2026.html` y estrategia WebKit/Firefox | 13/03/2026 |
 | [`structured-data.md`](./structured-data.md) | JSON-LD del sitio, referencias HOPE-INCLIVA y validación de metadatos técnicos | 13/03/2026 |
 | [`architecture-constraints.md`](./architecture-constraints.md) | Constraints de arquitectura que no deben romperse al tocar navegación, gradientes, notificaciones o banner | 13/03/2026 |
@@ -13,7 +13,7 @@
 | [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter, `og-share.png` y cache-buster `?v=...` | 09/03/2026 |
 | [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación fija, overlay móvil, cierre por Escape/backdrop y layout responsivo | 09/03/2026 |
 | [`global-styles.md`](./global-styles.md) | Estilos globales, gradiente base, transición de tema y fondos especiales | 09/03/2026 |
-| [`i18n-translations.md`](./i18n-translations.md) | Sistema i18n con `data-i18n`, `translations.json` y textos con markup | 09/03/2026 |
+| [`i18n-translations.md`](./i18n-translations.md) | Sistema i18n con `data-i18n`, `translations.json`, markup y renderizado por párrafos | 15/03/2026 |
 | [`gestion-tablon.md`](./gestion-tablon.md) | Guía canónica del tablón dinámico (`data/board.json`, adjuntos, validación y troubleshooting) | 13/03/2026 |
 | [`meteo-ui.md`](./meteo-ui.md) | Animaciones y responsividad del icono meteorológico | 30/01/2026 |
 | [`google-search-console.md`](./google-search-console.md) | Verificación en Google Search Console | 09/03/2026 |
@@ -33,7 +33,7 @@
 ### 🧪 Build, tests y utilidades
 
 - [`build-and-deploy.md`](./build-and-deploy.md): build reproducible y qué sale en `dist/`.
-- [`e2e-testing.md`](./e2e-testing.md): qué cubre Playwright y cuándo ejecutar smoke o full suite.
+- [`e2e-testing.md`](./e2e-testing.md): qué cubre Playwright y cuándo ejecutar smoke o full suite, incluyendo el bloque HOPE y su copy responsive.
 - [`scripts-utilities.md`](./scripts-utilities.md): scripts no diarios pero relevantes para mantenimiento.
 
 ### 🎨 Frontend y comportamiento visual
@@ -46,7 +46,7 @@
 
 ### 🧩 Contenido y datos editables
 
-- [`i18n-translations.md`](./i18n-translations.md): traducciones ES/VA y claves `data-i18n`.
+- [`i18n-translations.md`](./i18n-translations.md): traducciones ES/VA, claves `data-i18n` y bloques que se renderizan por párrafos.
 - [`gestion-tablon.md`](./gestion-tablon.md): tablón dinámico y `data/board.json`.
 - [`architecture-constraints.md`](./architecture-constraints.md): restricciones técnicas que afectan a cambios de contenido, tema y navegación.
 
@@ -67,11 +67,11 @@ Actualiza estas guías cuando cambies:
 - JSON-LD inline, metadatos OG/Twitter o referencias a HOPE-INCLIVA
 - scrollbars, modo oscuro, gradientes o compatibilidad Safari/WebKit/Firefox
 - navegación fija, overlay móvil, z-index o banner de subvención
-- sistema de traducciones (`data/translations.json`, claves `data-i18n`)
-- sección de colaboraciones, lightbox HOPE y grid compartido
+- sistema de traducciones (`data/translations.json`, claves `data-i18n`, renderizado por párrafos en `js/lang.js`)
+- sección de colaboraciones, lightbox HOPE, copy responsive y grid compartido
 - wrappers HTML de PDFs con Open Graph, favicon y social preview
 
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 13 de marzo de 2026 - v4.2.16*
+*Última actualización: 15 de marzo de 2026 - v4.2.16*

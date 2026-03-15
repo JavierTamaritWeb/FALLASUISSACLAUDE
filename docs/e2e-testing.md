@@ -105,12 +105,23 @@ Guía técnica:
 #### Validación visual y UX
 
 - La home y `colaboraciones.html` reutilizan el mismo bloque visual para HOPE.
+- El copy de HOPE se renderiza como varios párrafos reales a partir de `data/translations.json`, no como un único bloque de texto plano.
+- En desktop, el ancho del bloque de texto debe alinearse con el ancho útil del mosaico de 3 columnas para que la composición no quede ni más estrecha ni más ancha que las imágenes.
 - Se valida el grid tradicional responsive, la ausencia de recortes en miniaturas, `object-fit: contain` y la apertura/cierre del lightbox accesible.
 - En móvil también se comprueba el acordeón integrado en la portada.
+- La regresión también protege `text-align: justify`, la sangría del primer renglón y la ausencia de desbordes en el copy traducido.
 
 Archivo de test:
 
 - `tests/index-colaboraciones.e2e.spec.js`
+
+Archivos implicados:
+
+- `index.html`
+- `colaboraciones.html`
+- `js/lang.js`
+- `scss/components/_colaboraciones.scss`
+- `data/translations.json`
 
 #### Validación SEO técnica
 
@@ -505,4 +516,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 13 de marzo de 2026 - v4.2.16
+Última actualización: 15 de marzo de 2026 - v4.2.16

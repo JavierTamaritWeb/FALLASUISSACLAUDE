@@ -78,10 +78,53 @@ Para el texto del acordeón, se usa:
 
 Eso hace que `\\n` se muestre como salto de línea real.
 
+## 🪶 Renderizado por párrafos reales
+
+Cuando un bloque necesita tipografía de párrafo real, justificado y sangría elegante, `white-space: pre-line` no basta. En ese caso el proyecto usa un contenedor con `data-i18n-format="paragraphs"` y el motor i18n divide la traducción por saltos de línea para crear varios `<p>`.
+
+Ejemplo real del bloque HOPE:
+
+```html
+<div class="colaboraciones-page__texto"
+  data-i18n="colaboraciones.hope.texto"
+  data-i18n-format="paragraphs"></div>
+```
+
+Comportamiento actual en `js/lang.js`:
+
+- detecta `data-i18n-format="paragraphs"`
+- separa el string por una o más secuencias `\n`
+- limpia bloques vacíos y caracteres de control residuales
+- crea un `<p>` por bloque usando `textContent`
+
+Úsalo cuando necesites:
+
+- varios párrafos semánticos reales
+- `text-indent` por párrafo
+- control visual fino con `p + p`, `hyphens` o `text-align: justify`
+
+No lo uses si solo necesitas un salto de línea simple dentro de un texto corto; en esos casos sigue siendo más barato resolverlo con CSS y `white-space`.
+
+## 🤝 Caso HOPE
+
+El bloque HOPE de `index.html` y `colaboraciones.html` combina dos piezas:
+
+- `js/lang.js` renderiza `colaboraciones.hope.texto` como párrafos reales
+- `scss/components/_colaboraciones.scss` alinea el copy con el ancho útil del mosaico de 3 columnas en desktop y mantiene una sangría más contenida en móvil
+
+Si tocas ese bloque, revisa siempre el conjunto completo:
+
+- `index.html`
+- `colaboraciones.html`
+- `js/lang.js`
+- `scss/components/_colaboraciones.scss`
+- `tests/index-colaboraciones.e2e.spec.js`
+
 ## 🧪 Validación rápida
 
 - Si cambias traducciones: ejecuta `npm run build` (actualiza `dist/data/translations.json`).
 - Si algo “no se ve”: revisa primero que la clave en `data-i18n` coincide exactamente con la del JSON.
+- Si cambias un bloque con `data-i18n-format="paragraphs"`: revisa también el JS que construye los `<p>` y el CSS del contenedor, porque el problema puede no estar en la traducción en sí.
 
 ## 🧪 Tests E2E
 
@@ -93,4 +136,4 @@ Guía de ejecución: [`e2e-testing.md`](./e2e-testing.md)
 
 ---
 
-*Última actualización: 9 de marzo de 2026 - v4.2.16*
+Última actualización: 15 de marzo de 2026 - v4.2.16
