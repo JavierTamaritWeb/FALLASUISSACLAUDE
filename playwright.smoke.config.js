@@ -8,6 +8,7 @@ module.exports = defineConfig({
     '**/nav.e2e.spec.js',
     '**/i18n.e2e.spec.js',
     '**/board.e2e.spec.js',
+    '**/reveal-on-scroll.e2e.spec.js',
     '**/countdown.e2e.spec.js',
     '**/banner-subvencion.e2e.spec.js',
     '**/index-colaboraciones.e2e.spec.js',

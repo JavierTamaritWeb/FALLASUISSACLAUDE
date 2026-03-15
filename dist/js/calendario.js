@@ -21,16 +21,23 @@ function cumpleRango(eDateStr, iniDate, finDate) {
   return true;
 }
 
+function refreshCalendarReveal(root) {
+  if (window.scrollReveal && typeof window.scrollReveal.refresh === 'function') {
+    window.scrollReveal.refresh(root);
+  }
+}
+
 // Renderiza la lista de tarjetas de eventos.
 function renderizarLista(eventosFiltrados) {
   const lista = document.getElementById('lista-anuncios');
   lista.innerHTML = '';
   if (eventosFiltrados.length === 0) {
     lista.innerHTML = `
-      <p>No se han encontrado eventos que coincidan con los filtros seleccionados.</p>
+      <p class="reveal reveal--soft">No se han encontrado eventos que coincidan con los filtros seleccionados.</p>
       <button id="btn-reset-filtros">Borrar filtros</button>
     `;
     document.getElementById('btn-reset-filtros').addEventListener('click', resetearFiltros);
+    refreshCalendarReveal(lista);
     return;
   }
   const mapping = {
@@ -53,7 +60,7 @@ function renderizarLista(eventosFiltrados) {
       default: claseModificador = '';
     }
     const div = document.createElement('div');
-    div.className = `calendario-eventos__item ${claseModificador}`;
+    div.className = `calendario-eventos__item ${claseModificador} reveal reveal--soft`;
     const banda = document.createElement('div');
     banda.className = 'calendario-eventos__banda';
     banda.style.backgroundColor = mapping[e.category] || "#000";
@@ -86,6 +93,8 @@ function renderizarLista(eventosFiltrados) {
     });
     lista.appendChild(div);
   });
+
+  refreshCalendarReveal(lista);
 }
 
 function obtenerNombreDia(dateObj) {
@@ -174,6 +183,7 @@ function renderCalendarEvents(lang) {
     const item = document.createElement('div');
     item.classList.add('calendario-eventos__item');
     item.classList.add(`calendario-eventos__item--${event.category.toLowerCase()}`);
+    item.classList.add('reveal', 'reveal--soft');
     const banda = document.createElement('div');
     banda.classList.add('calendario-eventos__banda');
     item.appendChild(banda);
@@ -209,6 +219,8 @@ function renderCalendarEvents(lang) {
     });
     container.appendChild(item);
   });
+
+  refreshCalendarReveal(container);
 }
 
 function renderCalendarContent(lang) {

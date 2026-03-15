@@ -33,11 +33,25 @@ const VIEWPORTS = [
   { name: 'mobile', width: 375, height: 667 }
 ];
 
-async function prepareDeterministicPage(page) {
-  await setDeterministicClientState(page);
+async function prepareDeterministicPage(page, options = {}) {
+  await setDeterministicClientState(page, {
+    darkMode: 'false',
+    ...options
+  });
   await freezeTime(page);
   await mockWeatherApi(page);
   await mockMapTiles(page);
+}
+
+async function waitForThemeMode(page, mode) {
+  const expectedClass = mode === 'dark' ? 'modo-oscuro' : 'modo-claro';
+
+  await expect.poll(async () => {
+    return page.evaluate((themeClass) => {
+      return document.body.classList.contains(themeClass)
+        && document.documentElement.classList.contains(themeClass);
+    }, expectedClass);
+  }).toBe(true);
 }
 
 async function waitForVisualPageReady(page, pageName) {
@@ -50,6 +64,25 @@ async function waitForVisualPageReady(page, pageName) {
       .poll(async () => page.locator('#forecast-day-1-icon').getAttribute('src'))
       .toContain('@2x.png');
   }
+}
+
+async function stabilizeRevealForScreenshot(page) {
+  await page.evaluate(() => {
+    document.documentElement.classList.add('has-scroll-reveal');
+
+    if (window.scrollReveal && typeof window.scrollReveal.showAll === 'function') {
+      window.scrollReveal.showAll(document);
+    }
+
+    document.querySelectorAll('.reveal').forEach((element) => {
+      element.classList.add('reveal-ready', 'is-visible');
+    });
+
+    const notification = document.getElementById('notificacion');
+    if (notification) {
+      notification.classList.remove('mostrar');
+    }
+  });
 }
 
 test.describe('Visual Regression - Light Mode', () => {
@@ -65,6 +98,8 @@ test.describe('Visual Regression - Light Mode', () => {
 
         // Esperar a que carguen las fuentes y estilos
         await waitForVisualPageReady(browserPage, page.name);
+        await waitForThemeMode(browserPage, 'light');
+        await stabilizeRevealForScreenshot(browserPage);
         await browserPage.waitForTimeout(500);
 
         // Capturar screenshot de la página completa
@@ -79,7 +114,7 @@ test.describe('Visual Regression - Light Mode', () => {
 
 test.describe('Visual Regression - Dark Mode', () => {
   test.beforeEach(async ({ page }) => {
-    await prepareDeterministicPage(page);
+    await prepareDeterministicPage(page, { darkMode: 'true' });
   });
 
   for (const page of PAGES) {
@@ -90,13 +125,10 @@ test.describe('Visual Regression - Dark Mode', () => {
 
         // Esperar a que cargue
         await waitForVisualPageReady(browserPage, page.name);
+        await waitForThemeMode(browserPage, 'dark');
 
-        // Activar modo oscuro
-        const darkToggle = browserPage.locator('#darkModeToggle');
-        if (await darkToggle.isVisible()) {
-          await darkToggle.click();
-          await browserPage.waitForTimeout(400);
-        }
+        await stabilizeRevealForScreenshot(browserPage);
+        await browserPage.waitForTimeout(500);
 
         await expect(browserPage).toHaveScreenshot(`${page.name}-${viewport.name}-dark.png`, {
           fullPage: true,

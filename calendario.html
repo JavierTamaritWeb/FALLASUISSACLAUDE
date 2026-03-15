@@ -158,7 +158,7 @@
   <div id="notificacion"></div>
   <main class="cal" id="main-content">
     <div class="calendario-eventos modo-sencillo" id="calendarioContenedor">
-      <div class="calendario-eventos__acciones">
+      <div class="calendario-eventos__acciones reveal reveal--soft">
         <button class="calendario-eventos__boton-quitar" id="botonQuitarFiltros" data-i18n="calendario.quitar" aria-label="Limpiar todos los filtros del calendario" tabindex="0">Quitar Filtros (Alt+R)</button>
         <button class="calendario-eventos__modo-boton" id="botonModo" data-i18n="calendario.avanzado" aria-label="Cambiar entre modo sencillo y avanzado" aria-pressed="false" tabindex="0">Cambiar a Modo Avanzado</button>
         <!-- Botón para alternar Modo Oscuro -->
@@ -166,7 +166,7 @@
        
       </div>
      
-      <div class="calendario-eventos__controles">
+      <div class="calendario-eventos__controles reveal">
         <div class="calendario-eventos__fila fila-basica">
           <div class="calendario-eventos__control">
             <label for="filtro-busqueda" data-i18n="calendario.buscar">Buscar</label>
@@ -225,12 +225,12 @@
           </div>
         </div>
       </div>
-      <div class="calendario-eventos__leyenda" id="info-mes"></div>
-      <div class="calendario-eventos__mini" id="mini-calendario"></div>
+      <div class="calendario-eventos__leyenda reveal reveal--soft" id="info-mes"></div>
+      <div class="calendario-eventos__mini reveal reveal--soft" id="mini-calendario"></div>
       <!-- <div class="calendario-eventos__detalles-mes" id="descripcion-eventos-mes"></div>
       <div class="calendario-eventos__lista" id="lista-anuncios"></div> -->
           <!-- Contenedor para el encabezado con detalles del mes -->
-      <div class="calendario-eventos__detalles-mes" id="descripcion-eventos-mes" data-i18n="calendario.detallesMes"></div>
+      <div class="calendario-eventos__detalles-mes reveal" id="descripcion-eventos-mes" data-i18n="calendario.detallesMes"></div>
 
       <!-- Contenedor para la lista de tarjetas de eventos -->
       <div class="calendario-eventos__lista" id="lista-anuncios" data-i18n="calendario.listaAnuncios"></div>
@@ -301,6 +301,7 @@
   <script src="js/dark.js"></script>
   <script src="js/lang.js"></script>
   <script src="js/nav-menu.js"></script>
+  <script src="js/scroll-reveal.js"></script>
   <script src="js/calendario.js"></script>
   <script src="js/accessibility.js"></script>
  

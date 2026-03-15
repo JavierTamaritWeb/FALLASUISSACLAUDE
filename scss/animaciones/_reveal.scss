@@ -1,0 +1,46 @@
+// Reveal on scroll global y progresivo
+
+html.has-scroll-reveal {
+  .reveal {
+    --reveal-distance: clamp(2rem, 4vw, 4rem);
+    --reveal-duration: 720ms;
+    --reveal-delay: 0ms;
+    --reveal-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.reveal-ready {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-distance), 0);
+    transition:
+      opacity var(--reveal-duration) var(--reveal-easing) var(--reveal-delay),
+      transform var(--reveal-duration) var(--reveal-easing) var(--reveal-delay);
+    will-change: opacity, transform;
+  }
+
+  .reveal.reveal-ready.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+  }
+
+  .reveal--soft {
+    --reveal-distance: clamp(1rem, 2vw, 2rem);
+    --reveal-duration: 620ms;
+  }
+
+  .reveal--slow {
+    --reveal-duration: 880ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.has-scroll-reveal {
+    .reveal.reveal-ready,
+    .reveal.reveal-ready.is-visible {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      will-change: auto;
+    }
+  }
+}

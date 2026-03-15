@@ -5,6 +5,12 @@
 let boardData = null;
 window.boardData = null;
 
+function refreshBoardReveal(root) {
+  if (window.scrollReveal && typeof window.scrollReveal.refresh === 'function') {
+    window.scrollReveal.refresh(root);
+  }
+}
+
 /**
  * Carga datos del JSON
  * @returns {Promise<Object>} Datos del tablón
@@ -74,7 +80,7 @@ function renderNota(nota) {
   if (!hasAdjuntos) {
     // Nota sin adjuntos - article directo con clase board__note
     return `
-      <article class="board__note" role="article">
+      <article class="board__note reveal reveal--soft" role="article">
         <div class="clamp-screw" aria-hidden="true"></div>
         <div class="clamp-spring" aria-hidden="true"></div>
         <p class="board__note-content">${contenido}</p>
@@ -86,7 +92,7 @@ function renderNota(nota) {
 
   // Nota con adjuntos - envuelta en board__card
   return `
-    <article class="board__card" role="article">
+    <article class="board__card reveal reveal--soft" role="article">
       <div class="board__note">
         <div class="clamp-screw" aria-hidden="true"></div>
         <div class="clamp-spring" aria-hidden="true"></div>
@@ -116,11 +122,13 @@ function renderBoard() {
   const notasActivas = boardData.notas.filter(nota => nota.activo !== false);
 
   if (notasActivas.length === 0) {
-    container.innerHTML = '<p class="board__empty">No hay anuncios en este momento.</p>';
+    container.innerHTML = '<p class="board__empty reveal reveal--soft">No hay anuncios en este momento.</p>';
+    refreshBoardReveal(container);
     return;
   }
 
   container.innerHTML = notasActivas.map(renderNota).join('');
+  refreshBoardReveal(container);
 }
 
 /**
