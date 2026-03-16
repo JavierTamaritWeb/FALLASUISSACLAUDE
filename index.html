@@ -196,8 +196,8 @@
 </head>
 <body>
 
-  <!-- Banner de subvención (solo primera visita) -->
-  <div id="banner-subvencion" class="banner-subvencion oculto" role="dialog" aria-label="Información de subvención" aria-modal="true">
+  <!-- Banner de subvención (solo una vez por sesión del navegador) -->
+  <div id="banner-subvencion" class="banner-subvencion oculto" role="region" aria-label="Información de subvención" aria-hidden="true" inert>
     <div class="banner-subvencion__contenido">
       <button class="banner-subvencion__cerrar" aria-label="Cerrar banner">&times;</button>
       <picture>

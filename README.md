@@ -38,7 +38,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 - **Accesibilidad WCAG** - Cumple estándares de accesibilidad web
 - **Footer optimizado** - Navegación tipo “chips” (bordes sutiles), enlace activo legible en oscuro e iconos sociales responsive (más pequeños en móvil, más grandes en desktop)
 - **Colaboraciones integradas** - Sección HOPE compartida entre la home y una página dedicada con lightbox accesible
-- **Banner institucional por pestaña** - Se muestra en la primera carga de la pestaña y reaparece al recargar, sin persistencia de cierre en `localStorage`
+- **Banner institucional por sesión** - Tarjeta flotante no modal que se muestra una sola vez por sesión de navegador, sin persistencia funcional en `localStorage`
 
 #### 🧭 Barra de navegación (Header fijo)
 
@@ -128,7 +128,7 @@ WEBFALLASUISSA/
 │   ├── lang.js                # Sistema multiidioma
 │   ├── nav-menu.js            # Menú móvil (hamburguesa + overlay)
 │   ├── scroll-reveal.js       # Reveal on scroll global
-│   ├── banner-subvencion.js   # Modal institucional con control por pestaña/recarga
+│   ├── banner-subvencion.js   # Tarjeta institucional flotante con control por sesión del navegador
 │   ├── colaboraciones-lightbox.js # Lightbox accesible para HOPE
 │   ├── meteo.js               # Integración meteorológica
 │   ├── galeria_[1-4].js       # Galerías especializadas

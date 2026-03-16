@@ -152,14 +152,38 @@ Persistencia:
 Regla:
 
 - el cierre del banner no debe persistirse en `localStorage`
-- el comportamiento funcional usa solo `sessionStorage`
+- el comportamiento funcional usa una cookie de sesión compartida entre pestañas
 - `localStorage.bannerSubvencionCerrado` queda reservado para Playwright
 
 Por qué:
 
-- el banner debe mostrarse en la primera carga de la pestaña
-- no debe reaparecer al navegar dentro de la misma pestaña
-- debe reaparecer al recargar de verdad
+- el banner debe mostrarse solo una vez durante la sesión del navegador
+- no debe reaparecer al navegar, volver, recargar o abrir otra pestaña dentro de la misma sesión
+- debe volver a aparecer cuando se inicia una sesión nueva de navegador
+
+Renderizado:
+
+Regla:
+
+- mantenerlo como tarjeta flotante no modal
+- no volver a un overlay fullscreen que bloquee la página
+
+Por qué:
+
+- el contenido institucional sigue visible, pero reduce fricción y no interrumpe la navegación principal
+- el cierre manual es más predecible que un modal intrusivo o un auto-dismiss agresivo
+
+Accesibilidad del cierre:
+
+Regla:
+
+- el estado oculto debe combinar `inert` y `aria-hidden="true"`
+- antes de ocultar el banner, hay que sacar el foco del botón de cierre si sigue dentro del contenedor
+
+Por qué:
+
+- aplicar `aria-hidden` sobre un ancestro que todavía contiene el foco dispara una advertencia de accesibilidad en Chromium
+- `inert` evita que el banner oculto siga siendo focuseable o interactivo mientras termina su transición y antes de ser eliminado del DOM
 
 Renderizado y compatibilidad Safari:
 

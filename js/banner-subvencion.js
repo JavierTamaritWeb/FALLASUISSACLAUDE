@@ -1,8 +1,8 @@
-// Banner de subvención - se muestra en cada carga de página
+// Banner de subvención - tarjeta flotante mostrada una sola vez por sesión del navegador
 // Se ejecuta directamente (sin DOMContentLoaded) porque el script se carga al final del body
 (function() {
   const banner = document.getElementById('banner-subvencion');
-  const sessionKey = 'bannerSubvencionMostradoSesion';
+  const sessionCookie = 'bannerSubvencionSesion';
   if (!banner) return;
 
   // Ocultar si Playwright pre-setea la clave (solo en tests E2E)
@@ -11,27 +11,21 @@
     return;
   }
 
-  const esRecarga = detectarRecarga();
-  const yaMostradoEnPestana = leerSesion(sessionKey) === 'true';
-
-  if (!esRecarga && yaMostradoEnPestana) {
+  if (leerCookie(sessionCookie) === '1') {
     banner.remove();
     return;
   }
 
-  escribirSesion(sessionKey, 'true');
+  escribirCookieSesion(sessionCookie, '1');
 
   // Mostrar el banner
+  banner.removeAttribute('inert');
   banner.classList.remove('oculto');
+  banner.setAttribute('aria-hidden', 'false');
 
   // Botón cerrar
   const btnCerrar = banner.querySelector('.banner-subvencion__cerrar');
   btnCerrar?.addEventListener('click', cerrarBanner);
-
-  // Cerrar al hacer clic fuera del contenido
-  banner.addEventListener('click', (e) => {
-    if (e.target === banner) cerrarBanner();
-  });
 
   // Cerrar con ESC
   document.addEventListener('keydown', (e) => {
@@ -41,40 +35,31 @@
   });
 
   function cerrarBanner() {
+    const elementoActivo = document.activeElement;
+
+    if (elementoActivo instanceof HTMLElement && banner.contains(elementoActivo)) {
+      elementoActivo.blur();
+    }
+
     banner.classList.add('oculto');
+    banner.setAttribute('inert', '');
+    banner.setAttribute('aria-hidden', 'true');
     setTimeout(() => banner.remove(), 300);
   }
 
-  function detectarRecarga() {
-    const navigationEntries = typeof performance.getEntriesByType === 'function'
-      ? performance.getEntriesByType('navigation')
-      : [];
-    const navigationEntry = navigationEntries[0];
+  function leerCookie(clave) {
+    const prefijo = `${encodeURIComponent(clave)}=`;
+    const cookies = document.cookie ? document.cookie.split('; ') : [];
+    const cookie = cookies.find((entrada) => entrada.startsWith(prefijo));
 
-    if (navigationEntry && navigationEntry.type) {
-      return navigationEntry.type === 'reload';
-    }
-
-    if (performance.navigation) {
-      return performance.navigation.type === 1;
-    }
-
-    return false;
-  }
-
-  function leerSesion(clave) {
-    try {
-      return sessionStorage.getItem(clave);
-    } catch (error) {
+    if (!cookie) {
       return null;
     }
+
+    return decodeURIComponent(cookie.slice(prefijo.length));
   }
 
-  function escribirSesion(clave, valor) {
-    try {
-      sessionStorage.setItem(clave, valor);
-    } catch (error) {
-      // Ignorar navegadores con sessionStorage bloqueado
-    }
+  function escribirCookieSesion(clave, valor) {
+    document.cookie = `${encodeURIComponent(clave)}=${encodeURIComponent(valor)}; path=/; SameSite=Lax`;
   }
 })();

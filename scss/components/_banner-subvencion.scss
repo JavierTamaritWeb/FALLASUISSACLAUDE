@@ -1,64 +1,92 @@
 @use '../abstracts/variables' as v;
 
-// Banner de subvención - overlay modal
+// Banner de subvención - tarjeta flotante no modal
 .banner-subvencion {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.6);
+  right: 1.25rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  width: min(36rem, calc(100vw - 2rem));
   z-index: 1100;
   opacity: 1;
-  transition: opacity 0.3s ease;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;
 
   &.oculto {
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
+    transform: translateY(1rem);
   }
 }
 
 .banner-subvencion__contenido {
   background-color: v.$blanco;
   position: relative;
-  padding: 2rem;
-  width: 90%;
-  max-width: 700px;
-  border-radius: v.$border-radius;
-  border: 2px solid v.$primary-color;
-  animation: scaleIn 0.25s ease;
+  padding: 1.2rem 1.3rem 1rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(v.$primary-color, 0.18);
+  box-shadow: 0 1.25rem 3.5rem rgba(0, 0, 0, 0.22);
   text-align: center;
-  transition: background-color 2.4s ease-in-out, border-color 2.4s ease-in-out, color 2.4s ease-in-out;
+  transition: background-color 2.4s ease-in-out, border-color 2.4s ease-in-out, color 2.4s ease-in-out, box-shadow 0.3s ease;
 }
 
 .banner-subvencion__cerrar {
   position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  font-size: 3rem;
+  top: 0.4rem;
+  right: 0.45rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
   cursor: pointer;
   color: v.$primary-color;
-  background: none;
+  background-color: rgba(v.$primary-color, 0.08);
   border: none;
+  border-radius: 999px;
   line-height: 1;
-  transition: color 2.4s ease-in-out;
+  transition: color 2.4s ease-in-out, background-color 0.2s ease, transform 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgba(v.$primary-color, 0.16);
+    transform: scale(1.04);
+  }
 }
 
 .banner-subvencion__imagen {
+  display: block;
   width: 100%;
-  max-width: 600px;
+  max-width: 28rem;
   height: auto;
+  margin: 0 auto;
   transition: filter 2.4s ease-in-out;
 }
 
 // Responsive móvil
 @media (max-width: 767px) {
+  .banner-subvencion {
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    width: auto;
+  }
+
   .banner-subvencion__contenido {
-    width: 95%;
-    padding: 1.5rem 1rem;
+    padding: 1rem 1rem 0.85rem;
+    border-radius: 1rem;
+  }
+
+  .banner-subvencion__cerrar {
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.75rem;
+  }
+
+  .banner-subvencion__imagen {
+    max-width: 100%;
   }
 }

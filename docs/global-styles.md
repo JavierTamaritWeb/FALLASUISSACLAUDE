@@ -316,14 +316,18 @@ Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de
 | PNG (fallback) | 159 KB | -45% |
 
 ```html
-<picture>
-  <source srcset="img/subvencion.avif" type="image/avif">
-  <source srcset="img/subvencion.webp" type="image/webp">
-  <img class="banner-subvencion__imagen" src="img/subvencion.png" alt="Información de subvención">
-</picture>
+<div id="banner-subvencion" class="banner-subvencion oculto" aria-hidden="true" inert>
+  <picture>
+    <source srcset="img/subvencion.avif" type="image/avif">
+    <source srcset="img/subvencion.webp" type="image/webp">
+    <img class="banner-subvencion__imagen" src="img/subvencion.png" alt="Información de subvención">
+  </picture>
+</div>
 ```
 
 **Importante:** No revertir a `<img src="subvencion.svg">` — rompe el filtro en Safari.
+
+**Accesibilidad:** El banner oculto debe arrancar con `inert` además de `aria-hidden`. Cuando se cierre desde JavaScript, primero hay que retirar el foco del botón de cierre y después restaurar `inert`/`aria-hidden` para evitar advertencias del navegador y estados focuseables incoherentes.
 
 ### Archivos relacionados
 

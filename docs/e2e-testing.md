@@ -139,13 +139,15 @@ Guía técnica:
 
 ### 🏷️ Banner de subvención
 
-El banner de subvención (`#banner-subvencion`) se muestra la primera vez que se carga `index.html` en una pestaña. Si el usuario navega a otra página y vuelve en esa misma pestaña, ya no reaparece. Si hace una recarga real, vuelve a mostrarse.
+El banner de subvención (`#banner-subvencion`) se muestra la primera vez que se carga `index.html` durante una sesión del navegador. Si el usuario navega a otra página y vuelve, recarga o abre otra pestaña dentro de la misma sesión, ya no reaparece.
 
-El comportamiento del usuario no persiste en `localStorage`: el script solo usa `sessionStorage` para recordar que el banner ya se mostró en esa pestaña.
+El comportamiento del usuario no persiste en `localStorage`: el script usa una cookie de sesión compartida entre pestañas para recordar que el banner ya se mostró en ese navegador mientras siga abierta la sesión.
 
 Para evitar que interfiera con los tests generales, `playwright.config.js` pre-setea `localStorage.bannerSubvencionCerrado = 'true'` via `storageState`. El script `banner-subvencion.js` lee esa clave y hace `banner.remove()` antes de mostrarlo.
 
 **Importante:** El cierre del banner por el usuario NO escribe en `localStorage`. La clave solo la setean los tests.
+
+**Accesibilidad:** El contenedor arranca oculto con `aria-hidden="true"` e `inert`. Al mostrarse, se elimina `inert`; al cerrarse, el script desenfoca primero el botón de cierre si conserva el foco y solo después vuelve a aplicar `inert` y `aria-hidden`. Esto evita la advertencia del navegador sobre descendientes enfocados dentro de un ancestro oculto para tecnologías asistivas.
 
 Archivos de test:
 
