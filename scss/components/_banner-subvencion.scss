@@ -18,6 +18,16 @@
     visibility: hidden;
     transform: translateY(1rem);
   }
+
+  &.banner-subvencion--forzado {
+    left: 50%;
+    right: auto;
+    top: 1rem;
+    bottom: auto;
+    width: min(42rem, calc(100vw - 1.5rem));
+    z-index: 4000;
+    transform: translate(-50%, 0);
+  }
 }
 
 .banner-subvencion__contenido {
@@ -29,6 +39,12 @@
   box-shadow: 0 1.25rem 3.5rem rgba(0, 0, 0, 0.22);
   text-align: center;
   transition: background-color 2.4s ease-in-out, border-color 2.4s ease-in-out, color 2.4s ease-in-out, box-shadow 0.3s ease;
+}
+
+.banner-subvencion--forzado .banner-subvencion__contenido {
+  outline: 0.2rem solid rgba(v.$primary-color, 0.22);
+  outline-offset: 0.15rem;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.28);
 }
 
 .banner-subvencion__cerrar {
@@ -71,6 +87,15 @@
     right: 0.75rem;
     bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
     width: auto;
+  }
+
+  .banner-subvencion.banner-subvencion--forzado {
+    left: 50%;
+    right: auto;
+    top: 0.75rem;
+    bottom: auto;
+    width: min(42rem, calc(100vw - 1.5rem));
+    transform: translate(-50%, 0);
   }
 
   .banner-subvencion__contenido {

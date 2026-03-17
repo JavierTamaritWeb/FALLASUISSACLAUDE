@@ -7,6 +7,7 @@ const PAGES = [
   'eventos.html',
   'meteo.html',
   'blog.html',
+  'blog-somni.html',
   'galerias.html',
   'calendario.html',
   'mapa.html',

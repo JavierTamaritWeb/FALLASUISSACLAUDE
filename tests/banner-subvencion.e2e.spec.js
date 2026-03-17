@@ -7,10 +7,10 @@ test.describe('Banner de subvención', () => {
     });
   });
 
-  test('index lo muestra una sola vez por sesión de navegador y no reaparece al recargar', async ({ page, context }) => {
-    await page.goto('/index.html');
-
+  test('index lo muestra en cada carga de la home', async ({ page, context }) => {
     const banner = page.locator('#banner-subvencion');
+
+    await page.goto('/index.html');
     await expect(banner).toBeVisible();
 
     await banner.locator('.banner-subvencion__cerrar').click();
@@ -18,13 +18,16 @@ test.describe('Banner de subvención', () => {
 
     await page.goto('/lafalla.html');
     await page.goto('/index.html');
+    await expect(banner).toBeVisible();
+
+    await banner.locator('.banner-subvencion__cerrar').click();
     await expect(page.locator('#banner-subvencion')).toHaveCount(0);
 
     await page.reload();
-    await expect(page.locator('#banner-subvencion')).toHaveCount(0);
+    await expect(banner).toBeVisible();
 
     const secondPage = await context.newPage();
     await secondPage.goto('/index.html');
-    await expect(secondPage.locator('#banner-subvencion')).toHaveCount(0);
+    await expect(secondPage.locator('#banner-subvencion')).toBeVisible();
   });
 });

@@ -196,7 +196,7 @@
 </head>
 <body>
 
-  <!-- Banner de subvención (solo una vez por sesión del navegador) -->
+  <!-- Banner de subvención (se muestra en cada carga de la home) -->
   <div id="banner-subvencion" class="banner-subvencion oculto" role="region" aria-label="Información de subvención" aria-hidden="true" inert>
     <div class="banner-subvencion__contenido">
       <button class="banner-subvencion__cerrar" aria-label="Cerrar banner">&times;</button>
@@ -733,49 +733,6 @@
       <div class="historia reveal">
         <h3 class="historia__titulo" data-i18n="historia.titulo">Historia</h3>
         <div class="historia__prologo">
-          <h4 class="historia__prologo-titulo">"Somni"</h4>
-          <article>
-            <p class="historia__texto1" data-i18n="historia.texto1">Un día tuvimos un sueño que no sabíamos que compartíamos con más gente. Viviendo en el nuevo
-              barrio de les Moreres y hablando con los vecinos, descubrimos que era un sueño compartido.
-              Trabajamos para que se hiciera realidad.
-            </p>    
-            <br>
-            <p class="historia__texto2" data-i18n="historia.texto2">"Yo, de pequeña, fui fallera”, “Yo llevo toda la vida siendo fallero”, “Yo nunca lo he sido, pero
-                me gustaría”. Estas eran algunas de las frases que compartíamos y escuchábamos hablar entre
-                nosotros.
-            </p><br>
-
-            <p class="historia__texto3" data-i18n="historia.texto3">“¡Venga, valientes, hay que intentarlo!” Con esa determinación, ocho personas ilusionadas —José,
-                Marta, Paula, Rodrigo, Prados, Sara, Migue y David— comenzamos a reunirnos con un mismo
-                objetivo: hacer realidad el sueño. Fundamos la directiva, creamos el escudo que nos identifica,
-                redactamos los estatutos y emprendimos una lucha contra el tiempo y la burocracia.
-            </p><br>
-
-            <p class="historia__texto4" data-i18n="historia.texto4">En el mes de junio fue cuando, desde la Junta Central Fallera, nos confirmaron que el sueño se
-                estaba convirtiendo en realidad. Ya éramos falla, la número 396, la Falla Suïssa – L’Alquería
-                del Favero. Ya podíamos formar una comisión que, a día de hoy, está compuesta ni más ni
-                menos que por 113 falleros y falleras.
-            </p><br>
-            <p class="historia__texto5" data-i18n="historia.texto5">¿El próximo objetivo? Plantar falla, nuestro primer monumento. En estos meses los artistas falleros
-                ya tienen sus contratos firmados desde abril, pero como estamos soñando se hace la magia y
-                conseguimos que los grandes Paco y David quieran trabajar con nosotros, ayudarnos y ser
-                amigos de esta, nuestra comisión. Siempre les estaremos agradecidos. Este año plantaremos por
-                huevos, como dice el lema de nuestra falla grande: “¡Sssshhhhh… silencio que se rueda!”; será la
-                falla de la comisión infantil, que seguro enamora a Prados y Javier.
-            </p> <br>
-            <p class="historia__texto6" data-i18n="historia.texto6">Seguimos avanzando en este maravilloso sueño y tal vez llegue el momento de despertar y
-                volver al presente, porque ha llegado el día de la exaltación de nuestras falleras mayores y
-                la presentación de nuestros presidentes.
-            </p><br>
-              <p class="historia__texto7" data-i18n="historia.texto7"> Con todo ello, nos encontramos ante un sueño que ya es realidad, una realidad que hemos
-                creado entre todos, con el esfuerzo y el cariño por nuestra tierra, nuestro barrio y nuestra
-                tradición. Y ahora os invitamos a vivir con nosotros esta primera gran fiesta, a disfrutar de nuestra
-                Falla y del barrio que nos acoge, porque, como un día soñamos juntos, hoy celebramos el
-                comienzo de un camino que nunca olvidaremos. Bienvenidos a nuestras primeras e inolvidables Fallas.
-
-            </p>
-          </article>
-          <div class="historia__author">Autora: Paula Peiró</div>
           <div class="historia__archivos">
               <h4 class="historia__archivos-titulo" data-i18n="historia.archivos.titulo">Archivos</h4>
               <div class="historia__archivos-seccion">
@@ -852,7 +809,6 @@
               </div>
           
           </div>
-          
         </div>
         
       </div>
@@ -1041,13 +997,13 @@
         <h2 class="blog__title" data-i18n="blog.titulo"></h2>
       </div>
       <div class="blog__posts">
-        <article class="blog__post reveal reveal--soft">
-          <h3 class="blog__post-title" data-i18n="blog.articulo" ></h3>
-          <p class="blog__date" data-i18n="blog.fecha">Publicado el 1 de marzo de 2025</p>
-          <p class="blog__post-content" data-i18n="blog.descripcion">Las Fallas de Valencia tienen una rica historia que se remonta al siglo XVIII...</p>
+        <article class="blog__post blog__post--featured reveal reveal--soft">
+          <h3 class="blog__post-title" data-i18n="blog.somni.cardTitle"></h3>
+          <time class="blog__date" datetime="2025-03" data-i18n="blog.somni.date">Publicado en marzo de 2025</time>
+          <p class="blog__post-content" data-i18n="blog.somni.excerpt">Un sueño compartido en les Moreres, ocho personas decididas y el nacimiento de la Falla Suïssa - L'Alqueria del Favero: así empezó todo.</p>
           <div class="flex_button">
             <div class="boton-blog">
-              <a class="boton" data-i18n="ver" href="#">Ver</a>
+              <a class="boton" data-i18n="blog.leermas" data-i18n-aria-label="blog.somni.ctaAria" href="blog-somni.html">Ver más</a>
             </div>
            
           </div>
@@ -1058,7 +1014,7 @@
           <p class="blog__post-content" data-i18n="blog.descripcion">Las Fallas de Valencia tienen una rica historia que se remonta al siglo XVIII...</p>
           <div class="flex_button">
             <div class="boton-blog">
-              <a class="boton" data-i18n="ver" href="#">Ver</a>
+              <a class="boton" data-i18n="ver" href="#">Ver más</a>
             </div>
            
           </div>
@@ -1069,7 +1025,7 @@
           <p class="blog__post-content" data-i18n="blog.descripcion">Las Fallas de Valencia tienen una rica historia que se remonta al siglo XVIII...</p>
           <div class="flex_button">
             <div class="boton-blog">
-              <button class="boton" data-i18n="ver" href="#">Ver</button>
+              <button class="boton" data-i18n="ver" href="#">Ver más</button>
               <!-- <a class="boton" data-i18n="leermas" href="#"></a> -->
             </div>
            
@@ -1081,7 +1037,7 @@
           <p class="blog__post-content" data-i18n="blog.descripcion">Las Fallas de Valencia tienen una rica historia que se remonta al siglo XVIII...</p>
           <div class="flex_button">
             <div class="boton-blog">
-              <a class="boton" data-i18n="ver" href="#">Ver</a>
+              <a class="boton" data-i18n="ver" href="#">Ver más</a>
             </div>
            
           </div>
@@ -1103,28 +1059,28 @@
           <h3 class="galeria__title" data-i18n="galeria.galeria1">Galeria 1</h3>
           <img class="galeria__imagen galeria__foto-mini" src="img/apunta/Apunta25_26_15.jpg" alt="Evento 'Apúntate' temporada 2025-2026 - Falla Suïssa" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria1-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
-          <a class="boton" href="galeria_1.html" data-i18n="ver">Ver</a>
+          <a class="boton" href="galeria_1.html" data-i18n="ver">Ver más</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria2">Galeria 2</h3>
           <img class="galeria__imagen galeria__foto-mini" src="img/nombramientoFMI/Nombramiento_FMI2526-02.jpg" alt="Nombramiento Fallera Mayor Infantil 2025-2026" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria2-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
-          <a class="boton" href="galeria_2.html" data-i18n="ver">Ver</a>
+          <a class="boton" href="galeria_2.html" data-i18n="ver">Ver más</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria3">Galeria 3</h3>
           <img class="galeria__imagen galeria__foto-mini" src="img/monument/firma/2025_26/Firma_monumento_25_26.avif" alt="Firma del monumento fallero temporada 2025-2026" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria3-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
-          <a class="boton" href="galeria_3.html" data-i18n="ver">Ver</a>
+          <a class="boton" href="galeria_3.html" data-i18n="ver">Ver más</a>
   
         </div>
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria4">Galeria 4</h3>
           <img class="galeria__imagen galeria__foto-mini" src="img/proclamacion/Proclamacion_12.jpg" alt="Proclamación de representantes - Valencia 2025" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria4-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
-          <a class="boton" href="galeria_4.html" data-i18n="ver">Ver</a>
+          <a class="boton" href="galeria_4.html" data-i18n="ver">Ver más</a>
   
         </div>
       </div>

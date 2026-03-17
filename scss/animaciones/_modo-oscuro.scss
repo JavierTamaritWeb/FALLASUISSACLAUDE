@@ -70,7 +70,7 @@ body,
 .galeria,
 .galeria__title,
 .galeria__texto,
-.galeria .boton,
+.boton,
 .visor,
 .notepad__page,
 // Sección Meteo
@@ -126,6 +126,17 @@ body,
     border-color var(--theme-transition-border) var(--theme-transition-delay),
     box-shadow var(--theme-transition-shadow) var(--theme-transition-delay),
     fill var(--theme-transition);
+}
+
+.boton {
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 220ms ease,
+    background-color var(--theme-transition),
+    background var(--theme-transition),
+    color var(--theme-transition),
+    border-color var(--theme-transition-border) var(--theme-transition-delay),
+    box-shadow var(--theme-transition-shadow) var(--theme-transition-delay);
 }
 
 .header__waves .waves use {
@@ -607,6 +618,7 @@ body.modo-oscuro .organigrama__section {
 body.modo-oscuro .historia__prologo {
   background: v.$negro;
 }
+
 body.modo-oscuro .historia__archivos{
   color: v.$blanco-hueso;
   background: v.$negro;
@@ -618,6 +630,31 @@ body.modo-oscuro .historia__grid {
 body.modo-oscuro .historia__grid {
   background: v.$negro;
   border: 1px solid v.$gris-plateado;
+}
+body.modo-oscuro .blog-detail {
+  background: v.$negro;
+}
+body.modo-oscuro .blog-detail__article {
+  border: 2px solid v.$gris-plateado;
+  box-shadow: 0 1.35rem 3rem rgba(0, 0, 0, 0.3);
+
+  &::before {
+    opacity: 0;
+  }
+}
+body.modo-oscuro .blog-detail__back {
+  background-color: v.$gris-plateado;
+  color: v.$negro;
+}
+body.modo-oscuro .blog-detail__lead {
+  color: v.$primary-color;
+}
+body.modo-oscuro .blog-detail__date,
+body.modo-oscuro .blog-detail__author {
+  color: v.$primary-color;
+}
+body.modo-oscuro .blog-detail__content p {
+  color: v.$blanco-hueso;
 }
 
 /* ----------------------------------------------
@@ -738,16 +775,48 @@ body.modo-oscuro .galeria__texto {
   color: v.$blanco-hueso;
 }
 
-// Botón "Ver" en modo oscuro
-body.modo-oscuro .galeria .boton {
-  background-color: v.$gris-muy-oscuro;
+// Botones globales en modo oscuro
+body.modo-oscuro .boton {
+  background-color: rgba(v.$negro, 0.88);
+  border-color: rgba(v.$primary-color, 0.42);
   color: v.$primary-color;
-  border-color: v.$primary-color;
+  box-shadow:
+    0 1rem 2.2rem rgba(0, 0, 0, 0.42),
+    0 0.2rem 0.5rem rgba(v.$primary-color, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
-  &:hover {
-    background-color: v.$primary-color;
-    color: v.$blanco;
+  &::before {
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 24%,
+      rgba(v.$primary-color, 0.24) 50%,
+      transparent 78%
+    );
   }
+
+  &:hover,
+  &:focus-visible {
+    background: linear-gradient(
+      135deg,
+      rgba(v.$rojo-salmon, 0.98) 0%,
+      rgba(v.$amarillo-anaranjado, 0.94) 100%
+    );
+    border-color: rgba(v.$amarillo-anaranjado, 0.76);
+    box-shadow:
+      0 1.2rem 2.6rem rgba(0, 0, 0, 0.52),
+      0 0.35rem 1rem rgba(v.$primary-color, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    color: v.$negro-casi;
+    filter: saturate(1.08) brightness(1.04);
+  }
+}
+
+body.modo-oscuro .boton:focus-visible {
+  box-shadow:
+    0 0 0 0.35rem rgba(v.$amarillo-anaranjado, 0.22),
+    0 1.25rem 2.75rem rgba(0, 0, 0, 0.56),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 body.modo-oscuro .visor {

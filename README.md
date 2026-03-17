@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 15 de marzo de 2026 - v4.2.16 - Reveal on scroll global, snapshots visuales estabilizados y documentación técnica sincronizada.
+🆕 Última actualización: 17 de marzo de 2026 - v4.2.16 - Banner de subvención visible en cada carga de la home, helpers de depuración y documentación técnica sincronizada.
 
 ## 🌐 Vista Previa
 
@@ -38,7 +38,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 - **Accesibilidad WCAG** - Cumple estándares de accesibilidad web
 - **Footer optimizado** - Navegación tipo “chips” (bordes sutiles), enlace activo legible en oscuro e iconos sociales responsive (más pequeños en móvil, más grandes en desktop)
 - **Colaboraciones integradas** - Sección HOPE compartida entre la home y una página dedicada con lightbox accesible
-- **Banner institucional por sesión** - Tarjeta flotante no modal que se muestra una sola vez por sesión de navegador, sin persistencia funcional en `localStorage`
+- **Banner institucional en cada carga de la home** - Tarjeta flotante no modal que se muestra cada vez que se carga `index.html`; `localStorage` queda reservado para Playwright
 
 #### 🧭 Barra de navegación (Header fijo)
 
@@ -128,7 +128,7 @@ WEBFALLASUISSA/
 │   ├── lang.js                # Sistema multiidioma
 │   ├── nav-menu.js            # Menú móvil (hamburguesa + overlay)
 │   ├── scroll-reveal.js       # Reveal on scroll global
-│   ├── banner-subvencion.js   # Tarjeta institucional flotante con control por sesión del navegador
+│   ├── banner-subvencion.js   # Tarjeta institucional flotante visible en cada carga de la home
 │   ├── colaboraciones-lightbox.js # Lightbox accesible para HOPE
 │   ├── meteo.js               # Integración meteorológica
 │   ├── galeria_[1-4].js       # Galerías especializadas

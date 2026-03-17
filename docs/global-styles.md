@@ -23,6 +23,7 @@ El proyecto usa un reset universal que normaliza todos los elementos:
 ```
 
 **Por qué:**
+
 - Elimina márgenes y paddings por defecto de los navegadores
 - Usa `border-box` para un modelo de caja más predecible
 
@@ -32,14 +33,11 @@ Para permitir transiciones suaves de opacidad entre el modo claro (gradiente) y 
 
 **Implementación (Patrón Overlay `::before`):**
 
-1.  **Body**:
-    *   Actúa como contenedor base con un color de fondo de respaldo (`#0a4b8d`).
-    *   Tiene `position: relative`.
-
-2.  **Pseudo-elemento `::before`**:
-    *   Contiene el gradiente lineal.
-    *   `position: fixed` (para que no scrollee y cubra todo).
-    *   `transition: opacity var(--theme-transition)`.
+- **Body**: Actúa como contenedor base con un color de fondo de respaldo (`#0a4b8d`).
+- **Body**: Tiene `position: relative`.
+- **Pseudo-elemento `::before`**: Contiene el gradiente lineal.
+- **Pseudo-elemento `::before`**: Usa `position: fixed` para que no scrollee y cubra todo.
+- **Pseudo-elemento `::before`**: Usa `transition: opacity var(--theme-transition)`.
 
 ```scss
 body {
@@ -69,8 +67,8 @@ body {
 
 En `scss/animaciones/_modo-oscuro.scss`:
 
-1.  El `body` cambia su color de fondo a negro (`v.$negro`).
-2.  El pseudo-elemento `::before` (gradiente) cambia a `opacity: 0`.
+1. El `body` cambia su color de fondo a negro (`v.$negro`).
+2. El pseudo-elemento `::before` (gradiente) cambia a `opacity: 0`.
 
 Resultado: El gradiente se desvanece suavemente revelando el fondo negro que hay detrás.
 
@@ -79,6 +77,7 @@ Resultado: El gradiente se desvanece suavemente revelando el fondo negro que hay
 Para secciones que combinan una imagen de fondo + un overlay de color (como la sección `.falla` con el fondo del traje), se usa el mismo patrón de capas para animar el cambio de color del overlay.
 
 **Estructura:**
+
 - **.falla**: Contiene la **imagen** de fondo (`url(...)`).
 - **.falla::before**: Contiene el **overlay de color** con opacidad (`background-color: rgba(...)`) y la transición.
 
@@ -117,6 +116,7 @@ El archivo `_globales.scss` se importa en `main.scss` después de `normalize`:
 ## ⚠️ Consideraciones
 
 ### Orden de cascada
+
 El archivo `_globales.scss` se carga temprano. El archivo `_modo-oscuro.scss` se carga después y sobrescribe el fondo cuando se activa `.modo-oscuro`.
 
 ### Altura del contenido
@@ -208,10 +208,10 @@ body.modo-oscuro .falla::before {
 - `background-attachment: fixed` crea efecto parallax suave
 - La imagen se centra y cubre toda la sección sin duplicar declaraciones entre temas
 
-### Archivos relacionados
+### Archivos relacionados del banner
 
 | Archivo | Contenido |
-|---------|-----------|
+| --- | --- |
 | `scss/components/_falla.scss` | Estilos modo claro |
 | `scss/animaciones/_modo-oscuro.scss` | Estilos modo oscuro |
 | `img/fondo_traje.png` | Imagen de fondo (traje regional) |
@@ -230,11 +230,11 @@ body.modo-oscuro .falla::before {
 ### Componentes que usan este patrón
 
 | Componente | Archivo SCSS | Color base | Gradiente |
-|------------|--------------|------------|-----------|
+| --- | --- | --- | --- |
 | `.quieres-mas` | `_quieres.scss` | `$secondary-color` (#333) | Azul diagonal |
 | `.countdown__contenedor` | `_countdown.scss` | `$negro` | Azul diagonal |
 
-### Implementación
+### Implementación del filtro
 
 ```scss
 // Ejemplo: .quieres-mas
@@ -309,33 +309,41 @@ Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de
 **Mejora de rendimiento:**
 
 | Formato | Tamaño | Reducción vs SVG |
-|---------|--------|-----------------|
+| --- | --- | --- |
 | SVG (original) | 289 KB | — |
 | AVIF | 25 KB | -91% |
 | WebP | 61 KB | -79% |
 | PNG (fallback) | 159 KB | -45% |
 
 ```html
-<div id="banner-subvencion" class="banner-subvencion oculto" aria-hidden="true" inert>
-  <picture>
-    <source srcset="img/subvencion.avif" type="image/avif">
-    <source srcset="img/subvencion.webp" type="image/webp">
-    <img class="banner-subvencion__imagen" src="img/subvencion.png" alt="Información de subvención">
-  </picture>
+<div id="banner-subvencion" class="banner-subvencion oculto" role="region" aria-label="Información de subvención" aria-hidden="true" inert>
+  <div class="banner-subvencion__contenido">
+    <button class="banner-subvencion__cerrar" aria-label="Cerrar banner">&times;</button>
+    <picture>
+      <source srcset="img/subvencion.avif" type="image/avif">
+      <source srcset="img/subvencion.webp" type="image/webp">
+      <img class="banner-subvencion__imagen" src="img/subvencion.png" alt="Información de subvención">
+    </picture>
+  </div>
 </div>
 ```
 
 **Importante:** No revertir a `<img src="subvencion.svg">` — rompe el filtro en Safari.
 
-**Accesibilidad:** El banner oculto debe arrancar con `inert` además de `aria-hidden`. Cuando se cierre desde JavaScript, primero hay que retirar el foco del botón de cierre y después restaurar `inert`/`aria-hidden` para evitar advertencias del navegador y estados focuseables incoherentes.
+**Accesibilidad:** El banner oculto debe arrancar con `inert` además de `aria-hidden`, y el contenedor se expone como una región etiquetada. Cuando se cierre desde JavaScript, primero hay que retirar el foco del botón de cierre y después restaurar `inert`/`aria-hidden` para evitar advertencias del navegador y estados focuseables incoherentes.
+
+**Comportamiento actual:** El banner se muestra en cada carga de `index.html`. Si el usuario lo cierra, desaparece solo en esa vista actual y reaparece al volver a la home, recargarla o abrir otra pestaña de `index.html`.
+
+**Depuración manual:** `?resetBanner=1` limpia estado legado antes de mostrar la home y `?forzarBanner=1` además aplica `banner-subvencion--forzado` para elevar visibilidad y z-index durante diagnóstico.
 
 ### Archivos relacionados
 
 | Archivo | Contenido |
-|---------|-----------|
+| --- | --- |
 | `scss/components/_banner-subvencion.scss` | Estilos base + transición filter |
 | `scss/animaciones/_modo-oscuro.scss` | Regla `filter: invert(1) hue-rotate(180deg)` |
-| `index.html` | `<picture>` con fuentes AVIF/WebP/PNG |
+| `index.html` | Markup accesible del banner con cierre y `<picture>` AVIF/WebP/PNG |
+| `js/banner-subvencion.js` | Apertura en cada carga de la home, cierre accesible y helpers de depuración |
 
 ### Forzar reflow en JavaScript
 
@@ -382,14 +390,14 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 ### Variables Clave
 
 | Variable | Valor Defecto | Descripción |
-| :--- | :--- | :--- |
+| --- | --- | --- |
 | `$frieze-img` | `url('../img/cenefa_sin_fondo.svg')` | Imagen SVG de la cenefa |
 | `$frieze-bg` | `$blanco-hueso` (#F5F5F5) | Color de fondo de la banda (v4.1.3 cambio de transparent a hueso) |
 | `$frieze-size` | `clamp(30px, 8vw, 50px)` | Altura responsive |
 
 ---
 
-Última actualización: 15 de marzo de 2026 - v4.2.16
+Última actualización: 17 de marzo de 2026 - v4.2.16
 
 ## 🏛️ Componente Frieze (Cenefa)
 
@@ -401,7 +409,7 @@ La cenefa (`.frieze`) es un elemento decorativo que utiliza transiciones suaves 
 ### Colores y Comportamiento
 
 | Tema | Variable SCSS | Color |
-|------|--------------|-------|
+| --- | --- | --- |
 | Claro | `$frieze-bg` | `$blanco-hueso` (#F5F5F5) |
 | Oscuro | `$frieze-bg-dark` | `$gris-muy-oscuro` (#444) |
 

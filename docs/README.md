@@ -4,15 +4,15 @@
 
 | Documento | Descripción | Actualización |
 | ----------- | ------------- | --------------- |
-| [`build-and-deploy.md`](./build-and-deploy.md) | Build con Gulp, contenido de `dist/`, despliegue y relación con tests funcionales, visuales y snapshots | 15/03/2026 |
-| [`e2e-testing.md`](./e2e-testing.md) | Estrategia Playwright: smoke suite, full suite, reveal on scroll, validación HOPE y regressions visuales | 15/03/2026 |
+| [`build-and-deploy.md`](./build-and-deploy.md) | Build con Gulp, contenido de `dist/`, despliegue y relación con tests funcionales, visuales y snapshots | 17/03/2026 |
+| [`e2e-testing.md`](./e2e-testing.md) | Estrategia Playwright: smoke suite, full suite, reveal on scroll, validación HOPE, banner y regressions visuales | 17/03/2026 |
 | [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar general del sitio, caso especial de `llibret_2026.html` y estrategia WebKit/Firefox | 13/03/2026 |
 | [`structured-data.md`](./structured-data.md) | JSON-LD del sitio, referencias HOPE-INCLIVA y validación de metadatos técnicos | 13/03/2026 |
-| [`architecture-constraints.md`](./architecture-constraints.md) | Constraints de arquitectura que no deben romperse al tocar navegación, gradientes, reveal, notificaciones o banner | 15/03/2026 |
+| [`architecture-constraints.md`](./architecture-constraints.md) | Constraints de arquitectura que no deben romperse al tocar navegación, gradientes, reveal, notificaciones o banner | 17/03/2026 |
 | [`scripts-utilities.md`](./scripts-utilities.md) | Scripts utilitarios del repo: OG image, servidor local de `dist/` y migración SCSS | 13/03/2026 |
 | [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter, `og-share.png` y cache-buster `?v=...` | 09/03/2026 |
 | [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación fija, overlay móvil, cierre por Escape/backdrop y layout responsivo | 09/03/2026 |
-| [`global-styles.md`](./global-styles.md) | Estilos globales, gradiente base, reveal on scroll y fondos especiales | 15/03/2026 |
+| [`global-styles.md`](./global-styles.md) | Estilos globales, gradiente base, reveal on scroll, fondos especiales y notas técnicas del banner | 17/03/2026 |
 | [`i18n-translations.md`](./i18n-translations.md) | Sistema i18n con `data-i18n`, `translations.json`, markup y renderizado por párrafos | 15/03/2026 |
 | [`gestion-tablon.md`](./gestion-tablon.md) | Guía canónica del tablón dinámico (`data/board.json`, adjuntos, validación y troubleshooting) | 13/03/2026 |
 | [`meteo-ui.md`](./meteo-ui.md) | Animaciones y responsividad del icono meteorológico | 30/01/2026 |
@@ -75,4 +75,4 @@ Actualiza estas guías cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 15 de marzo de 2026 - v4.2.16*
+*Última actualización: 17 de marzo de 2026 - v4.2.16*

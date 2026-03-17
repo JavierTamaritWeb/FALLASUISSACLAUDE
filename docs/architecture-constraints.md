@@ -152,14 +152,15 @@ Persistencia:
 Regla:
 
 - el cierre del banner no debe persistirse en `localStorage`
-- el comportamiento funcional usa una cookie de sesión compartida entre pestañas
+- el comportamiento funcional muestra el banner en cada carga de `index.html`
 - `localStorage.bannerSubvencionCerrado` queda reservado para Playwright
+- cualquier cookie legado de sesión debe ignorarse y no puede gobernar la visibilidad
 
 Por qué:
 
-- el banner debe mostrarse solo una vez durante la sesión del navegador
-- no debe reaparecer al navegar, volver, recargar o abrir otra pestaña dentro de la misma sesión
-- debe volver a aparecer cuando se inicia una sesión nueva de navegador
+- el banner debe mostrarse siempre al abrir o recargar la home
+- debe reaparecer al volver a `index.html` desde otra página o al abrir una pestaña nueva de la home
+- la suite general de Playwright debe seguir pudiendo ocultarlo mediante `localStorage.bannerSubvencionCerrado`
 
 Renderizado:
 
@@ -218,6 +219,11 @@ Verificación recomendada:
 npm run build
 npx playwright test tests/banner-subvencion.e2e.spec.js
 ```
+
+Ayudas de depuración manual:
+
+- `index.html?resetBanner=1` para limpiar estado legado antes de cargar la home
+- `index.html?forzarBanner=1` para elevar el banner y confirmar si el problema es visual o de stacking
 
 Si además tocas navegación, tema o snapshots, ejecuta `npm run test:e2e:full`.
 

@@ -62,6 +62,15 @@
       <image:title>Blog</image:title>
     </image:image>
   </url>
+
+  <url>
+    <loc>https://fallasuissa.es/blog-somni.html</loc>
+    <image:image>
+      <image:loc>https://fallasuissa.es/img/pluma.png</image:loc>
+      <image:caption>Imagen representativa del artículo Somni</image:caption>
+      <image:title>Somni</image:title>
+    </image:image>
+  </url>
   
   <!-- Página de Galerías -->
   <url>

@@ -18,12 +18,20 @@ test.describe('i18n: sistema de traducciones', () => {
 
     await expect(page.locator('[data-i18n="nav.inicio"]').first()).toHaveText('Inicio');
     await expect(page.locator('[data-i18n="historia.archivos.titulo"]').first()).toHaveText('Archivos');
+    await expect(page.locator('.blog__post').first().locator('[data-i18n="blog.somni.cardTitle"]')).toHaveText('Somni');
+    await expect(page.locator('.blog__post').first().locator('a[href="blog-somni.html"]')).toHaveAttribute('aria-label', 'Abrir el artículo Somni');
 
     await expect(page.locator('[data-i18n="historia.archivos.presentacion"]').first()).toHaveText('Presentación');
     await expect(page.locator('[data-i18n="historia.archivos.fallas2026"]').first()).toHaveText(' Fallas 2026');
     await expect(page.locator('[data-i18n="historia.archivos.edicion202425"]').first()).toHaveText('Edición 2024-25');
     await expect(page.locator('[data-i18n="historia.archivos.edicion202526"]').first()).toHaveText('Edición 2025-26');
     await expect(page.locator('a[href="llibret_2026.html"]').first()).toHaveAttribute('aria-label', 'Abrir Llibret digital 2025-2026 en una pestaña nueva');
+
+    await page.goto('/blog-somni.html');
+    await expect(page.locator('[data-i18n="blog.somni.title"]').first()).toHaveText('"Somni"');
+    await expect(page.locator('[data-i18n="blog.somni.date"]').first()).toHaveText('Publicado en marzo de 2025');
+    await expect(page.locator('[data-i18n="blog.somni.author"]').first()).toHaveText('Autora: Paula Peiró');
+    await expect(page.locator('.blog-detail__content p').first()).toContainText('Un día tuvimos un sueño');
   });
 
   test('Cambiar a VA: actualiza textos, persiste y aplica en otras páginas', async ({ page }) => {
@@ -45,6 +53,8 @@ test.describe('i18n: sistema de traducciones', () => {
 
     await expect(page.locator('[data-i18n="nav.inicio"]').first()).toHaveText('Inici');
     await expect(page.locator('[data-i18n="historia.archivos.titulo"]').first()).toHaveText('Arxius');
+    await expect(page.locator('.blog__post').first().locator('[data-i18n="blog.somni.cardTitle"]')).toHaveText('Somni');
+    await expect(page.locator('.blog__post').first().locator('a[href="blog-somni.html"]')).toHaveAttribute('aria-label', "Obrir l'article Somni");
 
     await expect(page.locator('[data-i18n="historia.archivos.presentacion"]').first()).toHaveText('Presentació');
     await expect(page.locator('[data-i18n="historia.archivos.fallas2026"]').first()).toHaveText(' Falles 2026');
@@ -64,6 +74,12 @@ test.describe('i18n: sistema de traducciones', () => {
     await expect(page.locator('[data-i18n="historia.archivos.edicion202425"]').first()).toHaveText('Edició 2024-25');
     await expect(page.locator('[data-i18n="historia.archivos.edicion202526"]').first()).toHaveText('Edició 2025-26');
     await expect(page.locator('a[href="llibret_2026.html"]').first()).toHaveAttribute('aria-label', 'Obrir Llibret digital 2025-2026 en una pestanya nova');
+
+    await page.goto('/blog-somni.html');
+    await expect(page.locator('[data-i18n="blog.somni.title"]').first()).toHaveText('"Somni"');
+    await expect(page.locator('[data-i18n="blog.somni.date"]').first()).toHaveText('Publicat el març de 2025');
+    await expect(page.locator('[data-i18n="blog.somni.author"]').first()).toHaveText('Autora: Paula Peiró');
+    await expect(page.locator('.blog-detail__content p').first()).toContainText('Un dia vam tenir un somni');
 
     await page.reload();
     await expect(page.locator('[data-i18n="nav.inicio"]').first()).toHaveText('Inici');

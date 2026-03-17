@@ -139,9 +139,14 @@ Guía técnica:
 
 ### 🏷️ Banner de subvención
 
-El banner de subvención (`#banner-subvencion`) se muestra la primera vez que se carga `index.html` durante una sesión del navegador. Si el usuario navega a otra página y vuelve, recarga o abre otra pestaña dentro de la misma sesión, ya no reaparece.
+El banner de subvención (`#banner-subvencion`) se muestra cada vez que se carga `index.html`. Si el usuario lo cierra, desaparece de esa vista actual, pero vuelve a aparecer al regresar a la home, recargarla o abrir una pestaña nueva de `index.html`.
 
-El comportamiento del usuario no persiste en `localStorage`: el script usa una cookie de sesión compartida entre pestañas para recordar que el banner ya se mostró en ese navegador mientras siga abierta la sesión.
+El comportamiento del usuario no persiste en `localStorage` ni depende de una cookie funcional de sesión. El script solo reserva `localStorage.bannerSubvencionCerrado` para automatización y limpia cualquier cookie legado que ya no gobierna la visibilidad real.
+
+Para depuración manual existen dos parámetros útiles sobre la home:
+
+- `?resetBanner=1`: limpia estado legado y carga la página sin el parámetro en la URL final.
+- `?forzarBanner=1`: además de limpiar estado legado, añade `banner-subvencion--forzado` para subir el banner al frente visual durante diagnóstico.
 
 Para evitar que interfiera con los tests generales, `playwright.config.js` pre-setea `localStorage.bannerSubvencionCerrado = 'true'` via `storageState`. El script `banner-subvencion.js` lee esa clave y hace `banner.remove()` antes de mostrarlo.
 
@@ -556,6 +561,11 @@ Guía técnica:
   - Ejecuta `npm run build` antes de `npm run test:e2e`
   - Si el cambio toca layout, dark mode, reveal, OG, meteo o snapshots, ejecuta también `npm run test:e2e:full`
 
+- El banner de subvención no aparece en una comprobación manual:
+  - Abre `index.html?resetBanner=1`
+  - Si necesitas aislar un posible problema visual o de stacking, usa `index.html?forzarBanner=1`
+  - Comprueba que no estás reutilizando un contexto automatizado con `localStorage.bannerSubvencionCerrado = 'true'`
+
 - Snapshots visuales desfasados tras un cambio intencional:
   - Ejecuta `npm run build`
   - Regenera la baseline con `npx playwright test tests/visual-regression.e2e.spec.js --update-snapshots --workers=1`
@@ -570,4 +580,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 15 de marzo de 2026 - v4.2.16
+Última actualización: 17 de marzo de 2026 - v4.2.16

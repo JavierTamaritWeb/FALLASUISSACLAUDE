@@ -21,6 +21,7 @@ const PAGES = [
   { name: 'eventos', path: '/eventos.html' },
   { name: 'meteo', path: '/meteo.html' },
   { name: 'blog', path: '/blog.html' },
+  { name: 'blog-somni', path: '/blog-somni.html' },
   { name: 'galerias', path: '/galerias.html' },
   { name: 'calendario', path: '/calendario.html' },
   { name: 'mapa', path: '/mapa.html' },
@@ -54,15 +55,67 @@ async function waitForThemeMode(page, mode) {
   }).toBe(true);
 }
 
+async function waitForStableFullPageHeight(page, options = {}) {
+  const {
+    intervalMs = 150,
+    maxAttempts = 20,
+    stableSamples = 3
+  } = options;
+
+  let previousHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+  let stableCount = 0;
+
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    await page.waitForTimeout(intervalMs);
+
+    const currentHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+
+    if (currentHeight === previousHeight) {
+      stableCount += 1;
+
+      if (stableCount >= stableSamples) {
+        return;
+      }
+
+      continue;
+    }
+
+    previousHeight = currentHeight;
+    stableCount = 0;
+  }
+}
+
 async function waitForVisualPageReady(page, pageName) {
   await page.waitForLoadState('networkidle');
 
   if (pageName === 'meteo') {
     await expect(page.locator('#langSwitcher')).toContainText('Español');
     await expect(page.locator('#current-temp')).toHaveText(/\d+°C/);
-    await expect
-      .poll(async () => page.locator('#forecast-day-1-icon').getAttribute('src'))
-      .toContain('@2x.png');
+    await expect(page.locator('#forecast-day-1-icon')).toHaveAttribute('src', /@2x\.png/);
+    await expect(page.locator('#forecast-day-1-date')).not.toHaveText(/^Día 1$/);
+    await expect(page.locator('#forecast-day-5-temp')).toHaveText(/\d+°C/);
+
+    await expect.poll(async () => {
+      return page.evaluate(() => {
+        const selectors = [
+          '#current-icon-img',
+          '#forecast-day-1-icon',
+          '#forecast-day-2-icon',
+          '#forecast-day-3-icon',
+          '#forecast-day-4-icon',
+          '#forecast-day-5-icon'
+        ];
+
+        return selectors.every((selector) => {
+          const image = document.querySelector(selector);
+          return image instanceof HTMLImageElement
+            && image.complete
+            && image.naturalWidth > 0;
+        });
+      });
+    }).toBe(true);
+
+    await waitForStableFullPageHeight(page);
   }
 }
 
@@ -101,6 +154,7 @@ test.describe('Visual Regression - Light Mode', () => {
         await waitForThemeMode(browserPage, 'light');
         await stabilizeRevealForScreenshot(browserPage);
         await browserPage.waitForTimeout(500);
+        await waitForStableFullPageHeight(browserPage);
 
         // Capturar screenshot de la página completa
         await expect(browserPage).toHaveScreenshot(`${page.name}-${viewport.name}-light.png`, {
@@ -129,6 +183,7 @@ test.describe('Visual Regression - Dark Mode', () => {
 
         await stabilizeRevealForScreenshot(browserPage);
         await browserPage.waitForTimeout(500);
+        await waitForStableFullPageHeight(browserPage);
 
         await expect(browserPage).toHaveScreenshot(`${page.name}-${viewport.name}-dark.png`, {
           fullPage: true,

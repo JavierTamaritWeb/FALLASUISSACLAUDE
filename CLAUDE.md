@@ -3,14 +3,14 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 **Version:** 4.2.16
-**Last Updated:** 9 de marzo de 2026
+**Last Updated:** 17 de marzo de 2026
 
 ## Project Overview
 
 WEBFALLASUISSA is the official website for Falla Suissa - L'Alqueria del Favero (#396), a traditional Valencian falla commission. Static site with events, galleries, weather integration, and Spanish/Valenciano language support.
 
-- **Production**: https://fallasuissa.es
-- **Repository**: https://github.com/xavitamarit74-code/FALLASUISSACLAUDE
+- **Production**: [fallasuissa.es](https://fallasuissa.es)
+- **Repository**: [xavitamarit74-code/FALLASUISSACLAUDE](https://github.com/xavitamarit74-code/FALLASUISSACLAUDE)
 
 ## Build Commands
 
@@ -55,12 +55,14 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 ## Architecture
 
 ### Tech Stack
+
 - **Build**: Gulp 5 + Dart Sass + PostCSS (autoprefixer) + CSSNano + Sharp
 - **Frontend**: HTML5, SCSS (BEM), ES6+ JavaScript modules
 - **Libraries**: Swiper.js (carousels), Flatpickr (dates), DOMPurify
 - **Testing**: Playwright E2E (29 suites in the full matrix, 7 smoke suites by default)
 
 ### Directory Structure
+
 - `scss/` - Modular SCSS (imports order in `main.scss`: abstracts > base > optimization > layout > animaciones > components > sociales)
 - `js/` - ES6+ modules loaded per page
 - `data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-4].json`
@@ -80,9 +82,10 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Collaborations** (`scss/components/_colaboraciones.scss` + `js/colaboraciones-lightbox.js`): Shared HOPE section on `index.html` and `colaboraciones.html`. Uses a traditional responsive grid (2 columns on mobile, 3 from `768px`), `object-fit: contain`, and an accessible lightbox. Tests: `tests/index-colaboraciones.e2e.spec.js`.
 
-**Testing**: Tests serve `dist/` on `http://127.0.0.1:4173`. Playwright config pre-sets `localStorage` key `bannerSubvencionCerrado=true` to hide the banner in tests. Banner runtime uses a session cookie shared across tabs so it only appears once per browser session.
+**Testing**: Tests serve `dist/` on `http://127.0.0.1:4173`. Playwright config pre-sets `localStorage` key `bannerSubvencionCerrado=true` to hide the banner in tests. Banner runtime shows on each load of `index.html` unless an automated browser pre-sets that key.
 
 ### Version Note
+
 `package.json` version (4.2.0) is out of sync with the actual release version (4.2.16). The CLAUDE.md version reflects the real release state.
 
 ## Architecture Decisions & Constraints
@@ -98,7 +101,7 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 - **Notification animations (v4.2.7):** Only ONE animation rule for notifications. `_notificaciones.scss` owns `#notificacion.mostrar`. Do NOT add competing rule in `_accessibility.scss` for `.header__notificacion:not(:empty)` - causes ghost notification flash.
 
 - **Banner subvencion (v4.2.11-4.2.16):** Multiple constraints apply:
-  - **Browser-session only**: `banner-subvencion.js` does NOT persist closure to `localStorage`. The banner shows the first time `index.html` is loaded during a browser session, stays hidden on subsequent returns, reloads, and new tabs until the browser is closed, and uses a session cookie shared across tabs to remember that it has already been shown. The `localStorage.getItem('bannerSubvencionCerrado')` check exists solely for Playwright tests. Do NOT re-add `localStorage.setItem` in `cerrarBanner()`.
+  - **Visible on every home load**: `banner-subvencion.js` does NOT persist closure to `localStorage` and must not use a session cookie to gate real-user visibility. The banner appears every time `index.html` loads. The `localStorage.getItem('bannerSubvencionCerrado')` check exists solely for Playwright tests. Do NOT re-add `localStorage.setItem` in `cerrarBanner()`.
   - **Non-modal card**: the banner is a floating card, not a blocking fullscreen modal with backdrop. Do NOT revert it to an overlay that prevents interaction with the page.
   - **Accessible hide sequence**: hidden state relies on `inert` + `aria-hidden="true"`. When closing the banner, move focus off the close button before applying `aria-hidden` to the ancestor container; otherwise Chromium logs an accessibility warning because the focused descendant becomes hidden from assistive tech.
   - **Dark mode image**: Uses `filter: invert(1) hue-rotate(180deg)`. Do NOT use `invert(1)` alone - it turns the red Ajuntament crest green. The `hue-rotate(180deg)` restores red tones after inversion.
@@ -107,21 +110,25 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 ## Common Patterns
 
 ### Adding a translation
+
 1. Add key to `data/translations.json` under both `es` and `va`
 2. Use in HTML: `<span data-i18n="section.subsection.key"></span>`
 3. Run `npm run build`
 
 ### Adding a new page
+
 1. Create HTML file in root directory
 2. Add URL to `sitemap.xml` and `sitemap-index.xml`
 3. Run `npm run build`
 
 ### Updating Open Graph image
+
 1. Run `npm run generate:og`
 2. Update cache-buster `?v=YYYYMMDD` in ALL HTML files (og:image, twitter:image, image_src)
 3. Run `npm run build` then `npm run test:e2e:full`
 
 ### Adding a PDF with social preview
+
 Use HTML wrappers (see `pdf/Llibrets/` for examples). Include favicon, Open Graph, Twitter Card tags. Embed PDF with `<object>` and fallback download button. Link to `.html` wrapper instead of `.pdf`.
 
 ## Code Style

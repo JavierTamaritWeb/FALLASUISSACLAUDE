@@ -129,6 +129,8 @@ Guía completa: [`e2e-testing.md`](./e2e-testing.md).
 
 Guía técnica (modo oscuro + scrollbar Safari/WebKit): [`scrollbar-theme.md`](./scrollbar-theme.md).
 
+Si el cambio toca el banner de subvención, recuerda que la validación real ocurre sobre `dist/`. Para comprobaciones manuales rápidas en la home servida puedes usar `index.html?resetBanner=1` o `index.html?forzarBanner=1`.
+
 ## 🟦 Open Graph (WhatsApp): imagen y cache-buster
 
 WhatsApp cachea de forma muy agresiva la URL de `og:image`. Por eso:
@@ -167,4 +169,4 @@ Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo 
 
 ---
 
-Última actualización: 15 de marzo de 2026 - v4.2.16
+Última actualización: 17 de marzo de 2026 - v4.2.16
