@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const { mockMapTiles } = require('./helpers/deterministic-env');
 
 const PAGES = [
   'index.html',
@@ -29,7 +30,14 @@ test.describe('Header móvil: botones/notificación/menú en una fila', () => {
   for (const pageName of PAGES) {
     test(`${pageName} (mobile): botones izquierda, notificación centrada, menú derecha`, async ({ page }) => {
       await page.setViewportSize({ width: 360, height: 740 });
-      await page.goto(`/${pageName}`);
+
+      if (pageName === 'mapa.html') {
+        await mockMapTiles(page);
+      }
+
+      await page.goto(`/${pageName}`, {
+        waitUntil: pageName === 'mapa.html' ? 'domcontentloaded' : 'load'
+      });
 
       const bar = page.locator('.header__barra, .header-inner__barra').first();
       await expect(bar).toBeVisible();
