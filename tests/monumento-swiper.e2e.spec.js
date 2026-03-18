@@ -119,6 +119,58 @@ async function expectOnlyOneSlideVisible(swiper) {
   expect(visibleCount).toBe(1);
 }
 
+async function assertActiveSlideLayout(page, swiper, vp) {
+  const activeImg = swiper.locator('.swiper-slide-active img');
+  await expect(activeImg).toHaveCSS('object-fit', 'contain');
+
+  await ensureActiveImageLoaded(swiper);
+
+  const swiperBox = await getBox(swiper);
+  const slideBox = await getBox(swiper.locator('.swiper-slide-active'));
+  const imgBox = await getBox(activeImg);
+
+  if (vp.width >= 1200) {
+    const { scrollWidth, clientWidth } = await page.evaluate(() => {
+      const de = document.documentElement;
+      const body = document.body;
+      return {
+        clientWidth: de.clientWidth,
+        scrollWidth: Math.max(de.scrollWidth, body ? body.scrollWidth : 0)
+      };
+    });
+    expect(scrollWidth).toBeLessThanOrEqual(clientWidth + 2);
+
+    expect(swiperBox.x).toBeGreaterThanOrEqual(-1);
+    expect(swiperBox.x + swiperBox.width).toBeLessThanOrEqual(vp.width + 1);
+  }
+
+  expect(imgBox.x + imgBox.width).toBeLessThanOrEqual(swiperBox.x + swiperBox.width + 1);
+  expect(imgBox.y + imgBox.height).toBeLessThanOrEqual(swiperBox.y + swiperBox.height + 1);
+  expect(imgBox.x).toBeGreaterThanOrEqual(swiperBox.x - 1);
+  expect(imgBox.y).toBeGreaterThanOrEqual(swiperBox.y - 1);
+
+  expect(Math.abs(swiperBox.height - slideBox.height)).toBeLessThanOrEqual(32);
+
+  if (vp.width >= 768) {
+    await expectOnlyOneSlideVisible(swiper);
+
+    const prevBtn = swiper.locator('.swiper-button-prev');
+    const nextBtn = swiper.locator('.swiper-button-next');
+
+    if (await prevBtn.isVisible()) {
+      const prevBox = await getBox(prevBtn);
+      expect(boxesIntersect(prevBox, imgBox)).toBe(false);
+    }
+
+    if (await nextBtn.isVisible()) {
+      const nextBox = await getBox(nextBtn);
+      expect(boxesIntersect(nextBox, imgBox)).toBe(false);
+    }
+  }
+
+  return { swiperBox };
+}
+
 test.describe('Monumento: Swiper autoHeight sin recortes', () => {
   const expectedSrcs = [
     'img/falla2026.avif',
@@ -145,100 +197,24 @@ test.describe('Monumento: Swiper autoHeight sin recortes', () => {
           })
           .toBe(true);
 
-        // object-fit contain (no recorte)
-        const activeImg = swiper.locator('.swiper-slide-active img');
-        await expect(activeImg).toHaveCSS('object-fit', 'contain');
-
-        await ensureActiveImageLoaded(swiper);
-
-        const swiperBox = await getBox(swiper);
-        const slideBox = await getBox(swiper.locator('.swiper-slide-active'));
-        const imgBox = await getBox(activeImg);
-
-        // 0) En desktop, no debe aparecer scroll horizontal por el Swiper.
-        if (vp.width >= 1200) {
-          const { scrollWidth, clientWidth } = await page.evaluate(() => {
-            const de = document.documentElement;
-            const body = document.body;
-            return {
-              clientWidth: de.clientWidth,
-              scrollWidth: Math.max(de.scrollWidth, body ? body.scrollWidth : 0)
-            };
-          });
-          expect(scrollWidth).toBeLessThanOrEqual(clientWidth + 2);
-
-          // Bonus: el Swiper en sí no debe salirse del viewport.
-          expect(swiperBox.x).toBeGreaterThanOrEqual(-1);
-          expect(swiperBox.x + swiperBox.width).toBeLessThanOrEqual(vp.width + 1);
-        }
-
-        // 1) La imagen no se sale del contenedor (sin recorte/overflow)
-        expect(imgBox.x + imgBox.width).toBeLessThanOrEqual(swiperBox.x + swiperBox.width + 1);
-        expect(imgBox.y + imgBox.height).toBeLessThanOrEqual(swiperBox.y + swiperBox.height + 1);
-        expect(imgBox.x).toBeGreaterThanOrEqual(swiperBox.x - 1);
-        expect(imgBox.y).toBeGreaterThanOrEqual(swiperBox.y - 1);
-
-        // 2) autoHeight: el contenedor se ajusta (aprox) a la slide activa
-        // (Tolerancia por chrome UI de Swiper + rounding)
-        expect(Math.abs(swiperBox.height - slideBox.height)).toBeLessThanOrEqual(32);
-
-        // 2.5) En >=768px, los botones deben quedar fuera de la imagen (sin solape).
-        if (vp.width >= 768) {
-          // 2.6) En >=768px, no debe "asomar" otra slide dentro del viewport.
-          await expectOnlyOneSlideVisible(swiper);
-
-          const prevBtn = swiper.locator('.swiper-button-prev');
-          const nextBtn = swiper.locator('.swiper-button-next');
-
-          if (await prevBtn.isVisible()) {
-            const prevBox = await getBox(prevBtn);
-            expect(boxesIntersect(prevBox, imgBox)).toBe(false);
-          }
-
-          if (await nextBtn.isVisible()) {
-            const nextBox = await getBox(nextBtn);
-            expect(boxesIntersect(nextBox, imgBox)).toBe(false);
-          }
-        }
+        const { swiperBox } = await assertActiveSlideLayout(page, swiper, vp);
 
         // 3) Navega y sigue cumpliendo
         const next = swiper.locator('.swiper-button-next');
         if (await next.isVisible()) {
-          const prevHeight = swiperBox.height;
+          let previousHeight = swiperBox.height;
 
-          await next.click();
-          await page.waitForTimeout(350);
-          await ensureActiveImageLoaded(swiper);
+          for (const expectedSrc of [/falla2026-Infantil\.avif/, /falla2026-real\.avif/]) {
+            await next.click();
+            await page.waitForTimeout(350);
+            await expect(swiper.locator('.swiper-slide-active img')).toHaveAttribute('src', expectedSrc);
 
-          const swiperBox2 = await getBox(swiper);
-          const slideBox2 = await getBox(swiper.locator('.swiper-slide-active'));
-          const imgBox2 = await getBox(swiper.locator('.swiper-slide-active img'));
+            const { swiperBox: swiperBoxNext } = await assertActiveSlideLayout(page, swiper, vp);
 
-          expect(imgBox2.x + imgBox2.width).toBeLessThanOrEqual(swiperBox2.x + swiperBox2.width + 1);
-          expect(imgBox2.y + imgBox2.height).toBeLessThanOrEqual(swiperBox2.y + swiperBox2.height + 1);
-          expect(Math.abs(swiperBox2.height - slideBox2.height)).toBeLessThanOrEqual(32);
-
-          if (vp.width >= 768) {
-            await expectOnlyOneSlideVisible(swiper);
-
-            const prevBtn2 = swiper.locator('.swiper-button-prev');
-            const nextBtn2 = swiper.locator('.swiper-button-next');
-
-            if (await prevBtn2.isVisible()) {
-              const prevBox2 = await getBox(prevBtn2);
-              expect(boxesIntersect(prevBox2, imgBox2)).toBe(false);
-            }
-
-            if (await nextBtn2.isVisible()) {
-              const nextBox2 = await getBox(nextBtn2);
-              expect(boxesIntersect(nextBox2, imgBox2)).toBe(false);
-            }
+            expect(swiperBoxNext.height).toBeGreaterThan(0);
+            expect(previousHeight).toBeGreaterThan(0);
+            previousHeight = swiperBoxNext.height;
           }
-
-          // Si las imágenes tienen distintas proporciones en el futuro, esto detecta cambio real.
-          // Si hoy son similares, no forzamos diferencia.
-          expect(swiperBox2.height).toBeGreaterThan(0);
-          expect(prevHeight).toBeGreaterThan(0);
         }
       });
     }

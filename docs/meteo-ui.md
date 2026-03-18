@@ -25,6 +25,8 @@ Ese fallo no solo era visual: cambiaba el wrapping del texto y provocaba diferen
 - `js/lang.js` emite `translationsReady` cuando el idioma activo ya está cargado y aplicado.
 - `js/meteo.js` espera ese evento antes del primer `fetchCurrentWeather()` / `fetchForecast()`.
 - Si `translate(key)` todavía devolviera la propia key, meteo usa un fallback legible (`Mín`, `Máx`, `Viento`, etc.) en vez de pintar la key cruda.
+- `waitForTranslationsReady()` no bloquea indefinidamente: si el evento no llega, resuelve igualmente tras un timeout corto para no congelar la inicialización completa del módulo.
+- Tras `langChanged`, meteo vuelve a pedir clima actual y previsión para que la UI cambie de idioma sin recargar la página.
 
 ### Textos dinámicos que no debe pisar i18n
 
@@ -42,6 +44,8 @@ Ejemplo:
     data-i18n="meteo.sensacion"
     data-i18n-dynamic="true">Sensación: --°C</p>
 ```
+
+Este patrón se usa hoy tanto en la home como en la página completa de meteo. Si se elimina ese atributo en uno de los dos contextos, `lang.js` volverá a pisar el contenido dinámico y reaparecerán textos incompletos o keys crudas durante el primer render.
 
 ### Dimensiones Responsivas
 
@@ -128,6 +132,8 @@ Las capturas de `meteo.html` necesitan más preparación que una página estáti
 - `scrollHeight` estable antes del screenshot
 
 Esto protege especialmente el caso móvil oscuro, donde una etiqueta i18n mal resuelta podía añadir altura extra y romper el snapshot.
+
+La coordinación actual entre i18n y meteo no es solo un detalle de copy: forma parte de la estabilidad geométrica del widget y de la fiabilidad de los snapshots visuales.
 
 ---
 

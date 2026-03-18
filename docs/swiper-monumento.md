@@ -1,34 +1,43 @@
-# 🖼️ Swiper en “El Monumento” (anti-cropping + autoheight)
+# Swiper en "El Monumento" (anti-cropping + autoheight + hook temporal)
 
-Esta guía explica cómo está integrado Swiper en el proyecto y qué convenciones seguimos para evitar problemas típicos (cropping, altura incorrecta, controles cruzados entre sliders, etc.).
+Esta guía documenta el visor del monumento tal y como está implementado en marzo de 2026. El objetivo no es solo describir cómo funciona hoy, sino dejar claro qué parte es estructural y qué parte es un ajuste temporal ligado a las imágenes del ejercicio 2025-2026.
 
-## ✅ Objetivo
+## Objetivo
 
-- Evitar que las imágenes del slider se **recorten** (especialmente en fotos horizontales).
-- Mantener un comportamiento **responsive**.
-- Asegurar que cada Swiper se inicializa **por instancia** (sin controles globales).
+- evitar recortes de imagen en el slider
+- mantener un comportamiento responsive consistente entre home y página interna
+- asegurar que cada instancia usa sus propios controles
+- documentar el hook temporal de la foto real principal para que pueda reevaluarse o eliminarse el próximo ejercicio
 
-## 📌 Archivos implicados
+## Archivos implicados
 
-- JS (inicialización Swiper): `js/swiper.js`
-- SCSS (estilos Swiper): `scss/animaciones/_swiper.scss`
-- HTML (uso principal): `index.html` y/o `lafalla.html`
-- Tests E2E: `tests/monumento-swiper.e2e.spec.js`
+- JS de inicialización: `js/swiper.js`
+- SCSS del componente: `scss/animaciones/_swiper.scss`
+- HTML principal: `index.html`
+- HTML duplicado en interna: `lafalla.html`
+- Test E2E dedicado: `tests/monumento-swiper.e2e.spec.js`
+- Constraint de arquitectura relacionada: `docs/architecture-constraints.md`
+- Mantenimiento anual: `docs/monumento-rotacion-anual.md`
 
-## 🧱 Markup recomendado
+## Markup actual del visor
 
-- Usa un contenedor `.swiper` por slider.
-- Incluye sus controles **dentro** del contenedor (pagination/nav/scrollbar).
-
-Ejemplo (resumido):
+El visor del monumento vive hoy en `index.html` y `lafalla.html` con la misma estructura base:
 
 ```html
-<div class="swiper swiper--autoheight" data-testid="monumento-swiper">
+<div class="swiper swiper--autoheight contenedor" data-testid="monumento-swiper">
   <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="img/falla2026.avif" alt="Monumento principal" /></div>
-    <div class="swiper-slide"><img src="img/falla2026-Infantil.avif" alt="Monumento infantil" /></div>
-    <div class="swiper-slide"><img src="img/falla2026-real.avif" alt="Vista real del monumento principal" /></div>
-    <div class="swiper-slide"><img src="img/falla2026-infantil-real.avif" alt="Vista real del monumento infantil" /></div>
+    <div class="swiper-slide">
+      <img src="img/falla2026.avif" alt="Monumento fallero principal de la Falla Suïssa 2026">
+    </div>
+    <div class="swiper-slide">
+      <img src="img/falla2026-Infantil.avif" alt="Monumento fallero infantil de la Falla Suïssa 2026">
+    </div>
+    <div class="swiper-slide swiper-slide--monumento-real">
+      <img src="img/falla2026-real.avif" alt="Vista real del monumento fallero principal de la Falla Suïssa 2026">
+    </div>
+    <div class="swiper-slide">
+      <img src="img/falla2026-infantil-real.avif" alt="Vista real del monumento fallero infantil de la Falla Suïssa 2026">
+    </div>
   </div>
 
   <div class="swiper-pagination"></div>
@@ -38,9 +47,9 @@ Ejemplo (resumido):
 </div>
 ```
 
-## 🧾 Estado actual del slider (marzo 2026)
+## Estado actual del slider (marzo 2026)
 
-El visor del monumento en [`index.html`](../index.html) y [`lafalla.html`](../lafalla.html) trabaja ahora con **4 slides base no duplicadas**:
+El visor del monumento trabaja con 4 slides base no duplicadas:
 
 - `img/falla2026.avif`
 - `img/falla2026-Infantil.avif`
@@ -49,56 +58,213 @@ El visor del monumento en [`index.html`](../index.html) y [`lafalla.html`](../la
 
 Convención actual de carga:
 
-- las 2 primeras imágenes usan carga prioritaria/eager
+- las 2 primeras imágenes usan carga prioritaria o eager
 - las 2 fotos reales usan `loading="lazy"`
 
-La suite `tests/monumento-swiper.e2e.spec.js` valida el set exacto de slides base y evita contar los duplicados internos que Swiper añade cuando `loop: true` está activo.
+La tercera slide, la de `img/falla2026-real.avif`, lleva una clase extra:
 
-## 🎚️ Modo autoheight (cuándo usarlo)
+- `swiper-slide--monumento-real`
 
-Este repo usa una convención: si el contenedor tiene la clase:
+Esa clase no forma parte del contrato general del componente. Es un hook visual temporal que existe únicamente para la foto real principal de 2026.
 
-- `.swiper--autoheight`
+## Relación con `js/swiper.js`
 
-…entonces el Swiper se inicializa con `autoHeight` y además fuerza recalculado de altura tras cargas/transiciones.
+El comportamiento base del visor no depende del hook temporal. Lo gobierna `js/swiper.js`:
 
-Usa `.swiper--autoheight` cuando:
+- inicializa cada `.swiper` por instancia
+- activa `autoHeight` cuando el contenedor tiene `.swiper--autoheight`
+- recalcula la altura tras carga o decode de imágenes
+- vuelve a recalcular altura tras cada transición de slide
 
-- Las imágenes tienen **ratios** diferentes.
-- Hay riesgo de CLS visual o “corte” por altura fija.
+Esto significa que el contrato estructural del componente es:
 
-No lo uses si:
+- `loop: true`
+- `autoHeight` condicionado por clase
+- controles locales a la instancia
+- `object-fit: contain` en las imágenes
 
-- Todas las slides tienen la misma altura y prefieres un layout estable.
+El hook `swiper-slide--monumento-real` se superpone a ese comportamiento, pero no lo sustituye.
 
-## 🧠 Por qué el “cropping” suele pasar
+## Por qué el cropping suele pasar
 
-Normalmente pasa por una combinación de:
+Los problemas típicos en este visor aparecen por una combinación de:
 
-- `object-fit: cover` (recorte intencional) o un alto fijo en el contenedor.
-- Swiper calculando altura antes de que las imágenes terminen de cargar/decodificar.
+- `object-fit` incorrecto
+- altura fija del contenedor
+- ancho excesivo del Swiper en desktop
+- cálculo de altura antes de que las imágenes hayan terminado de cargar
+- botones laterales ocupando espacio visual sobre fotos más anchas
 
-La solución aquí se basa en:
+La solución base del repositorio es:
 
-- Estilos que priorizan **no recortar**.
-- Recalcular altura tras `load/decode` y en eventos de transición.
+- `object-fit: contain` para evitar recorte
+- `swiper--autoheight` para adaptar la altura al slide activo
+- contención de ancho en `scss/animaciones/_swiper.scss`
+- padding lateral por slide en tablet y desktop para reservar hueco a los botones
 
-## 🧪 Tests
+## Regla general de layout en tablet y desktop
 
-La suite incluye una batería para asegurar que el slider de “El Monumento” no se recorta ni se desborda en viewports típicos.
+En `>= 768px`, el visor usa un margen lateral de seguridad dentro de cada slide:
 
-### Nota importante sobre `.reveal`
+```scss
+.swiper.swiper--autoheight .swiper-slide {
+  padding-inline: 3.5rem;
+}
+```
 
-En `index.html`, el Swiper vive dentro de `.falla__monumento.reveal`. Por eso, los tests que interactúan con las flechas del slider deben:
+Ese padding cumple dos funciones a la vez:
+
+- deja espacio a los botones prev/next
+- evita que "asome" la slide siguiente
+
+Con 3rem como valor general, el botón previo podía llegar a invadir algunos píxeles del área útil de la imagen. Por eso el valor general estable quedó en 3.5rem.
+
+## Hook temporal de `falla2026-real.avif`
+
+### Qué problema resuelve
+
+La foto real principal `img/falla2026-real.avif` se veía más pequeña de lo deseado en pantallas superiores a 768px. El usuario pidió que se viera más grande en ambos visores, pero sin romper ninguna de estas garantías:
+
+- sin solape con botones
+- sin overflow horizontal
+- sin mostrar dos slides a la vez
+- sin perder `autoHeight`
+
+### Qué se probó primero y por qué no bastó
+
+El primer intento fue reducir el padding lateral de esa slide concreta a 3rem siempre.
+
+Resultado:
+
+- la imagen ganaba algo de tamaño
+- pero en tablet y desktop el botón previo podía solaparse con el contenido de la imagen activa
+
+Conclusión:
+
+- 3rem no era un valor seguro como regla estática para todo el estado del visor
+- el ajuste tenía que activarse solo cuando esa foto concreta fuera la slide activa
+
+### Solución final implementada
+
+La solución estable usa un selector condicional con `:has(...)`:
+
+```scss
+@media (min-width: 768px) {
+  .swiper.swiper--autoheight:has(.swiper-slide-active.swiper-slide--monumento-real) .swiper-slide--monumento-real {
+    padding-inline: 3rem;
+  }
+
+  .swiper.swiper--autoheight:has(.swiper-slide-active.swiper-slide--monumento-real) .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper.swiper--autoheight:has(.swiper-slide-active.swiper-slide--monumento-real) .swiper-button-next {
+    right: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .swiper.swiper--autoheight:has(.swiper-slide-active.swiper-slide--monumento-real) {
+    max-width: 70rem;
+  }
+}
+```
+
+### Qué hace exactamente
+
+Cuando la slide activa es la que tiene simultáneamente:
+
+- `.swiper-slide-active`
+- `.swiper-slide--monumento-real`
+
+entonces el visor cambia temporalmente su geometría:
+
+- la slide real usa `padding-inline: 3rem` en vez de 3.5rem
+- el botón previo se pega al borde izquierdo (`left: 0`)
+- el botón siguiente se pega al borde derecho (`right: 0`)
+- en `>= 1200px`, el contenedor pasa de `max-width: 64rem` a `max-width: 70rem`
+
+El resto del tiempo, el visor conserva la regla general más conservadora.
+
+### Por qué esta solución es la correcta hoy
+
+Porque concentra el ajuste en el único estado donde hace falta:
+
+- solo para la foto real principal
+- solo cuando está activa
+- solo en breakpoints donde ese ajuste aporta valor
+
+Eso reduce el riesgo de que el resto del carrusel herede una geometría innecesariamente agresiva.
+
+### Por qué no debe tratarse como patrón genérico
+
+Este hook no describe una categoría abstracta de slides. Describe una necesidad concreta de `img/falla2026-real.avif` en el ejercicio actual.
+
+Por tanto:
+
+- no debe copiarse a otras slides por inercia
+- no debe renombrarse como si fuera una feature general del Swiper
+- no debe conservarse automáticamente cuando cambien las imágenes de 2027
+
+Si el año que viene la nueva foto real no necesita este empuje visual, lo correcto será eliminar la clase y sus reglas SCSS, no arrastrarlas por costumbre.
+
+## Tests que protegen este contrato
+
+La suite `tests/monumento-swiper.e2e.spec.js` valida el visor sobre `index.html` y `lafalla.html` en mobile, tablet y desktop.
+
+Cobertura relevante:
+
+- el set exacto de 4 slides base
+- `object-fit: contain` en la imagen activa
+- una sola slide visible en tablet y desktop
+- ausencia de overflow horizontal en desktop
+- ausencia de solape entre botones y la imagen activa
+- estabilidad de `autoHeight`
+- navegación hasta la tercera slide `falla2026-real.avif`
+
+Detalle importante:
+
+- la suite ya no valida solo la slide inicial y la segunda
+- ahora también navega hasta la tercera slide para proteger específicamente el hook temporal
+
+## Interacción con `.reveal`
+
+En `index.html`, el Swiper vive dentro de `.falla__monumento.reveal`. Por eso los tests que interactúan con las flechas del slider deben:
 
 - hacer `scrollIntoViewIfNeeded()` sobre el Swiper
-- esperar a que el bloque reveal esté visible y estable
+- esperar a que el reveal esté visible y estable
 - solo entonces clicar navegación
 
 Sin ese paso, Playwright puede medir una geometría transitoria y detectar falsamente varias slides visibles a la vez.
 
-- Ejecuta: `npm run test:e2e:full`
-- Nota: los tests se ejecutan contra `dist/`, así que conviene hacer `npm run build` antes.
+## Mantenimiento anual
+
+La rotación anual de imágenes del monumento no es solo un cambio de `src`. También puede invalidar el hook temporal.
+
+Checklist rápido:
+
+1. cambiar imágenes y `alt` en `index.html` y `lafalla.html`
+2. actualizar el set esperado de `tests/monumento-swiper.e2e.spec.js`
+3. revisar visualmente si la nueva foto real principal sigue necesitando el hook
+4. si no lo necesita, eliminar `swiper-slide--monumento-real` y las reglas `:has(...)`
+5. ejecutar build y tests antes de darlo por cerrado
+
+Guía detallada de esa rotación: `docs/monumento-rotacion-anual.md`
+
+## Verificación recomendada
+
+```bash
+npm run build
+npx playwright test tests/monumento-swiper.e2e.spec.js
+npm run test:e2e
+npm run test:e2e:full
+```
+
+## Resumen operativo
+
+- `swiper--autoheight` y `js/swiper.js` son parte estable del componente
+- `swiper-slide--monumento-real` es un hook temporal, específico de 2026
+- si las imágenes del próximo ejercicio cambian de proporción, hay que reevaluar ese hook antes de conservarlo o eliminarlo
 
 ---
 

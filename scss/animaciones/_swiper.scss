@@ -46,6 +46,19 @@
     padding-inline: 3.5rem;
   }
 
+  // Hook temporal para la foto real principal de 2026; reevaluar al cambiar las imágenes del monumento.
+  .swiper.swiper--autoheight:has(.swiper-slide-active.swiper-slide--monumento-real) .swiper-slide--monumento-real {
+    padding-inline: 3rem;
+  }
+
+  .swiper.swiper--autoheight:has(.swiper-slide-active.swiper-slide--monumento-real) .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper.swiper--autoheight:has(.swiper-slide-active.swiper-slide--monumento-real) .swiper-button-next {
+    right: 0;
+  }
+
   .swiper.swiper--autoheight .swiper-button-prev {
     left: 0.5rem;
   }
@@ -59,6 +72,10 @@
   // En pantallas grandes, mantenemos el Swiper más contenido (antes era 100rem).
   .swiper.swiper--autoheight {
     max-width: 64rem;
+  }
+
+  .swiper.swiper--autoheight:has(.swiper-slide-active.swiper-slide--monumento-real) {
+    max-width: 70rem;
   }
 }
 

@@ -227,7 +227,46 @@ Ayudas de depuración manual:
 
 Si además tocas navegación, tema o snapshots, ejecuta `npm run test:e2e:full`.
 
-## 7. Qué hacer antes de tocar una zona sensible
+## 7. Swiper del monumento: hook temporal de la foto real
+
+Regla:
+
+- `swiper-slide--monumento-real` no es una convención general del componente
+- el selector `:has(.swiper-slide-active.swiper-slide--monumento-real)` es un ajuste temporal ligado a la foto real principal de 2026
+- no debe eliminarse ni reutilizarse sin revisar antes la proporción y el comportamiento de la imagen real activa
+
+Por qué:
+
+- la geometría general del visor usa `padding-inline: 3.5rem` para proteger imagen y botones
+- la foto real principal de 2026 necesitó verse algo más grande en `>= 768px`
+- un primer intento de reducir padding de forma fija provocó solape del botón previo en tablet y desktop
+- la solución estable solo activa el ajuste cuando esa slide es la activa, moviendo además los botones y ampliando el `max-width` en desktop
+
+Qué hacer cuando cambien las imágenes del próximo ejercicio:
+
+- revisar primero si la nueva foto real sigue necesitando ese hook
+- si no lo necesita, eliminar la clase en `index.html` y `lafalla.html`
+- retirar también las reglas específicas del SCSS y mantener el visor con su geometría general
+- actualizar el test del Swiper y la documentación asociada
+
+Archivos implicados:
+
+- `index.html`
+- `lafalla.html`
+- `scss/animaciones/_swiper.scss`
+- `tests/monumento-swiper.e2e.spec.js`
+- [`swiper-monumento.md`](./swiper-monumento.md)
+- [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md)
+
+Verificación recomendada:
+
+```bash
+npm run build
+npx playwright test tests/monumento-swiper.e2e.spec.js
+npm run test:e2e
+```
+
+## 8. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
 
@@ -243,8 +282,10 @@ Checklist rápido:
 - [`global-styles.md`](./global-styles.md)
 - [`scrollbar-theme.md`](./scrollbar-theme.md)
 - [`e2e-testing.md`](./e2e-testing.md)
+- [`swiper-monumento.md`](./swiper-monumento.md)
+- [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md)
 - [`../CLAUDE.md`](../CLAUDE.md)
 
 ---
 
-Última actualización: 15 de marzo de 2026 - v4.2.16
+Última actualización: 18 de marzo de 2026 - v4.2.16

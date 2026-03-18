@@ -34,6 +34,7 @@ Los tests se centran en:
   - centro: notificación inline (`#notificacion`) cuando está visible
   - derecha: botón de menú (hamburguesa)
 - Se valida con geometría (bounding boxes) para evitar regresiones de CSS (por ejemplo que vuelva a apilarse en columna).
+- En `mapa.html`, el test ya no espera a `load`: mockea tiles remotos y navega con `domcontentloaded`, porque esa spec solo necesita validar geometría del header y no debe quedar a merced de dependencias externas de Leaflet o de la carga de tiles.
 
 Archivo de test:
 
@@ -56,9 +57,13 @@ Archivo de test:
 - El slider no debe “recortar” imágenes por estilos de altura/overflow.
 - Se valida comportamiento responsive en varios viewports.
 - El set actual de slides base en `index.html` y `lafalla.html` es de **4 imágenes**: boceto principal, boceto infantil, foto real principal y foto real infantil.
+- La suite navega también hasta la tercera slide (`falla2026-real.avif`) para proteger el hook temporal de la foto real principal.
+- En tablet y desktop se valida además que solo haya una slide visible, que no exista solape entre botones e imagen activa y que el documento no cree overflow horizontal cuando la slide real aplica su ajuste específico.
 - Cuando el slider vive dentro de un bloque `.reveal`, los tests de geometría/interacción deben hacer scroll al componente y esperar a que el reveal esté estable antes de clicar navegación; si no, pueden aparecer falsos positivos en el conteo de slides visibles.
 
 Guía técnica del slider: [`swiper-monumento.md`](./swiper-monumento.md)
+
+Mantenimiento anual del set de imágenes: [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md)
 
 Referencia técnica de implementación (CSS/JS, breakpoints, iOS/Safari): [`navigation-bar.md`](./navigation-bar.md)
 
@@ -591,4 +596,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 17 de marzo de 2026 - v4.2.16
+Última actualización: 18 de marzo de 2026 - v4.2.16

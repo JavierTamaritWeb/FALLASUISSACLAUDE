@@ -157,6 +157,15 @@ document.addEventListener('translationsReady', () => {
 
 O bien, como hace ahora `js/meteo.js`, esperando explícitamente a que el idioma esté listo antes de pintar el primer estado.
 
+Contrato operativo actual:
+
+- `DOMContentLoaded` en `lang.js` carga el JSON
+- `updateTranslations()` aplica el idioma al DOM
+- después se emite `translationsReady`
+- los módulos dependientes de traducción pueden usar ese evento como barrera de inicialización
+
+No uses este evento como sustituto de toda la lógica de refresco. Para cambios posteriores de idioma en caliente, el contrato sigue siendo `langChanged`.
+
 ## 🛟 Fallback cuando `translate()` devuelve la key
 
 Si un módulo llama a `translate('meteo.min')` demasiado pronto, el motor devolverá la propia key (`meteo.min`).
@@ -165,6 +174,10 @@ Regla práctica actual para componentes dinámicos:
 
 - si `translate(key) === key`, usa un fallback local legible
 - no pintes la key cruda en UI final
+
+Caso ya implementado:
+
+- `js/meteo.js` protege labels como `meteo.min`, `meteo.max`, `meteo.viento` o `meteo.nubosidad` para que la interfaz siga siendo legible incluso si el render arranca antes de tener traducción útil disponible
 
 Esto evita textos rotos y también evita cambios de altura inesperados en tests visuales.
 
@@ -188,12 +201,18 @@ Si tocas ese bloque, revisa siempre el conjunto completo:
 - Si cambias traducciones: ejecuta `npm run build` (actualiza `dist/data/translations.json`).
 - Si algo “no se ve”: revisa primero que la clave en `data-i18n` coincide exactamente con la del JSON.
 - Si cambias un bloque con `data-i18n-format="paragraphs"`: revisa también el JS que construye los `<p>` y el CSS del contenedor, porque el problema puede no estar en la traducción en sí.
+- Si cambias un nodo con `data-i18n-dynamic="true"`: revisa también el módulo JavaScript que compone ese texto, porque `lang.js` ya no será el dueño final de su contenido.
 
 ## 🧪 Tests E2E
 
 Hay un test E2E dedicado al sistema de traducciones (idioma por defecto, cambio de idioma y persistencia entre páginas):
 
 - `tests/i18n.e2e.spec.js`
+
+Además, la integración real entre i18n y UI dinámica queda cubierta indirectamente por:
+
+- `tests/visual-regression.e2e.spec.js` en `meteo.html`
+- la smoke y full suite cuando el widget meteo o la home cambian su geometría
 
 Guía de ejecución: [`e2e-testing.md`](./e2e-testing.md)
 
