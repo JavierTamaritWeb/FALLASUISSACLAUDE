@@ -63,6 +63,42 @@ function intersectionSize(a, b) {
   };
 }
 
+async function expectBaseSlides(swiper, expectedSrcs) {
+  const baseSlides = await swiper.locator('.swiper-slide:not(.swiper-slide-duplicate) img').evaluateAll(imgs => {
+    return imgs.map(img => {
+      const src = img.getAttribute('src') || '';
+      return src.replace(/^\.?\//, '');
+    });
+  });
+
+  expect(baseSlides).toEqual(expectedSrcs);
+}
+
+async function ensureSwiperReadyForInteraction(swiper) {
+  await swiper.scrollIntoViewIfNeeded();
+
+  await expect.poll(async () => {
+    return await swiper.evaluate(el => {
+      const rect = el.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight;
+    });
+  }).toBe(true);
+
+  await expect.poll(async () => {
+    return await swiper.evaluate(el => {
+      const reveal = el.closest('.reveal');
+      if (!reveal || !reveal.classList.contains('reveal-ready')) {
+        return true;
+      }
+
+      const style = getComputedStyle(reveal);
+      const opacity = Number(style.opacity);
+      const transform = style.transform;
+      return opacity >= 0.99 && (transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)');
+    });
+  }).toBe(true);
+}
+
 async function expectOnlyOneSlideVisible(swiper) {
   const swiperBox = await getBox(swiper);
   const slideBoxes = await swiper.locator('.swiper-slide').evaluateAll(els => {
@@ -84,6 +120,13 @@ async function expectOnlyOneSlideVisible(swiper) {
 }
 
 test.describe('Monumento: Swiper autoHeight sin recortes', () => {
+  const expectedSrcs = [
+    'img/falla2026.avif',
+    'img/falla2026-Infantil.avif',
+    'img/falla2026-real.avif',
+    'img/falla2026-infantil-real.avif'
+  ];
+
   for (const pageName of ['index.html', 'lafalla.html']) {
     for (const vp of VIEWPORTS) {
       test(`${pageName} (${vp.name}): imagen cabe y altura se ajusta`, async ({ page }) => {
@@ -92,6 +135,8 @@ test.describe('Monumento: Swiper autoHeight sin recortes', () => {
 
         const swiper = page.locator('[data-testid="monumento-swiper"]');
         await expect(swiper).toBeVisible();
+        await expectBaseSlides(swiper, expectedSrcs);
+        await ensureSwiperReadyForInteraction(swiper);
 
         // Swiper marca el contenedor con esta clase cuando autoHeight está activo
         await expect

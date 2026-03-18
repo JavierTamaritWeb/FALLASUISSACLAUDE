@@ -46,11 +46,66 @@ function getLocaleFromLang() {
   }
 }
 
+function getTranslatedLabel(key, fallback) {
+  if (typeof translate !== 'function') {
+    return fallback;
+  }
+
+  const translatedValue = translate(key);
+  return translatedValue && translatedValue !== key ? translatedValue : fallback;
+}
+
+function areTranslationsReady() {
+  if (typeof currentLang !== 'string') {
+    return false;
+  }
+
+  const availableTranslations = window.translations;
+  if (!availableTranslations || typeof availableTranslations !== 'object') {
+    return false;
+  }
+
+  return Boolean(availableTranslations[currentLang] || availableTranslations.es);
+}
+
+function waitForTranslationsReady(timeoutMs = 2000) {
+  if (areTranslationsReady()) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    let resolved = false;
+
+    const finish = () => {
+      if (resolved) {
+        return;
+      }
+
+      resolved = true;
+      clearTimeout(timeoutId);
+      document.removeEventListener('translationsReady', handleTranslationsReady);
+      resolve();
+    };
+
+    const handleTranslationsReady = () => {
+      if (areTranslationsReady()) {
+        finish();
+      }
+    };
+
+    const timeoutId = setTimeout(finish, timeoutMs);
+
+    document.addEventListener('translationsReady', handleTranslationsReady, { once: true });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     // 1) Cargar config.json
     const res = await fetch('data/config.json');
     configData = await res.json();
+
+    await waitForTranslationsReady();
 
     // 2) Si la página tiene secciones de clima, realizar las llamadas a la API.
     if (document.querySelector('.weather-current')) {
@@ -195,40 +250,40 @@ function updateCurrentWeather(data) {
   if (tempElem)      { tempElem.textContent = `${Math.round(temp)}°C`; }
   if (descElem)      { descElem.textContent = capitalize(desc); }
   if (feelsElem)     { 
-    feelsElem.textContent = `${translate("meteo.sensacion")}: ${Math.round(feels_like)}°C`; 
+    feelsElem.textContent = `${getTranslatedLabel("meteo.sensacion", "Sensación")}: ${Math.round(feels_like)}°C`; 
   }
   if (minmaxElem)    { 
-    minmaxElem.textContent = `${translate("meteo.min") || "Mín"}: ${Math.round(temp_min)}°C / ${translate("meteo.max") || "Máx"}: ${Math.round(temp_max)}°C`; 
+    minmaxElem.textContent = `${getTranslatedLabel("meteo.min", "Mín")}: ${Math.round(temp_min)}°C / ${getTranslatedLabel("meteo.max", "Máx")}: ${Math.round(temp_max)}°C`; 
   }
   if (humElem)       { humElem.textContent = `${humidity}%`; }
   if (pressElem)     { pressElem.textContent = `${pressure} hPa`; }
   if (cloudsElem)    { 
-    cloudsElem.textContent = `${translate("meteo.nubosidad") || "Nubosidad"}: ${cloudiness}%`; 
+    cloudsElem.textContent = `${getTranslatedLabel("meteo.nubosidad", "Nubosidad")}: ${cloudiness}%`; 
   }
   if (visElem)       { visElem.textContent = `${(visibility / 1000).toFixed(1)} km`; }
   if (windSpeedElem) { 
-    windSpeedElem.textContent = `${translate("meteo.viento") || "Viento"}: ${speed} m/s`; 
+    windSpeedElem.textContent = `${getTranslatedLabel("meteo.viento", "Viento")}: ${speed} m/s`; 
   }
   if (windDegElem)   { 
-    windDegElem.textContent = `${translate("meteo.direccion") || "Dirección"}: ${deg}°`; 
+    windDegElem.textContent = `${getTranslatedLabel("meteo.direccion", "Dirección")}: ${deg}°`; 
   }
   if (rain1hElem)    { 
-    rain1hElem.textContent = `${translate("meteo.lluvia1h") || "Lluvia (1h)"}: ${rain && rain["1h"] ? rain["1h"] : 0} mm`; 
+    rain1hElem.textContent = `${getTranslatedLabel("meteo.lluvia1h", "Lluvia (1h)")}: ${rain && rain["1h"] ? rain["1h"] : 0} mm`; 
   }
   if (rain3hElem)    { 
-    rain3hElem.textContent = `${translate("meteo.lluvia3h") || "Lluvia (3h)"}: ${rain && rain["3h"] ? rain["3h"] : 0} mm`; 
+    rain3hElem.textContent = `${getTranslatedLabel("meteo.lluvia3h", "Lluvia (3h)")}: ${rain && rain["3h"] ? rain["3h"] : 0} mm`; 
   }
   if (snow1hElem)    { 
-    snow1hElem.textContent = `${translate("meteo.nieve1h") || "Nieve (1h)"}: ${snow && snow["1h"] ? snow["1h"] : 0} mm`; 
+    snow1hElem.textContent = `${getTranslatedLabel("meteo.nieve1h", "Nieve (1h)")}: ${snow && snow["1h"] ? snow["1h"] : 0} mm`; 
   }
   if (snow3hElem)    { 
-    snow3hElem.textContent = `${translate("meteo.nieve3h") || "Nieve (3h)"}: ${snow && snow["3h"] ? snow["3h"] : 0} mm`; 
+    snow3hElem.textContent = `${getTranslatedLabel("meteo.nieve3h", "Nieve (3h)")}: ${snow && snow["3h"] ? snow["3h"] : 0} mm`; 
   }
   if (sunrElem)      { 
-    sunrElem.textContent = `${translate("meteo.amanecer") || "Amanecer"}: ${sunriseTime}`; 
+    sunrElem.textContent = `${getTranslatedLabel("meteo.amanecer", "Amanecer")}: ${sunriseTime}`; 
   }
   if (sunsElem)      { 
-    sunsElem.textContent = `${translate("meteo.atardecer") || "Atardecer"}: ${sunsetTime}`; 
+    sunsElem.textContent = `${getTranslatedLabel("meteo.atardecer", "Atardecer")}: ${sunsetTime}`; 
   }
 
   // --- NUEVO CÓDIGO: Cambiar imagen .current-falleret según lluvia ---
@@ -306,13 +361,13 @@ function updateForecast(data) {
     if (descElem)   { descElem.textContent = capitalize(desc); }
     if (tempElem)   { tempElem.textContent = `${Math.round(main.temp)}°C`; }
     if (minmaxElem) { 
-      minmaxElem.textContent = `${translate("meteo.min") || "Mín"}: ${Math.round(main.temp_min)}°C / ${translate("meteo.max") || "Máx"}: ${Math.round(main.temp_max)}°C`; 
+      minmaxElem.textContent = `${getTranslatedLabel("meteo.min", "Mín")}: ${Math.round(main.temp_min)}°C / ${getTranslatedLabel("meteo.max", "Máx")}: ${Math.round(main.temp_max)}°C`; 
     }
     if (windElem)   { 
-      windElem.textContent = `${translate("meteo.viento") || "Viento"}: ${wind.speed} m/s`; 
+      windElem.textContent = `${getTranslatedLabel("meteo.viento", "Viento")}: ${wind.speed} m/s`; 
     }
     if (cloudElem)  { 
-      cloudElem.textContent = `${translate("meteo.nubosidad") || "Nubosidad"}: ${clouds.all}%`; 
+      cloudElem.textContent = `${getTranslatedLabel("meteo.nubosidad", "Nubosidad")}: ${clouds.all}%`; 
     }
   });
 }

@@ -105,6 +105,69 @@ Comportamiento actual en `js/lang.js`:
 
 No lo uses si solo necesitas un salto de línea simple dentro de un texto corto; en esos casos sigue siendo más barato resolverlo con CSS y `white-space`.
 
+## 🔄 Contenido dinámico + i18n
+
+Hay componentes donde el nodo necesita una traducción base, pero el contenido final lo completa JavaScript con datos dinámicos.
+
+Caso real actual:
+
+- `#current-feels-like` en meteo / portada
+
+Ese nodo no debe ser sobrescrito por `lang.js` con solo `Sensación`, porque `js/meteo.js` compone el texto completo (`Sensación: 26°C`).
+
+Para esos casos, usa este patrón:
+
+```html
+<p id="current-feels-like"
+  data-i18n="meteo.sensacion"
+  data-i18n-dynamic="true">Sensación: --°C</p>
+```
+
+Comportamiento actual:
+
+- `data-i18n` sigue declarando la clave semántica del nodo.
+- `data-i18n-dynamic="true"` le dice a `lang.js` que no reemplace su `textContent` automáticamente.
+- El módulo dueño del componente rellena luego el texto final.
+
+Úsalo cuando el HTML necesite:
+
+- una etiqueta traducida
+- más un valor dinámico renderizado por JS
+- sin que el motor global de i18n machaque el resultado final
+
+No lo uses en bloques estáticos normales, porque ahí sí conviene que `lang.js` mantenga el control completo.
+
+## 📣 Evento `translationsReady`
+
+`lang.js` emite `translationsReady` cuando:
+
+- ya cargó `data/translations.json`
+- conoce el idioma activo
+- ya aplicó `updateTranslations()` sobre el DOM
+
+Esto es útil para módulos que se cargan antes que `lang.js` o que dependen de `translate(key)` en su primer render.
+
+Ejemplo de uso:
+
+```javascript
+document.addEventListener('translationsReady', () => {
+  // Render seguro dependiente de i18n
+});
+```
+
+O bien, como hace ahora `js/meteo.js`, esperando explícitamente a que el idioma esté listo antes de pintar el primer estado.
+
+## 🛟 Fallback cuando `translate()` devuelve la key
+
+Si un módulo llama a `translate('meteo.min')` demasiado pronto, el motor devolverá la propia key (`meteo.min`).
+
+Regla práctica actual para componentes dinámicos:
+
+- si `translate(key) === key`, usa un fallback local legible
+- no pintes la key cruda en UI final
+
+Esto evita textos rotos y también evita cambios de altura inesperados en tests visuales.
+
 ## 🤝 Caso HOPE
 
 El bloque HOPE de `index.html` y `colaboraciones.html` combina dos piezas:
@@ -136,4 +199,4 @@ Guía de ejecución: [`e2e-testing.md`](./e2e-testing.md)
 
 ---
 
-Última actualización: 15 de marzo de 2026 - v4.2.16
+Última actualización: 18 de marzo de 2026 - v4.2.16

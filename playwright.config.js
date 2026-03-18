@@ -1,6 +1,8 @@
 // @ts-check
 const { defineConfig } = require('@playwright/test');
 
+const shouldReuseServer = process.env.PLAYWRIGHT_REUSE_SERVER === 'true';
+
 module.exports = defineConfig({
   testDir: './tests',
   timeout: 30_000,
@@ -33,7 +35,9 @@ module.exports = defineConfig({
   webServer: {
     command: 'node scripts/serve-dist.mjs --port 4173 --root dist',
     url: 'http://127.0.0.1:4173',
-    reuseExistingServer: !process.env.CI,
+    // Para snapshots y E2E visuales es más seguro arrancar siempre dist limpio.
+    // Si hace falta reutilizar un servidor local ya levantado, habilitarlo explícitamente.
+    reuseExistingServer: shouldReuseServer,
     timeout: 60_000
   }
 });

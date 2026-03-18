@@ -25,8 +25,10 @@ Ejemplo (resumido):
 ```html
 <div class="swiper swiper--autoheight" data-testid="monumento-swiper">
   <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="img/..." alt="..." /></div>
-    <div class="swiper-slide"><img src="img/..." alt="..." /></div>
+    <div class="swiper-slide"><img src="img/falla2026.avif" alt="Monumento principal" /></div>
+    <div class="swiper-slide"><img src="img/falla2026-Infantil.avif" alt="Monumento infantil" /></div>
+    <div class="swiper-slide"><img src="img/falla2026-real.avif" alt="Vista real del monumento principal" /></div>
+    <div class="swiper-slide"><img src="img/falla2026-infantil-real.avif" alt="Vista real del monumento infantil" /></div>
   </div>
 
   <div class="swiper-pagination"></div>
@@ -35,6 +37,22 @@ Ejemplo (resumido):
   <div class="swiper-scrollbar"></div>
 </div>
 ```
+
+## 🧾 Estado actual del slider (marzo 2026)
+
+El visor del monumento en [`index.html`](../index.html) y [`lafalla.html`](../lafalla.html) trabaja ahora con **4 slides base no duplicadas**:
+
+- `img/falla2026.avif`
+- `img/falla2026-Infantil.avif`
+- `img/falla2026-real.avif`
+- `img/falla2026-infantil-real.avif`
+
+Convención actual de carga:
+
+- las 2 primeras imágenes usan carga prioritaria/eager
+- las 2 fotos reales usan `loading="lazy"`
+
+La suite `tests/monumento-swiper.e2e.spec.js` valida el set exacto de slides base y evita contar los duplicados internos que Swiper añade cuando `loop: true` está activo.
 
 ## 🎚️ Modo autoheight (cuándo usarlo)
 
@@ -69,9 +87,19 @@ La solución aquí se basa en:
 
 La suite incluye una batería para asegurar que el slider de “El Monumento” no se recorta ni se desborda en viewports típicos.
 
+### Nota importante sobre `.reveal`
+
+En `index.html`, el Swiper vive dentro de `.falla__monumento.reveal`. Por eso, los tests que interactúan con las flechas del slider deben:
+
+- hacer `scrollIntoViewIfNeeded()` sobre el Swiper
+- esperar a que el bloque reveal esté visible y estable
+- solo entonces clicar navegación
+
+Sin ese paso, Playwright puede medir una geometría transitoria y detectar falsamente varias slides visibles a la vez.
+
 - Ejecuta: `npm run test:e2e:full`
 - Nota: los tests se ejecutan contra `dist/`, así que conviene hacer `npm run build` antes.
 
 ---
 
-*Última actualización: 9 de marzo de 2026 - v4.2.16*
+Última actualización: 18 de marzo de 2026 - v4.2.16

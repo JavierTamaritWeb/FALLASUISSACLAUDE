@@ -16,6 +16,10 @@ function translate(key) {
   return getNestedTranslation(key);
 }
 
+function notifyTranslationsReady() {
+  document.dispatchEvent(new Event('translationsReady'));
+}
+
 // Función para cargar el JSON de traducciones
 
 function loadTranslations() {
@@ -54,6 +58,10 @@ function renderParagraphTranslation(elem, translation) {
 // Función que actualiza el contenido de los elementos transables
 function updateTranslations () {
   document.querySelectorAll('[data-i18n]').forEach(elem => {
+    if (elem.hasAttribute('data-i18n-dynamic')) {
+      return;
+    }
+
     const key = elem.getAttribute('data-i18n');
     const translation = getNestedTranslation(key);
     if (translation) {
@@ -143,6 +151,7 @@ if (langSwitcher && langOptions) {
       langSwitcher.setAttribute('aria-expanded', 'false');
       actualizarLabelIdioma();
       updateTranslations();
+      notifyTranslationsReady();
 
       // Disparar un evento para notificar que el idioma ha cambiado
       const event = new Event("langChanged");
@@ -177,6 +186,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Pintar el label del botón de idioma según el idioma actual
     actualizarLabelIdioma();
+    notifyTranslationsReady();
     
     // Aquí se pueden inicializar otras funciones (por ejemplo, fetchCurrentWeather, initAnimations, etc.)
   } catch (error) {

@@ -55,6 +55,8 @@ Archivo de test:
 
 - El slider no debe “recortar” imágenes por estilos de altura/overflow.
 - Se valida comportamiento responsive en varios viewports.
+- El set actual de slides base en `index.html` y `lafalla.html` es de **4 imágenes**: boceto principal, boceto infantil, foto real principal y foto real infantil.
+- Cuando el slider vive dentro de un bloque `.reveal`, los tests de geometría/interacción deben hacer scroll al componente y esperar a que el reveal esté estable antes de clicar navegación; si no, pueden aparecer falsos positivos en el conteo de slides visibles.
 
 Guía técnica del slider: [`swiper-monumento.md`](./swiper-monumento.md)
 
@@ -202,6 +204,9 @@ Cobertura concreta:
 - Usa estado determinista: hora congelada, mocks de meteo/mapa y tema inicial por `localStorage`.
 - En modo oscuro no se hace click sobre el toggle: la página arranca ya en oscuro para evitar ruido de transición o notificación.
 - Antes de capturar, la suite fuerza todos los `.reveal` a visibles y limpia `#notificacion` para que las capturas no dependan del scroll ni de estados efímeros.
+- Para `meteo.html`, la captura espera además a que i18n esté listo, temperatura actual y forecast poblados, todos los iconos cargados y `scrollHeight` estable.
+- `playwright.config.js` **no reutiliza** un servidor existente por defecto. Esto evita falsos fallos visuales causados por servir un `dist/` obsoleto en `:4173`.
+- Si necesitas reutilizar manualmente un servidor ya arrancado, hazlo de forma explícita con `PLAYWRIGHT_REUSE_SERVER=true`.
 
 Archivo de test:
 
@@ -217,6 +222,12 @@ Si el cambio visual es intencional:
 npm run build
 npx playwright test tests/visual-regression.e2e.spec.js --update-snapshots --workers=1
 npx playwright test tests/visual-regression.e2e.spec.js --workers=1
+```
+
+Si quieres reutilizar un servidor local ya levantado:
+
+```bash
+PLAYWRIGHT_REUSE_SERVER=true npx playwright test tests/visual-regression.e2e.spec.js --workers=1
 ```
 
 ### 🟦 Open Graph (WhatsApp)
