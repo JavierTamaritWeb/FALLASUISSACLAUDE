@@ -71,6 +71,15 @@
       <image:title>Somni</image:title>
     </image:image>
   </url>
+
+  <url>
+    <loc>https://fallasuissa.es/blog-anima.html</loc>
+    <image:image>
+      <image:loc>https://fallasuissa.es/img/blog/federico-trenor.jpg</image:loc>
+      <image:caption>Federico Trénor i Trénor, Barón de Alaquàs, en les Moreres</image:caption>
+      <image:title>El alma del barrio</image:title>
+    </image:image>
+  </url>
   
   <!-- Página de Galerías -->
   <url>

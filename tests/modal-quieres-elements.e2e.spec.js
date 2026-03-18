@@ -4,6 +4,14 @@
  */
 import { test, expect } from '@playwright/test';
 
+async function abrirModalQuierese(page) {
+  const openModalBtn = page.locator('#open-quieres-modal');
+  await openModalBtn.scrollIntoViewIfNeeded();
+  await expect(openModalBtn).toBeVisible();
+  await openModalBtn.click();
+  await expect(page.locator('#modal-quieres')).toBeVisible();
+}
+
 test.describe('Modal Quieres - Diagnóstico de transición oscuro→claro', () => {
 
   // Elementos a verificar
@@ -19,7 +27,7 @@ test.describe('Modal Quieres - Diagnóstico de transición oscuro→claro', () =
   ];
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/index.html');
     // Forzar modo oscuro inmediatamente
     await page.evaluate(() => {
       document.body.classList.add('modo-oscuro');
@@ -28,8 +36,7 @@ test.describe('Modal Quieres - Diagnóstico de transición oscuro→claro', () =
       document.documentElement.classList.remove('modo-claro');
     });
     // Abrir modal
-    await page.click('#open-quieres-modal');
-    await expect(page.locator('#modal-quieres')).toBeVisible();
+    await abrirModalQuierese(page);
     // Esperar a que el modal esté completamente renderizado
     await page.waitForTimeout(100);
   });
@@ -224,7 +231,7 @@ test.describe('Modal Quieres - Diagnóstico de transición oscuro→claro', () =
 test.describe('Modal Quieres - Test de regresión visual de transición', () => {
 
   test('La transición debe ser gradual, no instantánea', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/index.html');
 
     // Forzar modo oscuro
     await page.evaluate(() => {
@@ -234,8 +241,7 @@ test.describe('Modal Quieres - Test de regresión visual de transición', () => 
     });
 
     // Abrir modal
-    await page.click('#open-quieres-modal');
-    await expect(page.locator('#modal-quieres')).toBeVisible();
+    await abrirModalQuierese(page);
     await page.waitForTimeout(100);
 
     // Obtener color inicial del contenido del modal

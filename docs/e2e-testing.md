@@ -161,6 +161,8 @@ Para evitar que interfiera con los tests generales, `playwright.config.js` pre-s
 
 **Accesibilidad:** El contenedor arranca oculto con `aria-hidden="true"` e `inert`. Al mostrarse, se elimina `inert`; al cerrarse, el script desenfoca primero el botón de cierre si conserva el foco y solo después vuelve a aplicar `inert` y `aria-hidden`. Esto evita la advertencia del navegador sobre descendientes enfocados dentro de un ancestro oculto para tecnologías asistivas.
 
+**Interacción móvil:** la spec también protege que el botón de cierre conserve un hit target real suficiente y no quede tapado por la cabecera fija ni por capas internas del propio banner.
+
 Archivos de test:
 
 - `tests/banner-subvencion.e2e.spec.js`
@@ -378,11 +380,19 @@ Tests para verificar las transiciones suaves del modal "¿Quieres formar parte?"
 
 - **modal-transition.e2e.spec.js**: Verifica que el modal tiene la propiedad `transition` configurada, conserva la duración 2.4s y que el color de fondo cambia al cambiar tema
 - **modal-dark-to-light.e2e.spec.js**: Test específico para la transición oscuro→claro, verificando colores intermedios
+- **modal-quieres-elements.e2e.spec.js**: Comprueba que el modal ya existe en `index.html`, se abre desde el DOM real de la home y que la inicialización externa no bloquee sus listeners
+
+Contrato operativo del modal:
+
+- `index.html` contiene el markup canónico del modal
+- `js/envia.js` no debe volver a depender de `fetch('modal-content.html')`
+- `emailjs` se trata como dependencia opcional en tiempo de ejecución; si la CDN falla, la UI del modal debe seguir abriendo y cerrando
 
 Archivos de test:
 
 - `tests/modal-transition.e2e.spec.js`
 - `tests/modal-dark-to-light.e2e.spec.js`
+- `tests/modal-quieres-elements.e2e.spec.js`
 
 ### 🖼️ Background Transition (Transición de fondo)
 
@@ -492,6 +502,7 @@ Smoke suite por defecto:
 - `tests/nav.e2e.spec.js`
 - `tests/i18n.e2e.spec.js`
 - `tests/board.e2e.spec.js`
+- `tests/reveal-on-scroll.e2e.spec.js`
 - `tests/countdown.e2e.spec.js`
 - `tests/banner-subvencion.e2e.spec.js`
 - `tests/index-colaboraciones.e2e.spec.js`
@@ -582,6 +593,11 @@ Guía técnica:
   - Si necesitas aislar un posible problema visual o de stacking, usa `index.html?forzarBanner=1`
   - Comprueba que no estás reutilizando un contexto automatizado con `localStorage.bannerSubvencionCerrado = 'true'`
 
+- Los tests del modal fallan o dejan de abrir la home:
+  - Verifica que el modal sigue estando en `index.html` y que `js/envia.js` no volvió a depender de `fetch('modal-content.html')`
+  - Comprueba que no hay un `emailjs.init(...)` en top-level rompiendo el registro de listeners cuando falla la CDN
+  - Si los specs del modal pasan pero la full suite falla, aísla `tests/visual-regression.e2e.spec.js` antes de tocar snapshots
+
 - Snapshots visuales desfasados tras un cambio intencional:
   - Ejecuta `npm run build`
   - Regenera la baseline con `npx playwright test tests/visual-regression.e2e.spec.js --update-snapshots --workers=1`
@@ -596,4 +612,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 18 de marzo de 2026 - v4.2.16
+Última actualización: 18 de marzo de 2026 - v4.3.11

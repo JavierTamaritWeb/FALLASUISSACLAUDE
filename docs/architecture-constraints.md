@@ -186,6 +186,19 @@ Por qué:
 - aplicar `aria-hidden` sobre un ancestro que todavía contiene el foco dispara una advertencia de accesibilidad en Chromium
 - `inert` evita que el banner oculto siga siendo focuseable o interactivo mientras termina su transición y antes de ser eliminado del DOM
 
+Interacción móvil y stacking:
+
+Regla:
+
+- el botón de cierre debe conservar un área táctil real mínima de `44x44`
+- aplicar `touch-action: manipulation`
+- mantener su `z-index` por encima de la cabecera fija y de las capas visuales internas del banner
+
+Por qué:
+
+- en móvil, el header fijo y la capa gráfica del banner pueden interceptar el click si el botón queda demasiado justo o por detrás de otra capa
+- el test E2E valida el hit target real, no solo que el icono sea visible en pantalla
+
 Renderizado y compatibilidad Safari:
 
 Regla:
@@ -227,7 +240,37 @@ Ayudas de depuración manual:
 
 Si además tocas navegación, tema o snapshots, ejecuta `npm run test:e2e:full`.
 
-## 7. Swiper del monumento: hook temporal de la foto real
+## 7. Modal "Quieres formar parte": DOM estable y dependencia externa opcional
+
+Regla:
+
+- el modal ya vive en `index.html` y debe abrirse desde ese DOM
+- no depender de `fetch('modal-content.html')` ni de fragmentos remotos para mostrarlo
+- registrar listeners tras `DOMContentLoaded`
+- `emailjs` debe detectarse en tiempo de ejecución; no llamar `emailjs.init(...)` en top-level
+
+Por qué:
+
+- `modal-content.html` no forma parte del proyecto y la apertura no puede quedar bloqueada por red
+- un fallo de la CDN de EmailJS no debe impedir abrir o cerrar el modal ni registrar sus handlers
+- la degradación correcta es: UI funcional y error controlado al enviar si la dependencia externa no está disponible
+
+Archivos implicados:
+
+- `index.html`
+- `js/envia.js`
+- `tests/modal-transition.e2e.spec.js`
+- `tests/modal-dark-to-light.e2e.spec.js`
+- `tests/modal-quieres-elements.e2e.spec.js`
+
+Verificación recomendada:
+
+```bash
+npm run build
+npx playwright test tests/modal-transition.e2e.spec.js tests/modal-dark-to-light.e2e.spec.js tests/modal-quieres-elements.e2e.spec.js
+```
+
+## 8. Swiper del monumento: hook temporal de la foto real
 
 Regla:
 
@@ -266,7 +309,41 @@ npx playwright test tests/monumento-swiper.e2e.spec.js
 npm run test:e2e
 ```
 
-## 8. Qué hacer antes de tocar una zona sensible
+## 9. Blog-detail: stacking de imágenes sobre gradiente
+
+Regla:
+
+`.blog-detail__figure` debe usar `z-index: 2` y centrado con `margin: auto` + `max-width: 48rem`. NO usar flexbox en el figure — causa problemas de sizing con `<picture>`.
+
+Por qué:
+
+`.blog-detail__article` usa el patrón `::before` con gradiente azul (z-index: 0). Los hijos directos reciben `z-index: 1` vía `> *`. El figure necesita `z-index: 2` explícito para garantizar que la imagen quede por encima del gradiente sin tinte azul. Flexbox en el figure encoge `<picture>` a su tamaño intrínseco, rompiendo el layout.
+
+Carga prioritaria y estado `loaded`:
+
+Regla:
+
+- si la imagen principal del artículo queda visible sin scroll, usar `loading="eager"` y `fetchpriority="high"`
+- los scripts que gestionan `.lazy-image` deben marcar como `loaded` también las imágenes que ya estén completas al registrar listeners
+
+Por qué:
+
+- si el esqueleto de carga sigue activo en una imagen ya resuelta, reaparece el tinte azul aunque el stacking sea correcto
+- la combinación HTML + JS evita falsos estados de carga tanto en red lenta como desde caché
+
+Archivos implicados:
+
+- `scss/components/_blog.scss`
+- `scss/animaciones/_modo-oscuro.scss`
+- `scss/components/_image-optimization.scss`
+- `js/image-optimizer.js`
+- `js/accessibility.js`
+
+Verificación recomendada:
+
+Comprobación visual en `dist/blog-anima.html`: la imagen debe verse sin tinte azul y centrada.
+
+## 10. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
 
@@ -288,4 +365,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 18 de marzo de 2026 - v4.2.16
+Última actualización: 18 de marzo de 2026 - v4.3.11

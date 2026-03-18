@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.2.16
-**Last Updated:** 17 de marzo de 2026
+**Version:** 4.3.11
+**Last Updated:** 18 de marzo de 2026
 
 ## Project Overview
 
@@ -28,6 +28,7 @@ npx gulp css             # Compile SCSS only
 npx gulp images          # Optimize images (WebP/AVIF)
 npx gulp js              # Copy JavaScript
 npx gulp html            # Process HTML
+npx gulp data            # Copy JSON data files
 
 # Run a specific test
 npx playwright test tests/nav.e2e.spec.js
@@ -59,7 +60,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 - **Build**: Gulp 5 + Dart Sass + PostCSS (autoprefixer) + CSSNano + Sharp
 - **Frontend**: HTML5, SCSS (BEM), ES6+ JavaScript modules
 - **Libraries**: Swiper.js (carousels), Flatpickr (dates), DOMPurify
-- **Testing**: Playwright E2E (29 suites in the full matrix, 7 smoke suites by default)
+- **Testing**: Playwright E2E (32 suites in full matrix, 8 smoke suites by default). Smoke suite (`npm run test:e2e`) runs: nav, i18n, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, scss-guardrails
 
 ### Directory Structure
 
@@ -76,17 +77,19 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Dark Mode** (`js/dark.js`): Applies `.modo-oscuro`/`.modo-claro` classes. CSS uses `::before` pseudo-elements for gradient-to-solid transitions because CSS cannot animate between `linear-gradient` and solid color directly. Background gradient lives on `body::before` to allow opacity cross-fade to black.
 
+**Blog Detail** (`scss/components/_blog.scss`): `.blog-detail__article` uses the same `::before` gradient overlay pattern. Images inside use `z-index: 2` on the figure to stay above the gradient layer.
+
 **Multi-Language** (`js/lang.js` + `js/initTranslations.js`): Elements use `data-i18n="section.key"` attributes. Loads `data/translations.json` on page load, persists choice to localStorage.
 
 **Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders with DOMPurify sanitization on `eventos.html`.
 
 **Collaborations** (`scss/components/_colaboraciones.scss` + `js/colaboraciones-lightbox.js`): Shared HOPE section on `index.html` and `colaboraciones.html`. Uses a traditional responsive grid (2 columns on mobile, 3 from `768px`), `object-fit: contain`, and an accessible lightbox. Tests: `tests/index-colaboraciones.e2e.spec.js`.
 
-**Testing**: Tests serve `dist/` on `http://127.0.0.1:4173`. Playwright config pre-sets `localStorage` key `bannerSubvencionCerrado=true` to hide the banner in tests. Banner runtime shows on each load of `index.html` unless an automated browser pre-sets that key.
+**Testing**: Tests serve `dist/` via `scripts/serve-dist.mjs` on `http://127.0.0.1:4173`. Playwright config pre-sets `localStorage` key `bannerSubvencionCerrado=true` to hide the banner in tests. Banner runtime shows on each load of `index.html` unless an automated browser pre-sets that key. Set `PLAYWRIGHT_REUSE_SERVER=true` to skip server restart when debugging.
 
 ### Version Note
 
-`package.json` version (4.2.0) is out of sync with the actual release version (4.2.16). The CLAUDE.md version reflects the real release state.
+`package.json` version (4.2.0) is out of sync with the actual release version (4.3.11). The CLAUDE.md version reflects the real release state.
 
 ## Architecture Decisions & Constraints
 
@@ -106,6 +109,8 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
   - **Accessible hide sequence**: hidden state relies on `inert` + `aria-hidden="true"`. When closing the banner, move focus off the close button before applying `aria-hidden` to the ancestor container; otherwise Chromium logs an accessibility warning because the focused descendant becomes hidden from assistive tech.
   - **Dark mode image**: Uses `filter: invert(1) hue-rotate(180deg)`. Do NOT use `invert(1)` alone - it turns the red Ajuntament crest green. The `hue-rotate(180deg)` restores red tones after inversion.
   - **Safari fix**: Uses `<picture>` with AVIF/WebP/PNG instead of SVG. Safari WebKit bug ([#246106](https://bugs.webkit.org/show_bug.cgi?id=246106)) prevents CSS `filter` from compositing correctly on SVGs with internal filter elements. Do NOT revert to `<img src="subvencion.svg">`. Size: SVG 289KB -> AVIF 25KB (-91%).
+
+- **Blog-detail image stacking (v4.3.11):** `.blog-detail__figure` necesita `z-index: 2` para quedar por encima del pseudo-elemento `::before` (gradiente azul, z-index: 0) de `.blog-detail__article`. El centrado usa `margin: 1.5rem auto` + `max-width: 48rem` en el figure (no flexbox, que causa problemas con `<picture>`). La imagen usa `display: block; width: 100%`. En móvil el figure pasa a `max-width: 100%`.
 
 ## Common Patterns
 

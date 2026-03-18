@@ -233,6 +233,7 @@ body.modo-oscuro .falla::before {
 | --- | --- | --- | --- |
 | `.quieres-mas` | `_quieres.scss` | `$secondary-color` (#333) | Azul diagonal |
 | `.countdown__contenedor` | `_countdown.scss` | `$negro` | Azul diagonal |
+| `.blog-detail__article` | `_blog.scss` | `#111111` | Azul diagonal |
 
 ### Implementación del filtro
 
@@ -273,6 +274,7 @@ body.modo-oscuro .quieres-mas::before {
 3. **SIEMPRE** añadir `z-index: 1` a los hijos directos (`> *`)
 4. **SIEMPRE** añadir el `::before` a la lista de transiciones en `_modo-oscuro.scss`
 5. Para elementos con `border-radius`, añadir `overflow: hidden` al padre
+6. Para **imágenes** dentro de componentes con overlay `::before`, el `<figure>` debe tener `z-index: 2` (no 1) para asegurar stacking correcto sobre el gradiente
 
 ## 🖼️ Inversión de Imagen con CSS Filter (Banner Subvención)
 
@@ -397,7 +399,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 ---
 
-Última actualización: 17 de marzo de 2026 - v4.2.16
+Última actualización: 18 de marzo de 2026 - v4.3.11
 
 ## 🏛️ Componente Frieze (Cenefa)
 

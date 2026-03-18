@@ -49,6 +49,21 @@ El JSON tiene un objeto raíz con un array `notas`.
 | `url` | `string` | Sí | Ruta relativa | Ruta desde la raíz pública, por ejemplo `pdf/bases.pdf` o `img/eventos/cartel.jpg`. |
 | `nombre` | `object` o `string` | Sí | Texto | Nombre visible. Se recomienda objeto bilingüe `{ "es": "...", "va": "..." }`. |
 
+### Validación efectiva del render
+
+El render actual filtra adjuntos inválidos antes de pintar la nota.
+
+Un adjunto solo se considera válido si:
+
+- `tipo` es `pdf` o `img`
+- `url` contiene una ruta no vacía
+- `nombre` aporta texto útil, ya sea como string o como objeto bilingüe con contenido real
+
+Consecuencia práctica:
+
+- si una nota mezcla adjuntos válidos e inválidos, solo se muestran los válidos
+- si todos los adjuntos se descartan, la nota se degrada a nota simple en lugar de dejar iconos o enlaces vacíos
+
 ## 🧾 Tipos de nota soportados hoy
 
 1. Solo texto.
@@ -142,6 +157,7 @@ El JSON tiene un objeto raíz con un array `notas`.
 - El contenido admite HTML simple como `<br>` o `<strong>`, pero úsalo con moderación.
 - No pegues HTML de terceros ni contenido no confiable: el renderizado actual inserta `contenido` como HTML en el DOM.
 - Las rutas de `adjuntos[].url` son relativas a la raíz del sitio público.
+- No uses adjuntos placeholder con `url`, `nombre` o `tipo` vacíos: el render los ignorará.
 - Si un archivo no existe, el enlace se generará igual, pero llevará a un 404.
 - Si quieres retirar una nota sin perder historial, usa `activo: false`.
 
@@ -167,6 +183,7 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 - carga de notas desde `data/board.json`
 - presencia del contenedor `#notesBoard`
 - renderizado de notas con y sin adjuntos
+- filtrado de adjuntos inválidos y degradación a nota simple cuando corresponde
 - accesibilidad básica (`role="article"`, `aria-hidden`, `aria-label`)
 - comportamiento responsive
 - re-renderizado cuando cambia el idioma
@@ -191,6 +208,13 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 1. Comprueba que `url` apunta a una ruta pública real.
 2. Confirma que el archivo existe en `img/` o `pdf/` antes de hacer build.
 
+### La nota se renderiza sin adjuntos
+
+1. Revisa que cada adjunto use `tipo: "pdf"` o `tipo: "img"`.
+2. Comprueba que `url` no esté vacía ni contenga solo espacios.
+3. Si `nombre` es un objeto, verifica que `nombre.es` y/o `nombre.va` tengan texto real.
+4. Recuerda que el render ignora adjuntos inválidos y deja la nota como texto simple si no queda ninguno válido.
+
 ## 🔗 Relacionado
 
 - [`e2e-testing.md`](./e2e-testing.md): estrategia de pruebas Playwright
@@ -199,4 +223,4 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 ---
 
-Última actualización: 13 de marzo de 2026 - v4.2.16
+Última actualización: 18 de marzo de 2026 - v4.3.11

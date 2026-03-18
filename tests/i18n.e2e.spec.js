@@ -20,6 +20,9 @@ test.describe('i18n: sistema de traducciones', () => {
     await expect(page.locator('[data-i18n="historia.archivos.titulo"]').first()).toHaveText('Archivos');
     await expect(page.locator('.blog__post').first().locator('[data-i18n="blog.somni.cardTitle"]')).toHaveText('Somni');
     await expect(page.locator('.blog__post').first().locator('a[href="blog-somni.html"]')).toHaveAttribute('aria-label', 'Abrir el artículo Somni');
+    const animaCardEs = page.locator('.blog__post').filter({ has: page.locator('a[href="blog-anima.html"]') }).first();
+    await expect(animaCardEs.locator('[data-i18n="blog.anima.cardTitle"]')).toHaveText('El alma del barrio');
+    await expect(animaCardEs.locator('a[href="blog-anima.html"]')).toHaveAttribute('aria-label', 'Abrir el artículo El alma del barrio');
 
     await expect(page.locator('[data-i18n="historia.archivos.presentacion"]').first()).toHaveText('Presentación');
     await expect(page.locator('[data-i18n="historia.archivos.fallas2026"]').first()).toHaveText(' Fallas 2026');
@@ -32,6 +35,13 @@ test.describe('i18n: sistema de traducciones', () => {
     await expect(page.locator('[data-i18n="blog.somni.date"]').first()).toHaveText('Publicado en marzo de 2025');
     await expect(page.locator('[data-i18n="blog.somni.author"]').first()).toHaveText('Autora: Paula Peiró');
     await expect(page.locator('.blog-detail__content p').first()).toContainText('Un día tuvimos un sueño');
+
+    await page.goto('/blog-anima.html');
+    await expect(page.locator('[data-i18n="blog.anima.title"]').first()).toHaveText('"El alma del barrio"');
+    await expect(page.locator('[data-i18n="blog.anima.date"]').first()).toHaveText('Publicado en marzo de 2026');
+    await expect(page.locator('[data-i18n="blog.anima.author"]').first()).toHaveText('Autor: Javier Tamarit');
+    await expect(page.locator('.blog-detail__content').first().locator('p').first()).toContainText('Después de la riada del 57');
+    await expect(page.locator('[data-i18n="blog.anima.imageCaption"]').first()).toHaveText('Federico Trénor i Trénor, Barón de Alaquàs');
   });
 
   test('Cambiar a VA: actualiza textos, persiste y aplica en otras páginas', async ({ page }) => {
@@ -55,6 +65,9 @@ test.describe('i18n: sistema de traducciones', () => {
     await expect(page.locator('[data-i18n="historia.archivos.titulo"]').first()).toHaveText('Arxius');
     await expect(page.locator('.blog__post').first().locator('[data-i18n="blog.somni.cardTitle"]')).toHaveText('Somni');
     await expect(page.locator('.blog__post').first().locator('a[href="blog-somni.html"]')).toHaveAttribute('aria-label', "Obrir l'article Somni");
+    const animaCardVa = page.locator('.blog__post').filter({ has: page.locator('a[href="blog-anima.html"]') }).first();
+    await expect(animaCardVa.locator('[data-i18n="blog.anima.cardTitle"]')).toHaveText('L’Ànima del barri');
+    await expect(animaCardVa.locator('a[href="blog-anima.html"]')).toHaveAttribute('aria-label', "Obrir l’article L’Ànima del barri");
 
     await expect(page.locator('[data-i18n="historia.archivos.presentacion"]').first()).toHaveText('Presentació');
     await expect(page.locator('[data-i18n="historia.archivos.fallas2026"]').first()).toHaveText(' Falles 2026');
@@ -80,6 +93,13 @@ test.describe('i18n: sistema de traducciones', () => {
     await expect(page.locator('[data-i18n="blog.somni.date"]').first()).toHaveText('Publicat el març de 2025');
     await expect(page.locator('[data-i18n="blog.somni.author"]').first()).toHaveText('Autora: Paula Peiró');
     await expect(page.locator('.blog-detail__content p').first()).toContainText('Un dia vam tenir un somni');
+
+    await page.goto('/blog-anima.html');
+    await expect(page.locator('[data-i18n="blog.anima.title"]').first()).toHaveText('"L’Ànima del barri"');
+    await expect(page.locator('[data-i18n="blog.anima.date"]').first()).toHaveText('Publicat el març de 2026');
+    await expect(page.locator('[data-i18n="blog.anima.author"]').first()).toHaveText('Autor: Javier Tamarit');
+    await expect(page.locator('.blog-detail__content').first().locator('p').first()).toContainText('Després de la riuada del 57');
+    await expect(page.locator('[data-i18n="blog.anima.imageCaption"]').first()).toHaveText('Federico Trénor i Trénor, Baró d’Alaquàs');
 
     await page.reload();
     await expect(page.locator('[data-i18n="nav.inicio"]').first()).toHaveText('Inici');

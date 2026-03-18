@@ -16,6 +16,19 @@
       <news:keywords>somni, blog, falla suïssa, historia, fallas</news:keywords>
     </news:news>
   </url>
+
+  <url>
+    <loc>https://fallasuissa.es/blog-anima.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Falla Suïssa - L'Alqueria del Favero</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2026-03-01</news:publication_date>
+      <news:title>El alma del barrio</news:title>
+      <news:keywords>alma del barrio, federico trenor, jardín del turia, les moreres, falla suïssa</news:keywords>
+    </news:news>
+  </url>
   
   <!-- Entrada de noticia de Eventos -->
   <url>

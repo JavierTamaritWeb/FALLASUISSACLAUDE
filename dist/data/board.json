@@ -4,26 +4,17 @@
       "id": "crida-la-punra-2026",
       "activo": true,
       "contenido": {
-        "es": "📌 RECORDATORIO <br> 15-02-2026 19:00 h<br>📝 Cita<br> Crida de La Punta",
-        "va": "📌 RECORDATORI <br> 15-02-2026 19:00 h<br>📝 Cita<br> Crida de La Punta"
+        "es": "📌 RECORDATORIO <br> 20-03-2026 19:00 h<br>📝 Cita<br> Cremá",
+        "va": "📌 RECORDATORI <br> 20-03-2026 19:00 h<br>📝 Cita<br> Cremà"
       },
-      "adjuntos": [
-        {
-          "tipo": "img",
-          "url": "img/eventos/Crida_La_Punra_2026.jpg",
-          "nombre": {
-            "es": "Crida La Punra 2026.jpg",
-            "va": "Crida La Punra 2026.jpg"
-          }
-        }
-      ]
+      "adjuntos": []
     },
     {
       "id": "crida-valencia-2026",
       "activo": true,
       "contenido": {
-        "es": "📌 RECORDATORIO <br> 22-02-2026 19:00 h<br>📝 Cita<br> Crida de Valencia",
-        "va": "📌 RECORDATORI <br> 22-02-2026 19:30 h<br>📝 Cita<br> Crida de València"
+        "es": "📌 RECORDATORIO <br> 20-03-2026 00:00 h<br>📝 Cita<br> Cremá",
+        "va": "📌 RECORDATORI <br> 20-03-2026 00:00 h<br>📝 Cita<br> Cremà"
       },
       "adjuntos": []
     }

@@ -7,6 +7,51 @@ class ImageOptimizer {
     this.init();
   }
 
+  markAsLoaded(img) {
+    img.classList.add('loaded');
+    img.classList.remove('error');
+  }
+
+  handleImageError(img) {
+    if (img.dataset.fallback && img.src !== img.dataset.fallback) {
+      img.classList.remove('loaded');
+      img.src = img.dataset.fallback;
+      return;
+    }
+
+    img.classList.add('error');
+    img.classList.remove('loaded');
+  }
+
+  bindImageState(img) {
+    if (img.dataset.imageStateBound === 'true') {
+      return;
+    }
+
+    img.dataset.imageStateBound = 'true';
+    img.addEventListener('load', () => {
+      this.markAsLoaded(img);
+    });
+    img.addEventListener('error', () => {
+      this.handleImageError(img);
+    });
+  }
+
+  syncImageState(img) {
+    this.bindImageState(img);
+
+    if (!img.complete) {
+      return;
+    }
+
+    if (img.naturalWidth > 0) {
+      this.markAsLoaded(img);
+      return;
+    }
+
+    this.handleImageError(img);
+  }
+
   init() {
     // Configurar Intersection Observer para lazy loading
     this.setupLazyLoading();
@@ -43,6 +88,14 @@ class ImageOptimizer {
 
     // Observar todas las imágenes lazy
     document.querySelectorAll('img[data-src], img[loading="lazy"]').forEach(img => {
+      if (!img.dataset.src) {
+        this.syncImageState(img);
+      }
+
+      if (img.complete && img.naturalWidth > 0 && !img.dataset.src) {
+        return;
+      }
+
       this.observer.observe(img);
     });
   }
@@ -54,19 +107,7 @@ class ImageOptimizer {
       img.removeAttribute('data-src');
     }
 
-    // Añadir clase cuando la imagen se carga
-    img.addEventListener('load', () => {
-      img.classList.add('loaded');
-    }, { once: true });
-
-    // Manejar errores de carga
-    img.addEventListener('error', () => {
-      img.classList.add('error');
-      // Fallback a imagen original si WebP/AVIF falla
-      if (img.dataset.fallback) {
-        img.src = img.dataset.fallback;
-      }
-    }, { once: true });
+    this.syncImageState(img);
   }
 
   optimizeExistingImages() {
@@ -85,6 +126,8 @@ class ImageOptimizer {
       if (!img.hasAttribute('loading') && !this.isAboveFold(img)) {
         img.setAttribute('loading', 'lazy');
       }
+
+      this.syncImageState(img);
       
       // Añadir dimensiones si no existen (evita layout shift)
       this.addDimensions(img);

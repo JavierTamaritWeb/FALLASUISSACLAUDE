@@ -5,10 +5,44 @@
 let boardData = null;
 window.boardData = null;
 
+const VALID_ADJUNTO_TYPES = new Set(['pdf', 'img']);
+
 function refreshBoardReveal(root) {
   if (window.scrollReveal && typeof window.scrollReveal.refresh === 'function') {
     window.scrollReveal.refresh(root);
   }
+}
+
+function getAdjuntoNombre(adj, lang) {
+  if (typeof adj.nombre === 'object' && adj.nombre !== null) {
+    return (adj.nombre[lang] || adj.nombre.es || '').trim();
+  }
+
+  return typeof adj.nombre === 'string' ? adj.nombre.trim() : '';
+}
+
+function getAdjuntosValidos(adjuntos, lang) {
+  if (!Array.isArray(adjuntos)) {
+    return [];
+  }
+
+  return adjuntos
+    .map((adj) => {
+      if (!adj || typeof adj !== 'object') {
+        return null;
+      }
+
+      const tipo = typeof adj.tipo === 'string' ? adj.tipo.trim().toLowerCase() : '';
+      const url = typeof adj.url === 'string' ? adj.url.trim() : '';
+      const nombre = getAdjuntoNombre(adj, lang);
+
+      if (!VALID_ADJUNTO_TYPES.has(tipo) || !url || !nombre) {
+        return null;
+      }
+
+      return { tipo, url, nombre };
+    })
+    .filter(Boolean);
 }
 
 /**
@@ -38,13 +72,8 @@ async function loadBoardData() {
  * @returns {string} HTML del adjunto
  */
 function renderAdjunto(adj, isMultiple) {
-  const lang = window.currentLang || 'es';
   const iconText = adj.tipo.toUpperCase();
-
-  // Nombre traducible
-  const nombre = typeof adj.nombre === 'object'
-    ? (adj.nombre[lang] || adj.nombre.es)
-    : adj.nombre;
+  const nombre = adj.nombre;
 
   const ariaLabel = adj.tipo === 'pdf'
     ? `Descargar: ${nombre}`
@@ -75,7 +104,8 @@ function renderAdjunto(adj, isMultiple) {
 function renderNota(nota) {
   const lang = window.currentLang || 'es';
   const contenido = nota.contenido[lang] || nota.contenido.es;
-  const hasAdjuntos = nota.adjuntos && nota.adjuntos.length > 0;
+  const adjuntosValidos = getAdjuntosValidos(nota.adjuntos, lang);
+  const hasAdjuntos = adjuntosValidos.length > 0;
 
   if (!hasAdjuntos) {
     // Nota sin adjuntos - article directo con clase board__note
@@ -87,8 +117,8 @@ function renderNota(nota) {
       </article>`;
   }
 
-  const isMultiple = nota.adjuntos.length > 1;
-  const adjuntosHTML = nota.adjuntos.map(adj => renderAdjunto(adj, isMultiple)).join('');
+  const isMultiple = adjuntosValidos.length > 1;
+  const adjuntosHTML = adjuntosValidos.map(adj => renderAdjunto(adj, isMultiple)).join('');
 
   // Nota con adjuntos - envuelta en board__card
   return `

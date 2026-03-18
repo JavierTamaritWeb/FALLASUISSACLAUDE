@@ -152,9 +152,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if ('loading' in HTMLImageElement.prototype) {
       // El navegador soporta lazy loading nativo
       lazyImages.forEach(img => {
+        if (img.complete && img.naturalWidth > 0) {
+          img.classList.add('loaded');
+          return;
+        }
+
         img.addEventListener('load', function() {
           this.classList.add('loaded');
-        });
+        }, { once: true });
       });
     } else {
       // Fallback con Intersection Observer

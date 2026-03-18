@@ -22,6 +22,7 @@ const PAGES = [
   { name: 'meteo', path: '/meteo.html' },
   { name: 'blog', path: '/blog.html' },
   { name: 'blog-somni', path: '/blog-somni.html' },
+  { name: 'blog-anima', path: '/blog-anima.html' },
   { name: 'galerias', path: '/galerias.html' },
   { name: 'calendario', path: '/calendario.html' },
   { name: 'mapa', path: '/mapa.html' },

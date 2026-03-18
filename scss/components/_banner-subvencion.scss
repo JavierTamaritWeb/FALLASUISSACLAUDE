@@ -33,6 +33,7 @@
 .banner-subvencion__contenido {
   background-color: v.$blanco;
   position: relative;
+  isolation: isolate;
   padding: 1.2rem 1.3rem 1rem;
   border-radius: 1.25rem;
   border: 1px solid rgba(v.$primary-color, 0.18);
@@ -53,10 +54,13 @@
   right: 0.45rem;
   width: 2.25rem;
   height: 2.25rem;
+  z-index: 2;
   display: grid;
   place-items: center;
   font-size: 2rem;
   cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
   color: v.$primary-color;
   background-color: rgba(v.$primary-color, 0.08);
   border: none;
@@ -87,6 +91,7 @@
     right: 0.75rem;
     bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
     width: auto;
+    z-index: 2100;
   }
 
   .banner-subvencion.banner-subvencion--forzado {
@@ -104,10 +109,12 @@
   }
 
   .banner-subvencion__cerrar {
-    top: 0.25rem;
-    right: 0.25rem;
-    width: 2rem;
-    height: 2rem;
+    top: 0.35rem;
+    right: 0.35rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    min-width: 44px;
+    min-height: 44px;
     font-size: 1.75rem;
   }
 

@@ -1,54 +1,97 @@
 
 // js/envia.js
 
-// Inicializar EmailJS con el User ID
-emailjs.init("2sroeCfiZ4SiH-ZyX");
+function getEmailJsClient() {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  const emailClient = window.emailjs;
+
+  if (!emailClient || typeof emailClient.init !== 'function' || typeof emailClient.send !== 'function') {
+    return null;
+  }
+
+  return emailClient;
+}
 
 document.addEventListener("DOMContentLoaded", function() {
+  const emailClient = getEmailJsClient();
+  if (emailClient) {
+    emailClient.init("2sroeCfiZ4SiH-ZyX");
+  } else {
+    console.warn('EmailJS no está disponible; el modal seguirá funcionando sin envío.');
+  }
 
   const openModalBtn = document.getElementById('open-quieres-modal');
   const closeModalBtn = document.getElementById('close-quieres-modal');
   const modal = document.getElementById('modal-quieres');
+  const abrirModal = () => {
+    modal.classList.add('active');
+  };
+  const cerrarModal = () => {
+    modal.classList.remove('active');
+  };
+
+  const actualizarTraducciones = () => {
+    if (typeof updateTranslations === 'function') {
+      updateTranslations();
+    }
+  };
+
+  const registrarCierreYRecarga = (buttonId) => {
+    const closeButton = document.getElementById(buttonId);
+    if (closeButton) {
+      closeButton.addEventListener('click', function() {
+        cerrarModal();
+        location.reload();
+      });
+    }
+  };
+
+  const renderizarModalResultado = ({
+    headerClass,
+    titleKey,
+    titleFallback,
+    messageKey,
+    messageFallback,
+    imageSrc,
+    imageAlt,
+    closeId,
+  }) => {
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header ${headerClass} text-white">
+          <h5 class="modal-title" data-i18n="${titleKey}">${titleFallback}</h5>
+          <button type="button" class="btn-close" id="${closeId}" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <img src="${imageSrc}" class="img-fluid mb-3" alt="${imageAlt}" loading="lazy" width="150" height="150">
+          <p class="lead" data-i18n="${messageKey}">${messageFallback}</p>
+        </div>
+      </div>
+    `;
+
+    actualizarTraducciones();
+    registrarCierreYRecarga(closeId);
+  };
 
   // Configurar eventos para abrir/cerrar el modal
   if (openModalBtn && modal && closeModalBtn) {
-    openModalBtn.addEventListener('click', async function(e) {
+    openModalBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      // Carga diferida del contenido del modal (lazy-loading)
-      if (!modal.dataset.loaded) {
-        try {
-          const response = await fetch('modal-content.html');
-          if (response.ok) {
-            modal.innerHTML = await response.text();
-            modal.dataset.loaded = true; // Marcamos que ya se cargó el contenido
-            // Actualizamos las traducciones (suponiendo que updateTranslations está definida)
-            if (typeof updateTranslations === 'function') {
-              updateTranslations();
-            }
-            // Agregamos evento de cierre al botón que se carga dinámicamente
-            const dynamicCloseBtn = modal.querySelector('.btn-close');
-            if (dynamicCloseBtn) {
-              dynamicCloseBtn.addEventListener('click', function() {
-                modal.classList.remove('active');
-              });
-            }
-          } else {
-            console.error("Error al cargar el contenido del modal:", response.statusText);
-          }
-        } catch (error) {
-          console.error("Error al cargar el contenido del modal:", error);
-        }
-      }
-      modal.classList.add('active');
+      abrirModal();
     });
 
     closeModalBtn.addEventListener('click', function() {
-      modal.classList.remove('active');
+      cerrarModal();
     });
 
     window.addEventListener('click', function(e) {
       if (e.target === modal) {
-        modal.classList.remove('active');
+        cerrarModal();
       }
     });
   } else {
@@ -73,63 +116,52 @@ document.addEventListener("DOMContentLoaded", function() {
         mensaje: document.getElementById('quieres-mensaje').value
       };
 
-      emailjs.send('service_m22kcmj', 'template_mid06vz', templateParams)
+      const activeEmailClient = emailClient || getEmailJsClient();
+      if (!activeEmailClient) {
+        document.body.style.cursor = 'default';
+        if (submitBtn) { submitBtn.disabled = false; }
+        console.error('EmailJS no está disponible');
+        renderizarModalResultado({
+          headerClass: 'bg-danger',
+          titleKey: 'modalerror.title',
+          titleFallback: 'Error Enviando Mensaje',
+          messageKey: 'modalerror.mensaje',
+          messageFallback: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.',
+          imageSrc: 'img/error.png',
+          imageAlt: 'Error',
+          closeId: 'close-error-modal',
+        });
+        return;
+      }
+
+      activeEmailClient.send('service_m22kcmj', 'template_mid06vz', templateParams)
         .then(function(response) {
           document.body.style.cursor = 'default';
           if (submitBtn) { submitBtn.disabled = false; }
-          // Correo enviado correctamente
-          modal.innerHTML = `
-            <div class="modal-content">
-              <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" data-i18n="modalexito.title"></h5>
-                <button type="button" class="btn-close" id="close-success-modal" aria-label="Cerrar">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body text-center">
-                <img src="img/exito.png" class="img-fluid mb-3" alt="Éxito" loading="lazy" width="150" height="150">
-                <p class="lead" data-i18n="modalexito.mensaje"></p>
-              </div>
-            </div>
-          `;
-          if (typeof updateTranslations === 'function') {
-            updateTranslations();
-          }
-          const closeSuccess = document.getElementById('close-success-modal');
-          if (closeSuccess) {
-            closeSuccess.addEventListener('click', function() {
-              modal.classList.remove('active');
-              location.reload();
-            });
-          }
+          renderizarModalResultado({
+            headerClass: 'bg-success',
+            titleKey: 'modalexito.title',
+            titleFallback: 'Mensaje enviado',
+            messageKey: 'modalexito.mensaje',
+            messageFallback: 'Tu mensaje se ha enviado correctamente.',
+            imageSrc: 'img/exito.png',
+            imageAlt: 'Éxito',
+            closeId: 'close-success-modal',
+          });
         }, function(error) {
           document.body.style.cursor = 'default';
           if (submitBtn) { submitBtn.disabled = false; }
           console.error('Error al enviar el mensaje:', error);
-          modal.innerHTML = `
-            <div class="modal-content">
-              <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" data-i18n="modalerror.title">Error Enviando Mensaje</h5>
-                <button type="button" class="btn-close" id="close-error-modal" aria-label="Cerrar">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body text-center">
-                <img src="img/error.png" class="img-fluid mb-3" alt="Error" loading="lazy" width="150" height="150">
-                <p class="lead" data-i18n="modalerror.mensaje">No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.</p>
-              </div>
-            </div>
-          `;
-          if (typeof updateTranslations === 'function') {
-            updateTranslations();
-          }
-          const closeError = document.getElementById('close-error-modal');
-          if (closeError) {
-            closeError.addEventListener('click', function() {
-              modal.classList.remove('active');
-              location.reload();
-            });
-          }
+          renderizarModalResultado({
+            headerClass: 'bg-danger',
+            titleKey: 'modalerror.title',
+            titleFallback: 'Error Enviando Mensaje',
+            messageKey: 'modalerror.mensaje',
+            messageFallback: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.',
+            imageSrc: 'img/error.png',
+            imageAlt: 'Error',
+            closeId: 'close-error-modal',
+          });
         });
     });
   } else {

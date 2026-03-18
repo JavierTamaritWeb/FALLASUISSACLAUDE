@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 17 de marzo de 2026 - v4.2.16 - Banner de subvención visible en cada carga de la home, helpers de depuración y documentación técnica sincronizada.
+🆕 Última actualización: 18 de marzo de 2026 - v4.3.11 - Modal “¿Quieres formar parte?” desacoplado de dependencias externas, banner/tablón/blog estabilizados y documentación técnica sincronizada.
 
 ## 🌐 Vista Previa
 
@@ -125,8 +125,10 @@ WEBFALLASUISSA/
 │   ├── calendario.js          # Sistema de calendario
 │   ├── countdown.js           # Cuenta atrás para Fallas
 │   ├── dark.js                # Modo oscuro/claro
+│   ├── envia.js               # Modal “¿Quieres formar parte?” y envío con EmailJS si está disponible
 │   ├── lang.js                # Sistema multiidioma
 │   ├── nav-menu.js            # Menú móvil (hamburguesa + overlay)
+│   ├── board.js               # Tablón dinámico y adjuntos validados
 │   ├── scroll-reveal.js       # Reveal on scroll global
 │   ├── banner-subvencion.js   # Tarjeta institucional flotante visible en cada carga de la home
 │   ├── colaboraciones-lightbox.js # Lightbox accesible para HOPE

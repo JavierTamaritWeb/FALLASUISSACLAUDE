@@ -218,6 +218,32 @@
     }
   }
 
+  &__figure {
+    margin: 1.5rem auto;
+    max-width: 48rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: v.$border-radius;
+    box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(v.$primary-color, 0.25);
+    object-fit: cover;
+  }
+
+  &__caption {
+    margin-top: 1rem;
+    font-size: 1.35rem;
+    color: v.$blanco-hueso;
+    font-style: italic;
+    opacity: 0.85;
+  }
+
   @media (max-width: 768px) {
     padding: 3.5rem 0;
 
@@ -236,6 +262,10 @@
 
     &__content p {
       font-size: 1.6rem;
+    }
+
+    &__figure {
+      max-width: 100%;
     }
   }
 }

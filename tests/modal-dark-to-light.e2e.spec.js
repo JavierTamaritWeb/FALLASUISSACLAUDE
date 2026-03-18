@@ -1,19 +1,29 @@
 
 import { test, expect } from '@playwright/test';
 
+async function abrirModalQuierese(page) {
+    const openModalBtn = page.locator('#open-quieres-modal');
+    await openModalBtn.scrollIntoViewIfNeeded();
+    await expect(openModalBtn).toBeVisible();
+    await openModalBtn.click();
+    await expect(page.locator('#modal-quieres')).toBeVisible();
+}
+
 test.describe('Modal Dark to Light Transition', () => {
     test('should transition smoothly from dark to light mode', async ({ page }) => {
-        await page.goto('/');
+        await page.goto('/index.html');
 
         // 1. Force Dark Mode immediately
         await page.evaluate(() => {
             document.body.classList.add('modo-oscuro');
             document.body.classList.remove('modo-claro');
+            document.documentElement.classList.add('modo-oscuro');
+            document.documentElement.classList.remove('modo-claro');
             // Ensure modal content reflects dark mode immediately (disable transition for setup if possible, or just wait)
         });
 
         // 2. Open Modal
-        await page.click('#open-quieres-modal');
+        await abrirModalQuierese(page);
         const modalContent = page.locator('#modal-quieres-content');
         await expect(modalContent).toBeVisible();
 
