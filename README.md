@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 18 de marzo de 2026 - v4.3.11 - Modal “¿Quieres formar parte?” desacoplado de dependencias externas, banner/tablón/blog estabilizados y documentación técnica sincronizada.
+🆕 Última actualización: 19 de marzo de 2026 - v4.5.0 - Versionado del proyecto sincronizado, banner/tablón/blog estabilizados y documentación técnica alineada.
 
 ## 🌐 Vista Previa
 

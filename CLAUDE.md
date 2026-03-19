@@ -91,7 +91,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` version (4.2.0) is out of sync with the actual release version (4.5.0). The CLAUDE.md version reflects the real release state.
+`package.json` and `package-lock.json` are synchronized with the current release version (4.5.0).
 
 ## Architecture Decisions & Constraints
 
