@@ -9,6 +9,24 @@ Esta guía describe el sistema de traducciones del proyecto y los “gotchas” 
 
 El build copia `data/` a `dist/data/`. En producción se consume `dist/`.
 
+## 🗂️ Qué va aquí y qué no
+
+Usa `data/translations.json` para texto genérico de interfaz:
+
+- navegación, botones, labels, placeholders y mensajes de estado
+- títulos o copys reutilizados por varias plantillas
+- textos accesibles genéricos como `aria-label` o estados vacíos de un componente
+
+No metas aquí metadatos ni contenido operativo con identidad propia.
+
+Regla práctica del repo:
+
+- `data/translations.json`: UI traducible y copy compartido
+- `data/board.json`: notas del tablón con su `contenido.es` y `contenido.va`
+- `data/blog.json`: estructura, `slug`, `dateISO`, `featured`, `sections` y `translationKey`
+
+Excepción admitida: cuando una entidad usa una plantilla común y necesita copy largo estructurado, puede usar un patrón mixto como el blog actual: metadata en `data/blog.json` y texto en `data/translations.json` mediante `translationKey`.
+
 ## 🔑 Cómo se enlaza el texto en HTML
 
 En el HTML se usan atributos `data-i18n` con una clave, por ejemplo:

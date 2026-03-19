@@ -5,6 +5,7 @@ Esta es la guía canónica del tablón dinámico. El contenido se edita en un JS
 ## 📍 Dónde aparece y qué lo pinta
 
 - datos: `data/board.json`
+- textos genéricos del componente: `data/translations.json` (`board.empty`, labels accesibles de adjuntos)
 - renderizado: `js/board.js`
 - estilos: `scss/components/_board.scss`
 - páginas que lo muestran: `index.html` y `eventos.html`
@@ -154,6 +155,7 @@ Consecuencia práctica:
 ## ⚠️ Reglas y precauciones
 
 - Mantén siempre ambos idiomas. Aunque un texto sea casi idéntico, define `es` y `va`.
+- El contenido de cada nota sigue viviendo en `data/board.json`; solo el copy genérico del componente debe ir a `data/translations.json`.
 - El contenido admite HTML simple como `<br>` o `<strong>`, pero úsalo con moderación.
 - No pegues HTML de terceros ni contenido no confiable: el renderizado actual inserta `contenido` como HTML en el DOM.
 - Las rutas de `adjuntos[].url` son relativas a la raíz del sitio público.

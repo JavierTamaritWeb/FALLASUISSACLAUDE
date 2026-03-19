@@ -28,7 +28,10 @@
       "WebFetch(domain:caniuse.com)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:bugs.webkit.org)",
-      "WebFetch(domain:ethanclevenger.com)"
+      "WebFetch(domain:ethanclevenger.com)",
+      "Bash(xxd)",
+      "Bash(sed:*)",
+      "Bash(npm run:*)"
     ]
   }
 }

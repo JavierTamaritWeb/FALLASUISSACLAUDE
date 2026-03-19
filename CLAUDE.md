@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.4.0
+**Version:** 4.5.0
 **Last Updated:** 19 de marzo de 2026
 
 ## Project Overview
@@ -79,7 +79,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Dark Mode** (`js/dark.js`): Applies `.modo-oscuro`/`.modo-claro` classes. CSS uses `::before` pseudo-elements for gradient-to-solid transitions because CSS cannot animate between `linear-gradient` and solid color directly. Background gradient lives on `body::before` to allow opacity cross-fade to black.
 
-**Blog** (`blog.html`, `blog-anima.html`, `blog-somni.html`): `blog.html` is the listing page; `blog-*.html` are individual article pages. Each article page loads its content from `data/translations.json` under the `blog` section. SCSS in `scss/components/_blog.scss` with `.blog` (listing) and `.blog-detail` (article) blocks. `.blog-detail__article` uses the same `::before` gradient overlay pattern as countdown/quieres-mas. Images inside use `z-index: 2` on the figure to stay above the gradient layer.
+**Blog** (`blog.html`, `blog-detail.html`, `js/blog-list.js`, `js/blog-detail.js`): Dynamic blog system. Articles are defined in `data/blog.json` (metadata, sections array) and `data/translations.json` (all translatable text). `blog-list.js` generates cards dynamically on both `blog.html` and `index.html` (the latter with `data-blog-limit="3"`). Featured articles sort first. `blog-detail.html` is a single template page that loads any article via `?slug=` parameter. Adding a new blog post = add entry to `blog.json` + add translations to `translations.json`. SCSS in `scss/components/_blog.scss` with `.blog` (listing) and `.blog-detail` (article) blocks. `.blog-detail__article` uses the same `::before` gradient overlay pattern as countdown/quieres-mas. Images inside use `z-index: 2` on the figure to stay above the gradient layer. SEO trade-off: social previews show generic "Blog | Falla Suïssa" title (scrapers don't execute JS).
 
 **Multi-Language** (`js/lang.js` + `js/initTranslations.js`): Elements use `data-i18n="section.key"` attributes. Loads `data/translations.json` on page load, persists choice to localStorage.
 
@@ -91,7 +91,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` version (4.2.0) is out of sync with the actual release version (4.4.0). The CLAUDE.md version reflects the real release state.
+`package.json` version (4.2.0) is out of sync with the actual release version (4.5.0). The CLAUDE.md version reflects the real release state.
 
 ## Architecture Decisions & Constraints
 
@@ -133,6 +133,12 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 1. Run `npm run generate:og`
 2. Update cache-buster `?v=YYYYMMDD` in ALL HTML files (og:image, twitter:image, image_src)
 3. Run `npm run build` then `npm run test:e2e:full`
+
+### Adding a blog post
+
+1. Add article entry to `data/blog.json` (slug, translationKey, dateISO, featured, sections array)
+2. Add all translatable text to `data/translations.json` under both `es` and `va` (cardTitle, title, lead, date, excerpt, author, back, backAria, ctaAria, content blocks, image alt/caption)
+3. Run `npm run build`
 
 ### Adding a PDF with social preview
 

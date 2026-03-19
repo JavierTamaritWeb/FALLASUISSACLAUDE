@@ -21,8 +21,8 @@ const PAGES = [
   { name: 'eventos', path: '/eventos.html' },
   { name: 'meteo', path: '/meteo.html' },
   { name: 'blog', path: '/blog.html' },
-  { name: 'blog-somni', path: '/blog-somni.html' },
-  { name: 'blog-anima', path: '/blog-anima.html' },
+  { name: 'blog-detail-somni', path: '/blog-detail.html?slug=somni' },
+  { name: 'blog-detail-anima', path: '/blog-detail.html?slug=anima' },
   { name: 'galerias', path: '/galerias.html' },
   { name: 'calendario', path: '/calendario.html' },
   { name: 'mapa', path: '/mapa.html' },
@@ -88,6 +88,14 @@ async function waitForStableFullPageHeight(page, options = {}) {
 
 async function waitForVisualPageReady(page, pageName) {
   await page.waitForLoadState('networkidle');
+
+  if (pageName.startsWith('blog-detail')) {
+    await page.waitForSelector('.blog-detail__article', { timeout: 5000 }).catch(() => {});
+  }
+
+  if (pageName === 'blog' || pageName === 'index') {
+    await page.waitForSelector('.blog__post', { timeout: 5000 }).catch(() => {});
+  }
 
   if (pageName === 'meteo') {
     await expect(page.locator('#langSwitcher')).toContainText('Español');

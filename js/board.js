@@ -7,6 +7,25 @@ window.boardData = null;
 
 const VALID_ADJUNTO_TYPES = new Set(['pdf', 'img']);
 
+function getCurrentBoardLang() {
+  if (typeof currentLang === 'string' && currentLang) {
+    return currentLang;
+  }
+
+  return localStorage.getItem('lang') || 'es';
+}
+
+function getBoardTranslation(key, fallback) {
+  if (typeof translate === 'function') {
+    const translation = translate(key);
+    if (translation && translation !== key) {
+      return translation;
+    }
+  }
+
+  return fallback;
+}
+
 function refreshBoardReveal(root) {
   if (window.scrollReveal && typeof window.scrollReveal.refresh === 'function') {
     window.scrollReveal.refresh(root);
@@ -74,10 +93,11 @@ async function loadBoardData() {
 function renderAdjunto(adj, isMultiple) {
   const iconText = adj.tipo.toUpperCase();
   const nombre = adj.nombre;
+  const actionLabel = adj.tipo === 'pdf'
+    ? getBoardTranslation('board.downloadFile', 'Descargar')
+    : getBoardTranslation('board.viewImage', 'Ver imagen');
 
-  const ariaLabel = adj.tipo === 'pdf'
-    ? `Descargar: ${nombre}`
-    : `Ver imagen: ${nombre}`;
+  const ariaLabel = `${actionLabel}: ${nombre}`;
 
   const linkHTML = `
     <a href="${adj.url}" class="board__file-link"
@@ -102,7 +122,7 @@ function renderAdjunto(adj, isMultiple) {
  * @returns {string} HTML de la nota
  */
 function renderNota(nota) {
-  const lang = window.currentLang || 'es';
+  const lang = getCurrentBoardLang();
   const contenido = nota.contenido[lang] || nota.contenido.es;
   const adjuntosValidos = getAdjuntosValidos(nota.adjuntos, lang);
   const hasAdjuntos = adjuntosValidos.length > 0;
@@ -152,7 +172,8 @@ function renderBoard() {
   const notasActivas = boardData.notas.filter(nota => nota.activo !== false);
 
   if (notasActivas.length === 0) {
-    container.innerHTML = '<p class="board__empty reveal reveal--soft">No hay anuncios en este momento.</p>';
+    const emptyMessage = getBoardTranslation('board.empty', 'No hay anuncios en este momento.');
+    container.innerHTML = `<p class="board__empty reveal reveal--soft">${emptyMessage}</p>`;
     refreshBoardReveal(container);
     return;
   }
@@ -167,6 +188,8 @@ function renderBoard() {
 async function initBoard() {
   await loadBoardData();
   renderBoard();
+
+  document.addEventListener('translationsReady', renderBoard, { once: true });
 }
 
 // Re-renderizar cuando cambia el idioma

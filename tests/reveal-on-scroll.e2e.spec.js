@@ -24,6 +24,7 @@ test.describe('Reveal on scroll global', () => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto('/index.html');
 
+    await page.waitForSelector('.blog__post');
     const blogCard = page.locator('.blog__post').first();
 
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
@@ -104,6 +105,7 @@ test.describe('Reveal on scroll global', () => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/blog.html');
 
+    await page.waitForSelector('.blog__post');
     const blogCard = page.locator('.blog__post').first();
     await expect(blogCard).toBeVisible();
 

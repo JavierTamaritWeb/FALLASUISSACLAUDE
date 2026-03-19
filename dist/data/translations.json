@@ -74,7 +74,7 @@
           "title": "\"Somni\"",
            "lead": "Somni",
           "date": "Publicado en marzo de 2025",
-          "excerpt": "\"Somni\".\nUn día tuvimos un sueño que no sabíamos que compartíamos con más gente. Viviendo en el nuevo barrio de les Moreres y hablando con los vecinos, descubrimos que era un sueño compartido.",
+          "excerpt": "\"Un día tuvimos un sueño que no sabíamos que compartíamos con más gente. Viviendo en el nuevo barrio de les Moreres y hablando con los vecinos, descubrimos que era un sueño compartido.",
           "author": "Autora: Paula Peiró",
           "back": "Volver al blog",
           "backAria": "Volver al listado del blog",
@@ -93,8 +93,19 @@
           "ctaAria": "Abrir el artículo El alma del barrio",
           "content1": "Después de la riada del 57, el Turia se quedó sin río: una herida larga en medio de Valencia. Y la idea oficial en los años sesenta y setenta era clara: hacer una autovía dentro de la ciudad, una \"aorta viaria\". Coches pasando justo por donde hoy juegan los niños, pasean los mayores y las Falleras Mayores se hacen la foto. La ciudad dijo basta. Nació una respuesta que aún resuena: \"El lecho del Turia es nuestro y lo queremos verde\". No era solo ecología. Era una forma de vivir: calle, sombra, banco, conversación. El lecho del río no tenía que separar barrios, sino unirlos.\n\nAquí entra Federico Trénor i Trénor, Barón de Alaquàs. Desde los cargos que ocupaba en el Estado, movió lo necesario para que el lecho del río no acabara asfaltado y se cediera a Valencia. Público, verde, vivo. Esto tiene fecha: 1 de diciembre de 1976. No es un cuento. De ahí nace el Jardín del Turia. Que no es solo \"un parque largo\". Es una victoria vecinal. Hoy es carril bici, pista para correr, banco para desahogarse, lugar donde quedar antes de la Ofrenda. Es donde bajas a coger aire.",
           "content2": "En Les Moreres, justo al lado del lecho, está el Paseo de Federico Trénor, con el busto del Barón. No es decoración, es recordatorio: esto se luchó. Y en el mismo barrio está pasando otra cosa. Ya hay comisión fallera propia, la Alquería del Favero. No viene de una tradición antigua: se ha hecho entre vecinos y todavía sin un casal fijo. Se mueven de un sitio a otro, montan mesas donde pueden, pero tiran adelante igual. No es solo fiesta de marzo, es \"aquí también somos\". Las dos cosas juntas cuentan el mismo mensaje. El Jardín del Turia dice: este espacio es de todos. La falla del barrio dice: esta gente quiere ser barrio y ya lo está siendo. Una cosa cuida el lugar. La otra hace comunidad. Y eso es lo que hace real a Les Moreres: no que alguien de fuera le ponga un nombre, sino que la gente diga \"esto es nuestro\" y se quede a defenderlo. Aunque sin casal propio.",
-          "imageCaption": "Federico Trénor i Trénor, Barón de Alaquàs"
+          "imageCaption": "Federico Trénor i Trénor, Barón de Alaquàs",
+          "imageAlt": "Busto de Federico Trénor i Trénor, Barón de Alaquàs, en el Paseo de Federico Trénor en les Moreres, Valencia"
+        },
+        "error": {
+          "notFound": "Artículo no encontrado",
+          "notFoundDesc": "El artículo que buscas no existe o ha sido eliminado.",
+          "backToBlog": "Volver al blog"
         }
+      },
+      "board": {
+        "empty": "No hay anuncios en este momento.",
+        "downloadFile": "Descargar",
+        "viewImage": "Ver imagen"
       },
       "meteo": {
         "titulo": "Meteo",
@@ -395,8 +406,19 @@
           "ctaAria": "Obrir l’article L’Ànima del barri",
           "content1": "Després de la riuada del 57, el Túria es va quedar sense riu: una ferida llarga al mig de València. I l’idea oficial als anys seixanta i setanta era clara: fer una autovia dins de la ciutat, una \"aorta viària\". Cotxes passant just per on hui juguen els xiquets, passegen els majors i les Falleres Majors es fan la foto. La ciutat va dir prou. Va nàixer una resposta que encara ressona: \"El llit del Túria és nostre i el volem verd\". No era només ecologia. Era una manera de viure: carrer, ombra, banc, conversa. El llit del riu no havia de separar barris, sinó unir-los.\n\nAcí entra Federico Trénor i Trénor, Baró d’Alaquàs. Des dels càrrecs que ocupava a l’Estat, va moure el que calia perquè el llit del riu no acabara asfaltat i es cedira a València. Públic, verd, viu. Açò té data: 1 de desembre de 1976. No és un conte. D’això naix el Jardí del Túria. Que no és només \"un parc llarg\". És una victòria veïnal. Hui és carril bici, pista per a córrer, banc per a desfogar-se, lloc on quedar abans de l’Ofrena. És on baixes a agarrar aire.",
           "content2": "En Les Moreres, just al costat del llit, està el Passeig de Federico Trénor, amb el bust del Baró. No és decoració, és recordatori: açò es va lluitar. I en el mateix barri està passant una altra cosa. Ja hi ha comissió fallera pròpia, l’Alqueria del Favero. No ve d’una tradició antiga: s’ha fet entre veïns i encara sense un casal fix. Es mouen d’un lloc a un altre, munten taules on poden, però tiren avant igual. No és només festa de març, és \"ací també som\". Les dues coses juntes conten el mateix missatge. El Jardí del Túria diu: este espai és de tots. La falla del barri diu: esta gent vol ser barri i ja ho està sent. Una cosa cuida el lloc. L’altra fa comunitat. I això és el que fa real Les Moreres: no que algú de fora li pose un nom, sinó que la gent diga \"açò és nostre\" i es quede a defensar-ho. Encara que sense casal propi.",
-          "imageCaption": "Federico Trénor i Trénor, Baró d’Alaquàs"
+          "imageCaption": "Federico Trénor i Trénor, Baró d’Alaquàs",
+          "imageAlt": "Bust de Federico Trénor i Trénor, Baró d’Alaquàs, al Passeig de Federico Trénor en les Moreres, València"
+        },
+        "error": {
+          "notFound": "Article no trobat",
+          "notFoundDesc": "L’article que busques no existeix o ha estat eliminat.",
+          "backToBlog": "Tornar al blog"
         }
+      },
+      "board": {
+        "empty": "No hi ha anuncis en este moment.",
+        "downloadFile": "Descarregar",
+        "viewImage": "Veure imatge"
       },
       "meteo": {
         "titulo": "Oratge",
