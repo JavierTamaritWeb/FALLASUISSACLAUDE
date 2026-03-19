@@ -98,6 +98,49 @@
   <!-- Hojas de estilo -->
   <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet"  href="css/main.css">
+
+  <!-- Mejoras SEO Estáticas -->
+  <link rel="alternate" hreflang="es" href="https://fallasuissa.es/meteo.html">
+  <link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/meteo.html">
+  <link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/meteo.html">
+
+  <!-- Schema.org Eventos Dinámicos -->
+  <script type="application/ld+json">
+  [
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Cremá",
+    "startDate": "2026-03-20T19:00:00+01:00",
+    "location": {
+      "@type": "Place",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Valencia",
+        "addressRegion": "Comunidad Valenciana",
+        "addressCountry": "ES"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Cremá",
+    "startDate": "2026-03-20T00:00:00+01:00",
+    "location": {
+      "@type": "Place",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Valencia",
+        "addressRegion": "Comunidad Valenciana",
+        "addressCountry": "ES"
+      }
+    }
+  }
+]
+  </script>
 </head>
 <body>
   <header class="header-inner">

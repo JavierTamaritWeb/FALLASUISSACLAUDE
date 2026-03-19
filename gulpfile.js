@@ -128,9 +128,126 @@ function pdfTask() {
   return streamToPromise(src(paths.pdf.src, { encoding: false }).pipe(dest(paths.pdf.dest)));
 }
 
-// HTML - Copia HTML del root (excluye google*.html para evitar colisiones)
-function htmlTask() {
-  return streamToPromise(src(paths.html.src, { encoding: false }).pipe(dest(paths.html.dest)));
+const { Transform } = require('stream');
+
+async function getSchemaEvents() {
+  try {
+    const rawData = await fs.readFile(path.join(__dirname, 'data', 'board.json'), 'utf8');
+    const board = JSON.parse(rawData);
+    const events = [];
+    
+    board.notas.forEach(nota => {
+      if (!nota.activo || !nota.contenido || !nota.contenido.es) return;
+      
+      const text = nota.contenido.es;
+      
+      // Intentar extraer fecha (dd-mm-rrrr) y hora (hh:mm)
+      const dateRegex = /(\d{2})-(\d{2})-(\d{4})(?:\s+(\d{2}:\d{2}))?/;
+      const matchDate = text.match(dateRegex);
+      
+      let startDate = new Date().toISOString();
+      if (matchDate) {
+        const [ , day, month, year, time ] = matchDate;
+        const isoString = `${year}-${month}-${day}T${time ? time + ':00' : '00:00:00'}+01:00`; // Asume CET
+        startDate = isoString;
+      }
+      
+      // Intentar extraer titulo
+      let name = "Evento Falla Suïssa";
+      const nameMatch = text.match(/<br>\s*📝[^<]+<br>\s*(.+?)(?:<br>|$)/);
+      if (nameMatch && nameMatch[1]) {
+        name = nameMatch[1].replace(/<[^>]+>/g, '').trim();
+      } else {
+        const parts = text.split('<br>');
+        if (parts.length > 0) {
+          name = parts[parts.length - 1].replace(/<[^>]+>/g, '').trim();
+        }
+      }
+
+      events.push({
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": name,
+        "startDate": startDate,
+        "location": {
+          "@type": "Place",
+          "name": "Falla Suïssa - L'Alqueria del Favero",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Valencia",
+            "addressRegion": "Comunidad Valenciana",
+            "addressCountry": "ES"
+          }
+        }
+      });
+    });
+    
+    return events;
+  } catch(e) {
+    console.warn('Error procesando board.json Schema:', e);
+    return [];
+  }
+}
+
+function modifyHtmlStream(schemaEventsJSON, lang) {
+  return new Transform({
+    objectMode: true,
+    transform(file, enc, cb) {
+      if (file.isNull()) return cb(null, file);
+      if (file.isStream()) return cb(new Error('Streaming en modifyHtmlStream no soportado'));
+      
+      let html = file.contents.toString('utf8');
+      
+      // 1. Reemplazar etiqueta de idioma principal para la variante en valenciano
+      if (lang === 'ca') {
+        html = html.replace(/<html\s+([^>]*)lang="es"/i, '<html $1lang="ca"');
+        html = html.replace(/<html\s+lang="es"(.*)?>/i, '<html lang="ca"$1>');
+      }
+
+      // 2. Preparar bloque de inyección
+      const fileName = path.basename(file.path);
+      const isIndex = fileName === 'index.html';
+      const mainUrl = `https://fallasuissa.es/${isIndex ? '' : fileName}`;
+      const caUrl = `https://fallasuissa.es/va/${isIndex ? '' : fileName}`;
+      
+      let injections = `
+  <!-- Mejoras SEO Estáticas -->
+  <link rel="alternate" hreflang="es" href="${mainUrl}">
+  <link rel="alternate" hreflang="ca" href="${caUrl}">
+  <link rel="alternate" hreflang="x-default" href="${mainUrl}">\n`;
+
+      if (schemaEventsJSON && schemaEventsJSON !== '[]') {
+         injections += `\n  <!-- Schema.org Eventos Dinámicos -->\n  <script type="application/ld+json">\n  ${schemaEventsJSON}\n  </script>\n`;
+      }
+
+      // 3. Inyectar justo antes del cierre de head
+      html = html.replace('</head>', injections + '</head>');
+      
+      file.contents = Buffer.from(html);
+      cb(null, file);
+    }
+  });
+}
+
+// HTML - Copia HTML del root, parsea Hreflang y compila multi-idioma + Schema
+async function htmlTask() {
+  const events = await getSchemaEvents();
+  const schemaString = JSON.stringify(events, null, 2);
+
+  // Buffer process (no encoding flag para que cargue bin pero el Transform convierte a utf8 y viceversa)
+  const esPromise = streamToPromise(
+    src(paths.html.src)
+      .pipe(modifyHtmlStream(schemaString, 'es'))
+      .pipe(dest(paths.html.dest))
+  );
+
+  const caPromise = streamToPromise(
+    src(paths.html.src)
+      .pipe(modifyHtmlStream(schemaString, 'ca'))
+      .pipe(dest(path.join(paths.html.dest, 'va')))
+  );
+
+  return Promise.all([esPromise, caPromise]);
 }
 
 // Root files - robots/sitemaps/.htaccess/manifest/sw/google-verification/etc

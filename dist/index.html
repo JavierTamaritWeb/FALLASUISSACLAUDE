@@ -193,6 +193,53 @@
   <!-- Hojas de estilo -->
   <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="css/main.css">
+
+  <!-- Preload LCP Images -->
+  <link rel="preload" as="image" href="img/Escudo_falla.avif" type="image/avif" fetchpriority="high">
+  <link rel="preload" as="image" href="img/falla2026.avif" type="image/avif" fetchpriority="high">
+
+  <!-- Mejoras SEO Estáticas -->
+  <link rel="alternate" hreflang="es" href="https://fallasuissa.es/">
+  <link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/">
+  <link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/">
+
+  <!-- Schema.org Eventos Dinámicos -->
+  <script type="application/ld+json">
+  [
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Cremá",
+    "startDate": "2026-03-20T19:00:00+01:00",
+    "location": {
+      "@type": "Place",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Valencia",
+        "addressRegion": "Comunidad Valenciana",
+        "addressCountry": "ES"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Cremá",
+    "startDate": "2026-03-20T00:00:00+01:00",
+    "location": {
+      "@type": "Place",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Valencia",
+        "addressRegion": "Comunidad Valenciana",
+        "addressCountry": "ES"
+      }
+    }
+  }
+]
+  </script>
 </head>
 <body>
 
@@ -331,7 +378,7 @@
                       <img src="img/falla2026.avif" alt="Monumento fallero principal de la Falla Suïssa 2026" loading="eager" decoding="async" fetchpriority="high">
                   </div>
                   <div class="swiper-slide">
-                      <img src="img/falla2026-Infantil.avif" alt="Monumento fallero infantil de la Falla Suïssa 2026" loading="eager" decoding="async">
+                      <img src="img/falla2026-Infantil.avif" alt="Monumento fallero infantil de la Falla Suïssa 2026" loading="lazy" decoding="async">
                     </div>
                     <!-- Hook temporal para la foto real principal 2026; revisar si sigue haciendo falta el próximo ejercicio. -->
                     <div class="swiper-slide swiper-slide--monumento-real">
@@ -341,7 +388,7 @@
                       <img src="img/falla2026-infantil-real.avif" alt="Vista real del monumento fallero infantil de la Falla Suïssa 2026" loading="lazy" decoding="async">
                   </div>
                   <!-- <div class="swiper-slide">
-                    <img src="img/foto_2425_02.avif" alt="Detalle artístico del monumento fallero Falla Suïssa 2025" loading="eager" decoding="async">
+                    <img src="img/foto_2425_02.avif" alt="Detalle artístico del monumento fallero Falla Suïssa 2025" loading="lazy" decoding="async">
                   </div> -->
                 </div>
                 <div class="swiper-pagination"></div>
@@ -833,7 +880,7 @@
     <div class="contenedor">
       <div class="colaboraciones__heading reveal reveal--soft">
         <img class="colaboraciones__imagen" src="img/colaboracion/hope/colaboracion.png"
-             alt="Icono de colaboraciones de la Falla Suïssa" width="64" height="64" loading="eager" decoding="async">
+             alt="Icono de colaboraciones de la Falla Suïssa" width="64" height="64" loading="lazy" decoding="async">
         <h2 class="colaboraciones__heading-texto" data-i18n="colaboraciones.titulo">Colaboraciones</h2>
       </div>
 
@@ -967,14 +1014,12 @@
     <!-- Sección Clima Actual -->
       <div class="weather-current reveal">
         <h2 class="clima-actual" data-i18n="meteo.donde">en Valencia</h2>
-        <img class="current-falleret" src="img/decoracion/falleretPro.svg" alt="Falleret Decorativo" loading="eager">
-        
+        <img class="current-falleret" src="img/decoracion/falleretPro.svg" alt="Falleret Decorativo" loading="lazy">
+
         <div class="current-wrapper">
           <div class="current-content">
               <div class="current-icon">
-                <img id="current-icon-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Icono del estado meteorológico actual" loading="eager" decoding="async" />
-              </div>
-            
+                <img id="current-icon-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Icono del estado meteorológico actual" loading="lazy" decoding="async" />
               
           
           <!-- Información principal -->
