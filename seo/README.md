@@ -63,4 +63,4 @@ Build recomendado:
 
 ---
 
-*Última actualización: 9 de marzo de 2026 - v4.2.16*
+Última actualización: 19 de marzo de 2026 - v4.5.0

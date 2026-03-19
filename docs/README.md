@@ -4,22 +4,22 @@
 
 | Documento | Descripción | Actualización |
 | ----------- | ------------- | --------------- |
-| [`build-and-deploy.md`](./build-and-deploy.md) | Build con Gulp, contenido de `dist/`, despliegue y relación con tests funcionales, visuales y snapshots | 17/03/2026 |
-| [`e2e-testing.md`](./e2e-testing.md) | Estrategia Playwright: smoke suite, banner, modal sobre DOM real, validación HOPE y aislamiento de regresiones visuales | 18/03/2026 |
-| [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar general del sitio, caso especial de `llibret_2026.html` y estrategia WebKit/Firefox | 13/03/2026 |
-| [`structured-data.md`](./structured-data.md) | JSON-LD del sitio, referencias HOPE-INCLIVA y validación de metadatos técnicos | 13/03/2026 |
-| [`architecture-constraints.md`](./architecture-constraints.md) | Constraints de arquitectura que no deben romperse al tocar navegación, banner, modal, gradientes, reveal, blog-detail o el hook temporal del Swiper del monumento | 18/03/2026 |
-| [`scripts-utilities.md`](./scripts-utilities.md) | Scripts utilitarios del repo: OG image, servidor local de `dist/` y migración SCSS | 13/03/2026 |
-| [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter, `og-share.png` y cache-buster `?v=...` | 09/03/2026 |
-| [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación fija, overlay móvil, cierre por Escape/backdrop y layout responsivo | 09/03/2026 |
-| [`global-styles.md`](./global-styles.md) | Estilos globales, gradiente base, reveal on scroll, fondos especiales y notas técnicas del banner | 17/03/2026 |
-| [`i18n-translations.md`](./i18n-translations.md) | Sistema i18n con `data-i18n`, `translations.json`, `translationsReady`, nodos dinámicos y renderizado por párrafos | 18/03/2026 |
-| [`gestion-tablon.md`](./gestion-tablon.md) | Guía canónica del tablón dinámico (`data/board.json`, adjuntos, filtrado de inválidos, validación y troubleshooting) | 18/03/2026 |
-| [`meteo-ui.md`](./meteo-ui.md) | Meteo, animaciones, sincronización con i18n y estabilidad visual | 18/03/2026 |
-| [`google-search-console.md`](./google-search-console.md) | Verificación en Google Search Console | 09/03/2026 |
-| [`robots-configuration.md`](./robots-configuration.md) | Configuración de `robots.txt` y variantes para bots | 09/03/2026 |
-| [`swiper-monumento.md`](./swiper-monumento.md) | Swiper “El Monumento”: anti-cropping, autoheight y hook temporal de la foto real 2026 | 18/03/2026 |
-| [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md) | Checklist anual para cambiar imágenes del monumento y decidir si el hook temporal debe mantenerse o eliminarse | 18/03/2026 |
+| [`build-and-deploy.md`](./build-and-deploy.md) | Build con Gulp, contenido de `dist/`, despliegue y relación con tests funcionales, visuales y snapshots | 19/03/2026 |
+| [`e2e-testing.md`](./e2e-testing.md) | Estrategia Playwright: smoke suite, banner, modal sobre DOM real, validación HOPE y aislamiento de regresiones visuales | 19/03/2026 |
+| [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar general del sitio, caso especial de `llibret_2026.html` y estrategia WebKit/Firefox | 19/03/2026 |
+| [`structured-data.md`](./structured-data.md) | JSON-LD del sitio, referencias HOPE-INCLIVA y validación de metadatos técnicos | 19/03/2026 |
+| [`architecture-constraints.md`](./architecture-constraints.md) | Constraints de arquitectura que no deben romperse al tocar navegación, banner, modal, gradientes, reveal, blog-detail o el hook temporal del Swiper del monumento | 19/03/2026 |
+| [`scripts-utilities.md`](./scripts-utilities.md) | Scripts utilitarios del repo: OG image, servidor local de `dist/` y migración SCSS | 19/03/2026 |
+| [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter, `og-share.png` y cache-buster `?v=...` | 19/03/2026 |
+| [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación fija, overlay móvil, cierre por Escape/backdrop y layout responsivo | 19/03/2026 |
+| [`global-styles.md`](./global-styles.md) | Estilos globales, gradiente base, reveal on scroll, fondos especiales y notas técnicas del banner | 19/03/2026 |
+| [`i18n-translations.md`](./i18n-translations.md) | Sistema i18n con `data-i18n`, `translations.json`, `translationsReady`, nodos dinámicos y renderizado por párrafos | 19/03/2026 |
+| [`gestion-tablon.md`](./gestion-tablon.md) | Guía canónica del tablón dinámico (`data/board.json`, adjuntos, filtrado de inválidos, validación y troubleshooting) | 19/03/2026 |
+| [`meteo-ui.md`](./meteo-ui.md) | Meteo, animaciones, sincronización con i18n y estabilidad visual | 19/03/2026 |
+| [`google-search-console.md`](./google-search-console.md) | Verificación en Google Search Console | 19/03/2026 |
+| [`robots-configuration.md`](./robots-configuration.md) | Configuración de `robots.txt` y variantes para bots | 19/03/2026 |
+| [`swiper-monumento.md`](./swiper-monumento.md) | Swiper “El Monumento”: anti-cropping, autoheight y hook temporal de la foto real 2026 | 19/03/2026 |
+| [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md) | Checklist anual para cambiar imágenes del monumento y decidir si el hook temporal debe mantenerse o eliminarse | 19/03/2026 |
 
 ## 🎯 Documentos por Categoría
 

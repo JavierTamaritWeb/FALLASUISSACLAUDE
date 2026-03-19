@@ -42,10 +42,6 @@ Las comisiones falleras se financian através de:
 - **Web oficial:** https://fallasuissa.es
 - **Redes sociales:** Facebook, Instagram, TikTok, YouTube
 
----
-
-*Última actualización: 15 de enero de 2026*
-
 ### 🎨 ¿Qué es un monumento fallero?
 Un monumento fallero es una construcción artística temporal, generalmente de cartón-piedra, madera y corcho, que representa escenas satíricas, críticas sociales o temas tradicionales. Estos monumentos se queman en La Cremà como culminación de las fiestas.
 
@@ -81,3 +77,7 @@ Reconocidas por la **UNESCO** como Patrimonio Cultural Inmaterial de la Humanida
 
 ### Sostenibilidad
 Las comisiones falleras están adoptando medidas de sostenibilidad ambiental, reciclando materiales y promoviendo prácticas ecológicas en sus actividades.
+
+---
+
+Última actualización: 19 de marzo de 2026 - v4.5.0

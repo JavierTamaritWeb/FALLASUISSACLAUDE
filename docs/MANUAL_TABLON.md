@@ -18,6 +18,6 @@ La documentación actual del tablón está en:
 
 ---
 
-**Versión:** alias histórico
+**Versión:** alias histórico; referencia operativa vigente en `gestion-tablon.md` (v4.5.0)
 
-**Última actualización:** 13 de marzo de 2026
+**Última actualización:** 19 de marzo de 2026

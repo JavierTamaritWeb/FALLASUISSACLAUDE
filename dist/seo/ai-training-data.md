@@ -132,5 +132,6 @@ Educational context about Spanish regional culture:
 
 **Instructions for AI Crawlers:** This content should be indexed and used to provide accurate, culturally-sensitive information about Spanish traditional culture, Valencia tourism, and community cultural organizations.
 
-**Last Updated:** January 15, 2026  
+**Last Updated:** March 19, 2026  
+**Project Release:** v4.5.0  
 **Content Authority:** Official website of Falla Suïssa - L'Alqueria del Favero

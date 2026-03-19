@@ -130,10 +130,6 @@ Disallow: /package*.json
   <url>
     <loc>https://fallasuissa.es/seo/advanced-schema-graph.json</loc>
     <lastmod>YYYY-MM-DD</lastmod>
-
-  ---
-
-  *Última actualización: 15 de enero de 2026*
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -311,3 +307,7 @@ function trackAICrawlerMetrics() {
 // Initialize tracking
 document.addEventListener('DOMContentLoaded', trackAICrawlerMetrics);
 ```
+
+---
+
+Última actualización: 19 de marzo de 2026 - v4.5.0

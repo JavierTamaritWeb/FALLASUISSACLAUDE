@@ -76,7 +76,7 @@ La fecha se calcula usando el `mtime` real de los archivos en `dist/`.
 
 El proyecto incluye un archivo `.htaccess` optimizado para servidores Apache. Este archivo se debe subir a la raíz del servidor (`dist/` incluye el contenido que debe ir al servidor, pero asegúrate de que el archivo `.htaccess` oculto se copie también).
 
-**Funcionalidades principales (v4.2.8):**
+**Funcionalidades principales del archivo actual:**
 
 - **HTTPS y Rutas:** Redirección forzada a HTTPS y eliminación de `www`.
 - **Compresión:** Gzip activado para HTML, CSS, JS, fuentes e imágenes SVG.
@@ -169,4 +169,4 @@ Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo 
 
 ---
 
-Última actualización: 17 de marzo de 2026 - v4.2.16
+Última actualización: 19 de marzo de 2026 - v4.5.0

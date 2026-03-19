@@ -220,10 +220,6 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
 }
 
 trackLocalSEO();
-
----
-
-*Última actualización: 15 de enero de 2026*
 ```
 
 ## 🔍 AI Content Analysis Tools
@@ -258,6 +254,10 @@ function analyzeContentSentiment() {
 // Run sentiment analysis
 document.addEventListener('DOMContentLoaded', analyzeContentSentiment);
 ```
+
+---
+
+Última actualización: 19 de marzo de 2026 - v4.5.0
 
 ### AI-Friendly Content Structure
 ```javascript

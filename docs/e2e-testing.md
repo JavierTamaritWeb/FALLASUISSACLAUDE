@@ -1,6 +1,6 @@
 # 🧪 Tests E2E (Playwright)
 
-**Smoke por defecto: 8 suites** | **Suite completa: 32 suites**
+**Smoke por defecto: 8 suites** | **Suite completa: 33 suites**
 
 Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto, qué validan y qué cobertura mínima se espera cuando cambias SEO técnico, scrollbars, navegación o componentes sensibles.
 

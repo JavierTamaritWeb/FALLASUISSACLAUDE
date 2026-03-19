@@ -264,10 +264,6 @@ const searchConsoleConfig = {
 
 ### Enhanced Structured Data Validation
 
----
-
-*Última actualización: 15 de enero de 2026*
-
 ```javascript
 // Structured Data Validation for AI
 function validateStructuredDataForAI() {
@@ -397,3 +393,7 @@ getLCP(aiPerformanceConfig.trackMetric.bind(aiPerformanceConfig));
 getTTFB(aiPerformanceConfig.trackMetric.bind(aiPerformanceConfig));
 onINP(aiPerformanceConfig.trackMetric.bind(aiPerformanceConfig));
 ```
+
+---
+
+Última actualización: 19 de marzo de 2026 - v4.5.0
