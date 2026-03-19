@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.3.11
-**Last Updated:** 18 de marzo de 2026
+**Version:** 4.4.0
+**Last Updated:** 19 de marzo de 2026
 
 ## Project Overview
 
@@ -35,6 +35,7 @@ npx playwright test tests/nav.e2e.spec.js
 npx playwright test -g "mobile"       # Match by pattern
 npx playwright test --headed           # Visible browser
 npx playwright test --debug            # Debug mode
+PLAYWRIGHT_REUSE_SERVER=true npx playwright test  # Skip server restart (debugging)
 
 # SEO & Open Graph
 npm run seo:dist         # Copy SEO folder to dist/
@@ -59,8 +60,9 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 - **Build**: Gulp 5 + Dart Sass + PostCSS (autoprefixer) + CSSNano + Sharp
 - **Frontend**: HTML5, SCSS (BEM), ES6+ JavaScript modules
-- **Libraries**: Swiper.js (carousels), Flatpickr (dates), DOMPurify
-- **Testing**: Playwright E2E (32 suites in full matrix, 8 smoke suites by default). Smoke suite (`npm run test:e2e`) runs: nav, i18n, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, scss-guardrails
+- **Libraries (CDN)**: Swiper.js v11 (carousels, jsDelivr), Anime.js v3.2.1 (animations, cdnjs), EmailJS v4 (contact form, jsDelivr)
+- **Libraries (npm)**: Flatpickr v4.6.13 (date picker)
+- **Testing**: Playwright E2E (33 suites in full matrix, 8 smoke suites by default). Smoke suite (`npm run test:e2e`) runs: nav, i18n, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, scss-guardrails
 
 ### Directory Structure
 
@@ -77,11 +79,11 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Dark Mode** (`js/dark.js`): Applies `.modo-oscuro`/`.modo-claro` classes. CSS uses `::before` pseudo-elements for gradient-to-solid transitions because CSS cannot animate between `linear-gradient` and solid color directly. Background gradient lives on `body::before` to allow opacity cross-fade to black.
 
-**Blog Detail** (`scss/components/_blog.scss`): `.blog-detail__article` uses the same `::before` gradient overlay pattern. Images inside use `z-index: 2` on the figure to stay above the gradient layer.
+**Blog** (`blog.html`, `blog-anima.html`, `blog-somni.html`): `blog.html` is the listing page; `blog-*.html` are individual article pages. Each article page loads its content from `data/translations.json` under the `blog` section. SCSS in `scss/components/_blog.scss` with `.blog` (listing) and `.blog-detail` (article) blocks. `.blog-detail__article` uses the same `::before` gradient overlay pattern as countdown/quieres-mas. Images inside use `z-index: 2` on the figure to stay above the gradient layer.
 
 **Multi-Language** (`js/lang.js` + `js/initTranslations.js`): Elements use `data-i18n="section.key"` attributes. Loads `data/translations.json` on page load, persists choice to localStorage.
 
-**Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders with DOMPurify sanitization on `eventos.html`.
+**Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders on `eventos.html`.
 
 **Collaborations** (`scss/components/_colaboraciones.scss` + `js/colaboraciones-lightbox.js`): Shared HOPE section on `index.html` and `colaboraciones.html`. Uses a traditional responsive grid (2 columns on mobile, 3 from `768px`), `object-fit: contain`, and an accessible lightbox. Tests: `tests/index-colaboraciones.e2e.spec.js`.
 
@@ -89,7 +91,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` version (4.2.0) is out of sync with the actual release version (4.3.11). The CLAUDE.md version reflects the real release state.
+`package.json` version (4.2.0) is out of sync with the actual release version (4.4.0). The CLAUDE.md version reflects the real release state.
 
 ## Architecture Decisions & Constraints
 
@@ -110,7 +112,7 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
   - **Dark mode image**: Uses `filter: invert(1) hue-rotate(180deg)`. Do NOT use `invert(1)` alone - it turns the red Ajuntament crest green. The `hue-rotate(180deg)` restores red tones after inversion.
   - **Safari fix**: Uses `<picture>` with AVIF/WebP/PNG instead of SVG. Safari WebKit bug ([#246106](https://bugs.webkit.org/show_bug.cgi?id=246106)) prevents CSS `filter` from compositing correctly on SVGs with internal filter elements. Do NOT revert to `<img src="subvencion.svg">`. Size: SVG 289KB -> AVIF 25KB (-91%).
 
-- **Blog-detail image stacking (v4.3.11):** `.blog-detail__figure` necesita `z-index: 2` para quedar por encima del pseudo-elemento `::before` (gradiente azul, z-index: 0) de `.blog-detail__article`. El centrado usa `margin: 1.5rem auto` + `max-width: 48rem` en el figure (no flexbox, que causa problemas con `<picture>`). La imagen usa `display: block; width: 100%`. En móvil el figure pasa a `max-width: 100%`.
+- **Blog-detail image stacking (v4.3.11):** `.blog-detail__figure` needs `z-index: 2` to stay above the `::before` pseudo-element (blue gradient, z-index: 0) of `.blog-detail__article`. Centering uses `margin: 1.5rem auto` + `max-width: 48rem` on the figure (not flexbox, which causes issues with `<picture>`). Image uses `display: block; width: 100%`. On mobile the figure switches to `max-width: 100%`.
 
 ## Common Patterns
 
