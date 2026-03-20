@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-const PAGES = ['index.html', 'lafalla.html', 'eventos.html', 'meteo.html', 'blog.html', 'blog-detail.html?slug=somni'];
+const PAGES = ['index.html', 'lafalla.html', 'eventos.html', 'meteo.html', 'blog.html', 'blog-somni.html', 'blog-anima.html'];
 
 /**
  * Obtiene los estilos del pseudo-elemento ::before de la barra

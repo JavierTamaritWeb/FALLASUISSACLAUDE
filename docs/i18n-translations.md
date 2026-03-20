@@ -23,9 +23,8 @@ Regla práctica del repo:
 
 - `data/translations.json`: UI traducible y copy compartido
 - `data/board.json`: notas del tablón con su `contenido.es` y `contenido.va`
-- `data/blog.json`: estructura, `slug`, `dateISO`, `featured`, `sections` y `translationKey`
 
-Excepción admitida: cuando una entidad usa una plantilla común y necesita copy largo estructurado, puede usar un patrón mixto como el blog actual: metadata en `data/blog.json` y texto en `data/translations.json` mediante `translationKey`.
+El blog usa páginas estáticas individuales (`blog-somni.html`, `blog-anima.html`) con atributos `data-i18n` que apuntan a claves en `data/translations.json` (bajo `blog.somni.*` y `blog.anima.*`). No existe `data/blog.json` desde v4.6.0.
 
 ## 🔑 Cómo se enlaza el texto en HTML
 
@@ -236,4 +235,4 @@ Guía de ejecución: [`e2e-testing.md`](./e2e-testing.md)
 
 ---
 
-Última actualización: 19 de marzo de 2026 - v4.5.0
+Última actualización: 20 de marzo de 2026 - v4.6.1

@@ -309,7 +309,9 @@ npx playwright test tests/monumento-swiper.e2e.spec.js
 npm run test:e2e
 ```
 
-## 9. Blog-detail: stacking de imágenes sobre gradiente
+## 9. Blog estático: stacking de imágenes sobre gradiente
+
+Desde v4.6.0+ el blog usa páginas estáticas individuales (`blog-somni.html`, `blog-anima.html`) en lugar de una plantilla dinámica. Las restricciones de CSS siguen vigentes.
 
 Regla:
 
@@ -333,6 +335,7 @@ Por qué:
 
 Archivos implicados:
 
+- `blog-somni.html`, `blog-anima.html` (páginas estáticas)
 - `scss/components/_blog.scss`
 - `scss/animaciones/_modo-oscuro.scss`
 - `scss/components/_image-optimization.scss`
@@ -365,4 +368,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 19 de marzo de 2026 - v4.5.0
+Última actualización: 20 de marzo de 2026 - v4.6.1

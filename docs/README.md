@@ -55,7 +55,7 @@
 ## 📝 Notas de Mantenimiento
 
 - [`MANUAL_TABLON.md`](./MANUAL_TABLON.md) se mantiene solo como alias histórico. La guía vigente del tablón es [`gestion-tablon.md`](./gestion-tablon.md).
-- La versión funcional documentada del proyecto es `v4.5.0` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.6.1` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta
@@ -80,4 +80,4 @@ Actualiza estas guías cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 19 de marzo de 2026 - v4.5.0*
+*Última actualización: 20 de marzo de 2026 - v4.6.1*

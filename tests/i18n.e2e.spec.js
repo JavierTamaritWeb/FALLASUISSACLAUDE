@@ -18,12 +18,11 @@ test.describe('i18n: sistema de traducciones', () => {
 
     await expect(page.locator('[data-i18n="nav.inicio"]').first()).toHaveText('Inicio');
     await expect(page.locator('[data-i18n="historia.archivos.titulo"]').first()).toHaveText('Archivos');
-    await page.waitForSelector('.blog__post');
     await expect(page.locator('.blog__post').first().locator('[data-i18n="blog.somni.cardTitle"]')).toHaveText('Somni');
-    await expect(page.locator('.blog__post').first().locator('a[href="blog-detail.html?slug=somni"]')).toHaveAttribute('aria-label', 'Abrir el artículo Somni');
-    const animaCardEs = page.locator('.blog__post').filter({ has: page.locator('a[href="blog-detail.html?slug=anima"]') }).first();
+    await expect(page.locator('.blog__post').first().locator('a[href="blog-somni.html"]')).toHaveAttribute('aria-label', 'Abrir el artículo Somni');
+    const animaCardEs = page.locator('.blog__post').filter({ has: page.locator('a[href="blog-anima.html"]') }).first();
     await expect(animaCardEs.locator('[data-i18n="blog.anima.cardTitle"]')).toHaveText('El alma del barrio');
-    await expect(animaCardEs.locator('a[href="blog-detail.html?slug=anima"]')).toHaveAttribute('aria-label', 'Abrir el artículo El alma del barrio');
+    await expect(animaCardEs.locator('a[href="blog-anima.html"]')).toHaveAttribute('aria-label', 'Abrir el artículo El alma del barrio');
 
     await expect(page.locator('[data-i18n="historia.archivos.presentacion"]').first()).toHaveText('Presentación');
     await expect(page.locator('[data-i18n="historia.archivos.fallas2026"]').first()).toHaveText(' Fallas 2026');
@@ -31,15 +30,13 @@ test.describe('i18n: sistema de traducciones', () => {
     await expect(page.locator('[data-i18n="historia.archivos.edicion202526"]').first()).toHaveText('Edición 2025-26');
     await expect(page.locator('a[href="llibret_2026.html"]').first()).toHaveAttribute('aria-label', 'Abrir Llibret digital 2025-2026 en una pestaña nueva');
 
-    await page.goto('/blog-detail.html?slug=somni');
-    await page.waitForSelector('.blog-detail__article');
+    await page.goto('/blog-somni.html');
     await expect(page.locator('[data-i18n="blog.somni.title"]').first()).toHaveText('"Somni"');
     await expect(page.locator('[data-i18n="blog.somni.date"]').first()).toHaveText('Publicado en marzo de 2025');
     await expect(page.locator('[data-i18n="blog.somni.author"]').first()).toHaveText('Autora: Paula Peiró');
     await expect(page.locator('.blog-detail__content p').first()).toContainText('Un día tuvimos un sueño');
 
-    await page.goto('/blog-detail.html?slug=anima');
-    await page.waitForSelector('.blog-detail__article');
+    await page.goto('/blog-anima.html');
     await expect(page.locator('[data-i18n="blog.anima.title"]').first()).toHaveText('"El alma del barrio"');
     await expect(page.locator('[data-i18n="blog.anima.date"]').first()).toHaveText('Publicado en marzo de 2026');
     await expect(page.locator('[data-i18n="blog.anima.author"]').first()).toHaveText('Autor: Javier Tamarit');
@@ -66,12 +63,11 @@ test.describe('i18n: sistema de traducciones', () => {
 
     await expect(page.locator('[data-i18n="nav.inicio"]').first()).toHaveText('Inici');
     await expect(page.locator('[data-i18n="historia.archivos.titulo"]').first()).toHaveText('Arxius');
-    await page.waitForSelector('.blog__post');
     await expect(page.locator('.blog__post').first().locator('[data-i18n="blog.somni.cardTitle"]')).toHaveText('Somni');
-    await expect(page.locator('.blog__post').first().locator('a[href="blog-detail.html?slug=somni"]')).toHaveAttribute('aria-label', "Obrir l'article Somni");
-    const animaCardVa = page.locator('.blog__post').filter({ has: page.locator('a[href="blog-detail.html?slug=anima"]') }).first();
+    await expect(page.locator('.blog__post').first().locator('a[href="blog-somni.html"]')).toHaveAttribute('aria-label', "Obrir l'article Somni");
+    const animaCardVa = page.locator('.blog__post').filter({ has: page.locator('a[href="blog-anima.html"]') }).first();
     await expect(animaCardVa.locator('[data-i18n="blog.anima.cardTitle"]')).toHaveText("L\u2019\u00c0nima del barri");
-    await expect(animaCardVa.locator('a[href="blog-detail.html?slug=anima"]')).toHaveAttribute('aria-label', "Obrir l\u2019article L\u2019\u00c0nima del barri");
+    await expect(animaCardVa.locator('a[href="blog-anima.html"]')).toHaveAttribute('aria-label', "Obrir l\u2019article L\u2019\u00c0nima del barri");
 
     await expect(page.locator('[data-i18n="historia.archivos.presentacion"]').first()).toHaveText('Presentació');
     await expect(page.locator('[data-i18n="historia.archivos.fallas2026"]').first()).toHaveText(' Falles 2026');
@@ -92,15 +88,13 @@ test.describe('i18n: sistema de traducciones', () => {
     await expect(page.locator('[data-i18n="historia.archivos.edicion202526"]').first()).toHaveText('Edició 2025-26');
     await expect(page.locator('a[href="llibret_2026.html"]').first()).toHaveAttribute('aria-label', 'Obrir Llibret digital 2025-2026 en una pestanya nova');
 
-    await page.goto('/blog-detail.html?slug=somni');
-    await page.waitForSelector('.blog-detail__article');
+    await page.goto('/blog-somni.html');
     await expect(page.locator('[data-i18n="blog.somni.title"]').first()).toHaveText('"Somni"');
     await expect(page.locator('[data-i18n="blog.somni.date"]').first()).toHaveText('Publicat el març de 2025');
     await expect(page.locator('[data-i18n="blog.somni.author"]').first()).toHaveText('Autora: Paula Peiró');
     await expect(page.locator('.blog-detail__content p').first()).toContainText('Un dia vam tenir un somni');
 
-    await page.goto('/blog-detail.html?slug=anima');
-    await page.waitForSelector('.blog-detail__article');
+    await page.goto('/blog-anima.html');
     await expect(page.locator('[data-i18n="blog.anima.title"]').first()).toHaveText("\"L\u2019\u00c0nima del barri\"");
     await expect(page.locator('[data-i18n="blog.anima.date"]').first()).toHaveText('Publicat el març de 2026');
     await expect(page.locator('[data-i18n="blog.anima.author"]').first()).toHaveText('Autor: Javier Tamarit');

@@ -31,7 +31,9 @@
       "WebFetch(domain:ethanclevenger.com)",
       "Bash(xxd)",
       "Bash(sed:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(npm version:*)",
+      "Bash(node:*)"
     ]
   }
 }

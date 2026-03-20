@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.5.0
-**Last Updated:** 19 de marzo de 2026
+**Version:** 4.6.1
+**Last Updated:** 20 de marzo de 2026
 
 ## Project Overview
 
@@ -68,7 +68,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 - `scss/` - Modular SCSS (imports order in `main.scss`: abstracts > base > optimization > layout > animaciones > components > sociales)
 - `js/` - ES6+ modules loaded per page
-- `data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-4].json`
+- `data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-4].json` (note: `blog.json` removed in v4.6.0)
 - `dist/` - Generated output (DO NOT edit)
 - `tests/` - Playwright E2E specs
 - `docs/` - Technical docs (Markdown)
@@ -79,9 +79,9 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Dark Mode** (`js/dark.js`): Applies `.modo-oscuro`/`.modo-claro` classes. CSS uses `::before` pseudo-elements for gradient-to-solid transitions because CSS cannot animate between `linear-gradient` and solid color directly. Background gradient lives on `body::before` to allow opacity cross-fade to black.
 
-**Blog** (`blog.html`, `blog-detail.html`, `js/blog-list.js`, `js/blog-detail.js`): Dynamic blog system. Articles are defined in `data/blog.json` (metadata, sections array) and `data/translations.json` (all translatable text). `blog-list.js` generates cards dynamically on both `blog.html` and `index.html` (the latter with `data-blog-limit="3"`). Featured articles sort first. `blog-detail.html` is a single template page that loads any article via `?slug=` parameter. Adding a new blog post = add entry to `blog.json` + add translations to `translations.json`. SCSS in `scss/components/_blog.scss` with `.blog` (listing) and `.blog-detail` (article) blocks. `.blog-detail__article` uses the same `::before` gradient overlay pattern as countdown/quieres-mas. Images inside use `z-index: 2` on the figure to stay above the gradient layer. SEO trade-off: social previews show generic "Blog | Falla Suïssa" title (scrapers don't execute JS).
+**Blog** (`blog.html`, `blog-somni.html`, `blog-anima.html`): Static blog system with per-article SEO. Each article is a standalone HTML page with its own `<title>`, `<meta description>`, Schema.org `BlogPosting`, Open Graph (`og:type=article`, `article:published_time`), and Twitter Card tags. Blog cards on `blog.html` and `index.html` are hardcoded static HTML (no JS rendering). Translatable text uses `data-i18n` attributes loaded from `data/translations.json`. SCSS in `scss/components/_blog.scss` with `.blog` (listing) and `.blog-detail` (article) blocks. `.blog-detail__article` uses the same `::before` gradient overlay pattern as countdown/quieres-mas. Images inside use `z-index: 2` on the figure to stay above the gradient layer. Adding a new blog post = create static HTML page + add translations + add cards to `blog.html` and `index.html` + update `sitemap.xml`.
 
-**Multi-Language** (`js/lang.js` + `js/initTranslations.js`): Elements use `data-i18n="section.key"` attributes. Loads `data/translations.json` on page load, persists choice to localStorage.
+**Multi-Language** (`js/lang.js` + `js/initTranslations.js`): Elements use `data-i18n="section.key"` attributes. Loads `data/translations.json` on page load, persists choice to localStorage. `lang.js` fires `translationsReady` event after load and `langChanged` on switch. Dynamic components (board) must check `window.translations` first; if not ready, listen for `translationsReady` before rendering.
 
 **Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders on `eventos.html`.
 
@@ -91,7 +91,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.5.0).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.1).
 
 ## Architecture Decisions & Constraints
 
@@ -136,9 +136,11 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 
 ### Adding a blog post
 
-1. Add article entry to `data/blog.json` (slug, translationKey, dateISO, featured, sections array)
+1. Create a static HTML page (`blog-{slug}.html`) based on `blog-somni.html` or `blog-anima.html` as template. Include specific SEO: `<title>`, `<meta description>`, Schema.org `BlogPosting` (with headline, datePublished, author), Open Graph (`og:type=article`, `article:published_time`), and Twitter Card tags
 2. Add all translatable text to `data/translations.json` under both `es` and `va` (cardTitle, title, lead, date, excerpt, author, back, backAria, ctaAria, content blocks, image alt/caption)
-3. Run `npm run build`
+3. Add static blog cards to `blog.html` and `index.html` with hrefs pointing to the new page
+4. Add URL to `sitemap.xml`
+5. Run `npm run build`
 
 ### Adding a PDF with social preview
 

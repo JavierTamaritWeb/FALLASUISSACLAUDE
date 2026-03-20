@@ -49,10 +49,16 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fallasuissa.es/blog-detail.html</loc>
-    <lastmod>2026-03-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://fallasuissa.es/blog-somni.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/blog-anima.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/galerias.html</loc>
