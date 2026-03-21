@@ -18,7 +18,7 @@
 
 .video-dron__titulo {
   color: v.$primary-color;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: v.$font-size-medium;
   font-family: v.$font-family;
   font-weight: 700;

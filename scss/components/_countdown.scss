@@ -63,7 +63,7 @@
     font-weight: 600;
     color: v.$dorado;
     font-size: 1.6rem;
-    text-transform: uppercase;
+    text-transform: capitalize;
     padding: .5rem 1rem;
   
     @media (min-width:768px) {

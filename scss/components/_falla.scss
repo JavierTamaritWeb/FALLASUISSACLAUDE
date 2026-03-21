@@ -55,7 +55,7 @@
     color: v.$primary-color;
     font-size: v.$font-size-regular;
     padding: 1rem;
-    text-transform: uppercase;
+    text-transform: capitalize;
     @media (min-width: 768px) {
       font-size: v.$font-size-medium;
       padding-top: 3rem;
@@ -66,7 +66,7 @@
     display: flex;
     align-items: center;
     justify-content: left;
-    text-transform: uppercase;
+    text-transform: capitalize;
     padding-top: 2rem;
   }
 }
@@ -104,7 +104,7 @@
     }
   }
   &__titulo {
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: v.$primary-color;
   }
   @media (max-width: 480px) {
@@ -155,7 +155,7 @@
   &__header {
     padding: 1rem 2rem;
     font-size: 2.4rem;
-    text-transform: uppercase;
+    text-transform: capitalize;
     
     @media (max-width: 767px) {
       font-size: 1.4rem; // Más pequeño para móviles
@@ -264,7 +264,7 @@
           margin: 1rem 0;
           border-left: 4px solid v.$primary-color;
           border-radius: 4px;
-          text-transform: uppercase;
+          text-transform: capitalize;
           @media (max-width: 480px) {
             font-size: 1.5rem;
           }
@@ -347,7 +347,7 @@ p {
   margin: 0 ;
 
   &__titulo {
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: v.$primary-color;
   }
   @media (max-width: 480px) {
@@ -445,7 +445,7 @@ p {
   }
   &__prologo-titulo {
     color: v.$primary-color;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-size: 2.4rem;
     margin-bottom: 1rem;
     padding-top: 2rem;
@@ -481,7 +481,7 @@ p {
     
   }
   &__archivos-titulo {
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: v.$primary-color;
     font-size: 2.4rem;
     margin-bottom: 1rem;
@@ -500,7 +500,7 @@ p {
   }
 
   &__archivos-subtitulo {
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-size: 1.8rem;
     font-weight: 700;
     margin: 2rem 0 1rem;
@@ -615,7 +615,7 @@ p {
     font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
+    text-transform: capitalize;
 
     body.modo-oscuro & {
       background-color: rgba(v.$primary-color, 0.16);
@@ -745,7 +745,7 @@ p {
   margin: 1rem 0;
   border-left: 4px solid v.$primary-color;
   border-radius: 4px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   
   ul {
     list-style: none;
