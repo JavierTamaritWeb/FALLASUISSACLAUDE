@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.3
+**Version:** 4.6.4
 **Last Updated:** 21 de marzo de 2026
 
 ## Project Overview
@@ -69,7 +69,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 - `scss/` - Modular SCSS (imports order in `main.scss`: abstracts > base > optimization > layout > animaciones > components > sociales)
 - `js/` - ES6+ modules loaded per page
-- `data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-4].json` (note: `blog.json` removed in v4.6.0)
+- `data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-6].json` (note: `blog.json` removed in v4.6.0)
 - `dist/` - Generated output (DO NOT edit)
 - `tests/` - Playwright E2E specs
 - `scripts/` - Node utilities: `serve-dist.mjs` (test server), `generate-og-image.mjs` (OG image)
@@ -91,7 +91,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Collaborations** (`scss/components/_colaboraciones.scss` + `js/colaboraciones-lightbox.js`): Shared HOPE section on `index.html` and `colaboraciones.html`. Uses a traditional responsive grid (2 columns on mobile, 3 from `768px`), `object-fit: contain`, and an accessible lightbox. Tests: `tests/index-colaboraciones.e2e.spec.js`.
 
-**Video Drone** (`js/video-dron.js` + `scss/components/_video-dron.scss`): Aerial video player section inside `<main class="falla">` on both `index.html` and `lafalla.html`, placed between the monumento slider and the falleros/nosotros section. Uses a custom poster overlay with play button SVG, and controls for play/pause, restart, and fullscreen. Video source in `img/dron/`. The section uses `reveal reveal--soft` for scroll animation.
+**Video Drone** (`js/video-dron.js` + `scss/components/_video-dron.scss`): Aerial video player section inside `<main class="falla">` on both `index.html` and `lafalla.html`, placed between the monumento slider and the falleros/nosotros section. Uses a custom poster overlay with play button SVG. Controls: play/pause, restart, fullscreen, mute/unmute (with icon toggle), volume slider (pill-shaped wrapper with primary color fill), and progress bar (seekable, full-width). All controls sync between inline and fullscreen players (volume, mute state, progress). Video source in `img/dron/`. The section uses `reveal reveal--soft` for scroll animation.
 
 **Timeline Navigation** (`js/timeline.js` + `scss/components/_timeline.scss`): Lateral progress indicator that shows dots for each `[data-index]` section (skipping hero at index 0). Desktop only (≥768px), hides when hero is visible. Dynamically creates a `<nav class="timeline">` with clickable dots and connector lines. Active dot highlights based on scroll position via IntersectionObserver.
 
@@ -101,7 +101,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.3).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.4).
 
 ## Architecture Decisions & Constraints
 
