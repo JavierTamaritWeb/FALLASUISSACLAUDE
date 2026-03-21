@@ -255,7 +255,7 @@
     </div>
   </div>
 
-  <header class="header">
+  <header class="header" data-index="0">
     
     <div class="header__contenido contenedor">
 
@@ -332,7 +332,7 @@
 
   
  <div class="cuenta-atras-fondo">
-  <section class="countdown" aria-labelledby="countdown-title">
+  <section class="countdown" data-index="1" aria-labelledby="countdown-title">
     <div class="countdown__contenedor">
       <h3 class="countdown__message" id="countdown-title" data-i18n="countdown.message">Cuenta atrás para las Fallas</h3>
       <div class="countdown__clock">
@@ -369,7 +369,7 @@
     <div class="contenedor">
       <h2 class="falla__title" data-i18n="falla.lafalla">La Falla</h2>
 
-        <div class="falla__monumento reveal">
+        <div class="falla__monumento reveal" data-index="2">
             <h3 class="falla__monumento-title" data-i18n="falla.monumento">El Monumento</h3>
             <!-- Slider principal -->
             <div class="swiper swiper--autoheight contenedor" data-testid="monumento-swiper">
@@ -437,7 +437,7 @@
           </div>
         </section>
 
-          <div class="falleros reveal">
+          <div class="falleros reveal" data-index="3">
 
               <h3 class="falleros__titulo" data-i18n="falla.nosotros.titulo">Nosotros</h3>
           
@@ -822,7 +822,7 @@
                 
             </div>
 
-      <div class="historia reveal">
+      <div class="historia reveal" data-index="4">
         <h3 class="historia__titulo" data-i18n="historia.titulo">Historia</h3>
         <div class="historia__prologo">
           <div class="historia__archivos">
@@ -914,7 +914,7 @@
   </main>
 
   <!-- Sección de Colaboraciones -->
-  <section class="colaboraciones">
+  <section class="colaboraciones" data-index="5">
     <div class="contenedor">
       <div class="colaboraciones__heading reveal reveal--soft">
         <img class="colaboraciones__imagen" src="img/colaboracion/hope/colaboracion.png"
@@ -1009,7 +1009,7 @@
   </section>
 
   <!-- Sección de Eventos, Forecast, Blog y Galería (si aplica) -->
-  <section class="eventos">
+  <section class="eventos" data-index="6">
       <div class="contenedor">
         <div class="eventos__heading reveal reveal--soft">
           <img class="eventos__calendario" src="img/Eventos.PNG" alt="Calendario de eventos de la Falla Suïssa" loading="lazy" decoding="async">
@@ -1038,7 +1038,7 @@
     </section>
   <div class="divisor"></div>
 
-  <section class="eltiempo">
+  <section class="eltiempo" data-index="7">
 
     <div class="contenedor">
       <div class="forecast reveal reveal--soft">
@@ -1079,7 +1079,7 @@
   </section>
   
 
-  <section class="blog">
+  <section class="blog" data-index="8">
     <div class="contenedor">
       <div class="blog__titulo">
         <img class="blog__pluma" src="img/pluma.png" alt="Icono decorativo de pluma para blog" loading="lazy" decoding="async" aria-hidden="true">
@@ -1111,7 +1111,7 @@
   </section>
   
 
-  <section class="galerias">
+  <section class="galerias" data-index="9">
     <div class="contenedor">
       <div class="galerias__titulo">
         <img class="galerias__camara" src="img/camara.png" alt="Icono de cámara fotográfica para galerías" loading="lazy" decoding="async">
@@ -1153,7 +1153,7 @@
   </section>
 
   <!-- Sección "¿Quieres saber más sobre nuestra Falla?" -->
-  <section class="quieres-mas">
+  <section class="quieres-mas" data-index="10">
     <div class="quieres-mas__flex contenedor reveal reveal--slow">
       <img class="quieres-mas__imagen" src="img/Preguntar.png" alt="Icono de Preguntar">
       <!-- El enlace tiene un id para poder asignarle el evento de apertura del modal -->
@@ -1272,6 +1272,7 @@
   <script src="js/lang.js"></script>
   <script src="js/nav-menu.js"></script>
   <script src="js/scroll-reveal.js"></script>
+  <script src="js/timeline.js"></script>
   <script src="js/board.js"></script>
   <script src="js/countdown.js"></script>
   <script src="js/acc.js"></script>

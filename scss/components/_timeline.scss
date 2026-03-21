@@ -1,0 +1,120 @@
+// scss/components/_timeline.scss
+// Timeline de navegación lateral - Solo desktop (≥768px)
+
+@use '../abstracts/variables' as v;
+
+// =============================================================================
+// TIMELINE - Navegación lateral fija
+// =============================================================================
+
+.timeline {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  // Ocultar en móvil
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+// Dot individual
+.timeline__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(v.$blanco, 0.3);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+
+  &:hover {
+    border-color: rgba(v.$blanco, 0.6);
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$primary-color;
+    outline-offset: 3px;
+  }
+
+  // Estado activo
+  &.is-active {
+    border-color: v.$primary-color;
+    background: v.$primary-color;
+    box-shadow: 0 0 8px rgba(v.$primary-color, 0.6);
+  }
+}
+
+// Línea conectora entre dots
+.timeline__line {
+  width: 1px;
+  height: 16px;
+  background: rgba(v.$blanco, 0.15);
+}
+
+// Modo oscuro - sin cambios necesarios ya que usa rgba(v.$blanco)
+// Modo claro - ajustar colores para contraste
+.modo-claro .timeline__dot {
+  border-color: rgba(v.$negro, 0.2);
+
+  &:hover {
+    border-color: rgba(v.$negro, 0.4);
+  }
+
+  &.is-active {
+    border-color: v.$primary-color;
+    background: v.$primary-color;
+    box-shadow: 0 0 8px rgba(v.$primary-color, 0.4);
+  }
+}
+
+.modo-claro .timeline__line {
+  background: rgba(v.$negro, 0.1);
+}
+
+// Tablet: dots más pequeños (768px–1024px)
+@media (min-width: 768px) and (max-width: 1024px) {
+  .timeline__dot {
+    width: 7px;
+    height: 7px;
+    min-width: 7px;
+    min-height: 7px;
+    border-width: 1.5px;
+    appearance: none;
+    -webkit-appearance: none;
+
+    &.is-active {
+      box-shadow: 0 0 6px rgba(v.$primary-color, 0.6);
+    }
+  }
+
+  .timeline__line {
+    height: 12px;
+  }
+}
+
+// Accesibilidad: reducir movimiento
+@media (prefers-reduced-motion: reduce) {
+  .timeline {
+    transition: none;
+  }
+
+  .timeline__dot {
+    transition: none;
+  }
+}
