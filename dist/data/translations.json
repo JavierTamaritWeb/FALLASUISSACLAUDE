@@ -45,9 +45,24 @@
             "mapaInteractivo":{
               "texto": "El mapa interactivo de la Falla Suïssa - L'Alqueria del Favero es una herramienta que permite a los visitantes explorar los diferentes puntos de interés de la falla. Incluye información sobre las ubicaciones de los monumentos, las casetas, los actos y otros eventos relacionados con las Fallas. Es una manera fácil y divertida de conocer mejor nuestra falla y participar en las celebraciones."
             }
+        },
+        "videoDron": {
+          "titulo": "Vista Aérea",
+          "play": "Reproducir",
+          "pause": "Pausar",
+          "restart": "Reiniciar",
+          "fullscreen": "Ampliar",
+          "close": "Cerrar",
+          "playAria": "Reproducir vídeo",
+          "pauseAria": "Pausar vídeo",
+          "restartAria": "Reiniciar vídeo desde el principio",
+          "fullscreenAria": "Ver vídeo en pantalla completa",
+          "closeAria": "Cerrar pantalla completa",
+          "videoAria": "Vídeo aéreo de la Falla Suïssa grabado con dron",
+          "fallback": "Tu navegador no soporta la reproducción de vídeo."
         }
       },
-      
+
       "eventos": {
         "titulo": "Eventos",
         "calendario": "Calendario",
@@ -353,6 +368,21 @@
             "mapaInteractivo":{
               "texto": "El mapa interactiu de la Falla Suïssa - L'Alqueria del Favero és una eina que permet als visitants explorar els diferents punts d'interès de la falla. Inclou informació sobre les ubicacions dels monuments, les casetes, els actes i altres esdeveniments relacionats amb les Falles. És una manera fàcil i divertida de conèixer millor la nostra falla i participar en les celebracions."
             }
+        },
+        "videoDron": {
+          "titulo": "Vista Aèria",
+          "play": "Reproduir",
+          "pause": "Pausar",
+          "restart": "Reiniciar",
+          "fullscreen": "Ampliar",
+          "close": "Tancar",
+          "playAria": "Reproduir vídeo",
+          "pauseAria": "Pausar vídeo",
+          "restartAria": "Reiniciar vídeo des del principi",
+          "fullscreenAria": "Veure vídeo en pantalla completa",
+          "closeAria": "Tancar pantalla completa",
+          "videoAria": "Vídeo aeri de la Falla Suïssa gravat amb dron",
+          "fallback": "El teu navegador no suporta la reproducció de vídeo."
         }
       },
 
@@ -607,7 +637,7 @@
         "titulo": "Col·laboracions",
         "hope": {
           "titulo": "HOPE",
-          "texto": "El passat 7 de març, la nostra comissió fallera Suïssa-L'Alqueria del Favero va demostrar que l'esperit faller va molt més enllà de la pólvora i la festa. Perquè quan una falla s'uneix de veritat, és capaç de moure muntanyes.\nVam organitzar una perolà de 'fesols i naps' solidària a favor del Projecte Hope, i cada cullerada servida portava dins quelcom molt més gran que l'arròs: portava esperança. Esperança per a les famílies que lluiten cada dia contra el Limfoma No Hodgkin Pediàtric, esperança per als xiquets i xiquetes que mereixen un futur sense malaltia, esperança perquè la investigació continue avançant i trobe les respostes que tantes famílies necessiten.\nCada plat, cada euro recaptat, cada mà que va col·laborar aquell dia és la prova que la nostra comissió no sols alça monuments al carrer, sinó que també construeix alguna cosa molt més important: solidaritat de veritat, la que es cuina a foc lent i es reparteix entre tots.\nPerquè ser faller és això. És seure junts al voltant d'una taula, compartir allò que som i posar el nostre granet d'arena perquè el món siga una mica millor. I el 7 de març, Suïssa-L'Alqueria del Favero ho va fer amb el cor en la mà i la cullera en l'altra.\nA tots els que vinguéreu, col·laboràreu o simplement compartíreu la paraula: gràcies. Perquè la investigació contra el càncer infantil avança també gràcies a gestos com aquest. Gestos de barri, de falla, de família.\nQue ningú no dubte mai del poder d'una comissió unida. Que ningú no dubte del poder d'una perolà feta amb ànima.\n\bPer Hope. Pels xiquets i xiquetes. Per la nostra falla.\b"
+          "texto": "El passat 7 de març, la nostra comissió fallera Suïssa-L'Alqueria del Favero va demostrar que l'esperit faller va molt més enllà de la pólvora i la festa. Perquè quan una falla s'uneix de veritat, és capaç de moure muntanyes.\nVam organitzar una perolà de 'fesols i naps' solidària a favor del Projecte Hope, i cada cullerada servida portava dins quelcom molt més gran que l'arròs: portava esperança. Esperança per a les famílies que lluiten cada dia contra el Limfoma No Hodgkin Pediàtric, esperança per als xiquets i xiquetes que mereixen un futur sense malaltia, esperança perquè la investigació continue avançant i trobe les respostes que tantes famílies necessiten.\nCada plat, cada euro recaptat, cada mà que va col·laborar aquell dia és la prova que la nostra comissió no sols alça monuments al carrer, sinó que també construeix alguna cosa molt més important: solidaritat de veritat, la que es cuina a foc lent i es reparteix entre tots.\nPerquè ser faller és això. És seure junts al voltant d'una taula, compartir allò que som i posar el nostre granet d'arena perquè el món siga una mica millor. I el 7 de març, Suïssa-L'Alqueria del Favero ho va fer amb el cor en la mà i la cullera en l'altra.\nA tots els que vinguéreu, col·laboràreu o simplement compartíreu la paraula: gràcies. Perquè la investigació contra el càncer infantil avança també gràcies a gestos com aquest. Gestos de barri, de falla, de família.\nQue ningú no dubte mai del poder d'una comissió unida. Que ningú no dubte del poder d'una perolà feta amb ànima.\nPer Hope. Pels xiquets i xiquetes. Per la nostra falla."
         },
         "lightbox": {
           "titulo": "Imatge ampliada de HOPE",

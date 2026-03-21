@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const miBoton = document.querySelector('.boton'); // Asegúrate de que el id o selector sea correcto
+    if (!miBoton) return;
     const colorOriginal = window.getComputedStyle(miBoton).backgroundColor;
   
     // Cambiar el color cuando se presiona el botón

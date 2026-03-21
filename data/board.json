@@ -4,8 +4,8 @@
       "id": "crida-la-punra-2026",
       "activo": true,
       "contenido": {
-        "es": "📌 RECORDATORIO <br> 20-03-2026 19:00 h<br>📝 Cita<br> Cremá",
-        "va": "📌 RECORDATORI <br> 20-03-2026 19:00 h<br>📝 Cita<br> Cremà"
+        "es": "📌 RECORDATORIO <br> 00-00-0000 19:00 h<br>📝 Cita<br> Nueva Cita",
+        "va": "📌 RECORDATORI <br> 00-00-0000 19:00 h<br>📝 Cita<br> Nova Cita"
       },
       "adjuntos": []
     },
@@ -13,8 +13,8 @@
       "id": "crida-valencia-2026",
       "activo": true,
       "contenido": {
-        "es": "📌 RECORDATORIO <br> 20-03-2026 00:00 h<br>📝 Cita<br> Cremá",
-        "va": "📌 RECORDATORI <br> 20-03-2026 00:00 h<br>📝 Cita<br> Cremà"
+        "es": "📌 RECORDATORIO <br> 00-00-0000 00:00 h<br>📝 Cita<br> Nueva Cita",
+        "va": "📌 RECORDATORI <br> 00-00-0000 00:00 h<br>📝 Cita<br> Nova Cita"
       },
       "adjuntos": []
     }

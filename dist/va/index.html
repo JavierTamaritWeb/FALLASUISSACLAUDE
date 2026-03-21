@@ -209,8 +209,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": "Cremá",
-    "startDate": "2026-03-20T19:00:00+01:00",
+    "name": "Nueva Cita",
+    "startDate": "0000-00-00T19:00:00+01:00",
     "location": {
       "@type": "Place",
       "name": "Falla Suïssa - L'Alqueria del Favero",
@@ -225,8 +225,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": "Cremá",
-    "startDate": "2026-03-20T00:00:00+01:00",
+    "name": "Nueva Cita",
+    "startDate": "0000-00-00T00:00:00+01:00",
     "location": {
       "@type": "Place",
       "name": "Falla Suïssa - L'Alqueria del Favero",
@@ -398,6 +398,44 @@
             </div>
         </div>
 
+        <!-- Sección Vídeo de Dron -->
+        <section class="video-dron reveal reveal--soft" aria-labelledby="video-dron-titulo">
+          <h3 class="video-dron__titulo" id="video-dron-titulo" data-i18n="falla.videoDron.titulo">Vista Aérea</h3>
+          <div class="video-dron__frame">
+            <div class="video-dron__video-wrapper">
+              <video id="videoDron" class="video-dron__video"
+                src="img/dron/dron-001-2026.mp4" preload="metadata" playsinline
+                aria-label="Vídeo aéreo de la Falla Suïssa grabado con dron"
+                data-i18n-aria-label="falla.videoDron.videoAria">
+              </video>
+              <button class="video-dron__poster-overlay" id="videoDronPosterPlay"
+                aria-label="Reproducir vídeo"
+                data-i18n-aria-label="falla.videoDron.playAria">
+                <svg class="video-dron__play-icon" viewBox="0 0 70 70" aria-hidden="true">
+                  <circle cx="35" cy="35" r="34" fill="rgba(4,18,35,0.76)" stroke="rgba(255,255,255,0.22)"/>
+                  <polygon points="28,20 28,50 52,35" fill="#fff"/>
+                </svg>
+              </button>
+            </div>
+            <div class="video-dron__controls" role="group" aria-label="Controles de vídeo">
+              <button class="video-dron__btn" id="videoDronPlay"
+                aria-label="Reproducir vídeo" data-i18n-aria-label="falla.videoDron.playAria">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="3,1 3,15 14,8"/></svg>
+                <span data-i18n="falla.videoDron.play">Reproducir</span>
+              </button>
+              <button class="video-dron__btn" id="videoDronRestart"
+                aria-label="Reiniciar vídeo desde el principio" data-i18n-aria-label="falla.videoDron.restartAria">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7h-2a5 5 0 1 1-5-5V0L3 4l5 4V5a3 3 0 0 1 0 6"/></svg>
+                <span data-i18n="falla.videoDron.restart">Reiniciar</span>
+              </button>
+              <button class="video-dron__btn" id="videoDronFullscreenBtn"
+                aria-label="Ver vídeo en pantalla completa" data-i18n-aria-label="falla.videoDron.fullscreenAria">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 1h5V0H0v6h1V1zm14 0h-5V0h6v6h-1V1zM1 15h5v1H0v-6h1v5zm14 0h-5v1h6v-6h-1v5z"/></svg>
+                <span data-i18n="falla.videoDron.fullscreen">Ampliar</span>
+              </button>
+            </div>
+          </div>
+        </section>
 
           <div class="falleros reveal">
 
@@ -577,7 +615,7 @@
                                               </li>
                                                 
                                               <li class="accordion__directiva-delegacion-infantil">
-                                                <span data-i18n="directiva.dinfantil">>Delegación Infantil:</span>
+                                                <span data-i18n="directiva.dinfantil">Delegación Infantil:</span>
                                                 <ul>
                                                   <li>Sara</li>
                                                 </ul>
@@ -1029,12 +1067,11 @@
             <p id="current-feels-like" class="current-info__portada-feels-like" data-i18n="meteo.sensacion" data-i18n-dynamic="true">Sensación: --°C</p>
             <p id="current-minmax" class="current-info__portada-minmax">Mín: --°C / Máx: --°C</p>
           </div>
+          <!-- Detalles adicionales -->
+          <div class="current-details current-details__humedad">
+            <div class="etiqueta-humedad"><strong class="etiqueta-pronostico" data-i18n="meteo.humedad"="">Humedad</strong> <span id="current-humidity">--%</span></div>
           </div>
-        </div>
-        
-        <!-- Detalles adicionales -->
-        <div class="current-details current-details__humedad">
-          <div class="etiqueta-humedad"><strong class="etiqueta-pronostico" data-i18n="meteo.humedad"="">Humedad</strong> <span id="current-humidity">--%</span></div>
+          </div>
         </div>
       </div>
     </div> 
@@ -1157,6 +1194,33 @@
 
     </div>
   </div>
+  <!-- Overlay Fullscreen Vídeo Dron -->
+  <div class="video-dron__fullscreen" id="videoDronFullscreen"
+    role="dialog" aria-modal="true" aria-hidden="true"
+    aria-label="Vídeo en pantalla completa"
+    data-i18n-aria-label="falla.videoDron.fullscreenAria">
+    <button class="video-dron__fullscreen-close" id="videoDronFsClose"
+      aria-label="Cerrar pantalla completa" data-i18n-aria-label="falla.videoDron.closeAria">&times;</button>
+    <div class="video-dron__fullscreen-wrapper">
+      <video id="videoDronFs" class="video-dron__fullscreen-video"
+        src="img/dron/dron-001-2026.mp4" preload="none" playsinline
+        aria-label="Vídeo aéreo de la Falla Suïssa grabado con dron"
+        data-i18n-aria-label="falla.videoDron.videoAria">
+      </video>
+    </div>
+    <div class="video-dron__fullscreen-controls" role="group" aria-label="Controles de vídeo">
+      <button class="video-dron__btn" id="videoDronFsPlay"
+        aria-label="Reproducir vídeo" data-i18n-aria-label="falla.videoDron.playAria">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="3,1 3,15 14,8"/></svg>
+        <span data-i18n="falla.videoDron.play">Reproducir</span>
+      </button>
+      <button class="video-dron__btn" id="videoDronFsRestart"
+        aria-label="Reiniciar vídeo desde el principio" data-i18n-aria-label="falla.videoDron.restartAria">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7h-2a5 5 0 1 1-5-5V0L3 4l5 4V5a3 3 0 0 1 0 6"/></svg>
+        <span data-i18n="falla.videoDron.restart">Reiniciar</span>
+      </button>
+    </div>
+  </div>
   <!-- Frieze Inferior con modificador bordered -->
   <div class="frieze frieze--bordered"></div>
   <!-- Footer -->
@@ -1215,6 +1279,7 @@
   <script src="js/initTranslations.js"></script>
   <script src="js/colaboraciones-lightbox.js"></script>
   <script src="js/accessibility.js"></script>
+  <script src="js/video-dron.js"></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');

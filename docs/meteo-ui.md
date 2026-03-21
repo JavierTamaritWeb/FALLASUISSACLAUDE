@@ -6,6 +6,24 @@ Documentación técnica sobre los componentes visuales de la sección meteoroló
 
 El icono que muestra el estado actual del clima (`#current-icon-img`) tiene comportamientos responsivos y estéticos específicos definidos en `scss/components/_meteo.scss`.
 
+## 🏗️ Estructura del widget en la Home
+
+En `index.html`, el widget meteorológico compacto tiene esta jerarquía:
+
+```html
+<div class="current-wrapper">
+  <div class="current-content">        <!-- flex column, align-items: center -->
+    <div class="current-icon">...</div>
+    <div class="current-info">...</div>
+    <div class="current-details current-details__humedad">
+      <div class="etiqueta-humedad">...</div>
+    </div>
+  </div>
+</div>
+```
+
+La humedad está dentro de `.current-content` para heredar el centrado flex. En `meteo.html`, `.current-details` es un grid independiente con todas las métricas (humedad, presión, viento, nubes, etc.).
+
 ## 🌍 Sincronización con i18n
 
 La sección meteo depende de etiquetas traducidas para construir varios textos dinámicos (`Sensación`, `Mín`, `Máx`, `Viento`, `Nubosidad`, etc.).
@@ -137,4 +155,4 @@ La coordinación actual entre i18n y meteo no es solo un detalle de copy: forma 
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.1
+Última actualización: 20 de marzo de 2026 - v4.6.2

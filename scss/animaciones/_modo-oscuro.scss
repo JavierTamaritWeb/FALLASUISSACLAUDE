@@ -72,7 +72,6 @@ body,
 .galeria__texto,
 .boton,
 .visor,
-.notepad__page,
 // Sección Meteo
 .eltiempo,
 .header-meteo,
@@ -88,6 +87,10 @@ body,
 .calendario-eventos__mini-encabezado,
 .calendario-eventos__mini-dia,
 .calendario-eventos__detalles-mes,
+// Video Dron
+.video-dron__frame,
+.video-dron__frame::before,
+.video-dron__btn,
 // Colaboraciones
 .colaboraciones,
 .colaboraciones::before,
@@ -117,6 +120,14 @@ body,
 .banner-subvencion__contenido,
 .banner-subvencion__cerrar,
 .banner-subvencion__imagen,
+// Galerías (notepad)
+.notepad__page {
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease,
+    background-color var(--theme-transition);
+}
+
 // Navegación móvil
 .navegacion {
   transition:
@@ -328,7 +339,7 @@ body.modo-oscuro .calendario-eventos__mini-encabezado {
 }
 
 body.modo-oscuro .calendario-eventos__mini-dia {
-  background-color: pink;
+  background-color: v.$gris-muy-oscuro;
 }
 
 body.modo-oscuro .calendario-eventos__detalles-mes {
@@ -531,6 +542,21 @@ body.modo-oscuro .falla {
     background-color: rgba(0, 0, 0, 0.85);
   }
 }
+/* ----------------------------------------------
+   MODO OSCURO VIDEO DRON
+------------------------------------------------ */
+body.modo-oscuro .video-dron__frame {
+  border-color: v.$gris-plateado;
+
+  &::before {
+    opacity: 0;
+  }
+}
+
+body.modo-oscuro .video-dron__btn {
+  background: rgba(v.$gris-muy-oscuro, 0.86);
+}
+
 body.modo-oscuro .accordion__section {
     background-color: v.$negro;
 }

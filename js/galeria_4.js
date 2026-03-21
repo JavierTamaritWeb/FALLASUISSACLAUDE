@@ -15,7 +15,7 @@ let pages = []; // Almacenará los <article> generados
 async function loadPages() {
   try {
     const response = await fetch("data/dataPages4.json");
-    if (!response.ok) throw new Error("No se pudo cargar dataPages1.json");
+    if (!response.ok) throw new Error("No se pudo cargar dataPages4.json");
     const data = await response.json();
     createPages(data);
     updateUI();

@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.1
+**Version:** 4.6.2
 **Last Updated:** 20 de marzo de 2026
 
 ## Project Overview
@@ -22,6 +22,7 @@ npm run test:e2e:full    # Run the complete Playwright E2E suite
 npm run test:e2e:visual  # Run visual regression snapshots only
 npm run test:e2e:install # Install Playwright browsers (first time)
 npm run test:e2e:ui      # Interactive smoke test UI
+npm run test:e2e:ui:full # Interactive full test UI
 
 # Individual Gulp tasks
 npx gulp css             # Compile SCSS only
@@ -71,6 +72,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 - `data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-4].json` (note: `blog.json` removed in v4.6.0)
 - `dist/` - Generated output (DO NOT edit)
 - `tests/` - Playwright E2E specs
+- `scripts/` - Node utilities: `serve-dist.mjs` (test server), `generate-og-image.mjs` (OG image)
 - `docs/` - Technical docs (Markdown)
 - `seo/` - Sitemaps, schema, robots variants
 - `pdf/` - PDFs with HTML wrappers for favicon/social preview
@@ -83,15 +85,21 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Multi-Language** (`js/lang.js` + `js/initTranslations.js`): Elements use `data-i18n="section.key"` attributes. Loads `data/translations.json` on page load, persists choice to localStorage. `lang.js` fires `translationsReady` event after load and `langChanged` on switch. Dynamic components (board) must check `window.translations` first; if not ready, listen for `translationsReady` before rendering.
 
+**HTML Build Pipeline** (`gulpfile.js` → `htmlTask`): During build, the HTML task auto-injects into every page: (1) `hreflang` alternate links for `es`/`ca`/`x-default`, and (2) Schema.org `Event` JSON-LD extracted from `data/board.json`. It also generates a `/va/` variant of every page with `lang="ca"`. Sitemap `<lastmod>` values are auto-updated based on file mtimes in `dist/`.
+
 **Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders on `eventos.html`.
 
 **Collaborations** (`scss/components/_colaboraciones.scss` + `js/colaboraciones-lightbox.js`): Shared HOPE section on `index.html` and `colaboraciones.html`. Uses a traditional responsive grid (2 columns on mobile, 3 from `768px`), `object-fit: contain`, and an accessible lightbox. Tests: `tests/index-colaboraciones.e2e.spec.js`.
 
+**Video Drone** (`js/video-dron.js` + `scss/components/_video-dron.scss`): Aerial video player section inside `<main class="falla">` on both `index.html` and `lafalla.html`, placed between the monumento slider and the falleros/nosotros section. Uses a custom poster overlay with play button SVG, and controls for play/pause, restart, and fullscreen. Video source in `img/dron/`. The section uses `reveal reveal--soft` for scroll animation.
+
 **Testing**: Tests serve `dist/` via `scripts/serve-dist.mjs` on `http://127.0.0.1:4173`. Playwright config pre-sets `localStorage` key `bannerSubvencionCerrado=true` to hide the banner in tests. Banner runtime shows on each load of `index.html` unless an automated browser pre-sets that key. Set `PLAYWRIGHT_REUSE_SERVER=true` to skip server restart when debugging.
+
+**Known flaky tests**: Visual regression tests (snapshot mismatches), meteo animation tests (opacity timing), and countdown UI tests (timing-dependent) may intermittently fail. These are known issues, not regressions.
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.1).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.2).
 
 ## Architecture Decisions & Constraints
 

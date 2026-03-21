@@ -91,4 +91,4 @@ Una vez verificado tendrás acceso a:
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.1
+Última actualización: 20 de marzo de 2026 - v4.6.2
