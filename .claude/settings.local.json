@@ -53,7 +53,15 @@
       "Bash(__NEW_LINE_fabea3dd299134a1__ echo:*)",
       "Bash(xxd /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude/data/translations.json)",
       "Bash(python3:*)",
-      "WebFetch(domain:stitch.withgoogle.com)"
+      "WebFetch(domain:stitch.withgoogle.com)",
+      "Bash(claude mcp:*)",
+      "mcp__notebooklm__search_notebooks",
+      "mcp__notebooklm__list_notebooks",
+      "mcp__notebooklm__add_notebook",
+      "mcp__notebooklm__select_notebook",
+      "Bash(/tmp/validate_svg.html:*)",
+      "Read(//tmp/**)",
+      "Bash(find /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude/scss -name *.scss -type f)"
     ]
   }
 }

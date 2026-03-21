@@ -91,6 +91,9 @@ body,
 .video-dron__frame,
 .video-dron__frame::before,
 .video-dron__btn,
+.video-dron__progress,
+.video-dron__volume-wrapper,
+.video-dron__volume,
 // Colaboraciones
 .colaboraciones,
 .colaboraciones::before,
@@ -555,6 +558,41 @@ body.modo-oscuro .video-dron__frame {
 
 body.modo-oscuro .video-dron__btn {
   background: rgba(v.$gris-muy-oscuro, 0.86);
+}
+
+body.modo-oscuro .video-dron__progress {
+  background: rgba(v.$gris-muy-oscuro, 0.5);
+  background-image: linear-gradient(v.$primary-color, v.$primary-color);
+  background-size: var(--progress, 0%) 100%;
+  background-repeat: no-repeat;
+
+  &::-moz-range-progress {
+    background: v.$primary-color;
+  }
+
+  &::-moz-range-track {
+    background: rgba(v.$gris-muy-oscuro, 0.5);
+  }
+}
+
+body.modo-oscuro .video-dron__volume-wrapper {
+  background: rgba(v.$gris-muy-oscuro, 0.86);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.modo-oscuro .video-dron__volume {
+  background: rgba(v.$gris-muy-oscuro, 0.5);
+  background-image: linear-gradient(v.$primary-color, v.$primary-color);
+  background-size: var(--volume, 100%) 100%;
+  background-repeat: no-repeat;
+
+  &::-moz-range-progress {
+    background: v.$primary-color;
+  }
+
+  &::-moz-range-track {
+    background: rgba(v.$gris-muy-oscuro, 0.5);
+  }
 }
 
 body.modo-oscuro .accordion__section {

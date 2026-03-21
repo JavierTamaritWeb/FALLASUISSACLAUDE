@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnPlay = document.getElementById('videoDronPlay');
   const btnRestart = document.getElementById('videoDronRestart');
   const btnFullscreen = document.getElementById('videoDronFullscreenBtn');
+  const btnMute = document.getElementById('videoDronMute');
+  const volumeSlider = document.getElementById('videoDronVolume');
+  const progressBar = document.getElementById('videoDronProgress');
 
   // Elementos fullscreen
   const fullscreen = document.getElementById('videoDronFullscreen');
@@ -15,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const fsClose = document.getElementById('videoDronFsClose');
   const fsBtnPlay = document.getElementById('videoDronFsPlay');
   const fsBtnRestart = document.getElementById('videoDronFsRestart');
+  const fsBtnMute = document.getElementById('videoDronFsMute');
+  const fsVolumeSlider = document.getElementById('videoDronFsVolume');
+  const fsProgressBar = document.getElementById('videoDronFsProgress');
 
   if (!video || !fullscreen) return;
 
@@ -25,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   const iconPlay = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="3,1 3,15 14,8"/></svg>';
   const iconPause = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="2" y="1" width="4" height="14"/><rect x="10" y="1" width="4" height="14"/></svg>';
+
+  // Iconos SVG para alternar silencio/sonido
+  const iconVolume = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z"/><path d="M11 5.5c.7.7.7 2.3 0 3M12.8 3.5c1.4 1.4 1.4 4.6 0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+  const iconMuted = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z" fill="currentColor"/><line x1="11" y1="5" x2="15" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="15" y1="5" x2="11" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 
   // =========================================================================
   // Utilidades
@@ -55,6 +65,56 @@ document.addEventListener('DOMContentLoaded', () => {
       if (svg) svg.outerHTML = iconPlay;
       if (span) span.textContent = getTranslation('falla.videoDron.play') || 'Reproducir';
       btn.setAttribute('aria-label', getTranslation('falla.videoDron.playAria') || 'Reproducir vídeo');
+    }
+  }
+
+  function updateMuteButton(btn, isMuted) {
+    const svg = btn.querySelector('svg');
+    const span = btn.querySelector('span');
+    if (isMuted) {
+      if (svg) svg.outerHTML = iconMuted;
+      if (span) span.textContent = getTranslation('falla.videoDron.unmute') || 'Activar sonido';
+      btn.setAttribute('aria-label', getTranslation('falla.videoDron.unmuteAria') || 'Activar sonido del vídeo');
+    } else {
+      if (svg) svg.outerHTML = iconVolume;
+      if (span) span.textContent = getTranslation('falla.videoDron.mute') || 'Silenciar';
+      btn.setAttribute('aria-label', getTranslation('falla.videoDron.muteAria') || 'Silenciar vídeo');
+    }
+  }
+
+  // Actualiza la barra de progreso con el tiempo actual del vídeo
+  function updateProgress(videoEl, progressEl) {
+    if (videoEl.duration && isFinite(videoEl.duration)) {
+      const pct = (videoEl.currentTime / videoEl.duration) * 100;
+      progressEl.value = pct;
+      progressEl.style.setProperty('--progress', pct + '%');
+    }
+  }
+
+  // Alternar silencio/sonido sincronizando slider
+  function toggleMute(videoEl, btn, slider) {
+    videoEl.muted = !videoEl.muted;
+    updateMuteButton(btn, videoEl.muted);
+    if (videoEl.muted) {
+      slider.value = 0;
+      slider.style.setProperty('--volume', '0%');
+    } else {
+      slider.value = videoEl.volume * 100;
+      slider.style.setProperty('--volume', (videoEl.volume * 100) + '%');
+    }
+  }
+
+  // Cambiar volumen desde el slider
+  function changeVolume(videoEl, btn, value) {
+    videoEl.volume = value / 100;
+    videoEl.muted = value === 0;
+    updateMuteButton(btn, videoEl.muted);
+  }
+
+  // Buscar en el vídeo al hacer clic/arrastrar la barra de progreso
+  function seekVideo(videoEl, value) {
+    if (videoEl.duration && isFinite(videoEl.duration)) {
+      videoEl.currentTime = (value / 100) * videoEl.duration;
     }
   }
 
@@ -113,6 +173,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Barra de progreso inline
+  video.addEventListener('timeupdate', () => {
+    updateProgress(video, progressBar);
+  });
+
+  progressBar.addEventListener('input', () => {
+    seekVideo(video, progressBar.value);
+    progressBar.style.setProperty('--progress', progressBar.value + '%');
+  });
+
+  // Botón silenciar inline
+  btnMute.addEventListener('click', () => {
+    toggleMute(video, btnMute, volumeSlider);
+  });
+
+  // Slider de volumen inline
+  volumeSlider.addEventListener('input', () => {
+    const val = Number(volumeSlider.value);
+    changeVolume(video, btnMute, val);
+    volumeSlider.style.setProperty('--volume', val + '%');
+  });
+
+  // Inicializar sliders
+  volumeSlider.style.setProperty('--volume', '100%');
+  progressBar.style.setProperty('--progress', '0%');
+
   // =========================================================================
   // Fullscreen lightbox
   // =========================================================================
@@ -131,6 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
     fsVideo.play();
     updatePlayButton(fsBtnPlay, true);
 
+    // Sincronizar volumen y estado de silencio
+    fsVideo.volume = video.volume;
+    fsVideo.muted = video.muted;
+    fsVolumeSlider.value = video.muted ? 0 : video.volume * 100;
+    fsVolumeSlider.style.setProperty('--volume', (fsVideo.muted ? 0 : fsVideo.volume * 100) + '%');
+    updateMuteButton(fsBtnMute, fsVideo.muted);
+
     requestAnimationFrame(() => {
       fsClose.focus();
     });
@@ -140,6 +233,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sincronizar tiempo de vuelta
     video.currentTime = fsVideo.currentTime;
     fsVideo.pause();
+
+    // Sincronizar volumen de vuelta
+    video.volume = fsVideo.volume;
+    video.muted = fsVideo.muted;
+    volumeSlider.value = fsVideo.muted ? 0 : fsVideo.volume * 100;
+    volumeSlider.style.setProperty('--volume', (video.muted ? 0 : video.volume * 100) + '%');
+    updateMuteButton(btnMute, video.muted);
 
     fullscreen.classList.remove('open');
     fullscreen.setAttribute('aria-hidden', 'true');
@@ -193,6 +293,32 @@ document.addEventListener('DOMContentLoaded', () => {
       updatePlayButton(fsBtnPlay, false);
     }
   });
+
+  // Barra de progreso fullscreen
+  fsVideo.addEventListener('timeupdate', () => {
+    updateProgress(fsVideo, fsProgressBar);
+  });
+
+  fsProgressBar.addEventListener('input', () => {
+    seekVideo(fsVideo, fsProgressBar.value);
+    fsProgressBar.style.setProperty('--progress', fsProgressBar.value + '%');
+  });
+
+  // Botón silenciar fullscreen
+  fsBtnMute.addEventListener('click', () => {
+    toggleMute(fsVideo, fsBtnMute, fsVolumeSlider);
+  });
+
+  // Slider de volumen fullscreen
+  fsVolumeSlider.addEventListener('input', () => {
+    const val = Number(fsVolumeSlider.value);
+    changeVolume(fsVideo, fsBtnMute, val);
+    fsVolumeSlider.style.setProperty('--volume', val + '%');
+  });
+
+  // Inicializar sliders fullscreen
+  fsVolumeSlider.style.setProperty('--volume', '100%');
+  fsProgressBar.style.setProperty('--progress', '0%');
 
   // Escape para cerrar
   document.addEventListener('keydown', (e) => {

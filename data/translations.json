@@ -59,7 +59,13 @@
           "fullscreenAria": "Ver vídeo en pantalla completa",
           "closeAria": "Cerrar pantalla completa",
           "videoAria": "Vídeo aéreo de la Falla Suïssa grabado con dron",
-          "fallback": "Tu navegador no soporta la reproducción de vídeo."
+          "fallback": "Tu navegador no soporta la reproducción de vídeo.",
+          "mute": "Silenciar",
+          "unmute": "Activar sonido",
+          "muteAria": "Silenciar vídeo",
+          "unmuteAria": "Activar sonido del vídeo",
+          "volumeAria": "Volumen del vídeo",
+          "progressAria": "Progreso del vídeo"
         }
       },
 
@@ -150,7 +156,11 @@
         "galeria3-note1": "Imagen de la firma del contrato Monumento 2025-26",
         "galeria3-note2": "Fin",
         "galeria4": "Proclamación 2025-26",
-        "galeria4-texto": "Galería de imágenes de la Proclamación 2025-26"
+        "galeria4-texto": "Galería de imágenes de la Proclamación 2025-26",
+        "galeria5": "Ofrenda de Frutos 2025-26",
+        "galeria5-texto": "Galería de imágenes de la Ofrenda de Frutos 2025-26",
+        "galeria6": "Cremá 2025-26",
+        "galeria6-texto": "Galería de imágenes de la Cremà 2025-26"
       },
       "calendario":{
         "titulo": "Calendario",
@@ -382,7 +392,13 @@
           "fullscreenAria": "Veure vídeo en pantalla completa",
           "closeAria": "Tancar pantalla completa",
           "videoAria": "Vídeo aeri de la Falla Suïssa gravat amb dron",
-          "fallback": "El teu navegador no suporta la reproducció de vídeo."
+          "fallback": "El teu navegador no suporta la reproducció de vídeo.",
+          "mute": "Silenciar",
+          "unmute": "Activar so",
+          "muteAria": "Silenciar vídeo",
+          "unmuteAria": "Activar so del vídeo",
+          "volumeAria": "Volum del vídeo",
+          "progressAria": "Progrés del vídeo"
         }
       },
 
@@ -474,7 +490,11 @@
         "galeria3-note1": "Imatge de la signatura del contracte del Monument 2025-26",
         "galeria3-note2": "Fi",
         "galeria4": "Proclamació 2025-26",
-        "galeria4-texto": "Galeria d'imatges de la Proclamació 2025-26"
+        "galeria4-texto": "Galeria d'imatges de la Proclamació 2025-26",
+        "galeria5": "Ofrena de Fruits 2025-26",
+        "galeria5-texto": "Galeria d'imatges de l'Ofrena de Fruits 2025-26",
+        "galeria6": "Cremà 2025-26",
+        "galeria6-texto": "Galeria d'imatges de la Cremà 2025-26"
       },
       "calendario":{
         "titulo": "Calendari",

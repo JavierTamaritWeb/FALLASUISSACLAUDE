@@ -252,7 +252,7 @@
       </div>
       
       <div class="header__grid">
-        <h1 class="header__title"><span>Falla </span>Suïssa - L'Alqueria del Favero</h1>
+        <h1 class="header__title"><span>Falla </span>Suïssa - L'Alqueria <span style="text-transform: lowercase">del</span> Favero</h1>
         <picture>
           <source srcset="img/Escudo_falla.avif" type="image/avif">
           <source srcset="img/Escudo_falla.webp" type="image/webp">
@@ -373,6 +373,13 @@
                 </svg>
               </button>
             </div>
+            <!-- Barra de progreso -->
+            <div class="video-dron__progress-container">
+              <input type="range" class="video-dron__progress" id="videoDronProgress"
+                min="0" max="100" value="0" step="0.1"
+                aria-label="Progreso del vídeo"
+                data-i18n-aria-label="falla.videoDron.progressAria">
+            </div>
             <div class="video-dron__controls" role="group" aria-label="Controles de vídeo">
               <button class="video-dron__btn" id="videoDronPlay"
                 aria-label="Reproducir vídeo" data-i18n-aria-label="falla.videoDron.playAria">
@@ -389,6 +396,17 @@
                 <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 1h5V0H0v6h1V1zm14 0h-5V0h6v6h-1V1zM1 15h5v1H0v-6h1v5zm14 0h-5v1h6v-6h-1v5z"/></svg>
                 <span data-i18n="falla.videoDron.fullscreen">Ampliar</span>
               </button>
+              <button class="video-dron__btn" id="videoDronMute"
+                aria-label="Silenciar vídeo" data-i18n-aria-label="falla.videoDron.muteAria">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z"/><path d="M11 5.5c.7.7.7 2.3 0 3M12.8 3.5c1.4 1.4 1.4 4.6 0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span data-i18n="falla.videoDron.mute">Silenciar</span>
+              </button>
+              <div class="video-dron__volume-wrapper">
+                <input type="range" class="video-dron__volume" id="videoDronVolume"
+                  min="0" max="100" value="100" step="1"
+                  aria-label="Volumen del vídeo"
+                  data-i18n-aria-label="falla.videoDron.volumeAria">
+              </div>
             </div>
           </div>
         </section>
@@ -1100,7 +1118,21 @@
           <img class="galeria__imagen galeria__foto-mini" src="img/proclamacion/Proclamacion_12.jpg" alt="Proclamación de representantes - Valencia 2025" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria4-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
           <a class="boton" href="galeria_4.html" data-i18n="ver">Ver más</a>
-  
+
+        </div>
+        <div class="galeria reveal reveal--soft">
+          <h3 class="galeria__title" data-i18n="galeria.galeria5">Ofrenda de Frutos 2025-26</h3>
+          <img class="galeria__imagen galeria__foto-mini" src="img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-001.jpeg" alt="Ofrenda de Frutos 2025-26 - Falla Suïssa" loading="lazy" decoding="async">
+          <p class="galeria__texto" data-i18n="galeria.galeria5-texto">Galería de imágenes de la Ofrenda de Frutos 2025-26</p>
+          <a class="boton" href="galeria_5.html" data-i18n="ver">Ver más</a>
+
+        </div>
+        <div class="galeria reveal reveal--soft">
+          <h3 class="galeria__title" data-i18n="galeria.galeria6">Cremà 2025-26</h3>
+          <img class="galeria__imagen galeria__foto-mini" src="img/crema/crema-2026/crema-2026-001.jpeg" alt="Cremà 2025-26 - Falla Suïssa" loading="lazy" decoding="async">
+          <p class="galeria__texto" data-i18n="galeria.galeria6-texto">Galería de imágenes de la Cremà 2025-26</p>
+          <a class="boton" href="galeria_6.html" data-i18n="ver">Ver más</a>
+
         </div>
       </div>
     </div>
@@ -1164,6 +1196,13 @@
         data-i18n-aria-label="falla.videoDron.videoAria">
       </video>
     </div>
+    <!-- Barra de progreso fullscreen -->
+    <div class="video-dron__progress-container video-dron__progress-container--fs">
+      <input type="range" class="video-dron__progress" id="videoDronFsProgress"
+        min="0" max="100" value="0" step="0.1"
+        aria-label="Progreso del vídeo"
+        data-i18n-aria-label="falla.videoDron.progressAria">
+    </div>
     <div class="video-dron__fullscreen-controls" role="group" aria-label="Controles de vídeo">
       <button class="video-dron__btn" id="videoDronFsPlay"
         aria-label="Reproducir vídeo" data-i18n-aria-label="falla.videoDron.playAria">
@@ -1175,6 +1214,17 @@
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7h-2a5 5 0 1 1-5-5V0L3 4l5 4V5a3 3 0 0 1 0 6"/></svg>
         <span data-i18n="falla.videoDron.restart">Reiniciar</span>
       </button>
+      <button class="video-dron__btn" id="videoDronFsMute"
+        aria-label="Silenciar vídeo" data-i18n-aria-label="falla.videoDron.muteAria">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z"/><path d="M11 5.5c.7.7.7 2.3 0 3M12.8 3.5c1.4 1.4 1.4 4.6 0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span data-i18n="falla.videoDron.mute">Silenciar</span>
+      </button>
+      <div class="video-dron__volume-wrapper">
+        <input type="range" class="video-dron__volume" id="videoDronFsVolume"
+          min="0" max="100" value="100" step="1"
+          aria-label="Volumen del vídeo"
+          data-i18n-aria-label="falla.videoDron.volumeAria">
+      </div>
     </div>
   </div>
   <!-- Frieze Inferior con modificador bordered -->

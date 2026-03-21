@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.2
-**Last Updated:** 20 de marzo de 2026
+**Version:** 4.6.3
+**Last Updated:** 21 de marzo de 2026
 
 ## Project Overview
 
@@ -93,13 +93,15 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Video Drone** (`js/video-dron.js` + `scss/components/_video-dron.scss`): Aerial video player section inside `<main class="falla">` on both `index.html` and `lafalla.html`, placed between the monumento slider and the falleros/nosotros section. Uses a custom poster overlay with play button SVG, and controls for play/pause, restart, and fullscreen. Video source in `img/dron/`. The section uses `reveal reveal--soft` for scroll animation.
 
+**Timeline Navigation** (`js/timeline.js` + `scss/components/_timeline.scss`): Lateral progress indicator that shows dots for each `[data-index]` section (skipping hero at index 0). Desktop only (≥768px), hides when hero is visible. Dynamically creates a `<nav class="timeline">` with clickable dots and connector lines. Active dot highlights based on scroll position via IntersectionObserver.
+
 **Testing**: Tests serve `dist/` via `scripts/serve-dist.mjs` on `http://127.0.0.1:4173`. Playwright config pre-sets `localStorage` key `bannerSubvencionCerrado=true` to hide the banner in tests. Banner runtime shows on each load of `index.html` unless an automated browser pre-sets that key. Set `PLAYWRIGHT_REUSE_SERVER=true` to skip server restart when debugging.
 
 **Known flaky tests**: Visual regression tests (snapshot mismatches), meteo animation tests (opacity timing), and countdown UI tests (timing-dependent) may intermittently fail. These are known issues, not regressions.
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.2).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.3).
 
 ## Architecture Decisions & Constraints
 
