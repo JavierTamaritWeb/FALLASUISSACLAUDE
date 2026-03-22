@@ -94,6 +94,9 @@ body,
 .video-dron__progress,
 .video-dron__volume-wrapper,
 .video-dron__volume,
+// Ofrenda
+.ofrenda,
+.ofrenda::before,
 // Colaboraciones
 .colaboraciones,
 .colaboraciones::before,
@@ -895,6 +898,15 @@ body.modo-oscuro .notepad__page {
 ------------------------------------------------ */
 body.modo-oscuro .quieres-mas {
   // El color base ya está en el elemento, solo desvanecemos el gradiente
+  &::before {
+    opacity: 0;
+  }
+}
+
+/* ----------------------------------------------
+   MODO OSCURO OFRENDA
+------------------------------------------------ */
+body.modo-oscuro .ofrenda {
   &::before {
     opacity: 0;
   }

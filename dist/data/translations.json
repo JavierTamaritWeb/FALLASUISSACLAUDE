@@ -69,6 +69,32 @@
         }
       },
 
+      "ofrenda": {
+        "titulo": "Ofrenda",
+        "subtitulo": "A la Virgen de los Desamparados",
+        "fullscreen": "Ampliar",
+        "fullscreenAria": "Ver vídeo en pantalla completa",
+        "close": "Cerrar",
+        "closeAria": "Cerrar pantalla completa",
+        "fmAlt": "Fallera Mayor de la Falla Suïssa en la Ofrenda Floral 2025-26",
+        "fmmAlt": "Fallera Mayor y acompañamiento en la Ofrenda Floral 2025-26",
+        "generalAlt": "Ofrenda Floral a la Virgen de los Desamparados 2025-26",
+        "ampliarAria": "Abrir imagen ampliada",
+        "videoAria": "Vídeo de la Ofrenda Floral 2025-26 de la Falla Suïssa",
+        "play": "Reproducir",
+        "pause": "Pausar",
+        "restart": "Reiniciar",
+        "playAria": "Reproducir vídeo",
+        "pauseAria": "Pausar vídeo",
+        "restartAria": "Reiniciar vídeo desde el principio",
+        "mute": "Silenciar",
+        "unmute": "Activar sonido",
+        "muteAria": "Silenciar vídeo",
+        "unmuteAria": "Activar sonido del vídeo",
+        "volumeAria": "Volumen del vídeo",
+        "progressAria": "Progreso del vídeo"
+      },
+
       "eventos": {
         "titulo": "Eventos",
         "calendario": "Calendario",
@@ -400,6 +426,32 @@
           "volumeAria": "Volum del vídeo",
           "progressAria": "Progrés del vídeo"
         }
+      },
+
+      "ofrenda": {
+        "titulo": "Ofrena",
+        "subtitulo": "A la Mare de Déu dels Desemparats",
+        "fullscreen": "Ampliar",
+        "fullscreenAria": "Veure vídeo en pantalla completa",
+        "close": "Tancar",
+        "closeAria": "Tancar pantalla completa",
+        "fmAlt": "Fallera Major de la Falla Suïssa en l'Ofrena Floral 2025-26",
+        "fmmAlt": "Fallera Major i acompanyament en l'Ofrena Floral 2025-26",
+        "generalAlt": "Ofrena Floral a la Mare de Déu dels Desemparats 2025-26",
+        "ampliarAria": "Obrir imatge ampliada",
+        "videoAria": "Vídeo de l'Ofrena Floral 2025-26 de la Falla Suïssa",
+        "play": "Reproduir",
+        "pause": "Pausar",
+        "restart": "Reiniciar",
+        "playAria": "Reproduir vídeo",
+        "pauseAria": "Pausar vídeo",
+        "restartAria": "Reiniciar vídeo des del principi",
+        "mute": "Silenciar",
+        "unmute": "Activar so",
+        "muteAria": "Silenciar vídeo",
+        "unmuteAria": "Activar so del vídeo",
+        "volumeAria": "Volum del vídeo",
+        "progressAria": "Progrés del vídeo"
       },
 
       "eventos": {

@@ -61,7 +61,8 @@
       "mcp__notebooklm__select_notebook",
       "Bash(/tmp/validate_svg.html:*)",
       "Read(//tmp/**)",
-      "Bash(find /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude/scss -name *.scss -type f)"
+      "Bash(find /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude/scss -name *.scss -type f)",
+      "Bash(lsof -ti:4173)"
     ]
   }
 }
