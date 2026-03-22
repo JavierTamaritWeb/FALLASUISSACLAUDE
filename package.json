@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "gulp",
     "build": "gulp build",
+    "prepare": "node scripts/install-git-hooks.mjs",
+    "git:check-large-files": "node scripts/check-git-file-size.mjs --scope=unpushed",
+    "git:check-staged-large-files": "node scripts/check-git-file-size.mjs --scope=staged",
     "seo:dist": "gulp seoDist",
     "test:e2e": "playwright test -c playwright.smoke.config.js",
     "test:e2e:full": "playwright test",
