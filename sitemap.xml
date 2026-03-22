@@ -103,6 +103,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://fallasuissa.es/ofrenda.html</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://fallasuissa.es/calendario.html</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>

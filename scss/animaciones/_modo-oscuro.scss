@@ -908,7 +908,7 @@ body.modo-oscuro .quieres-mas {
 ------------------------------------------------ */
 body.modo-oscuro .ofrenda {
   &::before {
-    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.85);
   }
 }
 

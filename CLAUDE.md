@@ -3,7 +3,7 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 **Version:** 4.6.4
-**Last Updated:** 21 de marzo de 2026
+**Last Updated:** 22 de marzo de 2026
 
 ## Project Overview
 
@@ -63,7 +63,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 - **Frontend**: HTML5, SCSS (BEM), ES6+ JavaScript modules
 - **Libraries (CDN)**: Swiper.js v11 (carousels, jsDelivr), Anime.js v3.2.1 (animations, cdnjs), EmailJS v4 (contact form, jsDelivr)
 - **Libraries (npm)**: Flatpickr v4.6.13 (date picker)
-- **Testing**: Playwright E2E (33 suites in full matrix, 8 smoke suites by default). Smoke suite (`npm run test:e2e`) runs: nav, i18n, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, scss-guardrails
+- **Testing**: Playwright E2E (33 suites in full matrix, 8 smoke suites by default, 80 tests). Smoke suite (`npm run test:e2e`) runs: nav, i18n, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, scss-guardrails
 
 ### Directory Structure
 
@@ -92,6 +92,8 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 **Collaborations** (`scss/components/_colaboraciones.scss` + `js/colaboraciones-lightbox.js`): Shared HOPE section on `index.html` and `colaboraciones.html`. Uses a traditional responsive grid (2 columns on mobile, 3 from `768px`), `object-fit: contain`, and an accessible lightbox. Tests: `tests/index-colaboraciones.e2e.spec.js`.
 
 **Video Drone** (`js/video-dron.js` + `scss/components/_video-dron.scss`): Aerial video player section inside `<main class="falla">` on both `index.html` and `lafalla.html`, placed between the monumento slider and the falleros/nosotros section. Uses a custom poster overlay with play button SVG. Controls: play/pause, restart, fullscreen, mute/unmute (with icon toggle), volume slider (pill-shaped wrapper with primary color fill), and progress bar (seekable, full-width). All controls sync between inline and fullscreen players (volume, mute state, progress). Video source in `img/dron/`. The section uses `reveal reveal--soft` for scroll animation.
+
+**Ofrenda** (`scss/components/_ofrenda.scss` + `js/ofrenda-video.js` + `ofrenda.html`): Section on `index.html` (between "La Falla" and "Colaboraciones") and dedicated inner page `ofrenda.html`. Dedicated to the Ofrenda Floral a la Virgen de los Desamparados. Contains a 3-image gallery (grid, `aspect-ratio: 3/4`, images use `position: absolute` on `.ofrenda__figura` — see Architecture Constraints) with lightbox via `.colaboraciones-mosaic__trigger` class (reuses existing lightbox JS). Also contains a video player with full controls (same pattern as video-dron: play/pause, restart, fullscreen with overlay, mute, volume, progress bar). Background uses `fondo_traje.png` with `::before` overlay `rgba(245,245,245,0.85)` (same pattern as `.falla`), dark mode transitions to `rgba(0,0,0,0.85)`. Navigation includes "Ofrenda" link between "La Falla" and "Colaboraciones" (`nav.ofrenda`). Sections separated by `<hr class="seccion-hr">` (visible only on desktop ≥768px).
 
 **Timeline Navigation** (`js/timeline.js` + `scss/components/_timeline.scss`): Lateral progress indicator that shows dots for each `[data-index]` section (skipping hero at index 0). Desktop only (≥768px), hides when hero is visible. Dynamically creates a `<nav class="timeline">` with clickable dots and connector lines. Active dot highlights based on scroll position via IntersectionObserver.
 

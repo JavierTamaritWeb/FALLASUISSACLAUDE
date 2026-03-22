@@ -3,6 +3,7 @@
       "nav": {
         "inicio": "Inicio",
         "lafalla": "La Falla",
+        "ofrenda": "Ofrenda",
         "eventos": "Eventos",
         "blog": "Blog",
         "meteo": "Meteo",
@@ -362,6 +363,7 @@
       "nav": {
         "inicio": "Inici",
         "lafalla": "La Falla",
+        "ofrenda": "Ofrena",
         "eventos": "Esdeveniments",
         "blog": "Blog",
         "meteo": "Oratge",
