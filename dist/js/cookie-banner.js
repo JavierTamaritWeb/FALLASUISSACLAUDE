@@ -4,7 +4,17 @@
 function initCookieBanner() {
   // Si ya hay consentimiento o localStorage está bloqueado (SecurityError Safari), lo gestionamos
   try {
-    if (localStorage.getItem('cookieConsent')) return;
+    // Permite forzar el borrado de las cookies para hacer pruebas añadiendo ?resetCookies al final de la URL
+    if (window.location.search.includes('resetCookies')) {
+      localStorage.removeItem('cookieConsent');
+      console.log('[Cookie Banner] Preferencia de cookies borrada vía parámetro URL.');
+    }
+
+    const consent = localStorage.getItem('cookieConsent');
+    console.log('[Cookie Banner] Estado de consentimiento:', consent);
+    if (consent) {
+      return;
+    }
   } catch (e) {
     console.warn('El acceso a localStorage está bloqueado por el navegador.');
   }
@@ -33,13 +43,19 @@ function initCookieBanner() {
     </div>
   `;
 
+  // Asegurarnos de que el body está disponible (salvataje para Safari en algunas condiciones de defer)
+  if (!document.body) {
+    document.addEventListener('DOMContentLoaded', () => initCookieBanner(), { once: true });
+    return;
+  }
+
   document.body.appendChild(banner);
 
-  // Forzar reflow para Safari macOS (evita que se salte la transición CSS)
-  void banner.offsetWidth;
-
-  // Mostrar con clase
-  banner.classList.add('cookie-banner--visible');
+  // Fallback definitivo para Safari: setTimeout obliga al navegador a recalcular el layout
+  // Evita que la inserción en DOM y la clase CSS se procesen en el mismo frame
+  setTimeout(() => {
+    banner.classList.add('cookie-banner--visible');
+  }, 50);
 
   function closeBanner(consent) {
     try {
