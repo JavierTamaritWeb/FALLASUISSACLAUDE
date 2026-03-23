@@ -65,7 +65,8 @@
       "Bash(lsof -ti:4173)",
       "Bash(wc -l /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude/dist/js/*.js)",
       "Bash(gzip -c dist/css/main.css)",
-      "Bash(cd /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude grep -n '<img ' index.html)"
+      "Bash(cd /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude grep -n '<img ' index.html)",
+      "Bash(cd /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude echo \"=== cookie-banner.js en páginas ===\" grep -l 'cookie-banner.js' *.html)"
     ]
   }
 }
