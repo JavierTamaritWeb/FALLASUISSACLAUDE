@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.9
+**Version:** 4.6.11
 **Last Updated:** 23 de marzo de 2026
 
 ## Project Overview
@@ -109,7 +109,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.8).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.11).
 
 ## Architecture Decisions & Constraints
 
