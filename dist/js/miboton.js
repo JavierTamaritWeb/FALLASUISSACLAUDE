@@ -1,6 +1,6 @@
 // js/miboton.js
 
-document.addEventListener('DOMContentLoaded', () => {
+function initMiBoton() {
     const miBoton = document.querySelector('.boton'); // Asegúrate de que el id o selector sea correcto
     if (!miBoton) return;
     const colorOriginal = window.getComputedStyle(miBoton).backgroundColor;
@@ -27,4 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
     miBoton.addEventListener('touchend', () => {
       miBoton.style.backgroundColor = colorOriginal;
     });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMiBoton, { once: true });
+} else {
+  initMiBoton();
+}

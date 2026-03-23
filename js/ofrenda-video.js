@@ -1,7 +1,7 @@
 // js/ofrenda-video.js
 // Reproductor de vídeo de la Ofrenda Floral con controles personalizados y lightbox fullscreen
 
-document.addEventListener('DOMContentLoaded', () => {
+function initOfrendaVideo() {
   // Elementos inline
   const video = document.getElementById('videoOfrenda');
   const posterOverlay = document.getElementById('videoOfrendaPosterPlay');
@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnMute = document.getElementById('videoOfrendaMute');
   const volumeSlider = document.getElementById('videoOfrendaVolume');
   const progressBar = document.getElementById('videoOfrendaProgress');
+  const inlineStatus = document.getElementById('videoOfrendaStatus');
 
   // Elementos fullscreen
   const fullscreen = document.getElementById('videoOfrendaFullscreen');
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fsBtnMute = document.getElementById('videoOfrendaFsMute');
   const fsVolumeSlider = document.getElementById('videoOfrendaFsVolume');
   const fsProgressBar = document.getElementById('videoOfrendaFsProgress');
+  const fullscreenStatus = document.getElementById('videoOfrendaFsStatus');
 
   if (!video || !fullscreen) return;
 
@@ -52,6 +54,79 @@ document.addEventListener('DOMContentLoaded', () => {
       return val || null;
     }
     return null;
+  }
+
+  function getStatusMessage() {
+    return getTranslation('ofrenda.loadError') || 'No se ha podido cargar el vídeo. Vuelve a intentarlo.';
+  }
+
+  function showStatus(statusEl) {
+    if (!statusEl) return;
+    statusEl.textContent = getStatusMessage();
+    statusEl.hidden = false;
+  }
+
+  function hideStatus(statusEl) {
+    if (!statusEl) return;
+    statusEl.hidden = true;
+  }
+
+  function prepareVideo(videoEl) {
+    if (!videoEl) return;
+
+    if (
+      videoEl.error
+      || videoEl.networkState === HTMLMediaElement.NETWORK_EMPTY
+      || videoEl.networkState === HTMLMediaElement.NETWORK_NO_SOURCE
+    ) {
+      videoEl.load();
+    }
+  }
+
+  function syncVideoTime(videoEl, time) {
+    if (!videoEl || !Number.isFinite(time) || time <= 0) return;
+
+    const applyTime = () => {
+      try {
+        videoEl.currentTime = time;
+      } catch (error) {
+        console.warn('No se pudo sincronizar el tiempo del vídeo de la Ofrenda.', error);
+      }
+    };
+
+    if (videoEl.readyState >= 1) {
+      applyTime();
+      return;
+    }
+
+    videoEl.addEventListener('loadedmetadata', applyTime, { once: true });
+  }
+
+  async function playVideo(videoEl, statusEl, buttonEl) {
+    hideStatus(statusEl);
+    prepareVideo(videoEl);
+
+    try {
+      await videoEl.play();
+      return true;
+    } catch (error) {
+      console.error('No se pudo reproducir el vídeo de la Ofrenda.', error);
+      showStatus(statusEl);
+      if (buttonEl) {
+        updatePlayButton(buttonEl, false);
+      }
+      return false;
+    }
+  }
+
+  function primeInlineVideo() {
+    hideStatus(inlineStatus);
+    prepareVideo(video);
+  }
+
+  function primeFullscreenVideo() {
+    hideStatus(fullscreenStatus);
+    prepareVideo(fsVideo);
   }
 
   function updatePlayButton(btn, isPlaying) {
@@ -118,8 +193,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Reproducción inline
   // =========================================================================
 
-  function playInline() {
-    video.play();
+  async function playInline() {
+    const started = await playVideo(video, inlineStatus, btnPlay);
+    if (!started) {
+      posterOverlay.classList.remove('video-dron__poster-overlay--hidden');
+      return;
+    }
+
     posterOverlay.classList.add('video-dron__poster-overlay--hidden');
     updatePlayButton(btnPlay, true);
   }
@@ -130,18 +210,25 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePlayButton(btnPlay, false);
   }
 
-  function toggleInline() {
+  async function toggleInline() {
     if (video.paused || video.ended) {
-      playInline();
+      await playInline();
     } else {
       pauseInline();
     }
   }
 
-  function restartInline() {
+  async function restartInline() {
     video.currentTime = 0;
-    playInline();
+    await playInline();
   }
+
+  posterOverlay.addEventListener('pointerenter', primeInlineVideo, { once: true });
+  posterOverlay.addEventListener('focus', primeInlineVideo, { once: true });
+  btnPlay.addEventListener('pointerenter', primeInlineVideo, { once: true });
+  btnPlay.addEventListener('focus', primeInlineVideo, { once: true });
+  btnFullscreen.addEventListener('pointerenter', primeFullscreenVideo, { once: true });
+  btnFullscreen.addEventListener('focus', primeFullscreenVideo, { once: true });
 
   // Poster overlay click
   posterOverlay.addEventListener('click', playInline);
@@ -159,14 +246,33 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   video.addEventListener('play', () => {
+    hideStatus(inlineStatus);
     posterOverlay.classList.add('video-dron__poster-overlay--hidden');
     updatePlayButton(btnPlay, true);
+  });
+
+  video.addEventListener('loadeddata', () => {
+    hideStatus(inlineStatus);
+  });
+
+  video.addEventListener('canplay', () => {
+    hideStatus(inlineStatus);
   });
 
   video.addEventListener('pause', () => {
     if (!video.ended) {
       updatePlayButton(btnPlay, false);
     }
+  });
+
+  video.addEventListener('stalled', () => {
+    showStatus(inlineStatus);
+  });
+
+  video.addEventListener('error', () => {
+    posterOverlay.classList.remove('video-dron__poster-overlay--hidden');
+    showStatus(inlineStatus);
+    updatePlayButton(btnPlay, false);
   });
 
   // Barra de progreso inline
@@ -199,26 +305,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fullscreen lightbox
   // =========================================================================
 
-  function openFullscreen() {
+  async function openFullscreen() {
     lastFocused = document.activeElement;
 
-    // Sincronizar tiempo
-    fsVideo.currentTime = video.currentTime;
+    const currentTime = Number.isFinite(video.currentTime) ? video.currentTime : 0;
+
+    hideStatus(fullscreenStatus);
+    primeFullscreenVideo();
+    syncVideoTime(fsVideo, currentTime);
+
+    fsVideo.volume = video.volume;
+    fsVideo.muted = video.muted;
+    fsVolumeSlider.value = video.muted ? 0 : video.volume * 100;
+    fsVolumeSlider.style.setProperty('--volume', (fsVideo.muted ? 0 : fsVideo.volume * 100) + '%');
+    updateMuteButton(fsBtnMute, fsVideo.muted);
+
     video.pause();
 
     fullscreen.classList.add('open');
     fullscreen.setAttribute('aria-hidden', 'false');
     document.body.classList.add('lightbox-open');
 
-    fsVideo.play();
-    updatePlayButton(fsBtnPlay, true);
-
-    // Sincronizar volumen y estado de silencio
-    fsVideo.volume = video.volume;
-    fsVideo.muted = video.muted;
-    fsVolumeSlider.value = video.muted ? 0 : video.volume * 100;
-    fsVolumeSlider.style.setProperty('--volume', (fsVideo.muted ? 0 : fsVideo.volume * 100) + '%');
-    updateMuteButton(fsBtnMute, fsVideo.muted);
+    const started = await playVideo(fsVideo, fullscreenStatus, fsBtnPlay);
+    updatePlayButton(fsBtnPlay, started);
 
     requestAnimationFrame(() => {
       fsClose.focus();
@@ -227,7 +336,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function closeFullscreen() {
     // Sincronizar tiempo de vuelta
-    video.currentTime = fsVideo.currentTime;
+    primeInlineVideo();
+    syncVideoTime(video, fsVideo.currentTime);
     fsVideo.pause();
 
     // Sincronizar volumen de vuelta
@@ -249,20 +359,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function toggleFullscreen() {
+  async function toggleFullscreen() {
     if (fsVideo.paused || fsVideo.ended) {
-      fsVideo.play();
-      updatePlayButton(fsBtnPlay, true);
+      const started = await playVideo(fsVideo, fullscreenStatus, fsBtnPlay);
+      updatePlayButton(fsBtnPlay, started);
     } else {
       fsVideo.pause();
       updatePlayButton(fsBtnPlay, false);
     }
   }
 
-  function restartFullscreen() {
+  async function restartFullscreen() {
     fsVideo.currentTime = 0;
-    fsVideo.play();
-    updatePlayButton(fsBtnPlay, true);
+    const started = await playVideo(fsVideo, fullscreenStatus, fsBtnPlay);
+    updatePlayButton(fsBtnPlay, started);
   }
 
   // Botón abrir fullscreen
@@ -281,13 +391,31 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   fsVideo.addEventListener('play', () => {
+    hideStatus(fullscreenStatus);
     updatePlayButton(fsBtnPlay, true);
+  });
+
+  fsVideo.addEventListener('loadeddata', () => {
+    hideStatus(fullscreenStatus);
+  });
+
+  fsVideo.addEventListener('canplay', () => {
+    hideStatus(fullscreenStatus);
   });
 
   fsVideo.addEventListener('pause', () => {
     if (!fsVideo.ended) {
       updatePlayButton(fsBtnPlay, false);
     }
+  });
+
+  fsVideo.addEventListener('stalled', () => {
+    showStatus(fullscreenStatus);
+  });
+
+  fsVideo.addEventListener('error', () => {
+    showStatus(fullscreenStatus);
+    updatePlayButton(fsBtnPlay, false);
   });
 
   // Barra de progreso fullscreen
@@ -330,4 +458,10 @@ document.addEventListener('DOMContentLoaded', () => {
       closeFullscreen();
     }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initOfrendaVideo, { once: true });
+} else {
+  initOfrendaVideo();
+}

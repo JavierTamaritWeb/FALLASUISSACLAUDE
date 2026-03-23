@@ -2,7 +2,7 @@
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
+function initAccordion() {
   const headers = document.querySelectorAll('.accordion__titular');
 
   // Función para resetear la clase activa de todos los íconos
@@ -43,4 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAccordion, { once: true });
+} else {
+  initAccordion();
+}

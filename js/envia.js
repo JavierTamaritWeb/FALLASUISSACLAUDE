@@ -1,6 +1,23 @@
 
 // js/envia.js
 
+const EMAILJS_SCRIPT_URL = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+const EMAILJS_SCRIPT_SELECTOR = 'script[data-emailjs-script="true"]';
+const EMAILJS_PUBLIC_KEY = '2sroeCfiZ4SiH-ZyX';
+
+let emailJsPromise = null;
+let emailJsInitialized = false;
+
+function initEmailJsClient(emailClient) {
+  if (!emailClient || emailJsInitialized) {
+    return emailClient;
+  }
+
+  emailClient.init(EMAILJS_PUBLIC_KEY);
+  emailJsInitialized = true;
+  return emailClient;
+}
+
 function getEmailJsClient() {
   if (typeof window === 'undefined') {
     return null;
@@ -12,20 +29,70 @@ function getEmailJsClient() {
     return null;
   }
 
-  return emailClient;
+  return initEmailJsClient(emailClient);
+}
+
+function loadEmailJs() {
+  const emailClient = getEmailJsClient();
+  if (emailClient) {
+    return Promise.resolve(emailClient);
+  }
+
+  if (emailJsPromise) {
+    return emailJsPromise;
+  }
+
+  emailJsPromise = new Promise((resolve, reject) => {
+    let script = document.querySelector(EMAILJS_SCRIPT_SELECTOR);
+
+    const handleLoad = () => {
+      if (script) {
+        script.dataset.loaded = 'true';
+      }
+
+      const loadedClient = getEmailJsClient();
+      if (loadedClient) {
+        resolve(loadedClient);
+        return;
+      }
+
+      emailJsPromise = null;
+      reject(new Error('EmailJS se ha cargado pero no está disponible en window.emailjs.'));
+    };
+
+    const handleError = () => {
+      emailJsPromise = null;
+      reject(new Error('No se pudo cargar EmailJS.'));
+    };
+
+    if (!script) {
+      script = document.createElement('script');
+      script.src = EMAILJS_SCRIPT_URL;
+      script.async = true;
+      script.defer = true;
+      script.dataset.emailjsScript = 'true';
+      script.addEventListener('load', handleLoad, { once: true });
+      script.addEventListener('error', handleError, { once: true });
+      document.head.appendChild(script);
+      return;
+    }
+
+    script.addEventListener('load', handleLoad, { once: true });
+    script.addEventListener('error', handleError, { once: true });
+  });
+
+  return emailJsPromise;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  const emailClient = getEmailJsClient();
-  if (emailClient) {
-    emailClient.init("2sroeCfiZ4SiH-ZyX");
-  } else {
-    console.warn('EmailJS no está disponible; el modal seguirá funcionando sin envío.');
-  }
-
   const openModalBtn = document.getElementById('open-quieres-modal');
   const closeModalBtn = document.getElementById('close-quieres-modal');
   const modal = document.getElementById('modal-quieres');
+  const primeEmailJs = () => {
+    loadEmailJs().catch(error => {
+      console.warn('No se pudo precargar EmailJS:', error);
+    });
+  };
   const abrirModal = () => {
     modal.classList.add('active');
   };
@@ -80,9 +147,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Configurar eventos para abrir/cerrar el modal
   if (openModalBtn && modal && closeModalBtn) {
+    openModalBtn.addEventListener('pointerenter', primeEmailJs, { once: true });
+    openModalBtn.addEventListener('focus', primeEmailJs, { once: true });
+
     openModalBtn.addEventListener('click', function(e) {
       e.preventDefault();
       abrirModal();
+      primeEmailJs();
     });
 
     closeModalBtn.addEventListener('click', function() {
@@ -101,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Manejo del envío del formulario con EmailJS
   const form = document.getElementById('quieres-form');
   if (form) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const submitBtn = form.querySelector('button.boton-modal');
       if (submitBtn) {
@@ -116,7 +187,28 @@ document.addEventListener("DOMContentLoaded", function() {
         mensaje: document.getElementById('quieres-mensaje').value
       };
 
-      const activeEmailClient = emailClient || getEmailJsClient();
+      let activeEmailClient = getEmailJsClient();
+      if (!activeEmailClient) {
+        try {
+          activeEmailClient = await loadEmailJs();
+        } catch (error) {
+          document.body.style.cursor = 'default';
+          if (submitBtn) { submitBtn.disabled = false; }
+          console.error('EmailJS no está disponible', error);
+          renderizarModalResultado({
+            headerClass: 'bg-danger',
+            titleKey: 'modalerror.title',
+            titleFallback: 'Error Enviando Mensaje',
+            messageKey: 'modalerror.mensaje',
+            messageFallback: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.',
+            imageSrc: 'img/error.png',
+            imageAlt: 'Error',
+            closeId: 'close-error-modal',
+          });
+          return;
+        }
+      }
+
       if (!activeEmailClient) {
         document.body.style.cursor = 'default';
         if (submitBtn) { submitBtn.disabled = false; }

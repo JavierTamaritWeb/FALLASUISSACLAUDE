@@ -2,6 +2,89 @@
 
 // Variable global para almacenar la configuración (config.json)
 let configData = null;
+let weatherInitPromise = null;
+let animeLoaderPromise = null;
+
+const ANIME_SCRIPT_URL = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
+const ANIME_SCRIPT_SELECTOR = 'script[data-anime-script="true"]';
+
+function getAnimeClient() {
+  if (typeof window === 'undefined' || typeof window.anime !== 'function') {
+    return null;
+  }
+
+  return window.anime;
+}
+
+function loadAnime() {
+  const animeClient = getAnimeClient();
+  if (animeClient) {
+    return Promise.resolve(animeClient);
+  }
+
+  if (animeLoaderPromise) {
+    return animeLoaderPromise;
+  }
+
+  animeLoaderPromise = new Promise((resolve, reject) => {
+    let script = document.querySelector(ANIME_SCRIPT_SELECTOR);
+
+    const handleLoad = () => {
+      if (script) {
+        script.dataset.loaded = 'true';
+      }
+
+      const loadedAnime = getAnimeClient();
+      if (loadedAnime) {
+        resolve(loadedAnime);
+        return;
+      }
+
+      animeLoaderPromise = null;
+      reject(new Error('anime.js se ha cargado pero no está disponible en window.anime.'));
+    };
+
+    const handleError = () => {
+      animeLoaderPromise = null;
+      reject(new Error('No se pudo cargar anime.js.'));
+    };
+
+    if (!script) {
+      script = document.createElement('script');
+      script.src = ANIME_SCRIPT_URL;
+      script.async = true;
+      script.defer = true;
+      script.dataset.animeScript = 'true';
+      script.addEventListener('load', handleLoad, { once: true });
+      script.addEventListener('error', handleError, { once: true });
+      document.head.appendChild(script);
+      return;
+    }
+
+    script.addEventListener('load', handleLoad, { once: true });
+    script.addEventListener('error', handleError, { once: true });
+  });
+
+  return animeLoaderPromise;
+}
+
+function hasWeatherUI() {
+  return Boolean(document.querySelector('.weather-current') || document.querySelector('.forecast-day'));
+}
+
+function updateWeatherSections() {
+  if (document.querySelector('.weather-current')) {
+    fetchCurrentWeather();
+  }
+
+  if (document.querySelector('.forecast-day')) {
+    fetchForecast();
+  }
+}
+
+function isWeatherNearViewport(trigger) {
+  return trigger.getBoundingClientRect().top <= window.innerHeight * 1.2;
+}
 
 /**
  * Función para obtener los parámetros de la API de OpenWeather
@@ -99,37 +182,75 @@ function waitForTranslationsReady(timeoutMs = 2000) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    // 1) Cargar config.json
+async function initWeatherModule() {
+  if (weatherInitPromise) {
+    return weatherInitPromise;
+  }
+
+  if (!hasWeatherUI()) {
+    return Promise.resolve();
+  }
+
+  weatherInitPromise = (async () => {
     const res = await fetch('data/config.json');
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
     configData = await res.json();
 
     await waitForTranslationsReady();
+    updateWeatherSections();
+    await initAnimations();
+  })().catch(error => {
+    weatherInitPromise = null;
+    throw error;
+  });
 
-    // 2) Si la página tiene secciones de clima, realizar las llamadas a la API.
-    if (document.querySelector('.weather-current')) {
-      fetchCurrentWeather();
-    }
-    if (document.querySelector('.forecast-day')) {
-      fetchForecast();
-    }
+  return weatherInitPromise;
+}
 
-    // 3) Iniciar animaciones (si anime.js está definido)
-    initAnimations();
-  } catch (error) {
+function startWeatherInit() {
+  initWeatherModule().catch(error => {
     console.error('Error al cargar configuración:', error);
+  });
+}
+
+function scheduleWeatherInit() {
+  const trigger = document.querySelector('.weather-current, .forecast-day');
+  if (!trigger) {
+    return;
   }
-});
+
+  if (isWeatherNearViewport(trigger)) {
+    startWeatherInit();
+    return;
+  }
+
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(() => {
+      startWeatherInit();
+    }, { timeout: 500 });
+    return;
+  }
+
+  window.setTimeout(startWeatherInit, 250);
+}
+
+document.addEventListener('DOMContentLoaded', scheduleWeatherInit);
 
 // Escucha un evento personalizado "langChanged" para actualizar los datos meteorológicos
 document.addEventListener('langChanged', () => {
-  if (document.querySelector('.weather-current')) {
-    fetchCurrentWeather();
+  if (!hasWeatherUI()) {
+    return;
   }
-  if (document.querySelector('.forecast-day')) {
-    fetchForecast();
+
+  if (configData) {
+    updateWeatherSections();
+    return;
   }
+
+  startWeatherInit();
 });
 
 /**
@@ -375,17 +496,20 @@ function updateForecast(data) {
 /**
  * Inicializa animaciones usando anime.js (si la librería está disponible).
  */
-function initAnimations() {
-  if (typeof anime !== 'function') {
+async function initAnimations() {
+  const animeClient = await loadAnime().catch(() => null);
+
+  if (!animeClient) {
     console.warn("anime.js no está definido, se omiten animaciones.");
     return;
   }
+
   if (document.querySelector('.forecast-day')) {
-    anime({
+    animeClient({
       targets: '.forecast-day',
       opacity: [0, 1],
       translateY: [-20, 0],
-      delay: anime.stagger(100)
+      delay: animeClient.stagger(100)
     });
   }
 }

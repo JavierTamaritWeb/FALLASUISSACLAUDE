@@ -11,6 +11,10 @@ const sharp = require('sharp');
 const { glob } = require('glob');
 const path = require('path');
 const fs = require('fs').promises;
+const crypto = require('crypto');
+
+const EVENT_BASE_URL = 'https://fallasuissa.es/eventos.html';
+const EVENT_IMAGE_URL = 'https://fallasuissa.es/img/Escudo_falla.png';
 
 // ===================================
 // PATHS
@@ -130,11 +134,233 @@ function pdfTask() {
 
 const { Transform } = require('stream');
 
+function optimizeHtmlAssetTags(html) {
+  const hasSwiper = /class=(['"])[^'"]*\bswiper\b[^'"]*\1/i.test(html);
+
+  if (!hasSwiper) {
+    html = html.replace(/\n?\s*<link rel="stylesheet" href="https:\/\/cdn\.jsdelivr\.net\/npm\/swiper@11\/swiper-bundle\.min\.css"\/>\s*\n?/i, '\n');
+    html = html.replace(/\n?\s*<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/swiper@11\/swiper-bundle\.min\.js"><\/script>\s*\n?/i, '\n');
+    html = html.replace(/\n?\s*<script src="js\/swiper\.js"><\/script>\s*\n?/i, '\n');
+  }
+
+  return html;
+}
+
+function stripLegacyDynamicEventSchema(html) {
+  return html.replace(/\n?\s*<!-- Schema\.org Eventos Dinámicos -->\s*<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/gi, '\n');
+}
+
+function isManagedBoardEventNode(node) {
+  if (!node || node['@type'] !== 'Event') {
+    return false;
+  }
+
+  const nodeId = typeof node['@id'] === 'string' ? node['@id'] : '';
+  const nodeUrl = typeof node.url === 'string' ? node.url : '';
+  const startDate = typeof node.startDate === 'string' ? node.startDate : '';
+  const organizerName = node.organizer && typeof node.organizer === 'object'
+    ? node.organizer.name
+    : '';
+  const locationName = node.location && typeof node.location === 'object'
+    ? node.location.name
+    : '';
+
+  return nodeId.startsWith(`${EVENT_BASE_URL}#`)
+    || nodeUrl === EVENT_BASE_URL
+    || startDate.includes('0000-00-00T')
+    || (!organizerName && locationName === "Falla Suïssa - L'Alqueria del Favero");
+}
+
+function mergeEventSchemaIntoHtml(html, schemaEventsJSON, options = {}) {
+  const { managedEventFilter = null } = options;
+
+  const schemaScriptRegex = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/i;
+  const match = html.match(schemaScriptRegex);
+
+  if (!match) {
+    return { html, merged: false };
+  }
+
+  try {
+    const structuredData = JSON.parse(match[1].trim());
+    if (!structuredData || Array.isArray(structuredData) || !Array.isArray(structuredData['@graph'])) {
+      return { html, merged: false };
+    }
+
+    let graphNodes = structuredData['@graph'];
+    let sanitized = false;
+
+    if (typeof managedEventFilter === 'function') {
+      const filteredGraphNodes = graphNodes.filter((node) => !managedEventFilter(node));
+      sanitized = filteredGraphNodes.length !== graphNodes.length;
+      graphNodes = filteredGraphNodes;
+    }
+
+    const schemaEvents = schemaEventsJSON && schemaEventsJSON !== '[]'
+      ? JSON.parse(schemaEventsJSON).map((event) => {
+        const { ['@context']: _context, ...eventNode } = event;
+        return eventNode;
+      })
+      : [];
+
+    if (!sanitized && !schemaEvents.length) {
+      return { html, merged: false };
+    }
+
+    structuredData['@graph'] = [...graphNodes, ...schemaEvents];
+
+    const mergedScript = `<script type="application/ld+json">\n  ${JSON.stringify(structuredData, null, 2)}\n  </script>`;
+
+    return {
+      html: html.replace(schemaScriptRegex, mergedScript),
+      merged: true
+    };
+  } catch (error) {
+    console.warn('Error fusionando Schema de eventos en HTML:', error);
+    return { html, merged: false };
+  }
+}
+
+async function getAssetVersionToken() {
+  const cssFiles = await glob('dist/css/**/*.css', { nodir: true });
+  const jsFiles = await glob('dist/js/**/*.js', { nodir: true });
+  const assetFiles = [...cssFiles, ...jsFiles].sort();
+
+  if (!assetFiles.length) {
+    return null;
+  }
+
+  const hash = crypto.createHash('sha1');
+
+  for (const assetFile of assetFiles) {
+    const assetContents = await fs.readFile(assetFile);
+    hash.update(path.relative('dist', assetFile).split(path.sep).join('/'));
+    hash.update(':');
+    hash.update(assetContents);
+    hash.update('|');
+  }
+
+  return hash.digest('hex').slice(0, 12);
+}
+
+function isVersionableLocalAssetUrl(url) {
+  if (!url || /^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(url) || url.startsWith('data:') || url.startsWith('#')) {
+    return false;
+  }
+
+  const pathname = url.split('#')[0].split('?')[0];
+  return /(?:^|\/)(?:css|js)\/.+\.(?:css|js)$/i.test(pathname);
+}
+
+function appendAssetVersionToUrl(url, assetVersion) {
+  if (!assetVersion || !isVersionableLocalAssetUrl(url)) {
+    return url;
+  }
+
+  const [withoutHash, hash = ''] = url.split('#');
+  const [pathname, search = ''] = withoutHash.split('?');
+  const params = new URLSearchParams(search);
+  params.set('v', assetVersion);
+
+  const queryString = params.toString();
+  return `${pathname}${queryString ? `?${queryString}` : ''}${hash ? `#${hash}` : ''}`;
+}
+
+function appendAssetVersionToHtml(html, assetVersion) {
+  if (!assetVersion) {
+    return html;
+  }
+
+  return html.replace(/\b(href|src)=(['"])([^'"]+)\2/g, (match, attr, quote, url) => {
+    const versionedUrl = appendAssetVersionToUrl(url, assetVersion);
+    return versionedUrl === url ? match : `${attr}=${quote}${versionedUrl}${quote}`;
+  });
+}
+
 async function getSchemaEvents() {
   try {
     const rawData = await fs.readFile(path.join(__dirname, 'data', 'board.json'), 'utf8');
     const board = JSON.parse(rawData);
     const events = [];
+
+    function stripHtml(html) {
+      return html
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/[ \t]+/g, ' ')
+        .replace(/\s*\n\s*/g, '\n')
+        .trim();
+    }
+
+    function isValidBoardDateParts(day, month, year) {
+      const numericDay = Number(day);
+      const numericMonth = Number(month);
+      const numericYear = Number(year);
+
+      if (!Number.isInteger(numericDay) || !Number.isInteger(numericMonth) || !Number.isInteger(numericYear)) {
+        return false;
+      }
+
+      if (numericDay <= 0 || numericMonth <= 0 || numericYear <= 0) {
+        return false;
+      }
+
+      const candidate = new Date(Date.UTC(numericYear, numericMonth - 1, numericDay));
+      return candidate.getUTCFullYear() === numericYear
+        && candidate.getUTCMonth() === numericMonth - 1
+        && candidate.getUTCDate() === numericDay;
+    }
+
+    function buildIsoLocalDateTime(day, month, year, time) {
+      if (!isValidBoardDateParts(day, month, year)) {
+        return null;
+      }
+
+      const [hours = '00', minutes = '00'] = (time || '00:00').split(':');
+      const numericHours = Number(hours);
+      const numericMinutes = Number(minutes);
+
+      if (
+        !Number.isInteger(numericHours)
+        || !Number.isInteger(numericMinutes)
+        || numericHours < 0
+        || numericHours > 23
+        || numericMinutes < 0
+        || numericMinutes > 59
+      ) {
+        return null;
+      }
+
+      return `${year}-${month}-${day}T${String(numericHours).padStart(2, '0')}:${String(numericMinutes).padStart(2, '0')}:00`;
+    }
+
+    function extractEventName(text) {
+      const nameMatch = text.match(/<br>\s*📝[^<]+<br>\s*(.+?)(?:<br>|$)/);
+      if (nameMatch && nameMatch[1]) {
+        return nameMatch[1].replace(/<[^>]+>/g, '').trim();
+      }
+
+      const parts = text.split('<br>');
+      if (parts.length > 0) {
+        return parts[parts.length - 1].replace(/<[^>]+>/g, '').trim();
+      }
+
+      return 'Evento Falla Suïssa';
+    }
+
+    function extractEventDescription(text, eventName) {
+      const plainText = stripHtml(text)
+        .replace(/^📌\s*(?:RECORDATORIO|RECORDATORI)\s*/i, '')
+        .replace(/^\d{2}-\d{2}-\d{4}(?:\s+\d{2}:\d{2}\s*h?)?\s*/i, '')
+        .replace(/^📝\s*(?:Cita|Recordatori|Recordatorio)\s*/i, '')
+        .trim();
+
+      if (!plainText) {
+        return `Evento de Falla Suïssa - L'Alqueria del Favero: ${eventName}.`;
+      }
+
+      return `Evento de Falla Suïssa - L'Alqueria del Favero. ${plainText}`;
+    }
     
     board.notas.forEach(nota => {
       if (!nota.activo || !nota.contenido || !nota.contenido.es) return;
@@ -144,31 +370,39 @@ async function getSchemaEvents() {
       // Intentar extraer fecha (dd-mm-rrrr) y hora (hh:mm)
       const dateRegex = /(\d{2})-(\d{2})-(\d{4})(?:\s+(\d{2}:\d{2}))?/;
       const matchDate = text.match(dateRegex);
-      
-      let startDate = new Date().toISOString();
-      if (matchDate) {
-        const [ , day, month, year, time ] = matchDate;
-        const isoString = `${year}-${month}-${day}T${time ? time + ':00' : '00:00:00'}+01:00`; // Asume CET
-        startDate = isoString;
+
+      if (!matchDate) {
+        return;
       }
-      
-      // Intentar extraer titulo
-      let name = "Evento Falla Suïssa";
-      const nameMatch = text.match(/<br>\s*📝[^<]+<br>\s*(.+?)(?:<br>|$)/);
-      if (nameMatch && nameMatch[1]) {
-        name = nameMatch[1].replace(/<[^>]+>/g, '').trim();
-      } else {
-        const parts = text.split('<br>');
-        if (parts.length > 0) {
-          name = parts[parts.length - 1].replace(/<[^>]+>/g, '').trim();
-        }
+
+      const [ , day, month, year, time ] = matchDate;
+      const startDate = buildIsoLocalDateTime(day, month, year, time);
+      if (!startDate) {
+        console.warn(`Se omite la nota ${nota.id || '(sin id)'} del Schema Event por fecha inválida.`);
+        return;
       }
+
+      const eventName = extractEventName(text);
+      const eventDescription = extractEventDescription(text, eventName);
+      const eventId = nota.id
+        ? `${EVENT_BASE_URL}#${nota.id}`
+        : `${EVENT_BASE_URL}#${eventName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'evento'}`;
 
       events.push({
         "@context": "https://schema.org",
         "@type": "Event",
-        "name": name,
+        "@id": eventId,
+        "name": eventName,
         "startDate": startDate,
+        "description": eventDescription,
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Falla Suïssa - L'Alqueria del Favero",
+          "url": "https://fallasuissa.es/",
+          "logo": EVENT_IMAGE_URL
+        },
         "location": {
           "@type": "Place",
           "name": "Falla Suïssa - L'Alqueria del Favero",
@@ -178,7 +412,16 @@ async function getSchemaEvents() {
             "addressRegion": "Comunidad Valenciana",
             "addressCountry": "ES"
           }
-        }
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": EVENT_BASE_URL,
+          "price": "0",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        },
+        "image": [EVENT_IMAGE_URL],
+        "url": EVENT_BASE_URL
       });
     });
     
@@ -189,7 +432,7 @@ async function getSchemaEvents() {
   }
 }
 
-function modifyHtmlStream(schemaEventsJSON, lang) {
+function modifyHtmlStream(schemaEventsJSON, lang, assetVersion) {
   return new Transform({
     objectMode: true,
     transform(file, enc, cb) {
@@ -197,6 +440,7 @@ function modifyHtmlStream(schemaEventsJSON, lang) {
       if (file.isStream()) return cb(new Error('Streaming en modifyHtmlStream no soportado'));
       
       let html = file.contents.toString('utf8');
+      let mergedEventSchema = false;
       
       // 1. Reemplazar etiqueta de idioma principal para la variante en valenciano
       if (lang === 'ca') {
@@ -204,11 +448,23 @@ function modifyHtmlStream(schemaEventsJSON, lang) {
         html = html.replace(/<html\s+lang="es"(.*)?>/i, '<html lang="ca"$1>');
       }
 
+      html = stripLegacyDynamicEventSchema(html);
+      html = optimizeHtmlAssetTags(html);
+
       // 2. Preparar bloque de inyección
       const fileName = path.basename(file.path);
       const isIndex = fileName === 'index.html';
+      const shouldInjectEventSchema = fileName === 'index.html' || fileName === 'eventos.html';
       const mainUrl = `https://fallasuissa.es/${isIndex ? '' : fileName}`;
       const caUrl = `https://fallasuissa.es/va/${isIndex ? '' : fileName}`;
+
+      if (shouldInjectEventSchema) {
+        const mergeResult = mergeEventSchemaIntoHtml(html, schemaEventsJSON, {
+          managedEventFilter: fileName === 'index.html' ? isManagedBoardEventNode : null
+        });
+        html = mergeResult.html;
+        mergedEventSchema = mergeResult.merged;
+      }
       
       let injections = `
   <!-- Mejoras SEO Estáticas -->
@@ -216,12 +472,13 @@ function modifyHtmlStream(schemaEventsJSON, lang) {
   <link rel="alternate" hreflang="ca" href="${caUrl}">
   <link rel="alternate" hreflang="x-default" href="${mainUrl}">\n`;
 
-      if (schemaEventsJSON && schemaEventsJSON !== '[]') {
+      if (shouldInjectEventSchema && schemaEventsJSON && schemaEventsJSON !== '[]' && !mergedEventSchema) {
          injections += `\n  <!-- Schema.org Eventos Dinámicos -->\n  <script type="application/ld+json">\n  ${schemaEventsJSON}\n  </script>\n`;
       }
 
       // 3. Inyectar justo antes del cierre de head
       html = html.replace('</head>', injections + '</head>');
+      html = appendAssetVersionToHtml(html, assetVersion);
       
       file.contents = Buffer.from(html);
       cb(null, file);
@@ -233,17 +490,18 @@ function modifyHtmlStream(schemaEventsJSON, lang) {
 async function htmlTask() {
   const events = await getSchemaEvents();
   const schemaString = JSON.stringify(events, null, 2);
+  const assetVersion = await getAssetVersionToken();
 
   // Buffer process (no encoding flag para que cargue bin pero el Transform convierte a utf8 y viceversa)
   const esPromise = streamToPromise(
     src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaString, 'es'))
+      .pipe(modifyHtmlStream(schemaString, 'es', assetVersion))
       .pipe(dest(paths.html.dest))
   );
 
   const caPromise = streamToPromise(
     src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaString, 'ca'))
+      .pipe(modifyHtmlStream(schemaString, 'ca', assetVersion))
       .pipe(dest(path.join(paths.html.dest, 'va')))
   );
 

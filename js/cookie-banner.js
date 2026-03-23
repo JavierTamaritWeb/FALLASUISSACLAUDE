@@ -1,7 +1,7 @@
 // js/cookie-banner.js
 // Banner de consentimiento de cookies (RGPD / LSSI / ePrivacy)
 
-document.addEventListener('DOMContentLoaded', () => {
+function initCookieBanner() {
   // Si ya hay consentimiento, no mostrar el banner
   if (localStorage.getItem('cookieConsent')) return;
 
@@ -51,4 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('cookieNecessary').addEventListener('click', () => {
     closeBanner('necessary');
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCookieBanner, { once: true });
+} else {
+  initCookieBanner();
+}

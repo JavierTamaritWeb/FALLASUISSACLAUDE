@@ -96,7 +96,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Hojas de estilo -->
-  <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="css/main.css">
 
 </head>
@@ -195,9 +194,11 @@
       <div class="video-dron__frame">
         <div class="video-dron__video-wrapper">
           <video id="videoOfrenda" class="video-dron__video"
-            src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" preload="metadata" playsinline
+            poster="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
             aria-label="Vídeo de la Ofrenda Floral 2025-26 de la Falla Suïssa"
             data-i18n-aria-label="ofrenda.videoAria">
+            <source src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
+            <span data-i18n="ofrenda.fallback">Tu navegador no soporta la reproducción de vídeo.</span>
           </video>
           <button class="video-dron__poster-overlay" id="videoOfrendaPosterPlay"
             aria-label="Reproducir vídeo"
@@ -243,6 +244,7 @@
               data-i18n-aria-label="ofrenda.volumeAria">
           </div>
         </div>
+        <p class="video-dron__status" id="videoOfrendaStatus" hidden role="status" aria-live="polite" data-i18n="ofrenda.loadError">No se ha podido cargar el vídeo. Vuelve a intentarlo.</p>
       </div>
     </div>
   </section>
@@ -271,9 +273,11 @@
       aria-label="Cerrar pantalla completa" data-i18n-aria-label="ofrenda.closeAria">&times;</button>
     <div class="video-dron__fullscreen-wrapper">
       <video id="videoOfrendaFs" class="video-dron__fullscreen-video"
-        src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" preload="none" playsinline
+        poster="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
         aria-label="Vídeo de la Ofrenda Floral 2025-26 de la Falla Suïssa"
         data-i18n-aria-label="ofrenda.videoAria">
+        <source src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
+        <span data-i18n="ofrenda.fallback">Tu navegador no soporta la reproducción de vídeo.</span>
       </video>
     </div>
     <!-- Barra de progreso fullscreen -->
@@ -306,6 +310,7 @@
           data-i18n-aria-label="ofrenda.volumeAria">
       </div>
     </div>
+    <p class="video-dron__status video-dron__status--fs" id="videoOfrendaFsStatus" hidden role="status" aria-live="polite" data-i18n="ofrenda.loadError">No se ha podido cargar el vídeo. Vuelve a intentarlo.</p>
   </div>
 
   <!-- Frieze Inferior con modificador bordered -->
@@ -354,13 +359,13 @@
     </nav>
   </footer>
 
-  <script src="js/ofrenda-video.js"></script>
-  <script src="js/colaboraciones-lightbox.js"></script>
+  <script src="js/ofrenda-video.js" defer></script>
+  <script src="js/colaboraciones-lightbox.js" defer></script>
   <script src="js/lang.js"></script>
   <script src="js/dark.js"></script>
   <script src="js/nav-menu.js"></script>
-  <script src="js/scroll-reveal.js"></script>
+  <script src="js/scroll-reveal.js" defer></script>
 
-  <script src="js/cookie-banner.js"></script>
+  <script src="js/cookie-banner.js" defer></script>
 </body>
 </html>

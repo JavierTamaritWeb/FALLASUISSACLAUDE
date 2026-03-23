@@ -22,8 +22,8 @@ button, .interactive-element {
 }
 
 /* Cumulative Layout Shift (CLS) prevention */
-img, video, iframe {
-  aspect-ratio: attr(width) / attr(height);
+img, video {
+  max-width: 100%;
   height: auto;
 }
 

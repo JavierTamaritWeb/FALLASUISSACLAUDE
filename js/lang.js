@@ -1,8 +1,13 @@
 //js/lang.es
 
 // Variables globales para traducciones y el idioma actual
-let translations = {};
+let translations = window.translations && typeof window.translations === 'object'
+  ? window.translations
+  : {};
 let currentLang = localStorage.getItem('lang') || 'es';
+let translationsPromise = null;
+
+window.currentLanguage = currentLang;
 
 // Función helper para obtener traducciones anidadas usando notación de puntos
 
@@ -22,15 +27,45 @@ function notifyTranslationsReady() {
 
 // Función para cargar el JSON de traducciones
 
-function loadTranslations() {
-  return fetch('data/translations.json')
-    .then(response => response.json())
-    .then(data => {
-      translations = data;
-      window.translations = data; // Esto asegura que window.translations esté definido
-    })
-    .catch(error => console.error('Error loading translations:', error));
+function cacheTranslations(data) {
+  translations = data;
+  window.translations = data;
+  return data;
 }
+
+function loadTranslations() {
+  if (translations && Object.keys(translations).length > 0) {
+    return Promise.resolve(translations);
+  }
+
+  if (window.translations && typeof window.translations === 'object' && Object.keys(window.translations).length > 0) {
+    translations = window.translations;
+    return Promise.resolve(translations);
+  }
+
+  if (translationsPromise) {
+    return translationsPromise;
+  }
+
+  translationsPromise = fetch('data/translations.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      return response.json();
+    })
+    .then(cacheTranslations)
+    .catch(error => {
+      translationsPromise = null;
+      console.error('Error loading translations:', error);
+      throw error;
+    });
+
+  return translationsPromise;
+}
+
+window.loadTranslations = loadTranslations;
 
 function renderParagraphTranslation(elem, translation) {
   const blocks = translation
@@ -147,6 +182,7 @@ if (langSwitcher && langOptions) {
     option.addEventListener('click', (e) => {
       currentLang = option.getAttribute('data-lang');
       localStorage.setItem('lang', currentLang);
+      window.currentLanguage = currentLang;
       langOptions.classList.remove('active');
       langSwitcher.setAttribute('aria-expanded', 'false');
       actualizarLabelIdioma();

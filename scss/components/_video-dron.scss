@@ -302,6 +302,27 @@
   flex-wrap: wrap;
 }
 
+.video-dron__status {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(4, 18, 35, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: v.$blanco;
+  font-family: v.$font-family;
+  font-size: 0.95rem;
+  line-height: 1.5;
+
+  &[hidden] {
+    display: none !important;
+  }
+
+  &--fs {
+    width: min(96vw, 60rem);
+    margin: 1rem auto 0;
+  }
+}
+
 .video-dron__btn {
   display: inline-flex;
   align-items: center;

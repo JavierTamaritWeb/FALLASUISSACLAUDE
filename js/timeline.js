@@ -2,7 +2,7 @@
 // Timeline de navegación lateral - Indicador de progreso entre secciones
 // Solo visible en desktop (≥768px), se oculta cuando el hero es visible
 
-document.addEventListener('DOMContentLoaded', function () {
+function initTimeline() {
   // Solo desktop
   if (window.innerWidth < 768) return;
 
@@ -102,4 +102,10 @@ document.addEventListener('DOMContentLoaded', function () {
   seccionesDots.forEach(function (sec) {
     dotTracker.observe(sec);
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTimeline, { once: true });
+} else {
+  initTimeline();
+}

@@ -1,7 +1,7 @@
 // js/video-dron.js
 // Reproductor de vídeo de dron con controles personalizados y lightbox fullscreen
 
-document.addEventListener('DOMContentLoaded', () => {
+function initVideoDron() {
   // Elementos inline
   const video = document.getElementById('videoDron');
   const posterOverlay = document.getElementById('videoDronPosterPlay');
@@ -334,4 +334,10 @@ document.addEventListener('DOMContentLoaded', () => {
       closeFullscreen();
     }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initVideoDron, { once: true });
+} else {
+  initVideoDron();
+}

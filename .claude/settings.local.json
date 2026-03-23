@@ -62,7 +62,10 @@
       "Bash(/tmp/validate_svg.html:*)",
       "Read(//tmp/**)",
       "Bash(find /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude/scss -name *.scss -type f)",
-      "Bash(lsof -ti:4173)"
+      "Bash(lsof -ti:4173)",
+      "Bash(wc -l /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude/dist/js/*.js)",
+      "Bash(gzip -c dist/css/main.css)",
+      "Bash(cd /Users/imac_mini_javi/Documents/WEB/FALLA/FallaSuissaClaude grep -n '<img ' index.html)"
     ]
   }
 }

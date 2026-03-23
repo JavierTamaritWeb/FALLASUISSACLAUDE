@@ -54,6 +54,18 @@ Reglas importantes:
 - el `CreativeWork` debe seguir mencionando tanto a la organización como a HOPE
 - el título, la descripción y los metadatos OG/Twitter deben estar alineados con la colaboración real, no solo con la galería visual
 
+### Eventos dinámicos del tablón: `index.html` y `eventos.html`
+
+Las dos páginas pueden incorporar nodos `Event` generados desde `data/board.json` durante el build.
+
+Reglas importantes:
+
+- solo se emiten eventos cuando la fecha extraída del tablón es real y válida
+- fechas placeholder como `00-00-0000` no deben publicarse nunca en JSON-LD
+- cada `Event` válido debe incluir `organizer`, `eventStatus`, `description`, `offers` e `image`
+- ninguna otra página debe conservar bloques heredados de `Schema.org Eventos Dinámicos`
+- el tablón puede seguir mostrando notas informativas en UI aunque no sean aptas para Schema.org
+
 ## 🤝 Regla específica de HOPE-INCLIVA
 
 Para evitar romper el SEO técnico que ya está testado, mantén siempre estas condiciones:
@@ -110,6 +122,9 @@ npm run build
 
 # Validar solo HOPE SEO
 npx playwright test tests/hope-seo.e2e.spec.js
+
+# Validar schema de eventos del tablón
+npx playwright test tests/event-schema.e2e.spec.js
 ```
 
 Ejecuta además `npm run test:e2e:full` si el cambio también toca navegación, OG global, snapshots, meteo o layout compartido.
