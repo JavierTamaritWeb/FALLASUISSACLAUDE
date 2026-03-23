@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.8
+**Version:** 4.6.9
 **Last Updated:** 23 de marzo de 2026
 
 ## Project Overview
@@ -63,7 +63,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 - **Frontend**: HTML5, SCSS (BEM), ES6+ JavaScript modules
 - **Libraries (CDN)**: Swiper.js v11 (carousels, jsDelivr), Anime.js v3.2.1 (animations, cdnjs), EmailJS v4 (contact form, jsDelivr)
 - **Libraries (npm)**: Flatpickr v4.6.13 (date picker)
-- **Testing**: Playwright E2E (33 suites in full matrix, 8 smoke suites by default, 80 tests). Smoke suite (`npm run test:e2e`) runs: nav, i18n, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, scss-guardrails
+- **Testing**: Playwright E2E (34 suites in full matrix, 8 smoke suites by default). Smoke suite (`npm run test:e2e`) runs: nav, i18n, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, scss-guardrails
 
 ### Directory Structure
 
@@ -101,7 +101,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Legal Pages** (`aviso-legal.html`, `privacidad.html`, `cookies.html` + `scss/components/_contenido-legal.scss`): RGPD/LSSI/ePrivacy compliant pages. Uses `header-inner` pattern. Styled with `.contenido-legal` component (white card on gray background, dark mode support). Footer of ALL pages includes `<nav class="footer__legal">` with links to the 3 legal pages.
 
-**Cookie Banner** (`js/cookie-banner.js` + `scss/components/_cookie-banner.scss`): RGPD cookie consent banner. Shows on first visit if `localStorage.cookieConsent` is not set. Buttons: "Aceptar todas" / "Solo necesarias". Saves preference to localStorage. Fixed bottom bar with backdrop-filter.
+**Cookie Banner** (`js/cookie-banner.js` + `scss/components/_cookie-banner.scss`): RGPD cookie consent banner. Shows on first visit if `localStorage.cookieConsent` is not set. Buttons: "Aceptar todas" / "Solo necesarias". Saves preference to localStorage. Fixed bottom bar with backdrop-filter. Tests: `tests/cookie-banner.e2e.spec.js`.
 
 **Fullscreen Image Viewer** (`js/fullscreen.js`): Gallery notepad images can be enlarged. Uses native Fullscreen API when available (Chrome, Firefox, Safari macOS). On iPhone Safari (no Fullscreen API), creates a dynamic overlay lightbox as fallback. Tests: `tests/fullscreen-fallback.e2e.spec.js`.
 
@@ -130,7 +130,7 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
   - **Dark mode image**: Uses `filter: invert(1) hue-rotate(180deg)`. Do NOT use `invert(1)` alone - it turns the red Ajuntament crest green. The `hue-rotate(180deg)` restores red tones after inversion.
   - **Safari fix**: Uses `<picture>` with AVIF/WebP/PNG instead of SVG. Safari WebKit bug ([#246106](https://bugs.webkit.org/show_bug.cgi?id=246106)) prevents CSS `filter` from compositing correctly on SVGs with internal filter elements. Do NOT revert to `<img src="subvencion.svg">`. Size: SVG 289KB -> AVIF 25KB (-91%).
 
-- **Ofrenda image stacking (v4.6.4):** `.ofrenda__figura` uses `position: relative` + `aspect-ratio: 3/4` as the containing block. The `<button class="colaboraciones-mosaic__trigger">` inside is `position: absolute; inset: 0` to fill the figure. The `<img class="ofrenda__imagen">` MUST use `position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important` — applied directly on `.ofrenda__figura .ofrenda__imagen`, NOT nested inside the trigger selector. This is because a `<button>` with `position: absolute` does not act as a containing block for its children. The image takes its dimensions from `.ofrenda__figura` (the nearest `position: relative` ancestor), skipping the button. The `!important` flags are required because `_colaboraciones.scss` defines `.colaboraciones-mosaic__trigger img` with `object-fit: contain`, `padding`, and `filter` that would otherwise override ofrenda styles. Do NOT: remove `!important`, nest the image rule inside the trigger selector, change `object-fit` to `contain`, or remove `position: absolute` from the image.
+- **Ofrenda image stacking (v4.6.9):** `.ofrenda__figura` uses `position: relative` + `aspect-ratio: 3/4` as the containing block. The `<button class="colaboraciones-mosaic__trigger">` inside is `position: absolute; inset: 0` to fill the figure. The `<img class="ofrenda__imagen">` must fill this container completely (`width: 100%; height: 100%; object-fit: cover`). To override styling inherited from the trigger (`padding`, `display: flex`, `object-fit: contain`), `.colaboraciones-mosaic__trigger` is heavily overridden locally in `_ofrenda.scss` using `padding: 0 !important;` and `display: block;`. The image is nested within the trigger to guarantee CSS specificity. Do NOT: nest the image outside the trigger, remove `!important` from the padding rule, or switch the display property back to `flex`, as this will cause the image to break its aspect ratio or render margins within the flex container.
 
 - **No text-transform: capitalize (v4.6.8):** Do NOT use `text-transform: capitalize` anywhere in the SCSS. It forces uppercase on every word including prepositions and articles mid-sentence ("Blog De Nuestra Falla" instead of "Blog de nuestra Falla"). All capitalization must come from the text source (translations.json, HTML). Use `text-transform: none` or omit the property entirely.
 
