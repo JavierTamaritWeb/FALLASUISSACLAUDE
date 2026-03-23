@@ -27,7 +27,7 @@
   position: relative;
   text-align: center;
   text-decoration: none;
-  text-transform: capitalize;
+  text-transform: none;
   letter-spacing: 0.08em;
   font-size: 1.45rem;
   font-weight: 800;
@@ -126,7 +126,7 @@
   font-size: 1.6rem;
   font-weight: 700;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: none;
   @include m.transition(background-color, color);
   cursor: pointer;
 
@@ -154,7 +154,7 @@
   border: none;
   padding: 1.5rem 3rem;
   font-size: 1.6rem;
-  text-transform: capitalize;
+  text-transform: none;
   font-weight: bold;
   border-radius: v.$border-radius;
   cursor: pointer;
@@ -214,7 +214,7 @@
 //   font-size: 1.6rem;
 //   font-weight: 700;
 //   text-align: center;
-//   text-transform: capitalize;
+//   text-transform: none;
 //   border: none;
 //   padding: 10px 20px;
 //   cursor: pointer;

@@ -913,6 +913,42 @@ body.modo-oscuro .ofrenda {
 }
 
 /* ----------------------------------------------
+   MODO OSCURO CONTENIDO LEGAL
+------------------------------------------------ */
+body.modo-oscuro .contenido-legal {
+  background-color: v.$negro;
+
+  .contenedor {
+    background-color: v.$gris-muy-oscuro;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  h3 {
+    color: v.$gris-plateado;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.75);
+
+    strong {
+      color: v.$blanco;
+    }
+  }
+
+  ul li, ol li {
+    color: rgba(255, 255, 255, 0.75);
+
+    strong {
+      color: v.$blanco;
+    }
+  }
+
+  p:first-of-type {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* ----------------------------------------------
    MODO OSCURO COLABORACIONES
 ------------------------------------------------ */
 body.modo-oscuro .colaboraciones {

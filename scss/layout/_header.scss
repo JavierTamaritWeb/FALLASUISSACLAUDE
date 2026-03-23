@@ -76,7 +76,7 @@
     font-size: v.$font-size-medium;
     font-weight: 900;
     color: v.$primary-color;
-    text-transform: capitalize;
+    text-transform: none;
     font-size: 3rem;
 
     span {
@@ -261,7 +261,7 @@
   &__enlace {
     color: v.$blanco;
     text-decoration: none;
-    text-transform: capitalize;
+    text-transform: none;
     padding: 0.1rem 0.3rem;
     font-size: 1.2rem;
     font-weight: 700;
@@ -416,7 +416,7 @@
 
 .heading-inner {
   color: v.$primary-color;
-  text-transform: capitalize;
+  text-transform: none;
   display: inline-block; // Permite que se pongan en línea
   margin-right: 1rem; // Espacio entre elementos
   white-space: nowrap !important; // FUERZA el texto a permanecer en una línea
@@ -962,7 +962,7 @@ body.modo-oscuro {
   color: #333;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
-  text-transform: capitalize;
+  text-transform: none;
   
   &:hover {
     // background-color: #f0f0f0;

@@ -170,7 +170,7 @@
     font-size: 1.6rem;
     font-weight: 700;
     text-align: center;
-    text-transform: capitalize;
+    text-transform: none;
     border: 1px solid v.$primary-color;
     @include m.transition(background-color, color);
     display: inline-block;

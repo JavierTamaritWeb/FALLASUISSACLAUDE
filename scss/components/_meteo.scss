@@ -191,7 +191,7 @@
      
       &__portada-desc {
         font-size: 2rem;
-        text-transform: capitalize;
+        text-transform: none;
         margin: 0.5rem 0;
       }
     }
@@ -254,12 +254,12 @@
 .pronostico {
   font-size: v.$font-size-medium;
   color: v.$primary-color;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .etiqueta-pronostico {
   color: v.$gris-oscuro;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 /* ------------------------------------------------
@@ -352,7 +352,7 @@
 .actual-desc {
   color: v.$blanco;
   font-size: 2rem;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .actual-feel-like {
@@ -431,13 +431,13 @@
     font-size: v.$font-size-medium;
     color: v.$primary-color !important;
     margin: 3rem;
-    text-transform: capitalize;
+    text-transform: none;
   }
   .clima-actual {
     font-size: v.$font-size-medium;
     color: v.$primary-color;
     margin: 3rem;
-    text-transform: capitalize;
+    text-transform: none;
   }
 
   /* Iconos de pronóstico más grandes en pantallas grandes */

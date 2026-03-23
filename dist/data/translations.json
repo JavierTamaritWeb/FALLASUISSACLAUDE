@@ -12,10 +12,10 @@
       },
       "countdown": {
         "message": "Cuenta atrás para las Fallas",
-        "dias": "Días",
-        "horas": "Horas",
-        "minutos": "Minutos",
-        "segundos": "Segundos",
+        "dias": "días",
+        "horas": "horas",
+        "minutos": "minutos",
+        "segundos": "segundos",
         "ongoing": "¡Estamos en Fallas!"
       },
       "falla":{
@@ -25,7 +25,7 @@
             "titulo": "Nosotros",
             "falleraM": "La Fallera Mayor",
             "falleraMayor":{
-              "texto": "Rosario es sentimiento en estado puro. Vive cada acto con el corazón en la mano, emocionándose en cada detalle y dejando que la intensidad de la fiesta la envuelva por completo. No puede escuchar el himno de la Comunitat Valenciana sin que se le quiebren la voz y las lágrimas asomen, porque para ella ser Fallera Mayor es un orgullo que se siente muy dentro.\nFamiliar, cercana y auténtica, transmite cariño en cada gesto y hace que todos se sientan parte de algo especial. Rosario no solo representa a nuestra falla: la vive, la siente y la abraza con el alma."
+              "texto": "Rosario es sentimiento en estado puro. Vive cada acto con el corazón en la mano, emocionándose en cada detalle y dejando que la intensidad de la fiesta la envuelva por completo. No puede escuchar el himno de la Comunitat Valenciana sin que se le quiebren la voz y las lágrimas asomen, porque para ella ser Fallera Mayor es un orgullo que se siente muy dentro.\nFamiliar, cercana y auténtica, transmite cariño en cada gesto y hace que todos se sientan parte de algo especial. Rosario no solo representa a nuestra Falla: la vive, la siente y la abraza con el alma."
             },
             "presidente": "El Presidente",
             "presidenteM":{
@@ -33,7 +33,7 @@
             },
             "falleraMI": "La Fallera Mayor Infantil",
             "falleramayoraI":{
-              "texto": "Daniela es ilusión, dulzura y alegría. Representa la esencia más pura de nuestra comisión infantil: esa mezcla de nervios, sonrisas infinitas y amor sincero por la fiesta. Con su mirada brillante y su carácter cercano, vive cada acto con emoción y orgullo, llevando el nombre de nuestra falla con elegancia y naturalidad.\nEs la ternura que emociona, la energía que contagia y el reflejo del futuro que estamos construyendo juntos."
+              "texto": "Daniela es ilusión, dulzura y alegría. Representa la esencia más pura de nuestra comisión infantil: esa mezcla de nervios, sonrisas infinitas y amor sincero por la fiesta. Con su mirada brillante y su carácter cercano, vive cada acto con emoción y orgullo, llevando el nombre de nuestra Falla con elegancia y naturalidad.\nEs la ternura que emociona, la energía que contagia y el reflejo del futuro que estamos construyendo juntos."
             },
             "presidenteI": "El Presidente Infantil",
             "presiI":{
@@ -44,7 +44,7 @@
             "organigrama": "Organigrama",
             "mapa": "Mapa",
             "mapaInteractivo":{
-              "texto": "El mapa interactivo de la Falla Suïssa - L'Alqueria del Favero es una herramienta que permite a los visitantes explorar los diferentes puntos de interés de la falla. Incluye información sobre las ubicaciones de los monumentos, las casetas, los actos y otros eventos relacionados con las Fallas. Es una manera fácil y divertida de conocer mejor nuestra falla y participar en las celebraciones."
+              "texto": "El mapa interactivo de la Falla Suïssa - L'Alqueria del Favero es una herramienta que permite a los visitantes explorar los diferentes puntos de interés de la Falla. Incluye información sobre las ubicaciones de los monumentos, las casetas, los actos y otros eventos relacionados con las Fallas. Es una manera fácil y divertida de conocer mejor nuestra Falla y participar en las celebraciones."
             }
         },
         "videoDron": {
@@ -99,20 +99,20 @@
       "eventos": {
         "titulo": "Eventos",
         "calendario": "Calendario",
-        "tablon": "Tablón de Anuncios"
+        "tablon": "Tablón de anuncios"
       },
       "quieres":{
-        "titulo": "¿Quieres saber mas sobre nuestra falla?",
-        "pregunta": "¿Quieres formar parte de nuestra falla?",
+        "titulo": "¿Quieres saber mas sobre nuestra Falla?",
+        "pregunta": "¿Quieres formar parte de nuestra Falla?",
         "nombre": "Nombre",
         "telefono": "Teléfono",
         "mensaje": "Mensaje",
         "aceptar": "Aceptar",
-        "nombrePlaceholder": "Nombre y Apellidos",
+        "nombrePlaceholder": "Nombre y apellidos",
         "mensajePlaceholder": "Introduce un mensaje"
       },
       "blog": {
-        "titulo": "Blog de nuestra falla",
+        "titulo": "Blog de nuestra Falla",
         "articulo": "La Historia de las Fallas",
         "fecha": "Publicado el 1 de marzo de 2025",
         "descripcion": "Las Fallas son una fiesta tradicional que se celebra en Valencia, España, cada marzo. Esta celebración es conocida por sus impresionantes monumentos de cartón piedra, que son quemados en la noche de San José.",
@@ -127,7 +127,7 @@
           "back": "Volver al blog",
           "backAria": "Volver al listado del blog",
           "ctaAria": "Abrir el artículo Somni",
-          "content": "Un día tuvimos un sueño que no sabíamos que compartíamos con más gente. Viviendo en el nuevo barrio de les Moreres y hablando con los vecinos, descubrimos que era un sueño compartido. Trabajamos para que se hiciera realidad.\n\n\"Yo, de pequeña, fui fallera\", \"Yo llevo toda la vida siendo fallero\", \"Yo nunca lo he sido, pero me gustaría\". Estas eran algunas de las frases que compartíamos y escuchábamos hablar entre nosotros.\n\n\"¡Venga, valientes, hay que intentarlo!\" Con esa determinación, ocho personas ilusionadas —José, Marta, Paula, Rodrigo, Prados, Sara, Migue y David— comenzamos a reunirnos con un mismo objetivo: hacer realidad el sueño. Fundamos la directiva, creamos el escudo que nos identifica, redactamos los estatutos y emprendimos una lucha contra el tiempo y la burocracia.\n\nEn el mes de junio fue cuando, desde la Junta Central Fallera, nos confirmaron que el sueño se estaba convirtiendo en realidad. Ya éramos falla, la número 396, la Falla Suïssa – L’Alqueria del Favero. Ya podíamos formar una comisión que, a día de hoy, está compuesta ni más ni menos que por 113 falleros y falleras.\n\n¿El próximo objetivo? Plantar falla, nuestro primer monumento. En estos meses los artistas falleros ya tienen sus contratos firmados desde abril, pero como estamos soñando se hace la magia y conseguimos que los grandes Paco y David quieran trabajar con nosotros, ayudarnos y ser amigos de esta, nuestra comisión. Siempre les estaremos agradecidos. Este año plantaremos por huevos, como dice el lema de nuestra falla grande: \"¡Sssshhhhh… silencio que se rueda!\"; será la falla de la comisión infantil, que seguro enamora a Prados y Javier.\n\nSeguimos avanzando en este maravilloso sueño y tal vez llegue el momento de despertar y volver al presente, porque ha llegado el día de la exaltación de nuestras falleras mayores y la presentación de nuestros presidentes.\n\nCon todo ello, nos encontramos ante un sueño que ya es realidad, una realidad que hemos creado entre todos, con el esfuerzo y el cariño por nuestra tierra, nuestro barrio y nuestra tradición. Y ahora os invitamos a vivir con nosotros esta primera gran fiesta, a disfrutar de nuestra Falla y del barrio que nos acoge, porque, como un día soñamos juntos, hoy celebramos el comienzo de un camino que nunca olvidaremos. Bienvenidos a nuestras primeras e inolvidables Fallas."
+          "content": "Un día tuvimos un sueño que no sabíamos que compartíamos con más gente. Viviendo en el nuevo barrio de les Moreres y hablando con los vecinos, descubrimos que era un sueño compartido. Trabajamos para que se hiciera realidad.\n\n\"Yo, de pequeña, fui fallera\", \"Yo llevo toda la vida siendo fallero\", \"Yo nunca lo he sido, pero me gustaría\". Estas eran algunas de las frases que compartíamos y escuchábamos hablar entre nosotros.\n\n\"¡Venga, valientes, hay que intentarlo!\" Con esa determinación, ocho personas ilusionadas —José, Marta, Paula, Rodrigo, Prados, Sara, Migue y David— comenzamos a reunirnos con un mismo objetivo: hacer realidad el sueño. Fundamos la directiva, creamos el escudo que nos identifica, redactamos los estatutos y emprendimos una lucha contra el tiempo y la burocracia.\n\nEn el mes de junio fue cuando, desde la Junta Central Fallera, nos confirmaron que el sueño se estaba convirtiendo en realidad. Ya éramos Falla, la número 396, la Falla Suïssa – L’Alqueria del Favero. Ya podíamos formar una comisión que, a día de hoy, está compuesta ni más ni menos que por 113 falleros y falleras.\n\n¿El próximo objetivo? Plantar Falla, nuestro primer monumento. En estos meses los artistas falleros ya tienen sus contratos firmados desde abril, pero como estamos soñando se hace la magia y conseguimos que los grandes Paco y David quieran trabajar con nosotros, ayudarnos y ser amigos de esta, nuestra comisión. Siempre les estaremos agradecidos. Este año plantaremos por huevos, como dice el lema de nuestra Falla grande: \"¡Sssshhhhh… silencio que se rueda!\"; será la Falla de la comisión infantil, que seguro enamora a Prados y Javier.\n\nSeguimos avanzando en este maravilloso sueño y tal vez llegue el momento de despertar y volver al presente, porque ha llegado el día de la exaltación de nuestras falleras mayores y la presentación de nuestros presidentes.\n\nCon todo ello, nos encontramos ante un sueño que ya es realidad, una realidad que hemos creado entre todos, con el esfuerzo y el cariño por nuestra tierra, nuestro barrio y nuestra tradición. Y ahora os invitamos a vivir con nosotros esta primera gran fiesta, a disfrutar de nuestra Falla y del barrio que nos acoge, porque, como un día soñamos juntos, hoy celebramos el comienzo de un camino que nunca olvidaremos. Bienvenidos a nuestras primeras e inolvidables Fallas."
         },
         "anima": {
           "cardTitle": "El alma del barrio",
@@ -140,7 +140,7 @@
           "backAria": "Volver al listado del blog",
           "ctaAria": "Abrir el artículo El alma del barrio",
           "content1": "Después de la riada del 57, el Turia se quedó sin río: una herida larga en medio de Valencia. Y la idea oficial en los años sesenta y setenta era clara: hacer una autovía dentro de la ciudad, una \"aorta viaria\". Coches pasando justo por donde hoy juegan los niños, pasean los mayores y las Falleras Mayores se hacen la foto. La ciudad dijo basta. Nació una respuesta que aún resuena: \"El lecho del Turia es nuestro y lo queremos verde\". No era solo ecología. Era una forma de vivir: calle, sombra, banco, conversación. El lecho del río no tenía que separar barrios, sino unirlos.\n\nAquí entra Federico Trénor i Trénor, Barón de Alaquàs. Desde los cargos que ocupaba en el Estado, movió lo necesario para que el lecho del río no acabara asfaltado y se cediera a Valencia. Público, verde, vivo. Esto tiene fecha: 1 de diciembre de 1976. No es un cuento. De ahí nace el Jardín del Turia. Que no es solo \"un parque largo\". Es una victoria vecinal. Hoy es carril bici, pista para correr, banco para desahogarse, lugar donde quedar antes de la Ofrenda. Es donde bajas a coger aire.",
-          "content2": "En Les Moreres, justo al lado del lecho, está el Paseo de Federico Trénor, con el busto del Barón. No es decoración, es recordatorio: esto se luchó. Y en el mismo barrio está pasando otra cosa. Ya hay comisión fallera propia, la Alquería del Favero. No viene de una tradición antigua: se ha hecho entre vecinos y todavía sin un casal fijo. Se mueven de un sitio a otro, montan mesas donde pueden, pero tiran adelante igual. No es solo fiesta de marzo, es \"aquí también somos\". Las dos cosas juntas cuentan el mismo mensaje. El Jardín del Turia dice: este espacio es de todos. La falla del barrio dice: esta gente quiere ser barrio y ya lo está siendo. Una cosa cuida el lugar. La otra hace comunidad. Y eso es lo que hace real a Les Moreres: no que alguien de fuera le ponga un nombre, sino que la gente diga \"esto es nuestro\" y se quede a defenderlo. Aunque sin casal propio.",
+          "content2": "En Les Moreres, justo al lado del lecho, está el Paseo de Federico Trénor, con el busto del Barón. No es decoración, es recordatorio: esto se luchó. Y en el mismo barrio está pasando otra cosa. Ya hay comisión fallera propia, la Alquería del Favero. No viene de una tradición antigua: se ha hecho entre vecinos y todavía sin un casal fijo. Se mueven de un sitio a otro, montan mesas donde pueden, pero tiran adelante igual. No es solo fiesta de marzo, es \"aquí también somos\". Las dos cosas juntas cuentan el mismo mensaje. El Jardín del Turia dice: este espacio es de todos. La Falla del barrio dice: esta gente quiere ser barrio y ya lo está siendo. Una cosa cuida el lugar. La otra hace comunidad. Y eso es lo que hace real a Les Moreres: no que alguien de fuera le ponga un nombre, sino que la gente diga \"esto es nuestro\" y se quede a defenderlo. Aunque sin casal propio.",
           "imageCaption": "Federico Trénor i Trénor, Barón de Alaquàs",
           "imageAlt": "Busto de Federico Trénor i Trénor, Barón de Alaquàs, en el Paseo de Federico Trénor en les Moreres, Valencia"
         }
@@ -165,8 +165,8 @@
         "nieve3h": "Nieve (3h)",
         "amanecer": "Amanecer",
         "atardecer": "Atardecer",
-        "pronostico": "Previsión Próximos 5 Días",
-        "sensacion": "Sensación Térmica",
+        "pronostico": "Previsión próximos 5 días",
+        "sensacion": "Sensación térmica",
         "min": "Mín",
         "max": "Máx"
         
@@ -204,9 +204,9 @@
         "informacion": "Información",
         "recordatorio": "Recordatorio",
         "puntual": "Fecha puntual",
-        "dia": "Día (2 Dígitos)",
-        "mes": "Mes (2 Dígitos)",
-        "anno": "Año (4 Dígitos)",
+        "dia": "Día (2 dígitos)",
+        "mes": "Mes (2 dígitos)",
+        "anno": "Año (4 dígitos)",
         "detallesMes": "Detalles del mes",
         "listaAnuncios": "Lista de anuncios",
         "eventosMes": "Eventos de {month} {year}",
@@ -262,10 +262,10 @@
         "Día de San Valentín": "Día de San Valentín",
         "Día Internacional de la Mujer": "Día Internacional de la Mujer",
         "Celebración del Día Internacional de la Mujer": "Celebración del Día Internacional de la Mujer",
-        "Aviso Urgente": "Aviso Urgente",
-        "Información Importante": "Información Importante",
+        "Aviso Urgente": "Aviso urgente",
+        "Información Importante": "Información importante",
 
-        "Reunión Mensual a las 18:30": "Reunión Mensual a las 18:30",
+        "Reunión Mensual a las 18:30": "Reunión mensual a las 18:30",
         "Presentación de la Falla 2025-26": "Presentación de la Falla 2025-26"
       },
       "icsModal": {
@@ -284,6 +284,11 @@
       "footer": {
       "derechos": "@ 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados."
     },
+      "legal": {
+        "aviso": "Aviso Legal",
+        "privacidad": "Privacidad",
+        "cookies": "Cookies"
+      },
       "notepad": {
         "caption": "",
         "indicator": "Página {current} de {total}"
@@ -292,11 +297,11 @@
       "anterior": "Anterior",
       "siguiente": "Siguiente",
       "modalexito":{
-        "title":"Mensaje Enviado",
+        "title":"Mensaje enviado",
         "mensaje":"Mensaje enviado correctamente"
       },
       "modalerror":{
-        "title":"Error Enviando Mensaje",
+        "title":"Error enviando mensaje",
         "mensaje":"No se pudo enviar el mensaje. Por favor, inténtalo de nuevo."
       },
   
@@ -305,8 +310,8 @@
         "texto1": "Un día tuvimos un sueño que no sabíamos que compartíamos con más gente. Viviendo en el nuevo barrio de les Moreres y hablando con los vecinos, descubrimos que era un sueño compartido. Trabajamos para que se hiciera realidad.",
         "texto2": "“Yo, de pequeña, fui fallera”, “Yo llevo toda la vida siendo fallero”, “Yo nunca lo he sido, pero me gustaría”. Estas eran algunas de las frases que compartíamos y escuchábamos hablar entre nosotros.",
         "texto3":"“¡Venga, valientes, hay que intentarlo!” Con esa determinación, ocho personas ilusionadas —José, Marta, Paula, Rodrigo, Prados, Sara, Migue y David— comenzamos a reunirnos con un mismo objetivo: hacer realidad el sueño. Fundamos la directiva, creamos el escudo que nos identifica, redactamos los estatutos y emprendimos una lucha contra el tiempo y la burocracia.",
-        "texto4":"En el mes de junio fue cuando, desde la Junta Central Fallera, nos confirmaron que el sueño se estaba convirtiendo en realidad. Ya éramos falla, la número 396, la Falla Suïssa – L’Alquería del Favero. Ya podíamos formar una comisión que, a día de hoy, está compuesta ni más ni menos que por 113 falleros y falleras.",
-        "texto5":"¿El próximo objetivo? Plantar falla, nuestro primer monumento. En estos meses los artistas falleros ya tienen sus contratos firmados desde abril, pero como estamos soñando se hace la magia y conseguimos que los grandes Paco y David quieran trabajar con nosotros, ayudarnos y ser amigos de esta, nuestra comisión. Siempre les estaremos agradecidos. Este año plantaremos por huevos, como dice el lema de nuestra falla grande: “¡Sssshhhhh… silencio que se rueda!”; será la falla de la comisión infantil, que seguro enamora a Prados y Javier.",
+        "texto4":"En el mes de junio fue cuando, desde la Junta Central Fallera, nos confirmaron que el sueño se estaba convirtiendo en realidad. Ya éramos Falla, la número 396, la Falla Suïssa – L’Alquería del Favero. Ya podíamos formar una comisión que, a día de hoy, está compuesta ni más ni menos que por 113 falleros y falleras.",
+        "texto5":"¿El próximo objetivo? Plantar Falla, nuestro primer monumento. En estos meses los artistas falleros ya tienen sus contratos firmados desde abril, pero como estamos soñando se hace la magia y conseguimos que los grandes Paco y David quieran trabajar con nosotros, ayudarnos y ser amigos de esta, nuestra comisión. Siempre les estaremos agradecidos. Este año plantaremos por huevos, como dice el lema de nuestra Falla grande: “¡Sssshhhhh… silencio que se rueda!”; será la Falla de la comisión infantil, que seguro enamora a Prados y Javier.",
         "texto6":"Seguimos avanzando en este maravilloso sueño y tal vez llegue el momento de despertar y volver al presente, porque ha llegado el día de la exaltación de nuestras falleras mayores y la presentación de nuestros presidentes.",
         "texto7":"Con todo ello, nos encontramos ante un sueño que ya es realidad, una realidad que hemos creado entre todos, con el esfuerzo y el cariño por nuestra tierra, nuestro barrio y nuestra tradición. Y ahora os invitamos a vivir con nosotros esta primera gran fiesta, a disfrutar de nuestra Falla y del barrio que nos acoge, porque, como un día soñamos juntos, hoy celebramos el comienzo de un camino que nunca olvidaremos. Bienvenidos a nuestras primeras e inolvidables Fallas.",
         "archivos": {
@@ -344,13 +349,13 @@
         "web": "Delegado Web",
         "loteria": "Delegada Lotería",
         "deportes": "Delegado Deportes",
-        "leyenda": "Este es el organigrama de la falla, donde se pueden ver los diferentes cargos y sus respectivas funciones. En el ejercicio 2025-26, queda conformado de esta manera."
+        "leyenda": "Este es el organigrama de la Falla, donde se pueden ver los diferentes cargos y sus respectivas funciones. En el ejercicio 2025-26, queda conformado de esta manera."
       },
       "colaboraciones": {
         "titulo": "Colaboraciones",
         "hope": {
           "titulo": "HOPE",
-          "texto": "El pasado 7 de marzo, nuestra comisión fallera Suïssa-L'Alqueria del Favero demostró que el espíritu faller va mucho más allá de la pólvora y la fiesta. Porque cuando una falla se une de verdad, es capaz de mover montañas.\nOrganizamos una perolà solidaria de 'fesols i naps' a favor del Proyecto Hope, y cada cucharada servida llevaba dentro algo más grande que el arroz: llevaba esperanza. Esperanza para las familias que luchan cada día contra el Linfoma No Hodgkin Pediátrico, esperanza para esos niños y niñas que merecen un futuro sin enfermedad, esperanza para que la investigación siga avanzando y encuentre las respuestas que tantas familias necesitan.\nCada plato, cada euro recaudado, cada mano que colaboró ese día es la prueba de que nuestra comisión no solo levanta monumentos en la calle, sino que también construye algo mucho más importante: solidaridad de verdad, la que se cocina a fuego lento y se reparte entre todos.\nPorque ser faller es eso. Es sentarse juntos alrededor de una mesa, compartir lo que somos y poner nuestro granito de arena para que el mundo sea un poco mejor. Y el 7 de marzo, Suïssa-L'Alqueria del Favero lo hizo con el corazón en la mano y la cuchara en la otra.\nA todos los que vinisteis, colaborasteis o simplemente compartisteis la palabra: gracias. Porque la investigación contra el cáncer infantil avanza también gracias a gestos como este. Gestos de barrio, de falla, de familia.\nQue nadie dude nunca del poder de una comisión unida. Que nadie dude del poder de una perolà hecha con alma.\nPer Hope. Pels xiquets i xiquetes. Per la nostra falla."
+          "texto": "El pasado 7 de marzo, nuestra comisión fallera Suïssa-L'Alqueria del Favero demostró que el espíritu faller va mucho más allá de la pólvora y la fiesta. Porque cuando una Falla se une de verdad, es capaz de mover montañas.\nOrganizamos una perolà solidaria de 'fesols i naps' a favor del Proyecto Hope, y cada cucharada servida llevaba dentro algo más grande que el arroz: llevaba esperanza. Esperanza para las familias que luchan cada día contra el Linfoma No Hodgkin Pediátrico, esperanza para esos niños y niñas que merecen un futuro sin enfermedad, esperanza para que la investigación siga avanzando y encuentre las respuestas que tantas familias necesitan.\nCada plato, cada euro recaudado, cada mano que colaboró ese día es la prueba de que nuestra comisión no solo levanta monumentos en la calle, sino que también construye algo mucho más importante: solidaridad de verdad, la que se cocina a fuego lento y se reparte entre todos.\nPorque ser faller es eso. Es sentarse juntos alrededor de una mesa, compartir lo que somos y poner nuestro granito de arena para que el mundo sea un poco mejor. Y el 7 de marzo, Suïssa-L'Alqueria del Favero lo hizo con el corazón en la mano y la cuchara en la otra.\nA todos los que vinisteis, colaborasteis o simplemente compartisteis la palabra: gracias. Porque la investigación contra el cáncer infantil avanza también gracias a gestos como este. Gestos de barrio, de Falla, de familia.\nQue nadie dude nunca del poder de una comisión unida. Que nadie dude del poder de una perolà hecha con alma.\nPer Hope. Pels xiquets i xiquetes. Per la nostra Falla."
         },
         "lightbox": {
           "titulo": "Imagen ampliada de HOPE",
@@ -372,10 +377,10 @@
       },
       "countdown": {
         "message": "Compte enrere per a les Fallas",
-        "dias": "Dies",
-        "horas": "Hores",
-        "minutos": "Minuts",
-        "segundos": "Segons",
+        "dias": "dies",
+        "horas": "hores",
+        "minutos": "minuts",
+        "segundos": "segons",
         "ongoing": "Ja estem en Falles!"
       },
       "falla":{
@@ -385,7 +390,7 @@
             "titulo": "Nosaltres",
             "falleraM": "La Fallera Major",
             "falleraMayor":{
-              "texto": "Rosario és sentiment en estat pur. Viu cada acte amb el cor en la mà, emocionant-se amb cada detall i deixant que la intensitat de la festa l’abrace per complet. No pot escoltar l’Himne de la Comunitat Valenciana sense que se li trenque la veu i li brollen les llàgrimes, perquè per a ella ser Fallera Major és un orgull que se sent ben endins.\nFamiliar, pròxima i autèntica, transmet afecte en cada gest i fa que tots se senten part d’alguna cosa especial. Rosario no sols representa la nostra falla: la viu, la sent i l’abraça amb l’ànima."
+              "texto": "Rosario és sentiment en estat pur. Viu cada acte amb el cor en la mà, emocionant-se amb cada detall i deixant que la intensitat de la festa l’abrace per complet. No pot escoltar l’Himne de la Comunitat Valenciana sense que se li trenque la veu i li brollen les llàgrimes, perquè per a ella ser Fallera Major és un orgull que se sent ben endins.\nFamiliar, pròxima i autèntica, transmet afecte en cada gest i fa que tots se senten part d’alguna cosa especial. Rosario no sols representa la nostra Falla: la viu, la sent i l’abraça amb l’ànima."
             },
             "presidente": "El President",
             "presidenteM":{
@@ -393,7 +398,7 @@
             },
             "falleraMI": "La Fallera Major Infantil",
             "falleramayoraI":{
-              "texto": "Daniela és il·lusió, dolçor i alegria. Representa l'essència més pura de la nostra comissió infantil: aquella barreja de nervis, somriures infinits i amor sincer per la festa. Amb la seva mirada brillant i el seu caràcter proper, viu cada acte amb emoció i orgull, portant el nom de la nostra falla amb elegància i naturalitat.\nÉs la tendresa que emociona, l'energia que contagia i el reflex del futur que estem construint junts."
+              "texto": "Daniela és il·lusió, dolçor i alegria. Representa l'essència més pura de la nostra comissió infantil: aquella barreja de nervis, somriures infinits i amor sincer per la festa. Amb la seva mirada brillant i el seu caràcter proper, viu cada acte amb emoció i orgull, portant el nom de la nostra Falla amb elegància i naturalitat.\nÉs la tendresa que emociona, l'energia que contagia i el reflex del futur que estem construint junts."
             },
             
             "presidenteI": "El President Infantil",
@@ -404,7 +409,7 @@
             "organigrama": "Organigrama",
             "mapa": "Mapa",
             "mapaInteractivo":{
-              "texto": "El mapa interactiu de la Falla Suïssa - L'Alqueria del Favero és una eina que permet als visitants explorar els diferents punts d'interès de la falla. Inclou informació sobre les ubicacions dels monuments, les casetes, els actes i altres esdeveniments relacionats amb les Falles. És una manera fàcil i divertida de conèixer millor la nostra falla i participar en les celebracions."
+              "texto": "El mapa interactiu de la Falla Suïssa - L'Alqueria del Favero és una eina que permet als visitants explorar els diferents punts d'interès de la Falla. Inclou informació sobre les ubicacions dels monuments, les casetes, els actes i altres esdeveniments relacionats amb les Falles. És una manera fàcil i divertida de conèixer millor la nostra Falla i participar en les celebracions."
             }
         },
         "videoDron": {
@@ -459,20 +464,20 @@
       "eventos": {
         "titulo": "Esdeveniments",
         "calendario": "Calendari",
-        "tablon": "Tauler d'Anuncis"
+        "tablon": "Tauler d'anuncis"
       },
       "quieres":{
         "titulo": "Vols saber més sobre la nostra Falla?",
-        "pregunta": "Vols formar part de la nostra falla?",
-        "nombre": "Nom i Cognoms",
+        "pregunta": "Vols formar part de la nostra Falla?",
+        "nombre": "Nom i cognoms",
         "telefono": "Telèfon",
         "mensaje": "Missatge",
         "aceptar": "Acceptar",
-        "nombrePlaceholder": "Nom i Cognoms",
+        "nombrePlaceholder": "Nom i cognoms",
         "mensajePlaceholder": "Intodueix un missatge"
       },
       "blog": {
-        "titulo": "Blog de la nostra falla",
+        "titulo": "Blog de la nostra Falla",
         "articulo": "La Història de les Falles",
         "fecha": "Publicat el 1 de març de 2025",
         "descripcion": "Les Falles són una festa tradicional que se celebra a València, Espanya, cada març. Aquesta celebració és coneguda pels seus impressionants monuments de cartró pedra, que són cremats la nit de Sant Josep. ",
@@ -487,7 +492,7 @@
           "back": "Tornar al blog",
           "backAria": "Tornar al llistat del blog",
           "ctaAria": "Obrir l'article Somni",
-          "content": "Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint al nou barri de les Moreres i parlant amb els veïns, vam descobrir que era un somni compartit. Vam treballar perquè es fes realitat.\n\n\"Jo, de petita, vaig ser fallera\", \"Jo porto tota la vida sent faller\", \"Jo mai ho he estat, però m’agradaria\". Aquestes eren algunes de les frases que compartíem i escoltàvem parlar entre nosaltres.\n\n\"Vinga, valents, cal intentar-ho!\" Amb aquesta determinació, vuit persones il·lusionades —José, Marta, Paula, Rodrigo, Prados, Sara, Migue i David— vam començar a reunir-nos amb un mateix objectiu: fer realitat el somni. Vam fundar la directiva, vam crear l’escut que ens identifica, vam redactar els estatuts i vam emprendre una lluita contra el temps i la burocràcia.\n\nAl mes de juny va ser quan, des de la Junta Central Fallera, ens van confirmar que el somni s’estava convertint en realitat. Ja érem falla, la número 396, la Falla Suïssa – L’Alqueria del Favero. Ja podíem formar una comissió que, a dia d’avui, està composta ni més ni menys que per 113 fallers i falleres.\n\nEl pròxim objectiu? Plantar falla, el nostre primer monument. En aquests mesos els artistes fallers ja tenen els seus contractes signats des d’abril, però com estem somiant es fa la màgia i aconseguim que els grans Paco i David vulguin treballar amb nosaltres, ajudar-nos i ser amics d’aquesta, la nostra comissió. Sempre els estarem agraïts. Aquest any plantarem per ous, com diu el lema de la nostra falla gran: \"¡Sssshhhhh… silenci que es roda!\"; serà la falla de la comissió infantil, que segur enamora a Prados i Javier.\n\nSeguim avançant en aquest meravellós somni i tal vegada arribi el moment de despertar i tornar al present, perquè ha arribat el dia de l’exaltació de les nostres falleres majors i la presentació dels nostres presidents.\n\nAmb tot això, ens trobem davant d’un somni que ja és realitat, una realitat que hem creat entre tots, amb l’esforç i l’afecte per la nostra terra, el nostre barri i la nostra tradició. I ara us convidem a viure amb nosaltres aquesta primera gran festa, a gaudir de la nostra Falla i del barri que ens acull, perquè, com un dia vam somiar junts, avui celebrem l’inici d’un camí que mai oblidarem. Benvinguts a les nostres primeres i inoblidables Falles."
+          "content": "Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint al nou barri de les Moreres i parlant amb els veïns, vam descobrir que era un somni compartit. Vam treballar perquè es fes realitat.\n\n\"Jo, de petita, vaig ser fallera\", \"Jo porto tota la vida sent faller\", \"Jo mai ho he estat, però m’agradaria\". Aquestes eren algunes de les frases que compartíem i escoltàvem parlar entre nosaltres.\n\n\"Vinga, valents, cal intentar-ho!\" Amb aquesta determinació, vuit persones il·lusionades —José, Marta, Paula, Rodrigo, Prados, Sara, Migue i David— vam començar a reunir-nos amb un mateix objectiu: fer realitat el somni. Vam fundar la directiva, vam crear l’escut que ens identifica, vam redactar els estatuts i vam emprendre una lluita contra el temps i la burocràcia.\n\nAl mes de juny va ser quan, des de la Junta Central Fallera, ens van confirmar que el somni s’estava convertint en realitat. Ja érem Falla, la número 396, la Falla Suïssa – L’Alqueria del Favero. Ja podíem formar una comissió que, a dia d’avui, està composta ni més ni menys que per 113 fallers i falleres.\n\nEl pròxim objectiu? Plantar Falla, el nostre primer monument. En aquests mesos els artistes fallers ja tenen els seus contractes signats des d’abril, però com estem somiant es fa la màgia i aconseguim que els grans Paco i David vulguin treballar amb nosaltres, ajudar-nos i ser amics d’aquesta, la nostra comissió. Sempre els estarem agraïts. Aquest any plantarem per ous, com diu el lema de la nostra Falla gran: \"¡Sssshhhhh… silenci que es roda!\"; serà la Falla de la comissió infantil, que segur enamora a Prados i Javier.\n\nSeguim avançant en aquest meravellós somni i tal vegada arribi el moment de despertar i tornar al present, perquè ha arribat el dia de l’exaltació de les nostres falleres majors i la presentació dels nostres presidents.\n\nAmb tot això, ens trobem davant d’un somni que ja és realitat, una realitat que hem creat entre tots, amb l’esforç i l’afecte per la nostra terra, el nostre barri i la nostra tradició. I ara us convidem a viure amb nosaltres aquesta primera gran festa, a gaudir de la nostra Falla i del barri que ens acull, perquè, com un dia vam somiar junts, avui celebrem l’inici d’un camí que mai oblidarem. Benvinguts a les nostres primeres i inoblidables Falles."
         },
         "anima": {
           "cardTitle": "L’Ànima del barri",
@@ -500,7 +505,7 @@
           "backAria": "Tornar al llistat del blog",
           "ctaAria": "Obrir l’article L’Ànima del barri",
           "content1": "Després de la riuada del 57, el Túria es va quedar sense riu: una ferida llarga al mig de València. I l’idea oficial als anys seixanta i setanta era clara: fer una autovia dins de la ciutat, una \"aorta viària\". Cotxes passant just per on hui juguen els xiquets, passegen els majors i les Falleres Majors es fan la foto. La ciutat va dir prou. Va nàixer una resposta que encara ressona: \"El llit del Túria és nostre i el volem verd\". No era només ecologia. Era una manera de viure: carrer, ombra, banc, conversa. El llit del riu no havia de separar barris, sinó unir-los.\n\nAcí entra Federico Trénor i Trénor, Baró d’Alaquàs. Des dels càrrecs que ocupava a l’Estat, va moure el que calia perquè el llit del riu no acabara asfaltat i es cedira a València. Públic, verd, viu. Açò té data: 1 de desembre de 1976. No és un conte. D’això naix el Jardí del Túria. Que no és només \"un parc llarg\". És una victòria veïnal. Hui és carril bici, pista per a córrer, banc per a desfogar-se, lloc on quedar abans de l’Ofrena. És on baixes a agarrar aire.",
-          "content2": "En Les Moreres, just al costat del llit, està el Passeig de Federico Trénor, amb el bust del Baró. No és decoració, és recordatori: açò es va lluitar. I en el mateix barri està passant una altra cosa. Ja hi ha comissió fallera pròpia, l’Alqueria del Favero. No ve d’una tradició antiga: s’ha fet entre veïns i encara sense un casal fix. Es mouen d’un lloc a un altre, munten taules on poden, però tiren avant igual. No és només festa de març, és \"ací també som\". Les dues coses juntes conten el mateix missatge. El Jardí del Túria diu: este espai és de tots. La falla del barri diu: esta gent vol ser barri i ja ho està sent. Una cosa cuida el lloc. L’altra fa comunitat. I això és el que fa real Les Moreres: no que algú de fora li pose un nom, sinó que la gent diga \"açò és nostre\" i es quede a defensar-ho. Encara que sense casal propi.",
+          "content2": "En Les Moreres, just al costat del llit, està el Passeig de Federico Trénor, amb el bust del Baró. No és decoració, és recordatori: açò es va lluitar. I en el mateix barri està passant una altra cosa. Ja hi ha comissió fallera pròpia, l’Alqueria del Favero. No ve d’una tradició antiga: s’ha fet entre veïns i encara sense un casal fix. Es mouen d’un lloc a un altre, munten taules on poden, però tiren avant igual. No és només festa de març, és \"ací també som\". Les dues coses juntes conten el mateix missatge. El Jardí del Túria diu: este espai és de tots. La Falla del barri diu: esta gent vol ser barri i ja ho està sent. Una cosa cuida el lloc. L’altra fa comunitat. I això és el que fa real Les Moreres: no que algú de fora li pose un nom, sinó que la gent diga \"açò és nostre\" i es quede a defensar-ho. Encara que sense casal propi.",
           "imageCaption": "Federico Trénor i Trénor, Baró d’Alaquàs",
           "imageAlt": "Bust de Federico Trénor i Trénor, Baró d’Alaquàs, al Passeig de Federico Trénor en les Moreres, València"
         }
@@ -525,8 +530,8 @@
         "nieve3h": "Neu (3h)",
         "amanecer": "Alba",
         "atardecer": "Posta de sol",
-        "pronostico": "Previsió Propers 5 Dies",
-        "sensacion": "Sensació Tèrmica",
+        "pronostico": "Previsió propers 5 dies",
+        "sensacion": "Sensació tèrmica",
         "min": "Mín",
         "max": "Máx"   
     
@@ -565,9 +570,9 @@
         "informacion": "Informació",
         "recordatorio": "Recordatori",
         "puntual": "Data puntual",
-        "dia": "Dia (2 Dígits)",
-        "mes": "Mes (2 Dígits)",
-        "anno": "Any (4 Dígits)",
+        "dia": "Dia (2 dígits)",
+        "mes": "Mes (2 dígits)",
+        "anno": "Any (4 dígits)",
         "detallesMes": "Detalls del mes",
         "listaAnuncios": "Llista d'anuncis",
         "eventosMes": "Esdeveniments de {month} {year}",
@@ -624,9 +629,9 @@
         "Día Internacional de la Mujer": "Dia Internacional de la Dona",
         "Celebración del Día Internacional de la Mujer": "Celebració del Dia Internacional de la Dona",
 
-        "Aviso Urgente": "Avís Urgent",
-        "Información Importante": "Informació Important",
-        "Reunión Mensual a las 18:30": "Reunió Mensual a les 18:30",
+        "Aviso Urgente": "Avís urgent",
+        "Información Importante": "Informació important",
+        "Reunión Mensual a las 18:30": "Reunió mensual a les 18:30",
         "Presentación de la Falla 2025-26": "Presentació de la Falla 2025-26"
         
       },
@@ -644,6 +649,11 @@
      "footer": {
         "derechos": "@ 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats."
     },
+      "legal": {
+        "aviso": "Avís Legal",
+        "privacidad": "Privacitat",
+        "cookies": "Cookies"
+      },
       "notepad": {
         "caption": "",
         "indicator": "Pàgina {current} de {total}"
@@ -664,8 +674,8 @@
         "texto1": "Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint al nou barri de les Moreres i parlant amb els veïns, vam descobrir que era un somni compartit. Vam treballar perquè es fes realitat.",
         "texto2": "“Jo, de petita, vaig ser fallera”, “Jo porto tota la vida sent faller”, “Jo mai ho he estat, però m'agradaria”. Aquestes eren algunes de les frases que compartíem i escoltàvem parlar entre nosaltres.",
         "texto3":"“Vinga, valents, cal intentar-ho!” Amb aquesta determinació, vuit persones il·lusionades —José, Marta, Paula, Rodrigo, Prados, Sara, Migue i David— vam començar a reunir-nos amb un mateix objectiu: fer realitat el somni. Vam fundar la directiva, vam crear l'escut que ens identifica, vam redactar els estatuts i vam emprendre una lluita contra el temps i la burocràcia.",
-        "texto4":"Al mes de juny va ser quan, des de la Junta Central Fallera, ens van confirmar que el somni s'estava convertint en realitat. Ja érem falla, la número 396, la Falla Suïssa – L’Alqueria del Favero. Ja podíem formar una comissió que, a dia d'avui, està composta ni més ni menys que per 113 fallers i falleres.",
-        "texto5":"El pròxim objectiu? Plantar falla, el nostre primer monument. En aquests mesos els artistes fallers ja tenen els seus contractes signats des d'abril, però com estem somiant es fa la màgia i aconseguim que els grans Paco i David vulguin treballar amb nosaltres, ajudar-nos i ser amics d'aquesta, la nostra comissió. Sempre els estarem agraïts. Aquest any plantarem per ous, com diu el lema de la nostra falla gran: “¡Sssshhhhh… silenci que es roda!”; serà la falla de la comissió infantil, que segur enamora a Prados i Javier.",
+        "texto4":"Al mes de juny va ser quan, des de la Junta Central Fallera, ens van confirmar que el somni s'estava convertint en realitat. Ja érem Falla, la número 396, la Falla Suïssa – L’Alqueria del Favero. Ja podíem formar una comissió que, a dia d'avui, està composta ni més ni menys que per 113 fallers i falleres.",
+        "texto5":"El pròxim objectiu? Plantar Falla, el nostre primer monument. En aquests mesos els artistes fallers ja tenen els seus contractes signats des d'abril, però com estem somiant es fa la màgia i aconseguim que els grans Paco i David vulguin treballar amb nosaltres, ajudar-nos i ser amics d'aquesta, la nostra comissió. Sempre els estarem agraïts. Aquest any plantarem per ous, com diu el lema de la nostra Falla gran: “¡Sssshhhhh… silenci que es roda!”; serà la Falla de la comissió infantil, que segur enamora a Prados i Javier.",
         "texto6":"Seguim avançant en aquest meravellós somni i tal vegada arribi el moment de despertar i tornar al present, perquè ha arribat el dia de l'exaltació de les nostres falleres majors i la presentació dels nostres presidents.", 
         "texto7":"Amb tot això, ens trobem davant d'un somni que ja és realitat, una realitat que hem creat entre tots, amb l'esforç i l'afecte per la nostra terra, el nostre barri i la nostra tradició. I ara us convidem a viure amb nosaltres aquesta primera gran festa, a gaudir de la nostra Falla i del barri que ens acull, perquè, com un dia vam somiar junts, avui celebrem l'inici d'un camí que mai oblidarem. Benvinguts a les nostres primeres i inoblidables Falles." ,
         "archivos": {
@@ -705,13 +715,13 @@
         "web": "Delegat Web",
         "loteria": "Delegada Loteria",
         "deportes": "Delegat Esports",
-        "leyenda": "Aquest és l'organigrama de la falla, on es poden veure els diferents càrrecs i les seves respectives funcions. En l'exercici 2025-26, queda conformada d'aquesta manera."
+        "leyenda": "Aquest és l'organigrama de la Falla, on es poden veure els diferents càrrecs i les seves respectives funcions. En l'exercici 2025-26, queda conformada d'aquesta manera."
       },
       "colaboraciones": {
         "titulo": "Col·laboracions",
         "hope": {
           "titulo": "HOPE",
-          "texto": "El passat 7 de març, la nostra comissió fallera Suïssa-L'Alqueria del Favero va demostrar que l'esperit faller va molt més enllà de la pólvora i la festa. Perquè quan una falla s'uneix de veritat, és capaç de moure muntanyes.\nVam organitzar una perolà de 'fesols i naps' solidària a favor del Projecte Hope, i cada cullerada servida portava dins quelcom molt més gran que l'arròs: portava esperança. Esperança per a les famílies que lluiten cada dia contra el Limfoma No Hodgkin Pediàtric, esperança per als xiquets i xiquetes que mereixen un futur sense malaltia, esperança perquè la investigació continue avançant i trobe les respostes que tantes famílies necessiten.\nCada plat, cada euro recaptat, cada mà que va col·laborar aquell dia és la prova que la nostra comissió no sols alça monuments al carrer, sinó que també construeix alguna cosa molt més important: solidaritat de veritat, la que es cuina a foc lent i es reparteix entre tots.\nPerquè ser faller és això. És seure junts al voltant d'una taula, compartir allò que som i posar el nostre granet d'arena perquè el món siga una mica millor. I el 7 de març, Suïssa-L'Alqueria del Favero ho va fer amb el cor en la mà i la cullera en l'altra.\nA tots els que vinguéreu, col·laboràreu o simplement compartíreu la paraula: gràcies. Perquè la investigació contra el càncer infantil avança també gràcies a gestos com aquest. Gestos de barri, de falla, de família.\nQue ningú no dubte mai del poder d'una comissió unida. Que ningú no dubte del poder d'una perolà feta amb ànima.\nPer Hope. Pels xiquets i xiquetes. Per la nostra falla."
+          "texto": "El passat 7 de març, la nostra comissió fallera Suïssa-L'Alqueria del Favero va demostrar que l'esperit faller va molt més enllà de la pólvora i la festa. Perquè quan una Falla s'uneix de veritat, és capaç de moure muntanyes.\nVam organitzar una perolà de 'fesols i naps' solidària a favor del Projecte Hope, i cada cullerada servida portava dins quelcom molt més gran que l'arròs: portava esperança. Esperança per a les famílies que lluiten cada dia contra el Limfoma No Hodgkin Pediàtric, esperança per als xiquets i xiquetes que mereixen un futur sense malaltia, esperança perquè la investigació continue avançant i trobe les respostes que tantes famílies necessiten.\nCada plat, cada euro recaptat, cada mà que va col·laborar aquell dia és la prova que la nostra comissió no sols alça monuments al carrer, sinó que també construeix alguna cosa molt més important: solidaritat de veritat, la que es cuina a foc lent i es reparteix entre tots.\nPerquè ser faller és això. És seure junts al voltant d'una taula, compartir allò que som i posar el nostre granet d'arena perquè el món siga una mica millor. I el 7 de març, Suïssa-L'Alqueria del Favero ho va fer amb el cor en la mà i la cullera en l'altra.\nA tots els que vinguéreu, col·laboràreu o simplement compartíreu la paraula: gràcies. Perquè la investigació contra el càncer infantil avança també gràcies a gestos com aquest. Gestos de barri, de Falla, de família.\nQue ningú no dubte mai del poder d'una comissió unida. Que ningú no dubte del poder d'una perolà feta amb ànima.\nPer Hope. Pels xiquets i xiquetes. Per la nostra Falla."
         },
         "lightbox": {
           "titulo": "Imatge ampliada de HOPE",
@@ -833,8 +843,8 @@
         "texto1": "One day we had a dream that we didn't know we shared with more people. Living in the new neighborhood of les Moreres and talking to the neighbors, we discovered that it was a shared dream. We worked to make it come true.",
         "texto2": "“I was a fallera when I was little”, “I have been a faller all my life”, “I have never been one, but I would like to be”. These were some of the phrases we shared and heard each other say.",
         "texto3":"“Come on, brave ones, we have to try!” With that determination, eight excited people —José, Marta, Paula, Rodrigo, Prados, Sara, Migue and David— began to meet with a common goal: to make the dream come true. We founded the board, created the shield that identifies us, drafted the statutes and undertook a fight against time and bureaucracy.",
-        "texto4":"In June, we were confirmed by the Central Fallera Board that the dream was becoming a reality. We were already a falla, number 396, the Falla Suïssa – L’Alqueria del Favero. We could now form a commission that today is made up of no less than 113 fallers and falleras.",
-        "texto5":"The next objective? To plant a falla, our first monument. In these months the fallero artists already have their contracts signed since April, but as we are dreaming the magic happens and we manage to get the great Paco and David to want to work with us, help us and be friends of this, our commission. We will always be grateful to them. This year we will plant eggs, as the motto of our big falla says: “¡Sssshhhhh… silence that is rolled!”; it will be the falla of the children's commission, which surely enchants Prados and Javier.",
+        "texto4":"In June, we were confirmed by the Central Fallera Board that the dream was becoming a reality. We were already a Falla, number 396, the Falla Suïssa – L’Alqueria del Favero. We could now form a commission that today is made up of no less than 113 fallers and falleras.",
+        "texto5":"The next objective? To plant a Falla, our first monument. In these months the fallero artists already have their contracts signed since April, but as we are dreaming the magic happens and we manage to get the great Paco and David to want to work with us, help us and be friends of this, our commission. We will always be grateful to them. This year we will plant eggs, as the motto of our big Falla says: “¡Sssshhhhh… silence that is rolled!”; it will be the Falla of the children's commission, which surely enchants Prados and Javier.",
         "texto6":"We continue to advance in this wonderful dream and perhaps the time will come to wake up and return to the present, because the day of the exaltation of our major falleras and the presentation of our presidents has arrived.",
         "texto7":"With all this, we find ourselves before a dream that is already a reality, a reality that we have created together, with the effort and affection for our land, our neighborhood and our tradition. And now we invite you to live this first great party with us, to enjoy our Falla and the neighborhood that welcomes us, because, as one day we dreamed together, today we celebrate the beginning of a path that we will never forget. Welcome to our first unforgettable Fallas."
       },
@@ -858,7 +868,7 @@
         "web": "Web Delegate",
         "loteria": "Lottery Delegate",
         "deportes": "Sports Delegate",
-        "leyenda": "This is the organizational chart of the falla, where you can see the different positions and their respective functions. In the 2025-26 exercise, it is configured this way."
+        "leyenda": "This is the organizational chart of the Falla, where you can see the different positions and their respective functions. In the 2025-26 exercise, it is configured this way."
       }
     },
     "fr": {
@@ -976,8 +986,8 @@
         "texto1": "Un jour, nous avons eu un rêve que nous ne savions pas partager avec d'autres. Vivant dans le nouveau quartier de les Moreres et parlant avec les voisins, nous avons découvert que c'était un rêve partagé. Nous avons travaillé pour le réaliser.",
         "texto2": "« Moi, petite, j'étais fallera », « Je suis faller depuis toute ma vie », « Je ne l'ai jamais été, mais j'aimerais ». C'étaient quelques-unes des phrases que nous partagions et entendions parler entre nous.",
         "texto3":"« Allez, courageux, il faut essayer ! » Avec cette détermination, huit personnes enthousiastes —José, Marta, Paula, Rodrigo, Prados, Sara, Migue et David— ont commencé à se réunir avec un même objectif : réaliser le rêve. Nous avons fondé la direction, créé le blason qui nous identifie, rédigé les statuts et entrepris une lutte contre le temps et la bureaucratie.",
-        "texto4":"Au mois de juin, la Junta Centrale Fallera nous a confirmé que le rêve devenait réalité. Nous étions déjà une falla, la numéro 396, la Falla Suïssa – L’Alqueria del Favero. Nous pouvions déjà former une commission qui, à ce jour, est composée de 113 fallers et falleras.",
-        "texto5":"Quel est le prochain objectif ? Planter la falla, notre premier monument. Au cours de ces mois, les artistes fallers ont déjà signé leurs contrats depuis avril, mais comme nous sommes en train de rêver, la magie opère et nous parvenons à ce que les grands Paco et David veuillent travailler avec nous, nous aider et être amis de cette commission. Nous leur en serons toujours reconnaissants. Cette année, nous planterons pour des œufs, comme le dit la devise de notre grande falla : « Sssshhhhh… silence ça tourne ! » ; ce sera la falla de la commission infantile, qui séduira sûrement Prados et Javier.",
+        "texto4":"Au mois de juin, la Junta Centrale Fallera nous a confirmé que le rêve devenait réalité. Nous étions déjà une Falla, la numéro 396, la Falla Suïssa – L’Alqueria del Favero. Nous pouvions déjà former une commission qui, à ce jour, est composée de 113 fallers et falleras.",
+        "texto5":"Quel est le prochain objectif ? Planter la Falla, notre premier monument. Au cours de ces mois, les artistes fallers ont déjà signé leurs contrats depuis avril, mais comme nous sommes en train de rêver, la magie opère et nous parvenons à ce que les grands Paco et David veuillent travailler avec nous, nous aider et être amis de cette commission. Nous leur en serons toujours reconnaissants. Cette année, nous planterons pour des œufs, comme le dit la devise de notre grande Falla : « Sssshhhhh… silence ça tourne ! » ; ce sera la Falla de la commission infantile, qui séduira sûrement Prados et Javier.",
         "texto6":"Nous continuons d'avancer dans ce merveilleux rêve et peut-être viendra le moment de se réveiller et de revenir au présent, car le jour de l'exaltation de nos falleras majeures et de la présentation de nos présidents est arrivé.",
         "texto7":"Avec tout cela, nous nous trouvons devant un rêve qui est déjà une réalité, une réalité que nous avons créée ensemble, avec l'effort et l'affection pour notre terre, notre quartier et notre tradition. Et maintenant, nous vous invitons à vivre avec nous cette première grande fête, à profiter de notre Falla et du quartier qui nous accueille, car, comme un jour nous avons rêvé ensemble, aujourd'hui nous célébrons le début d'un chemin que nous n'oublierons jamais. Bienvenue à nos premières et inoubliables Fallas."
       },
@@ -1002,7 +1012,7 @@
         "web": "Délégué Web",
         "loteria": "Déléguée Loterie",
         "deportes": "Délégué Sports",
-        "leyenda": "Voici l'organigramme de la falla, où vous pouvez voir les différents postes et leurs fonctions respectives. Dans l'exercice 2025-26, il est configuré de cette manière."
+        "leyenda": "Voici l'organigramme de la Falla, où vous pouvez voir les différents postes et leurs fonctions respectives. Dans l'exercice 2025-26, il est configuré de cette manière."
         
       }
     }

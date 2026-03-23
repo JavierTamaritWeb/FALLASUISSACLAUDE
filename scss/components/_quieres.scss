@@ -58,7 +58,7 @@
     font-size: 1.6rem;
     font-weight: 700;
     text-align: center;
-    text-transform: capitalize;
+    text-transform: none;
     @include m.transition(color 200ms);
     display: inline-block;
     cursor: pointer;
