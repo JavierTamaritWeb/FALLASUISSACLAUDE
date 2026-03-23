@@ -2,8 +2,12 @@
 // Banner de consentimiento de cookies (RGPD / LSSI / ePrivacy)
 
 function initCookieBanner() {
-  // Si ya hay consentimiento, no mostrar el banner
-  if (localStorage.getItem('cookieConsent')) return;
+  // Si ya hay consentimiento o localStorage está bloqueado (SecurityError Safari), lo gestionamos
+  try {
+    if (localStorage.getItem('cookieConsent')) return;
+  } catch (e) {
+    console.warn('El acceso a localStorage está bloqueado por el navegador.');
+  }
 
   // Crear el banner dinámicamente
   const banner = document.createElement('div');
@@ -31,15 +35,28 @@ function initCookieBanner() {
 
   document.body.appendChild(banner);
 
-  // Mostrar con animación
-  requestAnimationFrame(() => {
-    banner.classList.add('cookie-banner--visible');
-  });
+  // Forzar reflow para Safari macOS (evita que se salte la transición CSS)
+  void banner.offsetWidth;
+
+  // Mostrar con clase
+  banner.classList.add('cookie-banner--visible');
 
   function closeBanner(consent) {
-    localStorage.setItem('cookieConsent', consent);
+    try {
+      localStorage.setItem('cookieConsent', consent);
+    } catch (e) {
+      console.warn('No se pudo guardar el consentimiento debido a las restricciones del navegador.');
+    }
+    
     banner.classList.remove('cookie-banner--visible');
+    
+    // Fallback por si transitionend falla en Safari
+    const removeTimeout = setTimeout(() => {
+      if (document.getElementById('cookie-banner')) banner.remove();
+    }, 500);
+
     banner.addEventListener('transitionend', () => {
+      clearTimeout(removeTimeout);
       banner.remove();
     }, { once: true });
   }
