@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.4
-**Last Updated:** 22 de marzo de 2026
+**Version:** 4.6.8
+**Last Updated:** 23 de marzo de 2026
 
 ## Project Overview
 
@@ -99,11 +99,17 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Testing**: Tests serve `dist/` via `scripts/serve-dist.mjs` on `http://127.0.0.1:4173`. Playwright config pre-sets `localStorage` key `bannerSubvencionCerrado=true` to hide the banner in tests. Banner runtime shows on each load of `index.html` unless an automated browser pre-sets that key. Set `PLAYWRIGHT_REUSE_SERVER=true` to skip server restart when debugging.
 
+**Legal Pages** (`aviso-legal.html`, `privacidad.html`, `cookies.html` + `scss/components/_contenido-legal.scss`): RGPD/LSSI/ePrivacy compliant pages. Uses `header-inner` pattern. Styled with `.contenido-legal` component (white card on gray background, dark mode support). Footer of ALL pages includes `<nav class="footer__legal">` with links to the 3 legal pages.
+
+**Cookie Banner** (`js/cookie-banner.js` + `scss/components/_cookie-banner.scss`): RGPD cookie consent banner. Shows on first visit if `localStorage.cookieConsent` is not set. Buttons: "Aceptar todas" / "Solo necesarias". Saves preference to localStorage. Fixed bottom bar with backdrop-filter.
+
+**Fullscreen Image Viewer** (`js/fullscreen.js`): Gallery notepad images can be enlarged. Uses native Fullscreen API when available (Chrome, Firefox, Safari macOS). On iPhone Safari (no Fullscreen API), creates a dynamic overlay lightbox as fallback. Tests: `tests/fullscreen-fallback.e2e.spec.js`.
+
 **Known flaky tests**: Visual regression tests (snapshot mismatches), meteo animation tests (opacity timing), and countdown UI tests (timing-dependent) may intermittently fail. These are known issues, not regressions.
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.4).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.8).
 
 ## Architecture Decisions & Constraints
 
@@ -125,6 +131,10 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
   - **Safari fix**: Uses `<picture>` with AVIF/WebP/PNG instead of SVG. Safari WebKit bug ([#246106](https://bugs.webkit.org/show_bug.cgi?id=246106)) prevents CSS `filter` from compositing correctly on SVGs with internal filter elements. Do NOT revert to `<img src="subvencion.svg">`. Size: SVG 289KB -> AVIF 25KB (-91%).
 
 - **Ofrenda image stacking (v4.6.4):** `.ofrenda__figura` uses `position: relative` + `aspect-ratio: 3/4` as the containing block. The `<button class="colaboraciones-mosaic__trigger">` inside is `position: absolute; inset: 0` to fill the figure. The `<img class="ofrenda__imagen">` MUST use `position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important` — applied directly on `.ofrenda__figura .ofrenda__imagen`, NOT nested inside the trigger selector. This is because a `<button>` with `position: absolute` does not act as a containing block for its children. The image takes its dimensions from `.ofrenda__figura` (the nearest `position: relative` ancestor), skipping the button. The `!important` flags are required because `_colaboraciones.scss` defines `.colaboraciones-mosaic__trigger img` with `object-fit: contain`, `padding`, and `filter` that would otherwise override ofrenda styles. Do NOT: remove `!important`, nest the image rule inside the trigger selector, change `object-fit` to `contain`, or remove `position: absolute` from the image.
+
+- **No text-transform: capitalize (v4.6.8):** Do NOT use `text-transform: capitalize` anywhere in the SCSS. It forces uppercase on every word including prepositions and articles mid-sentence ("Blog De Nuestra Falla" instead of "Blog de nuestra Falla"). All capitalization must come from the text source (translations.json, HTML). Use `text-transform: none` or omit the property entirely.
+
+- **"Falla/Fallas" always capitalized (v4.6.8):** The words "Falla" and "Fallas" must ALWAYS have uppercase F in all visible text (translations, HTML, meta descriptions). This applies to all languages (ES: "Falla/Fallas", VA: "Falla/Falles"). Do NOT write "nuestra falla" — write "nuestra Falla".
 
 - **Blog-detail image stacking (v4.3.11):** `.blog-detail__figure` needs `z-index: 2` to stay above the `::before` pseudo-element (blue gradient, z-index: 0) of `.blog-detail__article`. Centering uses `margin: 1.5rem auto` + `max-width: 48rem` on the figure (not flexbox, which causes issues with `<picture>`). Image uses `display: block; width: 100%`. On mobile the figure switches to `max-width: 100%`.
 
