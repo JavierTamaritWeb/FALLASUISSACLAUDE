@@ -12,6 +12,7 @@ const { glob } = require('glob');
 const path = require('path');
 const fs = require('fs').promises;
 const crypto = require('crypto');
+const terser = require('gulp-terser');
 
 const EVENT_BASE_URL = 'https://fallasuissa.es/eventos.html';
 const EVENT_IMAGE_URL = 'https://fallasuissa.es/img/Escudo_falla.png';
@@ -117,9 +118,13 @@ function cssTask() {
   return streamToPromise(stream);
 }
 
-// JS - Copia
+// JS - Minifica y copia
 function jsTask() {
-  return streamToPromise(src(paths.js.src, { encoding: false }).pipe(dest(paths.js.dest)));
+  return streamToPromise(
+    src(paths.js.src)
+      .pipe(terser({ compress: true, mangle: true }))
+      .pipe(dest(paths.js.dest))
+  );
 }
 
 // Data - Copia
