@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.11
-**Last Updated:** 23 de marzo de 2026
+**Version:** 4.6.14
+**Last Updated:** 24 de marzo de 2026
 
 ## Project Overview
 
@@ -59,7 +59,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Tech Stack
 
-- **Build**: Gulp 5 + Dart Sass + PostCSS (autoprefixer) + CSSNano + Sharp
+- **Build**: Gulp 5 + Dart Sass + PostCSS (autoprefixer) + CSSNano + Terser (JS minification) + Sharp
 - **Frontend**: HTML5, SCSS (BEM), ES6+ JavaScript modules
 - **Libraries (CDN)**: Swiper.js v11 (carousels, jsDelivr), Anime.js v3.2.1 (animations, cdnjs), EmailJS v4 (contact form, jsDelivr)
 - **Libraries (npm)**: Flatpickr v4.6.13 (date picker)
@@ -109,7 +109,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.11).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.14).
 
 ## Architecture Decisions & Constraints
 
