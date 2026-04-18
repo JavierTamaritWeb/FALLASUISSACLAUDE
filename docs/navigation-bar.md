@@ -243,24 +243,36 @@ Dentro de `body.modo-oscuro` se fuerzan los estados `:hover`, `:focus-visible` y
 
 ---
 
-## 🟧 Estilo del enlace activo (active / aria-current)
+## 🟧 Estilo del enlace activo (active / aria-current) — v4.6.15
 
-El enlace activo se define por:
+Desde v4.6.15 tanto `.navegacion__enlace` (header) como `.footer__enlace` (footer) comparten el **patrón de subrayado animado (variante desvanecimiento)**. Ya **no** existe pastilla de fondo (blanca/azul) en el estado activo — el indicador es el color del texto + el subrayado permanente.
 
-- `.navegacion__enlace.active`
-- `.navegacion__enlace[aria-current="page"]`
+### Patrón compartido
 
-### En modo claro
+- En reposo: texto `v.$blanco`, sin fondo.
+- Pseudo-elemento `::after` (anclado `position: absolute; bottom`, `height: 2px`, `background-color: v.$primary-color`) con `width: 0; opacity: 0`.
+- En `:hover` y `:focus-visible`: `color: v.$primary-color` y el `::after` anima `width: 0 → calc(100% - padding*2)` + `opacity: 0 → 1` con `transition: width 0.3s ease, opacity 0.3s ease`.
+- En `.active` / `[aria-current="page"]`: mismo resultado que hover pero **permanente** (texto coral + subrayado al 100%).
 
-- Fondo: blanco translúcido (`rgba(255,255,255,0.75)`)
-- Texto: tono azul oscuro de la barra (`rgba(3,49,95,0.95)`)
+### Archivos fuente
 
-### En modo oscuro
+- `.navegacion__enlace` → `scss/layout/_header.scss` (bloque "Estilos de Navegación (Segunda versión)")
+- `.footer__enlace` → `scss/layout/_footer.scss`
 
-Override dentro de `body.modo-oscuro`:
+### Funciona igual en claro y oscuro
 
-- Fondo: blanco translúcido (ligeramente más alto en hover/focus)
-- Texto: gris oscuro (`rgba(34,34,34,0.95)`)
+El coral `v.$primary-color` (#FF6F61) tiene contraste suficiente contra:
+- el gradiente azul translúcido del header (modo claro),
+- el fondo gris translúcido del header (modo oscuro),
+- el gradiente azul del footer (ambos temas).
+
+Por eso **no** hay overrides de `body.modo-oscuro` para los enlaces activos. Los bloques previos de dark mode (fondo blanco en header, fondo `v.$gris-claro` en footer) fueron eliminados en v4.6.15.
+
+### No revertir
+
+- No re-añadir `background-color: rgba(255, 255, 255, 0.75)` en el enlace activo del header.
+- No re-añadir `background-color: #03315f` ni `background-color: v.$gris-claro` en el enlace activo del footer.
+- No cambiar `:focus-visible` por `:focus` (rompe la accesibilidad: haría que el subrayado quede "pegado" tras un click de ratón).
 
 ---
 
@@ -510,4 +522,12 @@ npm run build
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.2
+## 🆕 v4.6.15 - Patrón de subrayado unificado
+
+- `.navegacion__enlace` y `.footer__enlace` comparten ahora el patrón de subrayado animado con `::after` (variante desvanecimiento: animación simultánea de `width` y `opacity`).
+- Eliminada la pastilla de fondo (blanca en header, `#03315f` en footer) del estado activo.
+- Eliminados los overrides `body.modo-oscuro` que devolvían el activo a un fondo claro con texto oscuro (ya no hay fondo que ajustar).
+- Hover/focus y activo usan ambos `v.$primary-color` tanto en el texto como en la línea del `::after`.
+- Test `tests/nav.e2e.spec.js` actualizado: ya no espera fondo blanco en el enlace activo móvil; ahora valida `color === rgb(255, 111, 97)` y que el `::after` tiene `opacity: 1` + `background-color` en coral.
+
+Última actualización: 18 de abril de 2026 - v4.6.15

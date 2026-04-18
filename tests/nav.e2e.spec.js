@@ -109,8 +109,13 @@ test.describe('Navbar responsive + idioma', () => {
         link.classList.contains('active')
       );
 
+      const activeLink = activeLinks[0];
+      const activeAfter = activeLink ? window.getComputedStyle(activeLink, '::after') : null;
+
       return {
-        activeBackgroundColor: activeLinks[0] ? window.getComputedStyle(activeLinks[0]).backgroundColor : '',
+        activeColor: activeLink ? window.getComputedStyle(activeLink).color : '',
+        activeUnderlineOpacity: activeAfter ? activeAfter.opacity : '',
+        activeUnderlineBackground: activeAfter ? activeAfter.backgroundColor : '',
         activeLinks: activeLinks.length,
         backdropFilter: window.getComputedStyle(nav).backdropFilter,
         backgroundColor: window.getComputedStyle(nav).backgroundColor,
@@ -135,7 +140,11 @@ test.describe('Navbar responsive + idioma', () => {
     expect(navState.backdropFilter).toContain('blur');
     expect(navState.visibleLinkCount).toBeGreaterThan(0);
     expect(navState.activeLinks).toBe(1);
-    expect(navState.activeBackgroundColor).toMatch(/rgba\(255,\s*255,\s*255/);
+    // El enlace activo ahora se distingue con texto en color primario (#FF6F61) + subrayado permanente,
+    // sin pastilla de fondo blanca.
+    expect(navState.activeColor).toMatch(/rgb\(255,\s*111,\s*97\)/);
+    expect(navState.activeUnderlineBackground).toMatch(/rgb\(255,\s*111,\s*97\)/);
+    expect(parseFloat(navState.activeUnderlineOpacity)).toBe(1);
   });
 
   test('mobile: el dropdown adapta el fondo en modo oscuro', async ({ page }) => {

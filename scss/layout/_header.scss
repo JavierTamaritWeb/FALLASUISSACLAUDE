@@ -281,7 +281,7 @@
   
    
     &:hover {
-      background-color: v.$primary-color;
+      color: v.$primary-color;
     }
     
     @media (min-width: 768px) {
@@ -291,8 +291,7 @@
   
   &__enlace.active,
   &__enlace[aria-current="page"] {
-    background-color: #03315f;
-    color: v.$blanco;
+    color: v.$primary-color;
     
     /* Otros estilos opcionales */
   }
@@ -660,19 +659,6 @@ body.modo-oscuro {
     background-color: rgba(255, 255, 255, 0.12);
   }
 
-  .navegacion__enlace.active,
-  .navegacion__enlace[aria-current="page"] {
-    background-color: rgba(255, 255, 255, 0.75);
-    color: rgba(34, 34, 34, 0.95);
-  }
-
-  .navegacion__enlace.active:hover,
-  .navegacion__enlace.active:focus,
-  .navegacion__enlace[aria-current="page"]:hover,
-  .navegacion__enlace[aria-current="page"]:focus {
-    background-color: rgba(255, 255, 255, 0.85);
-    color: rgba(34, 34, 34, 0.95);
-  }
 }
 
 // Keyframe para el efecto de presionado
@@ -754,6 +740,7 @@ body.modo-oscuro {
 }
 
 .navegacion__enlace {
+  position: relative;
   color: v.$blanco;
   text-decoration: none;
   font-size: 1.2rem;
@@ -765,29 +752,45 @@ body.modo-oscuro {
   justify-content: center;
   min-height: 44px;
   width: auto;
-  transition: background-color 200ms ease, color 200ms ease, text-shadow 200ms ease;
+  transition: color 200ms ease, text-shadow 200ms ease, background-color 200ms ease;
   // Sombra más definida para legibilidad sobre fondo translúcido azul
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  
-  &:hover,
-  &:focus {
+
+  // Subrayado animado (desvanecimiento): crece de 0 → 100% con fade-in
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0.35rem;
+    left: 0.3rem;
+    width: 0;
+    height: 2px;
     background-color: v.$primary-color;
-    color: v.$blanco;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
   }
 
+  &:hover,
+  &:focus-visible {
+    color: v.$primary-color;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    width: calc(100% - 0.6rem);
+    opacity: 1;
+  }
+
+  // Enlace activo: subrayado permanente + texto en color primario (sin fondo)
   &.active,
   &[aria-current="page"] {
-    background-color: rgba(255, 255, 255, 0.75);
-    color: rgba(3, 49, 95, 0.95);
-    text-shadow: none; // No necesita sombra con fondo blanco
+    color: v.$primary-color;
   }
 
-  &.active:hover,
-  &.active:focus,
-  &[aria-current="page"]:hover,
-  &[aria-current="page"]:focus {
-    background-color: rgba(255, 255, 255, 0.85);
-    color: rgba(3, 49, 95, 0.95);
+  &.active::after,
+  &[aria-current="page"]::after {
+    width: calc(100% - 0.6rem);
+    opacity: 1;
   }
 }
 
@@ -844,6 +847,19 @@ body.modo-oscuro {
     justify-content: flex-start;
     padding: 0.65rem 0.85rem;
     border-radius: 0.9rem;
+
+    // Ajusta el subrayado al padding mayor del dropdown móvil
+    &::after {
+      bottom: 0.4rem;
+      left: 0.85rem;
+    }
+
+    &:hover::after,
+    &:focus-visible::after,
+    &.active::after,
+    &[aria-current="page"]::after {
+      width: calc(100% - 1.7rem);
+    }
   }
 
   body.nav-open {

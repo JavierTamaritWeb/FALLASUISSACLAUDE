@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.14
-**Last Updated:** 24 de marzo de 2026
+**Version:** 4.6.15
+**Last Updated:** 18 de abril de 2026
 
 ## Project Overview
 
@@ -109,7 +109,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.14).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.15).
 
 ## Architecture Decisions & Constraints
 
@@ -141,6 +141,8 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 - **"Falla/Fallas" always capitalized (v4.6.8):** The words "Falla" and "Fallas" must ALWAYS have uppercase F in all visible text (translations, HTML, meta descriptions). This applies to all languages (ES: "Falla/Fallas", VA: "Falla/Falles"). Do NOT write "nuestra falla" — write "nuestra Falla".
 
 - **Blog-detail image stacking (v4.3.11):** `.blog-detail__figure` needs `z-index: 2` to stay above the `::before` pseudo-element (blue gradient, z-index: 0) of `.blog-detail__article`. Centering uses `margin: 1.5rem auto` + `max-width: 48rem` on the figure (not flexbox, which causes issues with `<picture>`). Image uses `display: block; width: 100%`. On mobile the figure switches to `max-width: 100%`.
+
+- **Nav & footer underline hover pattern (v4.6.15):** Both `.navegacion__enlace` (header) and `.footer__enlace` share a single hover/active pattern — a `::after` underline (2px, `v.$primary-color`) that animates `width: 0 → calc(100% - padding*2)` and `opacity: 0 → 1` (desvanecimiento variant). Text colour shifts to `v.$primary-color` on `:hover`, `:focus-visible` and on `.active` / `[aria-current="page"]`. No background pill on active state — the coloured text + permanent underline ARE the indicator. Do NOT re-add `background-color: rgba(255,255,255,...)` or dark-mode `background-color: v.$gris-claro` overrides for the active state. The footer block still keeps `!important` on several declarations because of historical specificity battles with global resets — keep them when editing.
 
 ## Common Patterns
 

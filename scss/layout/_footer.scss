@@ -69,92 +69,83 @@
       justify-self: start;  // a la izquierda en escritorio
     }
   }
-  &__enlace.active,
-  &__enlace[aria-current="page"] {
-    background-color: #03315f !important;
-    color: v.$blanco !important; // O el color de texto que prefieras
-    border-color: rgba(255, 255, 255, 0.85) !important;
-    border-top-color: rgba(255, 255, 255, 0.85) !important;
-    box-shadow: none !important;
-    padding: 0.2rem 0.65rem !important;
-  }
-
   &__enlace {
+    position: relative;
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
     color: v.$blanco;
-    border-radius: 0.3rem !important;
     text-decoration: none;
     font-weight: 700;
     padding: 0.2rem 0.55rem !important;
     min-height: 44px !important;
     width: auto;
-    border: 1px solid rgba(255, 255, 255, 0.07) !important;
-    border-top-color: rgba(255, 255, 255, 0.03) !important;
-    background-color: rgba(255, 255, 255, 0.06) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
-    transition:
-      background-color 300ms ease,
-      color 300ms ease,
-      border-color 300ms ease,
-      box-shadow 300ms ease,
-      transform 300ms ease;
-    
-    &:hover {
-      background-color: v.$blanco !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    transition: color 300ms ease;
+
+    // Subrayado animado (mismo patrón que .navegacion__enlace)
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0.25rem;
+      left: 0.55rem;
+      width: 0;
+      height: 2px;
+      background-color: v.$primary-color;
+      opacity: 0;
+      transition: width 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    &:hover,
+    &:focus-visible {
       color: v.$primary-color !important;
-      border-color: rgba(v.$primary-color, 0.40) !important;
-      border-top-color: rgba(v.$primary-color, 0.16) !important;
-      padding: 0.2rem 0.55rem !important;
-      transform: none !important;
-      box-shadow: inset 0 1px 0 rgba(v.$primary-color, 0.03) !important;
+      background-color: transparent !important;
     }
 
-    &:focus {
-      outline: 3px solid v.$blanco !important;
-      outline-offset: 3px;
-      transform: none !important;
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25) !important;
-      border-color: rgba(255, 255, 255, 0.85) !important;
-    }
-
-    &:focus:not(:focus-visible) {
-      outline: none !important;
-      box-shadow: none !important;
+    &:hover::after,
+    &:focus-visible::after {
+      width: calc(100% - 1.1rem);
+      opacity: 1;
     }
 
     &:focus-visible {
-      outline: 3px solid v.$blanco !important;
-      outline-offset: 3px;
-      transform: none !important;
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25) !important;
-      border-color: rgba(255, 255, 255, 0.85) !important;
+      outline: 2px solid v.$primary-color;
+      outline-offset: 4px;
     }
 
     @media (min-width: 768px) {
       font-size: 1.3rem;
       padding: 0.25rem 0.75rem !important;
+
+      &::after {
+        left: 0.75rem;
+      }
+
+      &:hover::after,
+      &:focus-visible::after,
+      &.active::after,
+      &[aria-current="page"]::after {
+        width: calc(100% - 1.5rem);
+      }
     }
   }
 
-  body.modo-oscuro &__enlace.active,
-  body.modo-oscuro &__enlace[aria-current="page"] {
-    background-color: v.$gris-claro !important;
-    color: v.$negro !important;
-    border-color: v.$gris-medio-oscuro !important;
-    border-top-color: v.$gris-medio-oscuro !important;
-    box-shadow: none !important;
+  // Enlace activo: subrayado permanente + texto coral (sin fondo)
+  &__enlace.active,
+  &__enlace[aria-current="page"] {
+    color: v.$primary-color !important;
+    background-color: transparent !important;
   }
 
-  body.modo-oscuro &__enlace.active:hover,
-  body.modo-oscuro &__enlace[aria-current="page"]:hover {
-    background-color: v.$gris-claro !important;
-    color: v.$negro !important;
-    border-color: v.$gris-medio-oscuro !important;
-    border-top-color: v.$gris-medio-oscuro !important;
-    box-shadow: none !important;
+  &__enlace.active::after,
+  &__enlace[aria-current="page"]::after {
+    width: calc(100% - 1.1rem);
+    opacity: 1;
   }
 
   &__escudo {
