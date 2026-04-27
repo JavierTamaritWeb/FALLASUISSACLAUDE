@@ -21,6 +21,13 @@ El JSON tiene un objeto raíz con un array `notas`.
     {
       "id": "identificador-unico",
       "activo": true,
+      "imagen": {
+        "url": "img/eventos/cartel.jpg",
+        "alt": {
+          "es": "Texto alternativo en español",
+          "va": "Text alternatiu en valencià"
+        }
+      },
       "contenido": {
         "es": "Texto en español con <br> para saltos de línea",
         "va": "Text en valencià amb <br> per a salts de línia"
@@ -37,6 +44,9 @@ El JSON tiene un objeto raíz con un array `notas`.
 | ------- | ------ | ----------- | ------------- |
 | `id` | `string` | Sí | Identificador único y estable. Útil para localizar una nota concreta. |
 | `activo` | `boolean` | No | Si es `false`, la nota queda oculta sin necesidad de borrarla. |
+| `imagen` | `object` | No | Imagen embebida visible dentro de la nota (cartel, infografía…). Si se omite, la nota no muestra imagen embebida. |
+| `imagen.url` | `string` | Sí (si hay `imagen`) | Ruta relativa a la imagen, p. ej. `img/eventos/cartel.jpg`. |
+| `imagen.alt` | `object` o `string` | No | Texto alternativo accesible. Se recomienda objeto bilingüe `{ "es": "...", "va": "..." }`. |
 | `contenido` | `object` | Sí | Texto de la nota por idioma. Debe incluir `es` y `va`. |
 | `contenido.es` | `string` | Sí | Texto en español. |
 | `contenido.va` | `string` | Sí | Texto en valenciano. |
@@ -68,10 +78,18 @@ Consecuencia práctica:
 ## 🧾 Tipos de nota soportados hoy
 
 1. Solo texto.
-2. Texto con una imagen.
+2. Texto con una imagen embebida (`imagen`).
 3. Texto con un PDF.
 4. Texto con varios archivos.
 5. Texto con mezcla de PDFs e imágenes.
+6. Texto con imagen embebida + adjunto descargable (combinable con `imagen` y `adjuntos` a la vez).
+
+### Diferencia entre `imagen` y `adjuntos[].tipo: "img"`
+
+- `imagen` (campo de la nota): se renderiza como `<figure class="board__figure"><img class="board__image">` **dentro** del article, visible directamente. Útil para carteles o infografías que aportan información clave.
+- `adjuntos[]` con `tipo: "img"`: se renderiza como un enlace tipo "Ver imagen" que abre el archivo en otra pestaña. No se muestra inline.
+
+Pueden combinarse: imagen visible en la nota + enlace "Ver cartel completo" para abrirlo a tamaño real (ver ejemplo más abajo).
 
 ## ✍️ Flujo recomendado para añadir o editar una nota
 
@@ -121,6 +139,36 @@ Consecuencia práctica:
 }
 ```
 
+### Ejemplo: nota con imagen embebida + enlace al cartel completo
+
+```json
+{
+  "id": "presentacion-candidaturas-2026",
+  "activo": true,
+  "imagen": {
+    "url": "img/eventos/presentacion-candidaturas-2026.jpg",
+    "alt": {
+      "es": "Cartel de la Presentación de Candidaturas 2026-2027",
+      "va": "Cartell de la Presentació de Candidatures 2026-2027"
+    }
+  },
+  "contenido": {
+    "es": "📌 ANUNCIO <br> 24-04-2026 al 03-05-2026<br>📝 Cita<br> Presentación de Candidaturas 2026-2027 a Representantes",
+    "va": "📌 ANUNCI <br> 24-04-2026 al 03-05-2026<br>📝 Cita<br> Presentació de Candidatures 2026-2027 a Representants"
+  },
+  "adjuntos": [
+    {
+      "tipo": "img",
+      "url": "img/eventos/presentacion-candidaturas-2026.jpg",
+      "nombre": {
+        "es": "Ver cartel completo",
+        "va": "Veure cartell complet"
+      }
+    }
+  ]
+}
+```
+
 ### Ejemplo: nota con varios archivos
 
 ```json
@@ -158,10 +206,12 @@ Consecuencia práctica:
 - El contenido de cada nota sigue viviendo en `data/board.json`; solo el copy genérico del componente debe ir a `data/translations.json`.
 - El contenido admite HTML simple como `<br>` o `<strong>`, pero úsalo con moderación.
 - No pegues HTML de terceros ni contenido no confiable: el renderizado actual inserta `contenido` como HTML en el DOM.
-- Las rutas de `adjuntos[].url` son relativas a la raíz del sitio público.
+- Las rutas de `adjuntos[].url` y `imagen.url` son relativas a la raíz del sitio público.
 - No uses adjuntos placeholder con `url`, `nombre` o `tipo` vacíos: el render los ignorará.
 - Si un archivo no existe, el enlace se generará igual, pero llevará a un 404.
 - Si quieres retirar una nota sin perder historial, usa `activo: false`.
+- Para que el JSON-LD `Schema.org Event` se inyecte correctamente desde la nota, mantén el patrón `📝 Cita<br> NombreEvento` y una fecha en formato `DD-MM-YYYY` (opcional `HH:mm`). El gulpfile extrae nombre, descripción y `startDate` desde ahí.
+- Las nuevas imágenes que añadas a `img/eventos/` (u otra subcarpeta de `img/`) se procesan automáticamente a WebP/AVIF al ejecutar `npm run build` (Sharp). Aun así, `imagen.url` debe apuntar al JPG/PNG original; el navegador descargará ese archivo.
 
 ## ✅ Verificación recomendada
 
@@ -217,6 +267,16 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 3. Si `nombre` es un objeto, verifica que `nombre.es` y/o `nombre.va` tengan texto real.
 4. Recuerda que el render ignora adjuntos inválidos y deja la nota como texto simple si no queda ninguno válido.
 
+### La imagen embebida no se ve / sale translúcida
+
+1. Confirma que `imagen.url` apunta a un archivo existente y la ruta es relativa a la raíz pública.
+2. La regla global `img[loading="lazy"]` en `_seo.scss` aplica `background: #f5f5f5` y `content-visibility: auto`. Para `.board__image` ya hay un override (`background: transparent; content-visibility: visible`) en `_board.scss`. Si añades un nuevo bloque que use imágenes embebidas, replica ese patrón.
+3. Las notas del tablón están excluidas del fade-in de scroll-reveal mediante un override en `_board.scss` (`html.has-scroll-reveal .board .reveal { opacity: 1; ... }`) porque el `IntersectionObserver` con threshold 0.15 + rootMargin -10% bottom puede no disparar para notas grandes con cartel embebido. No quites ese override sin probar.
+
+### El botón "Ver imagen / Descargar" se ve raro en modo oscuro
+
+`scss/animaciones/_modo-oscuro.scss` define overrides específicos para `.board__file-link` (fondo `$gris-muy-oscuro`, borde sutil) y deja el `.board__file-name` con fondo transparente para que no aparezca una caja gris embebida en una tarjeta blanca. Si tocas estos estilos, mantén la coherencia.
+
 ## 🔗 Relacionado
 
 - [`e2e-testing.md`](./e2e-testing.md): estrategia de pruebas Playwright
@@ -225,4 +285,4 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.2
+Última actualización: 27 de abril de 2026 - v4.6.16

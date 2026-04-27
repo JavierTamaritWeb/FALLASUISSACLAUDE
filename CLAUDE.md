@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.15
-**Last Updated:** 18 de abril de 2026
+**Version:** 4.6.16
+**Last Updated:** 27 de abril de 2026
 
 ## Project Overview
 
@@ -87,7 +87,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **HTML Build Pipeline** (`gulpfile.js` → `htmlTask`): During build, the HTML task auto-injects into every page: (1) `hreflang` alternate links for `es`/`ca`/`x-default`, and (2) Schema.org `Event` JSON-LD extracted from `data/board.json`. It also generates a `/va/` variant of every page with `lang="ca"`. Sitemap `<lastmod>` values are auto-updated based on file mtimes in `dist/`.
 
-**Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders on `eventos.html`.
+**Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders on `eventos.html` and `index.html` (both contain `<div class="board" id="notesBoard">`). Each nota supports an optional `imagen` field (`{ url, alt: { es, va } }`) which is rendered as `<figure class="board__figure"><img class="board__image" loading="lazy">` inside the nota — useful for embedding posters or infographics. When a nota has an `imagen` and/or `adjuntos`, it is wrapped in `<article class="board__card">` (with the inner `<div class="board__note">`); plain notas without extras render as a direct `<article class="board__note">`. Adjuntos still appear below the figure as "Ver imagen"/"Descargar" links via the existing SVG-icon system.
 
 **Collaborations** (`scss/components/_colaboraciones.scss` + `js/colaboraciones-lightbox.js`): Shared HOPE section on `index.html` and `colaboraciones.html`. Uses a traditional responsive grid (2 columns on mobile, 3 from `768px`), `object-fit: contain`, and an accessible lightbox. Tests: `tests/index-colaboraciones.e2e.spec.js`.
 
@@ -109,7 +109,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.15).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.16).
 
 ## Architecture Decisions & Constraints
 

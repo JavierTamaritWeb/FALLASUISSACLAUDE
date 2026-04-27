@@ -1,22 +1,29 @@
 {
   "notas": [
     {
-      "id": "crida-la-punra-2026",
+      "id": "presentacion-candidaturas-2026",
       "activo": true,
-      "contenido": {
-        "es": "📌 RECORDATORIO <br> 00-00-0000 00:00 h<br>📝 Cita<br> Nueva Cita",
-        "va": "📌 RECORDATORI <br> 00-00-0000 00:00 h<br>📝 Cita<br> Nova Cita"
+      "imagen": {
+        "url": "img/eventos/presentacion-candidaturas-2026.jpg",
+        "alt": {
+          "es": "Cartel de la Presentación de Candidaturas 2026-2027 a Fallera Mayor, Fallera Mayor Infantil y Presidente Infantil",
+          "va": "Cartell de la Presentació de Candidatures 2026-2027 a Fallera Major, Fallera Major Infantil i President Infantil"
+        }
       },
-      "adjuntos": []
-    },
-    {
-      "id": "crida-valencia-2026",
-      "activo": true,
       "contenido": {
-        "es": "📌 RECORDATORIO <br> 00-00-0000 00:00 h<br>📝 Cita<br> Nueva Cita",
-        "va": "📌 RECORDATORI <br> 00-00-0000 00:00 h<br>📝 Cita<br> Nova Cita"
+        "es": "📌 ANUNCIO <br> 24-04-2026 al 03-05-2026<br>📝 Cita<br> Presentación de Candidaturas 2026-2027 a Representantes",
+        "va": "📌 ANUNCI <br> 24-04-2026 al 03-05-2026<br>📝 Cita<br> Presentació de Candidatures 2026-2027 a Representants"
       },
-      "adjuntos": []
+      "adjuntos": [
+        {
+          "tipo": "img",
+          "url": "img/eventos/presentacion-candidaturas-2026.jpg",
+          "nombre": {
+            "es": "Ver cartel completo",
+            "va": "Veure cartell complet"
+          }
+        }
+      ]
     }
   ]
 }

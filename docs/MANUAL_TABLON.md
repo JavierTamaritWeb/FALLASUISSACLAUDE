@@ -10,14 +10,14 @@ La documentación actual del tablón está en:
 
 ## Qué encontrarás allí
 
-- estructura real de `data/board.json`
-- ejemplos de notas y adjuntos
+- estructura real de `data/board.json` (incluido el campo `imagen` desde v4.6.16)
+- ejemplos de notas, adjuntos e imágenes embebidas
 - reglas de edición y validación
-- troubleshooting
+- troubleshooting (incluye apartado de imagen translúcida y botón en modo oscuro)
 - relación con `js/board.js` y `tests/board.e2e.spec.js`
 
 ---
 
-**Versión:** alias histórico; referencia operativa vigente en `gestion-tablon.md` (v4.6.2)
+**Versión:** alias histórico; referencia operativa vigente en `gestion-tablon.md` (v4.6.16)
 
-**Última actualización:** 20 de marzo de 2026
+**Última actualización:** 27 de abril de 2026

@@ -788,11 +788,23 @@ body.modo-oscuro .board__note .clamp-spring {
     );
 }
 
+// Botón de archivo adjunto en modo oscuro
+body.modo-oscuro .board__file-link {
+    background-color: v.$gris-muy-oscuro;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body.modo-oscuro .board__file-link:hover {
+    background-color: v.$gris-oscuro-medio;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.55);
+}
+
 // Nombre de archivo en modo oscuro
 body.modo-oscuro .board__file-name,
 body.modo-oscuro .board__file-text {
     color: v.$primary-color;
-    background-color: v.$gris-muy-oscuro;
+    background-color: transparent;
 }
 
 // Hover en archivos en modo oscuro

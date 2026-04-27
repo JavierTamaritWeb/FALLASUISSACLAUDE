@@ -40,6 +40,29 @@ function getAdjuntoNombre(adj, lang) {
   return typeof adj.nombre === 'string' ? adj.nombre.trim() : '';
 }
 
+function renderImagen(imagen, lang) {
+  if (!imagen || typeof imagen !== 'object') {
+    return '';
+  }
+
+  const url = typeof imagen.url === 'string' ? imagen.url.trim() : '';
+  if (!url) {
+    return '';
+  }
+
+  let alt = '';
+  if (typeof imagen.alt === 'object' && imagen.alt !== null) {
+    alt = (imagen.alt[lang] || imagen.alt.es || '').trim();
+  } else if (typeof imagen.alt === 'string') {
+    alt = imagen.alt.trim();
+  }
+
+  return `
+    <figure class="board__figure">
+      <img class="board__image" src="${url}" alt="${alt}" loading="lazy" decoding="async">
+    </figure>`;
+}
+
 function getAdjuntosValidos(adjuntos, lang) {
   if (!Array.isArray(adjuntos)) {
     return [];
@@ -126,9 +149,12 @@ function renderNota(nota) {
   const contenido = nota.contenido[lang] || nota.contenido.es;
   const adjuntosValidos = getAdjuntosValidos(nota.adjuntos, lang);
   const hasAdjuntos = adjuntosValidos.length > 0;
+  const imagenHTML = renderImagen(nota.imagen, lang);
+  const hasImagen = imagenHTML !== '';
+  const hasExtras = hasAdjuntos || hasImagen;
 
-  if (!hasAdjuntos) {
-    // Nota sin adjuntos - article directo con clase board__note
+  if (!hasExtras) {
+    // Nota simple - article directo con clase board__note
     return `
       <article class="board__note reveal reveal--soft" role="article">
         <div class="clamp-screw" aria-hidden="true"></div>
@@ -138,9 +164,16 @@ function renderNota(nota) {
   }
 
   const isMultiple = adjuntosValidos.length > 1;
-  const adjuntosHTML = adjuntosValidos.map(adj => renderAdjunto(adj, isMultiple)).join('');
+  const adjuntosHTML = hasAdjuntos
+    ? adjuntosValidos.map(adj => renderAdjunto(adj, isMultiple)).join('')
+    : '';
+  const adjuntosBloque = hasAdjuntos
+    ? (isMultiple
+        ? `<ul class="board__attachments">${adjuntosHTML}</ul>`
+        : `<div class="board__file">${adjuntosHTML}</div>`)
+    : '';
 
-  // Nota con adjuntos - envuelta en board__card
+  // Nota con imagen y/o adjuntos - envuelta en board__card
   return `
     <article class="board__card reveal reveal--soft" role="article">
       <div class="board__note">
@@ -148,9 +181,8 @@ function renderNota(nota) {
         <div class="clamp-spring" aria-hidden="true"></div>
         <p class="board__note-content">${contenido}</p>
       </div>
-      ${isMultiple
-        ? `<ul class="board__attachments">${adjuntosHTML}</ul>`
-        : `<div class="board__file">${adjuntosHTML}</div>`}
+      ${imagenHTML}
+      ${adjuntosBloque}
     </article>`;
 }
 

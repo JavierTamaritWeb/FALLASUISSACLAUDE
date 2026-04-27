@@ -130,7 +130,7 @@ img {
 // Estados de carga lazy
 // ---------------------------------------------------------
 img[loading="lazy"] {
-  &:not(.loaded):not(.eventos__calendario):not(.forecast__termo):not(.blog__pluma):not(.galerias__camara):not(.quieres-mas__imagen):not(.footer__escudo) {
+  &:not(.loaded):not(.eventos__calendario):not(.forecast__termo):not(.blog__pluma):not(.galerias__camara):not(.quieres-mas__imagen):not(.footer__escudo):not(.board__image) {
     opacity: 0.1;
     background: linear-gradient(
       90deg, 
@@ -255,7 +255,7 @@ img[fetchpriority="high"] {
 // Modo oscuro
 // ---------------------------------------------------------
 .modo-oscuro {
-  img[loading="lazy"]:not(.loaded) {
+  img[loading="lazy"]:not(.loaded):not(.eventos__calendario):not(.forecast__termo):not(.blog__pluma):not(.galerias__camara):not(.quieres-mas__imagen):not(.footer__escudo):not(.board__image) {
     background: linear-gradient(
       90deg, 
       #2a2a2a 25%, 

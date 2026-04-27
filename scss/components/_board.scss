@@ -164,6 +164,26 @@ $icon-img-color: v.$turquesa;
     align-items: center;
   }
 
+  // Imagen embebida dentro de la nota (cartel, infografía, etc.)
+  &__figure {
+    margin: 1rem auto 1.5rem;
+    width: 100%;
+    max-width: 32rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    background: transparent;
+    content-visibility: visible;
+    contain-intrinsic-size: auto;
+  }
+
   // Contenedor de archivos adjuntos
   &__file {
     display: flex;
@@ -303,5 +323,20 @@ $icon-img-color: v.$turquesa;
 @media (min-width: 1200px) {
   .board {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Override reveal-on-scroll: las notas del tablón mantienen las clases `reveal`
+// para compatibilidad con los tests, pero deben ser siempre opacas (sin
+// animación de fade-in) porque IntersectionObserver puede no disparar para
+// notas grandes con imagen embebida dentro del viewport reducido.
+html.has-scroll-reveal .board {
+  .reveal,
+  .reveal.reveal-ready,
+  .reveal.reveal-ready.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
   }
 }
