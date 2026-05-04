@@ -285,4 +285,4 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 ---
 
-Última actualización: 28 de abril de 2026 - v4.6.17
+Última actualización: 4 de mayo de 2026 - v4.6.18
