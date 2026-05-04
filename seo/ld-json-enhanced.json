@@ -44,26 +44,35 @@
     "itemListElement": [
       {
         "@type": "Offer",
+        "validFrom": "2024-01-01",
         "itemOffered": {
           "@type": "Event",
           "name": "Celebración de las Fallas",
-          "description": "Celebración anual de las Fallas con monumentos, mascletás y actividades tradicionales"
+          "description": "Celebración anual de las Fallas con monumentos, mascletás y actividades tradicionales",
+          "startDate": "2026-03-01",
+          "endDate": "2026-03-19"
         }
       },
       {
         "@type": "Offer",
+        "validFrom": "2024-01-01",
         "itemOffered": {
           "@type": "Event",
           "name": "Cenas y Eventos Gastronómicos",
-          "description": "Cenas tradicionales valencianas y eventos gastronómicos durante todo el año"
+          "description": "Cenas tradicionales valencianas y eventos gastronómicos durante todo el año",
+          "startDate": "2026-01-01",
+          "endDate": "2026-12-31"
         }
       },
       {
         "@type": "Offer",
+        "validFrom": "2024-01-01",
         "itemOffered": {
           "@type": "Event",
           "name": "Actividades Deportivas",
-          "description": "Campeonatos de fútbol playa, voleibol, tenis y otras actividades deportivas"
+          "description": "Campeonatos de fútbol playa, voleibol, tenis y otras actividades deportivas",
+          "startDate": "2026-01-01",
+          "endDate": "2026-12-31"
         }
       }
     ]

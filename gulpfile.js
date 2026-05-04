@@ -399,6 +399,7 @@ async function getSchemaEvents() {
         "@id": eventId,
         "name": eventName,
         "startDate": startDate,
+        "endDate": startDate,
         "description": eventDescription,
         "eventStatus": "https://schema.org/EventScheduled",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
@@ -423,7 +424,8 @@ async function getSchemaEvents() {
           "url": EVENT_BASE_URL,
           "price": "0",
           "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock"
+          "availability": "https://schema.org/InStock",
+          "validFrom": "2024-01-01T00:00:00"
         },
         "image": [EVENT_IMAGE_URL],
         "url": EVENT_BASE_URL
