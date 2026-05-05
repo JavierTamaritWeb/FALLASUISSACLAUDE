@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 5 de mayo de 2026 - v4.6.20 - Nueva sección "Deportes" con embebido de Google Drive, página inner `deportes.html`, traducciones es/va/en/fr y sistema unificado de botones (`.boton`) en toda la web.
+🆕 Última actualización: 6 de mayo de 2026 - v4.6.21 - Sección Deportes: doble franja separadora superior (2rem coral + 2rem #1f1f1f) en el iframe del documento de Drive, lograda combinando un `::before` en el wrapper y `border-top: 4rem` en el iframe.
 
 ## 🌐 Vista Previa
 

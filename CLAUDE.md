@@ -2,9 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.20
-**Last Updated:** 5 de mayo de 2026
+**Version:** 4.6.21
+**Last Updated:** 6 de mayo de 2026
 
+> 4.6.21 — Sección Deportes: doble franja separadora superior (2rem coral + 2rem `#1f1f1f`) producida con dos mecanismos coordinados: `::before` del wrapper para la coral y `border-top: 4rem solid #1f1f1f` del iframe para la oscura (los primeros 2rem quedan tapados por el `::before`). Wrapper con fondo `v.$primary-color` y skeleton alineado en `inset: 4rem 0 0 0`.
+>
 > 4.6.20 — Nueva sección Deportes (`deportes.html` + teaser en `index.html`) que embebe un documento de Google Drive vía iframe. El contenido se gestiona desde Drive sin tocar el repo. Limpieza de `js/miboton.js` (rompía el primer `.boton` con un side-effect de inline style); todos los botones del proyecto comparten ahora la clase `.boton` con `:active` definido vía SCSS.
 
 ## Project Overview
@@ -91,7 +93,11 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders on `eventos.html` and `index.html` (both contain `<div class="board" id="notesBoard">`). Each nota supports an optional `imagen` field (`{ url, alt: { es, va } }`) which is rendered as `<figure class="board__figure"><img class="board__image" loading="lazy">` inside the nota — useful for embedding posters or infographics. When a nota has an `imagen` and/or `adjuntos`, it is wrapped in `<article class="board__card">` (with the inner `<div class="board__note">`); plain notas without extras render as a direct `<article class="board__note">`. Adjuntos still appear below the figure as "Ver imagen"/"Descargar" links via the existing SVG-icon system.
 
-**Deportes** (`scss/components/_deportes.scss` + `deportes.html` + section `.deportes--teaser` on `index.html`): Sports activities are managed externally in a Google Drive document (file ID `1suCLG0EG6eU5TN5b2fIdOE89U17i-l3o-m_AjaSdYxU`). The inner page `deportes.html` embeds the Drive file via `<iframe src="https://drive.google.com/file/d/<ID>/preview">` inside `.deportes__doc-wrapper` (1px coral border, white skeleton during load). The home section is a teaser-only block (`data-index="8"`, `.deportes--teaser`) with intro + CTA `Ver Deportes` linking to `deportes.html` (no iframe in home — preserves LCP/CLS). Background uses gradient `linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%)` (institutional blue, same as page header) with `::before` overlay that fades to `v.$negro` opaque in dark mode (gradient-to-solid pattern). The Drive file MUST be set to "Anyone with the link can view" — otherwise the iframe will prompt for login. To update the content, the Sports delegates edit the Drive file directly; no rebuild needed. Translations live under `deportes.{titulo,intro,ctaIndex,ctaIndexAria,abrirExterno,abrirExternoAria,fallback,iframeTitle,regionLabel}` in `data/translations.json` for `es`/`va`/`en`/`fr`. CTAs use the global `.boton` class (do NOT redefine button styles in `_deportes.scss`).
+**Deportes** (`scss/components/_deportes.scss` + `deportes.html` + section `.deportes--teaser` on `index.html`): Sports activities are managed externally in a Google Drive document (file ID `1suCLG0EG6eU5TN5b2fIdOE89U17i-l3o-m_AjaSdYxU`). The inner page `deportes.html` embeds the Drive file via `<iframe src="https://drive.google.com/file/d/<ID>/preview">` inside `.deportes__doc-wrapper`. The home section is a teaser-only block (`data-index="8"`, `.deportes--teaser`) with intro + CTA `Ver Deportes` linking to `deportes.html` (no iframe in home — preserves LCP/CLS). Background uses gradient `linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%)` (institutional blue, same as page header) with `::before` overlay that fades to `v.$negro` opaque in dark mode (gradient-to-solid pattern). The Drive file MUST be set to "Anyone with the link can view" — otherwise the iframe will prompt for login. To update the content, the Sports delegates edit the Drive file directly; no rebuild needed. Translations live under `deportes.{titulo,intro,ctaIndex,ctaIndexAria,abrirExterno,abrirExternoAria,fallback,iframeTitle,regionLabel}` in `data/translations.json` for `es`/`va`/`en`/`fr`. CTAs use the global `.boton` class (do NOT redefine button styles in `_deportes.scss`).
+
+  - **`.deportes__doc-wrapper`**: 1px coral border (`v.$primary-color`), `border-radius: v.$border-radius`, `aspect-ratio: 4/5` (3/4 mobile, 1/1 tablet), `background-color: v.$primary-color`, `overflow: hidden`. Has a `::before` pseudo-element fixed at the top with `height: 2rem; background-color: v.$primary-color; z-index: 2` — this paints the **upper coral band** of the separator (it visually overlays the first 2rem of the iframe's dark `border-top`).
+  - **`.deportes__doc` (the iframe)**: fills the wrapper with `width: 100%; height: 100%; box-sizing: border-box; border: none; border-top: 4rem solid #1f1f1f`. The dark band is **4rem tall in CSS**, but only the **lower 2rem are visible** because the wrapper's `::before` covers the upper 2rem with coral. Net visual layout: 2rem coral → 2rem dark `#1f1f1f` → document. CRITICAL: **do not add `padding-top` on the wrapper, `margin-top` on the iframe, or any other vertical offset** — each one compounds with the existing `border-top` and ruins the alignment of the two bands.
+  - **`.deportes__doc-skeleton`**: `inset: 4rem 0 0 0` (NOT `inset: 0` and NOT `inset: 2rem 0 0 0`) so the loading shimmer starts exactly where the document area starts (below both bands). Same animation in dark mode but with `v.$gris-oscuro`/`v.$gris-muy-oscuro`.
 
 **Collaborations** (`scss/components/_colaboraciones.scss` + `js/colaboraciones-lightbox.js`): Shared HOPE section on `index.html` and `colaboraciones.html`. Uses a traditional responsive grid (2 columns on mobile, 3 from `768px`), `object-fit: contain`, and an accessible lightbox. Tests: `tests/index-colaboraciones.e2e.spec.js`.
 
@@ -113,7 +119,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.20).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.21).
 
 ## Architecture Decisions & Constraints
 
@@ -145,6 +151,13 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 - **"Falla/Fallas" always capitalized (v4.6.8):** The words "Falla" and "Fallas" must ALWAYS have uppercase F in all visible text (translations, HTML, meta descriptions). This applies to all languages (ES: "Falla/Fallas", VA: "Falla/Falles"). Do NOT write "nuestra falla" — write "nuestra Falla".
 
 - **Blog-detail image stacking (v4.3.11):** `.blog-detail__figure` needs `z-index: 2` to stay above the `::before` pseudo-element (blue gradient, z-index: 0) of `.blog-detail__article`. Centering uses `margin: 1.5rem auto` + `max-width: 48rem` on the figure (not flexbox, which causes issues with `<picture>`). Image uses `display: block; width: 100%`. On mobile the figure switches to `max-width: 100%`.
+
+- **Deportes iframe — doble franja separadora superior (v4.6.21):** The 4rem-tall separator above the Drive document is produced by **two coordinated mechanisms** (CSS does not allow a multi-color `border-top`):
+  1. `.deportes__doc-wrapper::before` paints a 2rem coral strip at the top with `position: absolute; top: 0; left: 0; right: 0; height: 2rem; background-color: v.$primary-color; z-index: 2; pointer-events: none`.
+  2. `.deportes__doc` has `border-top: 4rem solid #1f1f1f; height: 100%; box-sizing: border-box`. The first 2rem of that border are hidden under the wrapper's `::before`; only the lower 2rem remain visible.
+  3. `.deportes__doc-skeleton` uses `inset: 4rem 0 0 0` so the shimmer never bleeds into either band.
+
+  Visual layout (top → bottom): 2rem coral → 2rem `#1f1f1f` → document. Do **not** add `padding-top` to the wrapper, `margin-top` to the iframe, or change the iframe to `inset: 0` — any of those breaks alignment between the two bands. To change the band heights, edit FOUR values in lockstep: the wrapper `::before` `height`, the iframe `border-top` width (= sum of both bands), the skeleton's `inset` first value, and the doc-wrapper z-index hierarchy if needed.
 
 - **Nav & footer underline hover pattern (v4.6.15):** Both `.navegacion__enlace` (header) and `.footer__enlace` share a single hover/active pattern — a `::after` underline (2px, `v.$primary-color`) that animates `width: 0 → calc(100% - padding*2)` and `opacity: 0 → 1` (desvanecimiento variant). Text colour shifts to `v.$primary-color` on `:hover`, `:focus-visible` and on `.active` / `[aria-current="page"]`. No background pill on active state — the coloured text + permanent underline ARE the indicator. Do NOT re-add `background-color: rgba(255,255,255,...)` or dark-mode `background-color: v.$gris-claro` overrides for the active state. The footer block still keeps `!important` on several declarations because of historical specificity battles with global resets — keep them when editing.
 
