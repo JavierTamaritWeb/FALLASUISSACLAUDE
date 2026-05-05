@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 19 de marzo de 2026 - v4.5.0 - Versionado del proyecto sincronizado, banner/tablón/blog estabilizados y documentación técnica alineada.
+🆕 Última actualización: 5 de mayo de 2026 - v4.6.20 - Nueva sección "Deportes" con embebido de Google Drive, página inner `deportes.html`, traducciones es/va/en/fr y sistema unificado de botones (`.boton`) en toda la web.
 
 ## 🌐 Vista Previa
 
@@ -161,6 +161,7 @@ WEBFALLASUISSA/
 | `lafalla.html` | Información detallada | Falleras mayores, presidentes |
 | `colaboraciones.html` | Colaboraciones | Proyecto HOPE, grid fotográfico y lightbox |
 | `eventos.html` | Sistema de eventos | Calendario, tablón, PDFs |
+| `deportes.html` | Actividades deportivas | Documento de Google Drive embebido (gestión externa) |
 | `calendario.html` | Calendario interactivo | Exportación ICS, filtros |
 | `meteo.html` | Meteorología | Tiempo actual, pronóstico 5 días |
 | `blog.html` | Noticias y artículos | Sistema de contenidos |

@@ -103,6 +103,13 @@
   }
 }
 .boton:active {
+  background: linear-gradient(
+    135deg,
+    rgba(v.$primary-color, 1) 0%,
+    rgba(v.$rojo-salmon, 0.98) 100%
+  );
+  border-color: v.$primary-color;
+  color: v.$negro-casi;
   filter: saturate(1.02);
   transform: translateY(-1px) scale(0.985);
 }

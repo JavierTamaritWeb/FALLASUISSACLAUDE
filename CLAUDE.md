@@ -2,8 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.19
+**Version:** 4.6.20
 **Last Updated:** 5 de mayo de 2026
+
+> 4.6.20 — Nueva sección Deportes (`deportes.html` + teaser en `index.html`) que embebe un documento de Google Drive vía iframe. El contenido se gestiona desde Drive sin tocar el repo. Limpieza de `js/miboton.js` (rompía el primer `.boton` con un side-effect de inline style); todos los botones del proyecto comparten ahora la clase `.boton` con `:active` definido vía SCSS.
 
 ## Project Overview
 
@@ -89,6 +91,8 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders on `eventos.html` and `index.html` (both contain `<div class="board" id="notesBoard">`). Each nota supports an optional `imagen` field (`{ url, alt: { es, va } }`) which is rendered as `<figure class="board__figure"><img class="board__image" loading="lazy">` inside the nota — useful for embedding posters or infographics. When a nota has an `imagen` and/or `adjuntos`, it is wrapped in `<article class="board__card">` (with the inner `<div class="board__note">`); plain notas without extras render as a direct `<article class="board__note">`. Adjuntos still appear below the figure as "Ver imagen"/"Descargar" links via the existing SVG-icon system.
 
+**Deportes** (`scss/components/_deportes.scss` + `deportes.html` + section `.deportes--teaser` on `index.html`): Sports activities are managed externally in a Google Drive document (file ID `1suCLG0EG6eU5TN5b2fIdOE89U17i-l3o-m_AjaSdYxU`). The inner page `deportes.html` embeds the Drive file via `<iframe src="https://drive.google.com/file/d/<ID>/preview">` inside `.deportes__doc-wrapper` (1px coral border, white skeleton during load). The home section is a teaser-only block (`data-index="8"`, `.deportes--teaser`) with intro + CTA `Ver Deportes` linking to `deportes.html` (no iframe in home — preserves LCP/CLS). Background uses gradient `linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%)` (institutional blue, same as page header) with `::before` overlay that fades to `v.$negro` opaque in dark mode (gradient-to-solid pattern). The Drive file MUST be set to "Anyone with the link can view" — otherwise the iframe will prompt for login. To update the content, the Sports delegates edit the Drive file directly; no rebuild needed. Translations live under `deportes.{titulo,intro,ctaIndex,ctaIndexAria,abrirExterno,abrirExternoAria,fallback,iframeTitle,regionLabel}` in `data/translations.json` for `es`/`va`/`en`/`fr`. CTAs use the global `.boton` class (do NOT redefine button styles in `_deportes.scss`).
+
 **Collaborations** (`scss/components/_colaboraciones.scss` + `js/colaboraciones-lightbox.js`): Shared HOPE section on `index.html` and `colaboraciones.html`. Uses a traditional responsive grid (2 columns on mobile, 3 from `768px`), `object-fit: contain`, and an accessible lightbox. Tests: `tests/index-colaboraciones.e2e.spec.js`.
 
 **Video Drone** (`js/video-dron.js` + `scss/components/_video-dron.scss`): Aerial video player section inside `<main class="falla">` on both `index.html` and `lafalla.html`, placed between the monumento slider and the falleros/nosotros section. Uses a custom poster overlay with play button SVG. Controls: play/pause, restart, fullscreen, mute/unmute (with icon toggle), volume slider (pill-shaped wrapper with primary color fill), and progress bar (seekable, full-width). All controls sync between inline and fullscreen players (volume, mute state, progress). Video source in `img/dron/`. The section uses `reveal reveal--soft` for scroll animation.
@@ -109,7 +113,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.19).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.20).
 
 ## Architecture Decisions & Constraints
 

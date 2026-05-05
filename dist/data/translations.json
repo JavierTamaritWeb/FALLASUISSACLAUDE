@@ -5,6 +5,7 @@
         "lafalla": "La Falla",
         "ofrenda": "Ofrenda",
         "eventos": "Eventos",
+        "deportes": "Deportes",
         "blog": "Blog",
         "meteo": "Meteo",
         "galeria": "Galería",
@@ -102,6 +103,17 @@
         "titulo": "Eventos",
         "calendario": "Calendario",
         "tablon": "Tablón de anuncios"
+      },
+      "deportes": {
+        "titulo": "Deportes",
+        "intro": "Las actividades deportivas de la Falla Suïssa - L'Alqueria del Favero: torneos, encuentros, equipos y calendarios, se gestionan en nuestro documento compartido. Aquí lo tienes siempre actualizado.",
+        "ctaIndex": "Ver Deportes",
+        "ctaIndexAria": "Ver la página de Deportes",
+        "abrirExterno": "Abrir en una pestaña nueva",
+        "abrirExternoAria": "Abrir el documento de Deportes en una pestaña nueva",
+        "fallback": "Tu navegador no puede mostrar el documento. Ábrelo en una pestaña nueva.",
+        "iframeTitle": "Documento de actividades deportivas de la Falla Suïssa",
+        "regionLabel": "Documento de actividades deportivas"
       },
       "quieres":{
         "titulo": "¿Quieres saber mas sobre nuestra Falla?",
@@ -372,6 +384,7 @@
         "lafalla": "La Falla",
         "ofrenda": "Ofrena",
         "eventos": "Esdeveniments",
+        "deportes": "Esports",
         "blog": "Blog",
         "meteo": "Oratge",
         "galeria": "Galeria",
@@ -469,6 +482,17 @@
         "titulo": "Esdeveniments",
         "calendario": "Calendari",
         "tablon": "Tauler d'anuncis"
+      },
+      "deportes": {
+        "titulo": "Esports",
+        "intro": "Les activitats esportives de la Falla Suïssa - L'Alqueria del Favero: tornejos, trobades, equips i calendaris, es gestionen al nostre document compartit. Aquí el tens sempre actualitzat.",
+        "ctaIndex": "Veure Esports",
+        "ctaIndexAria": "Veure la pàgina d'Esports",
+        "abrirExterno": "Obrir en una pestanya nova",
+        "abrirExternoAria": "Obrir el document d'Esports en una pestanya nova",
+        "fallback": "El teu navegador no pot mostrar el document. Obri'l en una pestanya nova.",
+        "iframeTitle": "Document d'activitats esportives de la Falla Suïssa",
+        "regionLabel": "Document d'activitats esportives"
       },
       "quieres":{
         "titulo": "Vols saber més sobre la nostra Falla?",
@@ -739,6 +763,7 @@
         "inicio": "Home",
         "lafalla": "La Falla",
         "eventos": "Events",
+        "deportes": "Sports",
         "blog": "Blog",
         "meteo": "Weather",
         "galeria": "Gallery"
@@ -747,6 +772,17 @@
         "titulo": "Events",
         "calendario": "Calendar",
         "tablon": "Notice Board"
+      },
+      "deportes": {
+        "titulo": "Sports",
+        "intro": "Falla Suïssa sports activities — tournaments, matches, teams and schedules — are managed in our shared document. Always up to date.",
+        "ctaIndex": "View Sports",
+        "ctaIndexAria": "Go to the Sports page",
+        "abrirExterno": "Open in a new tab",
+        "abrirExternoAria": "Open the Sports document in a new tab",
+        "fallback": "Your browser cannot display the document. Open it in a new tab.",
+        "iframeTitle": "Falla Suïssa sports activities document",
+        "regionLabel": "Sports activities document"
       },
       "calendario": {
         "titulo": "Calendar",
@@ -880,6 +916,7 @@
         "inicio": "Accueil",
         "lafalla": "La Falla",
         "eventos": "Événements",
+        "deportes": "Sports",
         "blog": "Blog",
         "meteo": "Météo",
         "galeria": "Galerie"
@@ -888,6 +925,17 @@
         "titulo": "Événements",
         "calendario": "Calendrier",
         "tablon": "Tableau d'Annonces"
+      },
+      "deportes": {
+        "titulo": "Sports",
+        "intro": "Les activités sportives de la Falla Suïssa — tournois, rencontres, équipes et calendriers — sont gérées dans notre document partagé. Toujours à jour.",
+        "ctaIndex": "Voir Sports",
+        "ctaIndexAria": "Aller à la page Sports",
+        "abrirExterno": "Ouvrir dans un nouvel onglet",
+        "abrirExternoAria": "Ouvrir le document Sports dans un nouvel onglet",
+        "fallback": "Votre navigateur ne peut pas afficher le document. Ouvrez-le dans un nouvel onglet.",
+        "iframeTitle": "Document des activités sportives de la Falla Suïssa",
+        "regionLabel": "Document des activités sportives"
       },
       "calendario": {
         "titulo": "Calendrier",

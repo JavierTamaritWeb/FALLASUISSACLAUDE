@@ -235,7 +235,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=4ee06e3e28dd">
+  <link rel="stylesheet" href="css/main.css?v=c77350e0cbea">
 
   <!-- Preload LCP Images -->
   <link rel="preload" as="image" href="img/Escudo_falla.avif" type="image/avif" fetchpriority="high">
@@ -294,6 +294,7 @@
           <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html"></a>
           <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html"></a>
           <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html"></a>
           <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html"></a>
           <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html"></a>
           <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html"></a>
@@ -944,7 +945,10 @@
   <!-- Sección Ofrenda Floral -->
   <section class="ofrenda reveal" data-index="5">
     <div class="contenedor">
-      <h2 class="ofrenda__titulo" data-i18n="ofrenda.titulo">Ofrenda</h2>
+      <div class="ofrenda__heading">
+        <img class="ofrenda__icono" width="64" height="64" src="img/logos/logo-virgen.svg" alt="Icono de la Virgen de los Desamparados" loading="lazy" decoding="async">
+        <h2 class="ofrenda__titulo" data-i18n="ofrenda.titulo">Ofrenda</h2>
+      </div>
 
       <!-- Galería de imágenes -->
       <div class="ofrenda__galeria">
@@ -1163,7 +1167,23 @@
 
   <hr class="seccion-hr">
 
-  <section class="eltiempo" data-index="8">
+  <!-- Sección Deportes - Teaser hacia deportes.html -->
+  <section class="deportes deportes--teaser" data-index="8">
+    <div class="contenedor">
+      <div class="deportes__heading reveal reveal--soft">
+        <img class="deportes__icono" width="64" height="64" src="img/logos/logo-run.svg" alt="Icono de actividades deportivas de la Falla Suïssa" loading="lazy" decoding="async">
+        <h2 class="deportes__heading-texto" data-i18n="deportes.titulo">Deportes</h2>
+      </div>
+      <p class="deportes__intro reveal reveal--soft" data-i18n="deportes.intro">Las actividades deportivas de la Falla Suïssa - L'Alqueria del Favero: torneos, encuentros, equipos y calendarios, se gestionan en nuestro documento compartido. Aquí lo tienes siempre actualizado.</p>
+      <div class="deportes__cta-wrapper reveal">
+        <a class="boton deportes__abrir-externo" href="deportes.html" data-i18n="deportes.ctaIndex" data-i18n-aria-label="deportes.ctaIndexAria" aria-label="Ver la página de Deportes">Ver Deportes</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="seccion-hr">
+
+  <section class="eltiempo" data-index="9">
 
     <div class="contenedor">
       <div class="forecast reveal reveal--soft">
@@ -1205,7 +1225,7 @@
 
   <hr class="seccion-hr">
 
-  <section class="blog" data-index="9">
+  <section class="blog" data-index="10">
     <div class="contenedor">
       <div class="blog__titulo">
         <img class="blog__pluma" width="80" height="80" src="img/logos/logo-pluma.svg" alt="Icono decorativo de pluma para blog" loading="lazy" decoding="async" aria-hidden="true">
@@ -1238,7 +1258,7 @@
 
   <hr class="seccion-hr">
 
-  <section class="galerias" data-index="10">
+  <section class="galerias" data-index="11">
     <div class="contenedor">
       <div class="galerias__titulo">
         <img class="galerias__camara" width="80" height="80" src="img/logos/logo-camara.svg" alt="Icono de cámara fotográfica para galerías" loading="lazy" decoding="async">
@@ -1296,7 +1316,7 @@
   <hr class="seccion-hr">
 
   <!-- Sección "¿Quieres saber más sobre nuestra Falla?" -->
-  <section class="quieres-mas" data-index="11">
+  <section class="quieres-mas" data-index="12">
     <div class="quieres-mas__flex contenedor reveal reveal--slow">
       <img class="quieres-mas__imagen" width="64" height="64" src="img/logos/logo-ask.svg" alt="Icono de Preguntar">
       <!-- El enlace tiene un id para poder asignarle el evento de apertura del modal -->
@@ -1442,6 +1462,7 @@
           <a class="footer__enlace" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrenda</a>
           <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Colaboraciones</a>
           <a class="footer__enlace" href="eventos.html" data-i18n="nav.eventos">Eventos</a>
+          <a class="footer__enlace" href="deportes.html" data-i18n="nav.deportes">Deportes</a>
           <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Meteo</a>
           <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a>
           <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galería</a>
@@ -1479,17 +1500,17 @@
   <!-- Scripts JavaScript -->
    
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/swiper.js?v=4ee06e3e28dd"></script>
-  <script src="js/meteo.js?v=4ee06e3e28dd" defer></script>
-  <script src="js/dark.js?v=4ee06e3e28dd"></script>
-  <script src="js/lang.js?v=4ee06e3e28dd"></script>
-  <script src="js/nav-menu.js?v=4ee06e3e28dd"></script>
-  <script src="js/scroll-reveal.js?v=4ee06e3e28dd" defer></script>
-  <script src="js/board.js?v=4ee06e3e28dd" defer></script>
-  <script src="js/countdown.js?v=4ee06e3e28dd" defer></script>
-  <script src="js/colaboraciones-lightbox.js?v=4ee06e3e28dd" defer></script>
-  <script src="js/accessibility.js?v=4ee06e3e28dd" defer></script>
-  <script src="js/home-deferred.js?v=4ee06e3e28dd"></script>
+  <script src="js/swiper.js?v=c77350e0cbea"></script>
+  <script src="js/meteo.js?v=c77350e0cbea" defer></script>
+  <script src="js/dark.js?v=c77350e0cbea"></script>
+  <script src="js/lang.js?v=c77350e0cbea"></script>
+  <script src="js/nav-menu.js?v=c77350e0cbea"></script>
+  <script src="js/scroll-reveal.js?v=c77350e0cbea" defer></script>
+  <script src="js/board.js?v=c77350e0cbea" defer></script>
+  <script src="js/countdown.js?v=c77350e0cbea" defer></script>
+  <script src="js/colaboraciones-lightbox.js?v=c77350e0cbea" defer></script>
+  <script src="js/accessibility.js?v=c77350e0cbea" defer></script>
+  <script src="js/home-deferred.js?v=c77350e0cbea"></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -1512,8 +1533,8 @@
       });
     }
   </script>
-  <script src="js/envia.js?v=4ee06e3e28dd" defer></script>
-  <script src="js/banner-subvencion.js?v=4ee06e3e28dd" defer></script>
-  <script src="js/cookie-banner.js?v=4ee06e3e28dd" defer></script>
+  <script src="js/envia.js?v=c77350e0cbea" defer></script>
+  <script src="js/banner-subvencion.js?v=c77350e0cbea" defer></script>
+  <script src="js/cookie-banner.js?v=c77350e0cbea" defer></script>
 </body>
 </html>

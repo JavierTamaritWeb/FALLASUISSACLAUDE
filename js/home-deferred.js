@@ -114,7 +114,7 @@
 
   function initDeferredHomeScripts() {
     loadAfterPaint(['js/cookie-banner.js']);
-    loadOnIdle(['js/timeline.js', 'js/acc.js', 'js/miboton.js']);
+    loadOnIdle(['js/timeline.js', 'js/acc.js']);
     loadOnVisible('#videoDron', ['js/video-dron.js'], '320px');
     loadOnVisible('#videoOfrenda', ['js/ofrenda-video.js'], '320px');
   }

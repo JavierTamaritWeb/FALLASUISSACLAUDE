@@ -1,0 +1,178 @@
+// components/_deportes.scss
+// Sección Deportes — embebe documento de Drive publicado en la web
+
+@use '../abstracts/variables' as v;
+
+.deportes {
+  position: relative;
+  background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+  border-top: 1px solid v.$primary-color;
+  padding: 6rem 0;
+  overflow: hidden;
+
+  // Overlay para transición suave a modo oscuro (velo negro que aparece/desaparece)
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color var(--theme-transition, 2.4s ease-in-out);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  &__heading-texto {
+    font-weight: bold;
+    color: v.$primary-color;
+
+    @media (max-width: 768px) {
+      font-size: v.$font-size-medium;
+    }
+  }
+
+  &__icono {
+    width: 6.4rem;
+    height: 6.4rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    color: v.$primary-color;
+  }
+
+  &__intro {
+    max-width: 70ch;
+    margin: 2rem auto 3rem;
+    text-align: center;
+    font-size: v.$font-size-regular;
+    line-height: 1.6;
+    color: v.$blanco;
+    padding: 0 2rem;
+    transition: color var(--theme-transition, 2.4s ease-in-out);
+
+    @media (max-width: 767px) {
+      font-size: v.$font-size-small;
+    }
+  }
+
+  &__cta-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  // Solo ajustes de posicionamiento; los estilos visuales vienen de .boton
+  &__abrir-externo {
+    margin: 1.5rem auto 0;
+  }
+
+  // Wrapper del iframe (solo en deportes.html)
+  &__doc-wrapper {
+    position: relative;
+    margin: 3rem auto 0;
+    max-width: 110rem;
+    aspect-ratio: 4 / 5;
+    border: 1px solid v.$primary-color;
+    border-radius: v.$border-radius;
+    box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.25);
+    background-color: v.$blanco;
+    overflow: hidden;
+    transition: box-shadow var(--theme-transition, 2.4s ease-in-out);
+
+    @media (max-width: 767px) {
+      aspect-ratio: 3 / 4;
+      margin-inline: 1rem;
+      border-radius: 0.6rem;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  &__doc-skeleton {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, v.$blanco-hueso 0%, v.$gris-muy-claro-neutro 50%, v.$blanco-hueso 100%);
+    background-size: 200% 100%;
+    animation: deportes-skeleton 1.4s ease-in-out infinite;
+    z-index: 0;
+  }
+
+  &__doc {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    z-index: 1;
+  }
+
+  &__fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    color: v.$gris-oscuro;
+    background-color: v.$blanco;
+  }
+
+  // Responsive
+  @media (max-width: 767px) {
+    padding: 3rem 0;
+  }
+
+  @media (min-width: 768px) {
+    padding: 8rem 0;
+  }
+}
+
+// Modo oscuro: el ::before cubre el gradiente azul con $negro sólido
+body.modo-oscuro .deportes {
+  &::before {
+    background-color: v.$negro;
+  }
+
+  &__heading-texto {
+    color: v.$primary-color;
+  }
+
+  &__intro {
+    color: v.$gris-muy-claro;
+  }
+
+  &__doc-wrapper {
+    background-color: v.$blanco;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  }
+
+  &__doc-skeleton {
+    background: linear-gradient(90deg, v.$gris-oscuro 0%, v.$gris-muy-oscuro 50%, v.$gris-oscuro 100%);
+    background-size: 200% 100%;
+  }
+}
+
+@keyframes deportes-skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deportes__doc-skeleton {
+    animation: none;
+  }
+}
