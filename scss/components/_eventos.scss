@@ -42,12 +42,14 @@
   &__calendario {
     height: 4rem;
     width: 4rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     margin: 0rem 0;
     @media (max-width:768px) {
       height: 4rem;
       width: 4rem;
       margin: 2rem 0;
-      
+
     }
   }
   &__icon{

@@ -48,6 +48,8 @@
   &__imagen {
     height: 4rem;
     width: 4rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     margin: 0;
   }
 

@@ -52,13 +52,15 @@
     }
   }
   &__camara {
-    width: 4rem;
-    height: 3rem;
+    width: 5rem;
+    height: 5rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     margin: 5rem 0 !important;
     @media (min-width:768px) {
       margin: 1rem 1rem !important;
-      width: 5rem;
-      height: 4rem;
+      width: 6rem;
+      height: 6rem;
     }
   }
   &__title {

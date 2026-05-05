@@ -71,6 +71,7 @@ img {
   height: 4rem !important;
   max-width: 4rem !important;
   max-height: 4rem !important;
+  object-fit: contain !important;
   opacity: 1 !important; // Siempre completamente visible
 }
 
@@ -78,33 +79,43 @@ img {
 // Excepciones para iconos específicos (mantener tamaños diseñados)
 // ---------------------------------------------------------
 .forecast__termo {
-  width: 3rem !important;
-  height: 6rem !important;
-  max-width: 3rem !important;
-  max-height: 6rem !important;
+  width: 5rem !important;
+  height: 5rem !important;
+  max-width: 5rem !important;
+  max-height: 5rem !important;
+  object-fit: contain !important;
   opacity: 1 !important;
+
+  @media (min-width: 768px) {
+    width: 6rem !important;
+    height: 6rem !important;
+    max-width: 6rem !important;
+    max-height: 6rem !important;
+  }
 }
 
 .blog__pluma {
-  width: 5rem !important;
-  height: 8rem !important;
-  max-width: 5rem !important;
-  max-height: 8rem !important;
+  width: 6rem !important;
+  height: 6rem !important;
+  max-width: 6rem !important;
+  max-height: 6rem !important;
+  object-fit: contain !important;
   opacity: 1 !important;
 }
 
 .galerias__camara {
-  width: 4rem !important;
-  height: 3rem !important;
-  max-width: 4rem !important;
-  max-height: 3rem !important;
+  width: 5rem !important;
+  height: 5rem !important;
+  max-width: 5rem !important;
+  max-height: 5rem !important;
+  object-fit: contain !important;
   opacity: 1 !important;
-  
+
   @media (min-width: 768px) {
-    width: 5rem !important;
-    height: 4rem !important;
-    max-width: 5rem !important;
-    max-height: 4rem !important;
+    width: 6rem !important;
+    height: 6rem !important;
+    max-width: 6rem !important;
+    max-height: 6rem !important;
   }
 }
 
@@ -113,6 +124,7 @@ img {
   height: 4rem !important;
   max-width: 4rem !important;
   max-height: 4rem !important;
+  object-fit: contain !important;
   opacity: 1 !important;
 }
 

@@ -235,7 +235,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=6bea29265e6d">
+  <link rel="stylesheet" href="css/main.css?v=4ee06e3e28dd">
 
   <!-- Preload LCP Images -->
   <link rel="preload" as="image" href="img/Escudo_falla.avif" type="image/avif" fetchpriority="high">
@@ -373,7 +373,10 @@
   <!-- Sección "La Falla" -->
   <main class="falla" id="main-content">
     <div class="contenedor">
-      <h2 class="falla__title" data-i18n="falla.lafalla">La Falla</h2>
+      <div class="falla__heading">
+        <img class="falla__escudo" width="80" height="80" src="img/logos/logo-escudo-cutty.svg" alt="Escudo de la Falla Suïssa" loading="lazy" decoding="async">
+        <h2 class="falla__title" data-i18n="falla.lafalla">La Falla</h2>
+      </div>
 
         <div class="falla__monumento reveal" data-index="2">
             <h3 class="falla__monumento-title" data-i18n="falla.monumento">El Monumento</h3>
@@ -1036,7 +1039,7 @@
   <section class="colaboraciones" data-index="6">
     <div class="contenedor">
       <div class="colaboraciones__heading reveal reveal--soft">
-        <img class="colaboraciones__imagen" src="img/colaboracion/hope/colaboracion.png"
+        <img class="colaboraciones__imagen" src="img/logos/logo-colaborar.svg"
              alt="Icono de colaboraciones de la Falla Suïssa" width="64" height="64" loading="lazy" decoding="async">
         <h2 class="colaboraciones__heading-texto" data-i18n="colaboraciones.titulo">Colaboraciones</h2>
       </div>
@@ -1133,7 +1136,7 @@
   <section class="eventos" data-index="7">
       <div class="contenedor">
         <div class="eventos__heading reveal reveal--soft">
-          <img class="eventos__calendario" width="64" height="64" src="img/Eventos.PNG" alt="Calendario de eventos de la Falla Suïssa" loading="lazy" decoding="async">
+          <img class="eventos__calendario" width="64" height="64" src="img/logos/logo-eventos.svg" alt="Calendario de eventos de la Falla Suïssa" loading="lazy" decoding="async">
           <h2 class="eventos__heading-texto" data-i18n="eventos.titulo">Eventos</h2>
         </div>
 
@@ -1165,7 +1168,7 @@
     <div class="contenedor">
       <div class="forecast reveal reveal--soft">
         <div class="forecast__titulo">
-          <img class="forecast__termo" width="48" height="100" src="img/termometro.png" alt="Icono de termómetro para temperatura" loading="lazy" decoding="async">
+          <img class="forecast__termo" width="80" height="80" src="img/logos/logo-termo.svg" alt="Icono de termómetro para temperatura" loading="lazy" decoding="async">
           <h2 class="forecast__title" data-i18n="meteo.titulo">Meteo</h2>
         </div>
          
@@ -1205,7 +1208,7 @@
   <section class="blog" data-index="9">
     <div class="contenedor">
       <div class="blog__titulo">
-        <img class="blog__pluma" width="64" height="64" src="img/pluma.png" alt="Icono decorativo de pluma para blog" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="blog__pluma" width="80" height="80" src="img/logos/logo-pluma.svg" alt="Icono decorativo de pluma para blog" loading="lazy" decoding="async" aria-hidden="true">
         <h2 class="blog__title" data-i18n="blog.titulo"></h2>
       </div>
       <div class="blog__posts">
@@ -1238,7 +1241,7 @@
   <section class="galerias" data-index="10">
     <div class="contenedor">
       <div class="galerias__titulo">
-        <img class="galerias__camara" width="64" height="64" src="img/camara.png" alt="Icono de cámara fotográfica para galerías" loading="lazy" decoding="async">
+        <img class="galerias__camara" width="80" height="80" src="img/logos/logo-camara.svg" alt="Icono de cámara fotográfica para galerías" loading="lazy" decoding="async">
         <h2 class="galerias__title" data-i18n="galeria.titulo">Galería</h2>
       </div>
       <div class="galerias__grid">
@@ -1295,7 +1298,7 @@
   <!-- Sección "¿Quieres saber más sobre nuestra Falla?" -->
   <section class="quieres-mas" data-index="11">
     <div class="quieres-mas__flex contenedor reveal reveal--slow">
-      <img class="quieres-mas__imagen" width="64" height="64" src="img/Preguntar.png" alt="Icono de Preguntar">
+      <img class="quieres-mas__imagen" width="64" height="64" src="img/logos/logo-ask.svg" alt="Icono de Preguntar">
       <!-- El enlace tiene un id para poder asignarle el evento de apertura del modal -->
       <a class="quieres-mas__boton" href="#" id="open-quieres-modal">
         <h3 class="quieres-mas__title" data-i18n="quieres.titulo">¿Quieres saber más sobre nuestra Falla?</h3>
@@ -1476,17 +1479,17 @@
   <!-- Scripts JavaScript -->
    
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/swiper.js?v=6bea29265e6d"></script>
-  <script src="js/meteo.js?v=6bea29265e6d" defer></script>
-  <script src="js/dark.js?v=6bea29265e6d"></script>
-  <script src="js/lang.js?v=6bea29265e6d"></script>
-  <script src="js/nav-menu.js?v=6bea29265e6d"></script>
-  <script src="js/scroll-reveal.js?v=6bea29265e6d" defer></script>
-  <script src="js/board.js?v=6bea29265e6d" defer></script>
-  <script src="js/countdown.js?v=6bea29265e6d" defer></script>
-  <script src="js/colaboraciones-lightbox.js?v=6bea29265e6d" defer></script>
-  <script src="js/accessibility.js?v=6bea29265e6d" defer></script>
-  <script src="js/home-deferred.js?v=6bea29265e6d"></script>
+  <script src="js/swiper.js?v=4ee06e3e28dd"></script>
+  <script src="js/meteo.js?v=4ee06e3e28dd" defer></script>
+  <script src="js/dark.js?v=4ee06e3e28dd"></script>
+  <script src="js/lang.js?v=4ee06e3e28dd"></script>
+  <script src="js/nav-menu.js?v=4ee06e3e28dd"></script>
+  <script src="js/scroll-reveal.js?v=4ee06e3e28dd" defer></script>
+  <script src="js/board.js?v=4ee06e3e28dd" defer></script>
+  <script src="js/countdown.js?v=4ee06e3e28dd" defer></script>
+  <script src="js/colaboraciones-lightbox.js?v=4ee06e3e28dd" defer></script>
+  <script src="js/accessibility.js?v=4ee06e3e28dd" defer></script>
+  <script src="js/home-deferred.js?v=4ee06e3e28dd"></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -1509,8 +1512,8 @@
       });
     }
   </script>
-  <script src="js/envia.js?v=6bea29265e6d" defer></script>
-  <script src="js/banner-subvencion.js?v=6bea29265e6d" defer></script>
-  <script src="js/cookie-banner.js?v=6bea29265e6d" defer></script>
+  <script src="js/envia.js?v=4ee06e3e28dd" defer></script>
+  <script src="js/banner-subvencion.js?v=4ee06e3e28dd" defer></script>
+  <script src="js/cookie-banner.js?v=4ee06e3e28dd" defer></script>
 </body>
 </html>

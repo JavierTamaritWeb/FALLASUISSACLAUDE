@@ -18,8 +18,10 @@
     padding: auto;
   }
   &__pluma {
-    width: 5rem;
-    height: 8rem;
+    width: 6rem;
+    height: 6rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     padding-bottom: 2rem;
   }
   &__title {
