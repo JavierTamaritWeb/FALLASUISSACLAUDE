@@ -113,7 +113,8 @@
         "abrirExternoAria": "Abrir el documento de Deportes en una pestaña nueva",
         "fallback": "Tu navegador no puede mostrar el documento. Ábrelo en una pestaña nueva.",
         "iframeTitle": "Documento de actividades deportivas de la Falla Suïssa",
-        "regionLabel": "Documento de actividades deportivas"
+        "regionLabel": "Documento de actividades deportivas",
+        "delegadosTitulo": "Delegados de Deportes"
       },
       "quieres":{
         "titulo": "¿Quieres saber mas sobre nuestra Falla?",
@@ -492,7 +493,8 @@
         "abrirExternoAria": "Obrir el document d'Esports en una pestanya nova",
         "fallback": "El teu navegador no pot mostrar el document. Obri'l en una pestanya nova.",
         "iframeTitle": "Document d'activitats esportives de la Falla Suïssa",
-        "regionLabel": "Document d'activitats esportives"
+        "regionLabel": "Document d'activitats esportives",
+        "delegadosTitulo": "Delegats d'Esports"
       },
       "quieres":{
         "titulo": "Vols saber més sobre la nostra Falla?",
@@ -782,7 +784,8 @@
         "abrirExternoAria": "Open the Sports document in a new tab",
         "fallback": "Your browser cannot display the document. Open it in a new tab.",
         "iframeTitle": "Falla Suïssa sports activities document",
-        "regionLabel": "Sports activities document"
+        "regionLabel": "Sports activities document",
+        "delegadosTitulo": "Sports Delegates"
       },
       "calendario": {
         "titulo": "Calendar",
@@ -935,7 +938,8 @@
         "abrirExternoAria": "Ouvrir le document Sports dans un nouvel onglet",
         "fallback": "Votre navigateur ne peut pas afficher le document. Ouvrez-le dans un nouvel onglet.",
         "iframeTitle": "Document des activités sportives de la Falla Suïssa",
-        "regionLabel": "Document des activités sportives"
+        "regionLabel": "Document des activités sportives",
+        "delegadosTitulo": "Délégués des Sports"
       },
       "calendario": {
         "titulo": "Calendrier",
