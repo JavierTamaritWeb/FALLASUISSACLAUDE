@@ -63,6 +63,22 @@ npx gulp updateDistSitemapsLastmod
 
 Para scripts utilitarios que no forman parte del flujo diario de Gulp, consulta [`scripts-utilities.md`](./scripts-utilities.md).
 
+## 🌍 Pre-render de valenciano (v4.6.23)
+
+Desde v4.6.23 el build pre-renderiza las traducciones VA en `dist/va/*.html`: el cuerpo HTML se sirve con texto valenciano horneado, sin depender de que JS arranque. Lo gestiona `gulpfile.js → prerenderTranslations()` reusando `data/translations.json`.
+
+**Variable de entorno disponible** (kill switch):
+
+```bash
+DISABLE_I18N_PRERENDER=1 npm run build
+```
+
+Cuando se setea, el build registra `[i18n-prerender] desactivado por DISABLE_I18N_PRERENDER=1` y `dist/va/*.html` queda sin traducir (igual que `dist/*.html`). Útil para diagnosticar problemas en producción sin revertir el commit.
+
+Detalles funcionales y reglas: [`i18n-translations.md`](./i18n-translations.md). Aspecto SEO: [`google-search-console.md`](./google-search-console.md).
+
+Tras editar `data/translations.json` corre `npm run build` para regenerar el HTML pre-renderizado, y `npm run test:e2e` (incluye `i18n-prerender.e2e.spec.js` en el smoke).
+
 ## 🗺️ Sitemaps y `lastmod`
 
 El build ejecuta `updateDistSitemapsLastmod` para actualizar `lastmod` en:
@@ -166,7 +182,8 @@ Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo 
 
 - Si el build falla por dependencias: `rm -rf node_modules && npm install`
 - Si no ves cambios en producción: confirma que has subido `dist/` y no la raíz del repo
+- Si el pre-render VA produce salida inesperada: usa el kill switch `DISABLE_I18N_PRERENDER=1 npm run build` y revisa los warnings `[i18n-prerender] missing key: ...` que emite el build cuando faltan claves en `translations.va`
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.2
+Última actualización: 7 de mayo de 2026 - v4.6.23

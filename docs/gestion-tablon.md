@@ -281,7 +281,6 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 - [`e2e-testing.md`](./e2e-testing.md): estrategia de pruebas Playwright
 - [`i18n-translations.md`](./i18n-translations.md): claves bilingües y sistema de idioma
-- [`MANUAL_TABLON.md`](./MANUAL_TABLON.md): alias histórico que redirige a esta guía
 
 ---
 

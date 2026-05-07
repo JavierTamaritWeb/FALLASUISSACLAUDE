@@ -346,7 +346,70 @@ Verificación recomendada:
 
 Comprobación visual en `dist/blog-anima.html`: la imagen debe verse sin tinte azul y centrada.
 
-## 10. Qué hacer antes de tocar una zona sensible
+## 10. SEO multi-idioma — `gulpfile.js` como única fuente de canonical/hreflang (v4.6.22)
+
+Regla:
+
+- `<link rel="canonical">` y `<link rel="alternate" hreflang=...>` los inyecta exclusivamente `gulpfile.js` (`modifyHtmlStream`). No se mantienen a mano en los HTML del root.
+- En cada build se eliminan del source **todos** los `canonical` y `hreflang` preexistentes y se reinyectan con el bloque correcto.
+- El `canonical` debe ser **autoreferencial** (cada URL apunta a sí misma): la ES a `https://fallasuissa.es/<file>` y la VA a `https://fallasuissa.es/va/<file>`. NUNCA hagas que `/va/X.html` declare canonical hacia `/X.html`.
+- No usar URLs `?lang=ca` ni `?lang=es` como destino de hreflang (no son páginas crawlables).
+- `sitemap.xml` mantiene 48 entradas (24 ES + 24 VA) con bloques `<xhtml:link rel="alternate">` por entrada. Al añadir una página nueva, añade SUS DOS entradas (ES y VA) con los 3 alternates.
+
+Por qué:
+
+- En v4.6.22 se resolvió el aviso de GSC "Duplicada: el usuario no ha indicado ninguna versión canónica". La causa era canonical y hreflang en conflicto entre ES y VA: cuando se contradicen, Google ignora el hreflang y consolida las dos URLs como duplicadas.
+
+Archivos implicados:
+
+- `gulpfile.js → modifyHtmlStream`
+- `sitemap.xml`
+- [`google-search-console.md`](./google-search-console.md)
+
+Verificación recomendada:
+
+```bash
+npm run build
+grep -H "rel=\"canonical\"" dist/index.html dist/va/index.html
+# Debe haber exactamente 1 por archivo, autoreferencial.
+```
+
+## 11. Pre-render i18n VA en build (v4.6.23)
+
+Regla:
+
+1. **Los atributos `data-i18n*` deben PERMANECER en el HTML servido**: no eliminarlos del source ni filtrarlos en el build. Son la única forma de que el toggle a ES funcione client-side sin recargar.
+2. **No tocar `data/translations.json`** esperando que el HTML cambie sin rebuild: el pre-render genera el HTML en build time. Tras editar el JSON: `npm run build`.
+3. **Para añadir un nuevo atributo i18n** (p. ej. `data-i18n-aria-describedby`): hay que actualizar a la vez `prerenderTranslations` en `gulpfile.js` (array `attrMappings`) y la tabla de selectores en `js/lang.js → updateTranslations()`. Ambos deben procesar el mismo set, o el toggle runtime y el build se desincronizarán.
+4. **Claves faltantes en VA**: el build NO se rompe; el HTML conserva el texto fuente como fallback y emite `[i18n-prerender] missing key: <clave> @ <archivo>`.
+5. **`data-i18n-dynamic`** (meteo): el pre-render lo skipea. NO añadir contenido pre-renderizado a estos elementos — los rellena `js/meteo.js` en runtime.
+6. **`data-i18n-format="paragraphs"`**: el pre-render genera `<p>` por bloque dividido por `\n+`, replicando exactamente `renderParagraphTranslation` de `lang.js`. Mantener simetría si se modifica uno de los dos.
+7. **Solo VA pre-renderiza, ES no**: ES queda byte-idéntico al source. Si en el futuro se quisiera pre-renderizar también ES (drift detection), añadir flag opt-in `PRERENDER_ES=1`.
+8. **Kill switch**: `DISABLE_I18N_PRERENDER=1 npm run build` desactiva el pre-render sin revertir el commit.
+
+Por qué:
+
+- El objetivo SEO es que `dist/va/*.html` divirja en contenido del ES, no solo en `<html lang>`. Sin pre-render, Google ve el HTML pre-JS en español en ambas URLs y trata `/va/` como duplicado.
+- El toggle ES/VA en runtime sigue siendo necesario para usuarios que llegan a `/X.html` con preferencia VA en localStorage o que pulsan el botón de idioma sin recargar.
+
+Archivos implicados:
+
+- `gulpfile.js → prerenderTranslations()`
+- `js/lang.js → updateTranslations()`
+- `data/translations.json`
+- `tests/i18n-prerender.e2e.spec.js`
+- [`i18n-translations.md`](./i18n-translations.md)
+
+Verificación recomendada:
+
+```bash
+npm run build
+grep -o 'data-i18n="nav.inicio"[^>]*>[^<]*' dist/va/index.html   # Debe contener "Inici"
+grep -o 'data-i18n="nav.inicio"[^>]*>[^<]*' dist/index.html      # Debe contener "Inicio"
+npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
+```
+
+## 12. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
 
@@ -364,8 +427,10 @@ Checklist rápido:
 - [`e2e-testing.md`](./e2e-testing.md)
 - [`swiper-monumento.md`](./swiper-monumento.md)
 - [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md)
+- [`i18n-translations.md`](./i18n-translations.md)
+- [`google-search-console.md`](./google-search-console.md)
 - [`../CLAUDE.md`](../CLAUDE.md)
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.2
+Última actualización: 7 de mayo de 2026 - v4.6.23

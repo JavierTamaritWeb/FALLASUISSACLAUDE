@@ -113,7 +113,9 @@ function updateTranslations () {
 
   [
     ['[data-i18n-placeholder]', 'data-i18n-placeholder', 'placeholder'],
-    ['[data-i18n-aria-label]', 'data-i18n-aria-label', 'aria-label']
+    ['[data-i18n-aria-label]',  'data-i18n-aria-label',  'aria-label'],
+    ['[data-i18n-alt]',          'data-i18n-alt',          'alt'],
+    ['[data-i18n-title]',        'data-i18n-title',        'title']
   ].forEach(([selector, keyAttribute, targetAttribute]) => {
     document.querySelectorAll(selector).forEach(elem => {
       const key = elem.getAttribute(keyAttribute);

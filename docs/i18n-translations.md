@@ -122,6 +122,52 @@ Comportamiento actual en `js/lang.js`:
 
 No lo uses si solo necesitas un salto de línea simple dentro de un texto corto; en esos casos sigue siendo más barato resolverlo con CSS y `white-space`.
 
+## 🏗️ Pre-render de valenciano en build (v4.6.23)
+
+Desde v4.6.23, `gulpfile.js` incluye `prerenderTranslations()` que **sustituye en build time** el contenido de los `data-i18n*` por el valor correspondiente de `translations.va`. El resultado: `dist/va/*.html` se sirve con texto valenciano ya horneado en el body, sin depender de que el navegador ejecute JS.
+
+Por qué importa:
+
+- Google indexa `/va/*` como contenido en valenciano real (antes veía el HTML en español pre-JS y marcaba duplicado).
+- Mejora la accesibilidad si JS falla o tarda en cargar.
+- El toggle ES/VA en runtime sigue funcionando porque los atributos `data-i18n*` permanecen en el HTML servido — `js/lang.js` reescribe el DOM al cambiar de idioma.
+
+Atributos cubiertos por el pre-render y por `lang.js`:
+
+- `data-i18n` (contenido textual)
+- `data-i18n-aria-label` → atributo `aria-label`
+- `data-i18n-placeholder` → atributo `placeholder`
+- `data-i18n-alt` → atributo `alt` (procesado en runtime desde v4.6.23)
+- `data-i18n-title` → atributo `title` (procesado en runtime desde v4.6.23)
+- `data-i18n-format="paragraphs"` → genera `<p>` por bloque dividido por `\n+`
+- `data-i18n-dynamic` → skipeado por completo (lo rellena el módulo dueño en runtime)
+
+Reglas de oro al editar:
+
+1. **No tocar los `data-i18n*` del HTML del root** pensando que solo afectan a runtime: el build los lee para pre-renderizar. Si los borras pierdes la traducción VA en `dist/va/`.
+2. **Tras editar `data/translations.json`**, ejecuta `npm run build` para que el HTML pre-renderizado refleje el cambio.
+3. Si añades una clave nueva: asegúrate de tener traducción en **ambos** `es` y `va`. Si falta en `va`, el build avisa con `[i18n-prerender] missing key: <clave> @ <archivo>` y el HTML conserva el texto fuente como fallback (no rompe el build).
+4. **Para añadir un nuevo atributo i18n** (p. ej. `data-i18n-aria-describedby`): hay que extender a la vez el array `attrMappings` en `prerenderTranslations` (`gulpfile.js`) y la tabla de selectores en `updateTranslations()` (`js/lang.js`). Ambos deben procesar el mismo set.
+
+### Kill switch
+
+Si tras un cambio el pre-render produce salida incorrecta y necesitas desactivarlo en producción sin revertir:
+
+```bash
+DISABLE_I18N_PRERENDER=1 npm run build
+```
+
+El build registra `[i18n-prerender] desactivado por DISABLE_I18N_PRERENDER=1` y `dist/va/*.html` queda en español (igual que `dist/*.html`). Útil para diagnosticar mientras se arregla la clave problemática.
+
+### Test guardia
+
+`tests/i18n-prerender.e2e.spec.js` (en la smoke suite) verifica que:
+
+- `dist/va/index.html` contiene el texto VA esperado y no el ES.
+- `dist/index.html` (ES) sigue intacto.
+- Los atributos `data-i18n*` siguen presentes en el HTML servido.
+- `<html lang="ca">` en VA, `<html lang="es">` en ES.
+
 ## 🔄 Contenido dinámico + i18n
 
 Hay componentes donde el nodo necesita una traducción base, pero el contenido final lo completa JavaScript con datos dinámicos.
@@ -222,9 +268,10 @@ Si tocas ese bloque, revisa siempre el conjunto completo:
 
 ## 🧪 Tests E2E
 
-Hay un test E2E dedicado al sistema de traducciones (idioma por defecto, cambio de idioma y persistencia entre páginas):
+Hay dos tests E2E dedicados al sistema de traducciones:
 
-- `tests/i18n.e2e.spec.js`
+- `tests/i18n.e2e.spec.js` (idioma por defecto, cambio de idioma y persistencia entre páginas)
+- `tests/i18n-prerender.e2e.spec.js` (pre-render de VA en build sin ejecutar JS — verifica que `dist/va/*.html` contiene texto valenciano horneado)
 
 Además, la integración real entre i18n y UI dinámica queda cubierta indirectamente por:
 
@@ -235,4 +282,4 @@ Guía de ejecución: [`e2e-testing.md`](./e2e-testing.md)
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.2
+Última actualización: 7 de mayo de 2026 - v4.6.23

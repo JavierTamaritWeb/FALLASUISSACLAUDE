@@ -94,7 +94,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" crossorigin="anonymous">
   <!-- Swiper CSS -->
 <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=a8671664eaab">
+  <link rel="stylesheet" href="css/main.css?v=d1bccb56bab3">
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
   <link rel="canonical" href="https://fallasuissa.es/va/calendario.html">
@@ -127,15 +127,15 @@
         </div>
         <div class="header__notificacion" id="notificacion" aria-live="polite" aria-atomic="true"></div>
         <nav class="navegacion" role="navigation" aria-label="Navegación principal">
-          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html"></a>
-          <a class="navegacion__enlace active" data-i18n="nav.eventos" href="eventos.html" aria-current="page"></a>
-          <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html">Inici</a>
+          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
+          <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html">Ofrena</a>
+          <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Col·laboracions</a>
+          <a class="navegacion__enlace active" data-i18n="nav.eventos" href="eventos.html" aria-current="page">Esdeveniments</a>
+          <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html">Esports</a>
+          <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html">Oratge</a>
+          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html">Blog</a>
+          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html">Galeria</a>
         </nav>
       </div>
         
@@ -162,8 +162,8 @@
   <main class="cal" id="main-content">
     <div class="calendario-eventos modo-sencillo" id="calendarioContenedor">
       <div class="calendario-eventos__acciones reveal reveal--soft">
-        <button class="calendario-eventos__boton-quitar" id="botonQuitarFiltros" data-i18n="calendario.quitar" aria-label="Limpiar todos los filtros del calendario" tabindex="0">Quitar Filtros (Alt+R)</button>
-        <button class="calendario-eventos__modo-boton" id="botonModo" data-i18n="calendario.avanzado" aria-label="Cambiar entre modo sencillo y avanzado" aria-pressed="false" tabindex="0">Cambiar a Modo Avanzado</button>
+        <button class="calendario-eventos__boton-quitar" id="botonQuitarFiltros" data-i18n="calendario.quitar" aria-label="Limpiar todos los filtros del calendario" tabindex="0">Treure filtres</button>
+        <button class="calendario-eventos__modo-boton" id="botonModo" data-i18n="calendario.avanzado" aria-label="Cambiar entre modo sencillo y avanzado" aria-pressed="false" tabindex="0">Canvi a mode avançat</button>
         <!-- Botón para alternar Modo Oscuro -->
         <!-- <button class="calendario-eventos__modo-boton" id="botonModoOscuro">Modo Oscuro</button> -->
        
@@ -176,28 +176,28 @@
             <input type="text" id="filtro-busqueda" class="calendario-eventos__control-busqueda" placeholder="Palabras clave">
           </div>
           <div class="calendario-eventos__control">
-            <label for="filtro-rango-fecha" data-i18n="calendario.rango">Rango de fechas</label>
+            <label for="filtro-rango-fecha" data-i18n="calendario.rango">Rang de dates</label>
             <div class="calendario-eventos__control-fecha-wrapper">
               <input type="text" id="filtro-rango-fecha" class="calendario-eventos__control-fecha" placeholder="dd-mm-aaaa a dd-mm-aaaa"  required>
               <button id="borrar-rango-fecha" class="calendario-eventos__control-fecha-borrar">✕</button>
             </div>
           </div>
           <div class="calendario-eventos__control">
-            <label for="filtro-categoria" data-i18n="calendario.categorias">Categoría</label>
+            <label for="filtro-categoria" data-i18n="calendario.categorias">Categoria</label>
             <select id="filtro-categoria" class="calendario-eventos__control-texto">
-              <option value="" data-i18n="calendario.todas">Todas</option>
-              <option value="Festivo" data-i18n="calendario.festivo">Festivo</option>
+              <option value="" data-i18n="calendario.todas">Totes</option>
+              <option value="Festivo" data-i18n="calendario.festivo">Festiu</option>
               <option value="Falla" data-i18n="calendario.falla">Falla</option>
-              <option value="Evento" data-i18n="calendario.evento">Evento</option>
-              <option value="Urgente" data-i18n="calendario.urgente">Urgente</option>
-              <option value="Informacion" data-i18n="calendario.informacion">Informacion</option>
-              <option value="Recordatorio" data-i18n="calendario.recordatorio">Recordatorio</option>
+              <option value="Evento" data-i18n="calendario.evento">Esdeveniment</option>
+              <option value="Urgente" data-i18n="calendario.urgente">Urgent</option>
+              <option value="Informacion" data-i18n="calendario.informacion">Informació</option>
+              <option value="Recordatorio" data-i18n="calendario.recordatorio">Recordatori</option>
             </select>
           </div>
         </div>
         <div class="calendario-eventos__fila fila-avanzada avanzado">
           <div class="calendario-eventos__control">
-            <label for="filtro-fecha" data-i18n="calendario.puntual">Fecha puntual</label>
+            <label for="filtro-fecha" data-i18n="calendario.puntual">Data puntual</label>
             <div class="calendario-eventos__control-fecha-wrapper">
               <input type="date" id="filtro-fecha" class="calendario-eventos__control-fecha" placeholder="dd-mm-aaaa">
               <button id="borrar-fecha" class="calendario-eventos__control-fecha-borrar">✕</button>
@@ -206,21 +206,21 @@
         </div>
         <div class="calendario-eventos__fila fila-avanzada avanzado">
           <div class="calendario-eventos__control">
-            <label for="filtro-dia" data-i18n="calendario.dia">Día (2 dígitos)</label>
+            <label for="filtro-dia" data-i18n="calendario.dia">Dia (2 dígits)</label>
             <div class="calendario-eventos__campo-wrapper">
               <input type="text" id="filtro-dia" class="calendario-eventos__control-texto" placeholder="DD" maxlength="2" pattern="^\\d{1,2}$" inputmode="numeric" title="Día entre 01 y 31">
               <button class="calendario-eventos__borrar-campo" id="borrar-dia">✕</button>
             </div>
           </div>
           <div class="calendario-eventos__control">
-            <label for="filtro-mes" data-i18n="calendario.mes">Mes (2 dígitos)</label>
+            <label for="filtro-mes" data-i18n="calendario.mes">Mes (2 dígits)</label>
             <div class="calendario-eventos__campo-wrapper">
               <input type="text" id="filtro-mes" class="calendario-eventos__control-texto" placeholder="MM" maxlength="2" pattern="^\\d{1,2}$" inputmode="numeric" title="Mes entre 01 y 12">
               <button class="calendario-eventos__borrar-campo" id="borrar-mes">✕</button>
             </div>
           </div>
           <div class="calendario-eventos__control">
-            <label for="filtro-ano" data-i18n="calendario.anno">Año (4 dígitos)</label>
+            <label for="filtro-ano" data-i18n="calendario.anno">Any (4 dígits)</label>
             <div class="calendario-eventos__campo-wrapper">
               <input type="text" id="filtro-ano" class="calendario-eventos__control-texto" placeholder="AAAA" maxlength="4" pattern="^\\d{4}$" inputmode="numeric" title="Introduzca 4 dígitos (p.ej. 2025)">
               <button class="calendario-eventos__borrar-campo" id="borrar-ano">✕</button>
@@ -233,10 +233,10 @@
       <!-- <div class="calendario-eventos__detalles-mes" id="descripcion-eventos-mes"></div>
       <div class="calendario-eventos__lista" id="lista-anuncios"></div> -->
           <!-- Contenedor para el encabezado con detalles del mes -->
-      <div class="calendario-eventos__detalles-mes reveal" id="descripcion-eventos-mes" data-i18n="calendario.detallesMes"></div>
+      <div class="calendario-eventos__detalles-mes reveal" id="descripcion-eventos-mes" data-i18n="calendario.detallesMes">Detalls del mes</div>
 
       <!-- Contenedor para la lista de tarjetas de eventos -->
-      <div class="calendario-eventos__lista" id="lista-anuncios" data-i18n="calendario.listaAnuncios"></div>
+      <div class="calendario-eventos__lista" id="lista-anuncios" data-i18n="calendario.listaAnuncios">Llista d'anuncis</div>
 
     </div>
   </main>
@@ -246,16 +246,16 @@
   <div id="icsModal" class="ics-modal oculto">
     <div class="ics-modal__contenido">
       <button class="ics-modal__cerrar" id="icsCerrarBtn">×</button>
-      <h2 id="icsModalTitulo" class="ics-modal__titulo" data-i18n="icsModal.titulo">Día {date} ({dayName})</h2>
-      <label for="icsEvento" class="ics-modal__label" data-i18n="icsModal.evento">Evento</label>
+      <h2 id="icsModalTitulo" class="ics-modal__titulo" data-i18n="icsModal.titulo">Dia {date} ({dayName})</h2>
+      <label for="icsEvento" class="ics-modal__label" data-i18n="icsModal.evento">Esdeveniment</label>
       <!-- <input type="text" id="icsEvento" class="ics-modal__input" value=""> -->
-      <input type="text" id="icsEvento" class="ics-modal__input" data-i18n-placeholder="icsModal.placeholderEvento" placeholder="Introduzca el título del evento">
+      <input type="text" id="icsEvento" class="ics-modal__input" data-i18n-placeholder="icsModal.placeholderEvento" placeholder="Introduïu el títol de l'esdeveniment">
       <label for="icsHoraInicio" class="ics-modal__label" data-i18n="icsModal.horaInicial">Hora inicial</label>
       <input type="time" id="icsHoraInicio" class="ics-modal__input" value="00:00">
       <label for="icsHoraFin" class="ics-modal__label" data-i18n="icsModal.horaFinal">Hora final</label>
       <input type="time" id="icsHoraFin" class="ics-modal__input" value="23:59">
-      <label for="icsNotas" class="ics-modal__label" data-i18n="icsModal.notas">Notas</label>
-      <textarea id="icsNotas" class="ics-modal__textarea" data-i18n-placeholder="icsModal.placeholderNotas" placeholder="Introduzca sus notas"></textarea>
+      <label for="icsNotas" class="ics-modal__label" data-i18n="icsModal.notas">Notes</label>
+      <textarea id="icsNotas" class="ics-modal__textarea" data-i18n-placeholder="icsModal.placeholderNotas" placeholder="Introduïu les vostres notes"></textarea>
       <button id="icsAceptarBtn" class="ics-modal__boton" data-i18n="icsModal.aceptar">ACEPTAR</button>
     </div>
   </div>
@@ -268,15 +268,15 @@
     <div class="footer__contenedor">
       <div class="footer__contenido">
         <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
-          <a class="footer__enlace" href="index.html" data-i18n="nav.inicio">Inicio</a>
+          <a class="footer__enlace" href="index.html" data-i18n="nav.inicio">Inici</a>
           <a class="footer__enlace" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
-          <a class="footer__enlace" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrenda</a>
-          <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Colaboraciones</a>
-          <a class="footer__enlace active" href="eventos.html" data-i18n="nav.eventos">Eventos</a>
-          <a class="footer__enlace" href="deportes.html" data-i18n="nav.deportes">Deportes</a>
-          <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Meteo</a>
+          <a class="footer__enlace" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrena</a>
+          <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Col·laboracions</a>
+          <a class="footer__enlace active" href="eventos.html" data-i18n="nav.eventos">Esdeveniments</a>
+          <a class="footer__enlace" href="deportes.html" data-i18n="nav.deportes">Esports</a>
+          <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Oratge</a>
           <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a>
-          <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galería</a>
+          <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galeria</a>
         </nav>
         <picture>
           <source srcset="img/Escudo_falla.avif" type="image/avif">
@@ -300,22 +300,22 @@
         </nav>
       </div>
     </div>
-    <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados.</p>
+    <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats.</p>
     <nav class="footer__legal">
-      <a href="aviso-legal.html" data-i18n="legal.aviso">Aviso Legal</a>
-      <a href="privacidad.html" data-i18n="legal.privacidad">Privacidad</a>
+      <a href="aviso-legal.html" data-i18n="legal.aviso">Avís Legal</a>
+      <a href="privacidad.html" data-i18n="legal.privacidad">Privacitat</a>
       <a href="cookies.html" data-i18n="legal.cookies">Cookies</a>
     </nav>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="js/dark.js?v=a8671664eaab"></script>
-  <script src="js/lang.js?v=a8671664eaab"></script>
-  <script src="js/nav-menu.js?v=a8671664eaab"></script>
-  <script src="js/scroll-reveal.js?v=a8671664eaab" defer></script>
-  <script src="js/calendario.js?v=a8671664eaab"></script>
-  <script src="js/accessibility.js?v=a8671664eaab" defer></script>
+  <script src="js/dark.js?v=d1bccb56bab3"></script>
+  <script src="js/lang.js?v=d1bccb56bab3"></script>
+  <script src="js/nav-menu.js?v=d1bccb56bab3"></script>
+  <script src="js/scroll-reveal.js?v=d1bccb56bab3" defer></script>
+  <script src="js/calendario.js?v=d1bccb56bab3"></script>
+  <script src="js/accessibility.js?v=d1bccb56bab3" defer></script>
  
   
-  <script src="js/cookie-banner.js?v=a8671664eaab" defer></script>
+  <script src="js/cookie-banner.js?v=d1bccb56bab3" defer></script>
 </body>
 </html>

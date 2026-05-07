@@ -439,7 +439,127 @@ async function getSchemaEvents() {
   }
 }
 
-function modifyHtmlStream(schemaEventsJSON, lang, assetVersion) {
+// ===================================
+// I18n PRE-RENDER (v4.6.23)
+// ===================================
+// Sustituye contenido y atributos data-i18n* en HTML por el valor de
+// translations.<lang> antes de servir dist/va/*.html. Mantiene los
+// atributos data-i18n* en el HTML para que el toggle ES/VA en runtime
+// (js/lang.js) siga funcionando. Solo actúa cuando langTable != null.
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeAttr(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;');
+}
+
+function prerenderParagraphs(text) {
+  return String(text)
+    .split(/\n+/)
+    .map((block) => block.trim())
+    .filter(Boolean)
+    .map((block) => `<p>${escapeHtml(block)}</p>`)
+    .join('');
+}
+
+function getNestedKey(obj, dottedKey) {
+  if (!obj || typeof dottedKey !== 'string') return undefined;
+  return dottedKey.split('.').reduce(
+    (acc, key) => (acc && typeof acc === 'object' && key in acc) ? acc[key] : undefined,
+    obj
+  );
+}
+
+function trackMissingKey(tracker, key, fileName) {
+  if (!tracker) return;
+  const id = `${key}@${fileName}`;
+  if (tracker.has(id)) return;
+  tracker.add(id);
+  console.warn(`[i18n-prerender] missing key: ${key} @ ${fileName}`);
+}
+
+function prerenderTranslations(html, langTable, fileName, missingKeyTracker) {
+  if (!langTable) return html;
+
+  // 1. Pasada de contenido: data-i18n
+  const contentRegex = /<([a-zA-Z][a-zA-Z0-9]*)\b([^>]*?\bdata-i18n="([^"]+)"[^>]*?)>([\s\S]*?)<\/\1>/g;
+
+  html = html.replace(contentRegex, (match, tag, attrs, key, content) => {
+    // Skip elementos dinámicos (los rellena JS en runtime)
+    if (/\bdata-i18n-dynamic\b/.test(attrs)) return match;
+    // Skip si el contenido tiene tags hijos (no es hoja) — preserva estructura compleja
+    if (/<[a-zA-Z]/.test(content)) return match;
+
+    const translation = getNestedKey(langTable, key);
+    if (typeof translation !== 'string') {
+      trackMissingKey(missingKeyTracker, key, fileName);
+      return match;
+    }
+
+    let newContent;
+    const formatMatch = attrs.match(/\bdata-i18n-format="([^"]*)"/);
+    const isParagraphs = formatMatch && formatMatch[1] === 'paragraphs';
+    const isBoardNote = /\bclass="[^"]*\bboard__note-content\b[^"]*"/.test(attrs);
+
+    if (isParagraphs) {
+      newContent = prerenderParagraphs(translation);
+    } else if (isBoardNote) {
+      // Permite HTML literal (ej. <br> en notas del tablón)
+      newContent = translation;
+    } else {
+      newContent = escapeHtml(translation);
+    }
+
+    return `<${tag}${attrs}>${newContent}</${tag}>`;
+  });
+
+  // 2-5. Pasadas de atributos: aria-label, placeholder, alt, title
+  const attrMappings = [
+    ['data-i18n-aria-label', 'aria-label'],
+    ['data-i18n-placeholder', 'placeholder'],
+    ['data-i18n-alt', 'alt'],
+    ['data-i18n-title', 'title']
+  ];
+
+  for (const [sourceAttr, destAttr] of attrMappings) {
+    const attrRegex = new RegExp(
+      `<([a-zA-Z][a-zA-Z0-9]*)\\b([^>]*?\\b${sourceAttr}="([^"]+)"[^>]*?)>`,
+      'g'
+    );
+
+    html = html.replace(attrRegex, (match, tag, attrs, key) => {
+      const translation = getNestedKey(langTable, key);
+      if (typeof translation !== 'string') {
+        trackMissingKey(missingKeyTracker, key, fileName);
+        return match;
+      }
+
+      // Eliminar el atributo destino si ya estuviera presente (sustituir)
+      const stripDestAttr = new RegExp(`\\s+${destAttr}="[^"]*"`, 'g');
+      let cleanedAttrs = attrs.replace(stripDestAttr, '');
+
+      // Detectar self-closing (<tag ... />)
+      const trailingSlashMatch = cleanedAttrs.match(/\s*\/\s*$/);
+      const isSelfClose = Boolean(trailingSlashMatch);
+      if (isSelfClose) {
+        cleanedAttrs = cleanedAttrs.replace(/\s*\/\s*$/, '');
+      }
+
+      return `<${tag}${cleanedAttrs} ${destAttr}="${escapeAttr(translation)}"${isSelfClose ? ' />' : '>'}`;
+    });
+  }
+
+  return html;
+}
+
+function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missingKeyTracker) {
   return new Transform({
     objectMode: true,
     transform(file, enc, cb) {
@@ -453,6 +573,12 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion) {
       if (lang === 'ca') {
         html = html.replace(/<html\s+([^>]*)lang="es"/i, '<html $1lang="ca"');
         html = html.replace(/<html\s+lang="es"(.*)?>/i, '<html lang="ca"$1>');
+      }
+
+      // 1b. Pre-render de traducciones (solo VA por ahora). El toggle ES/VA
+      // en runtime sigue funcionando porque los atributos data-i18n* permanecen.
+      if (langTable) {
+        html = prerenderTranslations(html, langTable, path.basename(file.path), missingKeyTracker);
       }
 
       html = stripLegacyDynamicEventSchema(html);
@@ -500,26 +626,50 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion) {
   });
 }
 
-// HTML - Copia HTML del root, parsea Hreflang y compila multi-idioma + Schema
+// HTML - Copia HTML del root, pre-renderiza traducciones VA, inyecta canonical/hreflang + Schema
 async function htmlTask() {
-  const events = await getSchemaEvents();
+  const [events, translationsRaw, assetVersion] = await Promise.all([
+    getSchemaEvents(),
+    fs.readFile(path.join(__dirname, 'data', 'translations.json'), 'utf8'),
+    getAssetVersionToken()
+  ]);
   const schemaString = JSON.stringify(events, null, 2);
-  const assetVersion = await getAssetVersionToken();
+
+  let translations;
+  try {
+    translations = JSON.parse(translationsRaw);
+  } catch (e) {
+    console.warn('[i18n-prerender] translations.json no se pudo parsear, deshabilitando pre-render:', e.message);
+    translations = null;
+  }
+
+  // Kill switch: DISABLE_I18N_PRERENDER=1 desactiva el pre-render sin revertir.
+  const prerenderDisabled = process.env.DISABLE_I18N_PRERENDER === '1';
+  const langTableCa = (!prerenderDisabled && translations && translations.va) ? translations.va : null;
+  if (prerenderDisabled) {
+    console.warn('[i18n-prerender] desactivado por DISABLE_I18N_PRERENDER=1');
+  }
+
+  const missingKeyTracker = new Set();
 
   // Buffer process (no encoding flag para que cargue bin pero el Transform convierte a utf8 y viceversa)
   const esPromise = streamToPromise(
     src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaString, 'es', assetVersion))
+      .pipe(modifyHtmlStream(schemaString, 'es', assetVersion, null, null))
       .pipe(dest(paths.html.dest))
   );
 
   const caPromise = streamToPromise(
     src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaString, 'ca', assetVersion))
+      .pipe(modifyHtmlStream(schemaString, 'ca', assetVersion, langTableCa, missingKeyTracker))
       .pipe(dest(path.join(paths.html.dest, 'va')))
   );
 
-  return Promise.all([esPromise, caPromise]);
+  await Promise.all([esPromise, caPromise]);
+
+  if (missingKeyTracker.size > 0) {
+    console.warn(`[i18n-prerender] ${missingKeyTracker.size} clave(s) faltante(s) en va — el HTML conserva el texto fuente como fallback`);
+  }
 }
 
 // Root files - robots/sitemaps/.htaccess/manifest/sw/google-verification/etc

@@ -231,7 +231,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=a8671664eaab">
+  <link rel="stylesheet" href="css/main.css?v=d1bccb56bab3">
 
   <!-- Preload LCP Images -->
   <link rel="preload" as="image" href="img/Escudo_falla.avif" type="image/avif" fetchpriority="high">
@@ -286,15 +286,15 @@
        
         <div class="header__notificacion" id="notificacion" aria-live="polite" aria-atomic="true"></div>
         <nav class="navegacion" role="navigation" aria-label="Navegación principal">
-          <a class="navegacion__enlace active" data-i18n="nav.inicio" href="index.html" aria-current="page"></a>
-          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html"></a>
+          <a class="navegacion__enlace active" data-i18n="nav.inicio" href="index.html" aria-current="page">Inici</a>
+          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
+          <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html">Ofrena</a>
+          <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Col·laboracions</a>
+          <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html">Esdeveniments</a>
+          <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html">Esports</a>
+          <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html">Oratge</a>
+          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html">Blog</a>
+          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html">Galeria</a>
         </nav>
       </div>
       
@@ -338,26 +338,26 @@
  <div class="cuenta-atras-fondo">
   <section class="countdown" data-index="1" aria-labelledby="countdown-title">
     <div class="countdown__contenedor">
-      <h3 class="countdown__message" id="countdown-title" data-i18n="countdown.message">Cuenta atrás para las Fallas</h3>
+      <h3 class="countdown__message" id="countdown-title" data-i18n="countdown.message">Compte enrere per a les Fallas</h3>
       <div class="countdown__clock">
         <div class="countdown__time-box">
           <span class="countdown__time-value" data-time="days"></span>
-          <span data-i18n="countdown.dias">Días</span>
+          <span data-i18n="countdown.dias">dies</span>
         </div>
         <div class="countdown__time-box">
           <span class="countdown__time-value" data-time="hours"></span>
-          <span data-i18n="countdown.horas">Horas</span>
+          <span data-i18n="countdown.horas">hores</span>
         </div>
         <div class="countdown__time-box">
           <span class="countdown__time-value" data-time="minutes"></span>
-          <span data-i18n="countdown.minutos">Minutos</span>
+          <span data-i18n="countdown.minutos">minuts</span>
         </div>
         <div class="countdown__time-box">
           <span class="countdown__time-value" data-time="seconds"></span>
-          <span data-i18n="countdown.segundos">Segundos</span>
+          <span data-i18n="countdown.segundos">segons</span>
         </div>
       </div>
-      <p class="countdown__fallas-message" data-i18n="countdown.ongoing" style="display: none;">¡Estamos en Fallas!</p>
+      <p class="countdown__fallas-message" data-i18n="countdown.ongoing" style="display: none;">Ja estem en Falles!</p>
     </div>
   </section>
 
@@ -377,7 +377,7 @@
       </div>
 
         <div class="falla__monumento reveal" data-index="2">
-            <h3 class="falla__monumento-title" data-i18n="falla.monumento">El Monumento</h3>
+            <h3 class="falla__monumento-title" data-i18n="falla.monumento">El Monument</h3>
             <!-- Slider principal -->
             <div class="swiper swiper--autoheight contenedor" data-testid="monumento-swiper">
                 <div class="swiper-wrapper">
@@ -411,12 +411,10 @@
             <div class="video-dron__video-wrapper">
               <video id="videoDron" class="video-dron__video" width="1920" height="1080"
                 src="img/dron/dron-001-2026.mp4" preload="metadata" playsinline
-                aria-label="Vídeo aéreo de la Falla Suïssa grabado con dron"
-                data-i18n-aria-label="falla.videoDron.videoAria">
+                data-i18n-aria-label="falla.videoDron.videoAria" aria-label="Vídeo aeri de la Falla Suïssa gravat amb dron">
               </video>
               <button class="video-dron__poster-overlay" id="videoDronPosterPlay"
-                aria-label="Reproducir vídeo"
-                data-i18n-aria-label="falla.videoDron.playAria">
+                data-i18n-aria-label="falla.videoDron.playAria" aria-label="Reproduir vídeo">
                 <svg class="video-dron__play-icon" viewBox="0 0 70 70" aria-hidden="true">
                   <circle cx="35" cy="35" r="34" fill="rgba(4,18,35,0.76)" stroke="rgba(255,255,255,0.22)"/>
                   <polygon points="28,20 28,50 52,35" fill="#fff"/>
@@ -427,35 +425,29 @@
             <div class="video-dron__progress-container">
               <input type="range" class="video-dron__progress" id="videoDronProgress"
                 min="0" max="100" value="0" step="0.1"
-                aria-label="Progreso del vídeo"
-                data-i18n-aria-label="falla.videoDron.progressAria">
+                data-i18n-aria-label="falla.videoDron.progressAria" aria-label="Progrés del vídeo">
             </div>
             <div class="video-dron__controls" role="group" aria-label="Controles de vídeo">
-              <button class="video-dron__btn" id="videoDronPlay"
-                aria-label="Reproducir vídeo" data-i18n-aria-label="falla.videoDron.playAria">
+              <button class="video-dron__btn" id="videoDronPlay" data-i18n-aria-label="falla.videoDron.playAria" aria-label="Reproduir vídeo">
                 <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="3,1 3,15 14,8"/></svg>
-                <span data-i18n="falla.videoDron.play">Reproducir</span>
+                <span data-i18n="falla.videoDron.play">Reproduir</span>
               </button>
-              <button class="video-dron__btn" id="videoDronRestart"
-                aria-label="Reiniciar vídeo desde el principio" data-i18n-aria-label="falla.videoDron.restartAria">
+              <button class="video-dron__btn" id="videoDronRestart" data-i18n-aria-label="falla.videoDron.restartAria" aria-label="Reiniciar vídeo des del principi">
                 <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7h-2a5 5 0 1 1-5-5V0L3 4l5 4V5a3 3 0 0 1 0 6"/></svg>
                 <span data-i18n="falla.videoDron.restart">Reiniciar</span>
               </button>
-              <button class="video-dron__btn" id="videoDronFullscreenBtn"
-                aria-label="Ver vídeo en pantalla completa" data-i18n-aria-label="falla.videoDron.fullscreenAria">
+              <button class="video-dron__btn" id="videoDronFullscreenBtn" data-i18n-aria-label="falla.videoDron.fullscreenAria" aria-label="Veure vídeo en pantalla completa">
                 <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 1h5V0H0v6h1V1zm14 0h-5V0h6v6h-1V1zM1 15h5v1H0v-6h1v5zm14 0h-5v1h6v-6h-1v5z"/></svg>
                 <span data-i18n="falla.videoDron.fullscreen">Ampliar</span>
               </button>
-              <button class="video-dron__btn" id="videoDronMute"
-                aria-label="Silenciar vídeo" data-i18n-aria-label="falla.videoDron.muteAria">
+              <button class="video-dron__btn" id="videoDronMute" data-i18n-aria-label="falla.videoDron.muteAria" aria-label="Silenciar vídeo">
                 <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z"/><path d="M11 5.5c.7.7.7 2.3 0 3M12.8 3.5c1.4 1.4 1.4 4.6 0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 <span data-i18n="falla.videoDron.mute">Silenciar</span>
               </button>
               <div class="video-dron__volume-wrapper">
                 <input type="range" class="video-dron__volume" id="videoDronVolume"
                   min="0" max="100" value="100" step="1"
-                  aria-label="Volumen del vídeo"
-                  data-i18n-aria-label="falla.videoDron.volumeAria">
+                  data-i18n-aria-label="falla.videoDron.volumeAria" aria-label="Volum del vídeo">
               </div>
             </div>
           </div>
@@ -463,7 +455,7 @@
 
           <div class="falleros reveal" data-index="3">
 
-              <h3 class="falleros__titulo" data-i18n="falla.nosotros.titulo">Nosotros</h3>
+              <h3 class="falleros__titulo" data-i18n="falla.nosotros.titulo">Nosaltres</h3>
           
               <div class="falleros__nosotros">
                 <!-- ARIA live region para accesibilidad -->
@@ -474,9 +466,7 @@
 
                               <section class="accordion__section">
                                     <div class="accordion__titular">
-                                          <h3 class="accordion__header" data-i18n="falla.nosotros.falleraM">
-                                            La Fallera Mayor
-                                          </h3>
+                                          <h3 class="accordion__header" data-i18n="falla.nosotros.falleraM">La Fallera Major</h3>
                                           <span class="accordion__icon">▼</span>
                                     </div>
                                                 
@@ -494,10 +484,8 @@
                                               </div>
                                                 
                                             
-                                                <p class="accordion__texto" data-i18n="falla.nosotros.falleraMayor.texto">
-                                                
-                                                  Un ejemplo de tradición y elegancia que se luce con valentía al presentarse como la primera como nuestra Fallera Mayor, en una Falla de nueva creación, con lo que refleja su determinación y arrojo. Marta, tu porte y determinación inspiran a toda la Falla a soñar y celebrar nuestras raíces y tradiciones, con orgullo.
-                                                </p>
+                                                <p class="accordion__texto" data-i18n="falla.nosotros.falleraMayor.texto">Rosario és sentiment en estat pur. Viu cada acte amb el cor en la mà, emocionant-se amb cada detall i deixant que la intensitat de la festa l’abrace per complet. No pot escoltar l’Himne de la Comunitat Valenciana sense que se li trenque la veu i li brollen les llàgrimes, perquè per a ella ser Fallera Major és un orgull que se sent ben endins.
+Familiar, pròxima i autèntica, transmet afecte en cada gest i fa que tots se senten part d’alguna cosa especial. Rosario no sols representa la nostra Falla: la viu, la sent i l’abraça amb l’ànima.</p>
 
                                           </div>
                                     </div>
@@ -505,9 +493,7 @@
                     
                               <section class="accordion__section">
                                     <div class="accordion__titular">
-                                          <h3 class="accordion__header" data-i18n="falla.nosotros.presidente">
-                                            El Presidente
-                                          </h3>
+                                          <h3 class="accordion__header" data-i18n="falla.nosotros.presidente">El President</h3>
                                           <span class="accordion__icon">▼</span>
                                     </div>
                                 
@@ -523,9 +509,7 @@
                                               </div>
                                                 
 
-                                                <p class="accordion__texto" data-i18n="falla.nosotros.presidenteM.texto">
-                                                    Un ejemplo de liderazgo y dedicación que se manifiesta en cada paso que da. Su compromiso con la Falla es un faro que guía a todos hacia el éxito. Con su carisma y visión, inspira a cada miembro de la comisión a dar lo mejor de sí mismos. Su pasión por la tradición y su deseo de innovar hacen de él un líder excepcional.
-                                                </p>
+                                                <p class="accordion__texto" data-i18n="falla.nosotros.presidenteM.texto">Un exemple de lideratge i dedicació que es manifesta en cada pas que dóna. El seu compromís amb la Falla és un far que guia a tots cap a l'èxit. Amb el seu carisma i visió, inspira a cada membre de la comissió a donar el millor de si mateixos. La seva passió per la tradició i el seu desig d'innovar fan d'ell un líder excepcional.</p>
 
                                           </div>
                                     </div>
@@ -534,9 +518,7 @@
                               <section class="accordion__section">
 
                                     <div class="accordion__titular">
-                                          <h3 class="accordion__header" data-i18n="falla.nosotros.falleraMI">
-                                            La Fallera Mayor Infantil
-                                          </h3>
+                                          <h3 class="accordion__header" data-i18n="falla.nosotros.falleraMI">La Fallera Major Infantil</h3>
                                           <span class="accordion__icon">▼</span>
                                     </div>
                               
@@ -553,9 +535,8 @@
                                               </div>
                                                 
 
-                                                <p class="accordion__texto" data-i18n="falla.nosotros.falleramayoraI.texto">
-                                                  Con la dulzura en su mirada y una sonrisa que ilumina cada rincón, nuestra pequeña Fallera Mayor Infantil irradia la serenidad de la bondad. Es todo corazón, recordándonos que la inocencia y la pureza tienen un poder encantador para inspirar a quienes la rodean.
-                                                </p>
+                                                <p class="accordion__texto" data-i18n="falla.nosotros.falleramayoraI.texto">Daniela és il·lusió, dolçor i alegria. Representa l'essència més pura de la nostra comissió infantil: aquella barreja de nervis, somriures infinits i amor sincer per la festa. Amb la seva mirada brillant i el seu caràcter proper, viu cada acte amb emoció i orgull, portant el nom de la nostra Falla amb elegància i naturalitat.
+És la tendresa que emociona, l'energia que contagia i el reflex del futur que estem construint junts.</p>
 
                                           </div>
                                     </div>
@@ -563,9 +544,7 @@
                     
                               <section class="accordion__section">
                                     <div class="accordion__titular">
-                                          <h3 class="accordion__header" data-i18n="falla.nosotros.presidenteI">
-                                            El Presidente Infantil
-                                          </h3>
+                                          <h3 class="accordion__header" data-i18n="falla.nosotros.presidenteI">El President Infantil</h3>
                                           <span class="accordion__icon">▼</span>
                                     </div>
                                 
@@ -582,9 +561,8 @@
                                           </div>
                                           
 
-                                          <p class="accordion__texto" data-i18n="falla.nosotros.presiI.texto">
-                                            Contenido del nuevo apartado... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur nobis ipsam corporis dolorum fugit repellat earum assumenda?
-                                          </p>
+                                          <p class="accordion__texto" data-i18n="falla.nosotros.presiI.texto">Diego és energia, companyerisme i entusiasme. Apassionat del futbol i de l'esperit d'equip, porta al cor els valors de l'esforç, la constància i el joc net, qualitats que també el defineixen com a President Infantil.
+Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra comissió, demostrant que liderar també és animar, sumar i fer pinya. Amb el seu somriure i la seva passió, Diego és força i il·lusió per al nostre present i el nostre futur.</p>
 
                                       </div>
                                 </div>
@@ -592,9 +570,7 @@
                     
                           <section class="accordion__section">
                                 <div class="accordion__titular">
-                                      <h3 class="accordion__header" data-i18n="falla.nosotros.directiva">
-                                        La Directiva
-                                      </h3>
+                                      <h3 class="accordion__header" data-i18n="falla.nosotros.directiva">La Directiva</h3>
                                       <span class="accordion__icon">▼</span>
                                 </div>
                                 
@@ -609,14 +585,14 @@
                                           <div class="accordion__directiva">
                                             <ul>
                                               <li class="accordion__directiva-presidente">
-                                                <span data-i18n="directiva.presidente">Presidente:</span>
+                                                <span data-i18n="directiva.presidente">President</span>
                                                 <ul>
                                                   <li>José Santos Quiles</li>
                                                 </ul>
                                               </li>
 
                                               <li class="accordion__directiva-vicepresidentes">
-                                              <span data-i18n="directiva.vicepresidentes">Vicepresidencias:</span> 
+                                              <span data-i18n="directiva.vicepresidentes">Vicepresidents</span> 
                                                 <ul>
                                                   <li>Pablo</li>
                                                   <li>Prados</li>
@@ -624,14 +600,14 @@
                                                 </ul>
                                               </li> 
                                               <li class="accordion__directiva-secretaria">
-                                                <span data-i18n="directiva.secretaria">Secretaría:</span> 
+                                                <span data-i18n="directiva.secretaria">Secretaria</span> 
                                                 <ul>
                                                   <li>Paula</li>
                                                 </ul>
                                                
                                               </li>
                                               <li class="accordion__directiva-area-economica">
-                                                <span data-i18n="directiva.economica">Área Económica:</span>
+                                                <span data-i18n="directiva.economica">Àrea Econòmica</span>
                                                   <ul>
                                                     <li>David</li>
                                                     <li>Miguel Ángel</li>
@@ -639,7 +615,7 @@
                                               </li>
                                                 
                                               <li class="accordion__directiva-delegacion-infantil">
-                                                <span data-i18n="directiva.dinfantil">Delegación Infantil:</span>
+                                                <span data-i18n="directiva.dinfantil">Delegació Infantil</span>
                                                 <ul>
                                                   <li>Sara</li>
                                                 </ul>
@@ -652,9 +628,7 @@
                     
                           <section class="accordion__section">
                               <div class="accordion__titular">
-                                    <h3 class="accordion__header" data-i18n="falla.nosotros.organigrama">
-                                      Organigrama
-                                    </h3>
+                                    <h3 class="accordion__header" data-i18n="falla.nosotros.organigrama">Organigrama</h3>
                                     <span class="accordion__icon">▼</span>
                               </div>
                             
@@ -670,13 +644,13 @@
                                           <div class="organigrama-contenedor">
 
                                               <section class="organigrama clickable" role="tree" aria-label="Organigrama">
-                                                <h2 class="organigrama__title" data-i18n="organigrama.titulo">Organigrama de La Falla</h2>
+                                                <h2 class="organigrama__title" data-i18n="organigrama.titulo">Organigrama de la Falla</h2>
                                                 
                                                 <!-- Presidente -->
                                                 <div class="organigrama__top" role="treeitem" aria-label="Presidente: José Santos Quiles">
                                                   <div class="organigrama__node">
                                                     <p class="nombre">José Santos Quiles</p>
-                                                    <p class="cargo" data-i18n="organigrama.presidente">Presidente</p>
+                                                    <p class="cargo" data-i18n="organigrama.presidente">President</p>
                                                   </div>
                                                 </div>
                                                 
@@ -692,12 +666,12 @@
                                                             <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
                                                             <circle cx="9" cy="7" r="4"/>
                                                           </svg>
-                                                      <span data-i18n="organigrama.vicepresidentes">Vicepresidencias</span>    
+                                                      <span data-i18n="organigrama.vicepresidentes">Vicepresidents</span>    
                                                       
                                                     </h3>
                                                     <div class="organigrama__subhead">
-                                                      <div class="organigrama__subnode destacado"><p>Pablo Cortés<br><span data-i18n="organigrama.eventos">Eventos</span></p></div>
-                                                      <div class="organigrama__subnode destacado"><p>Prados Ramos<br><span data-i18n="organigrama.protoc">Protocolo y Deportes</span></p></div>
+                                                      <div class="organigrama__subnode destacado"><p>Pablo Cortés<br><span data-i18n="organigrama.eventos">Esdeveniments</span></p></div>
+                                                      <div class="organigrama__subnode destacado"><p>Prados Ramos<br><span data-i18n="organigrama.protoc">Protocol i Esports</span></p></div>
                                                       <div class="organigrama__subnode destacado"><p>Rodrigo Sobero<br><span data-i18n="organigrama.festejos">Festejos</span></p></div>
                                                     </div>
                                                     <div class="organigrama__branches">
@@ -708,9 +682,9 @@
                                                         <div class="organigrama__subnode delegados"><p>Ada Palerm</p></div>
                                                       </div>
                                                       <div class="organigrama__branch">
-                                                        <div class="organigrama__subnode delegados"><p>Jose Luis Damaso<br><span data-i18n="organigrama.deportes">Delagado Deportes</span> </p></div>
-                                                        <div class="organigrama__subnode delegados"><p>Pablo Pallardó<br><span data-i18n="organigrama.deportes">Delagado Deportes</span></p></div>
-                                                        <div class="organigrama__subnode delegados"><p>Hugo Santos<br><span data-i18n="organigrama.deportes">Delagado Deportes</span></p></div>
+                                                        <div class="organigrama__subnode delegados"><p>Jose Luis Damaso<br><span data-i18n="organigrama.deportes">Delegat Esports</span> </p></div>
+                                                        <div class="organigrama__subnode delegados"><p>Pablo Pallardó<br><span data-i18n="organigrama.deportes">Delegat Esports</span></p></div>
+                                                        <div class="organigrama__subnode delegados"><p>Hugo Santos<br><span data-i18n="organigrama.deportes">Delegat Esports</span></p></div>
                                                       </div>
                                                       <div class="organigrama__branch">
                                       
@@ -734,7 +708,7 @@
                                                         <path d="M22 13a18.15 18.15 0 0 1-20 0"/>
                                                         <rect width="20" height="14" x="2" y="6" rx="2"/>
                                                       </svg>
-                                                      <span data-i18n="organigrama.secretaria">Secretaría</span>
+                                                      <span data-i18n="organigrama.secretaria">Secretaria</span>
                                                       
                                                     </h3>
                                                     <div class="organigrama__subhead">
@@ -742,7 +716,7 @@
                                                     </div>
                                                     <div class="organigrama__branches">
                                                       <div class="organigrama__branch">
-                                                        <div class="organigrama__subnode delegados"><p>Javier Tamarit<br><span data-i18n="organigrama.web">Delegado Web</span></p></div>
+                                                        <div class="organigrama__subnode delegados"><p>Javier Tamarit<br><span data-i18n="organigrama.web">Delegat Web</span></p></div>
                                                       </div>
                                                     </div>
                                                   </section>
@@ -755,7 +729,7 @@
                                                         <path d="M4 14h9"/>
                                                         <path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/>
                                                       </svg>
-                                                      <span data-i18n="organigrama.economica">Área Económica</span>
+                                                      <span data-i18n="organigrama.economica">Àrea Econòmica</span>
                                                       
                                                     </h3>
                                                     <div class="organigrama__subhead">
@@ -766,7 +740,7 @@
                                                       
 
                                                       <div class="organigrama__branch">
-                                                        <div class="organigrama__subnode desplazado delegados"><p>Mamen Ramos<br><span data-i18n="organigrama.loteria">Delegada Lotería</span></p></div>
+                                                        <div class="organigrama__subnode desplazado delegados"><p>Mamen Ramos<br><span data-i18n="organigrama.loteria">Delegada Loteria</span></p></div>
                                                       </div>
                                                     </div>
                                                   </section>
@@ -782,7 +756,7 @@
                                                         <path d="M6.3 3.8a16.55 16.55 0 0 0 1.9 11.5"/>
                                                         <circle cx="12" cy="12" r="10"/>
                                                       </svg>
-                                                      <span data-i18n="organigrama.dinfantil">Delegación Infantil</span>
+                                                      <span data-i18n="organigrama.dinfantil">Delegació Infantil</span>
                                                       
                                                     </h3>
                                                     <div class="organigrama__subhead">
@@ -803,8 +777,7 @@
 
                                           </div>
                                           
-                                          <p class="accordion__texto organigrana-leyenda" data-i18n="organigrama.leyenda"> 
-                                            Este es el organigrama de la Falla, donde se pueden ver los diferentes cargos y sus respectivas funciones. En el ejercicio 2025-26, queda conformado de esta manera.  </p>
+                                          <p class="accordion__texto organigrana-leyenda" data-i18n="organigrama.leyenda">Aquest és l'organigrama de la Falla, on es poden veure els diferents càrrecs i les seves respectives funcions. En l'exercici 2025-26, queda conformada d'aquesta manera.</p>
                                         
                                           
                                            
@@ -814,9 +787,7 @@
                           </section>
                           <!-- <section class="accordion__section">
                                     <div class="accordion__titular">
-                                          <h3 class="accordion__header" data-i18n="falla.nosotros.mapa">
-                                            Mapa
-                                          </h3>
+                                          <h3 class="accordion__header" data-i18n="falla.nosotros.mapa">Mapa</h3>
                                           <span class="accordion__icon">▼</span>
                                     </div>
                                 
@@ -832,9 +803,7 @@
                                               
                                                 
                                               <a href="mapa.html">
-                                                <p class="accordion__texto" data-i18n="falla.nosotros.mapaInteractivo.texto">
-                                                    mapa interactivo 
-                                                </p>
+                                                <p class="accordion__texto" data-i18n="falla.nosotros.mapaInteractivo.texto">El mapa interactiu de la Falla Suïssa - L'Alqueria del Favero és una eina que permet als visitants explorar els diferents punts d'interès de la Falla. Inclou informació sobre les ubicacions dels monuments, les casetes, els actes i altres esdeveniments relacionats amb les Falles. És una manera fàcil i divertida de conèixer millor la nostra Falla i participar en les celebracions.</p>
                                               </a>
                                                 
 
@@ -847,14 +816,14 @@
             </div>
 
       <div class="historia reveal" data-index="4">
-        <h3 class="historia__titulo" data-i18n="historia.titulo">Historia</h3>
+        <h3 class="historia__titulo" data-i18n="historia.titulo">Història</h3>
         <div class="historia__prologo">
           <div class="historia__archivos">
-              <h4 class="historia__archivos-titulo" data-i18n="historia.archivos.titulo">Archivos</h4>
+              <h4 class="historia__archivos-titulo" data-i18n="historia.archivos.titulo">Arxius</h4>
               <div class="historia__archivos-seccion">
                 <h5 class="historia__archivos-subtitulo">Presentaciones</h5>
                 <div class="historia__grid">
-                  <a href="pdf/Presentaciones/Presentacion_Fallera_2026.html" class="historia__card" target="_blank" rel="noopener noreferrer" aria-label="Ver Presentación Fallera 2026" data-i18n-aria-label="historia.archivos.presentacionAria">
+                  <a href="pdf/Presentaciones/Presentacion_Fallera_2026.html" class="historia__card" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.presentacionAria" aria-label="Veure Presentació Fallera 2026 en una pestanya nova">
                     <div class="historia__card-icon">
                       <svg class="icon-pdf" width="50" height="50" viewBox="0 0 24 24" role="img" aria-hidden="true">
                         <path d="M3 1h14l4 4v18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" fill="#E03F3F"/>
@@ -863,7 +832,7 @@
                       </svg>
                     </div>
                     <h6 class="historia__card-title">
-                      <span data-i18n="historia.archivos.presentacion">Presentación</span> <span data-i18n="historia.archivos.fallas2026">Fallas 2026</span>
+                      <span data-i18n="historia.archivos.presentacion">Presentació</span> <span data-i18n="historia.archivos.fallas2026"> Falles 2026</span>
                     </h6>
                   </a>
                 </div>
@@ -873,8 +842,8 @@
                 <h5 class="historia__archivos-subtitulo">Llibrets</h5>
                 <div class="historia__grid historia__grid--llibrets">
                   <div class="historia__card-cluster historia__card-cluster--single" role="group" aria-labelledby="historia-llibrets-edicion-202425-index">
-                    <p class="historia__card-cluster-label" id="historia-llibrets-edicion-202425-index" data-i18n="historia.archivos.edicion202425">Edición 2024-25</p>
-                    <a href="pdf/Llibrets/Llibret_2024-25.html" class="historia__card historia__card--featured" target="_blank" rel="noopener noreferrer" aria-label="Ver Llibret 2024-25" data-i18n-aria-label="historia.archivos.llibret202425Aria">
+                    <p class="historia__card-cluster-label" id="historia-llibrets-edicion-202425-index" data-i18n="historia.archivos.edicion202425">Edició 2024-25</p>
+                    <a href="pdf/Llibrets/Llibret_2024-25.html" class="historia__card historia__card--featured" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.llibret202425Aria" aria-label="Veure Llibret 2024-25 en una pestanya nova">
                       <div class="historia__card-icon">
                         <svg class="icon-pdf" width="50" height="50" viewBox="0 0 24 24" role="img" aria-hidden="true">
                           <path d="M3 1h14l4 4v18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" fill="#E03F3F"/>
@@ -889,9 +858,9 @@
                   </div>
 
                   <div class="historia__card-cluster historia__card-cluster--compact" role="group" aria-labelledby="historia-llibrets-edicion-index">
-                    <p class="historia__card-cluster-label" id="historia-llibrets-edicion-index" data-i18n="historia.archivos.edicion202526">Edición 2025-26</p>
+                    <p class="historia__card-cluster-label" id="historia-llibrets-edicion-index" data-i18n="historia.archivos.edicion202526">Edició 2025-26</p>
                     <div class="historia__card-cluster-grid">
-                      <a href="pdf/Llibrets/Llibret_2025-26.html" class="historia__card historia__card--featured" target="_blank" rel="noopener noreferrer" aria-label="Ver Llibret 2025-26" data-i18n-aria-label="historia.archivos.llibret202526Aria">
+                      <a href="pdf/Llibrets/Llibret_2025-26.html" class="historia__card historia__card--featured" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.llibret202526Aria" aria-label="Veure Llibret 2025-26 en una pestanya nova">
                         <div class="historia__card-icon">
                           <svg class="icon-pdf" width="50" height="50" viewBox="0 0 24 24" role="img" aria-hidden="true">
                             <path d="M3 1h14l4 4v18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" fill="#E03F3F"/>
@@ -903,7 +872,7 @@
                         </h6>
                       </a>
 
-                      <a href="llibret_2026.html" class="historia__card historia__card--featured historia__card--digital" target="_blank" rel="noopener noreferrer" aria-label="Abrir Llibret digital 2025-2026 en una pestaña nueva" data-i18n-aria-label="historia.archivos.llibretDigitalAria">
+                      <a href="llibret_2026.html" class="historia__card historia__card--featured historia__card--digital" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.llibretDigitalAria" aria-label="Obrir Llibret digital 2025-2026 en una pestanya nova">
                         <div class="historia__card-icon">
                           <svg class="icon-web" width="50" height="50" viewBox="0 0 24 24" role="img" aria-hidden="true">
                             <rect x="2" y="3" width="20" height="18" rx="3" fill="#004BCF"/>
@@ -915,7 +884,7 @@
                           </svg>
                         </div>
                         <h6 class="historia__card-title">
-                          <span data-i18n="historia.archivos.llibretDigital">Llibret dig. traducido.</span>
+                          <span data-i18n="historia.archivos.llibretDigital">Llibret dig. traduït</span>
                           <span>2025-26</span>
                         </h6>
                       </a>
@@ -944,7 +913,7 @@
     <div class="contenedor">
       <div class="ofrenda__heading">
         <img class="ofrenda__icono" width="64" height="64" src="img/logos/logo-virgen.svg" alt="Icono de la Virgen de los Desamparados" loading="lazy" decoding="async">
-        <h2 class="ofrenda__titulo" data-i18n="ofrenda.titulo">Ofrenda</h2>
+        <h2 class="ofrenda__titulo" data-i18n="ofrenda.titulo">Ofrena</h2>
       </div>
 
       <!-- Galería de imágenes -->
@@ -952,25 +921,22 @@
         <div class="ofrenda__figura">
           <button class="colaboraciones-mosaic__trigger" type="button">
             <img class="ofrenda__imagen" width="400" height="533" src="img/ofrenda/ofenda-2026/ofrenda-2026-fm.jpeg"
-              alt="Fallera Mayor de la Falla Suïssa en la Ofrenda Floral 2025-26"
-              data-i18n-alt="ofrenda.fmAlt" loading="lazy" decoding="async">
-            <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Abrir imagen ampliada</span>
+              data-i18n-alt="ofrenda.fmAlt" loading="lazy" decoding="async" alt="Fallera Major de la Falla Suïssa en l'Ofrena Floral 2025-26">
+            <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
           </button>
         </div>
         <div class="ofrenda__figura">
           <button class="colaboraciones-mosaic__trigger" type="button">
             <img class="ofrenda__imagen" width="400" height="533" src="img/ofrenda/ofenda-2026/ofrenda-2026-fmm.jpeg"
-              alt="Fallera Mayor y acompañamiento en la Ofrenda Floral 2025-26"
-              data-i18n-alt="ofrenda.fmmAlt" loading="lazy" decoding="async">
-            <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Abrir imagen ampliada</span>
+              data-i18n-alt="ofrenda.fmmAlt" loading="lazy" decoding="async" alt="Fallera Major i acompanyament en l'Ofrena Floral 2025-26">
+            <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
           </button>
         </div>
         <div class="ofrenda__figura">
           <button class="colaboraciones-mosaic__trigger" type="button">
             <img class="ofrenda__imagen" width="400" height="533" src="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg"
-              alt="Ofrenda Floral a la Virgen de los Desamparados 2025-26"
-              data-i18n-alt="ofrenda.generalAlt" loading="lazy" decoding="async">
-            <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Abrir imagen ampliada</span>
+              data-i18n-alt="ofrenda.generalAlt" loading="lazy" decoding="async" alt="Ofrena Floral a la Mare de Déu dels Desemparats 2025-26">
+            <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
           </button>
         </div>
       </div>
@@ -980,14 +946,12 @@
         <div class="video-dron__video-wrapper">
           <video id="videoOfrenda" class="video-dron__video" width="1920" height="1080"
             poster="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
-            aria-label="Vídeo de la Ofrenda Floral 2025-26 de la Falla Suïssa"
-            data-i18n-aria-label="ofrenda.videoAria">
+            data-i18n-aria-label="ofrenda.videoAria" aria-label="Vídeo de l'Ofrena Floral 2025-26 de la Falla Suïssa">
             <source src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
-            <span data-i18n="ofrenda.fallback">Tu navegador no soporta la reproducción de vídeo.</span>
+            <span data-i18n="ofrenda.fallback">El teu navegador no suporta la reproducció de vídeo.</span>
           </video>
           <button class="video-dron__poster-overlay" id="videoOfrendaPosterPlay"
-            aria-label="Reproducir vídeo"
-            data-i18n-aria-label="ofrenda.playAria">
+            data-i18n-aria-label="ofrenda.playAria" aria-label="Reproduir vídeo">
             <svg class="video-dron__play-icon" viewBox="0 0 70 70" aria-hidden="true">
               <circle cx="35" cy="35" r="34" fill="rgba(4,18,35,0.76)" stroke="rgba(255,255,255,0.22)"/>
               <polygon points="28,20 28,50 52,35" fill="#fff"/>
@@ -998,38 +962,32 @@
         <div class="video-dron__progress-container">
           <input type="range" class="video-dron__progress" id="videoOfrendaProgress"
             min="0" max="100" value="0" step="0.1"
-            aria-label="Progreso del vídeo"
-            data-i18n-aria-label="ofrenda.progressAria">
+            data-i18n-aria-label="ofrenda.progressAria" aria-label="Progrés del vídeo">
         </div>
         <div class="video-dron__controls" role="group" aria-label="Controles de vídeo">
-          <button class="video-dron__btn" id="videoOfrendaPlay"
-            aria-label="Reproducir vídeo" data-i18n-aria-label="ofrenda.playAria">
+          <button class="video-dron__btn" id="videoOfrendaPlay" data-i18n-aria-label="ofrenda.playAria" aria-label="Reproduir vídeo">
             <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="3,1 3,15 14,8"/></svg>
-            <span data-i18n="ofrenda.play">Reproducir</span>
+            <span data-i18n="ofrenda.play">Reproduir</span>
           </button>
-          <button class="video-dron__btn" id="videoOfrendaRestart"
-            aria-label="Reiniciar vídeo desde el principio" data-i18n-aria-label="ofrenda.restartAria">
+          <button class="video-dron__btn" id="videoOfrendaRestart" data-i18n-aria-label="ofrenda.restartAria" aria-label="Reiniciar vídeo des del principi">
             <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7h-2a5 5 0 1 1-5-5V0L3 4l5 4V5a3 3 0 0 1 0 6"/></svg>
             <span data-i18n="ofrenda.restart">Reiniciar</span>
           </button>
-          <button class="video-dron__btn" id="videoOfrendaFullscreenBtn"
-            aria-label="Ver vídeo en pantalla completa" data-i18n-aria-label="ofrenda.fullscreenAria">
+          <button class="video-dron__btn" id="videoOfrendaFullscreenBtn" data-i18n-aria-label="ofrenda.fullscreenAria" aria-label="Veure vídeo en pantalla completa">
             <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 1h5V0H0v6h1V1zm14 0h-5V0h6v6h-1V1zM1 15h5v1H0v-6h1v5zm14 0h-5v1h6v-6h-1v5z"/></svg>
             <span data-i18n="ofrenda.fullscreen">Ampliar</span>
           </button>
-          <button class="video-dron__btn" id="videoOfrendaMute"
-            aria-label="Silenciar vídeo" data-i18n-aria-label="ofrenda.muteAria">
+          <button class="video-dron__btn" id="videoOfrendaMute" data-i18n-aria-label="ofrenda.muteAria" aria-label="Silenciar vídeo">
             <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z"/><path d="M11 5.5c.7.7.7 2.3 0 3M12.8 3.5c1.4 1.4 1.4 4.6 0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span data-i18n="ofrenda.mute">Silenciar</span>
           </button>
           <div class="video-dron__volume-wrapper">
             <input type="range" class="video-dron__volume" id="videoOfrendaVolume"
               min="0" max="100" value="100" step="1"
-              aria-label="Volumen del vídeo"
-              data-i18n-aria-label="ofrenda.volumeAria">
+              data-i18n-aria-label="ofrenda.volumeAria" aria-label="Volum del vídeo">
           </div>
         </div>
-        <p class="video-dron__status" id="videoOfrendaStatus" hidden role="status" aria-live="polite" data-i18n="ofrenda.loadError">No se ha podido cargar el vídeo. Vuelve a intentarlo.</p>
+        <p class="video-dron__status" id="videoOfrendaStatus" hidden role="status" aria-live="polite" data-i18n="ofrenda.loadError">No s'ha pogut carregar el vídeo. Torna-ho a intentar.</p>
       </div>
     </div>
   </section>
@@ -1042,7 +1000,7 @@
       <div class="colaboraciones__heading reveal reveal--soft">
         <img class="colaboraciones__imagen" src="img/logos/logo-colaborar.svg"
              alt="Icono de colaboraciones de la Falla Suïssa" width="64" height="64" loading="lazy" decoding="async">
-        <h2 class="colaboraciones__heading-texto" data-i18n="colaboraciones.titulo">Colaboraciones</h2>
+        <h2 class="colaboraciones__heading-texto" data-i18n="colaboraciones.titulo">Col·laboracions</h2>
       </div>
 
       <div class="colaboraciones__accordion">
@@ -1072,37 +1030,37 @@
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
                           <img src="img/colaboracion/hope/hope-001.jpeg" width="300" height="400" alt="Colaboración HOPE 1" loading="lazy" decoding="async">
-                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
                           <img src="img/colaboracion/hope/hope-002.jpeg" width="300" height="400" alt="Colaboración HOPE 2" loading="lazy" decoding="async">
-                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
                           <img src="img/colaboracion/hope/hope-003.jpeg" width="300" height="400" alt="Colaboración HOPE 3" loading="lazy" decoding="async">
-                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
                           <img src="img/colaboracion/hope/hope-004.jpeg" width="300" height="400" alt="Colaboración HOPE 4" loading="lazy" decoding="async">
-                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
                           <img src="img/colaboracion/hope/hope-005.jpeg" width="300" height="400" alt="Colaboración HOPE 5" loading="lazy" decoding="async">
-                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
                           <img src="img/colaboracion/hope/hope-006.jpg" width="300" height="400" alt="Colaboración HOPE 6" loading="lazy" decoding="async">
-                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Abrir imagen ampliada</span>
+                          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                     </div>
@@ -1118,10 +1076,10 @@
 
     <div class="colaboraciones-lightbox" id="colaboracionesLightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="colaboracionesLightboxTitle">
       <div class="colaboraciones-lightbox__dialog">
-        <h2 class="visually-hidden" id="colaboracionesLightboxTitle" data-i18n="colaboraciones.lightbox.titulo">Imagen ampliada de HOPE</h2>
+        <h2 class="visually-hidden" id="colaboracionesLightboxTitle" data-i18n="colaboraciones.lightbox.titulo">Imatge ampliada de HOPE</h2>
         <button class="colaboraciones-lightbox__close" type="button">
           <span aria-hidden="true">&times;</span>
-          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.cerrar">Cerrar imagen ampliada</span>
+          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.cerrar">Tancar imatge ampliada</span>
         </button>
         <div class="colaboraciones-lightbox__frame">
           <img class="colaboraciones-lightbox__image" src="" alt="">
@@ -1138,22 +1096,22 @@
       <div class="contenedor">
         <div class="eventos__heading reveal reveal--soft">
           <img class="eventos__calendario" width="64" height="64" src="img/logos/logo-eventos.svg" alt="Calendario de eventos de la Falla Suïssa" loading="lazy" decoding="async">
-          <h2 class="eventos__heading-texto" data-i18n="eventos.titulo">Eventos</h2>
+          <h2 class="eventos__heading-texto" data-i18n="eventos.titulo">Esdeveniments</h2>
         </div>
 
         <div class="eventos__titulo-calendario reveal reveal--soft">
           <img class="eventos__calendario" width="64" height="64" src="img/calendario.png" alt="Icono de calendario para eventos falleros" loading="lazy" decoding="async">
-          <h3 class="eventos__title" data-i18n="eventos.calendario">Calendario</h3>
+          <h3 class="eventos__title" data-i18n="eventos.calendario">Calendari</h3>
         </div>
 
         <div class="eventos__calentario-info reveal">
           <a href="calendario.html">
-            <p class="eventos-nota-calendario" data-i18n="calendario.nota1">En nuestro calendario tenéis a vuestra disposición una práctica opción para incorporar cualquier evento a vuestra agenda personal. Además, podéis editar fácilmente la fecha, el título y añadir las observaciones que necesitéis.</p>
-            <p class="eventos-nota-calendario" data-i18n="calendario.nota2">¡Todo está pensado para que mantener al día vuestra agenda fallera sea tan cómodo como ameno!</p>
+            <p class="eventos-nota-calendario" data-i18n="calendario.nota1">Al nostre calendari teniu a la vostra disposició una pràctica opció per incorporar qualsevol esdeveniment a la vostra agenda personal. A més, podeu editar fàcilment la data, el títol i afegir les observacions que necessiteu.</p>
+            <p class="eventos-nota-calendario" data-i18n="calendario.nota2">Tot està pensat perquè mantenir al dia la vostra agenda fallera sigui tan còmode com amè!</p>
           </a>
         </div>
 
-        <h3 class="tablon-titulo reveal reveal--soft" data-i18n="eventos.tablon">Tablón</h3>
+        <h3 class="tablon-titulo reveal reveal--soft" data-i18n="eventos.tablon">Tauler d'anuncis</h3>
         <div class="marco-tablon">
           <div class="board" id="notesBoard">
             <!-- Contenido cargado dinámicamente por js/board.js -->
@@ -1169,11 +1127,11 @@
     <div class="contenedor">
       <div class="deportes__heading reveal reveal--soft">
         <img class="deportes__icono" width="64" height="64" src="img/logos/logo-run.svg" alt="Icono de actividades deportivas de la Falla Suïssa" loading="lazy" decoding="async">
-        <h2 class="deportes__heading-texto" data-i18n="deportes.titulo">Deportes</h2>
+        <h2 class="deportes__heading-texto" data-i18n="deportes.titulo">Esports</h2>
       </div>
-      <p class="deportes__intro reveal reveal--soft" data-i18n="deportes.intro">Las actividades deportivas de la Falla Suïssa - L'Alqueria del Favero: torneos, encuentros, equipos y calendarios, se gestionan en nuestro documento compartido. Aquí lo tienes siempre actualizado.</p>
+      <p class="deportes__intro reveal reveal--soft" data-i18n="deportes.intro">Les activitats esportives de la Falla Suïssa - L'Alqueria del Favero: tornejos, trobades, equips i calendaris, es gestionen al nostre document compartit. Aquí el tens sempre actualitzat.</p>
       <div class="deportes__cta-wrapper reveal">
-        <a class="boton deportes__abrir-externo" href="deportes.html" data-i18n="deportes.ctaIndex" data-i18n-aria-label="deportes.ctaIndexAria" aria-label="Ver la página de Deportes">Ver Deportes</a>
+        <a class="boton deportes__abrir-externo" href="deportes.html" data-i18n="deportes.ctaIndex" data-i18n-aria-label="deportes.ctaIndexAria" aria-label="Veure la pàgina d'Esports">Veure Esports</a>
       </div>
     </div>
   </section>
@@ -1186,14 +1144,14 @@
       <div class="forecast reveal reveal--soft">
         <div class="forecast__titulo">
           <img class="forecast__termo" width="80" height="80" src="img/logos/logo-termo.svg" alt="Icono de termómetro para temperatura" loading="lazy" decoding="async">
-          <h2 class="forecast__title" data-i18n="meteo.titulo">Meteo</h2>
+          <h2 class="forecast__title" data-i18n="meteo.titulo">Oratge</h2>
         </div>
          
       </div>
 
     <!-- Sección Clima Actual -->
       <div class="weather-current reveal">
-        <h2 class="clima-actual" data-i18n="meteo.donde">en Valencia</h2>
+        <h2 class="clima-actual" data-i18n="meteo.donde">A València</h2>
         <img class="current-falleret" width="80" height="120" src="img/decoracion/falleretPro.svg" alt="Falleret Decorativo" loading="lazy">
 
         <div class="current-wrapper">
@@ -1211,7 +1169,7 @@
           </div>
           <!-- Detalles adicionales -->
           <div class="current-details current-details__humedad">
-            <div class="etiqueta-humedad"><strong class="etiqueta-pronostico" data-i18n="meteo.humedad"="">Humedad</strong> <span id="current-humidity">--%</span></div>
+            <div class="etiqueta-humedad"><strong class="etiqueta-pronostico" data-i18n="meteo.humedad"="">Humitat</strong> <span id="current-humidity">--%</span></div>
           </div>
           </div>
         </div>
@@ -1226,26 +1184,27 @@
     <div class="contenedor">
       <div class="blog__titulo">
         <img class="blog__pluma" width="80" height="80" src="img/logos/logo-pluma.svg" alt="Icono decorativo de pluma para blog" loading="lazy" decoding="async" aria-hidden="true">
-        <h2 class="blog__title" data-i18n="blog.titulo"></h2>
+        <h2 class="blog__title" data-i18n="blog.titulo">Blog de la nostra Falla</h2>
       </div>
       <div class="blog__posts">
         <article class="blog__post blog__post--featured reveal reveal--soft">
-          <h3 class="blog__post-title" data-i18n="blog.somni.cardTitle"></h3>
-          <time class="blog__date" datetime="2025-03" data-i18n="blog.somni.date"></time>
-          <p class="blog__post-content" data-i18n="blog.somni.excerpt"></p>
+          <h3 class="blog__post-title" data-i18n="blog.somni.cardTitle">Somni</h3>
+          <time class="blog__date" datetime="2025-03" data-i18n="blog.somni.date">Publicat el març de 2025</time>
+          <p class="blog__post-content" data-i18n="blog.somni.excerpt">"Somni".
+Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint al nou barri de les Moreres i parlant amb els veïns, vam descobrir que era un somni compartit.</p>
           <div class="flex_button">
             <div class="boton-blog">
-              <a class="boton" data-i18n="blog.leermas" data-i18n-aria-label="blog.somni.ctaAria" href="blog-somni.html">Ver más</a>
+              <a class="boton" data-i18n="blog.leermas" data-i18n-aria-label="blog.somni.ctaAria" href="blog-somni.html" aria-label="Obrir l'article Somni">Veure més</a>
             </div>
           </div>
         </article>
         <article class="blog__post reveal reveal--soft">
-          <h3 class="blog__post-title" data-i18n="blog.anima.cardTitle"></h3>
-          <time class="blog__date" datetime="2026-03" data-i18n="blog.anima.date"></time>
-          <p class="blog__post-content" data-i18n="blog.anima.excerpt"></p>
+          <h3 class="blog__post-title" data-i18n="blog.anima.cardTitle">L’Ànima del barri</h3>
+          <time class="blog__date" datetime="2026-03" data-i18n="blog.anima.date">Publicat el març de 2026</time>
+          <p class="blog__post-content" data-i18n="blog.anima.excerpt">Després de la riuada del 57, el Túria es va quedar sense riu. La ciutat va dir prou: "El llit del Túria és nostre i el volem verd". D’això naix el Jardí del Túria, i en Les Moreres, la Falla Suïssa.</p>
           <div class="flex_button">
             <div class="boton-blog">
-              <a class="boton" data-i18n="blog.leermas" data-i18n-aria-label="blog.anima.ctaAria" href="blog-anima.html">Ver más</a>
+              <a class="boton" data-i18n="blog.leermas" data-i18n-aria-label="blog.anima.ctaAria" href="blog-anima.html" aria-label="Obrir l’article L’Ànima del barri">Veure més</a>
             </div>
           </div>
         </article>
@@ -1259,49 +1218,49 @@
     <div class="contenedor">
       <div class="galerias__titulo">
         <img class="galerias__camara" width="80" height="80" src="img/logos/logo-camara.svg" alt="Icono de cámara fotográfica para galerías" loading="lazy" decoding="async">
-        <h2 class="galerias__title" data-i18n="galeria.titulo">Galería</h2>
+        <h2 class="galerias__title" data-i18n="galeria.titulo">Galeria</h2>
       </div>
       <div class="galerias__grid">
         <div class="galeria reveal reveal--soft">
-          <h3 class="galeria__title" data-i18n="galeria.galeria1">Galeria 1</h3>
+          <h3 class="galeria__title" data-i18n="galeria.galeria1">Apuntà 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/apunta/Apunta25_26_15.jpg" alt="Evento 'Apúntate' temporada 2025-2026 - Falla Suïssa" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria1-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
-          <a class="boton" href="galeria_1.html" data-i18n="ver">Ver más</a>
+          <p class="galeria__texto" data-i18n="galeria.galeria1-texto">Galeria d'imatges de l'Apuntà 2025-26</p>
+          <a class="boton" href="galeria_1.html" data-i18n="ver">Veure més</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
-          <h3 class="galeria__title" data-i18n="galeria.galeria2">Galeria 2</h3>
+          <h3 class="galeria__title" data-i18n="galeria.galeria2">Fallera Major Infantil 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/nombramientoFMI/Nombramiento_FMI2526-02.jpg" alt="Nombramiento Fallera Mayor Infantil 2025-2026" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria2-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
-          <a class="boton" href="galeria_2.html" data-i18n="ver">Ver más</a>
+          <p class="galeria__texto" data-i18n="galeria.galeria2-texto">Galeria d'imatges del Nombrament de la Fallera Major Infantil 2025-26</p>
+          <a class="boton" href="galeria_2.html" data-i18n="ver">Veure més</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
-          <h3 class="galeria__title" data-i18n="galeria.galeria3">Galeria 3</h3>
+          <h3 class="galeria__title" data-i18n="galeria.galeria3">Monument 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/monument/firma/2025_26/Firma_monumento_25_26.avif" alt="Firma del monumento fallero temporada 2025-2026" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria3-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
-          <a class="boton" href="galeria_3.html" data-i18n="ver">Ver más</a>
+          <p class="galeria__texto" data-i18n="galeria.galeria3-texto">Galeria d'imatges del Monument 2025-26</p>
+          <a class="boton" href="galeria_3.html" data-i18n="ver">Veure més</a>
   
         </div>
         <div class="galeria reveal reveal--soft">
-          <h3 class="galeria__title" data-i18n="galeria.galeria4">Galeria 4</h3>
+          <h3 class="galeria__title" data-i18n="galeria.galeria4">Proclamació 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/proclamacion/Proclamacion_12.jpg" alt="Proclamación de representantes - Valencia 2025" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria4-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
-          <a class="boton" href="galeria_4.html" data-i18n="ver">Ver más</a>
+          <p class="galeria__texto" data-i18n="galeria.galeria4-texto">Galeria d'imatges de la Proclamació 2025-26</p>
+          <a class="boton" href="galeria_4.html" data-i18n="ver">Veure més</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
-          <h3 class="galeria__title" data-i18n="galeria.galeria5">Ofrenda de Frutos 2025-26</h3>
+          <h3 class="galeria__title" data-i18n="galeria.galeria5">Ofrena de Fruits 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-001.jpeg" alt="Ofrenda de Frutos 2025-26 - Falla Suïssa" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria5-texto">Galería de imágenes de la Ofrenda de Frutos 2025-26</p>
-          <a class="boton" href="galeria_5.html" data-i18n="ver">Ver más</a>
+          <p class="galeria__texto" data-i18n="galeria.galeria5-texto">Galeria d'imatges de l'Ofrena de Fruits 2025-26</p>
+          <a class="boton" href="galeria_5.html" data-i18n="ver">Veure més</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria6">Cremà 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/crema/crema-2026/crema-2026-001.jpeg" alt="Cremà 2025-26 - Falla Suïssa" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria6-texto">Galería de imágenes de la Cremà 2025-26</p>
-          <a class="boton" href="galeria_6.html" data-i18n="ver">Ver más</a>
+          <p class="galeria__texto" data-i18n="galeria.galeria6-texto">Galeria d'imatges de la Cremà 2025-26</p>
+          <a class="boton" href="galeria_6.html" data-i18n="ver">Veure més</a>
 
         </div>
       </div>
@@ -1318,7 +1277,7 @@
       <img class="quieres-mas__imagen" width="64" height="64" src="img/logos/logo-ask.svg" alt="Icono de Preguntar">
       <!-- El enlace tiene un id para poder asignarle el evento de apertura del modal -->
       <a class="quieres-mas__boton" href="#" id="open-quieres-modal">
-        <h3 class="quieres-mas__title" data-i18n="quieres.titulo">¿Quieres saber más sobre nuestra Falla?</h3>
+        <h3 class="quieres-mas__title" data-i18n="quieres.titulo">Vols saber més sobre la nostra Falla?</h3>
       </a>
     </div>
   </section>
@@ -1327,27 +1286,27 @@
   <div id="modal-quieres" class="modal">
     <div class="modal-content" id="modal-quieres-content">
       <span class="close-modal" id="close-quieres-modal">&times;</span>
-      <h2 class="modal-title" data-i18n="quieres.pregunta">¿Quieres formar parte de nuestra Falla?</h2>
+      <h2 class="modal-title" data-i18n="quieres.pregunta">Vols formar part de la nostra Falla?</h2>
       <form id="quieres-form">
         <div class="form-group">
-          <label for="quieres-nombre" data-i18n="quieres.nombre">Nombre</label>
-          <input type="text" id="quieres-nombre" name="nombre" required placeholder="Nombre y apellidos" data-i18n-placeholder="quieres.nombrePlaceholder">
+          <label for="quieres-nombre" data-i18n="quieres.nombre">Nom i cognoms</label>
+          <input type="text" id="quieres-nombre" name="nombre" required data-i18n-placeholder="quieres.nombrePlaceholder" placeholder="Nom i cognoms">
         </div>
         <div class="form-group">
           <label for="quieres-email">Email</label>
           <input type="email" id="quieres-email" name="email" required placeholder="e-mail">
         </div>
         <div class="form-group">
-          <label for="quieres-telefono" data-i18n="quieres.telefono">Teléfono</label>
+          <label for="quieres-telefono" data-i18n="quieres.telefono">Telèfon</label>
           <!-- Se usa el tipo "tel" y un patrón para exigir "+34" seguido de 9 dígitos -->
           <input type="tel" id="quieres-telefono" name="telefono" placeholder="+34555443322" pattern="^\+34\d{9}$" required>
         </div>
         <div class="form-group">
-          <label for="quieres-mensaje" data-i18n="quieres.mensaje">Mensaje</label>
-          <textarea id="quieres-mensaje" name="mensaje" maxlength="300" required placeholder="Introduce un mensaje" data-i18n-placeholder="quieres.mensajePlaceholder"></textarea>
+          <label for="quieres-mensaje" data-i18n="quieres.mensaje">Missatge</label>
+          <textarea id="quieres-mensaje" name="mensaje" maxlength="300" required data-i18n-placeholder="quieres.mensajePlaceholder" placeholder="Intodueix un missatge"></textarea>
         </div>
         <span class="wrapper-inline">
-          <button class="boton-modal" data-i18n="quieres.aceptar">Aceptar</button>
+          <button class="boton-modal" data-i18n="quieres.aceptar">Acceptar</button>
         </span>
        
       </form>
@@ -1357,95 +1316,79 @@
   <!-- Overlay Fullscreen Vídeo Dron -->
   <div class="video-dron__fullscreen" id="videoDronFullscreen"
     role="dialog" aria-modal="true" aria-hidden="true"
-    aria-label="Vídeo en pantalla completa"
-    data-i18n-aria-label="falla.videoDron.fullscreenAria">
-    <button class="video-dron__fullscreen-close" id="videoDronFsClose"
-      aria-label="Cerrar pantalla completa" data-i18n-aria-label="falla.videoDron.closeAria">&times;</button>
+    data-i18n-aria-label="falla.videoDron.fullscreenAria" aria-label="Veure vídeo en pantalla completa">
+    <button class="video-dron__fullscreen-close" id="videoDronFsClose" data-i18n-aria-label="falla.videoDron.closeAria" aria-label="Tancar pantalla completa">&times;</button>
     <div class="video-dron__fullscreen-wrapper">
       <video id="videoDronFs" class="video-dron__fullscreen-video"
         src="img/dron/dron-001-2026.mp4" preload="none" playsinline
-        aria-label="Vídeo aéreo de la Falla Suïssa grabado con dron"
-        data-i18n-aria-label="falla.videoDron.videoAria">
+        data-i18n-aria-label="falla.videoDron.videoAria" aria-label="Vídeo aeri de la Falla Suïssa gravat amb dron">
       </video>
     </div>
     <!-- Barra de progreso fullscreen -->
     <div class="video-dron__progress-container video-dron__progress-container--fs">
       <input type="range" class="video-dron__progress" id="videoDronFsProgress"
         min="0" max="100" value="0" step="0.1"
-        aria-label="Progreso del vídeo"
-        data-i18n-aria-label="falla.videoDron.progressAria">
+        data-i18n-aria-label="falla.videoDron.progressAria" aria-label="Progrés del vídeo">
     </div>
     <div class="video-dron__fullscreen-controls" role="group" aria-label="Controles de vídeo">
-      <button class="video-dron__btn" id="videoDronFsPlay"
-        aria-label="Reproducir vídeo" data-i18n-aria-label="falla.videoDron.playAria">
+      <button class="video-dron__btn" id="videoDronFsPlay" data-i18n-aria-label="falla.videoDron.playAria" aria-label="Reproduir vídeo">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="3,1 3,15 14,8"/></svg>
-        <span data-i18n="falla.videoDron.play">Reproducir</span>
+        <span data-i18n="falla.videoDron.play">Reproduir</span>
       </button>
-      <button class="video-dron__btn" id="videoDronFsRestart"
-        aria-label="Reiniciar vídeo desde el principio" data-i18n-aria-label="falla.videoDron.restartAria">
+      <button class="video-dron__btn" id="videoDronFsRestart" data-i18n-aria-label="falla.videoDron.restartAria" aria-label="Reiniciar vídeo des del principi">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7h-2a5 5 0 1 1-5-5V0L3 4l5 4V5a3 3 0 0 1 0 6"/></svg>
         <span data-i18n="falla.videoDron.restart">Reiniciar</span>
       </button>
-      <button class="video-dron__btn" id="videoDronFsMute"
-        aria-label="Silenciar vídeo" data-i18n-aria-label="falla.videoDron.muteAria">
+      <button class="video-dron__btn" id="videoDronFsMute" data-i18n-aria-label="falla.videoDron.muteAria" aria-label="Silenciar vídeo">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z"/><path d="M11 5.5c.7.7.7 2.3 0 3M12.8 3.5c1.4 1.4 1.4 4.6 0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span data-i18n="falla.videoDron.mute">Silenciar</span>
       </button>
       <div class="video-dron__volume-wrapper">
         <input type="range" class="video-dron__volume" id="videoDronFsVolume"
           min="0" max="100" value="100" step="1"
-          aria-label="Volumen del vídeo"
-          data-i18n-aria-label="falla.videoDron.volumeAria">
+          data-i18n-aria-label="falla.videoDron.volumeAria" aria-label="Volum del vídeo">
       </div>
     </div>
   </div>
   <!-- Overlay Fullscreen Vídeo Ofrenda -->
   <div class="video-dron__fullscreen" id="videoOfrendaFullscreen"
     role="dialog" aria-modal="true" aria-hidden="true"
-    aria-label="Vídeo en pantalla completa"
-    data-i18n-aria-label="ofrenda.fullscreenAria">
-    <button class="video-dron__fullscreen-close" id="videoOfrendaFsClose"
-      aria-label="Cerrar pantalla completa" data-i18n-aria-label="ofrenda.closeAria">&times;</button>
+    data-i18n-aria-label="ofrenda.fullscreenAria" aria-label="Veure vídeo en pantalla completa">
+    <button class="video-dron__fullscreen-close" id="videoOfrendaFsClose" data-i18n-aria-label="ofrenda.closeAria" aria-label="Tancar pantalla completa">&times;</button>
     <div class="video-dron__fullscreen-wrapper">
       <video id="videoOfrendaFs" class="video-dron__fullscreen-video"
         poster="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
-        aria-label="Vídeo de la Ofrenda Floral 2025-26 de la Falla Suïssa"
-        data-i18n-aria-label="ofrenda.videoAria">
+        data-i18n-aria-label="ofrenda.videoAria" aria-label="Vídeo de l'Ofrena Floral 2025-26 de la Falla Suïssa">
         <source src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
-        <span data-i18n="ofrenda.fallback">Tu navegador no soporta la reproducción de vídeo.</span>
+        <span data-i18n="ofrenda.fallback">El teu navegador no suporta la reproducció de vídeo.</span>
       </video>
     </div>
     <!-- Barra de progreso fullscreen -->
     <div class="video-dron__progress-container video-dron__progress-container--fs">
       <input type="range" class="video-dron__progress" id="videoOfrendaFsProgress"
         min="0" max="100" value="0" step="0.1"
-        aria-label="Progreso del vídeo"
-        data-i18n-aria-label="ofrenda.progressAria">
+        data-i18n-aria-label="ofrenda.progressAria" aria-label="Progrés del vídeo">
     </div>
     <div class="video-dron__fullscreen-controls" role="group" aria-label="Controles de vídeo">
-      <button class="video-dron__btn" id="videoOfrendaFsPlay"
-        aria-label="Reproducir vídeo" data-i18n-aria-label="ofrenda.playAria">
+      <button class="video-dron__btn" id="videoOfrendaFsPlay" data-i18n-aria-label="ofrenda.playAria" aria-label="Reproduir vídeo">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="3,1 3,15 14,8"/></svg>
-        <span data-i18n="ofrenda.play">Reproducir</span>
+        <span data-i18n="ofrenda.play">Reproduir</span>
       </button>
-      <button class="video-dron__btn" id="videoOfrendaFsRestart"
-        aria-label="Reiniciar vídeo desde el principio" data-i18n-aria-label="ofrenda.restartAria">
+      <button class="video-dron__btn" id="videoOfrendaFsRestart" data-i18n-aria-label="ofrenda.restartAria" aria-label="Reiniciar vídeo des del principi">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7h-2a5 5 0 1 1-5-5V0L3 4l5 4V5a3 3 0 0 1 0 6"/></svg>
         <span data-i18n="ofrenda.restart">Reiniciar</span>
       </button>
-      <button class="video-dron__btn" id="videoOfrendaFsMute"
-        aria-label="Silenciar vídeo" data-i18n-aria-label="ofrenda.muteAria">
+      <button class="video-dron__btn" id="videoOfrendaFsMute" data-i18n-aria-label="ofrenda.muteAria" aria-label="Silenciar vídeo">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z"/><path d="M11 5.5c.7.7.7 2.3 0 3M12.8 3.5c1.4 1.4 1.4 4.6 0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span data-i18n="ofrenda.mute">Silenciar</span>
       </button>
       <div class="video-dron__volume-wrapper">
         <input type="range" class="video-dron__volume" id="videoOfrendaFsVolume"
           min="0" max="100" value="100" step="1"
-          aria-label="Volumen del vídeo"
-          data-i18n-aria-label="ofrenda.volumeAria">
+          data-i18n-aria-label="ofrenda.volumeAria" aria-label="Volum del vídeo">
       </div>
     </div>
-    <p class="video-dron__status video-dron__status--fs" id="videoOfrendaFsStatus" hidden role="status" aria-live="polite" data-i18n="ofrenda.loadError">No se ha podido cargar el vídeo. Vuelve a intentarlo.</p>
+    <p class="video-dron__status video-dron__status--fs" id="videoOfrendaFsStatus" hidden role="status" aria-live="polite" data-i18n="ofrenda.loadError">No s'ha pogut carregar el vídeo. Torna-ho a intentar.</p>
   </div>
   <!-- Frieze Inferior con modificador bordered -->
   <div class="frieze frieze--bordered"></div>
@@ -1454,15 +1397,15 @@
     <div class="footer__contenedor">
       <div class="footer__contenido">
         <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
-          <a class="footer__enlace active" href="index.html" data-i18n="nav.inicio">Inicio</a>
+          <a class="footer__enlace active" href="index.html" data-i18n="nav.inicio">Inici</a>
           <a class="footer__enlace" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
-          <a class="footer__enlace" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrenda</a>
-          <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Colaboraciones</a>
-          <a class="footer__enlace" href="eventos.html" data-i18n="nav.eventos">Eventos</a>
-          <a class="footer__enlace" href="deportes.html" data-i18n="nav.deportes">Deportes</a>
-          <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Meteo</a>
+          <a class="footer__enlace" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrena</a>
+          <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Col·laboracions</a>
+          <a class="footer__enlace" href="eventos.html" data-i18n="nav.eventos">Esdeveniments</a>
+          <a class="footer__enlace" href="deportes.html" data-i18n="nav.deportes">Esports</a>
+          <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Oratge</a>
           <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a>
-          <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galería</a>
+          <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galeria</a>
         </nav>
         <picture>
           <source srcset="img/Escudo_falla.avif" type="image/avif">
@@ -1486,10 +1429,10 @@
         </nav>
       </div>
     </div>
-          <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados.</p>
+          <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats.</p>
     <nav class="footer__legal">
-      <a href="aviso-legal.html" data-i18n="legal.aviso">Aviso Legal</a>
-      <a href="privacidad.html" data-i18n="legal.privacidad">Privacidad</a>
+      <a href="aviso-legal.html" data-i18n="legal.aviso">Avís Legal</a>
+      <a href="privacidad.html" data-i18n="legal.privacidad">Privacitat</a>
       <a href="cookies.html" data-i18n="legal.cookies">Cookies</a>
     </nav>
   </footer>
@@ -1497,17 +1440,17 @@
   <!-- Scripts JavaScript -->
    
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/swiper.js?v=a8671664eaab"></script>
-  <script src="js/meteo.js?v=a8671664eaab" defer></script>
-  <script src="js/dark.js?v=a8671664eaab"></script>
-  <script src="js/lang.js?v=a8671664eaab"></script>
-  <script src="js/nav-menu.js?v=a8671664eaab"></script>
-  <script src="js/scroll-reveal.js?v=a8671664eaab" defer></script>
-  <script src="js/board.js?v=a8671664eaab" defer></script>
-  <script src="js/countdown.js?v=a8671664eaab" defer></script>
-  <script src="js/colaboraciones-lightbox.js?v=a8671664eaab" defer></script>
-  <script src="js/accessibility.js?v=a8671664eaab" defer></script>
-  <script src="js/home-deferred.js?v=a8671664eaab"></script>
+  <script src="js/swiper.js?v=d1bccb56bab3"></script>
+  <script src="js/meteo.js?v=d1bccb56bab3" defer></script>
+  <script src="js/dark.js?v=d1bccb56bab3"></script>
+  <script src="js/lang.js?v=d1bccb56bab3"></script>
+  <script src="js/nav-menu.js?v=d1bccb56bab3"></script>
+  <script src="js/scroll-reveal.js?v=d1bccb56bab3" defer></script>
+  <script src="js/board.js?v=d1bccb56bab3" defer></script>
+  <script src="js/countdown.js?v=d1bccb56bab3" defer></script>
+  <script src="js/colaboraciones-lightbox.js?v=d1bccb56bab3" defer></script>
+  <script src="js/accessibility.js?v=d1bccb56bab3" defer></script>
+  <script src="js/home-deferred.js?v=d1bccb56bab3"></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -1530,8 +1473,8 @@
       });
     }
   </script>
-  <script src="js/envia.js?v=a8671664eaab" defer></script>
-  <script src="js/banner-subvencion.js?v=a8671664eaab" defer></script>
-  <script src="js/cookie-banner.js?v=a8671664eaab" defer></script>
+  <script src="js/envia.js?v=d1bccb56bab3" defer></script>
+  <script src="js/banner-subvencion.js?v=d1bccb56bab3" defer></script>
+  <script src="js/cookie-banner.js?v=d1bccb56bab3" defer></script>
 </body>
 </html>
