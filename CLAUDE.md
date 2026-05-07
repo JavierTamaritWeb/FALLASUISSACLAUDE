@@ -2,9 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.21
-**Last Updated:** 6 de mayo de 2026
+**Version:** 4.6.22
+**Last Updated:** 7 de mayo de 2026
 
+> 4.6.22 — Fix SEO multi-idioma para resolver el aviso de GSC "Duplicada: el usuario no ha indicado ninguna versión canónica". El `gulpfile` pasa a ser la **única fuente de verdad** de `canonical` y `hreflang`: en `modifyHtmlStream` se eliminan ambos del source antes de reinyectar un bloque coherente con `canonical` autoreferencial (`/` para ES, `/va/` para VA) y `hreflang` bidireccional (`es`, `ca`, `x-default`). Se eliminan las URLs fantasma `?lang=ca`/`?lang=es` que aparecían como hreflang. `sitemap.xml` se reescribe con 48 entradas (24 ES + 24 VA), cada una con bloques `<xhtml:link rel="alternate">`.
+>
 > 4.6.21 — Sección Deportes: doble franja separadora superior (2rem coral + 2rem `#1f1f1f`) producida con dos mecanismos coordinados: `::before` del wrapper para la coral y `border-top: 4rem solid #1f1f1f` del iframe para la oscura (los primeros 2rem quedan tapados por el `::before`). Wrapper con fondo `v.$primary-color` y skeleton alineado en `inset: 4rem 0 0 0`.
 >
 > 4.6.20 — Nueva sección Deportes (`deportes.html` + teaser en `index.html`) que embebe un documento de Google Drive vía iframe. El contenido se gestiona desde Drive sin tocar el repo. Limpieza de `js/miboton.js` (rompía el primer `.boton` con un side-effect de inline style); todos los botones del proyecto comparten ahora la clase `.boton` con `:active` definido vía SCSS.
@@ -89,7 +91,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 **Multi-Language** (`js/lang.js` + `js/initTranslations.js`): Elements use `data-i18n="section.key"` attributes. Loads `data/translations.json` on page load, persists choice to localStorage. `lang.js` fires `translationsReady` event after load and `langChanged` on switch. Dynamic components (board) must check `window.translations` first; if not ready, listen for `translationsReady` before rendering.
 
-**HTML Build Pipeline** (`gulpfile.js` → `htmlTask`): During build, the HTML task auto-injects into every page: (1) `hreflang` alternate links for `es`/`ca`/`x-default`, and (2) Schema.org `Event` JSON-LD extracted from `data/board.json`. It also generates a `/va/` variant of every page with `lang="ca"`. Sitemap `<lastmod>` values are auto-updated based on file mtimes in `dist/`.
+**HTML Build Pipeline** (`gulpfile.js` → `htmlTask` → `modifyHtmlStream`): During build, the HTML task is the **single source of truth** for SEO multi-idioma. For every source HTML it (1) strips any pre-existing `<link rel="canonical">` and `<link rel="alternate" hreflang="...">` so source files cannot drift, (2) re-injects a self-referential `canonical` (the URL of the file itself: `https://fallasuissa.es/<file>` for the ES build and `https://fallasuissa.es/va/<file>` for the VA build) plus a bidirectional `hreflang` block (`es`, `ca`, `x-default`), and (3) merges Schema.org `Event` JSON-LD from `data/board.json` into `index.html`/`eventos.html`. It also generates a `/va/` variant of every page with `lang="ca"`. Sitemap `<lastmod>` values are auto-updated based on file mtimes in `dist/`. Source HTML files in the repo root may still contain legacy `canonical`/`hreflang` lines — those are harmless because the build strips them; do NOT add new manual canonical/hreflang to source HTML or it will be silently removed at build time.
 
 **Bulletin Board** (`js/board.js`): Fetches `data/board.json`, renders on `eventos.html` and `index.html` (both contain `<div class="board" id="notesBoard">`). Each nota supports an optional `imagen` field (`{ url, alt: { es, va } }`) which is rendered as `<figure class="board__figure"><img class="board__image" loading="lazy">` inside the nota — useful for embedding posters or infographics. When a nota has an `imagen` and/or `adjuntos`, it is wrapped in `<article class="board__card">` (with the inner `<div class="board__note">`); plain notas without extras render as a direct `<article class="board__note">`. Adjuntos still appear below the figure as "Ver imagen"/"Descargar" links via the existing SVG-icon system.
 
@@ -124,6 +126,12 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 ## Architecture Decisions & Constraints
 
 These constraints arise from past bugs. Violating them will reintroduce issues:
+
+- **SEO multi-idioma — gulpfile como única fuente (v4.6.22):** El bloque `canonical` + `hreflang` lo gestiona **exclusivamente** `gulpfile.js` (`modifyHtmlStream`). En cada build se eliminan del source todos los `<link rel="canonical">` y `<link rel="alternate" hreflang="...">` antes de reinyectar la versión correcta. Reglas:
+  1. **No añadir** `canonical` ni `hreflang` a mano en los HTML del root: el build los borra. Si necesitas tocarlos, edita `modifyHtmlStream` en `gulpfile.js`.
+  2. El `canonical` debe ser **autoreferencial** (cada URL apunta a sí misma): la ES a `https://fallasuissa.es/<file>` y la VA a `https://fallasuissa.es/va/<file>`. NUNCA hagas que `/va/X.html` declare canonical hacia `/X.html` — eso reproduce el aviso de GSC "Duplicada: el usuario no ha indicado ninguna versión canónica" (canonical y hreflang en conflicto se ignoran ambos).
+  3. **No usar URLs `?lang=ca` ni `?lang=es`** como destino de hreflang: no son páginas crawlables (el cambio de idioma es client-side via `js/lang.js`).
+  4. `sitemap.xml` mantiene **48 entradas** (24 ES + 24 VA) con bloques `<xhtml:link rel="alternate">` por entrada. Cuando añadas una página nueva, añade SUS DOS entradas (ES y VA) con los 3 alternates.
 
 - **Mobile menu z-index stacking (v4.0.0):** Backdrop is inserted inside `.header__barra` (not `body`). Z-index: menu 2500, backdrop 1500, menu button 2600. Moving backdrop to `body` breaks stacking context.
 
@@ -171,9 +179,10 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 
 ### Adding a new page
 
-1. Create HTML file in root directory
-2. Add URL to `sitemap.xml` and `sitemap-index.xml`
-3. Run `npm run build`
+1. Create HTML file in root directory (do NOT add `<link rel="canonical">` ni `hreflang` — los inyecta el build)
+2. Add **two** entries to `sitemap.xml` (one for ES, one for `/va/`), each with `<xhtml:link rel="alternate">` for `es`, `ca`, `x-default`
+3. Add URL to `sitemap-index.xml` if needed
+4. Run `npm run build`
 
 ### Updating Open Graph image
 

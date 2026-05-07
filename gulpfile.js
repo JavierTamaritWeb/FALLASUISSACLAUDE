@@ -464,6 +464,12 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion) {
       const shouldInjectEventSchema = fileName === 'index.html' || fileName === 'eventos.html';
       const mainUrl = `https://fallasuissa.es/${isIndex ? '' : fileName}`;
       const caUrl = `https://fallasuissa.es/va/${isIndex ? '' : fileName}`;
+      const canonicalUrl = lang === 'ca' ? caUrl : mainUrl;
+
+      // Limpiar canonical y hreflang preexistentes en el source para que el build
+      // sea la única fuente de verdad y evitar conflictos (ver GSC: "Duplicada").
+      html = html.replace(/[ \t]*<link\s+rel="canonical"[^>]*>\s*\n?/gi, '');
+      html = html.replace(/[ \t]*<link\s+rel="alternate"\s+hreflang="[^"]*"[^>]*>\s*\n?/gi, '');
 
       if (shouldInjectEventSchema) {
         const mergeResult = mergeEventSchemaIntoHtml(html, schemaEventsJSON, {
@@ -472,9 +478,10 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion) {
         html = mergeResult.html;
         mergedEventSchema = mergeResult.merged;
       }
-      
+
       let injections = `
-  <!-- Mejoras SEO Estáticas -->
+  <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
+  <link rel="canonical" href="${canonicalUrl}">
   <link rel="alternate" hreflang="es" href="${mainUrl}">
   <link rel="alternate" hreflang="ca" href="${caUrl}">
   <link rel="alternate" hreflang="x-default" href="${mainUrl}">\n`;

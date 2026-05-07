@@ -1,145 +1,434 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://fallasuissa.es/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/lafalla.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/lafalla.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/lafalla.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/lafalla.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/lafalla.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/lafalla.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/lafalla.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/lafalla.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/llibret_2026.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/llibret_2026.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/llibret_2026.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/llibret_2026.html"/>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/llibret_2026.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/llibret_2026.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/llibret_2026.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/llibret_2026.html"/>
     <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/colaboraciones.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/colaboraciones.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/colaboraciones.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/colaboraciones.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/colaboraciones.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/colaboraciones.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/colaboraciones.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/colaboraciones.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/organigrama.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/organigrama.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/organigrama.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/organigrama.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/organigrama.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/organigrama.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/organigrama.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/organigrama.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/eventos.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/eventos.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/eventos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/eventos.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/eventos.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/eventos.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/eventos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/eventos.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/deportes.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/deportes.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/deportes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/deportes.html"/>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/deportes.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/deportes.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/deportes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/deportes.html"/>
     <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/meteo.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/meteo.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/meteo.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/meteo.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/meteo.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/meteo.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/meteo.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/meteo.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/blog.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/blog.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/blog-somni.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/blog-somni.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/blog-somni.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/blog-somni.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/blog-somni.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/blog-somni.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/blog-somni.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/blog-somni.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/blog-anima.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/blog-anima.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/blog-anima.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/blog-anima.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/blog-anima.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/blog-anima.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/blog-anima.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/blog-anima.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/galerias.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galerias.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galerias.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galerias.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/galerias.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galerias.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galerias.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galerias.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/galeria_1.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_1.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_1.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_1.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/galeria_1.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_1.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_1.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_1.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/galeria_2.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_2.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_2.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_2.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/galeria_2.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_2.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_2.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_2.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/galeria_3.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_3.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_3.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_3.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/galeria_3.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_3.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_3.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_3.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/galeria_4.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_4.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_4.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_4.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/galeria_4.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_4.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_4.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_4.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/galeria_5.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_5.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_5.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_5.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/galeria_5.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_5.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_5.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_5.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/galeria_6.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_6.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_6.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_6.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/galeria_6.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_6.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_6.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_6.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/ofrenda.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/ofrenda.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/ofrenda.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/ofrenda.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/ofrenda.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/ofrenda.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/ofrenda.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/ofrenda.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/aviso-legal.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/aviso-legal.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/aviso-legal.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/aviso-legal.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/aviso-legal.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/aviso-legal.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/aviso-legal.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/aviso-legal.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/privacidad.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/privacidad.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/privacidad.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/privacidad.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/cookies.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/cookies.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/cookies.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/cookies.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/calendario.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/calendario.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/calendario.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/calendario.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/calendario.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/calendario.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/calendario.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/calendario.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fallasuissa.es/mapa.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/mapa.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/mapa.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/mapa.html"/>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/mapa.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/mapa.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/mapa.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/mapa.html"/>
     <lastmod>2026-05-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
