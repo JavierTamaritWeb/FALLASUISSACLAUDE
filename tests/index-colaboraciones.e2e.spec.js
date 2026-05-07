@@ -111,12 +111,24 @@ async function expectLightbox(page, section, closeMode) {
   await expect(lightbox).toHaveAttribute('aria-hidden', 'true');
 }
 
+async function openHopeAccordion(section) {
+  const accordionSection = section.locator('.accordion__section').first();
+  const header = section.locator('.accordion__titular').first();
+  if (!(await accordionSection.evaluate((el) => el.classList.contains('active')))) {
+    await header.click();
+    await expect(accordionSection).toHaveClass(/active/);
+  }
+}
+
 test.describe('Colaboraciones en home', () => {
   test('index.html muestra el acordeón de colaboraciones integrado', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/index.html');
 
     const section = page.locator('.colaboraciones');
+    // El acordeón HOPE arranca cerrado; lo abrimos para verificar el contenido.
+    await openHopeAccordion(section);
+
     await expectMosaicoHope(section);
     await expectHopeCopy(section);
     await expectLightbox(page, section, 'button');
@@ -130,6 +142,8 @@ test.describe('Colaboraciones en home', () => {
     await page.goto('/colaboraciones.html');
 
     const section = page.locator('main.falla');
+    await openHopeAccordion(section);
+
     await expectMosaicoHope(section);
     await expectHopeCopy(section);
     await expectLightbox(page, section, 'escape');
@@ -143,10 +157,18 @@ test.describe('Colaboraciones en home', () => {
     const accordionSection = section.locator('.accordion__section').first();
     const header = section.locator('.accordion__titular').first();
 
+    // Estado inicial: cerrado
+    await expect(accordionSection).not.toHaveClass(/active/);
+
+    // Click para abrir
+    await header.click();
     await expect(accordionSection).toHaveClass(/active/);
+
+    // Click para cerrar
     await header.click();
     await expect(accordionSection).not.toHaveClass(/active/);
 
+    // Click para reabrir y verificar contenido
     await header.click();
     await expect(accordionSection).toHaveClass(/active/);
     await expectHopeCopy(section, { minUsageRatio: 0.9 });
