@@ -69,10 +69,10 @@ function replaceMixinIncludes(content) {
   return content;
 }
 
-const variablesFile = path.join(repoRoot, 'scss/abstracts/_variables.scss');
+const variablesFile = path.join(repoRoot, 'src/scss/abstracts/_variables.scss');
 const variableNames = extractVariableNames(variablesFile);
 
-const scssFiles = globSync('scss/**/*.scss', {
+const scssFiles = globSync('src/scss/**/*.scss', {
   cwd: repoRoot,
   absolute: true,
   nodir: true,

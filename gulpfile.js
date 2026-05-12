@@ -21,30 +21,30 @@ const EVENT_IMAGE_URL = 'https://fallasuissa.es/img/Escudo_falla.png';
 // PATHS
 // ===================================
 const paths = {
-  cssEntry: 'scss/main.scss',
-  scssAll: 'scss/**/*.scss',
-  js: { src: 'js/**/*.js', dest: 'dist/js' },
-  data: { src: 'data/**/*.json', dest: 'dist/data' },
-  pdf: { src: 'pdf/**/*.{pdf,html}', dest: 'dist/pdf' },
-  imgAll: 'img/**/*',
-  imgRasterForConvert: 'img/**/*.{png,jpg,jpeg}',
+  cssEntry: 'src/scss/main.scss',
+  scssAll: 'src/scss/**/*.scss',
+  js: { src: 'src/js/**/*.js', dest: 'dist/js' },
+  data: { src: 'src/data/**/*.json', dest: 'dist/data' },
+  pdf: { src: 'src/pdf/**/*.{pdf,html}', dest: 'dist/pdf' },
+  imgAll: 'src/img/**/*',
+  imgRasterForConvert: 'src/img/**/*.{png,jpg,jpeg}',
   imgDest: 'dist/img',
-  favicon: { src: 'favicon_io/**/*', dest: 'dist/favicon_io' },
-  html: { src: ['*.html', '!google*.html'], dest: 'dist' },
+  favicon: { src: 'src/favicon_io/**/*', dest: 'dist/favicon_io' },
+  html: { src: ['src/*.html', '!src/google*.html'], dest: 'dist' },
   root: {
     src: [
-      'robots.txt',
-      'sitemap*.xml',
-      '.htaccess',
-      'sw.js',
-      'manifest.json',
-      'ai-discovery.json',
-      'ai-info.html',
-      'google*.html'
+      'src/robots.txt',
+      'src/sitemap*.xml',
+      'src/.htaccess',
+      'src/sw.js',
+      'src/manifest.json',
+      'src/ai-discovery.json',
+      'src/ai-info.html',
+      'src/google*.html'
     ],
     dest: 'dist'
   },
-  seo: { src: 'seo/**/*', dest: 'dist/seo' }
+  seo: { src: 'src/seo/**/*', dest: 'dist/seo' }
 };
 
 // ===================================
@@ -83,13 +83,13 @@ async function ensureDirForFile(filePath) {
 function distPathFromImgFile(inputFile) {
   // inputFile viene con barras del SO; normalizamos a / para hacer replace robusto
   const normalized = inputFile.split(path.sep).join('/');
-  if (!normalized.startsWith('img/')) return path.join('dist', normalized);
-  return path.join('dist', normalized.replace(/^img\//, 'img/'));
+  if (!normalized.startsWith('src/img/')) return path.join('dist', normalized);
+  return path.join('dist', normalized.replace(/^src\/img\//, 'img/'));
 }
 
 function outputPathForModernFormat(inputFile, ext) {
   const normalized = inputFile.split(path.sep).join('/');
-  const rel = normalized.startsWith('img/') ? normalized.slice('img/'.length) : normalized;
+  const rel = normalized.startsWith('src/img/') ? normalized.slice('src/img/'.length) : normalized;
   const withoutExt = rel.replace(/\.(png|jpe?g)$/i, '');
   return path.join(paths.imgDest, `${withoutExt}.${ext}`);
 }
@@ -284,7 +284,7 @@ function appendAssetVersionToHtml(html, assetVersion) {
 
 async function getSchemaEvents() {
   try {
-    const rawData = await fs.readFile(path.join(__dirname, 'data', 'board.json'), 'utf8');
+    const rawData = await fs.readFile(path.join(__dirname, 'src', 'data', 'board.json'), 'utf8');
     const board = JSON.parse(rawData);
     const events = [];
 
@@ -630,7 +630,7 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missi
 async function htmlTask() {
   const [events, translationsRaw, assetVersion] = await Promise.all([
     getSchemaEvents(),
-    fs.readFile(path.join(__dirname, 'data', 'translations.json'), 'utf8'),
+    fs.readFile(path.join(__dirname, 'src', 'data', 'translations.json'), 'utf8'),
     getAssetVersionToken()
   ]);
   const schemaString = JSON.stringify(events, null, 2);

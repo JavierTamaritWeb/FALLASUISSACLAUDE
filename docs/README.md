@@ -1,5 +1,7 @@
 # 📚 Documentación Técnica - WEBFALLASUISSA
 
+> 📌 **Convención de paths (desde v4.6.24):** Todo el código fuente vive bajo `src/`. Los documentos de esta carpeta mencionan rutas de archivos source sin el prefijo `src/` por brevedad (ej. `scss/components/_meteo.scss`, `js/lang.js`, `data/translations.json`). La ubicación real es `src/<ruta>`. Las rutas que aparecen dentro de URLs HTML (`<script src="js/foo.js">`, `fetch('/data/...')`) son URLs del sitio servido (raíz de `dist/`), no de filesystem — esas no llevan el prefijo `src/`.
+
 ## 📁 Índice de Documentos
 
 | Documento | Descripción | Actualización |

@@ -6,8 +6,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const inputPath = path.join(__dirname, '../img/Escudo_falla.avif');
-const outputPath = path.join(__dirname, '../img/og-share.png');
+const inputPath = path.join(__dirname, '../src/img/Escudo_falla.avif');
+const outputPath = path.join(__dirname, '../src/img/og-share.png');
 
 // Azul corporativo (coincide con meta theme-color del sitio)
 const FALLA_BLUE = { r: 10, g: 75, b: 141, alpha: 1 }; // #0a4b8d

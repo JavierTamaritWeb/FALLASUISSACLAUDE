@@ -22,9 +22,9 @@ function findVariableDefinitions(scssContent) {
 
 test.describe('SCSS guardrails (namespaces, mixins, variables)', () => {
   const repoRoot = path.resolve(__dirname, '..');
-  const scssFiles = globSync('scss/**/*.scss', { cwd: repoRoot, absolute: true, nodir: true });
+  const scssFiles = globSync('src/scss/**/*.scss', { cwd: repoRoot, absolute: true, nodir: true });
 
-  test('No existe `@use ... as *;` en scss/**', () => {
+  test('No existe `@use ... as *;` en src/scss/**', () => {
     const offenders = [];
     for (const file of scssFiles) {
       const content = readUtf8(file);
@@ -63,8 +63,8 @@ test.describe('SCSS guardrails (namespaces, mixins, variables)', () => {
     expect(offenders, `Imports de mixins no usan alias m en:\n${offenders.join('\n')}`).toEqual([]);
   });
 
-  test('`scss/abstracts/_variables.scss` no tiene variables duplicadas', () => {
-    const variablesPath = path.join(repoRoot, 'scss/abstracts/_variables.scss');
+  test('`src/scss/abstracts/_variables.scss` no tiene variables duplicadas', () => {
+    const variablesPath = path.join(repoRoot, 'src/scss/abstracts/_variables.scss');
     const defs = findVariableDefinitions(readUtf8(variablesPath));
 
     const seen = new Map();
@@ -77,8 +77,8 @@ test.describe('SCSS guardrails (namespaces, mixins, variables)', () => {
     expect([...duplicates].sort(), `Variables duplicadas encontradas: ${[...duplicates].join(', ')}`).toEqual([]);
   });
 
-  test('No hay `@mixin` fuera de `scss/abstracts/_mixins.scss`', () => {
-    const mixinsFile = path.join(repoRoot, 'scss/abstracts/_mixins.scss');
+  test('No hay `@mixin` fuera de `src/scss/abstracts/_mixins.scss`', () => {
+    const mixinsFile = path.join(repoRoot, 'src/scss/abstracts/_mixins.scss');
     const offenders = [];
 
     for (const file of scssFiles) {
@@ -92,8 +92,8 @@ test.describe('SCSS guardrails (namespaces, mixins, variables)', () => {
     expect(offenders, `@mixin encontrado fuera de _mixins.scss en:\n${offenders.join('\n')}`).toEqual([]);
   });
 
-  test('`scss/abstracts/_mixins.scss` contiene mixins esperados', () => {
-    const mixinsFile = path.join(repoRoot, 'scss/abstracts/_mixins.scss');
+  test('`src/scss/abstracts/_mixins.scss` contiene mixins esperados', () => {
+    const mixinsFile = path.join(repoRoot, 'src/scss/abstracts/_mixins.scss');
     const content = stripScssComments(readUtf8(mixinsFile));
 
     expect(content).toMatch(/@mixin\s+transition\s*\(/);

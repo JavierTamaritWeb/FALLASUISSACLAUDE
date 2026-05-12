@@ -2,9 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.6.23
-**Last Updated:** 7 de mayo de 2026
+**Version:** 4.6.24
+**Last Updated:** 12 de mayo de 2026
 
+> 4.6.24 — Reestructuración del repositorio bajo `src/`. Todos los archivos source (las 7 carpetas `scss/`, `js/`, `data/`, `img/`, `pdf/`, `seo/`, `favicon_io/`; los 27 HTML; y los archivos sueltos `manifest.json`, `robots*.txt`, `sitemap*.xml`, `sw.js`, `.htaccess`, `ai-discovery.json`) se han movido a `src/` con `git mv` (historial preservado). La raíz queda con tooling y configs (`package.json`, `gulpfile.js`, `playwright*.config.js`, `tests/`, `scripts/`, `docs/`, `dist/`). Paths actualizados en `gulpfile.js`, `scripts/generate-og-image.mjs`, `scripts/refactor-scss-namespaces.mjs`, `tests/scss-guardrails.e2e.spec.js`. `dist/` sigue siendo byte-equivalente al anterior; ninguna URL pública ni el SW cambian.
+>
 > 4.6.23 — Pre-render de traducciones VA en build time. `gulpfile.js` añade `prerenderTranslations()` que sustituye contenido y atributos `data-i18n`, `data-i18n-aria-label`, `data-i18n-placeholder`, `data-i18n-alt` y `data-i18n-title` por el valor de `translations.va` antes de servir `dist/va/*.html`. Los atributos `data-i18n*` permanecen en el HTML para que el toggle ES/VA en runtime siga funcionando. `js/lang.js` extendido para procesar también `data-i18n-alt` y `data-i18n-title` en runtime (antes los ignoraba). Kill switch `DISABLE_I18N_PRERENDER=1 npm run build` desactiva el pre-render sin revertir. ES queda intacto. Resultado SEO: `dist/index.html` y `dist/va/index.html` ahora divergen en contenido (no solo en atributo `lang`), eliminando la señal de duplicado y permitiendo indexación valenciana real.
 >
 > 4.6.22 — Fix SEO multi-idioma para resolver el aviso de GSC "Duplicada: el usuario no ha indicado ninguna versión canónica". El `gulpfile` pasa a ser la **única fuente de verdad** de `canonical` y `hreflang`: en `modifyHtmlStream` se eliminan ambos del source antes de reinyectar un bloque coherente con `canonical` autoreferencial (`/` para ES, `/va/` para VA) y `hreflang` bidireccional (`es`, `ca`, `x-default`). Se eliminan las URLs fantasma `?lang=ca`/`?lang=es` que aparecían como hreflang. `sitemap.xml` se reescribe con 48 entradas (24 ES + 24 VA), cada una con bloques `<xhtml:link rel="alternate">`.
@@ -53,6 +55,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ## Important Rules
 
+- ALL source files live under `src/`. NEVER put new source files (HTML, JS, SCSS, JSON data, images, PDFs, sitemaps, etc.) in the repo root — only configs/tooling belong there (`package.json`, `gulpfile.js`, `playwright*.config.js`, `.gitignore`, `README.md`, `CLAUDE.md`, `LICENSE*`)
 - ALWAYS run `npm run build` before committing
 - ALWAYS run `npm run test:e2e` after CSS/JS changes
 - Run `npm run test:e2e:full` when touching navigation, dark mode, gradient transitions, OG metadata, meteo UI, Swiper, or visual snapshots
@@ -60,7 +63,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 - NEVER remove SCSS variables without checking `tests/scss-guardrails.e2e.spec.js`
 - NEVER reference `og-share.png` without cache-buster `?v=YYYYMMDD` (WhatsApp caching)
 - NEVER change gradient backgrounds to solid colors directly - use the `::before` opacity pattern (see `docs/global-styles.md`)
-- When adding translations: update `data/translations.json` for BOTH `es` and `va`
+- When adding translations: update `src/data/translations.json` for BOTH `es` and `va`
 - Comments in code are written in Spanish
 
 ## Architecture
@@ -75,15 +78,24 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Directory Structure
 
-- `scss/` - Modular SCSS (imports order in `main.scss`: abstracts > base > optimization > layout > animaciones > components > sociales)
-- `js/` - ES6+ modules loaded per page
-- `data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-6].json` (note: `blog.json` removed in v4.6.0)
-- `dist/` - Generated output (DO NOT edit)
+All source lives under `src/`. The repo root contains only tooling/configs/docs and the build output.
+
+- `src/` - **All source files**:
+  - `src/scss/` - Modular SCSS (imports order in `main.scss`: abstracts > base > optimization > layout > animaciones > components > sociales)
+  - `src/js/` - ES6+ modules loaded per page
+  - `src/data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-6].json` (note: `blog.json` removed in v4.6.0)
+  - `src/img/` - Raster + vector source images (build copies + generates WebP/AVIF into `dist/img/`)
+  - `src/pdf/` - PDFs with HTML wrappers for favicon/social preview
+  - `src/seo/` - Sitemaps, schema, robots variants
+  - `src/favicon_io/` - Favicon assets
+  - `src/*.html` - All page HTML (27 files: `index.html`, `lafalla.html`, blog pages, galerías, legal, etc.)
+  - `src/manifest.json`, `src/robots*.txt`, `src/sitemap*.xml`, `src/sw.js`, `src/.htaccess`, `src/ai-discovery.json` - public-root files copied verbatim to `dist/`
+- `dist/` - Generated output (DO NOT edit). Same structure as before (`dist/css/`, `dist/js/`, `dist/data/`, `dist/img/`, `dist/*.html`, etc.); the `src/` prefix is stripped by gulp tasks.
 - `tests/` - Playwright E2E specs
 - `scripts/` - Node utilities: `serve-dist.mjs` (test server), `generate-og-image.mjs` (OG image)
 - `docs/` - Technical docs (Markdown)
-- `seo/` - Sitemaps, schema, robots variants
-- `pdf/` - PDFs with HTML wrappers for favicon/social preview
+
+> 📌 **Path convention in this document**: Inline architectural prose mentions source files without the `src/` prefix for brevity (e.g., `js/lang.js`, `scss/components/_blog.scss`, `data/translations.json`). The actual file location is `src/<that path>`. URLs and HTML attribute paths (`<script src="js/foo.js">`, `fetch('/data/...')`) are URL paths in the served `dist/` — those are correct as-is, no prefix.
 
 ### Key Architectural Patterns
 
@@ -123,7 +135,7 @@ npm run generate:og      # Regenerate img/og-share.png (1200x630)
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.21).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.6.24).
 
 ## Architecture Decisions & Constraints
 
@@ -186,38 +198,38 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 
 ### Adding a translation
 
-1. Add key to `data/translations.json` under both `es` and `va`
+1. Add key to `src/data/translations.json` under both `es` and `va`
 2. Use in HTML: `<span data-i18n="section.subsection.key"></span>`
 3. Run `npm run build`
 
 ### Adding a new page
 
-1. Create HTML file in root directory (do NOT add `<link rel="canonical">` ni `hreflang` — los inyecta el build)
-2. Add **two** entries to `sitemap.xml` (one for ES, one for `/va/`), each with `<xhtml:link rel="alternate">` for `es`, `ca`, `x-default`
-3. Add URL to `sitemap-index.xml` if needed
+1. Create HTML file in `src/` (do NOT add `<link rel="canonical">` ni `hreflang` — los inyecta el build)
+2. Add **two** entries to `src/sitemap.xml` (one for ES, one for `/va/`), each with `<xhtml:link rel="alternate">` for `es`, `ca`, `x-default`
+3. Add URL to `src/sitemap-index.xml` if needed
 4. Run `npm run build`
 
 ### Updating Open Graph image
 
-1. Run `npm run generate:og`
+1. Run `npm run generate:og` (writes to `src/img/og-share.png`)
 2. Update cache-buster `?v=YYYYMMDD` in ALL HTML files (og:image, twitter:image, image_src)
 3. Run `npm run build` then `npm run test:e2e:full`
 
 ### Adding a blog post
 
-1. Create a static HTML page (`blog-{slug}.html`) based on `blog-somni.html` or `blog-anima.html` as template. Include specific SEO: `<title>`, `<meta description>`, Schema.org `BlogPosting` (with headline, datePublished, author), Open Graph (`og:type=article`, `article:published_time`), and Twitter Card tags
-2. Add all translatable text to `data/translations.json` under both `es` and `va` (cardTitle, title, lead, date, excerpt, author, back, backAria, ctaAria, content blocks, image alt/caption)
-3. Add static blog cards to `blog.html` and `index.html` with hrefs pointing to the new page
-4. Add URL to `sitemap.xml`
+1. Create a static HTML page (`src/blog-{slug}.html`) based on `src/blog-somni.html` or `src/blog-anima.html` as template. Include specific SEO: `<title>`, `<meta description>`, Schema.org `BlogPosting` (with headline, datePublished, author), Open Graph (`og:type=article`, `article:published_time`), and Twitter Card tags
+2. Add all translatable text to `src/data/translations.json` under both `es` and `va` (cardTitle, title, lead, date, excerpt, author, back, backAria, ctaAria, content blocks, image alt/caption)
+3. Add static blog cards to `src/blog.html` and `src/index.html` with hrefs pointing to the new page
+4. Add URL to `src/sitemap.xml`
 5. Run `npm run build`
 
 ### Adding a PDF with social preview
 
-Use HTML wrappers (see `pdf/Llibrets/` for examples). Include favicon, Open Graph, Twitter Card tags. Embed PDF with `<object>` and fallback download button. Link to `.html` wrapper instead of `.pdf`.
+Use HTML wrappers (see `src/pdf/Llibrets/` for examples). Include favicon, Open Graph, Twitter Card tags. Embed PDF with `<object>` and fallback download button. Link to `.html` wrapper instead of `.pdf`.
 
 ## Code Style
 
 - CSS follows BEM methodology (Block__Element--Modifier)
 - Git commits use Conventional Commits (feat:, fix:, docs:, style:, refactor:)
 - Breakpoints: mobile `max-width: 767px`, desktop `min-width: 768px`
-- Key SCSS variables in `scss/abstracts/_variables.scss` (primary: `$primary-color` #FF6F61, institutional blue: `$color-azul-falla` #004BCF)
+- Key SCSS variables in `src/scss/abstracts/_variables.scss` (primary: `$primary-color` #FF6F61, institutional blue: `$color-azul-falla` #004BCF)

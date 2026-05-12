@@ -3,10 +3,10 @@ import fs from 'fs';
 import path from 'path';
 
 test.describe('OpenGraph Image Validation', () => {
-  const ogImagePath = path.join(process.cwd(), 'img', 'og-share.png');
+  const ogImagePath = path.join(process.cwd(), 'src', 'img', 'og-share.png');
 
   test('og-share.png should exist', async () => {
-    expect(fs.existsSync(ogImagePath), 'El archivo img/og-share.png no existe').toBeTruthy();
+    expect(fs.existsSync(ogImagePath), 'El archivo src/img/og-share.png no existe').toBeTruthy();
   });
 
   test('og-share.png should be smaller than 300KB for WhatsApp', async () => {

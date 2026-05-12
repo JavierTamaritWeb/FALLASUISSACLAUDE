@@ -12,12 +12,12 @@ Esta guía documenta los scripts de mantenimiento que no forman parte del flujo 
 
 ### `generate-og-image.mjs`: propósito
 
-Regenera `img/og-share.png` con el formato que usa el sitio para Open Graph y WhatsApp.
+Regenera `src/img/og-share.png` con el formato que usa el sitio para Open Graph y WhatsApp.
 
 ### `generate-og-image.mjs`: entrada y salida
 
-- entrada: `img/Escudo_falla.avif`
-- salida: `img/og-share.png`
+- entrada: `src/img/Escudo_falla.avif`
+- salida: `src/img/og-share.png`
 
 ### `generate-og-image.mjs`: qué hace
 

@@ -21,7 +21,7 @@ El modo desarrollo ejecuta un build inicial y deja watchers activos.
 npm run dev
 ```
 
-Qué observa (watch): cambios en `scss/`, `js/`, `data/`, `pdf/`, `img/`, `favicon_io/`, `seo/` y ficheros raíz (robots, sitemaps, manifest, `google*.html`, etc.).
+Qué observa (watch): cambios en `src/scss/`, `src/js/`, `src/data/`, `src/pdf/`, `src/img/`, `src/favicon_io/`, `src/seo/` y ficheros públicos en `src/` (robots, sitemaps, manifest, `src/google*.html`, etc.). Desde v4.6.24 todo el source vive bajo `src/`.
 
 ## 🧱 Build de producción
 
@@ -41,12 +41,12 @@ npx gulp build
 
 ### Contenido típico de `dist/`
 
-- `dist/css/`: CSS compilado desde `scss/main.scss` + autoprefixer + cssnano
-- `dist/img/`: copia de `img/` + generación incremental de WebP/AVIF (para PNG/JPG/JPEG)
-- `dist/js/`, `dist/data/`, `dist/pdf/`, `dist/favicon_io/`
-- `dist/*.html` (páginas del root)
-- `dist/robots.txt`, `dist/sitemap*.xml`, `dist/manifest.json`, `dist/sw.js`, `dist/google*.html`, `dist/ai-discovery.json`, `dist/ai-info.html`
-- `dist/seo/` (copia de la carpeta `seo/`)
+- `dist/css/`: CSS compilado desde `src/scss/main.scss` + autoprefixer + cssnano
+- `dist/img/`: copia de `src/img/` + generación incremental de WebP/AVIF (para PNG/JPG/JPEG)
+- `dist/js/`, `dist/data/`, `dist/pdf/`, `dist/favicon_io/` (copias de `src/js/`, `src/data/`, `src/pdf/`, `src/favicon_io/`)
+- `dist/*.html` (copias de `src/*.html`; gulp strips the `src/` prefix)
+- `dist/robots.txt`, `dist/sitemap*.xml`, `dist/manifest.json`, `dist/sw.js`, `dist/google*.html`, `dist/ai-discovery.json`, `dist/ai-info.html` (copias de los ficheros públicos en `src/`)
+- `dist/seo/` (copia de `src/seo/`)
 
 ## 🧩 Tareas Gulp útiles
 
@@ -65,7 +65,7 @@ Para scripts utilitarios que no forman parte del flujo diario de Gulp, consulta 
 
 ## 🌍 Pre-render de valenciano (v4.6.23)
 
-Desde v4.6.23 el build pre-renderiza las traducciones VA en `dist/va/*.html`: el cuerpo HTML se sirve con texto valenciano horneado, sin depender de que JS arranque. Lo gestiona `gulpfile.js → prerenderTranslations()` reusando `data/translations.json`.
+Desde v4.6.23 el build pre-renderiza las traducciones VA en `dist/va/*.html`: el cuerpo HTML se sirve con texto valenciano horneado, sin depender de que JS arranque. Lo gestiona `gulpfile.js → prerenderTranslations()` reusando `src/data/translations.json`.
 
 **Variable de entorno disponible** (kill switch):
 
@@ -77,7 +77,7 @@ Cuando se setea, el build registra `[i18n-prerender] desactivado por DISABLE_I18
 
 Detalles funcionales y reglas: [`i18n-translations.md`](./i18n-translations.md). Aspecto SEO: [`google-search-console.md`](./google-search-console.md).
 
-Tras editar `data/translations.json` corre `npm run build` para regenerar el HTML pre-renderizado, y `npm run test:e2e` (incluye `i18n-prerender.e2e.spec.js` en el smoke).
+Tras editar `src/data/translations.json` corre `npm run build` para regenerar el HTML pre-renderizado, y `npm run test:e2e` (incluye `i18n-prerender.e2e.spec.js` en el smoke).
 
 ## 🗺️ Sitemaps y `lastmod`
 
@@ -151,7 +151,7 @@ Si el cambio toca el banner de subvención, recuerda que la validación real ocu
 
 WhatsApp cachea de forma muy agresiva la URL de `og:image`. Por eso:
 
-- La imagen de Open Graph del proyecto es `img/og-share.png`.
+- La imagen de Open Graph del proyecto es `src/img/og-share.png` (en `dist/` aparece como `dist/img/og-share.png`).
 - Los HTML deben referenciarla con un query param `?v=...` (por ejemplo `?v=20260122`) para forzar recacheo.
 
 Flujo recomendado cuando cambie la imagen OG:
@@ -176,7 +176,7 @@ Guía de utilidades relacionadas: [`scripts-utilities.md`](./scripts-utilities.m
 
 ## 📄 PDFs
 
-Los PDFs en `pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo (por ejemplo `pdf/Presentaciones/Prensentacion_Fallera_2026.pdf`), solo necesitas ejecutar `npm run build` para que aparezca en `dist/`.
+Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nuevo (por ejemplo `src/pdf/Presentaciones/Prensentacion_Fallera_2026.pdf`), solo necesitas ejecutar `npm run build` para que aparezca en `dist/`.
 
 ## 🧹 Troubleshooting
 

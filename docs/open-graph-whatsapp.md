@@ -11,8 +11,8 @@ WhatsApp suele fallar o no actualizar la imagen de previsualización por:
 
 ## 🖼️ Imagen OG del proyecto
 
-- Archivo fuente de salida: `img/og-share.png`
-- Fuente de generación: `img/Escudo_falla.avif`
+- Archivo fuente de salida: `src/img/og-share.png`
+- Fuente de generación: `src/img/Escudo_falla.avif`
 - Estándar recomendado:
   - Tamaño: **1200×630**
   - Formato: **PNG**
@@ -27,7 +27,7 @@ El repo incluye un generador basado en `sharp`:
 npm run generate:og
 ```
 
-Esto ejecuta `scripts/generate-og-image.mjs` y regenera `img/og-share.png`.
+Esto ejecuta `scripts/generate-og-image.mjs` y regenera `src/img/og-share.png`.
 
 ## 🔁 Cache-buster (`?v=...`) para WhatsApp
 
@@ -62,7 +62,7 @@ Archivo: `tests/og-image.e2e.spec.js`
 
 Valida:
 
-- Que existe `img/og-share.png`
+- Que existe `src/img/og-share.png`
 - Que pesa menos de 300KB
 - Que mide 1200×630
 
