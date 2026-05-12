@@ -112,7 +112,7 @@ Guía técnica:
 #### Validación visual y UX
 
 - La home y `colaboraciones.html` reutilizan el mismo bloque visual para HOPE.
-- El copy de HOPE se renderiza como varios párrafos reales a partir de `data/translations.json`, no como un único bloque de texto plano.
+- El copy de HOPE se renderiza como varios párrafos reales a partir de `src/data/translations.json`, no como un único bloque de texto plano.
 - En desktop, el ancho del bloque de texto debe alinearse con el ancho útil del mosaico de 3 columnas para que la composición no quede ni más estrecha ni más ancha que las imágenes.
 - Se valida el grid tradicional responsive, la ausencia de recortes en miniaturas, `object-fit: contain` y la apertura/cierre del lightbox accesible.
 - En móvil también se comprueba el acordeón integrado en la portada.
@@ -126,9 +126,9 @@ Archivos implicados:
 
 - `index.html`
 - `colaboraciones.html`
-- `js/lang.js`
-- `scss/components/_colaboraciones.scss`
-- `data/translations.json`
+- `src/js/lang.js`
+- `src/scss/components/_colaboraciones.scss`
+- `src/data/translations.json`
 
 #### Validación SEO técnica
 
@@ -191,7 +191,7 @@ Archivo de test:
 - Comprueba que un bloque puede ocultarse al salir del viewport y volver a mostrarse al reentrar.
 - Protege el refresco tras rerender en piezas que pintan HTML por JavaScript.
 - Verifica que `prefers-reduced-motion: reduce` no deje contenido oculto esperando al observer.
-- Mantiene exclusiones delicadas como `.forecast-day`, que conserva su animación propia en `js/meteo.js`.
+- Mantiene exclusiones delicadas como `.forecast-day`, que conserva su animación propia en `src/js/meteo.js`.
 
 Archivo de test:
 
@@ -239,7 +239,7 @@ PLAYWRIGHT_REUSE_SERVER=true npx playwright test tests/visual-regression.e2e.spe
 
 ### 🟦 Open Graph (WhatsApp)
 
-- La imagen `img/og-share.png` debe existir, pesar < 300KB y medir 1200×630.
+- La imagen `src/img/og-share.png` debe existir, pesar < 300KB y medir 1200×630.
 - Ningún HTML debe referenciar `og-share.png` sin cache-buster `?v=...` (evita problemas de caché en WhatsApp).
 - El build en `dist/` también debe contener la URL versionada.
 
@@ -385,7 +385,7 @@ Tests para verificar las transiciones suaves del modal "¿Quieres formar parte?"
 Contrato operativo del modal:
 
 - `index.html` contiene el markup canónico del modal
-- `js/envia.js` no debe volver a depender de `fetch('modal-content.html')`
+- `src/js/envia.js` no debe volver a depender de `fetch('modal-content.html')`
 - `emailjs` se trata como dependencia opcional en tiempo de ejecución; si la CDN falla, la UI del modal debe seguir abriendo y cerrando
 
 Archivos de test:
@@ -594,7 +594,7 @@ Guía técnica:
   - Comprueba que no estás reutilizando un contexto automatizado con `localStorage.bannerSubvencionCerrado = 'true'`
 
 - Los tests del modal fallan o dejan de abrir la home:
-  - Verifica que el modal sigue estando en `index.html` y que `js/envia.js` no volvió a depender de `fetch('modal-content.html')`
+  - Verifica que el modal sigue estando en `index.html` y que `src/js/envia.js` no volvió a depender de `fetch('modal-content.html')`
   - Comprueba que no hay un `emailjs.init(...)` en top-level rompiendo el registro de listeners cuando falla la CDN
   - Si los specs del modal pasan pero la full suite falla, aísla `tests/visual-regression.e2e.spec.js` antes de tocar snapshots
 

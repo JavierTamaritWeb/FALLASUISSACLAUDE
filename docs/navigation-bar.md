@@ -8,11 +8,11 @@ Esta guía documenta **exactamente** cómo funciona la barra de navegación (nav
 
 ## ✅ Archivos implicados (fuente de verdad)
 
-- **Estilos (SCSS):** `scss/layout/_header.scss`
-- **Menú móvil + scroll state (JS):** `js/nav-menu.js`
-- **Modo oscuro/claro (JS) + compat iOS:** `js/dark.js`
-- **Compatibilidad theme/iOS (SCSS):** `scss/components/_theme-compatibility.scss`
-- **Modo oscuro (SCSS):** `scss/animaciones/_modo-oscuro.scss`
+- **Estilos (SCSS):** `src/scss/layout/_header.scss`
+- **Menú móvil + scroll state (JS):** `src/js/nav-menu.js`
+- **Modo oscuro/claro (JS) + compat iOS:** `src/js/dark.js`
+- **Compatibilidad theme/iOS (SCSS):** `src/scss/components/_theme-compatibility.scss`
+- **Modo oscuro (SCSS):** `src/scss/animaciones/_modo-oscuro.scss`
 - **Artefacto compilado:** `dist/css/main.css` y `dist/*.html`
 
 ---
@@ -89,7 +89,7 @@ La barra `.header__barra` y `.header-inner__barra` se comportan como **barra fij
 - `top: calc(env(safe-area-inset-top) + 1rem)`
 - `left/right: 0`, centrada con `margin: 0 auto` y `max-width`.
 
-Esto está en `scss/layout/_header.scss` dentro del bloque:
+Esto está en `src/scss/layout/_header.scss` dentro del bloque:
 
 - `// Barras de Navegación Fijas para .header y .header-inner`
 
@@ -186,13 +186,13 @@ Para lograr una transición suave entre el modo claro (gradiente azul) y el modo
     *   El elemento anima su `background` de transparent → gris
     *   Ambas transiciones duran 2.4s = transición suave
 
-Esta lógica se aplica en `scss/layout/_header.scss` y `scss/animaciones/_modo-oscuro.scss`.
+Esta lógica se aplica en `src/scss/layout/_header.scss` y `src/scss/animaciones/_modo-oscuro.scss`.
 
 ### 🔔 Notificación de cambio de tema (Toast)
 
 Al alternar el modo oscuro/claro, aparece una notificación breve (`#notificacion`).
-- **Lógica de protección (Debounce):** En `js/dark.js`, se verifica si la notificación ya está visible (`.mostrar`) para evitar solapamientos o duplicados.
-- **Limpieza:** Se eliminó código redundante en `js/lang.js` que causaba conflictos de inicialización (doble disparo al cargar).
+- **Lógica de protección (Debounce):** En `src/js/dark.js`, se verifica si la notificación ya está visible (`.mostrar`) para evitar solapamientos o duplicados.
+- **Limpieza:** Se eliminó código redundante en `src/js/lang.js` que causaba conflictos de inicialización (doble disparo al cargar).
 
 ---
 
@@ -256,8 +256,8 @@ Desde v4.6.15 tanto `.navegacion__enlace` (header) como `.footer__enlace` (foote
 
 ### Archivos fuente
 
-- `.navegacion__enlace` → `scss/layout/_header.scss` (bloque "Estilos de Navegación (Segunda versión)")
-- `.footer__enlace` → `scss/layout/_footer.scss`
+- `.navegacion__enlace` → `src/scss/layout/_header.scss` (bloque "Estilos de Navegación (Segunda versión)")
+- `.footer__enlace` → `src/scss/layout/_footer.scss`
 
 ### Funciona igual en claro y oscuro
 
@@ -286,7 +286,7 @@ En móvil (≤767px):
 - La navegación `.navegacion` se convierte en panel overlay.
 - Se crea un backdrop `.nav-backdrop` para cerrar al tocar fuera.
 
-Toda la lógica está en `js/nav-menu.js`.
+Toda la lógica está en `src/js/nav-menu.js`.
 
 ### Comportamiento exacto
 
@@ -306,7 +306,7 @@ Toda la lógica está en `js/nav-menu.js`.
 
 ### CSS del overlay
 
-En `scss/layout/_header.scss` (bloque responsive móvil):
+En `src/scss/layout/_header.scss` (bloque responsive móvil):
 
 ```scss
 @media (max-width: 767px) {
@@ -360,13 +360,13 @@ En móvil, la barra usa un layout de 3 columnas (tipo grid) para evitar que el h
 - `.header__barra, .header-inner__barra` se configuran para disposición horizontal
 - Se asignan áreas/columnas para garantizar el orden visual: botones → notificación → menú
 
-Esto vive en `scss/layout/_header.scss`.
+Esto vive en `src/scss/layout/_header.scss`.
 
 ### Notificación: inline (no "toast" flotante)
 
 El proyecto tiene estilos globales tipo toast para `#notificacion` (centrado abajo, `position: fixed`) en:
 
-- `scss/base/_notificaciones.scss`
+- `src/scss/base/_notificaciones.scss`
 
 Para el header móvil, se sobreescribe esa presentación para que `#notificacion` sea **inline** dentro de la barra (con elipsis, altura consistente y sin transformaciones de toast).
 
@@ -386,9 +386,9 @@ En Safari/iOS (WebKit), si un ancestro (o el propio `body`) tiene `transform`, p
 
 Esto se refuerza en:
 
-- `scss/components/_theme-compatibility.scss`:
+- `src/scss/components/_theme-compatibility.scss`:
   - `body.modo-oscuro, body.modo-claro { transform: none; -webkit-transform: none; }`
-- `js/dark.js`:
+- `src/js/dark.js`:
   - cuando necesita "empujón" en iOS, fuerza reflow con `void document.body.offsetHeight;` en lugar de transforms.
 
 ---
@@ -429,7 +429,7 @@ Cuando cambias CSS/JS y no se refleja:
 
 Si el menú móvil no abre/cierra bien:
 
-- confirma que `js/nav-menu.js` se está cargando en esa página
+- confirma que `src/js/nav-menu.js` se está cargando en esa página
 - confirma que existe `.navegacion` dentro de `.header__barra` o `.header-inner__barra`
 - confirma que el breakpoint coincide en CSS y JS (767px)
 
@@ -490,7 +490,7 @@ npm run build
 - **La barra no se queda fija en iPhone:** busca `transform` aplicado a `body/html` o ancestros.
 - **El hover "naranja pegado" vuelve:** revisa que los estilos estén en `:focus-visible` y no en `:focus`.
 - **No se ven cambios:** asegúrate de estar sirviendo `dist/` y de haber ejecutado `npm run build` o `npx gulp css`.
-- **El menú móvil no abre:** confirma que `js/nav-menu.js` se carga en esa página y que existe `.navegacion` dentro de `.header__barra`/`.header-inner__barra`.
+- **El menú móvil no abre:** confirma que `src/js/nav-menu.js` se carga en esa página y que existe `.navegacion` dentro de `.header__barra`/`.header-inner__barra`.
 - **El menú móvil no se despliega (queda cortado):** verifica que NO hay `overflow: hidden` en `.header__barra`.
 - **El menú aparece con posición incorrecta:** verifica que el selector `> *` excluye `.navegacion` con `:not(.navegacion)`.
 - **La transición de la barra es instantánea:** verifica que el `::before` tiene `transition: opacity 2.4s` y que `transicion-a-claro` está configurado.
@@ -506,7 +506,7 @@ npm run build
 **Solución:** Se forzó un nuevo contexto de apilamiento para la navegación en desktop:
 
 ```scss
-// scss/layout/_header.scss
+// src/scss/layout/_header.scss
 @media (min-width: 768px) {
   .navegacion {
     position: relative; // Antes static

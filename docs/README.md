@@ -1,6 +1,6 @@
 # 📚 Documentación Técnica - WEBFALLASUISSA
 
-> 📌 **Convención de paths (desde v4.6.24):** Todo el código fuente vive bajo `src/`. Los documentos de esta carpeta mencionan rutas de archivos source sin el prefijo `src/` por brevedad (ej. `scss/components/_meteo.scss`, `js/lang.js`, `data/translations.json`). La ubicación real es `src/<ruta>`. Las rutas que aparecen dentro de URLs HTML (`<script src="js/foo.js">`, `fetch('/data/...')`) son URLs del sitio servido (raíz de `dist/`), no de filesystem — esas no llevan el prefijo `src/`.
+> 📌 **Convención de paths (desde v4.6.24):** Todo el código fuente vive bajo `src/`. Las referencias en estos documentos llevan siempre el prefijo `src/` (ej. `src/scss/components/_meteo.scss`, `src/js/lang.js`, `src/data/translations.json`). Las rutas dentro de URLs HTML/JS (`<script src="js/foo.js">`, `fetch('/data/...')`, `<img src="img/...">`) son URLs del sitio servido (raíz de `dist/`) y por eso NO llevan el prefijo `src/`.
 
 ## 📁 Índice de Documentos
 
@@ -16,7 +16,7 @@
 | [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación fija, overlay móvil, cierre por Escape/backdrop y layout responsivo | 20/03/2026 |
 | [`global-styles.md`](./global-styles.md) | Estilos globales, gradiente base, reveal on scroll, fondos especiales y notas técnicas del banner | 20/03/2026 |
 | [`i18n-translations.md`](./i18n-translations.md) | Sistema i18n con `data-i18n`, `translations.json`, pre-render VA en build, nodos dinámicos y renderizado por párrafos | 07/05/2026 |
-| [`gestion-tablon.md`](./gestion-tablon.md) | Guía canónica del tablón dinámico (`data/board.json`, adjuntos, filtrado de inválidos, validación y troubleshooting) | 04/05/2026 |
+| [`gestion-tablon.md`](./gestion-tablon.md) | Guía canónica del tablón dinámico (`src/data/board.json`, adjuntos, filtrado de inválidos, validación y troubleshooting) | 04/05/2026 |
 | [`meteo-ui.md`](./meteo-ui.md) | Meteo: estructura del widget, animaciones, sincronización con i18n y estabilidad visual | 20/03/2026 |
 | [`google-search-console.md`](./google-search-console.md) | Verificación en GSC + procedimiento ante el aviso "Duplicada: el usuario no ha indicado ninguna versión canónica" | 07/05/2026 |
 | [`robots-configuration.md`](./robots-configuration.md) | Configuración de `robots.txt` y variantes para bots | 20/03/2026 |
@@ -31,7 +31,7 @@
 - [`open-graph-whatsapp.md`](./open-graph-whatsapp.md): `og-share.png`, cache-buster y controles anti-regresión.
 - [`google-search-console.md`](./google-search-console.md): verificación y alta en Search Console.
 - [`robots-configuration.md`](./robots-configuration.md): robots, variantes y relación con sitemaps.
-- Índice SEO/IA de la carpeta `seo/`: [`../seo/README.md`](../seo/README.md).
+- Índice SEO/IA de la carpeta `src/seo/`: [`../seo/README.md`](../seo/README.md).
 
 ### 🧪 Build, tests y utilidades
 
@@ -51,7 +51,7 @@
 ### 🧩 Contenido y datos editables
 
 - [`i18n-translations.md`](./i18n-translations.md): traducciones ES/VA, claves `data-i18n` y bloques que se renderizan por párrafos.
-- [`gestion-tablon.md`](./gestion-tablon.md): tablón dinámico y `data/board.json`.
+- [`gestion-tablon.md`](./gestion-tablon.md): tablón dinámico y `src/data/board.json`.
 - [`architecture-constraints.md`](./architecture-constraints.md): restricciones técnicas que afectan a cambios de contenido, tema y navegación.
 
 ## 📝 Notas de Mantenimiento
@@ -71,8 +71,8 @@ Actualiza estas guías cuando cambies:
 - scrollbars, modo oscuro, gradientes, reveal on scroll o compatibilidad Safari/WebKit/Firefox
 - geometría o set de imágenes del Swiper del monumento, especialmente si tocas `swiper-slide--monumento-real`
 - navegación fija, overlay móvil, z-index o banner de subvención
-- sistema de traducciones (`data/translations.json`, claves `data-i18n`, renderizado por párrafos en `js/lang.js`, pre-render VA en `gulpfile.js → prerenderTranslations`)
-- coordinación entre i18n y módulos dinámicos como `js/meteo.js`
+- sistema de traducciones (`src/data/translations.json`, claves `data-i18n`, renderizado por párrafos en `src/js/lang.js`, pre-render VA en `gulpfile.js → prerenderTranslations`)
+- coordinación entre i18n y módulos dinámicos como `src/js/meteo.js`
 - sección de colaboraciones, lightbox HOPE, copy responsive y grid compartido
 - wrappers HTML de PDFs con Open Graph, favicon y social preview
 - flujo del modal “¿Quieres formar parte?”, su dependencia EmailJS o el markup embebido en `index.html`

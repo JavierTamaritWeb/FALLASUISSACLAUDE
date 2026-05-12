@@ -22,7 +22,7 @@ En el visor del monumento suelen cambiar:
 - `index.html`
 - `lafalla.html`
 - `tests/monumento-swiper.e2e.spec.js`
-- `scss/animaciones/_swiper.scss`
+- `src/scss/animaciones/_swiper.scss`
 - `docs/swiper-monumento.md`
 - `docs/architecture-constraints.md`
 - `docs/README.md` si se renombra o se retira esta guía

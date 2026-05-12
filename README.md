@@ -74,7 +74,7 @@ Guía técnica: [`docs/i18n-translations.md`](./docs/i18n-translations.md)
 
 ### 🟦 Open Graph (WhatsApp/Facebook/Twitter)
 
-- Imagen OG optimizada `img/og-share.png` (1200×630, fondo sólido, <300KB)
+- Imagen OG optimizada `src/img/og-share.png` (1200×630, fondo sólido, <300KB)
 - Cache-buster `?v=...` para evitar problemas de caché en WhatsApp
 
 Guía técnica: [`docs/open-graph-whatsapp.md`](./docs/open-graph-whatsapp.md)
@@ -285,7 +285,7 @@ npx gulp updateDistSitemapsLastmod
 
 ## ✅ Checklist antes de hacer push
 
-Como `dist/` está versionado y los tests E2E validan el artefacto real, antes de subir cambios (especialmente si tocas `scss/`, `js/` o `data/`):
+Como `dist/` está versionado y los tests E2E validan el artefacto real, antes de subir cambios (especialmente si tocas `src/scss/`, `src/js/` o `src/data/`):
 
 ```bash
 # 1) Regenera dist/
@@ -310,9 +310,9 @@ Notas:
 - En móvil (<768px), la navegación usa un menú tipo **dropdown overlay** con botón hamburguesa, cierre por Escape, click fuera (backdrop) y al clicar un enlace.
 - El selector de idioma muestra **“IDIOMA · Español/Valencià”** en desktop y se compacta a **solo icono** en móvil manteniendo accesibilidad mediante `aria-label`.
 - Archivos clave:
-  - `js/nav-menu.js`
-  - `js/lang.js`
-  - `scss/layout/_header.scss`
+  - `src/js/nav-menu.js`
+  - `src/js/lang.js`
+  - `src/scss/layout/_header.scss`
 
 ### 4. Estructura de distribución
 
@@ -440,7 +440,7 @@ sitemap-index.xml     → Hub principal de sitemaps
 ### Gestión de Traducciones
 
 ```json
-// data/translations.json - 846 líneas de contenido
+// src/data/translations.json - 846 líneas de contenido
 {
   "es": {
     "nav": {...},
@@ -822,7 +822,7 @@ Nueva estructura organizada:
 
 #### 🔧 **Optimizaciones Implementadas**
 
-- **Core Web Vitals CSS (`scss/_google-seo.scss`):**
+- **Core Web Vitals CSS (`src/scss/_google-seo.scss`):**
   - LCP (Largest Contentful Paint) optimization
   - FID (First Input Delay) acceleration
   - CLS (Cumulative Layout Shift) prevention

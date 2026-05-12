@@ -4,14 +4,14 @@ Esta guía describe el sistema de traducciones del proyecto y los “gotchas” 
 
 ## ✅ Fuente de verdad
 
-- Fuente: `data/translations.json`
+- Fuente: `src/data/translations.json`
 - Artefacto de build: `dist/data/translations.json`
 
-El build copia `data/` a `dist/data/`. En producción se consume `dist/`.
+El build copia `src/data/` a `dist/data/`. En producción se consume `dist/`.
 
 ## 🗂️ Qué va aquí y qué no
 
-Usa `data/translations.json` para texto genérico de interfaz:
+Usa `src/data/translations.json` para texto genérico de interfaz:
 
 - navegación, botones, labels, placeholders y mensajes de estado
 - títulos o copys reutilizados por varias plantillas
@@ -21,10 +21,10 @@ No metas aquí metadatos ni contenido operativo con identidad propia.
 
 Regla práctica del repo:
 
-- `data/translations.json`: UI traducible y copy compartido
-- `data/board.json`: notas del tablón con su `contenido.es` y `contenido.va`
+- `src/data/translations.json`: UI traducible y copy compartido
+- `src/data/board.json`: notas del tablón con su `contenido.es` y `contenido.va`
 
-El blog usa páginas estáticas individuales (`blog-somni.html`, `blog-anima.html`) con atributos `data-i18n` que apuntan a claves en `data/translations.json` (bajo `blog.somni.*` y `blog.anima.*`). No existe `data/blog.json` desde v4.6.0.
+El blog usa páginas estáticas individuales (`blog-somni.html`, `blog-anima.html`) con atributos `data-i18n` que apuntan a claves en `src/data/translations.json` (bajo `blog.somni.*` y `blog.anima.*`). No existe `src/data/blog.json` desde v4.6.0.
 
 ## 🔑 Cómo se enlaza el texto en HTML
 
@@ -34,7 +34,7 @@ En el HTML se usan atributos `data-i18n` con una clave, por ejemplo:
 <p class="accordion__texto" data-i18n="falla.nosotros.falleramayoraI.texto"></p>
 ```
 
-La clave debe existir (por idioma) en `data/translations.json`. Si la clave no coincide, el texto no aparecerá.
+La clave debe existir (por idioma) en `src/data/translations.json`. Si la clave no coincide, el texto no aparecerá.
 
 ## 🧩 Textos con markup (varias claves)
 
@@ -51,7 +51,7 @@ Ejemplo real (etiqueta de PDF en “Archivos”):
 </p>
 ```
 
-Y en `data/translations.json`:
+Y en `src/data/translations.json`:
 
 - `es.historia.archivos.presentacion` / `es.historia.archivos.fallas2026`
 - `va.historia.archivos.presentacion` / `va.historia.archivos.fallas2026`
@@ -107,7 +107,7 @@ Ejemplo real del bloque HOPE:
   data-i18n-format="paragraphs"></div>
 ```
 
-Comportamiento actual en `js/lang.js`:
+Comportamiento actual en `src/js/lang.js`:
 
 - detecta `data-i18n-format="paragraphs"`
 - separa el string por una o más secuencias `\n`
@@ -130,7 +130,7 @@ Por qué importa:
 
 - Google indexa `/va/*` como contenido en valenciano real (antes veía el HTML en español pre-JS y marcaba duplicado).
 - Mejora la accesibilidad si JS falla o tarda en cargar.
-- El toggle ES/VA en runtime sigue funcionando porque los atributos `data-i18n*` permanecen en el HTML servido — `js/lang.js` reescribe el DOM al cambiar de idioma.
+- El toggle ES/VA en runtime sigue funcionando porque los atributos `data-i18n*` permanecen en el HTML servido — `src/js/lang.js` reescribe el DOM al cambiar de idioma.
 
 Atributos cubiertos por el pre-render y por `lang.js`:
 
@@ -145,9 +145,9 @@ Atributos cubiertos por el pre-render y por `lang.js`:
 Reglas de oro al editar:
 
 1. **No tocar los `data-i18n*` del HTML del root** pensando que solo afectan a runtime: el build los lee para pre-renderizar. Si los borras pierdes la traducción VA en `dist/va/`.
-2. **Tras editar `data/translations.json`**, ejecuta `npm run build` para que el HTML pre-renderizado refleje el cambio.
+2. **Tras editar `src/data/translations.json`**, ejecuta `npm run build` para que el HTML pre-renderizado refleje el cambio.
 3. Si añades una clave nueva: asegúrate de tener traducción en **ambos** `es` y `va`. Si falta en `va`, el build avisa con `[i18n-prerender] missing key: <clave> @ <archivo>` y el HTML conserva el texto fuente como fallback (no rompe el build).
-4. **Para añadir un nuevo atributo i18n** (p. ej. `data-i18n-aria-describedby`): hay que extender a la vez el array `attrMappings` en `prerenderTranslations` (`gulpfile.js`) y la tabla de selectores en `updateTranslations()` (`js/lang.js`). Ambos deben procesar el mismo set.
+4. **Para añadir un nuevo atributo i18n** (p. ej. `data-i18n-aria-describedby`): hay que extender a la vez el array `attrMappings` en `prerenderTranslations` (`gulpfile.js`) y la tabla de selectores en `updateTranslations()` (`src/js/lang.js`). Ambos deben procesar el mismo set.
 
 ### Kill switch
 
@@ -176,7 +176,7 @@ Caso real actual:
 
 - `#current-feels-like` en meteo / portada
 
-Ese nodo no debe ser sobrescrito por `lang.js` con solo `Sensación`, porque `js/meteo.js` compone el texto completo (`Sensación: 26°C`).
+Ese nodo no debe ser sobrescrito por `lang.js` con solo `Sensación`, porque `src/js/meteo.js` compone el texto completo (`Sensación: 26°C`).
 
 Para esos casos, usa este patrón:
 
@@ -204,7 +204,7 @@ No lo uses en bloques estáticos normales, porque ahí sí conviene que `lang.js
 
 `lang.js` emite `translationsReady` cuando:
 
-- ya cargó `data/translations.json`
+- ya cargó `src/data/translations.json`
 - conoce el idioma activo
 - ya aplicó `updateTranslations()` sobre el DOM
 
@@ -218,7 +218,7 @@ document.addEventListener('translationsReady', () => {
 });
 ```
 
-O bien, como hace ahora `js/meteo.js`, esperando explícitamente a que el idioma esté listo antes de pintar el primer estado.
+O bien, como hace ahora `src/js/meteo.js`, esperando explícitamente a que el idioma esté listo antes de pintar el primer estado.
 
 Contrato operativo actual:
 
@@ -240,7 +240,7 @@ Regla práctica actual para componentes dinámicos:
 
 Caso ya implementado:
 
-- `js/meteo.js` protege labels como `meteo.min`, `meteo.max`, `meteo.viento` o `meteo.nubosidad` para que la interfaz siga siendo legible incluso si el render arranca antes de tener traducción útil disponible
+- `src/js/meteo.js` protege labels como `meteo.min`, `meteo.max`, `meteo.viento` o `meteo.nubosidad` para que la interfaz siga siendo legible incluso si el render arranca antes de tener traducción útil disponible
 
 Esto evita textos rotos y también evita cambios de altura inesperados en tests visuales.
 
@@ -248,15 +248,15 @@ Esto evita textos rotos y también evita cambios de altura inesperados en tests 
 
 El bloque HOPE de `index.html` y `colaboraciones.html` combina dos piezas:
 
-- `js/lang.js` renderiza `colaboraciones.hope.texto` como párrafos reales
-- `scss/components/_colaboraciones.scss` alinea el copy con el ancho útil del mosaico de 3 columnas en desktop y mantiene una sangría más contenida en móvil
+- `src/js/lang.js` renderiza `colaboraciones.hope.texto` como párrafos reales
+- `src/scss/components/_colaboraciones.scss` alinea el copy con el ancho útil del mosaico de 3 columnas en desktop y mantiene una sangría más contenida en móvil
 
 Si tocas ese bloque, revisa siempre el conjunto completo:
 
 - `index.html`
 - `colaboraciones.html`
-- `js/lang.js`
-- `scss/components/_colaboraciones.scss`
+- `src/js/lang.js`
+- `src/scss/components/_colaboraciones.scss`
 - `tests/index-colaboraciones.e2e.spec.js`
 
 ## 🧪 Validación rápida

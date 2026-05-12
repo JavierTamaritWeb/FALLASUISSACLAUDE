@@ -24,7 +24,7 @@ Pregunta al usuario qué quiere mejorar:
 #### Para SCSS/CSS:
 - Verificar metodología BEM (Block__Element--Modifier)
 - Buscar código duplicado que pueda refactorizarse
-- Revisar uso correcto de variables (`scss/abstracts/_variables.scss`)
+- Revisar uso correcto de variables (`src/scss/abstracts/_variables.scss`)
 - Comprobar mixins reutilizables
 - Validar breakpoints responsive (767px móvil, 768px+ desktop)
 - Revisar transiciones y animaciones (usar `var(--theme-transition)`)
@@ -79,7 +79,7 @@ Si el usuario aprueba:
 
 | Tipo | Ubicación |
 |------|-----------|
-| Variables SCSS | `scss/abstracts/_variables.scss` |
-| Modo oscuro | `scss/animaciones/_modo-oscuro.scss` |
-| Traducciones | `data/translations.json` |
+| Variables SCSS | `src/scss/abstracts/_variables.scss` |
+| Modo oscuro | `src/scss/animaciones/_modo-oscuro.scss` |
+| Traducciones | `src/data/translations.json` |
 | Tests E2E | `tests/*.e2e.spec.js` |

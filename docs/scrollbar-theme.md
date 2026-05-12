@@ -30,7 +30,7 @@ Por eso el tema oscuro se sincroniza en `html` y `body`, y la CSS global contemp
 
 Archivo principal:
 
-- `scss/animaciones/_modo-oscuro.scss`
+- `src/scss/animaciones/_modo-oscuro.scss`
 
 Claves:
 
@@ -59,7 +59,7 @@ Claves:
 
 Archivo:
 
-- `js/dark.js`
+- `src/js/dark.js`
 
 Responsabilidades:
 

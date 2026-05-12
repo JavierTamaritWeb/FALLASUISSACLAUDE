@@ -4,7 +4,7 @@ Documentación técnica sobre los componentes visuales de la sección meteoroló
 
 ## 🎨 Icono Meteorológico Principal
 
-El icono que muestra el estado actual del clima (`#current-icon-img`) tiene comportamientos responsivos y estéticos específicos definidos en `scss/components/_meteo.scss`.
+El icono que muestra el estado actual del clima (`#current-icon-img`) tiene comportamientos responsivos y estéticos específicos definidos en `src/scss/components/_meteo.scss`.
 
 ## 🏗️ Estructura del widget en la Home
 
@@ -28,7 +28,7 @@ La humedad está dentro de `.current-content` para heredar el centrado flex. En 
 
 La sección meteo depende de etiquetas traducidas para construir varios textos dinámicos (`Sensación`, `Mín`, `Máx`, `Viento`, `Nubosidad`, etc.).
 
-Desde marzo de 2026, `js/meteo.js` no renderiza la primera tanda de datos hasta que `js/lang.js` haya cargado el JSON y emitido `translationsReady`.
+Desde marzo de 2026, `src/js/meteo.js` no renderiza la primera tanda de datos hasta que `src/js/lang.js` haya cargado el JSON y emitido `translationsReady`.
 
 Esto evita una carrera real en la que el widget podía pintar textos como:
 
@@ -40,8 +40,8 @@ Ese fallo no solo era visual: cambiaba el wrapping del texto y provocaba diferen
 
 ### Contrato actual
 
-- `js/lang.js` emite `translationsReady` cuando el idioma activo ya está cargado y aplicado.
-- `js/meteo.js` espera ese evento antes del primer `fetchCurrentWeather()` / `fetchForecast()`.
+- `src/js/lang.js` emite `translationsReady` cuando el idioma activo ya está cargado y aplicado.
+- `src/js/meteo.js` espera ese evento antes del primer `fetchCurrentWeather()` / `fetchForecast()`.
 - Si `translate(key)` todavía devolviera la propia key, meteo usa un fallback legible (`Mín`, `Máx`, `Viento`, etc.) en vez de pintar la key cruda.
 - `waitForTranslationsReady()` no bloquea indefinidamente: si el evento no llega, resuelve igualmente tras un timeout corto para no congelar la inicialización completa del módulo.
 - Tras `langChanged`, meteo vuelve a pedir clima actual y previsión para que la UI cambie de idioma sin recargar la página.
@@ -53,7 +53,7 @@ El campo de sensación térmica mantiene `data-i18n="meteo.sensacion"`, pero aho
 Motivo:
 
 - `lang.js` sigue sabiendo qué label base le corresponde.
-- Pero no sobrescribe el contenido completo del nodo, porque ese texto lo compone `js/meteo.js` con valor dinámico (`Sensación: 26°C`).
+- Pero no sobrescribe el contenido completo del nodo, porque ese texto lo compone `src/js/meteo.js` con valor dinámico (`Sensación: 26°C`).
 
 Ejemplo:
 
@@ -109,7 +109,7 @@ El widget incluye una imagen decorativa ("Falleret" - *falleretPro.svg*) que rea
 - **Dimensiones:** Ambas imágenes mantienen dimensiones idénticas para evitar saltos de layout (CLS).
 
 ```javascript
-/* Lógica simplificada (js/meteo.js) */
+/* Lógica simplificada (src/js/meteo.js) */
 const isRaining = ['Rain', 'Drizzle', 'Thunderstorm'].includes(mainCondition);
 const newSrc = isRaining ? 'img/decoracion/falleretPlora.svg' : 'img/decoracion/falleretPro.svg';
 // Se aplica con una transición de opacidad (fade-out -> src change -> fade-in)

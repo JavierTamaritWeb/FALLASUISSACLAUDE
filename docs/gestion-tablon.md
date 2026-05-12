@@ -4,10 +4,10 @@ Esta es la guía canónica del tablón dinámico. El contenido se edita en un JS
 
 ## 📍 Dónde aparece y qué lo pinta
 
-- datos: `data/board.json`
-- textos genéricos del componente: `data/translations.json` (`board.empty`, labels accesibles de adjuntos)
-- renderizado: `js/board.js`
-- estilos: `scss/components/_board.scss`
+- datos: `src/data/board.json`
+- textos genéricos del componente: `src/data/translations.json` (`board.empty`, labels accesibles de adjuntos)
+- renderizado: `src/js/board.js`
+- estilos: `src/scss/components/_board.scss`
 - páginas que lo muestran: `index.html` y `eventos.html`
 - tests: `tests/board.e2e.spec.js`
 
@@ -45,7 +45,7 @@ El JSON tiene un objeto raíz con un array `notas`.
 | `id` | `string` | Sí | Identificador único y estable. Útil para localizar una nota concreta. |
 | `activo` | `boolean` | No | Si es `false`, la nota queda oculta sin necesidad de borrarla. |
 | `imagen` | `object` | No | Imagen embebida visible dentro de la nota (cartel, infografía…). Si se omite, la nota no muestra imagen embebida. |
-| `imagen.url` | `string` | Sí (si hay `imagen`) | Ruta relativa a la imagen, p. ej. `img/eventos/cartel.jpg`. |
+| `imagen.url` | `string` | Sí (si hay `imagen`) | URL desde la raíz pública del sitio (la usa el `<img src="…">` del render), p. ej. `img/eventos/cartel.jpg` — la imagen vive en `src/img/eventos/cartel.jpg`. |
 | `imagen.alt` | `object` o `string` | No | Texto alternativo accesible. Se recomienda objeto bilingüe `{ "es": "...", "va": "..." }`. |
 | `contenido` | `object` | Sí | Texto de la nota por idioma. Debe incluir `es` y `va`. |
 | `contenido.es` | `string` | Sí | Texto en español. |
@@ -57,7 +57,7 @@ El JSON tiene un objeto raíz con un array `notas`.
 | Campo | Tipo | Requerido | Valores | Descripción |
 | ------- | ------ | ----------- | --------- | ------------- |
 | `tipo` | `string` | Sí | `"pdf"`, `"img"` | Controla icono, copy accesible y presentación del enlace. |
-| `url` | `string` | Sí | Ruta relativa | Ruta desde la raíz pública, por ejemplo `pdf/bases.pdf` o `img/eventos/cartel.jpg`. |
+| `url` | `string` | Sí | URL relativa | URL desde la raíz pública del sitio (la consume el `<a href="…">` o `<img src="…">` del render). Por ejemplo `pdf/bases.pdf` o `img/eventos/cartel.jpg` — los archivos viven en `src/pdf/` y `src/img/`. |
 | `nombre` | `object` o `string` | Sí | Texto | Nombre visible. Se recomienda objeto bilingüe `{ "es": "...", "va": "..." }`. |
 
 ### Validación efectiva del render
@@ -93,7 +93,7 @@ Pueden combinarse: imagen visible en la nota + enlace "Ver cartel completo" para
 
 ## ✍️ Flujo recomendado para añadir o editar una nota
 
-1. Abre `data/board.json`.
+1. Abre `src/data/board.json`.
 2. Localiza el array `notas`.
 3. Añade una nota nueva al principio si quieres priorizarla visualmente.
 4. Define un `id` descriptivo y estable, por ejemplo `crida-2026-cambio-hora`.
@@ -203,7 +203,7 @@ Pueden combinarse: imagen visible en la nota + enlace "Ver cartel completo" para
 ## ⚠️ Reglas y precauciones
 
 - Mantén siempre ambos idiomas. Aunque un texto sea casi idéntico, define `es` y `va`.
-- El contenido de cada nota sigue viviendo en `data/board.json`; solo el copy genérico del componente debe ir a `data/translations.json`.
+- El contenido de cada nota sigue viviendo en `src/data/board.json`; solo el copy genérico del componente debe ir a `src/data/translations.json`.
 - El contenido admite HTML simple como `<br>` o `<strong>`, pero úsalo con moderación.
 - No pegues HTML de terceros ni contenido no confiable: el renderizado actual inserta `contenido` como HTML en el DOM.
 - Las rutas de `adjuntos[].url` y `imagen.url` son relativas a la raíz del sitio público.
@@ -211,7 +211,7 @@ Pueden combinarse: imagen visible en la nota + enlace "Ver cartel completo" para
 - Si un archivo no existe, el enlace se generará igual, pero llevará a un 404.
 - Si quieres retirar una nota sin perder historial, usa `activo: false`.
 - Para que el JSON-LD `Schema.org Event` se inyecte correctamente desde la nota, mantén el patrón `📝 Cita<br> NombreEvento` y una fecha en formato `DD-MM-YYYY` (opcional `HH:mm`). El gulpfile extrae nombre, descripción y `startDate` desde ahí.
-- Las nuevas imágenes que añadas a `img/eventos/` (u otra subcarpeta de `img/`) se procesan automáticamente a WebP/AVIF al ejecutar `npm run build` (Sharp). Aun así, `imagen.url` debe apuntar al JPG/PNG original; el navegador descargará ese archivo.
+- Las nuevas imágenes que añadas a `src/img/eventos/` (u otra subcarpeta de `src/img/`) se procesan automáticamente a WebP/AVIF al ejecutar `npm run build` (Sharp). Aun así, `imagen.url` debe apuntar al JPG/PNG original; el navegador descargará ese archivo.
 
 ## ✅ Verificación recomendada
 
@@ -232,7 +232,7 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 `tests/board.e2e.spec.js` cubre:
 
-- carga de notas desde `data/board.json`
+- carga de notas desde `src/data/board.json`
 - presencia del contenedor `#notesBoard`
 - renderizado de notas con y sin adjuntos
 - filtrado de adjuntos inválidos y degradación a nota simple cuando corresponde
@@ -258,7 +258,7 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 ### Los adjuntos no se abren
 
 1. Comprueba que `url` apunta a una ruta pública real.
-2. Confirma que el archivo existe en `img/` o `pdf/` antes de hacer build.
+2. Confirma que el archivo existe en `src/img/` o `src/pdf/` antes de hacer build.
 
 ### La nota se renderiza sin adjuntos
 
@@ -275,7 +275,7 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 ### El botón "Ver imagen / Descargar" se ve raro en modo oscuro
 
-`scss/animaciones/_modo-oscuro.scss` define overrides específicos para `.board__file-link` (fondo `$gris-muy-oscuro`, borde sutil) y deja el `.board__file-name` con fondo transparente para que no aparezca una caja gris embebida en una tarjeta blanca. Si tocas estos estilos, mantén la coherencia.
+`src/scss/animaciones/_modo-oscuro.scss` define overrides específicos para `.board__file-link` (fondo `$gris-muy-oscuro`, borde sutil) y deja el `.board__file-name` con fondo transparente para que no aparezca una caja gris embebida en una tarjeta blanca. Si tocas estos estilos, mantén la coherencia.
 
 ## 🔗 Relacionado
 

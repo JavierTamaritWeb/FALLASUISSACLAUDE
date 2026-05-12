@@ -4,9 +4,9 @@ Esta guía documenta el sistema de estilos globales del proyecto, incluyendo el 
 
 ## 📁 Archivos fuente
 
-- `scss/abstracts/_globales.scss`
-- `scss/animaciones/_reveal.scss`
-- `js/scroll-reveal.js`
+- `src/scss/abstracts/_globales.scss`
+- `src/scss/animaciones/_reveal.scss`
+- `src/js/scroll-reveal.js`
 
 ## 🔄 Reset CSS
 
@@ -65,7 +65,7 @@ body {
 
 ### Comportamiento en Modo Oscuro
 
-En `scss/animaciones/_modo-oscuro.scss`:
+En `src/scss/animaciones/_modo-oscuro.scss`:
 
 1. El `body` cambia su color de fondo a negro (`v.$negro`).
 2. El pseudo-elemento `::before` (gradiente) cambia a `opacity: 0`.
@@ -111,7 +111,7 @@ El archivo `_globales.scss` se importa en `main.scss` después de `normalize`:
 @use 'abstracts/accessibility';
 ```
 
-**Importante:** No definir `background-image` en otros archivos para evitar conflictos. El modo oscuro define `background-image: none` en `scss/animaciones/_modo-oscuro.scss` para anular el gradiente.
+**Importante:** No definir `background-image` en otros archivos para evitar conflictos. El modo oscuro define `background-image: none` en `src/scss/animaciones/_modo-oscuro.scss` para anular el gradiente.
 
 ## ⚠️ Consideraciones
 
@@ -138,14 +138,14 @@ El proyecto usa un sistema de reveal on scroll **opt-in**. No se aplica de forma
 - `.reveal`: marca el bloque que entra en el sistema.
 - `.reveal--soft`: reduce distancia y duración para piezas más ligeras.
 - `.reveal--slow`: alarga la duración del efecto.
-- `.reveal-ready`: estado preparado; lo añade `js/scroll-reveal.js`.
+- `.reveal-ready`: estado preparado; lo añade `src/js/scroll-reveal.js`.
 - `.is-visible`: estado visible; lo gestiona el `IntersectionObserver`.
 - `data-reveal-once`: deja el bloque visible tras su primera entrada en viewport.
 - `data-reveal-skip`: excluye un nodo aunque comparta árbol con otros bloques reveal.
 
 ### Comportamiento
 
-- `js/scroll-reveal.js` usa `IntersectionObserver` con `threshold: 0.15` y `rootMargin: 0px 0px -10% 0px`.
+- `src/js/scroll-reveal.js` usa `IntersectionObserver` con `threshold: 0.15` y `rootMargin: 0px 0px -10% 0px`.
 - El reveal es repetible: al salir del viewport se quita `.is-visible`, salvo que exista `data-reveal-once`.
 - `html.has-scroll-reveal` activa el contrato visual en CSS para no dejar estados intermedios cuando el script no ha arrancado todavía.
 - Si el usuario tiene `prefers-reduced-motion: reduce`, el sistema fuerza todos los bloques a visibles y no deja contenido oculto esperando al observer.
@@ -160,8 +160,8 @@ window.scrollReveal.refresh(root);
 
 Actualmente ya lo hacen:
 
-- `js/board.js`
-- `js/calendario.js`
+- `src/js/board.js`
+- `src/js/calendario.js`
 
 ### Exclusiones importantes
 
@@ -170,11 +170,11 @@ No apliques `.reveal` de forma indiscriminada a zonas frágiles o con animación
 - `header`, navegación fija, footer, modales, backdrops, lightboxes u overlays
 - internals de Swiper
 - `#map` y sus capas internas
-- `.forecast-day`, porque `js/meteo.js` ya anima esas tarjetas
+- `.forecast-day`, porque `src/js/meteo.js` ya anima esas tarjetas
 
 ## 👗 Fondo de Sección Falla (Traje Regional)
 
-La sección `.falla` (página principal con información de la Falla) tiene un fondo con imagen de traje regional valenciano (`img/fondo_traje.png`).
+La sección `.falla` (página principal con información de la Falla) tiene un fondo con imagen de traje regional valenciano (`src/img/fondo_traje.png`).
 
 ### Implementación actual
 
@@ -212,9 +212,9 @@ body.modo-oscuro .falla::before {
 
 | Archivo | Contenido |
 | --- | --- |
-| `scss/components/_falla.scss` | Estilos modo claro |
-| `scss/animaciones/_modo-oscuro.scss` | Estilos modo oscuro |
-| `img/fondo_traje.png` | Imagen de fondo (traje regional) |
+| `src/scss/components/_falla.scss` | Estilos modo claro |
+| `src/scss/animaciones/_modo-oscuro.scss` | Estilos modo oscuro |
+| `src/img/fondo_traje.png` | Imagen de fondo (traje regional) |
 
 ## 🔄 Transición de Gradiente a Color Sólido
 
@@ -342,14 +342,14 @@ Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de
 
 | Archivo | Contenido |
 | --- | --- |
-| `scss/components/_banner-subvencion.scss` | Estilos base + transición filter |
-| `scss/animaciones/_modo-oscuro.scss` | Regla `filter: invert(1) hue-rotate(180deg)` |
+| `src/scss/components/_banner-subvencion.scss` | Estilos base + transición filter |
+| `src/scss/animaciones/_modo-oscuro.scss` | Regla `filter: invert(1) hue-rotate(180deg)` |
 | `index.html` | Markup accesible del banner con cierre y `<picture>` AVIF/WebP/PNG |
-| `js/banner-subvencion.js` | Apertura en cada carga de la home, cierre accesible y helpers de depuración |
+| `src/js/banner-subvencion.js` | Apertura en cada carga de la home, cierre accesible y helpers de depuración |
 
 ### Forzar reflow en JavaScript
 
-En `js/dark.js`, se fuerza un reflow antes de cambiar las clases de modo para asegurar que la transición se aplique correctamente en todos los navegadores:
+En `src/js/dark.js`, se fuerza un reflow antes de cambiar las clases de modo para asegurar que la transición se aplique correctamente en todos los navegadores:
 
 ```javascript
 if (wasDark) {
@@ -386,8 +386,8 @@ npm run test:e2e:full
 
 La web incluye una banda decorativa (`.frieze`) que se utiliza como separador visual o elemento de marca.
 
-- **Fuente:** `scss/base/_frieze.scss`
-- **Variables:** `scss/abstracts/_variables.scss`
+- **Fuente:** `src/scss/base/_frieze.scss`
+- **Variables:** `src/scss/abstracts/_variables.scss`
 
 ### Variables Clave
 
@@ -405,7 +405,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 La cenefa (`.frieze`) es un elemento decorativo que utiliza transiciones suaves para adaptarse al cambio de tema.
 
-- **Archivo fuente**: `scss/base/_frieze.scss`
+- **Archivo fuente**: `src/scss/base/_frieze.scss`
 - **Función**: Borde decorativo superior/inferior.
 
 ### Colores y Comportamiento

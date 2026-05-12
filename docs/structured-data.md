@@ -1,13 +1,13 @@
 # 🧩 Datos Estructurados y SEO Técnico
 
-Esta guía documenta el JSON-LD que vive dentro de las páginas HTML, los artefactos de apoyo de la carpeta `seo/` y la validación técnica que protege la colaboración con HOPE-INCLIVA.
+Esta guía documenta el JSON-LD que vive dentro de las páginas HTML, los artefactos de apoyo de la carpeta `src/seo/` y la validación técnica que protege la colaboración con HOPE-INCLIVA.
 
 ## 🎯 Alcance
 
 Esta guía cubre:
 
 - los bloques inline `application/ld+json` de `index.html` y `colaboraciones.html`
-- los JSON de apoyo en `seo/schema-organization.json` y `seo/advanced-schema-graph.json`
+- los JSON de apoyo en `src/seo/schema-organization.json` y `src/seo/advanced-schema-graph.json`
 - la coherencia entre metadatos `<meta>`, Open Graph y JSON-LD
 - la validación automatizada en `tests/hope-seo.e2e.spec.js`
 
@@ -17,8 +17,8 @@ Esta guía cubre:
 | -------- | ------- |
 | `index.html` | grafo principal de la home y referencia técnica a HOPE-INCLIVA |
 | `colaboraciones.html` | página específica de colaboración con `mainEntity` enlazando el nodo HOPE |
-| `seo/schema-organization.json` | asset de referencia para la organización |
-| `seo/advanced-schema-graph.json` | grafo extendido con organización, HOPE, evento y location |
+| `src/seo/schema-organization.json` | asset de referencia para la organización |
+| `src/seo/advanced-schema-graph.json` | grafo extendido con organización, HOPE, evento y location |
 | `tests/hope-seo.e2e.spec.js` | regresión del SEO técnico de HOPE |
 
 ## 🧱 Patrón actual por página
@@ -56,7 +56,7 @@ Reglas importantes:
 
 ### Eventos dinámicos del tablón: `index.html` y `eventos.html`
 
-Las dos páginas pueden incorporar nodos `Event` generados desde `data/board.json` durante el build.
+Las dos páginas pueden incorporar nodos `Event` generados desde `src/data/board.json` durante el build.
 
 Reglas importantes:
 
@@ -76,11 +76,11 @@ Para evitar romper el SEO técnico que ya está testado, mantén siempre estas c
 4. Si cambias el copy de metadatos, actualiza también el JSON-LD y viceversa.
 5. Si añades otro bloque JSON-LD en estas páginas, no desplaces el bloque principal sin revisar los tests y la lectura de crawlers.
 
-## 🗂 Assets de apoyo en `seo/`
+## 🗂 Assets de apoyo en `src/seo/`
 
-Los archivos JSON de `seo/` no sustituyen al JSON-LD inline de las páginas: sirven como referencia técnica y como parte del material SEO distribuido con el build.
+Los archivos JSON de `src/seo/` no sustituyen al JSON-LD inline de las páginas: sirven como referencia técnica y como parte del material SEO distribuido con el build.
 
-### `seo/schema-organization.json`
+### `src/seo/schema-organization.json`
 
 Útil para centralizar los datos base de la organización:
 
@@ -90,7 +90,7 @@ Los archivos JSON de `seo/` no sustituyen al JSON-LD inline de las páginas: sir
 - datos fundacionales
 - relación con HOPE y subjectOf
 
-### `seo/advanced-schema-graph.json`
+### `src/seo/advanced-schema-graph.json`
 
 Amplía el modelo con:
 
@@ -112,7 +112,7 @@ Antes de cerrar un cambio de SEO técnico o Schema.org:
 3. Revisa `canonical` y `hreflang` si cambia la URL o el tipo de página.
 4. No dupliques la misma relación HOPE con IDs distintos.
 5. Si tocas la colaboración, revisa home y `colaboraciones.html` como un conjunto.
-6. Si cambias campos compartidos de organización, revisa también `seo/schema-organization.json` y `seo/advanced-schema-graph.json`.
+6. Si cambias campos compartidos de organización, revisa también `src/seo/schema-organization.json` y `src/seo/advanced-schema-graph.json`.
 
 ## ✅ Validación recomendada
 

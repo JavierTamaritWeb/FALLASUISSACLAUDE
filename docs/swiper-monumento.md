@@ -11,8 +11,8 @@ Esta guía documenta el visor del monumento tal y como está implementado en mar
 
 ## Archivos implicados
 
-- JS de inicialización: `js/swiper.js`
-- SCSS del componente: `scss/animaciones/_swiper.scss`
+- JS de inicialización: `src/js/swiper.js`
+- SCSS del componente: `src/scss/animaciones/_swiper.scss`
 - HTML principal: `index.html`
 - HTML duplicado en interna: `lafalla.html`
 - Test E2E dedicado: `tests/monumento-swiper.e2e.spec.js`
@@ -51,25 +51,25 @@ El visor del monumento vive hoy en `index.html` y `lafalla.html` con la misma es
 
 El visor del monumento trabaja con 4 slides base no duplicadas:
 
-- `img/falla2026.avif`
-- `img/falla2026-Infantil.avif`
-- `img/falla2026-real.avif`
-- `img/falla2026-infantil-real.avif`
+- `src/img/falla2026.avif`
+- `src/img/falla2026-Infantil.avif`
+- `src/img/falla2026-real.avif`
+- `src/img/falla2026-infantil-real.avif`
 
 Convención actual de carga:
 
 - las 2 primeras imágenes usan carga prioritaria o eager
 - las 2 fotos reales usan `loading="lazy"`
 
-La tercera slide, la de `img/falla2026-real.avif`, lleva una clase extra:
+La tercera slide, la de `src/img/falla2026-real.avif`, lleva una clase extra:
 
 - `swiper-slide--monumento-real`
 
 Esa clase no forma parte del contrato general del componente. Es un hook visual temporal que existe únicamente para la foto real principal de 2026.
 
-## Relación con `js/swiper.js`
+## Relación con `src/js/swiper.js`
 
-El comportamiento base del visor no depende del hook temporal. Lo gobierna `js/swiper.js`:
+El comportamiento base del visor no depende del hook temporal. Lo gobierna `src/js/swiper.js`:
 
 - inicializa cada `.swiper` por instancia
 - activa `autoHeight` cuando el contenedor tiene `.swiper--autoheight`
@@ -99,7 +99,7 @@ La solución base del repositorio es:
 
 - `object-fit: contain` para evitar recorte
 - `swiper--autoheight` para adaptar la altura al slide activo
-- contención de ancho en `scss/animaciones/_swiper.scss`
+- contención de ancho en `src/scss/animaciones/_swiper.scss`
 - padding lateral por slide en tablet y desktop para reservar hueco a los botones
 
 ## Regla general de layout en tablet y desktop
@@ -123,7 +123,7 @@ Con 3rem como valor general, el botón previo podía llegar a invadir algunos p�
 
 ### Qué problema resuelve
 
-La foto real principal `img/falla2026-real.avif` se veía más pequeña de lo deseado en pantallas superiores a 768px. El usuario pidió que se viera más grande en ambos visores, pero sin romper ninguna de estas garantías:
+La foto real principal `src/img/falla2026-real.avif` se veía más pequeña de lo deseado en pantallas superiores a 768px. El usuario pidió que se viera más grande en ambos visores, pero sin romper ninguna de estas garantías:
 
 - sin solape con botones
 - sin overflow horizontal
@@ -198,7 +198,7 @@ Eso reduce el riesgo de que el resto del carrusel herede una geometría innecesa
 
 ### Por qué no debe tratarse como patrón genérico
 
-Este hook no describe una categoría abstracta de slides. Describe una necesidad concreta de `img/falla2026-real.avif` en el ejercicio actual.
+Este hook no describe una categoría abstracta de slides. Describe una necesidad concreta de `src/img/falla2026-real.avif` en el ejercicio actual.
 
 Por tanto:
 
@@ -262,7 +262,7 @@ npm run test:e2e:full
 
 ## Resumen operativo
 
-- `swiper--autoheight` y `js/swiper.js` son parte estable del componente
+- `swiper--autoheight` y `src/js/swiper.js` son parte estable del componente
 - `swiper-slide--monumento-real` es un hook temporal, específico de 2026
 - si las imágenes del próximo ejercicio cambian de proporción, hay que reevaluar ese hook antes de conservarlo o eliminarlo
 

@@ -112,7 +112,7 @@ GSC puede reportar este aviso cuando detecta páginas con contenido similar y la
 ### Reglas operativas
 
 - **NO añadir** `<link rel="canonical">` ni `<link rel="alternate" hreflang=...>` a mano en los HTML del root: el build los borra. Si necesitas tocarlos, edita `modifyHtmlStream` en `gulpfile.js`.
-- **NO usar** URLs con `?lang=ca` ni `?lang=es` como destino de hreflang: el cambio de idioma es client-side via `js/lang.js`.
+- **NO usar** URLs con `?lang=ca` ni `?lang=es` como destino de hreflang: el cambio de idioma es client-side via `src/js/lang.js`.
 - **Para una página nueva**: añadir DOS entradas al sitemap (ES y VA) con sus 3 alternates.
 
 ### Procedimiento tras un aviso de GSC

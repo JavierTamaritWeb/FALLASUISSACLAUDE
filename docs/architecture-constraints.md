@@ -26,8 +26,8 @@ Valores que no deben perderse:
 
 Archivos implicados:
 
-- `js/nav-menu.js`
-- `scss/layout/` y componentes del header
+- `src/js/nav-menu.js`
+- `src/scss/layout/` y componentes del header
 - [`navigation-bar.md`](./navigation-bar.md)
 
 Verificación recomendada:
@@ -69,7 +69,7 @@ CSS no anima bien una transición entre `linear-gradient(...)` y un color sólid
 
 Archivos implicados:
 
-- `scss/` de los bloques afectados
+- `src/scss/` de los bloques afectados
 - [`global-styles.md`](./global-styles.md)
 
 Verificación recomendada:
@@ -92,7 +92,7 @@ Qué debe quedar fuera:
 - modales, backdrops, lightboxes y overlays
 - internals de Swiper
 - `#map` y sus capas internas
-- `.forecast-day`, porque `js/meteo.js` ya anima esas tarjetas
+- `.forecast-day`, porque `src/js/meteo.js` ya anima esas tarjetas
 
 Contenido dinámico:
 
@@ -100,8 +100,8 @@ Si un bloque se re-renderiza por JavaScript tras la carga inicial, hay que llama
 
 Casos ya cubiertos:
 
-- `js/board.js`
-- `js/calendario.js`
+- `src/js/board.js`
+- `src/js/calendario.js`
 
 Accesibilidad:
 
@@ -109,10 +109,10 @@ Con `prefers-reduced-motion: reduce`, el sistema no puede dejar contenido oculto
 
 Archivos implicados:
 
-- `js/scroll-reveal.js`
-- `scss/animaciones/_reveal.scss`
-- `js/board.js`
-- `js/calendario.js`
+- `src/js/scroll-reveal.js`
+- `src/scss/animaciones/_reveal.scss`
+- `src/js/board.js`
+- `src/js/calendario.js`
 - HTML de las páginas que usan `.reveal`
 
 Verificación recomendada:
@@ -137,7 +137,7 @@ Añadir otra regla competidora en `_accessibility.scss` o en otro archivo reintr
 
 Archivos implicados:
 
-- `scss/components/_notificaciones.scss`
+- `src/scss/components/_notificaciones.scss`
 - posibles overrides de accesibilidad o layout del header
 
 Verificación recomendada:
@@ -222,7 +222,7 @@ Por qué:
 
 Archivos implicados:
 
-- `js/banner-subvencion.js`
+- `src/js/banner-subvencion.js`
 - HTML de la home
 - estilos del banner
 
@@ -258,7 +258,7 @@ Por qué:
 Archivos implicados:
 
 - `index.html`
-- `js/envia.js`
+- `src/js/envia.js`
 - `tests/modal-transition.e2e.spec.js`
 - `tests/modal-dark-to-light.e2e.spec.js`
 - `tests/modal-quieres-elements.e2e.spec.js`
@@ -296,7 +296,7 @@ Archivos implicados:
 
 - `index.html`
 - `lafalla.html`
-- `scss/animaciones/_swiper.scss`
+- `src/scss/animaciones/_swiper.scss`
 - `tests/monumento-swiper.e2e.spec.js`
 - [`swiper-monumento.md`](./swiper-monumento.md)
 - [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md)
@@ -336,11 +336,11 @@ Por qué:
 Archivos implicados:
 
 - `blog-somni.html`, `blog-anima.html` (páginas estáticas)
-- `scss/components/_blog.scss`
-- `scss/animaciones/_modo-oscuro.scss`
-- `scss/components/_image-optimization.scss`
-- `js/image-optimizer.js`
-- `js/accessibility.js`
+- `src/scss/components/_blog.scss`
+- `src/scss/animaciones/_modo-oscuro.scss`
+- `src/scss/components/_image-optimization.scss`
+- `src/js/image-optimizer.js`
+- `src/js/accessibility.js`
 
 Verificación recomendada:
 
@@ -379,10 +379,10 @@ grep -H "rel=\"canonical\"" dist/index.html dist/va/index.html
 Regla:
 
 1. **Los atributos `data-i18n*` deben PERMANECER en el HTML servido**: no eliminarlos del source ni filtrarlos en el build. Son la única forma de que el toggle a ES funcione client-side sin recargar.
-2. **No tocar `data/translations.json`** esperando que el HTML cambie sin rebuild: el pre-render genera el HTML en build time. Tras editar el JSON: `npm run build`.
-3. **Para añadir un nuevo atributo i18n** (p. ej. `data-i18n-aria-describedby`): hay que actualizar a la vez `prerenderTranslations` en `gulpfile.js` (array `attrMappings`) y la tabla de selectores en `js/lang.js → updateTranslations()`. Ambos deben procesar el mismo set, o el toggle runtime y el build se desincronizarán.
+2. **No tocar `src/data/translations.json`** esperando que el HTML cambie sin rebuild: el pre-render genera el HTML en build time. Tras editar el JSON: `npm run build`.
+3. **Para añadir un nuevo atributo i18n** (p. ej. `data-i18n-aria-describedby`): hay que actualizar a la vez `prerenderTranslations` en `gulpfile.js` (array `attrMappings`) y la tabla de selectores en `src/js/lang.js → updateTranslations()`. Ambos deben procesar el mismo set, o el toggle runtime y el build se desincronizarán.
 4. **Claves faltantes en VA**: el build NO se rompe; el HTML conserva el texto fuente como fallback y emite `[i18n-prerender] missing key: <clave> @ <archivo>`.
-5. **`data-i18n-dynamic`** (meteo): el pre-render lo skipea. NO añadir contenido pre-renderizado a estos elementos — los rellena `js/meteo.js` en runtime.
+5. **`data-i18n-dynamic`** (meteo): el pre-render lo skipea. NO añadir contenido pre-renderizado a estos elementos — los rellena `src/js/meteo.js` en runtime.
 6. **`data-i18n-format="paragraphs"`**: el pre-render genera `<p>` por bloque dividido por `\n+`, replicando exactamente `renderParagraphTranslation` de `lang.js`. Mantener simetría si se modifica uno de los dos.
 7. **Solo VA pre-renderiza, ES no**: ES queda byte-idéntico al source. Si en el futuro se quisiera pre-renderizar también ES (drift detection), añadir flag opt-in `PRERENDER_ES=1`.
 8. **Kill switch**: `DISABLE_I18N_PRERENDER=1 npm run build` desactiva el pre-render sin revertir el commit.
@@ -395,8 +395,8 @@ Por qué:
 Archivos implicados:
 
 - `gulpfile.js → prerenderTranslations()`
-- `js/lang.js → updateTranslations()`
-- `data/translations.json`
+- `src/js/lang.js → updateTranslations()`
+- `src/data/translations.json`
 - `tests/i18n-prerender.e2e.spec.js`
 - [`i18n-translations.md`](./i18n-translations.md)
 
