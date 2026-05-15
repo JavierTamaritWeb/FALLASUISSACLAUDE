@@ -1,5 +1,6 @@
 # robots.txt para https://fallasuissa.es
 User-agent: *
+Content-Signal: search=yes, ai-train=yes, ai-input=yes
 Disallow: /admin/
 Disallow: /cgi-bin/
 Disallow: /src/

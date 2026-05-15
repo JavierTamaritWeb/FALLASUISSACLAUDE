@@ -1,0 +1,59 @@
+{
+  "$schema": "https://agentskills.io/schemas/v0.2.0/index.json",
+  "version": "0.2.0",
+  "publisher": {
+    "name": "Falla Suïssa - L'Alqueria del Favero",
+    "url": "https://fallasuissa.es/"
+  },
+  "updated": "2026-05-15",
+  "skills": [
+    {
+      "name": "falla-discovery",
+      "type": "data",
+      "description": "Metadata de descubrimiento (idiomas, branding, social, ubicación, categorías) de la Falla Suïssa.",
+      "url": "https://fallasuissa.es/ai-discovery.json",
+      "contentType": "application/json",
+      "sha256": "3310b2366559277548e22cba6eec590cc06e5d2b6665d4a0344a9df98c94366b"
+    },
+    {
+      "name": "ai-context",
+      "type": "document",
+      "description": "Guía de contexto en Markdown para asistentes de IA sobre la Falla, las Fallas y el sitio web.",
+      "url": "https://fallasuissa.es/seo/ai-training-data.md",
+      "contentType": "text/markdown",
+      "sha256": "eabc524cd2e54cd4cf2f3ba283bbfe1e7a8d1585593e61351673df90f5dd8a8f"
+    },
+    {
+      "name": "events-board",
+      "type": "data",
+      "description": "Tablón de avisos y citas vigentes (notas con fecha, hora y ubicación) de Falla Suïssa.",
+      "url": "https://fallasuissa.es/data/board.json",
+      "contentType": "application/json",
+      "sha256": "7ca766facde90230e4ededaab54e6c89c080137495ef8c7f88c83e74dc14da3e"
+    },
+    {
+      "name": "events-list",
+      "type": "data",
+      "description": "Listado de eventos del ejercicio fallero (presentaciones, mascletàs, ofrenda, etc.).",
+      "url": "https://fallasuissa.es/data/eventos.json",
+      "contentType": "application/json",
+      "sha256": "9a1a0e2836286680cbfb5bac712eeeebaf5025b595f5809fde8432fce2983b7e"
+    },
+    {
+      "name": "calendar-data",
+      "type": "data",
+      "description": "Datos del calendario anual con marcado de hitos falleros.",
+      "url": "https://fallasuissa.es/data/calendarData.json",
+      "contentType": "application/json",
+      "sha256": "9a4459508ef2fe7cddd42846a51c8f6026ecc1b66c9c83159134d6aa3cb27c8b"
+    },
+    {
+      "name": "structured-data",
+      "type": "data",
+      "description": "Grafo Schema.org enriquecido de la organización, eventos y contenido cultural.",
+      "url": "https://fallasuissa.es/seo/ai-enhanced-schema.json",
+      "contentType": "application/ld+json",
+      "sha256": "8735b4f59f83ad3bf4760426d631f97fa483347b4db5e8f92673650fcf8db8db"
+    }
+  ]
+}

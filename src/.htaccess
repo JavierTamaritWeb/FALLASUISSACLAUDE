@@ -93,7 +93,28 @@ RewriteRule ^ https://fallasuissa.es%{REQUEST_URI} [R=301,L]
     
     # Permissions Policy
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # =======================================================================
+    # AGENT-READY: Link headers (RFC 8288) en respuestas HTML
+    # Apunta a /.well-known/api-catalog (RFC 9727) y al índice Agent Skills v0.2
+    # =======================================================================
+    <FilesMatch "\.html$">
+        Header set Link "</.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </.well-known/agent-skills/index.json>; rel=\"agent-skills\"; type=\"application/json\", </ai-discovery.json>; rel=\"describedby\"; type=\"application/json\""
+    </FilesMatch>
+
+    # Content-Type para Markdown (negociación de contenido text/markdown)
+    <FilesMatch "\.md$">
+        Header set Content-Type "text/markdown; charset=utf-8"
+        Header set Vary "Accept"
+    </FilesMatch>
 </IfModule>
+
+# =======================================================================
+# AGENT-READY: MIME para /.well-known/api-catalog (RFC 9727, sin extensión)
+# =======================================================================
+<Files "api-catalog">
+    ForceType application/linkset+json
+</Files>
 
 # =======================================================================
 # REDIRECCIONES Y URLs AMIGABLES
@@ -108,7 +129,18 @@ RewriteRule ^ https://fallasuissa.es%{REQUEST_URI} [R=301,L]
     # Redirección www a no-www
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
     RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
-    
+
+    # Negociación de contenido Markdown (RFC 7231)
+    # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
+    RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+    RewriteRule ^$ /seo/ai-training-data.md [L]
+
+    # Si existe versión .md junto al .html, servirla cuando se pide markdown
+    RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME}.md -f
+    RewriteRule ^(.*)$ $1.md [L]
+
     # Añadir .html si no existe
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d

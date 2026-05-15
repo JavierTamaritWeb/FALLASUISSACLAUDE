@@ -44,7 +44,8 @@ const paths = {
     ],
     dest: 'dist'
   },
-  seo: { src: 'src/seo/**/*', dest: 'dist/seo' }
+  seo: { src: 'src/seo/**/*', dest: 'dist/seo' },
+  wellKnown: { src: 'src/.well-known/**/*', dest: 'dist/.well-known' }
 };
 
 // ===================================
@@ -687,6 +688,106 @@ function faviconTask() {
   return streamToPromise(src(paths.favicon.src, { encoding: false, allowEmpty: true }).pipe(dest(paths.favicon.dest)));
 }
 
+// =======================================================================
+// AGENT-READY: copia /.well-known/ y genera agent-skills/index.json
+// (RFC 9727 api-catalog + Agent Skills Discovery v0.2.0)
+// Debe ejecutarse DESPUÉS de dataTask, rootFilesTask y seoTask para que
+// los archivos referenciados existan en dist/ y se pueda calcular su sha256.
+// =======================================================================
+async function wellKnownTask() {
+  // 1) Copia api-catalog y cualquier otro contenido estático bajo src/.well-known/
+  await streamToPromise(
+    src(paths.wellKnown.src, { encoding: false, dot: true, allowEmpty: true })
+      .pipe(dest(paths.wellKnown.dest))
+  );
+
+  // 2) Define las skills (recursos read-only que un agente puede consumir)
+  const SITE_BASE = 'https://fallasuissa.es';
+  const skills = [
+    {
+      name: 'falla-discovery',
+      type: 'data',
+      description: 'Metadata de descubrimiento (idiomas, branding, social, ubicación, categorías) de la Falla Suïssa.',
+      url: `${SITE_BASE}/ai-discovery.json`,
+      distPath: 'dist/ai-discovery.json',
+      contentType: 'application/json'
+    },
+    {
+      name: 'ai-context',
+      type: 'document',
+      description: 'Guía de contexto en Markdown para asistentes de IA sobre la Falla, las Fallas y el sitio web.',
+      url: `${SITE_BASE}/seo/ai-training-data.md`,
+      distPath: 'dist/seo/ai-training-data.md',
+      contentType: 'text/markdown'
+    },
+    {
+      name: 'events-board',
+      type: 'data',
+      description: 'Tablón de avisos y citas vigentes (notas con fecha, hora y ubicación) de Falla Suïssa.',
+      url: `${SITE_BASE}/data/board.json`,
+      distPath: 'dist/data/board.json',
+      contentType: 'application/json'
+    },
+    {
+      name: 'events-list',
+      type: 'data',
+      description: 'Listado de eventos del ejercicio fallero (presentaciones, mascletàs, ofrenda, etc.).',
+      url: `${SITE_BASE}/data/eventos.json`,
+      distPath: 'dist/data/eventos.json',
+      contentType: 'application/json'
+    },
+    {
+      name: 'calendar-data',
+      type: 'data',
+      description: 'Datos del calendario anual con marcado de hitos falleros.',
+      url: `${SITE_BASE}/data/calendarData.json`,
+      distPath: 'dist/data/calendarData.json',
+      contentType: 'application/json'
+    },
+    {
+      name: 'structured-data',
+      type: 'data',
+      description: 'Grafo Schema.org enriquecido de la organización, eventos y contenido cultural.',
+      url: `${SITE_BASE}/seo/ai-enhanced-schema.json`,
+      distPath: 'dist/seo/ai-enhanced-schema.json',
+      contentType: 'application/ld+json'
+    }
+  ];
+
+  // 3) Calcula sha256 de cada recurso en dist/
+  const resolvedSkills = [];
+  for (const skill of skills) {
+    try {
+      const content = await fs.readFile(path.join(__dirname, skill.distPath));
+      const sha256 = crypto.createHash('sha256').update(content).digest('hex');
+      const { distPath, ...publicSkill } = skill;
+      resolvedSkills.push({ ...publicSkill, sha256 });
+    } catch (err) {
+      if (err && err.code === 'ENOENT') {
+        console.warn(`[agent-skills] omitida skill "${skill.name}": ${skill.distPath} no existe todavía.`);
+        continue;
+      }
+      throw err;
+    }
+  }
+
+  // 4) Escribe el índice
+  const index = {
+    $schema: 'https://agentskills.io/schemas/v0.2.0/index.json',
+    version: '0.2.0',
+    publisher: {
+      name: "Falla Suïssa - L'Alqueria del Favero",
+      url: `${SITE_BASE}/`
+    },
+    updated: formatLocalISODate(new Date()),
+    skills: resolvedSkills
+  };
+
+  const outPath = path.join(__dirname, 'dist', '.well-known', 'agent-skills', 'index.json');
+  await ensureDirForFile(outPath);
+  await fs.writeFile(outPath, JSON.stringify(index, null, 2) + '\n', 'utf8');
+}
+
 // Images - Copia todo img/ + genera WebP/AVIF (solo png/jpg/jpeg) incremental por mtime
 async function imagesTask() {
   // 1) Copiar todos los assets de img/ (incluye svg, gif, ico, webmanifest, webp/avif existentes, etc.)
@@ -852,6 +953,7 @@ function devTask(done) {
   watch(paths.html.src, htmlTask);
   watch(paths.root.src, series(rootFilesTask, updateDistSitemapsLastmod));
   watch(paths.seo.src, seoTask);
+  watch(paths.wellKnown.src, wellKnownTask);
   done();
 }
 
@@ -866,6 +968,7 @@ const build = series(
   htmlTask,
   rootFilesTask,
   seoTask,
+  wellKnownTask,
   updateDistSitemapsLastmod
 );
 
@@ -882,6 +985,7 @@ exports.html = htmlTask;
 exports.rootFiles = rootFilesTask;
 exports.seo = seoTask;
 exports.seoDist = seoTask;
+exports.wellKnown = wellKnownTask;
 exports.updateDistSitemapsLastmod = updateDistSitemapsLastmod;
 exports.dev = devTask;
 exports.build = build;

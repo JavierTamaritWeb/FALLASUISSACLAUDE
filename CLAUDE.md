@@ -2,9 +2,16 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.7.0
+**Version:** 4.7.1
 **Last Updated:** 15 de mayo de 2026
 
+> 4.7.1 — Agent-readiness pass. Cinco mejoras coordinadas para que el sitio se publique correctamente ante agentes IA y crawlers que siguen los nuevos estándares (RFC 8288, RFC 9727, Agent Skills v0.2, contentsignals.org, negociación markdown):
+> 1. `src/robots.txt` declara `Content-Signal: search=yes, ai-train=yes, ai-input=yes` (sitio cultural público, busca exposición).
+> 2. `src/.htaccess` emite `Link:` header en respuestas `*.html` apuntando a `/.well-known/api-catalog`, `/.well-known/agent-skills/index.json` y `/ai-discovery.json` (`describedby`).
+> 3. Negociación de contenido Markdown: cuando `Accept: text/markdown` apunta a `/`, Apache reescribe a `/seo/ai-training-data.md`; los `.md` reciben `Content-Type: text/markdown; charset=utf-8` + `Vary: Accept`.
+> 4. Nuevo `src/.well-known/api-catalog` (RFC 9727, `application/linkset+json`) lista los JSON endpoints (board, eventos, calendario, traducciones, sitemap-index) con sus `service-doc`/`service-desc`. `<Files "api-catalog"> ForceType application/linkset+json </Files>` resuelve la falta de extensión.
+> 5. Nueva tarea Gulp `wellKnownTask`: copia `src/.well-known/**` a `dist/.well-known/` y genera `dist/.well-known/agent-skills/index.json` (Agent Skills Discovery v0.2.0) con `sha256` calculado a partir del contenido real en `dist/`. La task se encadena en el build series **después** de `dataTask`/`rootFilesTask`/`seoTask` para que los archivos referenciados existan. Si un recurso falta, la skill se omite con warning (no rompe el build).
+>
 > 4.7.0 — Fix condición de carrera en `calendario.html`: `#lista-anuncios` y `#descripcion-eventos-mes` tenían `data-i18n="..."` en lugar de `data-i18n-aria-label="..."`. `lang.js` sobreescribía su `textContent` con las cadenas de traducción ("Lista de anuncios", "Detalles del mes"), borrando los items renderizados dinámicamente por `calendario.js`. Cambiado a `data-i18n-aria-label` para que solo actualice el atributo `aria-label` sin destruir el contenido interior. Test guardia: `tests/reveal-on-scroll.e2e.spec.js` ("calendario.html vuelve a registrar tarjetas tras filtrar y limpiar").
 >
 > 4.6.24 — Reestructuración del repositorio bajo `src/`. Todos los archivos source (las 7 carpetas `src/scss/`, `src/js/`, `src/data/`, `src/img/`, `src/pdf/`, `src/seo/`, `src/favicon_io/`; los 27 HTML; y los archivos sueltos `manifest.json`, `robots*.txt`, `sitemap*.xml`, `sw.js`, `.htaccess`, `ai-discovery.json`) se han movido a `src/` con `git mv` (historial preservado). La raíz queda con tooling y configs (`package.json`, `gulpfile.js`, `playwright*.config.js`, `tests/`, `scripts/`, `docs/`, `dist/`). Paths actualizados en `gulpfile.js`, `scripts/generate-og-image.mjs`, `scripts/refactor-scss-namespaces.mjs`, `tests/scss-guardrails.e2e.spec.js`. `dist/` sigue siendo byte-equivalente al anterior; ninguna URL pública ni el SW cambian.
@@ -142,6 +149,14 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
 ## Architecture Decisions & Constraints
 
 These constraints arise from past bugs. Violating them will reintroduce issues:
+
+- **Agent-readiness — `/.well-known/` y orden del build (v4.7.1):** El soporte agent-ready vive en tres sitios coordinados; cambiar cualquiera sin tocar los otros rompe el descubrimiento.
+  1. `src/.htaccess` declara el `Link:` header sobre `*.html`. La lista de relaciones (`api-catalog`, `agent-skills`, `describedby`) debe coincidir con los archivos servidos bajo `/.well-known/` y con `/ai-discovery.json`. Si añades una relación nueva (p. ej. `mcp-server`), súmala al `Header set Link` y publica el recurso al mismo tiempo.
+  2. `/.well-known/api-catalog` se sirve **sin extensión** (RFC 9727). Apache no infiere su MIME; `<Files "api-catalog"> ForceType application/linkset+json </Files>` se encarga. NO renombres el archivo a `api-catalog.json` ni borres el bloque `<Files>` o el catálogo se servirá como `text/html` y los agentes lo descartarán.
+  3. La task `wellKnownTask` en `gulpfile.js` se ejecuta **después** de `dataTask`, `rootFilesTask` y `seoTask` porque calcula `sha256` de archivos en `dist/`. NO la muevas antes en el series — quedarían skills sin hash. Si una skill apunta a un archivo que aún no existe en `dist/`, se omite con warning (no falla el build).
+  4. Para añadir o quitar skills: edita el array `skills` en `wellKnownTask` (gulpfile). El `sha256` se recalcula en cada build, por eso es estable contra cambios de contenido. NO escribas a mano `dist/.well-known/agent-skills/index.json` — lo sobrescribe el build.
+  5. La negociación de contenido Markdown solo afecta a `/` (sirve `seo/ai-training-data.md` cuando `Accept: text/markdown`) y a páginas con un `.md` hermano. Si quieres versiones markdown por página, genera `.md` junto a cada `.html` durante el build y la regla de `.htaccess` los servirá automáticamente.
+  6. `Content-Signal` en `robots.txt` está en `yes/yes/yes` porque el sitio es contenido cultural público y persigue exposición. Si en algún momento se quisiera bloquear training (`ai-train=no`), edita esa línea — el resto del agent-readiness sigue funcionando.
 
 - **Pre-render i18n VA en build (v4.6.23):** El pipeline pre-renderiza valenciano en `gulpfile.js → prerenderTranslations()`. Reglas:
   1. **Los atributos `data-i18n*` deben PERMANECER en el HTML servido**: NO eliminarlos del HTML del root ni filtrarlos en el build. Son la única forma de que el toggle a ES funcione client-side sin recargar.

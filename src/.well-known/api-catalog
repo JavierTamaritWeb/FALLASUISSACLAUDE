@@ -1,0 +1,59 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://fallasuissa.es/",
+      "service-desc": [
+        { "href": "https://fallasuissa.es/ai-discovery.json", "type": "application/json" }
+      ],
+      "service-doc": [
+        { "href": "https://fallasuissa.es/", "type": "text/html" },
+        { "href": "https://fallasuissa.es/seo/ai-training-data.md", "type": "text/markdown" }
+      ],
+      "service-meta": [
+        { "href": "https://fallasuissa.es/seo/ai-enhanced-schema.json", "type": "application/ld+json" }
+      ],
+      "status": [
+        { "href": "https://fallasuissa.es/", "type": "text/html" }
+      ]
+    },
+    {
+      "anchor": "https://fallasuissa.es/data/board.json",
+      "service-desc": [
+        { "href": "https://fallasuissa.es/data/board.json", "type": "application/json" }
+      ],
+      "service-doc": [
+        { "href": "https://fallasuissa.es/eventos.html", "type": "text/html" }
+      ]
+    },
+    {
+      "anchor": "https://fallasuissa.es/data/eventos.json",
+      "service-desc": [
+        { "href": "https://fallasuissa.es/data/eventos.json", "type": "application/json" }
+      ],
+      "service-doc": [
+        { "href": "https://fallasuissa.es/eventos.html", "type": "text/html" }
+      ]
+    },
+    {
+      "anchor": "https://fallasuissa.es/data/calendarData.json",
+      "service-desc": [
+        { "href": "https://fallasuissa.es/data/calendarData.json", "type": "application/json" }
+      ],
+      "service-doc": [
+        { "href": "https://fallasuissa.es/calendario.html", "type": "text/html" }
+      ]
+    },
+    {
+      "anchor": "https://fallasuissa.es/data/translations.json",
+      "service-desc": [
+        { "href": "https://fallasuissa.es/data/translations.json", "type": "application/json" }
+      ]
+    },
+    {
+      "anchor": "https://fallasuissa.es/sitemap-index.xml",
+      "service-desc": [
+        { "href": "https://fallasuissa.es/sitemap-index.xml", "type": "application/xml" }
+      ]
+    }
+  ]
+}
