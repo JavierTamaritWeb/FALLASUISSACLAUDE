@@ -2,9 +2,11 @@
 
 This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
-**Version:** 4.6.24
-**Last Updated:** 12 de mayo de 2026
+**Version:** 4.7.0
+**Last Updated:** 15 de mayo de 2026
 
+> 4.7.0 — Fix condición de carrera en `calendario.html`: `#lista-anuncios` y `#descripcion-eventos-mes` tenían `data-i18n="..."` en lugar de `data-i18n-aria-label="..."`. `lang.js` sobreescribía su `textContent` con las cadenas de traducción ("Lista de anuncios", "Detalles del mes"), borrando los items renderizados dinámicamente por `calendario.js`. Cambiado a `data-i18n-aria-label` para que solo actualice el atributo `aria-label` sin destruir el contenido interior. Test guardia: `tests/reveal-on-scroll.e2e.spec.js` ("calendario.html vuelve a registrar tarjetas tras filtrar y limpiar").
+>
 > 4.6.24 — Reestructuración del repositorio bajo `src/`. Todos los archivos source (las 7 carpetas `src/scss/`, `src/js/`, `src/data/`, `src/img/`, `src/pdf/`, `src/seo/`, `src/favicon_io/`; los 27 HTML; y los archivos sueltos `manifest.json`, `robots*.txt`, `sitemap*.xml`, `sw.js`, `.htaccess`, `ai-discovery.json`) se han movido a `src/` con `git mv` (historial preservado). La raíz queda con tooling y configs (`package.json`, `gulpfile.js`, `playwright*.config.js`, `tests/`, `scripts/`, `docs/`, `dist/`). Paths actualizados en `gulpfile.js`, `scripts/generate-og-image.mjs`, `scripts/refactor-scss-namespaces.mjs`, `tests/scss-guardrails.e2e.spec.js`. `dist/` sigue siendo byte-equivalente al anterior; ninguna URL pública ni el SW cambian.
 >
 > 4.6.23 — Pre-render de traducciones VA en build time. `gulpfile.js` añade `prerenderTranslations()` que sustituye contenido y atributos `data-i18n`, `data-i18n-aria-label`, `data-i18n-placeholder`, `data-i18n-alt` y `data-i18n-title` por el valor de `translations.va` antes de servir `dist/va/*.html`. Los atributos `data-i18n*` permanecen en el HTML para que el toggle ES/VA en runtime siga funcionando. `src/js/lang.js` extendido para procesar también `data-i18n-alt` y `data-i18n-title` en runtime (antes los ignoraba). Kill switch `DISABLE_I18N_PRERENDER=1 npm run build` desactiva el pre-render sin revertir. ES queda intacto. Resultado SEO: `dist/index.html` y `dist/va/index.html` ahora divergen en contenido (no solo en atributo `lang`), eliminando la señal de duplicado y permitiendo indexación valenciana real.
@@ -135,7 +137,7 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.6.24).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.7.0).
 
 ## Architecture Decisions & Constraints
 
