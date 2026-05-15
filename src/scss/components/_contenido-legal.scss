@@ -118,3 +118,360 @@
         font-weight: 500;
     }
 }
+
+// Página de autorización de imagen (adultos y menores).
+// Reutiliza .contenido-legal como contenedor y añade el formulario rellenable
+// + cabecera de impresión + @media print para una salida A4 limpia.
+//
+// Truco de impresión: el contenido va envuelto en <table><thead/><tbody/>.
+// En pantalla la tabla se colapsa a bloques (no parece tabla) y el thead
+// queda oculto. En @media print el thead pasa a `table-header-group` y los
+// navegadores lo repiten automáticamente en cada página impresa.
+.autorizacion-imagen {
+    // Cabecera con datos de la asociación que solo se ve al imprimir
+    &__cabecera-impresion {
+        display: none;
+    }
+
+    &__hoja,
+    &__hoja > tbody,
+    &__hoja > tbody > tr,
+    &__hoja > tbody > tr > td {
+        display: block;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background: transparent;
+    }
+
+    &__hoja-thead {
+        display: none; // oculto en pantalla; en @media print pasa a header-group
+    }
+
+    &__subtitulo {
+        font-size: 1.15rem;
+        font-style: italic;
+        color: #555;
+        margin-bottom: 1.5rem;
+    }
+
+    &__nota-final {
+        margin-top: 2rem;
+        font-style: italic;
+        color: #555;
+    }
+
+    &__acciones {
+        margin-top: 2.5rem;
+        text-align: center;
+    }
+}
+
+.autorizacion-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 2rem;
+    margin: 1rem 0 2rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+
+    &__campo {
+        display: flex;
+        flex-direction: column;
+
+        &--ancho {
+            grid-column: 1 / -1;
+        }
+    }
+
+    &__label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+
+        &--firma {
+            margin-top: 0.4rem;
+            text-align: center;
+            font-weight: 500;
+            color: #555;
+        }
+    }
+
+    &__linea {
+        display: block;
+        width: 100%;
+        min-height: 1.8rem;
+        border-bottom: 1px solid #333;
+    }
+
+    &__casilla {
+        display: inline-block;
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 1.5px solid #333;
+        border-radius: 2px;
+        vertical-align: middle;
+        margin-right: 0.4rem;
+    }
+
+    &__casillas-lista {
+        list-style: none !important;
+        margin: 0.5rem 0 1.5rem !important;
+        padding-left: 0 !important;
+
+        li {
+            list-style: none !important;
+            margin-bottom: 0.6rem;
+        }
+    }
+
+    // Tabla de finalidades + Autorizo/No autorizo
+    &__tabla {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0 2rem;
+        font-size: 1rem;
+
+        th,
+        td {
+            border: 1px solid #999;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #fdf2e9;
+            color: #333;
+            font-weight: 600;
+        }
+    }
+
+    &__celda-casilla {
+        width: 5rem;
+        text-align: center !important;
+    }
+
+    // Bloque de firma manuscrita
+    &--firma {
+        grid-template-columns: 1fr 1fr;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__firma {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    &__firma-caja {
+        display: block;
+        width: 100%;
+        min-height: 4rem;
+        border: 1px solid #333;
+        border-radius: 4px;
+        background-color: #fff;
+    }
+
+    &__boton-imprimir {
+        // Hereda los estilos globales de .boton; aquí solo aseguramos
+        // que se oculte al imprimir.
+        display: inline-block;
+    }
+}
+
+// Salida de impresión optimizada (A4) para los formularios de autorización
+@media print {
+    @page {
+        size: A4;
+        margin: 1.5cm;
+    }
+
+    body {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    // Ocultar cromo de la web: header, footer, banners, frisos
+    .header-inner,
+    .footer,
+    .frieze,
+    .cookie-banner,
+    .banner-subvencion,
+    #notificacion {
+        display: none !important;
+    }
+
+    .autorizacion-form__boton-imprimir,
+    .autorizacion-imagen__acciones {
+        display: none !important;
+    }
+
+    .contenido-legal {
+        background: #fff !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+
+        .contenedor {
+            background: #fff !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            max-width: none !important;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #000 !important;
+        }
+
+        h2 {
+            border-bottom: 1.5px solid #000 !important;
+            page-break-after: avoid;
+        }
+
+        p,
+        li {
+            color: #000 !important;
+        }
+
+        a {
+            color: #000 !important;
+            text-decoration: underline !important;
+        }
+
+        // La fecha de "última actualización" deja de ser destacada en impresión
+        p:first-of-type {
+            background-color: transparent !important;
+            border-left: 0 !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            margin-bottom: 1rem !important;
+            font-style: italic;
+        }
+    }
+
+    // Tabla externa: estructura repetible de cabecera por página.
+    // El navegador repite el contenido de `thead` con `table-header-group`
+    // automáticamente en cada salto de página.
+    .autorizacion-imagen__hoja {
+        display: table !important;
+        width: 100% !important;
+        border-collapse: collapse;
+    }
+
+    .autorizacion-imagen__hoja-thead {
+        display: table-header-group !important;
+    }
+
+    .autorizacion-imagen__hoja > tbody {
+        display: table-row-group !important;
+    }
+
+    .autorizacion-imagen__hoja > thead > tr,
+    .autorizacion-imagen__hoja > tbody > tr {
+        display: table-row !important;
+    }
+
+    .autorizacion-imagen__hoja > thead > tr > td,
+    .autorizacion-imagen__hoja > tbody > tr > td {
+        display: table-cell !important;
+        padding: 0 !important;
+        border: 0 !important;
+        vertical-align: top;
+    }
+
+    // Cabecera de impresión con escudo + datos de la asociación.
+    // Usamos display:table en lugar de flex porque los motores de impresión
+    // (Chrome/Safari "Imprimir → Guardar PDF") respetan width en table-cell
+    // mucho mejor que en flex-items.
+    .autorizacion-imagen__cabecera-impresion {
+        display: table !important;
+        width: 100% !important;
+        table-layout: fixed;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-bottom: 1px solid #000;
+        padding-bottom: 0.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .autorizacion-imagen__cabecera-escudo-wrap {
+        display: table-cell !important;
+        width: 2.5cm !important;
+        vertical-align: middle;
+        padding-right: 0.6rem;
+        box-sizing: border-box;
+    }
+
+    .autorizacion-imagen__cabecera-escudo {
+        display: block !important;
+        width: 2.5cm !important;
+        max-width: 2.5cm !important;
+        height: auto !important;
+        max-height: 2.5cm !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .autorizacion-imagen__cabecera-texto {
+        display: table-cell !important;
+        vertical-align: middle;
+        width: auto;
+    }
+
+    .autorizacion-imagen__cabecera-titulo {
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem !important;
+        line-height: 1.2;
+    }
+
+    .autorizacion-imagen__cabecera-meta {
+        font-size: 0.75rem !important;
+        line-height: 1.3;
+        margin: 0 !important;
+        word-break: break-word;
+    }
+
+    // Las URLs entre paréntesis (que añade un @media print global tras
+    // cada enlace) no tienen sentido en un formulario imprimible y rompen
+    // el layout. Las suprimimos en todo el documento de autorización.
+    .autorizacion-imagen a[href]::after,
+    .autorizacion-imagen a[href]:after {
+        content: "" !important;
+        display: none !important;
+    }
+
+    // Líneas/casillas/firmas: forzar tinta negra para que se imprima
+    .autorizacion-form__linea,
+    .autorizacion-form__casilla,
+    .autorizacion-form__firma-caja,
+    .autorizacion-form__tabla th,
+    .autorizacion-form__tabla td {
+        border-color: #000 !important;
+    }
+
+    .autorizacion-form__tabla th {
+        background-color: #eee !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    // Evitar cortes de página dentro de bloques críticos
+    .autorizacion-form,
+    .autorizacion-form__tabla,
+    .autorizacion-form__firma {
+        page-break-inside: avoid;
+    }
+}

@@ -73,6 +73,13 @@ img {
   max-height: 4rem !important;
   object-fit: contain !important;
   opacity: 1 !important; // Siempre completamente visible
+
+  @media (min-width: 768px) {
+    width: 6rem !important;
+    height: 6rem !important;
+    max-width: 6rem !important;
+    max-height: 6rem !important;
+  }
 }
 
 // ---------------------------------------------------------
@@ -101,6 +108,13 @@ img {
   max-height: 6rem !important;
   object-fit: contain !important;
   opacity: 1 !important;
+
+  @media (min-width: 768px) {
+    width: 9rem !important;
+    height: 9rem !important;
+    max-width: 9rem !important;
+    max-height: 9rem !important;
+  }
 }
 
 .galerias__camara {

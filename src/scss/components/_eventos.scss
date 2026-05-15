@@ -23,7 +23,10 @@
     color: v.$primary-color;
     @media (max-width:768px) {
       font-size: v.$font-size-medium;
-      
+
+    }
+    @media (min-width: 768px) {
+      font-size: v.$font-size-large;
     }
   }
   &__titulo-calendario {
