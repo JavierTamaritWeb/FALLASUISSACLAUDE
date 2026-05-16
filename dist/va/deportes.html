@@ -78,7 +78,7 @@
   <link rel="manifest" href="/manifest.json">
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=2594607df95a">
+  <link rel="stylesheet" href="css/main.css?v=cadc75900cad">
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
   <link rel="canonical" href="https://fallasuissa.es/va/deportes.html">
@@ -153,6 +153,16 @@
           </ul>
         </aside>
 
+        <!-- Tablón de anuncios JCF (multi-instancia: ver src/js/board.js) -->
+        <div class="deportes__board-wrapper reveal reveal--soft" aria-labelledby="deportes-tablon-titulo">
+          <h2 id="deportes-tablon-titulo" class="tablon-titulo deportes__tablon-titulo" data-i18n="deportes.tablonTitulo">Tauler d'Anuncis</h2>
+          <div class="marco-tablon deportes__marco-tablon">
+            <div class="board" id="sportsBoard"
+                 data-board-source="data/sports-board.json"
+                 data-i18n-aria-label="deportes.tablonAriaLabel" aria-label="Tauler d'anuncis esportius JCF"></div>
+          </div>
+        </div>
+
         <div class="deportes__doc-wrapper reveal" role="region" data-i18n-aria-label="deportes.regionLabel" aria-label="Document d'activitats esportives">
           <div class="deportes__doc-skeleton" aria-hidden="true"></div>
           <iframe class="deportes__doc"
@@ -223,10 +233,11 @@
       <a href="cookies.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.cookies">Cookies</a>
     </nav>
   </footer>
-  <script src="js/dark.js?v=2594607df95a"></script>
-  <script src="js/lang.js?v=2594607df95a"></script>
-  <script src="js/nav-menu.js?v=2594607df95a"></script>
-  <script src="js/scroll-reveal.js?v=2594607df95a" defer></script>
-  <script src="js/cookie-banner.js?v=2594607df95a" defer></script>
+  <script src="js/dark.js?v=cadc75900cad"></script>
+  <script src="js/lang.js?v=cadc75900cad"></script>
+  <script src="js/nav-menu.js?v=cadc75900cad"></script>
+  <script src="js/scroll-reveal.js?v=cadc75900cad" defer></script>
+  <script src="js/cookie-banner.js?v=cadc75900cad" defer></script>
+  <script src="js/board.js?v=cadc75900cad" defer></script>
 </body>
 </html>

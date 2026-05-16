@@ -114,7 +114,9 @@
         "fallback": "Tu navegador no puede mostrar el documento. Ábrelo en una pestaña nueva.",
         "iframeTitle": "Documento de actividades deportivas de la Falla Suïssa",
         "regionLabel": "Documento de actividades deportivas",
-        "delegadosTitulo": "Delegados de Deportes"
+        "delegadosTitulo": "Delegados de Deportes",
+        "tablonTitulo": "Tablón de Anuncios",
+        "tablonAriaLabel": "Tablón de anuncios deportivos JCF"
       },
       "quieres":{
         "titulo": "¿Quieres saber mas sobre nuestra Falla?",
@@ -585,7 +587,9 @@
         "fallback": "El teu navegador no pot mostrar el document. Obri'l en una pestanya nova.",
         "iframeTitle": "Document d'activitats esportives de la Falla Suïssa",
         "regionLabel": "Document d'activitats esportives",
-        "delegadosTitulo": "Delegats d'Esports"
+        "delegadosTitulo": "Delegats d'Esports",
+        "tablonTitulo": "Tauler d'Anuncis",
+        "tablonAriaLabel": "Tauler d'anuncis esportius JCF"
       },
       "quieres":{
         "titulo": "Vols saber més sobre la nostra Falla?",
@@ -967,7 +971,9 @@
         "fallback": "Your browser cannot display the document. Open it in a new tab.",
         "iframeTitle": "Falla Suïssa sports activities document",
         "regionLabel": "Sports activities document",
-        "delegadosTitulo": "Sports Delegates"
+        "delegadosTitulo": "Sports Delegates",
+        "tablonTitulo": "Noticeboard",
+        "tablonAriaLabel": "JCF sports announcements noticeboard"
       },
       "calendario": {
         "titulo": "Calendar",
@@ -1121,7 +1127,9 @@
         "fallback": "Votre navigateur ne peut pas afficher le document. Ouvrez-le dans un nouvel onglet.",
         "iframeTitle": "Document des activités sportives de la Falla Suïssa",
         "regionLabel": "Document des activités sportives",
-        "delegadosTitulo": "Délégués des Sports"
+        "delegadosTitulo": "Délégués des Sports",
+        "tablonTitulo": "Tableau d'Annonces",
+        "tablonAriaLabel": "Tableau d'annonces sportives JCF"
       },
       "calendario": {
         "titulo": "Calendrier",

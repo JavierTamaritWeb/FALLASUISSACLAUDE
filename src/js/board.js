@@ -1,11 +1,21 @@
 // js/board.js
-// Tablón de anuncios dinámico
-// Carga notas desde data/board.json y las renderiza en el contenedor #notesBoard
+// Tablón de anuncios dinámico — multi-instancia
+// Descubre todos los <div class="board"> del DOM, lee data-board-source
+// (default 'data/board.json') por elemento y los renderiza independientemente.
 
-let boardData = null;
-window.boardData = null;
-
+const DEFAULT_BOARD_SOURCE = 'data/board.json';
 const VALID_ADJUNTO_TYPES = new Set(['pdf', 'img']);
+
+// Cache de fetches (url -> Promise<data>) para no duplicar petición si
+// dos tableros comparten el mismo JSON.
+const boardSourceCache = new Map();
+
+// Registro de tableros activos en la página (id -> { el, source, data }).
+const boardRegistry = new Map();
+
+// Compatibilidad legacy: el primer tablero cargado sigue exponiendo sus datos
+// en window.boardData por si algún script externo dependía de ello.
+window.boardData = null;
 
 function getCurrentBoardLang() {
   if (typeof currentLang === 'string' && currentLang) {
@@ -88,30 +98,28 @@ function getAdjuntosValidos(adjuntos, lang) {
 }
 
 /**
- * Carga datos del JSON
- * @returns {Promise<Object>} Datos del tablón
+ * Carga (con cache) datos de un JSON-fuente del tablón.
+ * @param {string} url
+ * @returns {Promise<Object>}
  */
-async function loadBoardData() {
-  try {
-    const response = await fetch('data/board.json');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    window.boardData = data;
-    boardData = data;
-    return data;
-  } catch (error) {
-    console.error('Error cargando board.json:', error);
-    window.boardData = { notas: [] };
-    boardData = { notas: [] };
-    return { notas: [] };
+function fetchBoardSource(url) {
+  if (!boardSourceCache.has(url)) {
+    const promise = fetch(url)
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .catch((error) => {
+        console.error(`Error cargando ${url}:`, error);
+        return { notas: [] };
+      });
+    boardSourceCache.set(url, promise);
   }
+  return boardSourceCache.get(url);
 }
 
 /**
- * Genera HTML para un adjunto (con nombre traducible)
- * @param {Object} adj - Datos del adjunto
- * @param {boolean} isMultiple - Si hay múltiples adjuntos
- * @returns {string} HTML del adjunto
+ * Genera HTML para un adjunto (con nombre traducible).
  */
 function renderAdjunto(adj, isMultiple) {
   const iconText = adj.tipo.toUpperCase();
@@ -140,9 +148,7 @@ function renderAdjunto(adj, isMultiple) {
 }
 
 /**
- * Genera HTML para una nota
- * @param {Object} nota - Datos de la nota
- * @returns {string} HTML de la nota
+ * Genera HTML para una nota.
  */
 function renderNota(nota) {
   const lang = getCurrentBoardLang();
@@ -154,7 +160,6 @@ function renderNota(nota) {
   const hasExtras = hasAdjuntos || hasImagen;
 
   if (!hasExtras) {
-    // Nota simple - article directo con clase board__note
     return `
       <article class="board__note reveal reveal--soft" role="article">
         <div class="clamp-screw" aria-hidden="true"></div>
@@ -173,7 +178,6 @@ function renderNota(nota) {
         : `<div class="board__file">${adjuntosHTML}</div>`)
     : '';
 
-  // Nota con imagen y/o adjuntos - envuelta en board__card
   return `
     <article class="board__card reveal reveal--soft" role="article">
       <div class="board__note">
@@ -187,45 +191,68 @@ function renderNota(nota) {
 }
 
 /**
- * Renderiza el tablón completo
+ * Renderiza un tablón concreto a partir de sus datos.
  */
-function renderBoard() {
-  const container = document.getElementById('notesBoard');
-  if (!container) {
-    console.warn('Contenedor #notesBoard no encontrado');
+function renderBoardInto(el, data) {
+  if (!data || !Array.isArray(data.notas)) {
     return;
   }
 
-  if (!boardData?.notas) {
-    console.warn('No hay datos de notas cargados');
-    return;
-  }
-
-  const notasActivas = boardData.notas.filter(nota => nota.activo !== false);
+  const notasActivas = data.notas.filter(nota => nota.activo !== false);
 
   if (notasActivas.length === 0) {
     const emptyMessage = getBoardTranslation('board.empty', 'No hay anuncios en este momento.');
-    container.innerHTML = `<p class="board__empty reveal reveal--soft">${emptyMessage}</p>`;
-    refreshBoardReveal(container);
+    el.innerHTML = `<p class="board__empty reveal reveal--soft">${emptyMessage}</p>`;
+    refreshBoardReveal(el);
     return;
   }
 
-  container.innerHTML = notasActivas.map(renderNota).join('');
-  refreshBoardReveal(container);
+  el.innerHTML = notasActivas.map(renderNota).join('');
+  refreshBoardReveal(el);
 }
 
 /**
- * Inicialización del tablón
+ * Re-renderiza todos los tableros registrados (al cambiar idioma).
  */
-async function initBoard() {
-  await loadBoardData();
-  renderBoard();
-
-  document.addEventListener('translationsReady', renderBoard, { once: true });
+function renderAllBoards() {
+  boardRegistry.forEach(({ el, data }) => renderBoardInto(el, data));
 }
 
-// Re-renderizar cuando cambia el idioma
-document.addEventListener('langChanged', renderBoard);
+/**
+ * Inicializa un único tablero: carga su JSON-fuente y lo renderiza.
+ */
+async function initBoardEl(el, index) {
+  const id = el.id || `board-${index}`;
+  if (!el.id) {
+    el.id = id;
+  }
 
-// Iniciar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', initBoard);
+  const source = (el.dataset.boardSource || DEFAULT_BOARD_SOURCE).trim();
+  const data = await fetchBoardSource(source);
+
+  boardRegistry.set(id, { el, source, data });
+
+  if (window.boardData === null) {
+    window.boardData = data;
+  }
+
+  renderBoardInto(el, data);
+}
+
+/**
+ * Descubre todos los tableros del DOM y los inicializa.
+ */
+async function initAllBoards() {
+  const boards = document.querySelectorAll('div.board');
+
+  if (boards.length === 0) {
+    return;
+  }
+
+  await Promise.all(Array.from(boards).map((el, i) => initBoardEl(el, i)));
+
+  document.addEventListener('translationsReady', renderAllBoards, { once: true });
+}
+
+document.addEventListener('langChanged', renderAllBoards);
+document.addEventListener('DOMContentLoaded', initAllBoards);

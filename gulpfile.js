@@ -729,6 +729,14 @@ async function wellKnownTask() {
       contentType: 'application/json'
     },
     {
+      name: 'sports-board',
+      type: 'data',
+      description: 'Tablón JCF deportivo: bases y normativas oficiales (pádel, fútbol, vóley, fotografía) del ejercicio 2026-27.',
+      url: `${SITE_BASE}/data/sports-board.json`,
+      distPath: 'dist/data/sports-board.json',
+      contentType: 'application/json'
+    },
+    {
       name: 'events-list',
       type: 'data',
       description: 'Listado de eventos del ejercicio fallero (presentaciones, mascletàs, ofrenda, etc.).',

@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 6 de mayo de 2026 - v4.6.21 - Sección Deportes: doble franja separadora superior (2rem coral + 2rem #1f1f1f) en el iframe del documento de Drive, lograda combinando un `::before` en el wrapper y `border-top: 4rem` en el iframe.
+🆕 Última actualización: 16 de mayo de 2026 - v4.7.2 - Tablón de Anuncios exclusivo en Deportes (`#sportsBoard`) con 6 bases/normas JCF 2026-27 movidas a `src/data/sports-board.json`; refactor de `src/js/board.js` a multi-instancia (descubre `<div class="board">` y lee `data-board-source`); nueva skill agent-ready `sports-board` en `/.well-known/agent-skills/index.json`.
 
 ## 🌐 Vista Previa
 

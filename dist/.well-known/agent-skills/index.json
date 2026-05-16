@@ -5,7 +5,7 @@
     "name": "Falla Suïssa - L'Alqueria del Favero",
     "url": "https://fallasuissa.es/"
   },
-  "updated": "2026-05-15",
+  "updated": "2026-05-16",
   "skills": [
     {
       "name": "falla-discovery",
@@ -29,7 +29,15 @@
       "description": "Tablón de avisos y citas vigentes (notas con fecha, hora y ubicación) de Falla Suïssa.",
       "url": "https://fallasuissa.es/data/board.json",
       "contentType": "application/json",
-      "sha256": "7ca766facde90230e4ededaab54e6c89c080137495ef8c7f88c83e74dc14da3e"
+      "sha256": "9ec2412049e1271b0136d61fb195274f7bdcf152f7d4a58e44a8774fcc59956e"
+    },
+    {
+      "name": "sports-board",
+      "type": "data",
+      "description": "Tablón JCF deportivo: bases y normativas oficiales (pádel, fútbol, vóley, fotografía) del ejercicio 2026-27.",
+      "url": "https://fallasuissa.es/data/sports-board.json",
+      "contentType": "application/json",
+      "sha256": "d87cdbf1d8bf33acde1ab01453232b188b3ac9e14046ceb29c376deeae3ae9bb"
     },
     {
       "name": "events-list",

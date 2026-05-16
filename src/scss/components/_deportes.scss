@@ -197,6 +197,30 @@
     }
   }
 
+  // Tablón JCF — overrides locales sobre .tablon-titulo / .marco-tablon
+  // (definidos en _eventos.scss) para integrarlo sobre el fondo azul institucional.
+  &__board-wrapper {
+    margin: 4rem auto 3rem;
+    max-width: 110rem;
+  }
+
+  &__tablon-titulo {
+    color: v.$blanco;
+    justify-content: flex-start;
+    padding-block: 2rem;
+    padding-inline: 0;
+    text-align: left;
+  }
+
+  &__marco-tablon {
+    margin-inline: 0;
+    // Modo claro: quitar el fondo $naranja-suave heredado de .marco-tablon
+    // para que solo se vea el corcho gris del .board.
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+
   &__fallback {
     position: absolute;
     inset: 0;

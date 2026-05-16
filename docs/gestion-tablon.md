@@ -1,15 +1,23 @@
 # 📋 Gestión del Tablón de Anuncios
 
-Esta es la guía canónica del tablón dinámico. El contenido se edita en un JSON y se renderiza en la home y en la página de eventos sin tocar el HTML de cada página.
+Esta es la guía canónica del tablón dinámico. El contenido se edita en un JSON y se renderiza en la home, en la página de eventos y en la página de deportes sin tocar el HTML de cada página.
 
-## 📍 Dónde aparece y qué lo pinta
+> Desde v4.7.2 el sistema soporta **múltiples tableros independientes** por página. Cada tablero apunta a su propio JSON. Mantén las notas de eventos en `board.json` y las deportivas en `sports-board.json` — el render no las mezcla porque cada `<div class="board">` lleva su `data-board-source`.
 
-- datos: `src/data/board.json`
-- textos genéricos del componente: `src/data/translations.json` (`board.empty`, labels accesibles de adjuntos)
-- renderizado: `src/js/board.js`
-- estilos: `src/scss/components/_board.scss`
-- páginas que lo muestran: `index.html` y `eventos.html`
-- tests: `tests/board.e2e.spec.js`
+## 📍 Tableros desplegados hoy
+
+| Tablero | Fuente JSON | Páginas | Selector |
+| ------- | ----------- | ------- | -------- |
+| Eventos / general | `src/data/board.json` | `index.html`, `eventos.html` | `#notesBoard` (sin `data-board-source` → cae al default) |
+| Deportes JCF | `src/data/sports-board.json` | `deportes.html` | `#sportsBoard` con `data-board-source="data/sports-board.json"` |
+
+Recursos comunes:
+
+- renderizado: `src/js/board.js` (multi-instancia, descubre todos los `<div class="board">` del DOM)
+- estilos: `src/scss/components/_board.scss` + overrides locales en `src/scss/components/_deportes.scss` (`__board-wrapper`, `__tablon-titulo`, `__marco-tablon`)
+- textos genéricos del componente: `src/data/translations.json` (`board.empty`, labels accesibles de adjuntos; en Deportes además `deportes.tablonTitulo` y `deportes.tablonAriaLabel`)
+- skills agent-ready: `events-board` y `sports-board` (en el array `skills` de `wellKnownTask` en `gulpfile.js`); se publican en `dist/.well-known/agent-skills/index.json` con `sha256` automático
+- tests: `tests/board.e2e.spec.js` (incluye bloque `Tablón Deportes (#sportsBoard)` con 3 tests)
 
 ## 🧱 Estructura del archivo
 
@@ -277,6 +285,70 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 `src/scss/animaciones/_modo-oscuro.scss` define overrides específicos para `.board__file-link` (fondo `$gris-muy-oscuro`, borde sutil) y deja el `.board__file-name` con fondo transparente para que no aparezca una caja gris embebida en una tarjeta blanca. Si tocas estos estilos, mantén la coherencia.
 
+## 🏆 Tablón JCF de Deportes (`#sportsBoard`)
+
+Tablón dedicado a las **bases y normativas oficiales de la JCF** (concursos de fotografía, normas de campeonatos de pádel, fútbol, vóley). Vive en `deportes.html`, entre el aside de delegados y el iframe del documento Drive.
+
+### Cómo editar contenido deportivo
+
+El flujo es **idéntico al de `board.json`** pero sobre `src/data/sports-board.json`. Resumen rápido:
+
+1. Abre `src/data/sports-board.json` y localiza el array `notas`.
+2. Añade una nota nueva con `id` descriptivo (p. ej. `bases-iii-campeonato-padel-2027-28`).
+3. Convención editorial: empieza `contenido.es` y `contenido.va` con `📌 JCF 2026-27<br>` (o el ejercicio correspondiente) para diferenciarlo visualmente del tablón general.
+4. Sube el PDF a `src/pdf/JCF-2026-27/` (o crea la subcarpeta del ejercicio relevante).
+5. En `adjuntos[]` usa `tipo: "pdf"`, `url: "pdf/JCF-2026-27/<archivo>.pdf"`, `nombre.es` y `nombre.va`.
+6. `npm run build`.
+
+### Ejemplo: nueva nota deportiva
+
+```json
+{
+  "id": "bases-iii-tenis-jcf-2027",
+  "activo": true,
+  "contenido": {
+    "es": "📌 JCF 2026-27<br>III Campeonato de Tenis JCF<br>Bases de inscripción del campeonato organizado por la Junta Central Fallera.",
+    "va": "📌 JCF 2026-27<br>III Campionat de Tennis JCF<br>Bases d'inscripció del campionat organitzat per la Junta Central Fallera."
+  },
+  "adjuntos": [
+    {
+      "tipo": "pdf",
+      "url": "pdf/JCF-2026-27/bases-iii-campeonato-tenis-jcf.pdf",
+      "nombre": {
+        "es": "Bases III Campeonato Tenis JCF",
+        "va": "Bases III Campionat Tennis JCF"
+      }
+    }
+  ]
+}
+```
+
+### Reglas específicas del tablón Deportes
+
+- **No mezcles notas deportivas en `board.json`**. Cada tablero filtra su fuente; mover una nota deportiva a `board.json` la haría aparecer en `index.html` y `eventos.html` (que es lo que se desacopló en v4.7.2).
+- **Sin citas con fecha**. Las notas JCF son anuncios atemporales (bases, normativas). El patrón `📝 Cita<br>` + `DD-MM-YYYY HH:MM` solo se usa en `board.json` porque `gulpfile.js → getSchemaEvents` lee únicamente `board.json` para generar `Schema.org Event` JSON-LD; un anuncio JCF en `sports-board.json` con cita no se convertirá en Event.
+- **`activo: false`** para retirar temporalmente sin borrar (mismo comportamiento que en `board.json`).
+- **Skill agent-ready**: cualquier cambio en `sports-board.json` se publica vía `dist/.well-known/agent-skills/index.json` con un `sha256` recalculado automáticamente en `wellKnownTask`. No hay que tocar el gulpfile salvo que cambie el path del archivo.
+
+## ➕ Añadir un tablón nuevo a otra página (p. ej. Casal, Cultura)
+
+Desde v4.7.2 ya no hace falta tocar `board.js`. Pasos:
+
+1. Crea `src/data/<nombre>-board.json` con el mismo shape `{ "notas": [...] }`.
+2. En la página HTML inserta el wrapper y el contenedor con `data-board-source`:
+   ```html
+   <div class="board" id="casalBoard"
+        data-board-source="data/casal-board.json"
+        aria-label="Tablón del Casal"></div>
+   ```
+3. Carga el script al final del body si la página no lo tenía:
+   ```html
+   <script src="js/board.js" defer></script>
+   ```
+4. (Opcional) Añade la skill correspondiente al array `skills` en `wellKnownTask` (`gulpfile.js`) si quieres exponer el JSON a agentes IA.
+5. (Opcional) Reutiliza estilos `.tablon-titulo` + `.marco-tablon` o define un wrapper propio según el fondo de la sección. Si el fondo no es blanco/gris, sigue el patrón de `_deportes.scss` (`background: transparent` en el marco, color de título acorde al contraste).
+6. Añade un test en `tests/board.e2e.spec.js` siguiendo el patrón del bloque `Tablón Deportes (#sportsBoard)`.
+
 ## 🔗 Relacionado
 
 - [`e2e-testing.md`](./e2e-testing.md): estrategia de pruebas Playwright
@@ -284,4 +356,4 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 ---
 
-Última actualización: 4 de mayo de 2026 - v4.6.18
+Última actualización: 16 de mayo de 2026 - v4.7.2

@@ -176,4 +176,43 @@ test.describe('Tablón Dinámico (.board)', () => {
       }
     });
   });
+
+  test.describe('Tablón Deportes (#sportsBoard)', () => {
+    test('deportes.html: 6 cards JCF con PDFs en pdf/JCF-2026-27/', async ({ page }) => {
+      await page.goto('/deportes.html');
+      await page.waitForSelector('#sportsBoard .board__card', { timeout: 5000 });
+
+      const cards = page.locator('#sportsBoard .board__card');
+      expect(await cards.count()).toBeGreaterThanOrEqual(6);
+
+      const jcfLinks = page.locator('#sportsBoard .board__file-link[href*="pdf/JCF-2026-27/"]');
+      expect(await jcfLinks.count()).toBeGreaterThanOrEqual(6);
+    });
+
+    test('deportes.html: cambio ES→VA re-renderiza adjuntos', async ({ page }) => {
+      await page.goto('/deportes.html');
+      await page.waitForSelector('#sportsBoard .board__file-name');
+
+      const langSwitcher = page.locator('#langSwitcher');
+      if (await langSwitcher.isVisible()) {
+        await langSwitcher.click();
+        const vaOption = page.locator('.header__lang-option[data-lang="va"]');
+        if (await vaOption.isVisible()) {
+          await vaOption.click();
+          await page.waitForTimeout(300);
+        }
+      }
+
+      // Tras el re-render siguen existiendo 6+ cards con sus archivos.
+      const cards = page.locator('#sportsBoard .board__card');
+      expect(await cards.count()).toBeGreaterThanOrEqual(6);
+    });
+
+    test('#notesBoard de eventos.html no se ve afectado (1 nota residual)', async ({ page }) => {
+      await page.goto('/eventos.html');
+      await page.waitForSelector('#notesBoard .board__card, #notesBoard .board__note');
+      const notes = page.locator('#notesBoard article');
+      expect(await notes.count()).toBeGreaterThanOrEqual(1);
+    });
+  });
 });

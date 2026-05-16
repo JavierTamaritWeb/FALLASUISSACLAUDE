@@ -1,0 +1,112 @@
+{
+  "notas": [
+    {
+      "id": "bases-concurso-fotografia-2026",
+      "activo": true,
+      "contenido": {
+        "es": "📌 JCF 2026-27<br>LXVI Concurso de Fotografía JCF 2026<br>Bases de participación de la Junta Central Fallera para el concurso oficial de fotografía.",
+        "va": "📌 JCF 2026-27<br>LXVI Concurs de Fotografia JCF 2026<br>Bases de participació de la Junta Central Fallera per al concurs oficial de fotografia."
+      },
+      "adjuntos": [
+        {
+          "tipo": "pdf",
+          "url": "pdf/JCF-2026-27/bases-concurso-fotografia-2026.pdf",
+          "nombre": {
+            "es": "Bases Concurso Fotografía 2026",
+            "va": "Bases Concurs Fotografia 2026"
+          }
+        }
+      ]
+    },
+    {
+      "id": "normas-padel-jcf-2026",
+      "activo": true,
+      "contenido": {
+        "es": "📌 JCF 2026-27<br>Normas del Campeonato de Pádel JCF<br>Reglamento oficial del campeonato organizado por la Junta Central Fallera.",
+        "va": "📌 JCF 2026-27<br>Normes del Campionat de Pàdel JCF<br>Reglament oficial del campionat organitzat per la Junta Central Fallera."
+      },
+      "adjuntos": [
+        {
+          "tipo": "pdf",
+          "url": "pdf/JCF-2026-27/normas-campeonato-padel-jcf.pdf",
+          "nombre": {
+            "es": "Normas Campeonato Pádel JCF",
+            "va": "Normes Campionat Pàdel JCF"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bases-futbol-femenino-2026-27",
+      "activo": true,
+      "contenido": {
+        "es": "📌 JCF 2026-27<br>I Campeonato Fútbol Femenino 2026-27<br>Bases de inscripción para el primer campeonato JCF de fútbol femenino.",
+        "va": "📌 JCF 2026-27<br>I Campionat Futbol Femení 2026-27<br>Bases d'inscripció per al primer campionat JCF de futbol femení."
+      },
+      "adjuntos": [
+        {
+          "tipo": "pdf",
+          "url": "pdf/JCF-2026-27/bases-i-campeonato-futbol-femenino-2026-27.pdf",
+          "nombre": {
+            "es": "Bases I Campeonato Fútbol Femenino 2026-27",
+            "va": "Bases I Campionat Futbol Femení 2026-27"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bases-futbol-infantil-2026-27",
+      "activo": true,
+      "contenido": {
+        "es": "📌 JCF 2026-27<br>I Campeonato Fútbol Infantil 2026-27<br>Bases de inscripción para el primer campeonato JCF de fútbol infantil.",
+        "va": "📌 JCF 2026-27<br>I Campionat Futbol Infantil 2026-27<br>Bases d'inscripció per al primer campionat JCF de futbol infantil."
+      },
+      "adjuntos": [
+        {
+          "tipo": "pdf",
+          "url": "pdf/JCF-2026-27/bases-i-campeonato-futbol-infantil-2026-27.pdf",
+          "nombre": {
+            "es": "Bases I Campeonato Fútbol Infantil 2026-27",
+            "va": "Bases I Campionat Futbol Infantil 2026-27"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bases-voley-playa-2026-27",
+      "activo": true,
+      "contenido": {
+        "es": "📌 JCF 2026-27<br>II Campeonato Vóley Playa 2026-27<br>Bases de inscripción para la segunda edición del campeonato JCF de vóley playa.",
+        "va": "📌 JCF 2026-27<br>II Campionat Voleibol Platja 2026-27<br>Bases d'inscripció per a la segona edició del campionat JCF de voleibol platja."
+      },
+      "adjuntos": [
+        {
+          "tipo": "pdf",
+          "url": "pdf/JCF-2026-27/bases-ii-campeonato-voley-playa-2026-27.pdf",
+          "nombre": {
+            "es": "Bases II Campeonato Vóley Playa 2026-27",
+            "va": "Bases II Campionat Voleibol Platja 2026-27"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bases-futbol-playa-2026-27",
+      "activo": true,
+      "contenido": {
+        "es": "📌 JCF 2026-27<br>II Campeonato Fútbol Playa 2026-27<br>Bases de inscripción para la segunda edición del campeonato JCF de fútbol playa.",
+        "va": "📌 JCF 2026-27<br>II Campionat Futbol Platja 2026-27<br>Bases d'inscripció per a la segona edició del campionat JCF de futbol platja."
+      },
+      "adjuntos": [
+        {
+          "tipo": "pdf",
+          "url": "pdf/JCF-2026-27/bases-ii-campeonato-futbol-playa-2026-27.pdf",
+          "nombre": {
+            "es": "Bases II Campeonato Fútbol Playa 2026-27",
+            "va": "Bases II Campionat Futbol Platja 2026-27"
+          }
+        }
+      ]
+    }
+  ]
+}
