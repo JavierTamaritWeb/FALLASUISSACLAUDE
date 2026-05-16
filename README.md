@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 16 de mayo de 2026 - v4.7.2 - Tablón de Anuncios exclusivo en Deportes (`#sportsBoard`) con 6 bases/normas JCF 2026-27 movidas a `src/data/sports-board.json`; refactor de `src/js/board.js` a multi-instancia (descubre `<div class="board">` y lee `data-board-source`); nueva skill agent-ready `sports-board` en `/.well-known/agent-skills/index.json`.
+🆕 Última actualización: 16 de mayo de 2026 - v4.7.3 - Pulido visual del tablón JCF en Deportes (título coral en modo claro, centrado y tipografía reducida en móvil; notas y nombres de archivo más pequeños en `<768px` en ambos tableros). Nueva guía [`docs/well-known-agent-readiness.md`](./docs/well-known-agent-readiness.md) explicando `/.well-known/`, `api-catalog` (RFC 9727) y Agent Skills v0.2.
 
 ## 🌐 Vista Previa
 

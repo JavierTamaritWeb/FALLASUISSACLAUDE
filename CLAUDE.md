@@ -2,9 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.7.2
+**Version:** 4.7.3
 **Last Updated:** 16 de mayo de 2026
 
+> 4.7.3 — Pulido visual del tablón JCF en Deportes y nueva documentación de `/.well-known/`:
+> 1. **Título del tablón en color primario.** `.deportes__tablon-titulo` pasa de blanco a `v.$primary-color` (coral) en modo claro sobre el azul institucional; en modo oscuro se mantiene blanco mediante override en el bloque `body.modo-oscuro .deportes` para preservar el contraste WCAG sobre el velo `v.$negro` del `::before`.
+> 2. **Tablón responsivo en `<768px`.** En mobile el `.deportes__tablon-titulo` se centra (`justify-content: center; text-align: center`), reduce a `font-size: v.$font-size-regular` (alineado con `.deportes__delegados-titulo`) y compacta padding a `1.5rem 1rem 1rem`. Las notas del board (`.board__note-content` y `.board__file-name` en `src/scss/components/_board.scss`) bajan de `1.4rem` a `1.25rem` (line-height `1.4 → 1.35` en notas) en el mismo breakpoint — afecta a ambos tableros (`#notesBoard` y `#sportsBoard`) para coherencia visual.
+> 3. **Nuevo `docs/well-known-agent-readiness.md`**: guía canónica completa de la carpeta `/.well-known/` (RFC 8615/8288/9727, Agent Skills v0.2, `Content-Signal`), pipeline `wellKnownTask`, qué se actualiza automáticamente vs manualmente, flujo de descubrimiento por agentes IA en 3 requests, y receta para añadir nuevas skills. Enlazado desde `docs/README.md` (índice + categoría SEO/IA) y desde el constraint "Agent-readiness" en este archivo.
+>
 > 4.7.2 — Tablón de anuncios JCF exclusivo en `deportes.html` y refactor de `board.js` a multi-instancia paramétrica:
 > 1. **Multi-board en `src/js/board.js`**: el script ya no asume un único `#notesBoard` con `data/board.json`. Ahora descubre todos los `<div class="board">` del DOM, lee `data-board-source` (default `data/board.json`) y `id` (default `board-N`), y renderiza cada uno con su JSON. Cache de fetches en memoria (`boardSourceCache`) para no duplicar peticiones si dos tableros comparten fuente. Registro en `boardRegistry` para re-render coherente al disparar `langChanged` / `translationsReady`. `index.html` y `eventos.html` siguen pintando byte-equivalentes porque omiten `data-board-source` y caen al default.
 > 2. **Nuevo `src/data/sports-board.json`**: 6 notas trasladadas desde `board.json` (bases campeonatos JCF de pádel, fútbol femenino, fútbol infantil, vóley playa, fútbol playa, concurso fotografía 2026). Prefijo editorial `📌 JCF 2026-27` para diferenciarlas del tablón general. `board.json` queda con una sola nota (`apunta-2026`, única que cumple el patrón `📝 Cita<br>` + fecha y por tanto la única que genera `Schema.org Event` en `gulpfile.js → getSchemaEvents`).
@@ -152,7 +157,7 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.7.2).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.7.3).
 
 ## Architecture Decisions & Constraints
 
