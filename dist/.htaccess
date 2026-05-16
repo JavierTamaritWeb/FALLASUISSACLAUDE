@@ -96,10 +96,17 @@ RewriteRule ^ https://fallasuissa.es%{REQUEST_URI} [R=301,L]
 
     # =======================================================================
     # AGENT-READY: Link headers (RFC 8288) en respuestas HTML
-    # Apunta a /.well-known/api-catalog (RFC 9727) y al índice Agent Skills v0.2
+    # Una directiva por relación (Apache las une con ", " al enviar) para
+    # evitar el escape \"..\" que rompe parsers RFC 8288 estrictos.
+    # rel sin comillas (válido per §3 cuando es un único relation-type token).
     # =======================================================================
     <FilesMatch "\.html$">
-        Header set Link "</.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </.well-known/agent-skills/index.json>; rel=\"agent-skills\"; type=\"application/json\", </ai-discovery.json>; rel=\"describedby\"; type=\"application/json\""
+        Header always set    Link "</.well-known/api-catalog>; rel=api-catalog"
+        Header always append Link "</.well-known/agent-skills/index.json>; rel=agent-skills"
+        Header always append Link "</ai-discovery.json>; rel=describedby"
+        Header always append Link "</ai-discovery.json>; rel=service-desc"
+        Header always append Link "</seo/ai-training-data.md>; rel=alternate"
+        Header always append Link "</sitemap-index.xml>; rel=sitemap"
     </FilesMatch>
 
     # Content-Type para Markdown (negociación de contenido text/markdown)
