@@ -205,11 +205,20 @@
   }
 
   &__tablon-titulo {
-    color: v.$blanco;
+    color: v.$primary-color;
     justify-content: flex-start;
     padding-block: 2rem;
     padding-inline: 0;
     text-align: left;
+
+    @media (max-width: 767px) {
+      // En mobile: centrado, tipografía coherente con .deportes__delegados-titulo,
+      // y padding compacto para no comerse altura de scroll.
+      justify-content: center;
+      text-align: center;
+      font-size: v.$font-size-regular;
+      padding: 1.5rem 1rem 1rem;
+    }
   }
 
   &__marco-tablon {
@@ -255,6 +264,11 @@ body.modo-oscuro .deportes {
 
   &__intro {
     color: v.$gris-muy-claro;
+  }
+
+  &__tablon-titulo {
+    // En modo oscuro el velo es $negro: blanco contrasta mejor que el coral.
+    color: v.$blanco;
   }
 
   &__doc-wrapper {

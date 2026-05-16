@@ -162,6 +162,11 @@ $icon-img-color: v.$turquesa;
     display: flex;
     justify-content: left;
     align-items: center;
+
+    @media (max-width: 767px) {
+      font-size: 1.25rem;
+      line-height: 1.35;
+    }
   }
 
   // Imagen embebida dentro de la nota (cartel, infografía, etc.)
@@ -269,6 +274,10 @@ $icon-img-color: v.$turquesa;
     border-radius: 0;
     padding: 0;
     white-space: normal;
+
+    @media (max-width: 767px) {
+      font-size: 1.25rem;
+    }
   }
 
   // Compatibilidad con clase antigua .board__file-text
