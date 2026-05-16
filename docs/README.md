@@ -20,6 +20,7 @@
 | [`meteo-ui.md`](./meteo-ui.md) | Meteo: estructura del widget, animaciones, sincronización con i18n y estabilidad visual | 20/03/2026 |
 | [`google-search-console.md`](./google-search-console.md) | Verificación en GSC + procedimiento ante el aviso "Duplicada: el usuario no ha indicado ninguna versión canónica" | 07/05/2026 |
 | [`robots-configuration.md`](./robots-configuration.md) | Configuración de `robots.txt` y variantes para bots | 20/03/2026 |
+| [`well-known-agent-readiness.md`](./well-known-agent-readiness.md) | Carpeta `.well-known/`: `api-catalog` (RFC 9727), `agent-skills/index.json` (v0.2), pipeline `wellKnownTask`, descubrimiento por agentes IA y reglas de mantenimiento | 16/05/2026 |
 | [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping, autoheight y hook temporal de la foto real 2026 | 20/03/2026 |
 | [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md) | Checklist anual para cambiar imágenes del monumento y decidir si el hook temporal debe mantenerse o eliminarse | 20/03/2026 |
 
@@ -31,6 +32,7 @@
 - [`open-graph-whatsapp.md`](./open-graph-whatsapp.md): `og-share.png`, cache-buster y controles anti-regresión.
 - [`google-search-console.md`](./google-search-console.md): verificación y alta en Search Console.
 - [`robots-configuration.md`](./robots-configuration.md): robots, variantes y relación con sitemaps.
+- [`well-known-agent-readiness.md`](./well-known-agent-readiness.md): `.well-known/`, `api-catalog` (RFC 9727) y skills agent-ready (Agent Skills v0.2) para asistentes IA.
 - Índice SEO/IA de la carpeta `src/seo/`: [`../seo/README.md`](../seo/README.md).
 
 ### 🧪 Build, tests y utilidades
@@ -56,7 +58,7 @@
 
 ## 📝 Notas de Mantenimiento
 
-- La versión funcional documentada del proyecto es `v4.6.23` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.7.2` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta
@@ -81,4 +83,4 @@ Actualiza estas guías cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 7 de mayo de 2026 - v4.6.23*
+*Última actualización: 16 de mayo de 2026 - v4.7.2*
