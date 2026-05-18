@@ -18,7 +18,7 @@
 | [`i18n-translations.md`](./i18n-translations.md) | Sistema i18n con `data-i18n`, `translations.json`, pre-render VA en build, nodos dinámicos y renderizado por párrafos | 07/05/2026 |
 | [`gestion-tablon.md`](./gestion-tablon.md) | Guía canónica del tablón dinámico (`src/data/board.json`, adjuntos, filtrado de inválidos, validación y troubleshooting) | 04/05/2026 |
 | [`meteo-ui.md`](./meteo-ui.md) | Meteo: estructura del widget, animaciones, sincronización con i18n y estabilidad visual | 20/03/2026 |
-| [`google-search-console.md`](./google-search-console.md) | Verificación en GSC + procedimiento ante el aviso "Duplicada: el usuario no ha indicado ninguna versión canónica" | 07/05/2026 |
+| [`google-search-console.md`](./google-search-console.md) | Verificación en GSC + procedimiento ante avisos "Duplicada (sin canónica)" y "No se ha encontrado (404)" (301/410 en `.htaccess`) | 18/05/2026 |
 | [`robots-configuration.md`](./robots-configuration.md) | Configuración de `robots.txt` y variantes para bots | 20/03/2026 |
 | [`well-known-agent-readiness.md`](./well-known-agent-readiness.md) | Carpeta `.well-known/`: `api-catalog` (RFC 9727), `agent-skills/index.json` (v0.2), pipeline `wellKnownTask`, descubrimiento por agentes IA y reglas de mantenimiento | 16/05/2026 |
 | [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping, autoheight y hook temporal de la foto real 2026 | 20/03/2026 |
@@ -58,7 +58,7 @@
 
 ## 📝 Notas de Mantenimiento
 
-- La versión funcional documentada del proyecto es `v4.7.3` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.7.4` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta
@@ -83,4 +83,4 @@ Actualiza estas guías cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 16 de mayo de 2026 - v4.7.3*
+*Última actualización: 18 de mayo de 2026 - v4.7.4*

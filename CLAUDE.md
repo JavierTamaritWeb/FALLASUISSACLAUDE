@@ -2,9 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.7.3
-**Last Updated:** 16 de mayo de 2026
+**Version:** 4.7.4
+**Last Updated:** 18 de mayo de 2026
 
+> 4.7.4 — Limpieza de URLs 404 reportadas por Google Search Console. `src/.htaccess` añade 4 reglas dentro del bloque `<IfModule mod_rewrite.c>` (después de `www → no-www`, antes de la negociación Markdown) que cubren los 4 patrones detectados en GSC: **A)** `/va/pdf/*` → 301 a `/pdf/*` (variantes VA que Google inventó y que nunca existieron), **B)** `migany2025*.pdf` → 410 Gone (eliminados sin equivalente; 410 retira del índice más rápido que 404), **C)** `2024_LLIBRET_FALLA _MORERES_DIGITAL.pdf` en raíz `/pdf/` → 301 a `/pdf/Llibrets/` (reorganización a subcarpeta), **D)** `C6xxx_*.pdf` → 301 a `/deportes.html` (bases JCF temporada 2025-26 sustituidas por las 2026-27 en `/pdf/JCF-2026-27/`). Procedimiento operativo y reglas para futuros 404 documentados en [`docs/google-search-console.md`](./docs/google-search-console.md).
+>
 > 4.7.3 — Pulido visual del tablón JCF en Deportes y nueva documentación de `/.well-known/`:
 > 1. **Título del tablón en color primario.** `.deportes__tablon-titulo` pasa de blanco a `v.$primary-color` (coral) en modo claro sobre el azul institucional; en modo oscuro se mantiene blanco mediante override en el bloque `body.modo-oscuro .deportes` para preservar el contraste WCAG sobre el velo `v.$negro` del `::before`.
 > 2. **Tablón responsivo en `<768px`.** En mobile el `.deportes__tablon-titulo` se centra (`justify-content: center; text-align: center`), reduce a `font-size: v.$font-size-regular` (alineado con `.deportes__delegados-titulo`) y compacta padding a `1.5rem 1rem 1rem`. Las notas del board (`.board__note-content` y `.board__file-name` en `src/scss/components/_board.scss`) bajan de `1.4rem` a `1.25rem` (line-height `1.4 → 1.35` en notas) en el mismo breakpoint — afecta a ambos tableros (`#notesBoard` y `#sportsBoard`) para coherencia visual.

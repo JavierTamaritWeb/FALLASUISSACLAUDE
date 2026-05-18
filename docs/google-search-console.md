@@ -124,4 +124,66 @@ GSC puede reportar este aviso cuando detecta páginas con contenido similar y la
 
 ---
 
-Última actualización: 7 de mayo de 2026 - v4.6.23
+## 🚨 Aviso "No se ha encontrado (404)" — limpieza de URLs antiguas (v4.7.4)
+
+GSC reportó 24 URLs 404 (pico de 36 en abril, descendiendo solo a 24 en mayo). El análisis de los ejemplos mostrados por GSC reveló **4 patrones**, no 24 URLs sueltas:
+
+| Patrón | Origen | URLs afectadas |
+|---|---|---|
+| **A** — `/va/pdf/*` | Google indexó variantes VA que **nunca existieron** (los PDFs solo viven en `/pdf/*`). Probablemente generadas al resolver enlaces relativos desde páginas `/va/`. | 3 ejemplos: `Llibret_2024-25.html`, `Llibret_2025-26.html`, `Presentacion_Fallera_2026.html` |
+| **B** — `migany2025*.pdf` | Wrappers Mig Any 2025 eliminados sin equivalente actual. | 3 ejemplos: `.pdf`, `_ingles.pdf`, `_ucraniano.pdf` |
+| **C** — `2024_LLIBRET_FALLA _MORERES_DIGITAL.pdf` en raíz `/pdf/` | El archivo se reorganizó a `/pdf/Llibrets/`. | 2 ejemplos (con y sin `www.`) |
+| **D** — `C6xxx_*.pdf` | Bases campeonatos JCF temporada **2025-26** (sustituidas por las 2026-27 en `/pdf/JCF-2026-27/`). | 12+ ejemplos (TENIS, BOLOS, PETANCA, VOLEY PLAYA…) |
+
+### Cómo lo resuelve el repo
+
+`src/.htaccess` declara 4 reglas dentro del bloque `<IfModule mod_rewrite.c>`, **después** de la redirección `www → no-www` y **antes** de la negociación de Markdown:
+
+```apache
+# A) /va/pdf/* → /pdf/*
+RewriteRule ^va/pdf/(.*)$ /pdf/$1 [R=301,L]
+
+# B) migany2025*.pdf → 410 Gone (sin equivalente)
+RewriteRule ^pdf/migany2025.*\.pdf$ - [R=410,L]
+
+# C) Llibret 2024 movido a /pdf/Llibrets/
+RewriteRule "^pdf/2024_LLIBRET_FALLA._MORERES_DIGITAL\.pdf$" \
+    "/pdf/Llibrets/2024_LLIBRET_FALLA%20_MORERES_DIGITAL.pdf" [R=301,L]
+
+# D) Bases JCF antiguas → /deportes.html
+RewriteRule "^pdf/C6[0-9]+.*\.pdf$" /deportes.html [R=301,L]
+```
+
+### Reglas operativas
+
+- **301 vs 410**: usar 301 cuando hay destino equivalente (la página o el documento sigue existiendo). Usar **410 Gone** cuando el recurso se eliminó sin sustituto — Google lo retira del índice más rápido que un 404.
+- **No tocar las URLs antiguas con `www.fallasuissa.es`**: el bloque `Redirección www a no-www` ya las pasa a `https://fallasuissa.es/...` (301), y luego las nuevas reglas de limpieza las atrapan en una segunda redirección. Esto produce 2 saltos, aceptable para Google (<5).
+- **Códigos C6xxx**: son numeración interna de la Junta Central Fallera. El patrón `^pdf/C6[0-9]+.*\.pdf$` es seguro y no afectará a archivos legítimos (los actuales viven bajo `/pdf/JCF-2026-27/` y NO empiezan con `C6` en raíz).
+- **Si añades un PDF nuevo**: ponlo bajo su carpeta correspondiente (`/pdf/JCF-2026-27/`, `/pdf/Llibrets/`, `/pdf/Presentaciones/`) — NO en la raíz `/pdf/`. Si por error queda en raíz, las URLs antiguas pueden no resolverse al reorganizarlo después.
+- **Si eliminas un PDF**: si no tiene equivalente, añade una regla 410 Gone. Si tiene equivalente, añade una 301.
+
+### Verificar tras el deploy
+
+```bash
+# Debe redirigir a /pdf/Llibrets/Llibret_2025-26.html
+curl -sI https://fallasuissa.es/va/pdf/Llibrets/Llibret_2025-26.html | grep -E '^(HTTP|Location)'
+
+# Debe redirigir a /deportes.html
+curl -sI https://fallasuissa.es/pdf/C6192_XXXIII_Campeonato_PETANCA.pdf | grep -E '^(HTTP|Location)'
+
+# Debe devolver HTTP/1.1 410 Gone
+curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
+```
+
+### Procedimiento tras un aviso de GSC
+
+1. Exportar los ejemplos de URLs desde GSC → **Indexación → No se ha encontrado (404)**.
+2. Clasificar en **patrones** (no en URLs sueltas): renombrados, eliminados, prefijos inventados, carpetas reorganizadas.
+3. Añadir 1 regla `RewriteRule` por patrón en `src/.htaccess` (301 si hay destino, 410 si no).
+4. `npm run build` (la regla viaja a `dist/.htaccess` vía `rootFilesTask`).
+5. Tras desplegar, validar con `curl -sI` que cada patrón devuelve el código esperado.
+6. En GSC, pulsar **"Validar corrección"** en el informe. Google re-rastreará en 2-3 semanas.
+
+---
+
+Última actualización: 18 de mayo de 2026 - v4.7.4
