@@ -21,6 +21,7 @@
     margin: 0 auto;
     // Color base para modo oscuro (transicionable)
     background-color: v.$negro;
+    border: 2px solid v.$primary-color;
     border-radius: v.$border-radius;
     box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.1);
     position: relative;

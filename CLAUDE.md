@@ -2,9 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.7.5
+**Version:** 4.7.6
 **Last Updated:** 18 de mayo de 2026
 
+> 4.7.6 — Pulido visual post-4.7.5:
+> 1. **Borde coral en la cuenta atrás.** `.countdown__contenedor` (`src/scss/components/_countdown.scss`) gana `border: 2px solid v.$primary-color` — visible en ambos modos (claro/oscuro) porque está en la regla base. Acentúa el contraste de la card sobre el gradiente azul institucional.
+> 2. **Nuevo icono SVG para el teaser Nuevos Falleros.** El archivo `src/img/logos/fondo-nuevos-falleros.svg` fue renombrado a `src/img/logos/logo-nuevos-falleros.svg` (manteniendo coherencia con la convención `logo-*` del resto de iconos del directorio). El `<img class="nuevos-falleros__icono">` del teaser en `src/index.html` apunta ahora a este SVG en lugar del PNG transitorio. El PNG (`logo-nuevos-falleros.png`) sigue en `src/img/logos/` y `dist/img/logos/` pero sin referencias activas — disponible para reutilización (p. ej. en redes sociales / og-image) o eliminable si se confirma que no se necesita.
+>
 > 4.7.5 — Nueva sección **Nuevos Falleros** + reorganización del iframe Drive:
 > 1. **Página dedicada `src/nuevos-falleros.html`** + teaser en `src/index.html` (data-index="12", entre Galería y "¿Quieres más?"). Renumerada `.quieres-mas` a `data-index="13"`. Patrón análogo a `deportes` / `colaboraciones`: teaser corto en index con CTA "Saber más" → página standalone con el contenido completo. Estructura final de la página dedicada (de arriba a abajo): `<h3>Documentos de interés general</h3>` (alineado a la izquierda) → iframe Drive + skeleton + `<noscript>` fallback → CTA "Abrir en pestaña nueva" → `<h3>Formularios descargables</h3>` → grid de 2 tarjetas linkando a `autorizacion-imagen.html` (mayores) y `autorizacion-imagen-menor.html` (menores). No se generan PDFs nuevos: las dos HTMLs preexistentes ya son imprimibles desde el navegador.
 > 2. **iframe Drive MOVIDO de `deportes.html` → `nuevos-falleros.html`.** El file ID Drive (`1suCLG0EG6eU5TN5b2fIdOE89U17i-l3o-m_AjaSdYxU`) ya no se referencia desde `deportes.html` (que ahora solo contiene intro + delegados + tablón JCF). El CTA "Abrir en pestaña nueva" también se trasladó. Si vuelve un documento Drive a deportes, restaurar markup desde el commit anterior. Las keys `deportes.regionLabel/iframeTitle/fallback/abrirExterno/abrirExternoAria` siguen en `translations.json` (no rompen nada, reutilizables).
@@ -170,7 +174,7 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.7.5).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.7.6).
 
 ## Architecture Decisions & Constraints
 
