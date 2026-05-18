@@ -137,6 +137,25 @@ RewriteRule ^ https://fallasuissa.es%{REQUEST_URI} [R=301,L]
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
     RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
+    # =======================================================================
+    # REDIRECCIONES 301/410 — Limpieza de URLs 404 detectadas por GSC
+    # =======================================================================
+
+    # A) Google indexó variantes /va/pdf/* que nunca existieron (los PDFs
+    #    solo viven en /pdf/*). Redirigir a la versión real.
+    RewriteRule ^va/pdf/(.*)$ /pdf/$1 [R=301,L]
+
+    # B) PDFs "Mig Any 2025" eliminados sin equivalente actual -> 410 Gone
+    #    (avisa a Google de que se fueron permanentemente)
+    RewriteRule ^pdf/migany2025.*\.pdf$ - [R=410,L]
+
+    # C) Llibret 2024 movido de /pdf/ a /pdf/Llibrets/
+    RewriteRule "^pdf/2024_LLIBRET_FALLA._MORERES_DIGITAL\.pdf$" "/pdf/Llibrets/2024_LLIBRET_FALLA%20_MORERES_DIGITAL.pdf" [R=301,L]
+
+    # D) Bases campeonatos JCF temporada anterior (códigos C6xxx) ->
+    #    /deportes.html (nuevas bases 2026-27 enlazadas desde el tablón)
+    RewriteRule "^pdf/C6[0-9]+.*\.pdf$" /deportes.html [R=301,L]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
