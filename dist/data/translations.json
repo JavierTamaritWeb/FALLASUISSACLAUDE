@@ -9,7 +9,8 @@
         "blog": "Blog",
         "meteo": "Meteo",
         "galeria": "Galería",
-        "colaboraciones": "Colaboraciones"
+        "colaboraciones": "Colaboraciones",
+        "nuevosFalleros": "Nuevos Falleros"
       },
       "countdown": {
         "message": "Cuenta atrás para las Fallas",
@@ -117,6 +118,32 @@
         "delegadosTitulo": "Delegados de Deportes",
         "tablonTitulo": "Tablón de Anuncios",
         "tablonAriaLabel": "Tablón de anuncios deportivos JCF"
+      },
+      "nuevosFalleros": {
+        "titulo": "Nuevos Falleros",
+        "introIndex": "¿Eres una nueva incorporación a nuestra Falla? ¡Te damos una calurosa bienvenida! A continuación te adjuntamos unos links de interés. ;)",
+        "ctaIndex": "Saber más",
+        "ctaIndexAria": "Ver la página de Nuevos Falleros",
+        "intro": "Bienvenido/a a la Falla Suïssa - L'Alqueria del Favero. En esta sección reunimos la documentación que necesitas para incorporarte como nuevo fallero o fallera.\n\nDescarga, imprime y firma el formulario que corresponda según tu edad, y entrégalo a la junta directiva de la comisión.",
+        "formulariosTitulo": "Formularios descargables",
+        "docInteresTitulo": "Documentos de interés general",
+        "formMayores": {
+          "titulo": "Autorización de derechos de imagen — Falleros/as mayores de edad",
+          "desc": "Formulario imprimible de autorización para el tratamiento del nombre y la imagen, conforme al RGPD y la LOPDGDD.",
+          "cta": "Ver e imprimir",
+          "ctaAria": "Abrir el formulario de autorización de imagen para mayores de edad"
+        },
+        "formMenores": {
+          "titulo": "Autorización de derechos de imagen — Menores de edad",
+          "desc": "Formulario imprimible de autorización parental, a firmar por padre, madre o tutor/a legal.",
+          "cta": "Ver e imprimir",
+          "ctaAria": "Abrir el formulario de autorización de imagen para menores de edad"
+        },
+        "regionLabel": "Documento de información para nuevos falleros",
+        "iframeTitle": "Documento de información para nuevos falleros",
+        "fallback": "Tu navegador no puede mostrar el documento. Ábrelo en una pestaña nueva.",
+        "abrirExterno": "Abrir en una pestaña nueva",
+        "abrirExternoAria": "Abrir el documento de Nuevos Falleros en una pestaña nueva"
       },
       "quieres":{
         "titulo": "¿Quieres saber mas sobre nuestra Falla?",
@@ -482,7 +509,8 @@
         "blog": "Blog",
         "meteo": "Oratge",
         "galeria": "Galeria",
-        "colaboraciones": "Col·laboracions"
+        "colaboraciones": "Col·laboracions",
+        "nuevosFalleros": "Nous Fallers"
       },
       "countdown": {
         "message": "Compte enrere per a les Fallas",
@@ -590,6 +618,32 @@
         "delegadosTitulo": "Delegats d'Esports",
         "tablonTitulo": "Tauler d'Anuncis",
         "tablonAriaLabel": "Tauler d'anuncis esportius JCF"
+      },
+      "nuevosFalleros": {
+        "titulo": "Nous Fallers",
+        "introIndex": "Ets una nova incorporació a la nostra Falla? Et donem una càlida benvinguda! A continuació t'adjuntem uns enllaços d'interés. ;)",
+        "ctaIndex": "Saber-ne més",
+        "ctaIndexAria": "Veure la pàgina de Nous Fallers",
+        "intro": "Benvingut/da a la Falla Suïssa - L'Alqueria del Favero. En aquesta secció reunim la documentació que necessites per a incorporar-te com a nou faller o fallera.\n\nDescarrega, imprimeix i firma el formulari que corresponga segons la teua edat, i lliura'l a la junta directiva de la comissió.",
+        "formulariosTitulo": "Formularis descarregables",
+        "docInteresTitulo": "Documents d'interés general",
+        "formMayores": {
+          "titulo": "Autorització de drets d'imatge — Fallers/es majors d'edat",
+          "desc": "Formulari imprimible d'autorització per al tractament del nom i la imatge, conforme al RGPD i la LOPDGDD.",
+          "cta": "Veure i imprimir",
+          "ctaAria": "Obrir el formulari d'autorització d'imatge per a majors d'edat"
+        },
+        "formMenores": {
+          "titulo": "Autorització de drets d'imatge — Menors d'edat",
+          "desc": "Formulari imprimible d'autorització parental, a firmar pel pare, mare o tutor/a legal.",
+          "cta": "Veure i imprimir",
+          "ctaAria": "Obrir el formulari d'autorització d'imatge per a menors d'edat"
+        },
+        "regionLabel": "Document d'informació per a nous fallers",
+        "iframeTitle": "Document d'informació per a nous fallers",
+        "fallback": "El teu navegador no pot mostrar el document. Obri'l en una pestanya nova.",
+        "abrirExterno": "Obrir en una pestanya nova",
+        "abrirExternoAria": "Obrir el document de Nous Fallers en una pestanya nova"
       },
       "quieres":{
         "titulo": "Vols saber més sobre la nostra Falla?",
@@ -954,7 +1008,8 @@
         "deportes": "Sports",
         "blog": "Blog",
         "meteo": "Weather",
-        "galeria": "Gallery"
+        "galeria": "Gallery",
+        "nuevosFalleros": "New Members"
       },
       "eventos": {
         "titulo": "Events",
@@ -974,6 +1029,32 @@
         "delegadosTitulo": "Sports Delegates",
         "tablonTitulo": "Noticeboard",
         "tablonAriaLabel": "JCF sports announcements noticeboard"
+      },
+      "nuevosFalleros": {
+        "titulo": "New Members",
+        "introIndex": "Are you a new addition to our Falla? We give you a warm welcome! Below you'll find some useful links. ;)",
+        "ctaIndex": "Learn more",
+        "ctaIndexAria": "Go to the New Members page",
+        "intro": "Welcome to Falla Suïssa - L'Alqueria del Favero. This section gathers the documentation you need to register as a new fallero or fallera.\n\nDownload, print and sign the form that applies to your age, and hand it to the comisión's board.",
+        "formulariosTitulo": "Downloadable forms",
+        "docInteresTitulo": "General interest documents",
+        "formMayores": {
+          "titulo": "Image rights authorization — Falleros/as of legal age",
+          "desc": "Printable authorization form for the processing of the name and image, in accordance with the GDPR and the LOPDGDD.",
+          "cta": "View and print",
+          "ctaAria": "Open the image rights authorization form for adults"
+        },
+        "formMenores": {
+          "titulo": "Image rights authorization — Minors",
+          "desc": "Printable parental authorization form, to be signed by father, mother or legal guardian.",
+          "cta": "View and print",
+          "ctaAria": "Open the image rights authorization form for minors"
+        },
+        "regionLabel": "Document with information for new members",
+        "iframeTitle": "Document with information for new members",
+        "fallback": "Your browser cannot display the document. Open it in a new tab.",
+        "abrirExterno": "Open in a new tab",
+        "abrirExternoAria": "Open the New Members document in a new tab"
       },
       "calendario": {
         "titulo": "Calendar",
@@ -1110,7 +1191,8 @@
         "deportes": "Sports",
         "blog": "Blog",
         "meteo": "Météo",
-        "galeria": "Galerie"
+        "galeria": "Galerie",
+        "nuevosFalleros": "Nouveaux Falleros"
       },
       "eventos": {
         "titulo": "Événements",
@@ -1130,6 +1212,32 @@
         "delegadosTitulo": "Délégués des Sports",
         "tablonTitulo": "Tableau d'Annonces",
         "tablonAriaLabel": "Tableau d'annonces sportives JCF"
+      },
+      "nuevosFalleros": {
+        "titulo": "Nouveaux Falleros",
+        "introIndex": "Es-tu une nouvelle recrue de notre Falla ? Nous te souhaitons la bienvenue ! Ci-dessous, tu trouveras quelques liens utiles. ;)",
+        "ctaIndex": "En savoir plus",
+        "ctaIndexAria": "Aller à la page Nouveaux Falleros",
+        "intro": "Bienvenue à la Falla Suïssa - L'Alqueria del Favero. Cette section rassemble la documentation nécessaire pour t'inscrire comme nouveau fallero ou fallera.\n\nTélécharge, imprime et signe le formulaire correspondant à ton âge, et remets-le au conseil d'administration de la commission.",
+        "formulariosTitulo": "Formulaires téléchargeables",
+        "docInteresTitulo": "Documents d'intérêt général",
+        "formMayores": {
+          "titulo": "Autorisation des droits d'image — Falleros majeurs",
+          "desc": "Formulaire imprimable d'autorisation pour le traitement du nom et de l'image, conformément au RGPD et à la LOPDGDD.",
+          "cta": "Voir et imprimer",
+          "ctaAria": "Ouvrir le formulaire d'autorisation d'image pour les majeurs"
+        },
+        "formMenores": {
+          "titulo": "Autorisation des droits d'image — Mineurs",
+          "desc": "Formulaire imprimable d'autorisation parentale, à signer par le père, la mère ou le tuteur/la tutrice légal(e).",
+          "cta": "Voir et imprimer",
+          "ctaAria": "Ouvrir le formulaire d'autorisation d'image pour les mineurs"
+        },
+        "regionLabel": "Document d'information pour les nouveaux falleros",
+        "iframeTitle": "Document d'information pour les nouveaux falleros",
+        "fallback": "Votre navigateur ne peut pas afficher le document. Ouvrez-le dans un nouvel onglet.",
+        "abrirExterno": "Ouvrir dans un nouvel onglet",
+        "abrirExternoAria": "Ouvrir le document Nouveaux Falleros dans un nouvel onglet"
       },
       "calendario": {
         "titulo": "Calendrier",

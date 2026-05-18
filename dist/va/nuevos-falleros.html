@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aviso Legal | Falla Suïssa - L'Alqueria del Favero</title>
-  <meta name="description" content="Aviso legal e identificación del titular del sitio web de la Falla Suïssa - L'Alqueria del Favero.">
+  <title>Nuevos Falleros | Falla Suïssa - L'Alqueria del Favero</title>
+  <meta name="description" content="Información para nuevos falleros y falleras de la Falla Suïssa - L'Alqueria del Favero: documentación, formularios descargables de autorización de derechos de imagen para mayores y menores de edad.">
   <meta name="robots" content="index, follow">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content="#0a4b8d">
 
   <!-- Google Fonts -->
@@ -20,14 +20,30 @@
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   <link rel="manifest" href="/manifest.json">
 
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nuevos Falleros | Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:description" content="Documentación y formularios para incorporarte como nuevo fallero o fallera de la Falla Suïssa - L'Alqueria del Favero.">
+  <meta property="og:image" content="https://fallasuissa.es/img/og-share.png?v=20260518">
+  <meta property="og:url" content="https://fallasuissa.es/nuevos-falleros.html">
+  <meta property="og:site_name" content="Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="ca_ES">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nuevos Falleros | Falla Suïssa - L'Alqueria del Favero">
+  <meta name="twitter:description" content="Documentación y formularios para incorporarte como nuevo fallero o fallera de la Falla Suïssa - L'Alqueria del Favero.">
+  <meta name="twitter:image" content="https://fallasuissa.es/img/og-share.png?v=20260518">
+
   <!-- Hojas de estilo -->
   <link rel="stylesheet" href="css/main.css?v=0764b7af23d3">
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
-  <link rel="canonical" href="https://fallasuissa.es/va/aviso-legal.html">
-  <link rel="alternate" hreflang="es" href="https://fallasuissa.es/aviso-legal.html">
-  <link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/aviso-legal.html">
-  <link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/aviso-legal.html">
+  <link rel="canonical" href="https://fallasuissa.es/va/nuevos-falleros.html">
+  <link rel="alternate" hreflang="es" href="https://fallasuissa.es/nuevos-falleros.html">
+  <link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/nuevos-falleros.html">
+  <link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/nuevos-falleros.html">
 </head>
 <body>
   <header class="header-inner">
@@ -42,12 +58,12 @@
             </div>
           </div>
           <button class="header__modo-boton" id="botonModoOscuro" aria-label="Cambiar a modo oscuro">
-            <svg class="header__icon header__icon--moon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <svg class="header__icon header__icon--moon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M21 12a9 9 0 01-9 9 7.5 7.5 0 01-6.88-4.4 7 7 0 0010.06-9.48A9 9 0 0121 12z"/>
             </svg>
           </button>
         </div>
-        <div class="header__notificacion" id="notificacion"></div>
+        <div class="header__notificacion" id="notificacion" aria-live="polite" aria-atomic="true"></div>
         <nav class="navegacion" role="navigation" aria-label="Menú principal">
           <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html">Inici</a>
           <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
@@ -58,9 +74,8 @@
           <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html">Oratge</a>
           <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html">Blog</a>
           <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html">Galeria</a>
-          <a class="navegacion__enlace" data-i18n="nav.nuevosFalleros" href="nuevos-falleros.html">Nous Fallers</a>
+          <a class="navegacion__enlace active" data-i18n="nav.nuevosFalleros" href="nuevos-falleros.html" aria-current="page">Nous Fallers</a>
         </nav>
-        <div class="header__notificacion" id="notificacion"></div>
       </div>
     </div>
     <div class="header-inner__grid">
@@ -70,55 +85,53 @@
           <source srcset="img/Escudo_falla.webp" type="image/webp">
           <img class="header-inner__escudo" src="img/Escudo_falla.png" alt="Escudo de la Falla" loading="lazy">
         </picture>
-        <h1 class="heading-inner"><span class="heading-inner__span">Aviso Legal</span></h1>
+        <h1 class="heading-inner"><span class="heading-inner__span" data-i18n="nuevosFalleros.titulo">Nous Fallers</span></h1>
       </div>
     </div>
   </header>
   <div class="frieze frieze--bordered"></div>
 
-  <section class="contenido-legal">
+  <section class="nuevos-falleros" aria-labelledby="nuevos-falleros-title">
     <div class="contenedor">
-      <p>Última actualización: 23 de marzo de 2026</p>
+      <h3 class="nuevos-falleros__subtitulo nuevos-falleros__subtitulo--left reveal reveal--soft" data-i18n="nuevosFalleros.docInteresTitulo">Documents d'interés general</h3>
 
-      <h2>1. Identificación del titular</h2>
-      <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa:</p>
-      <ul>
-        <li><strong>Denominación:</strong> Asociación Cultural Falla Suïssa - L'Alqueria del Favero</li>
-        <li><strong>CIF:</strong> G19961085</li>
-        <li><strong>Domicilio social:</strong> Carre Suïssa, Num 12, Esc. 2, Planta 10, Puerta D, 46024 València (Valencia)</li>
-        <li><strong>Correo electrónico:</strong> <a href="mailto:info@fallasuissa.es">info@fallasuissa.es</a></li>
-        <li><strong>Sitio web:</strong> <a href="https://fallasuissa.es">https://fallasuissa.es</a></li>
-      </ul>
+      <div class="nuevos-falleros__doc-wrapper reveal" role="region" data-i18n-aria-label="nuevosFalleros.regionLabel" aria-label="Document d'informació per a nous fallers">
+        <div class="nuevos-falleros__doc-skeleton" aria-hidden="true"></div>
+        <iframe class="nuevos-falleros__doc"
+          src="https://drive.google.com/file/d/1suCLG0EG6eU5TN5b2fIdOE89U17i-l3o-m_AjaSdYxU/preview"
+          data-i18n-title="nuevosFalleros.iframeTitle"
+          loading="lazy"
+          allow="autoplay"
+          referrerpolicy="no-referrer-when-downgrade" title="Document d'informació per a nous fallers"></iframe>
+        <noscript>
+          <p class="nuevos-falleros__fallback" data-i18n="nuevosFalleros.fallback">El teu navegador no pot mostrar el document. Obri'l en una pestanya nova.</p>
+        </noscript>
+      </div>
 
-      <h2>2. Objeto y ámbito de aplicación</h2>
-      <p>El presente Aviso Legal regula el acceso y uso del sitio web <strong>fallasuissa.es</strong>, propiedad de la Asociación Cultural Falla Suïssa - L'Alqueria del Favero, entidad sin ánimo de lucro dedicada a la promoción y difusión de la cultura fallera valenciana.</p>
+      <div class="nuevos-falleros__cta-wrapper reveal">
+        <a class="boton nuevos-falleros__abrir-externo"
+          href="https://drive.google.com/file/d/1suCLG0EG6eU5TN5b2fIdOE89U17i-l3o-m_AjaSdYxU/view"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-i18n="nuevosFalleros.abrirExterno"
+          data-i18n-aria-label="nuevosFalleros.abrirExternoAria" aria-label="Obrir el document de Nous Fallers en una pestanya nova">Obrir en una pestanya nova</a>
+      </div>
 
-      <h2>3. Propiedad intelectual e industrial</h2>
-      <p>Todos los contenidos del sitio web, incluyendo textos, fotografías, vídeos, diseños gráficos, logotipos, iconos y código fuente, son propiedad de la Asociación Cultural Falla Suïssa - L'Alqueria del Favero o de sus legítimos titulares, y están protegidos por las leyes de propiedad intelectual e industrial vigentes.</p>
-      <p>Queda prohibida la reproducción, distribución, comunicación pública o transformación de dichos contenidos sin autorización expresa, salvo para uso personal y privado.</p>
+      <h3 id="nuevos-falleros-title" class="nuevos-falleros__subtitulo reveal reveal--soft" data-i18n="nuevosFalleros.formulariosTitulo">Formularis descarregables</h3>
 
-      <h2>4. Condiciones de uso</h2>
-      <p>El usuario se compromete a utilizar el sitio web de conformidad con la ley, el presente Aviso Legal, la moral y las buenas costumbres. En particular, se compromete a no:</p>
-      <ul>
-        <li>Utilizar los contenidos con fines ilícitos o contrarios a lo establecido en este Aviso Legal.</li>
-        <li>Reproducir, copiar, distribuir o modificar los contenidos sin autorización.</li>
-        <li>Suprimir, eludir o manipular los derechos de propiedad intelectual.</li>
-      </ul>
+      <div class="nuevos-falleros__grid">
+        <article class="nuevos-falleros__card reveal reveal--soft">
+          <h4 class="nuevos-falleros__card-titulo" data-i18n="nuevosFalleros.formMayores.titulo">Autorització de drets d'imatge — Fallers/es majors d'edat</h4>
+          <p class="nuevos-falleros__card-desc" data-i18n="nuevosFalleros.formMayores.desc">Formulari imprimible d'autorització per al tractament del nom i la imatge, conforme al RGPD i la LOPDGDD.</p>
+          <a class="boton nuevos-falleros__card-cta" href="autorizacion-imagen.html" data-i18n="nuevosFalleros.formMayores.cta" data-i18n-aria-label="nuevosFalleros.formMayores.ctaAria" aria-label="Obrir el formulari d'autorització d'imatge per a majors d'edat">Veure i imprimir</a>
+        </article>
 
-      <h2>5. Exclusión de responsabilidad</h2>
-      <p>La Asociación no se hace responsable de:</p>
-      <ul>
-        <li>La falta de disponibilidad, continuidad o calidad del sitio web.</li>
-        <li>Los daños que pudieran derivarse del uso del sitio web.</li>
-        <li>Los contenidos y servicios de sitios web de terceros enlazados desde esta web.</li>
-        <li>La presencia de virus o elementos dañinos que pudieran causar alteraciones en el sistema informático del usuario.</li>
-      </ul>
-
-      <h2>6. Enlaces a terceros</h2>
-      <p>Este sitio web puede contener enlaces a páginas de terceros (redes sociales, entidades colaboradoras, etc.). La Asociación no asume responsabilidad alguna sobre el contenido, políticas de privacidad o prácticas de dichos sitios externos.</p>
-
-      <h2>7. Legislación aplicable y jurisdicción</h2>
-      <p>Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, las partes se someten a los Juzgados y Tribunales de la ciudad de València.</p>
+        <article class="nuevos-falleros__card reveal reveal--soft">
+          <h4 class="nuevos-falleros__card-titulo" data-i18n="nuevosFalleros.formMenores.titulo">Autorització de drets d'imatge — Menors d'edat</h4>
+          <p class="nuevos-falleros__card-desc" data-i18n="nuevosFalleros.formMenores.desc">Formulari imprimible d'autorització parental, a firmar pel pare, mare o tutor/a legal.</p>
+          <a class="boton nuevos-falleros__card-cta" href="autorizacion-imagen-menor.html" data-i18n="nuevosFalleros.formMenores.cta" data-i18n-aria-label="nuevosFalleros.formMenores.ctaAria" aria-label="Obrir el formulari d'autorització d'imatge per a menors d'edat">Veure i imprimir</a>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -136,7 +149,7 @@
           <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Oratge</a>
           <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a>
           <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galeria</a>
-          <a class="footer__enlace" href="nuevos-falleros.html" data-i18n="nav.nuevosFalleros">Nous Fallers</a>
+          <a class="footer__enlace active" href="nuevos-falleros.html" data-i18n="nav.nuevosFalleros">Nous Fallers</a>
         </nav>
         <picture>
           <source srcset="img/Escudo_falla.avif" type="image/avif">

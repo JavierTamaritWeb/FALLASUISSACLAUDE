@@ -128,6 +128,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://fallasuissa.es/nuevos-falleros.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/nuevos-falleros.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/nuevos-falleros.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/nuevos-falleros.html"/>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/nuevos-falleros.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/nuevos-falleros.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/nuevos-falleros.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/nuevos-falleros.html"/>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://fallasuissa.es/meteo.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/meteo.html"/>
     <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/meteo.html"/>

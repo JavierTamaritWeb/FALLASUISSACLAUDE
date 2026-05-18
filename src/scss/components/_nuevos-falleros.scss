@@ -1,0 +1,300 @@
+// components/_nuevos-falleros.scss
+// Sección Nuevos Falleros — bienvenida a nuevos falleros y formularios descargables
+
+@use '../abstracts/variables' as v;
+
+.nuevos-falleros {
+  position: relative;
+  background-color: v.$blanco-hueso;
+  border-top: 1px solid v.$primary-color;
+  padding: 6rem 0;
+  overflow: hidden;
+  transition: background-color var(--theme-transition, 2.4s ease-in-out);
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__heading-texto {
+    font-weight: bold;
+    color: v.$primary-color;
+
+    @media (max-width: 767px) {
+      font-size: v.$font-size-medium;
+    }
+  }
+
+  &__icono {
+    width: 6.4rem;
+    height: 6.4rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+  }
+
+  &__intro {
+    max-width: 70ch;
+    margin: 2rem auto 3rem;
+    text-align: center;
+    font-size: v.$font-size-regular;
+    line-height: 1.6;
+    color: v.$gris-oscuro;
+    padding: 0 2rem;
+    transition: color var(--theme-transition, 2.4s ease-in-out);
+
+    p + p {
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 767px) {
+      font-size: v.$font-size-small;
+    }
+  }
+
+  &__cta-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  &__subtitulo {
+    text-align: center;
+    color: v.$primary-color;
+    margin: 4rem auto 2rem;
+    font-size: v.$font-size-medium;
+    font-weight: bold;
+
+    @media (max-width: 767px) {
+      font-size: v.$font-size-regular;
+    }
+
+    // Alineación con el doc-wrapper: mismo max-width por breakpoint para que
+    // los bordes izquierdos coincidan visualmente.
+    &--left {
+      text-align: left;
+      max-width: 110rem;
+
+      @media (min-width: 1025px) {
+        max-width: 100rem;
+      }
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 2rem;
+    max-width: 90rem;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+      padding: 0 1rem;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    background-color: v.$blanco;
+    border: 1px solid v.$primary-color;
+    border-radius: v.$border-radius;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.08);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      background-color var(--theme-transition, 2.4s ease-in-out),
+      border-color var(--theme-transition, 2.4s ease-in-out);
+
+    &:hover,
+    &:focus-within {
+      transform: translateY(-2px);
+      box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.18);
+    }
+  }
+
+  &__card-titulo {
+    color: v.$color-azul-falla;
+    font-size: v.$font-size-regular;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 1rem;
+    text-align: left;
+
+    @media (max-width: 767px) {
+      font-size: v.$font-size-small;
+    }
+  }
+
+  &__card-desc {
+    color: v.$gris-oscuro;
+    font-size: v.$font-size-small;
+    line-height: 1.5;
+    margin: 0 0 2rem;
+    flex-grow: 1;
+    transition: color var(--theme-transition, 2.4s ease-in-out);
+  }
+
+  &__card-cta {
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  &__cta-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  // Solo ajustes de posicionamiento; los estilos visuales vienen de .boton
+  &__abrir-externo {
+    margin: 1.5rem auto 0;
+  }
+
+  // Wrapper del iframe Drive
+  &__doc-wrapper {
+    position: relative;
+    margin: 3rem auto 0;
+    max-width: 110rem;
+    aspect-ratio: 4 / 5;
+    border: 1px solid v.$primary-color;
+    border-radius: v.$border-radius;
+    box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.25);
+    background-color: v.$primary-color;
+    overflow: hidden;
+    transition: box-shadow var(--theme-transition, 2.4s ease-in-out);
+
+    // Franja superior coral (2rem) que cubre la mitad superior del border-top
+    // oscuro del iframe. Resultado visual: 2rem coral + 2rem oscuro + documento.
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2rem;
+      background-color: v.$primary-color;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    @media (max-width: 767px) {
+      aspect-ratio: 3 / 4;
+      margin-inline: 1rem;
+      border-radius: 0.6rem;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      aspect-ratio: 1 / 1;
+    }
+
+    @media (min-width: 1025px) {
+      max-width: 100rem;
+    }
+  }
+
+  &__doc-skeleton {
+    position: absolute;
+    inset: 4rem 0 0 0;
+    background: linear-gradient(90deg, v.$blanco-hueso 0%, v.$gris-muy-claro-neutro 50%, v.$blanco-hueso 100%);
+    background-size: 200% 100%;
+    animation: nuevos-falleros-skeleton 1.4s ease-in-out infinite;
+    z-index: 0;
+  }
+
+  // Banda separadora superior (4rem total): 2rem coral del ::before del wrapper +
+  // 2rem oscuros del border-top del iframe. NO añadir padding-top al wrapper ni
+  // margin-top al iframe — cualquier offset extra rompe la alineación.
+  &__doc {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-top: 4rem solid #1f1f1f;
+    display: block;
+    z-index: 1;
+  }
+
+  &__fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    color: v.$gris-oscuro;
+    background-color: v.$blanco;
+  }
+
+  // Variante teaser (solo en index.html): sin grid de tarjetas, solo intro + CTA
+  &--teaser {
+    .nuevos-falleros__intro {
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: 4rem 0;
+  }
+
+  @media (min-width: 768px) {
+    padding: 8rem 0;
+  }
+}
+
+// Modo oscuro: fondos y textos se invierten
+body.modo-oscuro .nuevos-falleros {
+  background-color: v.$negro-casi;
+
+  &__intro {
+    color: v.$gris-muy-claro;
+  }
+
+  &__card {
+    background-color: v.$gris-muy-oscuro;
+    border-color: v.$primary-color;
+    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.5);
+
+    &:hover,
+    &:focus-within {
+      box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  &__card-titulo {
+    color: v.$primary-color;
+  }
+
+  &__card-desc {
+    color: v.$gris-muy-claro;
+  }
+
+  &__doc-wrapper {
+    background-color: v.$primary-color;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  }
+
+  &__doc-skeleton {
+    background: linear-gradient(90deg, v.$gris-oscuro 0%, v.$gris-muy-oscuro 50%, v.$gris-oscuro 100%);
+    background-size: 200% 100%;
+  }
+}
+
+@keyframes nuevos-falleros-skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nuevos-falleros__doc-skeleton {
+    animation: none;
+  }
+}

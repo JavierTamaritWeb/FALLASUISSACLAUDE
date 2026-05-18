@@ -231,7 +231,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=c4fa68a5e56f">
+  <link rel="stylesheet" href="css/main.css?v=0764b7af23d3">
 
   <!-- Preload LCP Images -->
   <link rel="preload" as="image" href="img/Escudo_falla.avif" type="image/avif" fetchpriority="high">
@@ -295,6 +295,7 @@
           <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html">Oratge</a>
           <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html">Blog</a>
           <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html">Galeria</a>
+          <a class="navegacion__enlace" data-i18n="nav.nuevosFalleros" href="nuevos-falleros.html">Nous Fallers</a>
         </nav>
       </div>
       
@@ -1271,8 +1272,24 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
 
   <hr class="seccion-hr">
 
+  <!-- Sección Nuevos Falleros — Teaser hacia nuevos-falleros.html -->
+  <section class="nuevos-falleros nuevos-falleros--teaser" data-index="12">
+    <div class="contenedor">
+      <div class="nuevos-falleros__heading reveal reveal--soft">
+        <img class="nuevos-falleros__icono" width="64" height="64" src="img/logos/logo-escudo-cutty.svg" alt="Icono de bienvenida a nuevos falleros" loading="lazy" decoding="async">
+        <h2 class="nuevos-falleros__heading-texto" data-i18n="nuevosFalleros.titulo">Nous Fallers</h2>
+      </div>
+      <p class="nuevos-falleros__intro reveal reveal--soft" data-i18n="nuevosFalleros.introIndex">Ets una nova incorporació a la nostra Falla? Et donem una càlida benvinguda! A continuació t'adjuntem uns enllaços d'interés. ;)</p>
+      <div class="nuevos-falleros__cta-wrapper reveal">
+        <a class="boton" href="nuevos-falleros.html" data-i18n="nuevosFalleros.ctaIndex" data-i18n-aria-label="nuevosFalleros.ctaIndexAria" aria-label="Veure la pàgina de Nous Fallers">Saber-ne més</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="seccion-hr">
+
   <!-- Sección "¿Quieres saber más sobre nuestra Falla?" -->
-  <section class="quieres-mas" data-index="12">
+  <section class="quieres-mas" data-index="13">
     <div class="quieres-mas__flex contenedor reveal reveal--slow">
       <img class="quieres-mas__imagen" width="64" height="64" src="img/logos/logo-ask.svg" alt="Icono de Preguntar">
       <!-- El enlace tiene un id para poder asignarle el evento de apertura del modal -->
@@ -1406,6 +1423,7 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
           <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Oratge</a>
           <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a>
           <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galeria</a>
+          <a class="footer__enlace" href="nuevos-falleros.html" data-i18n="nav.nuevosFalleros">Nous Fallers</a>
         </nav>
         <picture>
           <source srcset="img/Escudo_falla.avif" type="image/avif">
@@ -1440,17 +1458,17 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
   <!-- Scripts JavaScript -->
    
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/swiper.js?v=c4fa68a5e56f"></script>
-  <script src="js/meteo.js?v=c4fa68a5e56f" defer></script>
-  <script src="js/dark.js?v=c4fa68a5e56f"></script>
-  <script src="js/lang.js?v=c4fa68a5e56f"></script>
-  <script src="js/nav-menu.js?v=c4fa68a5e56f"></script>
-  <script src="js/scroll-reveal.js?v=c4fa68a5e56f" defer></script>
-  <script src="js/board.js?v=c4fa68a5e56f" defer></script>
-  <script src="js/countdown.js?v=c4fa68a5e56f" defer></script>
-  <script src="js/colaboraciones-lightbox.js?v=c4fa68a5e56f" defer></script>
-  <script src="js/accessibility.js?v=c4fa68a5e56f" defer></script>
-  <script src="js/home-deferred.js?v=c4fa68a5e56f"></script>
+  <script src="js/swiper.js?v=0764b7af23d3"></script>
+  <script src="js/meteo.js?v=0764b7af23d3" defer></script>
+  <script src="js/dark.js?v=0764b7af23d3"></script>
+  <script src="js/lang.js?v=0764b7af23d3"></script>
+  <script src="js/nav-menu.js?v=0764b7af23d3"></script>
+  <script src="js/scroll-reveal.js?v=0764b7af23d3" defer></script>
+  <script src="js/board.js?v=0764b7af23d3" defer></script>
+  <script src="js/countdown.js?v=0764b7af23d3" defer></script>
+  <script src="js/colaboraciones-lightbox.js?v=0764b7af23d3" defer></script>
+  <script src="js/accessibility.js?v=0764b7af23d3" defer></script>
+  <script src="js/home-deferred.js?v=0764b7af23d3"></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -1473,8 +1491,8 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
       });
     }
   </script>
-  <script src="js/envia.js?v=c4fa68a5e56f" defer></script>
-  <script src="js/banner-subvencion.js?v=c4fa68a5e56f" defer></script>
-  <script src="js/cookie-banner.js?v=c4fa68a5e56f" defer></script>
+  <script src="js/envia.js?v=0764b7af23d3" defer></script>
+  <script src="js/banner-subvencion.js?v=0764b7af23d3" defer></script>
+  <script src="js/cookie-banner.js?v=0764b7af23d3" defer></script>
 </body>
 </html>
