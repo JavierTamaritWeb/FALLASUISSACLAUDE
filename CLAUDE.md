@@ -2,9 +2,16 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Version:** 4.7.7
+**Version:** 4.7.8
 **Last Updated:** 24 de mayo de 2026
 
+> 4.7.8 — Pulido visual de la subsección Representantes (modo claro) para alinear con el resto de acordeones del sitio:
+> 1. **Fondo del panel = gradiente azul institucional heredado.** Se elimina el override `.accordion--representantes .accordion__content { background: v.$blanco-hueso }` que tenía v4.7.7. Ahora el panel hereda el gradiente `linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%)` del `.accordion__content` base de `_falla.scss` — mismo fondo que la Plana Mayor (acordeón "Fallera Mayor / Presidente / …") y HOPE. En modo oscuro sigue siendo `v.$negro` por la regla global de `_modo-oscuro.scss`.
+> 2. **Textos de cargo y placeholder en blanco-hueso.** Antes eran `v.$gris-oscuro` (legibles sobre fondo claro, ilegibles sobre azul oscuro). Pasan a `v.$blanco-hueso` igual que `.accordion__texto` de la Plana Mayor.
+> 3. **Nombre del representante se mantiene en coral** (`v.$primary-color`), consistente con `.accordion__nombre-plana-mayor` — destaca como acento sobre el azul institucional.
+> 4. **`box-shadow` de las miniaturas reforzada**: pasa de `rgba(0,0,0,.12)` (invisible sobre azul) a `rgba(0,0,0,.35)` en reposo y `rgba(0,0,0,.5)` en hover. El placeholder de fondo de imagen mientras carga pasa de `v.$blanco-hueso` a `rgba(255,255,255,.08)` (sutil blanco translúcido coherente con el azul).
+> 5. **Modo oscuro intacto**: las reglas `body.modo-oscuro .accordion--representantes { ... }` ya migradas en v4.7.7 (titular `$negro`, hover `$negro-casi`, sombra coral `rgba(255,111,97,.18-.32)`, cargo/placeholder `$gris-muy-claro`) siguen aplicándose correctamente — la cascada no cambió.
+>
 > 4.7.7 — Nueva subsección **Representantes** dentro de Historia/Archivos (en `src/index.html` y `src/lafalla.html`):
 > 1. **Acordeón nuevo** `accordion--representantes` con dos paneles cerrados por defecto: "Representantes 2025-26" (4 miniaturas: Fallera Mayor, Presidente, Fallera Mayor Infantil, Presidente Infantil) y "Representantes 2024-25" (mensaje "En construcción" mientras no haya datos publicables). Los 4 cargos por edición son los mismos que la Plana Mayor — cuando se rellenen los datos 2024-25 más adelante, el slot de Presidente reutilizará el mismo nombre/foto que 2025-26 (José Santos Quiles).
 > 2. **Grid responsivo** `representantes-grid` en `src/scss/components/_representantes.scss`: **2 columnas** <768px y **4 columnas en una fila desde ≥768px** (gap aumenta a `2.5rem` en ≥1200px). El salto de 2→4 columnas se hace a 768px (no a 1200px) para que las imágenes mantengan tamaño miniatura también en tablets/laptops — si no, en 768-1199px las fotos ocupaban ~50% del viewport y quedaban sobredimensionadas. Imágenes con `aspect-ratio: 3/4`, `max-width: 24rem`, borde coral `2px solid v.$primary-color`, hover `translateY(-0.4rem)` con `prefers-reduced-motion` neutralizado. Reutiliza las JPGs ya existentes en `src/img/` (FalleraMayor, Presidente, FalleraMayorInfantil, PresidenteInfantil) — el pipeline auto-genera AVIF/WebP sin añadir archivos nuevos al repo.

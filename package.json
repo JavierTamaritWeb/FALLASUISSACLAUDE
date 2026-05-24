@@ -1,6 +1,6 @@
 {
   "name": "web-falla",
-  "version": "4.7.7",
+  "version": "4.7.8",
   "description": "Proyecto Gulp para la Falla Suïssa - L'Alqueria del Favero",
   "main": "index.js",
   "scripts": {
