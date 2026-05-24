@@ -52,19 +52,18 @@
     }
   }
 
-  // Sobrescribir el gradiente azul + flex column que aplica el .accordion base.
-  .accordion__content {
-    background: v.$blanco-hueso;
-    transition: max-height 0.5s ease, background-color var(--theme-transition, 2.4s ease-in-out);
+  // El .accordion__content hereda del base de _falla.scss el gradiente azul
+  // institucional (lineal 135deg, #0a4b8d → #02427a → #003366) para mantener
+  // coherencia visual con el resto de acordeones del sitio (Plana Mayor, HOPE).
+  // Aquí solo se sobrescribe el .accordion__content-inner para que el grid
+  // funcione (el base aplica flex column + align-items center).
+  .accordion__content-inner {
+    display: block;
+    padding: 1rem;
+    text-align: initial;
 
-    .accordion__content-inner {
-      display: block;
-      padding: 1rem;
-      text-align: initial;
-
-      @media (min-width: 768px) {
-        padding: 1.5rem;
-      }
+    @media (min-width: 768px) {
+      padding: 1.5rem;
     }
   }
 }
@@ -110,13 +109,13 @@
     object-fit: cover;
     border-radius: v.$border-radius;
     border: 2px solid v.$primary-color;
-    background-color: v.$blanco-hueso;
-    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.12);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
       transform: translateY(-0.4rem);
-      box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.18);
+      box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.5);
     }
   }
 
@@ -125,6 +124,9 @@
     max-width: 24rem;
   }
 
+  // Textos sobre el gradiente azul institucional → blancos para contraste alto.
+  // Nombre en coral (consistente con .accordion__nombre-plana-mayor de la Plana
+  // Mayor), cargo y placeholder en blanco-hueso (igual que .accordion__texto).
   &__nombre {
     font-family: v.$font-family;
     color: v.$primary-color;
@@ -136,7 +138,7 @@
 
   &__cargo {
     font-size: 1.4rem;
-    color: v.$gris-oscuro;
+    color: v.$blanco-hueso;
     margin: 0.5rem 0 0;
     line-height: 1.3;
   }
@@ -147,7 +149,7 @@
     font-style: italic;
     font-size: v.$font-size-regular;
     padding: 3rem 1rem;
-    color: v.$gris-oscuro;
+    color: v.$blanco-hueso;
   }
 }
 
