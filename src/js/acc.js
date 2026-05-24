@@ -1,9 +1,15 @@
 // js/acc.js
 
-
-
 function initAccordion() {
   const headers = document.querySelectorAll('.accordion__titular');
+
+  // Si el titular tiene aria-expanded, lo sincronizamos con el estado abierto/cerrado.
+  // Los acordeones antiguos sin ese atributo no se ven afectados.
+  function setExpanded(titular, isOpen) {
+    if (titular && titular.hasAttribute('aria-expanded')) {
+      titular.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+  }
 
   // Función para resetear la clase activa de todos los íconos
   function resetIcons() {
@@ -25,13 +31,18 @@ function initAccordion() {
         if (icon) {
           icon.classList.remove('accordion__icon--active');
         }
+        setExpanded(this, false);
         return;
       }
 
       // Cierra todas las secciones y resetea todos los íconos
       const sections = document.querySelectorAll('.accordion__section');
       sections.forEach(function(sec) {
-        sec.classList.remove('active');
+        if (sec.classList.contains('active')) {
+          sec.classList.remove('active');
+          const otroTitular = sec.querySelector('.accordion__titular');
+          setExpanded(otroTitular, false);
+        }
       });
       resetIcons();
 
@@ -41,6 +52,7 @@ function initAccordion() {
       if (icon) {
         icon.classList.add('accordion__icon--active');
       }
+      setExpanded(this, true);
     });
   });
 }

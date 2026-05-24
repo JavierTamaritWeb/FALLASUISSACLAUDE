@@ -459,7 +459,19 @@
           "presentacionAria": "Ver Presentación Fallera 2026 en una pestaña nueva",
           "llibret202425Aria": "Ver Llibret 2024-25 en una pestaña nueva",
           "llibret202526Aria": "Ver Llibret 2025-26 en una pestaña nueva",
-          "llibretDigitalAria": "Abrir Llibret digital 2025-2026 en una pestaña nueva"
+          "llibretDigitalAria": "Abrir Llibret digital 2025-2026 en una pestaña nueva",
+          "representantes": {
+            "titulo": "Representantes",
+            "edicion202526": "Representantes 2025-26",
+            "edicion202425": "Representantes 2024-25",
+            "enConstruccion": "En construcción",
+            "cargos": {
+              "falleraMayor": "Fallera Mayor",
+              "presidente": "Presidente",
+              "falleraMayorInfantil": "Fallera Mayor Infantil",
+              "presidenteInfantil": "Presidente Infantil"
+            }
+          }
         }
         
       },
@@ -958,7 +970,19 @@
           "presentacionAria": "Veure Presentació Fallera 2026 en una pestanya nova",
           "llibret202425Aria": "Veure Llibret 2024-25 en una pestanya nova",
           "llibret202526Aria": "Veure Llibret 2025-26 en una pestanya nova",
-          "llibretDigitalAria": "Obrir Llibret digital 2025-2026 en una pestanya nova"
+          "llibretDigitalAria": "Obrir Llibret digital 2025-2026 en una pestanya nova",
+          "representantes": {
+            "titulo": "Representants",
+            "edicion202526": "Representants 2025-26",
+            "edicion202425": "Representants 2024-25",
+            "enConstruccion": "En construcció",
+            "cargos": {
+              "falleraMayor": "Fallera Major",
+              "presidente": "President",
+              "falleraMayorInfantil": "Fallera Major Infantil",
+              "presidenteInfantil": "President Infantil"
+            }
+          }
         }  
 
         
