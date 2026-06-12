@@ -39,11 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const langOptions = document.getElementById('langOptions');
     
     if (langSwitcher && langOptions) {
-      langSwitcher.addEventListener('click', function() {
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        toggleDropdown(!isExpanded);
-      });
-      
+      // El clic para abrir/cerrar lo gestiona EN EXCLUSIVA lang.js (clase .active).
+      // Aquí solo se añade el soporte de teclado (flechas/Escape) sobre ese mismo
+      // mecanismo, para no pisar la visibilidad con un style.display inline (ver A1).
       langSwitcher.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowDown') {
           e.preventDefault();
@@ -86,7 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (langSwitcher && langOptions) {
       langSwitcher.setAttribute('aria-expanded', show);
-      langOptions.style.display = show ? 'block' : 'none';
+      // Usar la MISMA clase .active que lang.js, no un style.display inline:
+      // el inline sobrescribiría al CSS y desincronizaría la visibilidad (ver A1).
+      langOptions.classList.toggle('active', show);
       
       if (show) {
         // Establecer tabindex para opciones
@@ -255,23 +255,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   /* ===================================
-     CLICK OUTSIDE TO CLOSE
-     =================================== */
-  
-  function initClickOutside() {
-    document.addEventListener('click', function(e) {
-      const langSwitcher = document.getElementById('langSwitcher');
-      const langOptions = document.getElementById('langOptions');
-      
-      if (langSwitcher && langOptions) {
-        if (!langSwitcher.contains(e.target) && !langOptions.contains(e.target)) {
-          toggleDropdown(false);
-        }
-      }
-    });
-  }
-  
-  /* ===================================
      INITIALIZATION
      =================================== */
   
@@ -282,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initLazyLoadingAccessibility();
   initFocusManagement();
   initLiveRegions();
-  initClickOutside();
+  // El cierre al hacer clic fuera lo gestiona lang.js (clase .active); no duplicar aquí (ver A1).
   
   // Anunciar que las mejoras de accesibilidad están cargadas
   setTimeout(() => {
