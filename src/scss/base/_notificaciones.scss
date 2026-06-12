@@ -26,12 +26,14 @@
     visibility: visible;
 }
 
-/* Un keyframe para animar la entrada (opcional) */
-@keyframes fadeIn {
+/* Un keyframe para animar la entrada. Nombre propio: con "fadeIn" colisionaba
+   con el @keyframes homónimo de _mixins/_header y ganaba la última definición
+   (sin el translateX(-50%) que mantiene centrada la notificación). */
+@keyframes fadeInNotificacion {
     from { transform: translateX(-50%) translateY(10px); opacity: 0; }
     to { transform: translateX(-50%) translateY(0); opacity: 1; }
 }
 
 #notificacion.mostrar {
-    animation: fadeIn 0.5s forwards;
+    animation: fadeInNotificacion 0.5s forwards;
 }

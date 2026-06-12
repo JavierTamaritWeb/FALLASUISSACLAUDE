@@ -231,14 +231,9 @@
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+// El @keyframes fadeIn que vivía aquí (solo opacidad, sin uso en este archivo)
+// se eliminó en v4.7.9: por colisión de nombres pisaba al fadeIn canónico de
+// _mixins.scss y al de notificaciones en TODOS los usos del sitio.
 
 // ---------------------------------------------------------
 // Estilos de Navegación (Primera versión)

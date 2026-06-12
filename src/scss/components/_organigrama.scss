@@ -266,7 +266,7 @@
       }
     }
 
-    @media (min-width: 481px) and (max-width: 768px) {
+    @media (min-width: 481px) and (max-width: 767px) {
       :root {
           --font-base: 0.8rem;
           --font-lg: 1rem;
@@ -283,7 +283,7 @@
       }
     }
 
-    @media (min-width: 769px) and (max-width: 1024px) {
+    @media (min-width: 768px) and (max-width: 1024px) {
       :root {
           --font-base: 0.85rem;
           --font-lg: 1.1rem;

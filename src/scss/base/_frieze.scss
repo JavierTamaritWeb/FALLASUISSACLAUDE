@@ -29,11 +29,8 @@
     border-bottom: 2px solid v.$primary-color;
     box-sizing: border-box; 
   }
-  @media (max-width: 768px) {
-        $frieze-size: 30px; 
-    }
-
-  @media (min-width: 768px) {
-        $frieze-size: 50px; 
-    }
+  // El tamaño responsive (30px móvil / 50px desktop) lo resuelve el clamp()
+  // de v.$frieze-size; reasignar la variable Sass dentro de un @media no
+  // genera CSS (Sass compila en build-time) y esas reasignaciones muertas
+  // se eliminaron en v4.7.9.
 }
