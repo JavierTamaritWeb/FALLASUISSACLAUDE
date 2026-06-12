@@ -225,6 +225,13 @@ Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problem
 
 ## Patrones comunes
 
+### Subir de versión (release)
+Actualiza los CUATRO sitios en lockstep — olvidar `sw.js` deja a los visitantes recurrentes viendo la versión anterior cacheada:
+1. `package.json` y `package-lock.json` (campo `version`)
+2. `CLAUDE.md`: cabecera **Versión**, *Nota de versión* y entrada de **Changelog**
+3. `src/sw.js`: `CACHE_NAME` y `CRITICAL_CACHE` (`falla-suissa-vX.Y.Z` / `falla-critical-vX.Y.Z`) — al cambiar los nombres, el `activate` del service worker purga los caches antiguos en los clientes que aún lo tengan registrado
+4. Ejecuta `npm run build` (copia `sw.js` a `dist/`)
+
 ### Añadir una traducción
 1. Añade la clave a `src/data/translations.json` bajo `es` y `va`
 2. Úsala en HTML: `<span data-i18n="section.subsection.key"></span>`
