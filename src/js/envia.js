@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
           </button>
         </div>
         <div class="modal-body text-center">
-          <img src="${imageSrc}" class="img-fluid mb-3" alt="${imageAlt}" loading="lazy" width="150" height="150">
+          <img src="${imageSrc}" class="img-fluid mb-3" alt="${imageAlt}" width="150" height="150">
           <p class="lead" data-i18n="${messageKey}">${messageFallback}</p>
         </div>
       </div>

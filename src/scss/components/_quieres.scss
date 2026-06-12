@@ -156,6 +156,52 @@
   transition: color 2.4s ease-in-out;
 }
 
+/* Modal de resultado (lo inyecta envia.js tras enviar el formulario).
+   El modal vive dentro de .quieres-mas (texto claro sobre fondo azul):
+   sin colores explícitos, el texto heredado es ilegible sobre el modal blanco. */
+#modal-quieres .modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+
+  .modal-title {
+    margin-bottom: 0;
+  }
+}
+
+#modal-quieres .btn-close {
+  background: none;
+  border: none;
+  font-size: 3rem;
+  line-height: 1;
+  padding: 0 0.4rem;
+  cursor: pointer;
+  color: v.$primary-color;
+  transition: color 2.4s ease-in-out;
+}
+
+#modal-quieres .modal-body {
+  text-align: center;
+  padding-top: 1.6rem;
+
+  img {
+    display: block;
+    margin: 0 auto 1.2rem;
+  }
+
+  .lead {
+    font-size: 1.6rem;
+    color: v.$negro;
+    margin: 0;
+    transition: color 2.4s ease-in-out;
+  }
+}
+
+body.modo-oscuro #modal-quieres .modal-body .lead {
+  color: v.$blanco-hueso; // el modal-content pasa a fondo oscuro en modo oscuro
+}
+
 
 /* Formulario */
 #quieres-form {

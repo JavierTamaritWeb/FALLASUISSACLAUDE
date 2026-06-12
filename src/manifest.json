@@ -3,42 +3,42 @@
   "short_name": "Falla Suïssa",
   "description": "Web oficial de la Falla Suïssa - L'Alqueria del Favero. Eventos, galerías, información y todo sobre nuestra comisión fallera.",
   "id": "/",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "theme_color": "#0a4b8d",
   "background_color": "#f5f5f5",
-  "scope": "/",
+  "scope": "./",
   "lang": "es-ES",
   "dir": "ltr",
   
   "icons": [
     {
-      "src": "/img/android-chrome-192x192.png",
+      "src": "img/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/img/android-chrome-512x512.png", 
+      "src": "img/android-chrome-512x512.png", 
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/img/apple-touch-icon.png",
+      "src": "img/apple-touch-icon.png",
       "sizes": "180x180", 
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/img/favicon-32x32.png",
+      "src": "img/favicon-32x32.png",
       "sizes": "32x32",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/img/favicon-16x16.png",
+      "src": "img/favicon-16x16.png",
       "sizes": "16x16", 
       "type": "image/png",
       "purpose": "any"
@@ -50,10 +50,10 @@
       "name": "Eventos",
       "short_name": "Eventos",
       "description": "Ver próximos eventos de la falla",
-      "url": "/eventos.html",
+      "url": "./eventos.html",
       "icons": [
         {
-          "src": "/img/android-chrome-192x192.png",
+          "src": "img/android-chrome-192x192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -63,10 +63,10 @@
       "name": "Calendario",
       "short_name": "Calendario", 
       "description": "Consultar el calendario de actividades",
-      "url": "/calendario.html",
+      "url": "./calendario.html",
       "icons": [
         {
-          "src": "/img/android-chrome-192x192.png",
+          "src": "img/android-chrome-192x192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -76,10 +76,10 @@
       "name": "Galerías",
       "short_name": "Galerías",
       "description": "Ver fotos y galerías de la falla",
-      "url": "/galerias.html", 
+      "url": "./galerias.html", 
       "icons": [
         {
-          "src": "/img/android-chrome-192x192.png",
+          "src": "img/android-chrome-192x192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -89,10 +89,10 @@
       "name": "La Falla",
       "short_name": "La Falla",
       "description": "Información sobre nuestra comisión",
-      "url": "/lafalla.html",
+      "url": "./lafalla.html",
       "icons": [
         {
-          "src": "/img/android-chrome-192x192.png",
+          "src": "img/android-chrome-192x192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
