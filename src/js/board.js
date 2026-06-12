@@ -1,3 +1,9 @@
+// Raíz del sitio: '/' en producción; calculada desde la ruta de la página
+// para soportar servir la web desde un subdirectorio (p. ej. Live Server
+// sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
+// archivo y el segmento va/ final de la ruta actual.
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+
 // js/board.js
 // Tablón de anuncios dinámico — multi-instancia
 // Descubre todos los <div class="board"> del DOM, lee data-board-source
@@ -10,10 +16,11 @@ const VALID_ADJUNTO_TYPES = new Set(['pdf', 'img']);
 // JSON) se resuelven contra la raíz del sitio: desde las páginas /va/
 // resolverían a /va/data|img|pdf, que no existen.
 function resolveBoardUrl(url) {
-  if (!url || /^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(url)) {
+  // Las URLs absolutas, con esquema, con ancla o ya relativas con ../ se dejan tal cual.
+  if (!url || /^(?:[a-z][a-z0-9+.-]*:|\/|\.{1,2}\/|#)/i.test(url)) {
     return url;
   }
-  return `/${url}`;
+  return window.SITE_ROOT + url;
 }
 
 // Cache de fetches (url -> Promise<data>) para no duplicar petición si

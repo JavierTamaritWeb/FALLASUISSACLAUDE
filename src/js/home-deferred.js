@@ -1,3 +1,9 @@
+// Raíz del sitio: '/' en producción; calculada desde la ruta de la página
+// para soportar servir la web desde un subdirectorio (p. ej. Live Server
+// sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
+// archivo y el segmento va/ final de la ruta actual.
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+
 // js/home-deferred.js
 
 (function () {
@@ -117,10 +123,11 @@
   }
 
   function initDeferredHomeScripts() {
-    loadAfterPaint(['/js/cookie-banner.js']);
-    loadOnIdle(['/js/timeline.js', '/js/acc.js']);
-    loadOnVisible('#videoDron', ['/js/video-dron.js'], '320px');
-    loadOnVisible('#videoOfrenda', ['/js/ofrenda-video.js'], '320px');
+    const root = window.SITE_ROOT;
+    loadAfterPaint([root + 'js/cookie-banner.js']);
+    loadOnIdle([root + 'js/timeline.js', root + 'js/acc.js']);
+    loadOnVisible('#videoDron', [root + 'js/video-dron.js'], '320px');
+    loadOnVisible('#videoOfrenda', [root + 'js/ofrenda-video.js'], '320px');
   }
 
   if (document.readyState === 'loading') {

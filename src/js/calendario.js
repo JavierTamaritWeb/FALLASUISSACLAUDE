@@ -1,3 +1,9 @@
+// Raíz del sitio: '/' en producción; calculada desde la ruta de la página
+// para soportar servir la web desde un subdirectorio (p. ej. Live Server
+// sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
+// archivo y el segmento va/ final de la ruta actual.
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+
 // js/calendario.js
 
 // ================================
@@ -646,8 +652,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   Promise.all([
-    fetch('/data/eventos.json').then(response => response.json()),
-    fetch('/data/calendarData.json').then(response => response.json())
+    fetch(window.SITE_ROOT + 'data/eventos.json').then(response => response.json()),
+    fetch(window.SITE_ROOT + 'data/calendarData.json').then(response => response.json())
   ])
   .then(([eventData, calData]) => {
     window.eventos = eventData.eventos;

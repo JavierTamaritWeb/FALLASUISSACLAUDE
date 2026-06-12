@@ -1,3 +1,9 @@
+// Raíz del sitio: '/' en producción; calculada desde la ruta de la página
+// para soportar servir la web desde un subdirectorio (p. ej. Live Server
+// sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
+// archivo y el segmento va/ final de la ruta actual.
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+
 // js/meteo.js
 
 // Variable global para almacenar la configuración (config.json)
@@ -192,7 +198,7 @@ async function initWeatherModule() {
   }
 
   weatherInitPromise = (async () => {
-    const res = await fetch('/data/config.json');
+    const res = await fetch(window.SITE_ROOT + 'data/config.json');
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}`);
     }
@@ -415,7 +421,7 @@ function updateCurrentWeather(data) {
     const isRaining = (weatherMain === 'Rain' || weatherMain === 'Drizzle' || weatherMain === 'Thunderstorm' || (typeof rain !== 'undefined'));
     
     // Rutas relativas desde index.html
-    const targetSrc = isRaining ? '/img/decoracion/falleretPlora.svg' : '/img/decoracion/falleretPro.svg';
+    const targetSrc = isRaining ? window.SITE_ROOT + 'img/decoracion/falleretPlora.svg' : window.SITE_ROOT + 'img/decoracion/falleretPro.svg';
 
     // Añadir transición para suavidad
     falleretImg.style.transition = 'opacity 0.5s ease';

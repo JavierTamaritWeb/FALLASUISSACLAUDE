@@ -1,3 +1,9 @@
+// Raíz del sitio: '/' en producción; calculada desde la ruta de la página
+// para soportar servir la web desde un subdirectorio (p. ej. Live Server
+// sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
+// archivo y el segmento va/ final de la ruta actual.
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+
 // js/initTranslations.js
 
 window.currentLanguage = (() => {
@@ -15,7 +21,7 @@ if (typeof window.loadTranslations === 'function') {
     console.error('Error al reutilizar las traducciones:', error);
   });
 } else if (!window.translations) {
-  fetch('/data/translations.json')
+  fetch(window.SITE_ROOT + 'data/translations.json')
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);

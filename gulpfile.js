@@ -158,19 +158,22 @@ function optimizeHtmlAssetTags(html) {
 const VA_ASSET_PREFIXES = /^(?:css|js|img|data|pdf)\//;
 
 // La variante /va/ vive en un subdirectorio pero comparte los assets de la
-// raíz (dist/va/ solo contiene HTML): las URLs relativas de assets deben
-// volverse absolutas o resolverían a /va/css|js|img|data|pdf (404). Los
-// enlaces entre páginas (lafalla.html, etc.) se mantienen relativos para que
-// la navegación permanezca dentro de /va/.
+// raíz (dist/va/ solo contiene HTML): las URLs de assets se reescriben con
+// `../` para que suban un nivel. Se usa `../` y NO rutas absolutas `/...`
+// para que el sitio funcione también servido desde un subdirectorio
+// (p. ej. Live Server sirviendo la raíz del repo con la web en /dist/).
+// Los enlaces entre páginas (lafalla.html, etc.) se mantienen relativos para
+// que la navegación permanezca dentro de /va/.
 function rewriteAssetUrlsToRoot(html) {
-  html = html.replace(/\b(src|href|poster|data-board-source)="((?:css|js|img|data|pdf)\/[^"]*)"/g, '$1="/$2"');
+  html = html.replace(/\b(src|href|poster|data-board-source)="((?:css|js|img|data|pdf)\/[^"]*)"/g, '$1="../$2"');
+  html = html.replace(/\b(href)="(manifest\.json[^"]*)"/g, '$1="../$2"');
 
   html = html.replace(/\bsrcset="([^"]+)"/g, (match, value) => {
     const rewritten = value
       .split(',')
       .map((candidate) => {
         const trimmed = candidate.trim();
-        return VA_ASSET_PREFIXES.test(trimmed) ? `/${trimmed}` : trimmed;
+        return VA_ASSET_PREFIXES.test(trimmed) ? `../${trimmed}` : trimmed;
       })
       .join(', ');
     return `srcset="${rewritten}"`;

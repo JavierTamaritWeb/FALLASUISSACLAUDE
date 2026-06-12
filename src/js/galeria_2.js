@@ -1,3 +1,9 @@
+// Raíz del sitio: '/' en producción; calculada desde la ruta de la página
+// para soportar servir la web desde un subdirectorio (p. ej. Live Server
+// sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
+// archivo y el segmento va/ final de la ruta actual.
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+
 // js/galeria_2.js
 // 
 // js/galeria_1.js
@@ -16,7 +22,7 @@ let pages = []; // Almacenará los <article> generados
 // 1. Cargar JSON y crear páginas
 async function loadPages() {
   try {
-    const response = await fetch("/data/dataPages2.json");
+    const response = await fetch(window.SITE_ROOT + "data/dataPages2.json");
     if (!response.ok) throw new Error("No se pudo cargar dataPages2.json");
     const data = await response.json();
     createPages(data);

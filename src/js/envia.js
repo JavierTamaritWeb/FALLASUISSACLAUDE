@@ -1,3 +1,9 @@
+// Raíz del sitio: '/' en producción; calculada desde la ruta de la página
+// para soportar servir la web desde un subdirectorio (p. ej. Live Server
+// sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
+// archivo y el segmento va/ final de la ruta actual.
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+
 
 // js/envia.js
 
@@ -201,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
             titleFallback: 'Error Enviando Mensaje',
             messageKey: 'modalerror.mensaje',
             messageFallback: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.',
-            imageSrc: '/img/error.png',
+            imageSrc: window.SITE_ROOT + 'img/error.png',
             imageAlt: 'Error',
             closeId: 'close-error-modal',
           });
@@ -219,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function() {
           titleFallback: 'Error Enviando Mensaje',
           messageKey: 'modalerror.mensaje',
           messageFallback: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.',
-          imageSrc: '/img/error.png',
+          imageSrc: window.SITE_ROOT + 'img/error.png',
           imageAlt: 'Error',
           closeId: 'close-error-modal',
         });
@@ -236,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function() {
             titleFallback: 'Mensaje enviado',
             messageKey: 'modalexito.mensaje',
             messageFallback: 'Tu mensaje se ha enviado correctamente.',
-            imageSrc: '/img/exito.png',
+            imageSrc: window.SITE_ROOT + 'img/exito.png',
             imageAlt: 'Éxito',
             closeId: 'close-success-modal',
           });
@@ -250,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
             titleFallback: 'Error Enviando Mensaje',
             messageKey: 'modalerror.mensaje',
             messageFallback: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.',
-            imageSrc: '/img/error.png',
+            imageSrc: window.SITE_ROOT + 'img/error.png',
             imageAlt: 'Error',
             closeId: 'close-error-modal',
           });
