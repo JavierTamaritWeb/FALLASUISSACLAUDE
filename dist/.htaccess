@@ -145,12 +145,21 @@ RewriteRule ^ https://fallasuissa.es%{REQUEST_URI} [R=301,L]
     #    solo viven en /pdf/*). Redirigir a la versión real.
     RewriteRule ^va/pdf/(.*)$ /pdf/$1 [R=301,L]
 
+    # A2) Red de seguridad: el HTML /va/ anterior a v4.7.9 referenciaba los
+    #     assets con rutas relativas que resolvían a /va/css|js|img|data
+    #     (inexistentes -> 404). El build ya escribe rutas absolutas, pero el
+    #     HTML cacheado/indexado sigue pidiendo estas URLs.
+    RewriteRule ^va/(css|js|img|data|favicon_io)/(.*)$ /$1/$2 [R=301,L]
+
     # B) PDFs "Mig Any 2025" eliminados sin equivalente actual -> 410 Gone
     #    (avisa a Google de que se fueron permanentemente)
     RewriteRule ^pdf/migany2025.*\.pdf$ - [R=410,L]
 
     # C) Llibret 2024 movido de /pdf/ a /pdf/Llibrets/
-    RewriteRule "^pdf/2024_LLIBRET_FALLA._MORERES_DIGITAL\.pdf$" "/pdf/Llibrets/2024_LLIBRET_FALLA%20_MORERES_DIGITAL.pdf" [R=301,L]
+    #    El % va escapado (\%): en la sustitución de mod_rewrite un % sin
+    #    escapar es un backreference de RewriteCond (%2 → cadena vacía) y el
+    #    301 apuntaba a ...FALLA0_MORERES... (otro 404).
+    RewriteRule "^pdf/2024_LLIBRET_FALLA._MORERES_DIGITAL\.pdf$" "/pdf/Llibrets/2024_LLIBRET_FALLA\%20_MORERES_DIGITAL.pdf" [R=301,L]
 
     # D) Bases campeonatos JCF temporada anterior (códigos C6xxx) ->
     #    /deportes.html (nuevas bases 2026-27 enlazadas desde el tablón)

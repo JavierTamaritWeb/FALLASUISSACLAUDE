@@ -16,7 +16,9 @@
   <meta name="geo.placename" content="Valencia, España">
   <meta name="geo.position" content="39.4699;-0.3763">
   <meta name="ICBM" content="39.4699, -0.3763">
-<!-- Open Graph / Facebook -->
+  <!-- canonical + hreflang los inyecta el build (gulpfile → modifyHtmlStream); NO añadir aquí (ver restricción SEO multi-idioma) -->
+
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fallasuissa.es/">
   <meta property="og:title" content="Falla Suïssa-L'Alqueria del Favero | Tradición Valenciana">
@@ -222,20 +224,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
   <link rel="manifest" href="/manifest.json">
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=c1366a6f9c13">
+  <link rel="stylesheet" href="/css/main.css?v=f62c968916ce">
 
   <!-- Preload LCP Images -->
-  <link rel="preload" as="image" href="img/Escudo_falla.avif" type="image/avif" fetchpriority="high">
-  <link rel="preload" as="image" href="img/falla2026.avif" type="image/avif" fetchpriority="high">
+  <link rel="preload" as="image" href="/img/Escudo_falla.avif" type="image/avif" fetchpriority="high">
+  <link rel="preload" as="image" href="/img/falla2026.avif" type="image/avif" fetchpriority="high">
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
   <link rel="canonical" href="https://fallasuissa.es/va/">
@@ -250,9 +252,9 @@
     <div class="banner-subvencion__contenido">
       <button class="banner-subvencion__cerrar" aria-label="Cerrar banner">&times;</button>
       <picture>
-        <source srcset="img/subvencion.avif" type="image/avif">
-        <source srcset="img/subvencion.webp" type="image/webp">
-        <img class="banner-subvencion__imagen" width="200" height="100" src="img/subvencion.png" alt="Información de subvención">
+        <source srcset="/img/subvencion.avif" type="image/avif">
+        <source srcset="/img/subvencion.webp" type="image/webp">
+        <img class="banner-subvencion__imagen" width="200" height="100" src="/img/subvencion.png" alt="Información de subvención">
       </picture>
     </div>
   </div>
@@ -302,9 +304,9 @@
       <div class="header__grid">
         <h1 class="header__title"><span>Falla </span>Suïssa - L'Alqueria <span style="text-transform: lowercase">del</span> Favero</h1>
         <picture>
-          <source srcset="img/Escudo_falla.avif" type="image/avif">
-          <source srcset="img/Escudo_falla.webp" type="image/webp">
-          <img class="header__escudo" src="img/Escudo_falla.png" width="80" height="100" alt="Logo de la Falla Suïssa - L'Alqueria del Favero" loading="eager" decoding="sync" fetchpriority="high">
+          <source srcset="/img/Escudo_falla.avif" type="image/avif">
+          <source srcset="/img/Escudo_falla.webp" type="image/webp">
+          <img class="header__escudo" src="/img/Escudo_falla.png" width="80" height="100" alt="Logo de la Falla Suïssa - L'Alqueria del Favero" loading="eager" decoding="sync" fetchpriority="high">
         </picture>
         
       </div>
@@ -313,8 +315,8 @@
 
     <!-- Decoración Fallereta (Cambio SVG Light/Dark) -->
     <div class="header__monumento">
-      <img class="header__monumento-img header__monumento-img--light" src="img/decoracion/falleretaD.svg" width="120" height="200" alt="Fallereta Decorativa" loading="eager">
-      <img class="header__monumento-img header__monumento-img--dark" src="img/decoracion/falleretaN.svg" width="120" height="200" alt="Fallereta Decorativa Modo Oscuro" loading="eager">
+      <img class="header__monumento-img header__monumento-img--light" src="/img/decoracion/falleretaD.svg" width="120" height="200" alt="Fallereta Decorativa" loading="eager">
+      <img class="header__monumento-img header__monumento-img--dark" src="/img/decoracion/falleretaN.svg" width="120" height="200" alt="Fallereta Decorativa Modo Oscuro" loading="eager">
     </div>
 
     <div class="header__waves">
@@ -373,7 +375,7 @@
   <main class="falla" id="main-content">
     <div class="contenedor">
       <div class="falla__heading">
-        <img class="falla__escudo" width="80" height="80" src="img/logos/logo-escudo-cutty.svg" alt="Escudo de la Falla Suïssa" loading="lazy" decoding="async">
+        <img class="falla__escudo" width="80" height="80" src="/img/logos/logo-escudo-cutty.svg" alt="Escudo de la Falla Suïssa" loading="lazy" decoding="async">
         <h2 class="falla__title" data-i18n="falla.lafalla">La Falla</h2>
       </div>
 
@@ -383,20 +385,20 @@
             <div class="swiper swiper--autoheight contenedor" data-testid="monumento-swiper">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
-                      <img src="img/falla2026.avif" width="800" height="450" alt="Monumento fallero principal de la Falla Suïssa 2026" loading="eager" decoding="async" fetchpriority="high">
+                      <img src="/img/falla2026.avif" width="800" height="450" alt="Monumento fallero principal de la Falla Suïssa 2026" loading="eager" decoding="async" fetchpriority="high">
                   </div>
                   <div class="swiper-slide">
-                      <img src="img/falla2026-Infantil.avif" width="800" height="450" alt="Monumento fallero infantil de la Falla Suïssa 2026" loading="lazy" decoding="async">
+                      <img src="/img/falla2026-Infantil.avif" width="800" height="450" alt="Monumento fallero infantil de la Falla Suïssa 2026" loading="lazy" decoding="async">
                     </div>
                     <!-- Hook temporal para la foto real principal 2026; revisar si sigue haciendo falta el próximo ejercicio. -->
                     <div class="swiper-slide swiper-slide--monumento-real">
-                      <img src="img/falla2026-real.avif" width="800" height="450" alt="Vista real del monumento fallero principal de la Falla Suïssa 2026" loading="lazy" decoding="async">
+                      <img src="/img/falla2026-real.avif" width="800" height="450" alt="Vista real del monumento fallero principal de la Falla Suïssa 2026" loading="lazy" decoding="async">
                     </div>
                     <div class="swiper-slide">
-                      <img src="img/falla2026-infantil-real.avif" width="800" height="450" alt="Vista real del monumento fallero infantil de la Falla Suïssa 2026" loading="lazy" decoding="async">
+                      <img src="/img/falla2026-infantil-real.avif" width="800" height="450" alt="Vista real del monumento fallero infantil de la Falla Suïssa 2026" loading="lazy" decoding="async">
                   </div>
                   <!-- <div class="swiper-slide">
-                    <img src="img/foto_2425_02.avif" width="800" height="450" alt="Detalle artístico del monumento fallero Falla Suïssa 2025" loading="lazy" decoding="async">
+                    <img src="/img/foto_2425_02.avif" width="800" height="450" alt="Detalle artístico del monumento fallero Falla Suïssa 2025" loading="lazy" decoding="async">
                   </div> -->
                 </div>
                 <div class="swiper-pagination"></div>
@@ -411,7 +413,7 @@
           <div class="video-dron__frame">
             <div class="video-dron__video-wrapper">
               <video id="videoDron" class="video-dron__video" width="1920" height="1080"
-                src="img/dron/dron-001-2026.mp4" preload="metadata" playsinline
+                src="/img/dron/dron-001-2026.mp4" preload="metadata" playsinline
                 data-i18n-aria-label="falla.videoDron.videoAria" aria-label="Vídeo aeri de la Falla Suïssa gravat amb dron">
               </video>
               <button class="video-dron__poster-overlay" id="videoDronPosterPlay"
@@ -476,9 +478,9 @@
                                           <div class="accordion__content-inner">
                                               <div class="accordion__leyenda-foto">
                                                 <picture>
-                                                      <source srcset="img/FalleraMayor.avif" type="image/avif">
-                                                      <source srcset="img/FalleraMayor.webp" type="image/webp">
-                                                      <img class="accordion__planamayor" width="300" height="400" src="img/FalleraMayor.jpg" alt="Marta, Fallera Mayor de la Falla Suïssa 2025-2026" loading="lazy" decoding="async">
+                                                      <source srcset="/img/FalleraMayor.avif" type="image/avif">
+                                                      <source srcset="/img/FalleraMayor.webp" type="image/webp">
+                                                      <img class="accordion__planamayor" width="300" height="400" src="/img/FalleraMayor.jpg" alt="Marta, Fallera Mayor de la Falla Suïssa 2025-2026" loading="lazy" decoding="async">
                                                 </picture>
                                                 <p class="accordion__nombre-plana-mayor">Rosario Fernández Fernández</p>
 
@@ -502,9 +504,9 @@ Familiar, pròxima i autèntica, transmet afecte en cada gest i fa que tots se s
                                           <div class="accordion__content-inner">
                                               <div class="accordion__leyenda-foto">
                                                 <picture>
-                                                      <source srcset="img/Presidente.avif" type="image/avif">
-                                                      <source srcset="img/Presidente.webp" type="image/webp">
-                                                      <img class="accordion__planamayor" width="300" height="400" src="img/Presidente.jpg" alt="José Santos Quiles, Presidente de la Falla Suïssa" loading="lazy" decoding="async">
+                                                      <source srcset="/img/Presidente.avif" type="image/avif">
+                                                      <source srcset="/img/Presidente.webp" type="image/webp">
+                                                      <img class="accordion__planamayor" width="300" height="400" src="/img/Presidente.jpg" alt="José Santos Quiles, Presidente de la Falla Suïssa" loading="lazy" decoding="async">
                                                 </picture>
                                                 <p class="accordion__nombre-plana-mayor">José Santos Quiles</p>
                                               </div>
@@ -527,9 +529,9 @@ Familiar, pròxima i autèntica, transmet afecte en cada gest i fa que tots se s
                                           <div class="accordion__content-inner">
                                               <div class="accordion__leyenda-foto">
                                                   <picture>
-                                                        <source srcset="img/FalleraMayorInfantil.avif" type="image/avif">
-                                                        <source srcset="img/FalleraMayorInfantil.webp" type="image/webp">
-                                                        <img class="accordion__planamayor" width="300" height="400" src="img/FalleraMayorInfantil.jpg" alt="Fallera Mayor Infantil de la Falla Suïssa 2025-2026" loading="lazy" decoding="async">
+                                                        <source srcset="/img/FalleraMayorInfantil.avif" type="image/avif">
+                                                        <source srcset="/img/FalleraMayorInfantil.webp" type="image/webp">
+                                                        <img class="accordion__planamayor" width="300" height="400" src="/img/FalleraMayorInfantil.jpg" alt="Fallera Mayor Infantil de la Falla Suïssa 2025-2026" loading="lazy" decoding="async">
                                                   </picture>
                                                   <p class="accordion__nombre-plana-mayor">Daniela Cortés Caravantes</p>
 
@@ -553,9 +555,9 @@ Familiar, pròxima i autèntica, transmet afecte en cada gest i fa que tots se s
                                       <div class="accordion__content-inner">
                                           <div class="accordion__leyenda-foto">
                                                 <picture>
-                                                      <source srcset="img/PresidenteInfantil.avif" type="image/avif">
-                                                      <source srcset="img/PresidenteInfantil.webp" type="image/webp">
-                                                      <img class="accordion__planamayor" width="300" height="400" src="img/PresidenteInfantil.jpg" alt="Presidente Infantil de la Falla Suïssa 2025-2026" loading="lazy" decoding="async">
+                                                      <source srcset="/img/PresidenteInfantil.avif" type="image/avif">
+                                                      <source srcset="/img/PresidenteInfantil.webp" type="image/webp">
+                                                      <img class="accordion__planamayor" width="300" height="400" src="/img/PresidenteInfantil.jpg" alt="Presidente Infantil de la Falla Suïssa 2025-2026" loading="lazy" decoding="async">
                                                 </picture>
                                                 <p class="accordion__nombre-plana-mayor">Diego Gómez Medina</p>
 
@@ -578,9 +580,9 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                                 <div class="accordion__content">
                                       <div class="accordion__content-inner">
                                           <picture>
-                                              <source srcset="img/Escudo_falla.avif" type="image/avif">
-                                              <source srcset="img/Escudo_falla.webp" type="image/webp">
-                                              <img class="accordion__escudo" width="60" height="75" src="img/Escudo_falla.png" alt="" loading="lazy" decoding="async" aria-hidden="true">
+                                              <source srcset="/img/Escudo_falla.avif" type="image/avif">
+                                              <source srcset="/img/Escudo_falla.webp" type="image/webp">
+                                              <img class="accordion__escudo" width="60" height="75" src="/img/Escudo_falla.png" alt="" loading="lazy" decoding="async" aria-hidden="true">
                                           </picture>
 
                                           <div class="accordion__directiva">
@@ -636,9 +638,9 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                               <div class="accordion__content">
                                     <div class="accordion__content-inner">
                                           <picture>
-                                              <source srcset="img/Escudo_falla.avif" type="image/avif">
-                                              <source srcset="img/Escudo_falla.webp" type="image/webp">
-                                              <img class="accordion__escudo" width="60" height="75" src="img/Escudo_falla.png" alt="" loading="lazy" decoding="async" aria-hidden="true">
+                                              <source srcset="/img/Escudo_falla.avif" type="image/avif">
+                                              <source srcset="/img/Escudo_falla.webp" type="image/webp">
+                                              <img class="accordion__escudo" width="60" height="75" src="/img/Escudo_falla.png" alt="" loading="lazy" decoding="async" aria-hidden="true">
                                           </picture>
 
 
@@ -796,9 +798,9 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                                           <div class="accordion__content-inner">
                                               
                                                 <picture>
-                                                      <source srcset="img/Escudo_falla.avif" type="image/avif">
-                                                      <source srcset="img/Escudo_falla.webp" type="image/webp">
-                                                      <img class="accordion__escudo" width="60" height="75" src="img/Escudo_falla.png" alt="Imagen para El Presidente" loading="lazy">
+                                                      <source srcset="/img/Escudo_falla.avif" type="image/avif">
+                                                      <source srcset="/img/Escudo_falla.webp" type="image/webp">
+                                                      <img class="accordion__escudo" width="60" height="75" src="/img/Escudo_falla.png" alt="Imagen para El Presidente" loading="lazy">
                                                 </picture>
                                                 
                                               
@@ -824,7 +826,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
               <div class="historia__archivos-seccion">
                 <h5 class="historia__archivos-subtitulo">Presentaciones</h5>
                 <div class="historia__grid">
-                  <a href="pdf/Presentaciones/Presentacion_Fallera_2026.html" class="historia__card" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.presentacionAria" aria-label="Veure Presentació Fallera 2026 en una pestanya nova">
+                  <a href="/pdf/Presentaciones/Presentacion_Fallera_2026.html" class="historia__card" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.presentacionAria" aria-label="Veure Presentació Fallera 2026 en una pestanya nova">
                     <div class="historia__card-icon">
                       <svg class="icon-pdf" width="50" height="50" viewBox="0 0 24 24" role="img" aria-hidden="true">
                         <path d="M3 1h14l4 4v18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" fill="#E03F3F"/>
@@ -844,7 +846,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                 <div class="historia__grid historia__grid--llibrets">
                   <div class="historia__card-cluster historia__card-cluster--single" role="group" aria-labelledby="historia-llibrets-edicion-202425-index">
                     <p class="historia__card-cluster-label" id="historia-llibrets-edicion-202425-index" data-i18n="historia.archivos.edicion202425">Edició 2024-25</p>
-                    <a href="pdf/Llibrets/Llibret_2024-25.html" class="historia__card historia__card--featured" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.llibret202425Aria" aria-label="Veure Llibret 2024-25 en una pestanya nova">
+                    <a href="/pdf/Llibrets/Llibret_2024-25.html" class="historia__card historia__card--featured" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.llibret202425Aria" aria-label="Veure Llibret 2024-25 en una pestanya nova">
                       <div class="historia__card-icon">
                         <svg class="icon-pdf" width="50" height="50" viewBox="0 0 24 24" role="img" aria-hidden="true">
                           <path d="M3 1h14l4 4v18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" fill="#E03F3F"/>
@@ -861,7 +863,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                   <div class="historia__card-cluster historia__card-cluster--compact" role="group" aria-labelledby="historia-llibrets-edicion-index">
                     <p class="historia__card-cluster-label" id="historia-llibrets-edicion-index" data-i18n="historia.archivos.edicion202526">Edició 2025-26</p>
                     <div class="historia__card-cluster-grid">
-                      <a href="pdf/Llibrets/Llibret_2025-26.html" class="historia__card historia__card--featured" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.llibret202526Aria" aria-label="Veure Llibret 2025-26 en una pestanya nova">
+                      <a href="/pdf/Llibrets/Llibret_2025-26.html" class="historia__card historia__card--featured" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="historia.archivos.llibret202526Aria" aria-label="Veure Llibret 2025-26 en una pestanya nova">
                         <div class="historia__card-icon">
                           <svg class="icon-pdf" width="50" height="50" viewBox="0 0 24 24" role="img" aria-hidden="true">
                             <path d="M3 1h14l4 4v18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" fill="#E03F3F"/>
@@ -909,9 +911,9 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                           <li class="representantes-grid__item">
                             <figure class="representantes-grid__figura">
                               <picture>
-                                <source srcset="img/FalleraMayor.avif" type="image/avif">
-                                <source srcset="img/FalleraMayor.webp" type="image/webp">
-                                <img class="representantes-grid__imagen" src="img/FalleraMayor.jpg" width="300" height="400" alt="Rosario Fernández Fernández, Fallera Mayor 2025-26" loading="lazy" decoding="async">
+                                <source srcset="/img/FalleraMayor.avif" type="image/avif">
+                                <source srcset="/img/FalleraMayor.webp" type="image/webp">
+                                <img class="representantes-grid__imagen" src="/img/FalleraMayor.jpg" width="300" height="400" alt="Rosario Fernández Fernández, Fallera Mayor 2025-26" loading="lazy" decoding="async">
                               </picture>
                               <figcaption class="representantes-grid__caption">
                                 <p class="representantes-grid__nombre">Rosario Fernández Fernández</p>
@@ -922,9 +924,9 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                           <li class="representantes-grid__item">
                             <figure class="representantes-grid__figura">
                               <picture>
-                                <source srcset="img/Presidente.avif" type="image/avif">
-                                <source srcset="img/Presidente.webp" type="image/webp">
-                                <img class="representantes-grid__imagen" src="img/Presidente.jpg" width="300" height="400" alt="José Santos Quiles, Presidente 2025-26" loading="lazy" decoding="async">
+                                <source srcset="/img/Presidente.avif" type="image/avif">
+                                <source srcset="/img/Presidente.webp" type="image/webp">
+                                <img class="representantes-grid__imagen" src="/img/Presidente.jpg" width="300" height="400" alt="José Santos Quiles, Presidente 2025-26" loading="lazy" decoding="async">
                               </picture>
                               <figcaption class="representantes-grid__caption">
                                 <p class="representantes-grid__nombre">José Santos Quiles</p>
@@ -935,9 +937,9 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                           <li class="representantes-grid__item">
                             <figure class="representantes-grid__figura">
                               <picture>
-                                <source srcset="img/FalleraMayorInfantil.avif" type="image/avif">
-                                <source srcset="img/FalleraMayorInfantil.webp" type="image/webp">
-                                <img class="representantes-grid__imagen" src="img/FalleraMayorInfantil.jpg" width="300" height="400" alt="Daniela Cortés Caravantes, Fallera Mayor Infantil 2025-26" loading="lazy" decoding="async">
+                                <source srcset="/img/FalleraMayorInfantil.avif" type="image/avif">
+                                <source srcset="/img/FalleraMayorInfantil.webp" type="image/webp">
+                                <img class="representantes-grid__imagen" src="/img/FalleraMayorInfantil.jpg" width="300" height="400" alt="Daniela Cortés Caravantes, Fallera Mayor Infantil 2025-26" loading="lazy" decoding="async">
                               </picture>
                               <figcaption class="representantes-grid__caption">
                                 <p class="representantes-grid__nombre">Daniela Cortés Caravantes</p>
@@ -948,9 +950,9 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                           <li class="representantes-grid__item">
                             <figure class="representantes-grid__figura">
                               <picture>
-                                <source srcset="img/PresidenteInfantil.avif" type="image/avif">
-                                <source srcset="img/PresidenteInfantil.webp" type="image/webp">
-                                <img class="representantes-grid__imagen" src="img/PresidenteInfantil.jpg" width="300" height="400" alt="Diego Gómez Medina, Presidente Infantil 2025-26" loading="lazy" decoding="async">
+                                <source srcset="/img/PresidenteInfantil.avif" type="image/avif">
+                                <source srcset="/img/PresidenteInfantil.webp" type="image/webp">
+                                <img class="representantes-grid__imagen" src="/img/PresidenteInfantil.jpg" width="300" height="400" alt="Diego Gómez Medina, Presidente Infantil 2025-26" loading="lazy" decoding="async">
                               </picture>
                               <figcaption class="representantes-grid__caption">
                                 <p class="representantes-grid__nombre">Diego Gómez Medina</p>
@@ -996,7 +998,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
   <section class="ofrenda reveal" data-index="5">
     <div class="contenedor">
       <div class="ofrenda__heading">
-        <img class="ofrenda__icono" width="64" height="64" src="img/logos/logo-virgen.svg" alt="Icono de la Virgen de los Desamparados" loading="lazy" decoding="async">
+        <img class="ofrenda__icono" width="64" height="64" src="/img/logos/logo-virgen.svg" alt="Icono de la Virgen de los Desamparados" loading="lazy" decoding="async">
         <h2 class="ofrenda__titulo" data-i18n="ofrenda.titulo">Ofrena</h2>
       </div>
 
@@ -1004,21 +1006,21 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
       <div class="ofrenda__galeria">
         <div class="ofrenda__figura">
           <button class="colaboraciones-mosaic__trigger" type="button">
-            <img class="ofrenda__imagen" width="400" height="533" src="img/ofrenda/ofenda-2026/ofrenda-2026-fm.jpeg"
+            <img class="ofrenda__imagen" width="400" height="533" src="/img/ofrenda/ofenda-2026/ofrenda-2026-fm.jpeg"
               data-i18n-alt="ofrenda.fmAlt" loading="lazy" decoding="async" alt="Fallera Major de la Falla Suïssa en l'Ofrena Floral 2025-26">
             <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
           </button>
         </div>
         <div class="ofrenda__figura">
           <button class="colaboraciones-mosaic__trigger" type="button">
-            <img class="ofrenda__imagen" width="400" height="533" src="img/ofrenda/ofenda-2026/ofrenda-2026-fmm.jpeg"
+            <img class="ofrenda__imagen" width="400" height="533" src="/img/ofrenda/ofenda-2026/ofrenda-2026-fmm.jpeg"
               data-i18n-alt="ofrenda.fmmAlt" loading="lazy" decoding="async" alt="Fallera Major i acompanyament en l'Ofrena Floral 2025-26">
             <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
           </button>
         </div>
         <div class="ofrenda__figura">
           <button class="colaboraciones-mosaic__trigger" type="button">
-            <img class="ofrenda__imagen" width="400" height="533" src="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg"
+            <img class="ofrenda__imagen" width="400" height="533" src="/img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg"
               data-i18n-alt="ofrenda.generalAlt" loading="lazy" decoding="async" alt="Ofrena Floral a la Mare de Déu dels Desemparats 2025-26">
             <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
           </button>
@@ -1029,9 +1031,9 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
       <div class="video-dron__frame">
         <div class="video-dron__video-wrapper">
           <video id="videoOfrenda" class="video-dron__video" width="1920" height="1080"
-            poster="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
+            poster="/img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
             data-i18n-aria-label="ofrenda.videoAria" aria-label="Vídeo de l'Ofrena Floral 2025-26 de la Falla Suïssa">
-            <source src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
+            <source src="/img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
             <span data-i18n="ofrenda.fallback">El teu navegador no suporta la reproducció de vídeo.</span>
           </video>
           <button class="video-dron__poster-overlay" id="videoOfrendaPosterPlay"
@@ -1082,7 +1084,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
   <section class="colaboraciones" data-index="6">
     <div class="contenedor">
       <div class="colaboraciones__heading reveal reveal--soft">
-        <img class="colaboraciones__imagen" src="img/logos/logo-colaborar.svg"
+        <img class="colaboraciones__imagen" src="/img/logos/logo-colaborar.svg"
              alt="Icono de colaboraciones de la Falla Suïssa" width="64" height="64" loading="lazy" decoding="async">
         <h2 class="colaboraciones__heading-texto" data-i18n="colaboraciones.titulo">Col·laboracions</h2>
       </div>
@@ -1099,7 +1101,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                 <div class="accordion__content">
                   <div class="accordion__content-inner">
                     <div class="colaboraciones-page__intro reveal">
-                      <img class="colaboraciones-page__logo" width="120" height="120" src="img/colaboracion/hope/hope.svg" alt="Logo HOPE" loading="lazy" decoding="async">
+                      <img class="colaboraciones-page__logo" width="120" height="120" src="/img/colaboracion/hope/hope.svg" alt="Logo HOPE" loading="lazy" decoding="async">
                       <div class="colaboraciones-page__texto" data-i18n="colaboraciones.hope.texto" data-i18n-format="paragraphs">
                         <p>El pasado 7 de marzo, nuestra comisión fallera Suïssa-L'Alqueria del Favero demostró que el espíritu faller va mucho más allá de la pólvora y la fiesta. Porque cuando una Falla se une de verdad, es capaz de mover montañas.</p>
                         <p>Organizamos una perolà solidaria de 'fesols i naps' a favor del Proyecto Hope, y cada cucharada servida llevaba dentro algo más grande que el arroz: llevaba esperanza. Esperanza para las familias que luchan cada día contra el Linfoma No Hodgkin Pediátrico, esperanza para esos niños y niñas que merecen un futuro sin enfermedad, esperanza para que la investigación siga avanzando y encuentre las respuestas que tantas familias necesitan.</p>
@@ -1113,37 +1115,37 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                     <div class="colaboraciones-mosaic reveal reveal--soft">
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
-                          <img src="img/colaboracion/hope/hope-001.jpeg" width="300" height="400" alt="Colaboración HOPE 1" loading="lazy" decoding="async">
+                          <img src="/img/colaboracion/hope/hope-001.jpeg" width="300" height="400" alt="Colaboración HOPE 1" loading="lazy" decoding="async">
                           <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
-                          <img src="img/colaboracion/hope/hope-002.jpeg" width="300" height="400" alt="Colaboración HOPE 2" loading="lazy" decoding="async">
+                          <img src="/img/colaboracion/hope/hope-002.jpeg" width="300" height="400" alt="Colaboración HOPE 2" loading="lazy" decoding="async">
                           <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
-                          <img src="img/colaboracion/hope/hope-003.jpeg" width="300" height="400" alt="Colaboración HOPE 3" loading="lazy" decoding="async">
+                          <img src="/img/colaboracion/hope/hope-003.jpeg" width="300" height="400" alt="Colaboración HOPE 3" loading="lazy" decoding="async">
                           <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
-                          <img src="img/colaboracion/hope/hope-004.jpeg" width="300" height="400" alt="Colaboración HOPE 4" loading="lazy" decoding="async">
+                          <img src="/img/colaboracion/hope/hope-004.jpeg" width="300" height="400" alt="Colaboración HOPE 4" loading="lazy" decoding="async">
                           <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
-                          <img src="img/colaboracion/hope/hope-005.jpeg" width="300" height="400" alt="Colaboración HOPE 5" loading="lazy" decoding="async">
+                          <img src="/img/colaboracion/hope/hope-005.jpeg" width="300" height="400" alt="Colaboración HOPE 5" loading="lazy" decoding="async">
                           <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
                       <div class="colaboraciones-mosaic__item">
                         <button class="colaboraciones-mosaic__trigger" type="button">
-                          <img src="img/colaboracion/hope/hope-006.jpg" width="300" height="400" alt="Colaboración HOPE 6" loading="lazy" decoding="async">
+                          <img src="/img/colaboracion/hope/hope-006.jpg" width="300" height="400" alt="Colaboración HOPE 6" loading="lazy" decoding="async">
                           <span class="visually-hidden" data-i18n="colaboraciones.lightbox.abrir">Obrir imatge ampliada</span>
                         </button>
                       </div>
@@ -1179,12 +1181,12 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
   <section class="eventos" data-index="7">
       <div class="contenedor">
         <div class="eventos__heading reveal reveal--soft">
-          <img class="eventos__calendario" width="64" height="64" src="img/logos/logo-eventos.svg" alt="Calendario de eventos de la Falla Suïssa" loading="lazy" decoding="async">
+          <img class="eventos__calendario" width="64" height="64" src="/img/logos/logo-eventos.svg" alt="Calendario de eventos de la Falla Suïssa" loading="lazy" decoding="async">
           <h2 class="eventos__heading-texto" data-i18n="eventos.titulo">Esdeveniments</h2>
         </div>
 
         <div class="eventos__titulo-calendario reveal reveal--soft">
-          <img class="eventos__calendario" width="64" height="64" src="img/calendario.png" alt="Icono de calendario para eventos falleros" loading="lazy" decoding="async">
+          <img class="eventos__calendario" width="64" height="64" src="/img/calendario.png" alt="Icono de calendario para eventos falleros" loading="lazy" decoding="async">
           <h3 class="eventos__title" data-i18n="eventos.calendario">Calendari</h3>
         </div>
 
@@ -1210,7 +1212,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
   <section class="deportes deportes--teaser" data-index="8">
     <div class="contenedor">
       <div class="deportes__heading reveal reveal--soft">
-        <img class="deportes__icono" width="64" height="64" src="img/logos/logo-run.svg" alt="Icono de actividades deportivas de la Falla Suïssa" loading="lazy" decoding="async">
+        <img class="deportes__icono" width="64" height="64" src="/img/logos/logo-run.svg" alt="Icono de actividades deportivas de la Falla Suïssa" loading="lazy" decoding="async">
         <h2 class="deportes__heading-texto" data-i18n="deportes.titulo">Esports</h2>
       </div>
       <p class="deportes__intro reveal reveal--soft" data-i18n="deportes.intro">Les activitats esportives de la Falla Suïssa - L'Alqueria del Favero: tornejos, trobades, equips i calendaris, es gestionen al nostre document compartit. Aquí el tens sempre actualitzat.</p>
@@ -1227,7 +1229,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
     <div class="contenedor">
       <div class="forecast reveal reveal--soft">
         <div class="forecast__titulo">
-          <img class="forecast__termo" width="80" height="80" src="img/logos/logo-termo.svg" alt="Icono de termómetro para temperatura" loading="lazy" decoding="async">
+          <img class="forecast__termo" width="80" height="80" src="/img/logos/logo-termo.svg" alt="Icono de termómetro para temperatura" loading="lazy" decoding="async">
           <h2 class="forecast__title" data-i18n="meteo.titulo">Oratge</h2>
         </div>
          
@@ -1236,14 +1238,15 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
     <!-- Sección Clima Actual -->
       <div class="weather-current reveal">
         <h2 class="clima-actual" data-i18n="meteo.donde">A València</h2>
-        <img class="current-falleret" width="80" height="120" src="img/decoracion/falleretPro.svg" alt="Falleret Decorativo" loading="lazy">
+        <img class="current-falleret" width="80" height="120" src="/img/decoracion/falleretPro.svg" alt="Falleret Decorativo" loading="lazy">
 
         <div class="current-wrapper">
           <div class="current-content">
               <div class="current-icon">
                 <img id="current-icon-img" width="64" height="64" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Icono del estado meteorológico actual" loading="lazy" decoding="async" />
-              
-          
+              </div>
+
+
           <!-- Información principal -->
           <div class="current-info">
             <h3 id="current-temp" class="current-info__portada-temp">--°C</h3>
@@ -1253,7 +1256,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
           </div>
           <!-- Detalles adicionales -->
           <div class="current-details current-details__humedad">
-            <div class="etiqueta-humedad"><strong class="etiqueta-pronostico" data-i18n="meteo.humedad"="">Humitat</strong> <span id="current-humidity">--%</span></div>
+            <div class="etiqueta-humedad"><strong class="etiqueta-pronostico" data-i18n="meteo.humedad">Humitat</strong> <span id="current-humidity">--%</span></div>
           </div>
           </div>
         </div>
@@ -1267,7 +1270,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
   <section class="blog" data-index="10">
     <div class="contenedor">
       <div class="blog__titulo">
-        <img class="blog__pluma" width="80" height="80" src="img/logos/logo-pluma.svg" alt="Icono decorativo de pluma para blog" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="blog__pluma" width="80" height="80" src="/img/logos/logo-pluma.svg" alt="Icono decorativo de pluma para blog" loading="lazy" decoding="async" aria-hidden="true">
         <h2 class="blog__title" data-i18n="blog.titulo">Blog de la nostra Falla</h2>
       </div>
       <div class="blog__posts">
@@ -1301,48 +1304,48 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
   <section class="galerias" data-index="11">
     <div class="contenedor">
       <div class="galerias__titulo">
-        <img class="galerias__camara" width="80" height="80" src="img/logos/logo-camara.svg" alt="Icono de cámara fotográfica para galerías" loading="lazy" decoding="async">
+        <img class="galerias__camara" width="80" height="80" src="/img/logos/logo-camara.svg" alt="Icono de cámara fotográfica para galerías" loading="lazy" decoding="async">
         <h2 class="galerias__title" data-i18n="galeria.titulo">Galeria</h2>
       </div>
       <div class="galerias__grid">
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria1">Apuntà 2025-26</h3>
-          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/apunta/Apunta25_26_15.jpg" alt="Evento 'Apúntate' temporada 2025-2026 - Falla Suïssa" loading="lazy" decoding="async">
+          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="/img/apunta/Apunta25_26_15.jpg" alt="Evento 'Apúntate' temporada 2025-2026 - Falla Suïssa" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria1-texto">Galeria d'imatges de l'Apuntà 2025-26</p>
           <a class="boton" href="galeria_1.html" data-i18n="ver">Veure més</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria2">Fallera Major Infantil 2025-26</h3>
-          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/nombramientoFMI/Nombramiento_FMI2526-02.jpg" alt="Nombramiento Fallera Mayor Infantil 2025-2026" loading="lazy" decoding="async">
+          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="/img/nombramientoFMI/Nombramiento_FMI2526-02.jpg" alt="Nombramiento Fallera Mayor Infantil 2025-2026" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria2-texto">Galeria d'imatges del Nombrament de la Fallera Major Infantil 2025-26</p>
           <a class="boton" href="galeria_2.html" data-i18n="ver">Veure més</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria3">Monument 2025-26</h3>
-          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/monument/firma/2025_26/Firma_monumento_25_26.avif" alt="Firma del monumento fallero temporada 2025-2026" loading="lazy" decoding="async">
+          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="/img/monument/firma/2025_26/Firma_monumento_25_26.avif" alt="Firma del monumento fallero temporada 2025-2026" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria3-texto">Galeria d'imatges del Monument 2025-26</p>
           <a class="boton" href="galeria_3.html" data-i18n="ver">Veure més</a>
   
         </div>
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria4">Proclamació 2025-26</h3>
-          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/proclamacion/Proclamacion_12.jpg" alt="Proclamación de representantes - Valencia 2025" loading="lazy" decoding="async">
+          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="/img/proclamacion/Proclamacion_12.jpg" alt="Proclamación de representantes - Valencia 2025" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria4-texto">Galeria d'imatges de la Proclamació 2025-26</p>
           <a class="boton" href="galeria_4.html" data-i18n="ver">Veure més</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria5">Ofrena de Fruits 2025-26</h3>
-          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-001.jpeg" alt="Ofrenda de Frutos 2025-26 - Falla Suïssa" loading="lazy" decoding="async">
+          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="/img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-001.jpeg" alt="Ofrenda de Frutos 2025-26 - Falla Suïssa" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria5-texto">Galeria d'imatges de l'Ofrena de Fruits 2025-26</p>
           <a class="boton" href="galeria_5.html" data-i18n="ver">Veure més</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
           <h3 class="galeria__title" data-i18n="galeria.galeria6">Cremà 2025-26</h3>
-          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/crema/crema-2026/crema-2026-001.jpeg" alt="Cremà 2025-26 - Falla Suïssa" loading="lazy" decoding="async">
+          <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="/img/crema/crema-2026/crema-2026-001.jpeg" alt="Cremà 2025-26 - Falla Suïssa" loading="lazy" decoding="async">
           <p class="galeria__texto" data-i18n="galeria.galeria6-texto">Galeria d'imatges de la Cremà 2025-26</p>
           <a class="boton" href="galeria_6.html" data-i18n="ver">Veure més</a>
 
@@ -1359,7 +1362,7 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
   <section class="nuevos-falleros nuevos-falleros--teaser" data-index="12">
     <div class="contenedor">
       <div class="nuevos-falleros__heading reveal reveal--soft">
-        <img class="nuevos-falleros__icono" width="64" height="64" src="img/logos/logo-nuevos-falleros.svg" alt="Icono de bienvenida a nuevos falleros" loading="lazy" decoding="async">
+        <img class="nuevos-falleros__icono" width="64" height="64" src="/img/logos/logo-nuevos-falleros.svg" alt="Icono de bienvenida a nuevos falleros" loading="lazy" decoding="async">
         <h2 class="nuevos-falleros__heading-texto" data-i18n="nuevosFalleros.titulo">Nous Fallers</h2>
       </div>
       <p class="nuevos-falleros__intro reveal reveal--soft" data-i18n="nuevosFalleros.introIndex">Ets una nova incorporació a la nostra Falla? Et donem una càlida benvinguda! A continuació t'adjuntem uns enllaços d'interés. ;)</p>
@@ -1374,7 +1377,7 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
   <!-- Sección "¿Quieres saber más sobre nuestra Falla?" -->
   <section class="quieres-mas" data-index="13">
     <div class="quieres-mas__flex contenedor reveal reveal--slow">
-      <img class="quieres-mas__imagen" width="64" height="64" src="img/logos/logo-ask.svg" alt="Icono de Preguntar">
+      <img class="quieres-mas__imagen" width="64" height="64" src="/img/logos/logo-ask.svg" alt="Icono de Preguntar">
       <!-- El enlace tiene un id para poder asignarle el evento de apertura del modal -->
       <a class="quieres-mas__boton" href="#" id="open-quieres-modal">
         <h3 class="quieres-mas__title" data-i18n="quieres.titulo">Vols saber més sobre la nostra Falla?</h3>
@@ -1420,7 +1423,7 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
     <button class="video-dron__fullscreen-close" id="videoDronFsClose" data-i18n-aria-label="falla.videoDron.closeAria" aria-label="Tancar pantalla completa">&times;</button>
     <div class="video-dron__fullscreen-wrapper">
       <video id="videoDronFs" class="video-dron__fullscreen-video"
-        src="img/dron/dron-001-2026.mp4" preload="none" playsinline
+        src="/img/dron/dron-001-2026.mp4" preload="none" playsinline
         data-i18n-aria-label="falla.videoDron.videoAria" aria-label="Vídeo aeri de la Falla Suïssa gravat amb dron">
       </video>
     </div>
@@ -1457,9 +1460,9 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
     <button class="video-dron__fullscreen-close" id="videoOfrendaFsClose" data-i18n-aria-label="ofrenda.closeAria" aria-label="Tancar pantalla completa">&times;</button>
     <div class="video-dron__fullscreen-wrapper">
       <video id="videoOfrendaFs" class="video-dron__fullscreen-video"
-        poster="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
+        poster="/img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
         data-i18n-aria-label="ofrenda.videoAria" aria-label="Vídeo de l'Ofrena Floral 2025-26 de la Falla Suïssa">
-        <source src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
+        <source src="/img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
         <span data-i18n="ofrenda.fallback">El teu navegador no suporta la reproducció de vídeo.</span>
       </video>
     </div>
@@ -1509,9 +1512,9 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
           <a class="footer__enlace" href="nuevos-falleros.html" data-i18n="nav.nuevosFalleros">Nous Fallers</a>
         </nav>
         <picture>
-          <source srcset="img/Escudo_falla.avif" type="image/avif">
-          <source srcset="img/Escudo_falla.webp" type="image/webp">
-          <img class="footer__escudo" width="60" height="75" src="img/Escudo_falla.png" alt="Escudo de la Falla" loading="lazy">
+          <source srcset="/img/Escudo_falla.avif" type="image/avif">
+          <source srcset="/img/Escudo_falla.webp" type="image/webp">
+          <img class="footer__escudo" width="60" height="75" src="/img/Escudo_falla.png" alt="Escudo de la Falla" loading="lazy">
         </picture>
 
         <nav class="sociales">
@@ -1541,17 +1544,17 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
   <!-- Scripts JavaScript -->
    
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/swiper.js?v=c1366a6f9c13"></script>
-  <script src="js/meteo.js?v=c1366a6f9c13" defer></script>
-  <script src="js/dark.js?v=c1366a6f9c13"></script>
-  <script src="js/lang.js?v=c1366a6f9c13"></script>
-  <script src="js/nav-menu.js?v=c1366a6f9c13"></script>
-  <script src="js/scroll-reveal.js?v=c1366a6f9c13" defer></script>
-  <script src="js/board.js?v=c1366a6f9c13" defer></script>
-  <script src="js/countdown.js?v=c1366a6f9c13" defer></script>
-  <script src="js/colaboraciones-lightbox.js?v=c1366a6f9c13" defer></script>
-  <script src="js/accessibility.js?v=c1366a6f9c13" defer></script>
-  <script src="js/home-deferred.js?v=c1366a6f9c13"></script>
+  <script src="/js/swiper.js?v=f62c968916ce"></script>
+  <script src="/js/meteo.js?v=f62c968916ce" defer></script>
+  <script src="/js/dark.js?v=f62c968916ce"></script>
+  <script src="/js/lang.js?v=f62c968916ce"></script>
+  <script src="/js/nav-menu.js?v=f62c968916ce"></script>
+  <script src="/js/scroll-reveal.js?v=f62c968916ce" defer></script>
+  <script src="/js/board.js?v=f62c968916ce" defer></script>
+  <script src="/js/countdown.js?v=f62c968916ce" defer></script>
+  <script src="/js/colaboraciones-lightbox.js?v=f62c968916ce" defer></script>
+  <script src="/js/accessibility.js?v=f62c968916ce" defer></script>
+  <script src="/js/home-deferred.js?v=f62c968916ce"></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -1574,8 +1577,8 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
       });
     }
   </script>
-  <script src="js/envia.js?v=c1366a6f9c13" defer></script>
-  <script src="js/banner-subvencion.js?v=c1366a6f9c13" defer></script>
-  <script src="js/cookie-banner.js?v=c1366a6f9c13" defer></script>
+  <script src="/js/envia.js?v=f62c968916ce" defer></script>
+  <script src="/js/banner-subvencion.js?v=f62c968916ce" defer></script>
+  <script src="/js/cookie-banner.js?v=f62c968916ce" defer></script>
 </body>
 </html>

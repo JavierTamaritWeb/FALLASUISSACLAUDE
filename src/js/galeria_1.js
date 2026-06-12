@@ -14,7 +14,7 @@ let pages = []; // Almacenará los <article> generados
 // 1. Cargar JSON y crear páginas
 async function loadPages() {
   try {
-    const response = await fetch("data/dataPages1.json");
+    const response = await fetch("/data/dataPages1.json");
     if (!response.ok) throw new Error("No se pudo cargar dataPages1.json");
     const data = await response.json();
     createPages(data);

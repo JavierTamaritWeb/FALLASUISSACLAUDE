@@ -49,6 +49,17 @@ test.describe('i18n pre-render: VA pre-renderizada en build (sin JS)', () => {
     expect(html).toMatch(/data-i18n="nav\.inicio"[^>]*>\s*Inici\s*</);
   });
 
+  test('los assets de dist/va/ usan rutas absolutas (la variante VA no tiene css/js/img propios)', () => {
+    const vaHtml = readDist('va/index.html');
+    expect(vaHtml).toMatch(/href="\/css\/main\.css/);
+    expect(vaHtml).toMatch(/src="\/js\/lang\.js/);
+    // Ninguna referencia relativa que resolvería a /va/css|js|img|data|pdf (404)
+    expect(vaHtml).not.toMatch(/\b(?:src|href|poster|srcset|data-board-source)="(?:css|js|img|data|pdf)\//);
+    // La versión ES mantiene las rutas relativas del source
+    const esHtml = readDist('index.html');
+    expect(esHtml).toMatch(/href="css\/main\.css/);
+  });
+
   test('lang attribute es "ca" en dist/va/ y "es" en dist/', () => {
     const vaHtml = readDist('va/index.html');
     const esHtml = readDist('index.html');

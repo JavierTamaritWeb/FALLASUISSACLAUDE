@@ -192,7 +192,7 @@ async function initWeatherModule() {
   }
 
   weatherInitPromise = (async () => {
-    const res = await fetch('data/config.json');
+    const res = await fetch('/data/config.json');
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}`);
     }
@@ -415,7 +415,7 @@ function updateCurrentWeather(data) {
     const isRaining = (weatherMain === 'Rain' || weatherMain === 'Drizzle' || weatherMain === 'Thunderstorm' || (typeof rain !== 'undefined'));
     
     // Rutas relativas desde index.html
-    const targetSrc = isRaining ? 'img/decoracion/falleretPlora.svg' : 'img/decoracion/falleretPro.svg';
+    const targetSrc = isRaining ? '/img/decoracion/falleretPlora.svg' : '/img/decoracion/falleretPro.svg';
 
     // Añadir transición para suavidad
     falleretImg.style.transition = 'opacity 0.5s ease';

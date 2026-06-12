@@ -14,7 +14,7 @@
   borrarCookie(legacySessionCookie);
 
   if (resetearEstadoDesdeUrl) {
-    localStorage.removeItem('bannerSubvencionCerrado');
+    limpiarBannerCerrado();
 
     urlActual.searchParams.delete('resetBanner');
     urlActual.searchParams.delete('forzarBanner');
@@ -23,12 +23,12 @@
 
   // La clave de localStorage solo existe para Playwright.
   // Si se queda persistida en un navegador real, la limpiamos para no ocultar el banner.
-  if (!esNavegadorAutomatizado && localStorage.getItem('bannerSubvencionCerrado') === 'true') {
-    localStorage.removeItem('bannerSubvencionCerrado');
+  if (!esNavegadorAutomatizado && leerBannerCerrado()) {
+    limpiarBannerCerrado();
   }
 
   // Ocultar si Playwright pre-setea la clave durante tests E2E.
-  if (esNavegadorAutomatizado && localStorage.getItem('bannerSubvencionCerrado') === 'true') {
+  if (esNavegadorAutomatizado && leerBannerCerrado()) {
     banner.remove();
     return;
   }
@@ -69,5 +69,24 @@
 
   function borrarCookie(clave) {
     document.cookie = `${encodeURIComponent(clave)}=; Max-Age=0; path=/; SameSite=Lax`;
+  }
+
+  // try/catch obligatorio: Safari lanza SecurityError con localStorage bloqueado
+  // y sin él el IIFE abortaría antes de mostrar el banner.
+  function leerBannerCerrado() {
+    try {
+      return localStorage.getItem('bannerSubvencionCerrado') === 'true';
+    } catch (e) {
+      console.warn('El acceso a localStorage está bloqueado por el navegador.');
+      return false;
+    }
+  }
+
+  function limpiarBannerCerrado() {
+    try {
+      localStorage.removeItem('bannerSubvencionCerrado');
+    } catch (e) {
+      // localStorage bloqueado: no hay nada persistido que limpiar.
+    }
   }
 })();

@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.7.8 · **Última actualización:** 24 de mayo de 2026
+**Versión:** 4.7.9 · **Última actualización:** 12 de junio de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -125,11 +125,20 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.7.8).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.7.9).
 
 ## Decisiones y restricciones de arquitectura
 
 Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problemas.
+
+- **Assets absolutos en /va/ y URLs absolutas en JS (v4.7.9):** `dist/va/` solo contiene HTML; los assets viven en la raíz. Antes de v4.7.9 las rutas relativas resolvían a `/va/css|js|img|data` (404) y toda la sección VA se servía sin estilos ni JS. El fix abarca seis sitios coordinados:
+  1. **El build reescribe los assets de la variante VA a rutas absolutas** (`gulpfile.js → rewriteAssetUrlsToRoot`, solo `lang === 'ca'`): atributos `src/href/poster/srcset/data-board-source` con prefijo `css/|js/|img/|data/|pdf/` pasan a `/css/...` etc. Los enlaces entre páginas (`lafalla.html`) se mantienen relativos para que la navegación permanezca en `/va/`. La reescritura va DESPUÉS de `optimizeHtmlAssetTags` (sus regex esperan rutas relativas) y antes de `appendAssetVersionToHtml` (que ya acepta rutas absolutas). NO la muevas ni añadas `<base href>` (rompería los enlaces relativos entre páginas VA).
+  2. **Todo `fetch()` y toda URL construida en runtime en `src/js/` debe ser absoluta** (`/data/...`, `/img/...`, `/js/...`): translations, eventos, calendarData, config, dataPages1-6, imágenes de `envia.js`/`meteo.js` y los scripts diferidos de `home-deferred.js`. Un fetch relativo nuevo volvería a 404ear en `/va/`.
+  3. **`board.js → resolveBoardUrl()`** normaliza a raíz el `data-board-source` y las `url` relativas de `imagen`/`adjuntos` del JSON (los JSON del tablón siguen usando rutas relativas tipo `img/...`/`pdf/...` — no hace falta cambiarlos).
+  4. **`home-deferred.js` deduplica por URL resuelta** (`new URL(...).href` contra `document.scripts[].src`), no por igualdad de string: el tag estático del HTML (relativo en ES, absoluto en VA) y la carga diferida (absoluta) deben reconocerse como el mismo script o `cookie-banner.js` se ejecuta dos veces (duplica `#cookie-banner` y rompe sus tests).
+  5. **Red de seguridad en `.htaccess`** (regla A2): `^va/(css|js|img|data|favicon_io)/` → 301 a la raíz, para el HTML `/va/` antiguo aún cacheado/indexado con rutas relativas. NO la quites al menos hasta que GSC deje de registrar esas URLs.
+  6. **Idioma por defecto según la página**: `lang.js` e `initTranslations.js` derivan el fallback de `document.documentElement.lang` (`ca` → `va`, resto → `es`) cuando no hay `localStorage.lang`. Sin esto, un visitante nuevo en `/va/` vería el contenido pre-renderizado VA reescrito a español al cargar el JS. La elección guardada en localStorage sigue ganando sobre la URL.
+  7. **Test guardia**: `tests/i18n-prerender.e2e.spec.js` comprueba que `dist/va/index.html` no contiene ninguna referencia relativa de assets y que la versión ES las conserva.
 
 - **Acordeón Representantes (v4.7.7):**
   1. **El titular accesible** usa `<button type="button" class="accordion__titular" aria-expanded aria-controls>` con focus-visible coral (los acordeones antiguos siguen siendo `<div>` — no migrados). `src/js/acc.js` sincroniza `aria-expanded` solo cuando el titular tiene ese atributo (retro-compatible). NO toques el `hidden`/`inert` del panel: la animación base `max-height: 0 → 100rem` necesita que `.accordion__content` quede en el flujo del DOM; el `aria-expanded` del botón basta para los lectores de pantalla.
@@ -253,6 +262,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.7.9** — Fix crítico: la sección `/va/` se servía sin CSS/JS/imágenes (los assets relativos resolvían a `/va/css|js|img|data`, inexistentes). El build reescribe los assets de la variante VA a rutas absolutas, los `fetch()`/URLs runtime de `src/js/` pasan a absolutos, `lang.js`/`initTranslations.js` toman el idioma por defecto del `lang` de la página y `.htaccess` gana la regla A2 (301 de assets `/va/` cacheados a la raíz). Ver restricción *Assets absolutos en /va/*. Además, fixes de HTML roto: `organigrama.html` (etiqueta `Ada Palerm/p>` visible en producción + 3 `</div>` y 1 `</section>` huérfanos — la leyenda vuelve dentro de `.organigrama-contenedor`) e `index.html` (cierre de `.current-icon` ausente en la sección meteo + atributo malformado `data-i18n="meteo.humedad"=""`). Endurecimiento Safari: TODOS los accesos a `localStorage` de `src/js/` van ahora en try/catch (lang, initTranslations, banner-subvencion, dark, board, calendario, ofrenda-video, video-dron — patrón de cookie-banner.js; con storage bloqueado el sitio queda 100% funcional, verificado simulando `SecurityError`). Regla C de `.htaccess`: el `%20` de la sustitución se escapa como `\%20` (sin escapar, mod_rewrite lo parsea como backreference `%2`+`0` y el 301 del Llibret 2024 apuntaba a otro 404).
 - **4.7.8** — Pulido visual de Representantes (modo claro): el panel hereda el gradiente azul institucional (se eliminó el override `$blanco-hueso` de v4.7.7), cargo/placeholder en `$blanco-hueso`, nombre coral, `box-shadow` de miniaturas reforzada. Ver patrón *Representantes*.
 - **4.7.7** — Nueva subsección **Representantes** en Historia/Archivos (`index.html`/`lafalla.html`). Ver patrón + restricción *Representantes*.
 - **4.7.6** — `.countdown__contenedor` gana `border: 2px solid v.$primary-color` (ambos modos). Icono del teaser Nuevos Falleros renombrado `fondo-nuevos-falleros.svg` → `logo-nuevos-falleros.svg` (`.nuevos-falleros__icono`); el PNG antiguo (`logo-nuevos-falleros.png`) queda en `src/img/logos/` sin uso.

@@ -4,7 +4,17 @@
 let translations = window.translations && typeof window.translations === 'object'
   ? window.translations
   : {};
-let currentLang = localStorage.getItem('lang') || 'es';
+// En /va/ el build pone <html lang="ca">: sin elección guardada, respetar el
+// idioma pre-renderizado de la página en vez de pisarlo con 'es'.
+const pageLang = document.documentElement.lang === 'ca' ? 'va' : 'es';
+// try/catch obligatorio: Safari lanza SecurityError con localStorage bloqueado
+// y, a nivel de módulo, abortaría todo el sistema i18n (ver cookie-banner.js).
+let currentLang = pageLang;
+try {
+  currentLang = localStorage.getItem('lang') || pageLang;
+} catch (e) {
+  console.warn('El acceso a localStorage está bloqueado por el navegador.');
+}
 let translationsPromise = null;
 
 window.currentLanguage = currentLang;
@@ -47,7 +57,7 @@ function loadTranslations() {
     return translationsPromise;
   }
 
-  translationsPromise = fetch('data/translations.json')
+  translationsPromise = fetch('/data/translations.json')
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
@@ -183,7 +193,11 @@ if (langSwitcher && langOptions) {
   document.querySelectorAll('.header__lang-option').forEach(option => {
     option.addEventListener('click', (e) => {
       currentLang = option.getAttribute('data-lang');
-      localStorage.setItem('lang', currentLang);
+      try {
+        localStorage.setItem('lang', currentLang);
+      } catch (e) {
+        console.warn('No se pudo guardar el idioma seleccionado (localStorage bloqueado).');
+      }
       window.currentLanguage = currentLang;
       langOptions.classList.remove('active');
       langSwitcher.setAttribute('aria-expanded', 'false');

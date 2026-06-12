@@ -44,7 +44,12 @@ function initOfrendaVideo() {
 
   function getTranslation(key) {
     if (window.translations) {
-      const lang = localStorage.getItem('lang') || 'es';
+      let lang = window.currentLanguage || 'es';
+      try {
+        lang = localStorage.getItem('lang') || lang;
+      } catch (e) {
+        // Safari con localStorage bloqueado lanza SecurityError.
+      }
       const keys = key.split('.');
       let val = window.translations[lang];
       for (const k of keys) {

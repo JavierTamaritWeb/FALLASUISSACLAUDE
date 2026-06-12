@@ -30,7 +30,9 @@ const paths = {
   imgRasterForConvert: 'src/img/**/*.{png,jpg,jpeg}',
   imgDest: 'dist/img',
   favicon: { src: 'src/favicon_io/**/*', dest: 'dist/favicon_io' },
-  html: { src: ['src/*.html', '!src/google*.html'], dest: 'dist' },
+  // ai-info.html lo copia rootFilesTask tal cual (página noindex AI-only, no traducible);
+  // excluida aquí para que htmlTask no le inyecte canonical/hreflang ni genere /va/ai-info.html (ver B2)
+  html: { src: ['src/*.html', '!src/google*.html', '!src/ai-info.html'], dest: 'dist' },
   root: {
     src: [
       'src/robots.txt',
@@ -148,6 +150,30 @@ function optimizeHtmlAssetTags(html) {
     html = html.replace(/\n?\s*<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/swiper@11\/swiper-bundle\.min\.js"><\/script>\s*\n?/i, '\n');
     html = html.replace(/\n?\s*<script src="js\/swiper\.js"><\/script>\s*\n?/i, '\n');
   }
+
+  return html;
+}
+
+const VA_ASSET_PREFIXES = /^(?:css|js|img|data|pdf)\//;
+
+// La variante /va/ vive en un subdirectorio pero comparte los assets de la
+// raíz (dist/va/ solo contiene HTML): las URLs relativas de assets deben
+// volverse absolutas o resolverían a /va/css|js|img|data|pdf (404). Los
+// enlaces entre páginas (lafalla.html, etc.) se mantienen relativos para que
+// la navegación permanezca dentro de /va/.
+function rewriteAssetUrlsToRoot(html) {
+  html = html.replace(/\b(src|href|poster|data-board-source)="((?:css|js|img|data|pdf)\/[^"]*)"/g, '$1="/$2"');
+
+  html = html.replace(/\bsrcset="([^"]+)"/g, (match, value) => {
+    const rewritten = value
+      .split(',')
+      .map((candidate) => {
+        const trimmed = candidate.trim();
+        return VA_ASSET_PREFIXES.test(trimmed) ? `/${trimmed}` : trimmed;
+      })
+      .join(', ');
+    return `srcset="${rewritten}"`;
+  });
 
   return html;
 }
@@ -584,6 +610,12 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missi
 
       html = stripLegacyDynamicEventSchema(html);
       html = optimizeHtmlAssetTags(html);
+
+      // 1c. Assets a rutas absolutas en la variante /va/ (tras
+      // optimizeHtmlAssetTags, cuyas regex esperan rutas relativas).
+      if (lang === 'ca') {
+        html = rewriteAssetUrlsToRoot(html);
+      }
 
       // 2. Preparar bloque de inyección
       const fileName = path.basename(file.path);

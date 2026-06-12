@@ -6,6 +6,16 @@
 const DEFAULT_BOARD_SOURCE = 'data/board.json';
 const VALID_ADJUNTO_TYPES = new Set(['pdf', 'img']);
 
+// Las rutas relativas (data-board-source y las url de imagen/adjuntos del
+// JSON) se resuelven contra la raíz del sitio: desde las páginas /va/
+// resolverían a /va/data|img|pdf, que no existen.
+function resolveBoardUrl(url) {
+  if (!url || /^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(url)) {
+    return url;
+  }
+  return `/${url}`;
+}
+
 // Cache de fetches (url -> Promise<data>) para no duplicar petición si
 // dos tableros comparten el mismo JSON.
 const boardSourceCache = new Map();
@@ -22,7 +32,12 @@ function getCurrentBoardLang() {
     return currentLang;
   }
 
-  return localStorage.getItem('lang') || 'es';
+  try {
+    return localStorage.getItem('lang') || window.currentLanguage || 'es';
+  } catch (e) {
+    // Safari con localStorage bloqueado lanza SecurityError.
+    return window.currentLanguage || 'es';
+  }
 }
 
 function getBoardTranslation(key, fallback) {
@@ -69,7 +84,7 @@ function renderImagen(imagen, lang) {
 
   return `
     <figure class="board__figure">
-      <img class="board__image" src="${url}" alt="${alt}" loading="lazy" decoding="async">
+      <img class="board__image" src="${resolveBoardUrl(url)}" alt="${alt}" loading="lazy" decoding="async">
     </figure>`;
 }
 
@@ -92,7 +107,7 @@ function getAdjuntosValidos(adjuntos, lang) {
         return null;
       }
 
-      return { tipo, url, nombre };
+      return { tipo, url: resolveBoardUrl(url), nombre };
     })
     .filter(Boolean);
 }
@@ -227,7 +242,7 @@ async function initBoardEl(el, index) {
     el.id = id;
   }
 
-  const source = (el.dataset.boardSource || DEFAULT_BOARD_SOURCE).trim();
+  const source = resolveBoardUrl((el.dataset.boardSource || DEFAULT_BOARD_SOURCE).trim());
   const data = await fetchBoardSource(source);
 
   boardRegistry.set(id, { el, source, data });

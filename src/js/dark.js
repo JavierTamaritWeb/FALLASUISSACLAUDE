@@ -241,7 +241,13 @@ botonModoOscuro.addEventListener('click', () => {
     document.body.classList.add('modo-claro');
     document.documentElement.classList.add('modo-claro');
   }
-  localStorage.setItem('darkMode', document.body.classList.contains('modo-oscuro'));
+  // try/catch obligatorio: Safari lanza SecurityError con localStorage bloqueado
+  // y sin él el handler abortaría dejando icono y theme-color desincronizados.
+  try {
+    localStorage.setItem('darkMode', document.body.classList.contains('modo-oscuro'));
+  } catch (e) {
+    console.warn('No se pudo guardar la preferencia de modo oscuro (localStorage bloqueado).');
+  }
   actualizarThemeColor();
   actualizarIcono();
   

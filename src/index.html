@@ -16,9 +16,7 @@
   <meta name="geo.placename" content="Valencia, España">
   <meta name="geo.position" content="39.4699;-0.3763">
   <meta name="ICBM" content="39.4699, -0.3763">
-  <link rel="canonical" href="https://fallasuissa.es/">
-  <link rel="alternate" hreflang="es" href="https://fallasuissa.es/">
-  <link rel="alternate" hreflang="ca-ES" href="https://fallasuissa.es/?lang=ca">
+  <!-- canonical + hreflang los inyecta el build (gulpfile → modifyHtmlStream); NO añadir aquí (ver restricción SEO multi-idioma) -->
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -1238,8 +1236,9 @@
           <div class="current-content">
               <div class="current-icon">
                 <img id="current-icon-img" width="64" height="64" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Icono del estado meteorológico actual" loading="lazy" decoding="async" />
-              
-          
+              </div>
+
+
           <!-- Información principal -->
           <div class="current-info">
             <h3 id="current-temp" class="current-info__portada-temp">--°C</h3>
@@ -1249,7 +1248,7 @@
           </div>
           <!-- Detalles adicionales -->
           <div class="current-details current-details__humedad">
-            <div class="etiqueta-humedad"><strong class="etiqueta-pronostico" data-i18n="meteo.humedad"="">Humedad</strong> <span id="current-humidity">--%</span></div>
+            <div class="etiqueta-humedad"><strong class="etiqueta-pronostico" data-i18n="meteo.humedad">Humedad</strong> <span id="current-humidity">--%</span></div>
           </div>
           </div>
         </div>

@@ -30,7 +30,11 @@
       return loadedScripts.get(versionedSrc);
     }
 
-    const existingScript = document.querySelector(`script[src="${versionedSrc}"]`);
+    // Deduplicar por URL resuelta: el tag estático del HTML puede usar una
+    // ruta relativa y la carga diferida una absoluta (o viceversa) y ambas
+    // deben reconocerse como el mismo script.
+    const absoluteSrc = new URL(versionedSrc, window.location.href).href;
+    const existingScript = Array.from(document.scripts).find((s) => s.src === absoluteSrc);
     if (existingScript) {
       return Promise.resolve(existingScript);
     }
@@ -113,10 +117,10 @@
   }
 
   function initDeferredHomeScripts() {
-    loadAfterPaint(['js/cookie-banner.js']);
-    loadOnIdle(['js/timeline.js', 'js/acc.js']);
-    loadOnVisible('#videoDron', ['js/video-dron.js'], '320px');
-    loadOnVisible('#videoOfrenda', ['js/ofrenda-video.js'], '320px');
+    loadAfterPaint(['/js/cookie-banner.js']);
+    loadOnIdle(['/js/timeline.js', '/js/acc.js']);
+    loadOnVisible('#videoDron', ['/js/video-dron.js'], '320px');
+    loadOnVisible('#videoOfrenda', ['/js/ofrenda-video.js'], '320px');
   }
 
   if (document.readyState === 'loading') {

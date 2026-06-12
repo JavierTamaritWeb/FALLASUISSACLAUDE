@@ -643,8 +643,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   Promise.all([
-    fetch('data/eventos.json').then(response => response.json()),
-    fetch('data/calendarData.json').then(response => response.json())
+    fetch('/data/eventos.json').then(response => response.json()),
+    fetch('/data/calendarData.json').then(response => response.json())
   ])
   .then(([eventData, calData]) => {
     window.eventos = eventData.eventos;
@@ -707,7 +707,11 @@ function asignarEventos() {
 // Función updateLanguage, se asume que se invoca desde lang.js.
 function updateLanguage(newLang) {
   currentLang = newLang;
-  localStorage.setItem('lang', currentLang);
+  try {
+    localStorage.setItem('lang', currentLang);
+  } catch (e) {
+    // Safari con localStorage bloqueado lanza SecurityError; la elección no persiste.
+  }
   updateTranslations();
   renderCalendarContent(currentLang);
   const event = new Event("langChanged");
