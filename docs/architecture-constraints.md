@@ -339,8 +339,9 @@ Archivos implicados:
 - `src/scss/components/_blog.scss`
 - `src/scss/animaciones/_modo-oscuro.scss`
 - `src/scss/components/_image-optimization.scss`
-- `src/js/image-optimizer.js`
 - `src/js/accessibility.js`
+
+> Nota: `src/js/image-optimizer.js` figuraba en esta lista pero ningún HTML lo cargaba; se eliminó en v4.7.9 junto a `performance-optimizer.js` y `pwa-manager.js` (módulos muertos con rutas internas inexistentes).
 
 Verificación recomendada:
 

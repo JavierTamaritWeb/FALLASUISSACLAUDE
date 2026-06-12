@@ -73,10 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!document.fullscreenElement && !document.webkitFullscreenElement) {
           const requestFs = img.requestFullscreen || img.webkitRequestFullscreen;
           if (requestFs) {
-            requestFs.call(img).catch(() => {
-              // Si falla la API nativa, usar fallback
-              openFallback(img.currentSrc || img.src, img.alt);
-            });
+            // webkitRequestFullscreen (Safari macOS antiguo) devuelve undefined,
+            // no una promesa: un .catch directo lanzaría TypeError y anularía
+            // el fallback que pretende capturar.
+            const result = requestFs.call(img);
+            if (result && typeof result.catch === 'function') {
+              result.catch(() => {
+                // Si falla la API nativa, usar fallback
+                openFallback(img.currentSrc || img.src, img.alt);
+              });
+            }
           }
         } else {
           const exitFs = document.exitFullscreen || document.webkitExitFullscreen;

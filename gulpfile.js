@@ -31,11 +31,12 @@ const paths = {
   imgDest: 'dist/img',
   favicon: { src: 'src/favicon_io/**/*', dest: 'dist/favicon_io' },
   // ai-info.html lo copia rootFilesTask tal cual (página noindex AI-only, no traducible);
-  // excluida aquí para que htmlTask no le inyecte canonical/hreflang ni genere /va/ai-info.html (ver B2)
-  html: { src: ['src/*.html', '!src/google*.html', '!src/ai-info.html'], dest: 'dist' },
+  // excluida aquí para que htmlTask no le inyecte canonical/hreflang ni genere /va/ai-info.html (ver B2).
+  // base.html es una plantilla interna: NO se publica (sin entrada en sitemap; .htaccess responde 410)
+  html: { src: ['src/*.html', '!src/google*.html', '!src/ai-info.html', '!src/base.html'], dest: 'dist' },
   root: {
     src: [
-      'src/robots.txt',
+      'src/robots*.txt',
       'src/sitemap*.xml',
       'src/.htaccess',
       'src/sw.js',

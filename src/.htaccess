@@ -165,6 +165,10 @@ RewriteRule ^ https://fallasuissa.es%{REQUEST_URI} [R=301,L]
     #    /deportes.html (nuevas bases 2026-27 enlazadas desde el tablón)
     RewriteRule "^pdf/C6[0-9]+.*\.pdf$" /deportes.html [R=301,L]
 
+    # E) base.html era una plantilla interna publicada por error (indexable y
+    #    sin entrada en sitemap); desde v4.7.9 se excluye del build -> 410 Gone
+    RewriteRule ^(va/)?base\.html$ - [R=410,L]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]

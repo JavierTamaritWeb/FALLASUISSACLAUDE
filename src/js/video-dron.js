@@ -127,8 +127,23 @@ function initVideoDron() {
   // Reproducción inline
   // =========================================================================
 
-  function playInline() {
-    video.play();
+  // Reproduce controlando la promesa (mismo patrón que ofrenda-video.js): el
+  // navegador puede rechazar play() (NotAllowedError por políticas de autoplay,
+  // AbortError por un pause() inmediato) y sin catch queda un unhandled
+  // rejection con la UI desincronizada.
+  async function safePlay(videoEl, buttonEl) {
+    try {
+      await videoEl.play();
+      return true;
+    } catch (error) {
+      console.error('No se pudo reproducir el vídeo del dron.', error);
+      if (buttonEl) updatePlayButton(buttonEl, false);
+      return false;
+    }
+  }
+
+  async function playInline() {
+    if (!(await safePlay(video, btnPlay))) return;
     posterOverlay.classList.add('video-dron__poster-overlay--hidden');
     updatePlayButton(btnPlay, true);
   }
@@ -219,8 +234,9 @@ function initVideoDron() {
     fullscreen.setAttribute('aria-hidden', 'false');
     document.body.classList.add('lightbox-open');
 
-    fsVideo.play();
-    updatePlayButton(fsBtnPlay, true);
+    safePlay(fsVideo, fsBtnPlay).then((ok) => {
+      if (ok) updatePlayButton(fsBtnPlay, true);
+    });
 
     // Sincronizar volumen y estado de silencio
     fsVideo.volume = video.volume;
@@ -260,8 +276,9 @@ function initVideoDron() {
 
   function toggleFullscreen() {
     if (fsVideo.paused || fsVideo.ended) {
-      fsVideo.play();
-      updatePlayButton(fsBtnPlay, true);
+      safePlay(fsVideo, fsBtnPlay).then((ok) => {
+        if (ok) updatePlayButton(fsBtnPlay, true);
+      });
     } else {
       fsVideo.pause();
       updatePlayButton(fsBtnPlay, false);
@@ -270,8 +287,9 @@ function initVideoDron() {
 
   function restartFullscreen() {
     fsVideo.currentTime = 0;
-    fsVideo.play();
-    updatePlayButton(fsBtnPlay, true);
+    safePlay(fsVideo, fsBtnPlay).then((ok) => {
+      if (ok) updatePlayButton(fsBtnPlay, true);
+    });
   }
 
   // Botón abrir fullscreen
