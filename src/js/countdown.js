@@ -130,23 +130,27 @@
     const { target, status } = getTargetDates();
     const now = new Date();
 
-    // Obtenemos las traducciones
-    const translatedMessage = getNestedTranslation("countdown.message");
-    const ongoingMessage = getNestedTranslation("countdown.ongoing");
+    // Obtenemos las traducciones. getNestedTranslation devuelve la propia
+    // clave si aún no han cargado: en ese caso conservamos el texto estático
+    // del HTML (ya correcto en ES y pre-renderizado en VA) en vez de mostrarla.
+    const rawMessage = getNestedTranslation("countdown.message");
+    const translatedMessage = rawMessage === "countdown.message" ? null : rawMessage;
+    const rawOngoing = getNestedTranslation("countdown.ongoing");
+    const ongoingMessage = rawOngoing === "countdown.ongoing" ? null : rawOngoing;
 
     if (status === "ongoing") {
       // Estamos en Fallas: ocultamos el reloj y mostramos el mensaje traducido
       if (countdownMessage) countdownMessage.style.display = "none";
       if (clock) clock.style.display = "none";
       if (fallasMessage) {
-        fallasMessage.textContent = ongoingMessage;
+        if (ongoingMessage) fallasMessage.textContent = ongoingMessage;
         fallasMessage.style.display = "block";
       }
       return;
     } else if (target) {
       // Mostramos la cuenta regresiva
       if (countdownMessage) {
-        countdownMessage.textContent = translatedMessage;
+        if (translatedMessage) countdownMessage.textContent = translatedMessage;
         countdownMessage.style.display = "block";
       }
       if (clock) clock.style.display = "flex";

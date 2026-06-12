@@ -82,10 +82,14 @@ function updateUI() {
   prevBtn.disabled = currentPage === 0;
   nextBtn.disabled = currentPage === pages.length - 1;
   // Utilizamos una traducción con parámetros para el indicador
+  // translate() devuelve la propia clave si las traducciones aún no han
+  // cargado: usamos un formato neutro hasta que llegue translationsReady.
   const rawIndicator = translate("notepad.indicator"); // Ej: "Página {current} de {total}"
-  indicator.textContent = rawIndicator
-    .replace("{current}", currentPage + 1)
-    .replace("{total}", pages.length);
+  indicator.textContent = rawIndicator === "notepad.indicator"
+    ? `${currentPage + 1} / ${pages.length}`
+    : rawIndicator
+        .replace("{current}", currentPage + 1)
+        .replace("{total}", pages.length);
 }
 
 // 5. Avanzar a la siguiente página con animación
@@ -123,6 +127,12 @@ function prevPage() {
 // Eventos de los botones
 prevBtn.addEventListener("click", prevPage);
 nextBtn.addEventListener("click", nextPage);
+
+// Re-render del indicador al cargar las traducciones y en cada cambio de
+// idioma (lang.js dispara translationsReady en ambos casos).
+document.addEventListener("translationsReady", () => {
+  if (pages.length) updateUI();
+});
 
 // Iniciar todo
 loadPages();

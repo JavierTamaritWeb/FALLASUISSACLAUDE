@@ -178,6 +178,9 @@ function renderCalendarDetails(lang) {
 function renderCalendarEvents(lang) {
   const container = document.getElementById('lista-anuncios');
   if (!container) return;
+  // Los eventos llegan por fetch en DOMContentLoaded: si aún no han cargado
+  // (p. ej. langChanged inmediato), no hay nada que renderizar todavía.
+  if (!Array.isArray(window.eventos)) return;
   container.innerHTML = '';
   window.eventos.forEach(event => {
     const item = document.createElement('div');
