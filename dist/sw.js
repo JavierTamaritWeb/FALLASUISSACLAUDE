@@ -5,8 +5,8 @@
 // en cada subida de versión. Al cambiar los nombres, el handler de activate
 // purga los caches antiguos — sin el bump, los visitantes recurrentes con el
 // SW registrado seguirían viendo el HTML/CSS cacheado de la versión anterior.
-const CACHE_NAME = 'falla-suissa-v4.8.1';
-const CRITICAL_CACHE = 'falla-critical-v4.8.1';
+const CACHE_NAME = 'falla-suissa-v4.8.2';
+const CRITICAL_CACHE = 'falla-critical-v4.8.2';
 
 // Recursos críticos para cache inmediato
 const CRITICAL_RESOURCES = [

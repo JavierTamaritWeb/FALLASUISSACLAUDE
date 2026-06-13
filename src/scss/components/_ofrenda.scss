@@ -50,11 +50,7 @@
   border: none;
   border-top: 3px solid v.$primary-color;
   margin: 0;
-  display: none;
-
-  @media (min-width: 768px) {
-    display: block;
-  }
+  display: block;
 }
 
 // =============================================================================
