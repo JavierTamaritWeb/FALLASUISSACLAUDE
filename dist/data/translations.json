@@ -153,7 +153,9 @@
         "mensaje": "Mensaje",
         "aceptar": "Aceptar",
         "nombrePlaceholder": "Nombre y apellidos",
-        "mensajePlaceholder": "Introduce un mensaje"
+        "mensajePlaceholder": "Introduce un mensaje",
+        "privacidadTexto": "He leído y acepto la",
+        "privacidadEnlace": "Política de Privacidad"
       },
       "blog": {
         "titulo": "Blog de nuestra Falla",
@@ -665,7 +667,9 @@
         "mensaje": "Missatge",
         "aceptar": "Acceptar",
         "nombrePlaceholder": "Nom i cognoms",
-        "mensajePlaceholder": "Intodueix un missatge"
+        "mensajePlaceholder": "Intodueix un missatge",
+        "privacidadTexto": "He llegit i accepte la",
+        "privacidadEnlace": "Política de Privacitat"
       },
       "blog": {
         "titulo": "Blog de la nostra Falla",

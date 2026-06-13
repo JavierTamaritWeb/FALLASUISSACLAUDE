@@ -71,14 +71,26 @@ function renderizarLista(eventosFiltrados) {
     banda.className = 'calendario-eventos__banda';
     banda.style.backgroundColor = mapping[e.category] || "#000";
     div.insertBefore(banda, div.firstChild);
-    div.innerHTML += `
-      <h2 class="calendario-eventos__item-titulo">${translateEventName(e.title, currentLang)}</h2>
-      <p class="calendario-eventos__item-contenido">${translateEventName(e.description, currentLang)}</p>
-      <div class="calendario-eventos__item-meta">
-        <span>${e.date}</span>
-        <span>${translateEventName(e.category, currentLang)}</span>
-      </div>
-    `;
+    // Construcción con createElement + textContent (no innerHTML) para evitar
+    // inyección si el JSON de eventos contuviera HTML: mismo patrón seguro que
+    // renderCalendarEvents() más abajo.
+    const tituloEl = document.createElement('h2');
+    tituloEl.className = 'calendario-eventos__item-titulo';
+    tituloEl.textContent = translateEventName(e.title, currentLang);
+    div.appendChild(tituloEl);
+    const contenidoEl = document.createElement('p');
+    contenidoEl.className = 'calendario-eventos__item-contenido';
+    contenidoEl.textContent = translateEventName(e.description, currentLang);
+    div.appendChild(contenidoEl);
+    const metaEl = document.createElement('div');
+    metaEl.className = 'calendario-eventos__item-meta';
+    const fechaSpan = document.createElement('span');
+    fechaSpan.textContent = e.date;
+    metaEl.appendChild(fechaSpan);
+    const categoriaSpan = document.createElement('span');
+    categoriaSpan.textContent = translateEventName(e.category, currentLang);
+    metaEl.appendChild(categoriaSpan);
+    div.appendChild(metaEl);
     div.addEventListener('click', () => {
       const [year, m, d] = e.date.split('-').map(Number);
       const dateObj = new Date(year, m - 1, d);

@@ -23,6 +23,80 @@ function resolveBoardUrl(url) {
   return window.SITE_ROOT + url;
 }
 
+// ---------------------------------------------------------------------------
+// Saneamiento (defensa en profundidad)
+// board.json/sports-board.json son de primer origen, pero los editan delegados
+// (ver docs/gestion-tablon.md). Estas utilidades evitan que un HTML/atributo
+// peligroso introducido por error o por un compromiso del repo se ejecute.
+// ---------------------------------------------------------------------------
+
+// Escapa entidades para interpolar en contexto de atributo o texto.
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Acepta rutas relativas, anclas y http(s); rechaza esquemas peligrosos
+// (javascript:, data:, vbscript:, etc.) aunque lleven espacios/control de por
+// medio para disfrazarlos.
+function isSafeUrl(url) {
+  const value = String(url == null ? '' : url).trim();
+  if (!value) return false;
+  const scheme = value.replace(/[\u0000-\u0020]+/g, '').match(/^([a-z][a-z0-9+.-]*):/i);
+  if (scheme) {
+    return /^https?$/i.test(scheme[1]);
+  }
+  return true; // relativa o ancla
+}
+
+// Conjunto mínimo de etiquetas/atributos de formato permitidos en el contenido
+// de una nota (que sí admite HTML intencionado: <br>, énfasis, enlaces).
+const BOARD_ALLOWED_TAGS = new Set(['BR', 'STRONG', 'EM', 'B', 'I', 'U', 'P', 'SPAN', 'A']);
+const BOARD_ALLOWED_ATTRS = { A: new Set(['href', 'target', 'rel']) };
+
+// Sanea HTML de confianza limitada usando el parser del navegador sobre un
+// <template> inerte (no ejecuta scripts ni dispara onerror al parsear): conserva
+// solo las etiquetas/atributos de la allowlist y descarta el resto como texto.
+function sanitizeBoardHtml(html) {
+  const template = document.createElement('template');
+  template.innerHTML = String(html == null ? '' : html);
+
+  const walk = (node) => {
+    Array.from(node.childNodes).forEach((child) => {
+      if (child.nodeType !== Node.ELEMENT_NODE) return;
+
+      if (!BOARD_ALLOWED_TAGS.has(child.tagName)) {
+        // Etiqueta no permitida -> se reemplaza por su texto plano.
+        child.replaceWith(document.createTextNode(child.textContent || ''));
+        return;
+      }
+
+      const allowed = BOARD_ALLOWED_ATTRS[child.tagName] || new Set();
+      Array.from(child.attributes).forEach((attr) => {
+        const name = attr.name.toLowerCase();
+        const isUnsafeAttr = !allowed.has(name) || name.startsWith('on');
+        const isUnsafeHref = name === 'href' && !isSafeUrl(attr.value);
+        if (isUnsafeAttr || isUnsafeHref) {
+          child.removeAttribute(attr.name);
+        }
+      });
+
+      if (child.tagName === 'A') {
+        child.setAttribute('rel', 'noopener noreferrer');
+      }
+
+      walk(child);
+    });
+  };
+
+  walk(template.content);
+  return template.innerHTML;
+}
+
 // Cache de fetches (url -> Promise<data>) para no duplicar petición si
 // dos tableros comparten el mismo JSON.
 const boardSourceCache = new Map();
@@ -78,7 +152,7 @@ function renderImagen(imagen, lang) {
   }
 
   const url = typeof imagen.url === 'string' ? imagen.url.trim() : '';
-  if (!url) {
+  if (!url || !isSafeUrl(url)) {
     return '';
   }
 
@@ -91,7 +165,7 @@ function renderImagen(imagen, lang) {
 
   return `
     <figure class="board__figure">
-      <img class="board__image" src="${resolveBoardUrl(url)}" alt="${alt}" loading="lazy" decoding="async">
+      <img class="board__image" src="${escapeHtml(resolveBoardUrl(url))}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">
     </figure>`;
 }
 
@@ -110,7 +184,7 @@ function getAdjuntosValidos(adjuntos, lang) {
       const url = typeof adj.url === 'string' ? adj.url.trim() : '';
       const nombre = getAdjuntoNombre(adj, lang);
 
-      if (!VALID_ADJUNTO_TYPES.has(tipo) || !url || !nombre) {
+      if (!VALID_ADJUNTO_TYPES.has(tipo) || !url || !nombre || !isSafeUrl(url)) {
         return null;
       }
 
@@ -144,16 +218,17 @@ function fetchBoardSource(url) {
  * Genera HTML para un adjunto (con nombre traducible).
  */
 function renderAdjunto(adj, isMultiple) {
-  const iconText = adj.tipo.toUpperCase();
-  const nombre = adj.nombre;
+  const iconText = escapeHtml(adj.tipo.toUpperCase());
+  const nombre = escapeHtml(adj.nombre);
   const actionLabel = adj.tipo === 'pdf'
     ? getBoardTranslation('board.downloadFile', 'Descargar')
     : getBoardTranslation('board.viewImage', 'Ver imagen');
 
-  const ariaLabel = `${actionLabel}: ${nombre}`;
+  const ariaLabel = escapeHtml(`${actionLabel}: ${adj.nombre}`);
+  const safeUrl = escapeHtml(adj.url);
 
   const linkHTML = `
-    <a href="${adj.url}" class="board__file-link"
+    <a href="${safeUrl}" class="board__file-link"
        target="_blank" rel="noopener noreferrer"
        aria-label="${ariaLabel}">
       <svg class="board__file-icon board__file-icon--${adj.tipo}"
@@ -174,7 +249,9 @@ function renderAdjunto(adj, isMultiple) {
  */
 function renderNota(nota) {
   const lang = getCurrentBoardLang();
-  const contenido = nota.contenido[lang] || nota.contenido.es;
+  // El contenido admite HTML de formato intencionado (<br>, énfasis, enlaces),
+  // por eso se sanea con allowlist en vez de escaparse por completo.
+  const contenido = sanitizeBoardHtml(nota.contenido[lang] || nota.contenido.es);
   const adjuntosValidos = getAdjuntosValidos(nota.adjuntos, lang);
   const hasAdjuntos = adjuntosValidos.length > 0;
   const imagenHTML = renderImagen(nota.imagen, lang);

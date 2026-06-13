@@ -238,6 +238,77 @@ body.modo-oscuro #modal-quieres .modal-body .lead {
   box-shadow: 1px 0 5px v.$primary-color;
 }
 
+// Fila de consentimiento RGPD: checkbox pequeño a la izquierda del texto
+#quieres-form .form-group--consentimiento {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+#quieres-form .form-group--consentimiento input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  // !important para ganar la especificidad de #quieres-form input
+  padding: 0 !important;
+  width: 1.6rem !important;
+  height: 1.6rem !important;
+  min-width: 1.6rem;
+  max-width: 1.6rem;
+  min-height: 1.6rem;
+  max-height: 1.6rem;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1.5px solid v.$gris-claro;
+  border-radius: 3px;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  box-shadow: none;
+
+  &:checked {
+    background-color: v.$primary-color;
+    border-color: v.$primary-color;
+
+    // Tick centrado horizontal y verticalmente dentro del cuadrado
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0.45rem;
+      height: 0.8rem;
+      border: 0.15rem solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: translate(-50%, -60%) rotate(45deg);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$primary-color;
+    outline-offset: 2px;
+  }
+}
+
+#quieres-form .form-consentimiento__label {
+  font-size: v.$font-size-small;
+  color: v.$primary-color;
+  cursor: pointer;
+  transition: color 2.4s ease-in-out;
+  line-height: 1.3;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.8;
+    }
+  }
+}
+
 .wrapper-inline {
   display: flex;
   align-items: center;
