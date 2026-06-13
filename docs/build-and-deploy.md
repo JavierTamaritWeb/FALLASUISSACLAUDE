@@ -101,21 +101,52 @@ El proyecto incluye un archivo `.htaccess` optimizado para servidores Apache. Es
 - **Tipos MIME:** Soporte para WebP, AVIF y ficheros webmanifest.
 - **URLs Amigables:** Redirección automática de URLs sin extensión a `.html`.
 
-## 🌐 Despliegue (opciones)
+## 🌐 Despliegue
 
-Este repo mantiene `dist/` versionado. Eso permite desplegar en hosts simples (FTP/hosting estático) sin necesidad de Node en el servidor.
+### Opción recomendada: `npm run deploy` (script automatizado)
 
-Opciones habituales:
+El sitio se despliega en Hostinger vía SSH con `tools/deploy.sh`, que **construye y sincroniza en un solo paso**:
 
-1. **Desplegar el contenido de `dist/`**
+```bash
+npm run deploy
+```
 
-- Ejecuta `npm run build`
-- Sube `dist/` al servidor (raíz pública)
+Qué hace, en orden:
 
-1. **Desplegar desde Git con `dist/` ya incluido**
+1. `npm run build` (regenera `dist/`).
+2. Comprueba la conexión SSH y que `rsync` existe en el servidor; crea el directorio remoto si falta.
+3. Pide confirmación (porque sincroniza en modo **espejo con `--delete`**: borra en el servidor lo que ya no esté en `dist/`).
+4. `rsync -avz --delete` de `dist/` → `~/domains/fallasuissa.es/public_html/` (incluye dotfiles como `.htaccess` y `.well-known/`; excluye `.DS_Store`).
+5. Verifica que `https://fallasuissa.es` responde **HTTP 200**.
 
-- Pull en el servidor/hosting
-- Publicar `dist/` como carpeta raíz (según tu proveedor)
+**Flags** (pásalas tras `--` con npm, p. ej. `npm run deploy -- --dry-run`):
+
+| Flag | Efecto |
+|------|--------|
+| `--dry-run` | Ensayo: muestra qué cambiaría rsync **sin** tocar el servidor. Úsalo antes de un deploy dudoso. |
+| `--skip-build` | Sube el `dist/` actual sin reconstruir. |
+| `-y`, `--yes` | No pide confirmación (automatización; salta la red de seguridad del `--delete`). |
+| `-h`, `--help` | Ayuda. |
+
+**Conexión** (datos en la cabecera del script, sobreescribibles por variable de entorno: `SSH_USER`, `SSH_HOST`, `SSH_PORT`, `REMOTE_DIR`, `LOCAL_DIR`):
+
+- Servidor: `REDACTED_USER@REDACTED_HOST`, puerto `65002`.
+- Directorio remoto: `~/domains/fallasuissa.es/public_html`.
+
+**Autenticación**: Hostinger usa contraseña SSH por defecto. Para un deploy sin prompts, configura una clave una sola vez:
+
+```bash
+ssh-copy-id -p 65002 REDACTED_USER@REDACTED_HOST
+```
+
+El script funciona con o sin clave; sin ella, `ssh`/`rsync` pedirán la contraseña.
+
+### Alternativas manuales
+
+Este repo mantiene `dist/` versionado, así que también puedes desplegar sin el script:
+
+1. **Subir el contenido de `dist/`**: ejecuta `npm run build` y sube `dist/` a la raíz pública (FTP/panel del hosting). Asegúrate de incluir el `.htaccess` oculto.
+2. **Desplegar desde Git con `dist/` incluido**: haz pull en el servidor y publica `dist/` como carpeta raíz.
 
 ## 🧪 Tests E2E (Playwright)
 
@@ -182,8 +213,9 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 - Si el build falla por dependencias: `rm -rf node_modules && npm install`
 - Si no ves cambios en producción: confirma que has subido `dist/` y no la raíz del repo
+- Si `npm run deploy` falla en el paso SSH: prueba `ssh -p 65002 REDACTED_USER@REDACTED_HOST` a mano para verificar acceso, y `npm run deploy -- --dry-run` para diagnosticar sin tocar el servidor
 - Si el pre-render VA produce salida inesperada: usa el kill switch `DISABLE_I18N_PRERENDER=1 npm run build` y revisa los warnings `[i18n-prerender] missing key: ...` que emite el build cuando faltan claves en `translations.va`
 
 ---
 
-Última actualización: 7 de mayo de 2026 - v4.6.23
+Última actualización: 13 de junio de 2026 - v4.8.0
