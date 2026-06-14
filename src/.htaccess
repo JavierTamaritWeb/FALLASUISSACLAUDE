@@ -15,13 +15,27 @@ RewriteRule ^ https://fallasuissa.es%{REQUEST_URI} [R=301,L]
 # (sube/borra ese fichero por SSH) sin necesidad de re-desplegar.
 #
 # Devuelve HTTP 503 (Service Unavailable) + Retry-After para que Google NO
-# indexe la pantalla ni piense que el contenido desapareció. El bypass por IP
-# permite que el equipo siga viendo la web real mientras dura el mantenimiento.
-# La página servida (mantenimiento.html) es autocontenida (CSS inline, sin
-# assets externos), por lo que no hace falta excluir CSS/JS/imágenes del rewrite.
+# indexe la pantalla ni piense que el contenido desapareció. La página servida
+# (mantenimiento.html) es autocontenida (CSS inline, sin assets externos), por
+# lo que no hace falta excluir CSS/JS/imágenes del rewrite.
+#
+# Bypass del equipo por TOKEN SECRETO (no por IP, para no versionar datos
+# personales): visitar con ?preview=TOKEN fija una cookie de bypass y permite
+# ver la web real. __MAINT_TOKEN__ es un placeholder: el valor real lo inyecta
+# `tools/deploy.sh` tras el rsync, leyéndolo de tools/deploy.env (NO versionado).
+
+# 1) Durante mantenimiento, si llega el token por query, fija la cookie de bypass
+#    (válida 1 día) para que las siguientes peticiones (sin query) también pasen.
 RewriteCond %{DOCUMENT_ROOT}/.maintenance -f
-RewriteCond %{REMOTE_ADDR} !=0.0.0.0             # IP del equipo (bypass) — añadir una línea por cada IP extra
-RewriteCond %{REQUEST_URI} !=/mantenimiento.html     # evita el bucle 503 sobre la propia página
+RewriteCond %{QUERY_STRING} (^|&)preview=__MAINT_TOKEN__($|&)
+RewriteRule ^ - [CO=maint_bypass:__MAINT_TOKEN__:.fallasuissa.es:1440:/]
+
+# 2) Responder 503 salvo que: haya cookie de bypass, venga el token por query, o
+#    sea la propia página de mantenimiento (evita el bucle 503).
+RewriteCond %{DOCUMENT_ROOT}/.maintenance -f
+RewriteCond %{HTTP_COOKIE} !maint_bypass=__MAINT_TOKEN__
+RewriteCond %{QUERY_STRING} !(^|&)preview=__MAINT_TOKEN__($|&)
+RewriteCond %{REQUEST_URI} !=/mantenimiento.html
 RewriteRule ^ - [R=503,L]
 
 ErrorDocument 503 /mantenimiento.html

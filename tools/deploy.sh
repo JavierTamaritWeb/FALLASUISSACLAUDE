@@ -14,34 +14,42 @@
 #   -y, --yes            No pide confirmación antes de sincronizar (--delete borra
 #                        archivos huérfanos en producción; úsalo con cabeza).
 #   --maintenance on     Activa el modo mantenimiento (sube el centinela .maintenance:
-#                        el sitio devuelve 503 a todos menos a la IP del equipo).
+#                        el sitio devuelve 503 salvo a quien tenga el token de bypass).
 #   --maintenance off    Desactiva el modo mantenimiento (borra el centinela).
 #   -h, --help           Muestra esta ayuda.
 #
 # Nota: --maintenance NO construye ni sincroniza; solo enciende/apaga el centinela
 # por SSH y verifica el resultado. El bloque que lo aplica vive en .htaccess.
 #
-# Variables de entorno (override opcional):
-#   SSH_USER SSH_HOST SSH_PORT REMOTE_DIR LOCAL_DIR ASSUME_YES
+# Configuración: los datos sensibles (SSH + token de mantenimiento) NO viven en
+# este script. Se leen de tools/deploy.env (ignorado por git). Copia la plantilla
+# tools/deploy.env.example a tools/deploy.env y rellénala. También se pueden pasar
+# por variable de entorno: SSH_USER SSH_HOST SSH_PORT REMOTE_DIR LOCAL_DIR MAINT_TOKEN.
 #
-# Autenticación: Hostinger usa contraseña SSH por defecto, así que ssh/rsync
-# la pedirán. Para deploy sin prompts, configura una clave una sola vez:
-#   ssh-copy-id -p 65002 REDACTED_USER@REDACTED_HOST
+# Autenticación: configura una clave SSH una sola vez para deploy sin prompts:
+#   ssh-copy-id -p "$SSH_PORT" "$SSH_USER@$SSH_HOST"
 
 set -euo pipefail
-
-# --- Configuración ----------------------------------------------------------
-SSH_USER="${SSH_USER:-REDACTED_USER}"
-SSH_HOST="${SSH_HOST:-REDACTED_HOST}"
-SSH_PORT="${SSH_PORT:-65002}"
-# Ruta relativa a $HOME del usuario SSH (raíz web del dominio en Hostinger).
-REMOTE_DIR="${REMOTE_DIR:-domains/fallasuissa.es/public_html}"
-LOCAL_DIR="${LOCAL_DIR:-dist}"
-SITE_URL="https://fallasuissa.es"
 
 # --- Localización del repo --------------------------------------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# --- Config sensible desde tools/deploy.env (NO versionado) -----------------
+# SSH_USER/HOST/etc. y el token de mantenimiento no se hardcodean en el repo:
+# se leen de deploy.env (copia de deploy.env.example). Las var. de entorno ganan.
+if [[ -f "$SCRIPT_DIR/deploy.env" ]]; then
+  set -a; . "$SCRIPT_DIR/deploy.env"; set +a
+fi
+
+# --- Configuración ----------------------------------------------------------
+SSH_USER="${SSH_USER:-}"                                   # obligatorio (deploy.env)
+SSH_HOST="${SSH_HOST:-}"                                   # obligatorio (deploy.env)
+SSH_PORT="${SSH_PORT:-65002}"
+REMOTE_DIR="${REMOTE_DIR:-domains/fallasuissa.es/public_html}"
+LOCAL_DIR="${LOCAL_DIR:-dist}"
+SITE_URL="${SITE_URL:-https://fallasuissa.es}"
+MAINT_TOKEN="${MAINT_TOKEN:-}"                             # token de bypass (deploy.env)
 
 # --- Colores / helpers ------------------------------------------------------
 if [[ -t 1 ]]; then
@@ -82,26 +90,46 @@ done
 SSH_CMD="ssh -p $SSH_PORT"
 MAINT_FILE="$REMOTE_DIR/.maintenance"
 
+# --- Validación de config sensible ------------------------------------------
+[[ -n "$SSH_USER" && -n "$SSH_HOST" ]] \
+  || die "Faltan credenciales SSH. Copia tools/deploy.env.example a tools/deploy.env y rellénalo (o exporta SSH_USER/SSH_HOST)."
+
+# Inyecta el token de bypass real en el .htaccess del servidor, sustituyendo el
+# placeholder __MAINT_TOKEN__. El repo nunca contiene el token; el rsync sube el
+# .htaccess con el placeholder, así que esto debe correr DESPUÉS de cada rsync.
+inject_maint_token() {
+  [[ -n "$MAINT_TOKEN" ]] || { info "MAINT_TOKEN vacío — no se inyecta token de bypass."; return 0; }
+  if $SSH_CMD "$SSH_USER@$SSH_HOST" "f='$REMOTE_DIR/.htaccess'; [ -f \"\$f\" ] && sed -i 's/__MAINT_TOKEN__/$MAINT_TOKEN/g' \"\$f\""; then
+    ok "Token de bypass inyectado en el .htaccess del servidor."
+  else
+    fail "No se pudo inyectar el token en el .htaccess del servidor (revisa SSH)."
+  fi
+}
+
 # --- Modo mantenimiento (cortocircuita: no construye ni sincroniza) ---------
 if [[ -n "$MAINTENANCE" ]]; then
   if [[ "$MAINTENANCE" == "on" ]]; then
-    info "Activando modo mantenimiento (centinela .maintenance)…"
+    info "Activando modo mantenimiento…"
+    inject_maint_token   # garantiza el token en el .htaccess antes de cortar el acceso
     $SSH_CMD "$SSH_USER@$SSH_HOST" "touch '$MAINT_FILE'" || die "No se pudo crear el centinela por SSH."
+    info "Verificando $SITE_URL …"
+    code="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL" || echo "000")"
+    [[ "$code" == "503" ]] \
+      && ok "Mantenimiento ACTIVO — el sitio responde 503 para los visitantes." \
+      || fail "Centinela creado, pero el sitio devolvió HTTP $code (esperado 503; revisa el .htaccess)."
+    if [[ -n "$MAINT_TOKEN" ]]; then
+      bcode="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL/?preview=$MAINT_TOKEN" || echo "000")"
+      [[ "$bcode" == "200" ]] \
+        && ok "Bypass OK — con el token el equipo ve la web real (200)." \
+        || fail "El bypass con token devolvió HTTP $bcode (esperado 200)."
+      info "Enlace de previsualización para el equipo (no compartir públicamente):"
+      printf '   %s/?preview=%s\n' "$SITE_URL" "$MAINT_TOKEN"
+    fi
   else
     info "Desactivando modo mantenimiento (borrando centinela)…"
     $SSH_CMD "$SSH_USER@$SSH_HOST" "rm -f '$MAINT_FILE'" || die "No se pudo borrar el centinela por SSH."
-  fi
-  info "Verificando $SITE_URL …"
-  code="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL" || echo "000")"
-  if [[ "$MAINTENANCE" == "on" ]]; then
-    case "$code" in
-      503) ok "Mantenimiento ACTIVO — el sitio responde 503 para los visitantes." ;;
-      200) ok "Mantenimiento ACTIVO (centinela creado)."
-           info "Tu IP está en el bypass del .htaccess, por eso ves 200 desde aquí; el resto de visitantes recibe 503."
-           info "Para confirmar el 503 real, abre $SITE_URL desde otra red (p. ej. el móvil con datos)." ;;
-      *)   fail "Centinela creado, pero el sitio devolvió HTTP $code (esperado 503/200; revisa el .htaccess)." ;;
-    esac
-  else
+    info "Verificando $SITE_URL …"
+    code="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL" || echo "000")"
     [[ "$code" == "200" ]] \
       && ok "Mantenimiento DESACTIVADO — el sitio responde 200." \
       || fail "Centinela borrado, pero el sitio devolvió HTTP $code (esperado 200; revisa manualmente)."
@@ -156,6 +184,10 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
   exit 0
 fi
 ok "Archivos sincronizados."
+
+# El rsync acaba de subir el .htaccess con el placeholder __MAINT_TOKEN__;
+# reinyectamos el token real (de deploy.env) para no dejarlo en el repo.
+inject_maint_token
 
 # --- 5. Verificación post-deploy --------------------------------------------
 info "Verificando $SITE_URL …"

@@ -21,3 +21,6 @@ test-results/
 playwright-report/
 .playwright/
 tests/screenshots-modal-debug/
+
+# Config sensible del deploy (SSH + token de mantenimiento) — nunca versionar
+tools/deploy.env
