@@ -129,15 +129,12 @@ Qué hace, en orden:
 | `--maintenance on\|off` | Enciende/apaga el modo mantenimiento (no construye ni sincroniza). Ver más abajo. |
 | `-h`, `--help` | Ayuda. |
 
-**Conexión** (datos en la cabecera del script, sobreescribibles por variable de entorno: `SSH_USER`, `SSH_HOST`, `SSH_PORT`, `REMOTE_DIR`, `LOCAL_DIR`):
+**Conexión**: los datos del servidor (`SSH_USER`, `SSH_HOST`, `SSH_PORT`, `REMOTE_DIR`) **no se versionan**; viven en `tools/deploy.env` (ver sección siguiente). El directorio remoto es la raíz web del dominio en Hostinger (`~/domains/<dominio>/public_html`).
 
-- Servidor: `REDACTED_USER@REDACTED_HOST`, puerto `65002`.
-- Directorio remoto: `~/domains/fallasuissa.es/public_html`.
-
-**Autenticación**: Hostinger usa contraseña SSH por defecto. Para un deploy sin prompts, configura una clave una sola vez:
+**Autenticación**: Hostinger usa contraseña SSH por defecto. Para un deploy sin prompts, configura una clave una sola vez (usa los valores de tu `deploy.env`):
 
 ```bash
-ssh-copy-id -p 65002 REDACTED_USER@REDACTED_HOST
+ssh-copy-id -p "$SSH_PORT" "$SSH_USER@$SSH_HOST"
 ```
 
 El script funciona con o sin clave; sin ella, `ssh`/`rsync` pedirán la contraseña.
@@ -244,7 +241,7 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 - Si el build falla por dependencias: `rm -rf node_modules && npm install`
 - Si no ves cambios en producción: confirma que has subido `dist/` y no la raíz del repo
-- Si `npm run deploy` falla en el paso SSH: prueba `ssh -p 65002 REDACTED_USER@REDACTED_HOST` a mano para verificar acceso, y `npm run deploy -- --dry-run` para diagnosticar sin tocar el servidor
+- Si `npm run deploy` falla en el paso SSH: prueba `ssh -p "$SSH_PORT" "$SSH_USER@$SSH_HOST"` a mano (con los valores de tu `deploy.env`) para verificar acceso, y `npm run deploy -- --dry-run` para diagnosticar sin tocar el servidor
 - Si el pre-render VA produce salida inesperada: usa el kill switch `DISABLE_I18N_PRERENDER=1 npm run build` y revisa los warnings `[i18n-prerender] missing key: ...` que emite el build cuando faltan claves en `translations.va`
 
 ---
