@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.8.2 · **Última actualización:** 13 de junio de 2026
+**Versión:** 4.9.0 · **Última actualización:** 14 de junio de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -125,11 +125,17 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.8.2).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.9.0).
 
 ## Decisiones y restricciones de arquitectura
 
 Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problemas.
+
+- **Deploy, secretos y mantenimiento (v4.9.0):**
+  1. **NUNCA versionar datos sensibles.** El repo es público. Las credenciales SSH (`SSH_USER/HOST/PORT/REMOTE_DIR`) y el token de mantenimiento (`MAINT_TOKEN`) viven en `tools/deploy.env` (en `.gitignore`); plantilla en `tools/deploy.env.example`. `tools/deploy.sh` los lee al arrancar y aborta si faltan `SSH_USER/HOST`. Antes (v4.8.x) se hardcodeó una IP del equipo y datos SSH en `src/.htaccess`/`deploy.sh`/docs; se purgaron del historial con `git filter-repo` + force-push (los hashes cambiaron — re-clona cualquier clon antiguo).
+  2. **Modo mantenimiento** (`tools/deploy.sh --maintenance on|off`): sube/borra el centinela `.maintenance` en la raíz web. El bloque del `.htaccess` da **HTTP 503 + Retry-After** mientras exista, sirviendo `mantenimiento.html` vía `ErrorDocument 503`. Queda **dormido** sin el centinela. NO uses 200 para una pantalla de mantenimiento (Google la indexaría / pensaría que el contenido se fue).
+  3. **Bypass por token, NO por IP**: `?preview=<MAINT_TOKEN>` fija una cookie de bypass. El `.htaccess` versionado lleva el placeholder `__MAINT_TOKEN__`; `deploy.sh → inject_maint_token()` sustituye el valor real en el `.htaccess` del servidor **después de cada rsync** (por eso el token nunca entra en git). El rsync usa `--exclude='.maintenance'` para no apagar un mantenimiento en curso al desplegar.
+  4. **`mantenimiento.html` es standalone** como `ai-info.html`: excluida del glob `html` de `gulpfile.js` y copiada por `rootFilesTask` (sin canonical/hreflang ni variante `/va/`). Debe ser autocontenida (CSS inline, sin assets externos) para no depender de la CSP ni de archivos que podrían faltar durante un rediseño.
 
 - **Rutas de assets en /va/ y URLs en JS — independientes del subdirectorio (v4.7.9):** `dist/va/` solo contiene HTML; los assets viven un nivel arriba. Antes de v4.7.9 las rutas relativas resolvían a `/va/css|js|img|data` (404) y toda la sección VA se servía sin estilos ni JS. El fix usa rutas `../` y `window.SITE_ROOT` — NUNCA rutas absolutas `/...`, porque el sitio debe funcionar también servido desde un subdirectorio (Live Server sirviendo la raíz del repo con la web en `/dist/` o `/src/`):
   1. **El build reescribe los assets de la variante VA con `../`** (`gulpfile.js → rewriteAssetUrlsToRoot`, solo `lang === 'ca'`): atributos `src/href/poster/srcset/data-board-source` con prefijo `css/|js/|img/|data/|pdf/` (+ `manifest.json`) pasan a `../css/...` etc. Los enlaces entre páginas (`lafalla.html`) se mantienen relativos para que la navegación permanezca en `/va/`. La reescritura va DESPUÉS de `optimizeHtmlAssetTags` (sus regex esperan rutas sin prefijo) y antes de `appendAssetVersionToHtml`. NO la muevas, NO uses rutas absolutas `/...` (rompen el servido desde subdirectorio) ni añadas `<base href>` (rompería los enlaces relativos entre páginas VA).
@@ -269,6 +275,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.9.0** — Tres bloques de trabajo: **(1) Modo mantenimiento** — nueva `mantenimiento.html` autocontenida (CSS inline, sin assets externos, bilingüe ES/VA, `noindex`), tratada como standalone igual que `ai-info.html` (excluida de `htmlTask`, copiada por `rootFilesTask`, sin `/va/`). El `.htaccess` devuelve **HTTP 503 + `Retry-After`** cuando existe el centinela `~/.../public_html/.maintenance`, con bypass por **token secreto** (`?preview=TOKEN` → cookie) y `ErrorDocument 503`. Se enciende/apaga con `tools/deploy.sh --maintenance on|off`. **(2) Seguridad del deploy** — los datos sensibles (SSH + token) salen del repo a `tools/deploy.env` (gitignored; plantilla `deploy.env.example`); `deploy.sh` los lee y aborta si faltan. El `.htaccess` versionado lleva el placeholder `__MAINT_TOKEN__` que `deploy.sh` inyecta en el servidor tras cada rsync (`--exclude='.maintenance'` para no apagar el modo en un deploy). Se reescribió el historial git (`git filter-repo` + force-push) para purgar una IP del equipo y credenciales SSH que se habían commiteado, y los blobs PNG gigantes. **(3) Optimización de imágenes** — `foto_2425_02.png` (67MB) y `foto_2425_01.png` (12MB), fotos de cámara solo usadas en slides comentados, pasan a JPEG 1920px; `fondo_traje.png` (8.4MB, fondo de 5 secciones) pasa a JPEG 2560px servido vía `image-set()` (AVIF/WebP con fallback) en `_falla/_meteo/_forecast/_galeria/_ofrenda.scss`. Ver restricción *Deploy, secretos y mantenimiento*.
 - **4.8.2** — Fix responsive: `.seccion-hr` (separador de la sección Ofrenda, `_ofrenda.scss`) era `display: none` por defecto y solo visible en `@media (min-width: 768px)`; ahora es `display: block` fijo, visible en todos los tamaños (incluido <768px).
 - **4.8.1** — Tooling de despliegue: nuevo `tools/deploy.sh` que construye (`npm run build`) y sincroniza `dist/` a Hostinger vía `rsync -avz --delete` sobre SSH (espejo a `~/domains/fallasuissa.es/public_html`), con verificación `curl 200` final y flags `--dry-run`/`--skip-build`/`-y`. Atajo `npm run deploy` en `package.json`. Documentado en [`docs/build-and-deploy.md`](./docs/build-and-deploy.md). Sin cambios en el sitio servido (solo herramienta de release).
 - **4.8.0** — Auditoría de seguridad: añade `Content-Security-Policy` y `Strict-Transport-Security` (HSTS, max-age=1 año + preload) en `.htaccess`; elimina la cabecera obsoleta `X-XSS-Protection`. `mapa.html`: SRI (`integrity sha384`) en Font Awesome 6.5.0 (cdnjs). `board.js`: saneamiento de contenido del tablón con `escapeHtml()` en atributos, `isSafeUrl()` para rechazar esquemas peligrosos y `sanitizeBoardHtml()` con allowlist de etiquetas. `calendario.js`: sustituye `innerHTML +=` por `createElement + textContent` en `renderizarLista()`. Formulario de contacto: checkbox RGPD "He leído y acepto la Política de Privacidad" (`required`, enlace a `privacidad.html`, traducciones ES/VA, estilos en `_quieres.scss`).
