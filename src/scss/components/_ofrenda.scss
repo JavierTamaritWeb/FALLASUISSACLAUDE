@@ -9,7 +9,12 @@
 
 .ofrenda {
   background-color: #111;
-  background-image: url('../img/fondo_traje.png');
+  background-image: url('../img/fondo_traje.jpg'); // fallback si el navegador no soporta image-set
+  background-image: image-set(
+    url('../img/fondo_traje.avif') type('image/avif'),
+    url('../img/fondo_traje.webp') type('image/webp'),
+    url('../img/fondo_traje.jpg') type('image/jpeg')
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

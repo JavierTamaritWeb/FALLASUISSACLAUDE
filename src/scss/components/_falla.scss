@@ -7,7 +7,12 @@
   // Configuración de fondo para soportar transición de modo oscuro
   position: relative;
   // Solo la imagen aquí (sin overlay degradado), el overlay va en ::before
-  background: url('../img/fondo_traje.png');
+  background: url('../img/fondo_traje.jpg'); // fallback si el navegador no soporta image-set
+  background-image: image-set(
+    url('../img/fondo_traje.avif') type('image/avif'),
+    url('../img/fondo_traje.webp') type('image/webp'),
+    url('../img/fondo_traje.jpg') type('image/jpeg')
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
