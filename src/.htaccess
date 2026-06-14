@@ -7,6 +7,29 @@ RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\.fallasuissa\.es$ [NC]
 RewriteRule ^ https://fallasuissa.es%{REQUEST_URI} [R=301,L]
 
+# =======================================================================
+# MODO MANTENIMIENTO
+# =======================================================================
+# Activo SOLO si existe el archivo centinela ".maintenance" en la raíz del
+# servidor. Se enciende/apaga con `tools/deploy.sh --maintenance on|off`
+# (sube/borra ese fichero por SSH) sin necesidad de re-desplegar.
+#
+# Devuelve HTTP 503 (Service Unavailable) + Retry-After para que Google NO
+# indexe la pantalla ni piense que el contenido desapareció. El bypass por IP
+# permite que el equipo siga viendo la web real mientras dura el mantenimiento.
+# La página servida (mantenimiento.html) es autocontenida (CSS inline, sin
+# assets externos), por lo que no hace falta excluir CSS/JS/imágenes del rewrite.
+RewriteCond %{DOCUMENT_ROOT}/.maintenance -f
+RewriteCond %{REMOTE_ADDR} !=0.0.0.0             # IP del equipo (bypass) — añadir una línea por cada IP extra
+RewriteCond %{REQUEST_URI} !=/mantenimiento.html     # evita el bucle 503 sobre la propia página
+RewriteRule ^ - [R=503,L]
+
+ErrorDocument 503 /mantenimiento.html
+<IfModule mod_headers.c>
+    # Retry-After solo se añade a las respuestas 503 del mantenimiento (2 horas).
+    Header always set Retry-After "7200" "expr=%{REQUEST_STATUS} == 503"
+</IfModule>
+
 
 # =======================================================================
 # COMPRESIÓN GZIP

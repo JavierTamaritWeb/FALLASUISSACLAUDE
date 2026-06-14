@@ -33,7 +33,9 @@ const paths = {
   // ai-info.html lo copia rootFilesTask tal cual (página noindex AI-only, no traducible);
   // excluida aquí para que htmlTask no le inyecte canonical/hreflang ni genere /va/ai-info.html (ver B2).
   // base.html es una plantilla interna: NO se publica (sin entrada en sitemap; .htaccess responde 410)
-  html: { src: ['src/*.html', '!src/google*.html', '!src/ai-info.html', '!src/base.html'], dest: 'dist' },
+  // mantenimiento.html se copia verbatim por rootFilesTask (página standalone, noindex, sin /va/);
+  // excluida aquí para que htmlTask no le inyecte canonical/hreflang ni genere /va/mantenimiento.html.
+  html: { src: ['src/*.html', '!src/google*.html', '!src/ai-info.html', '!src/base.html', '!src/mantenimiento.html'], dest: 'dist' },
   root: {
     src: [
       'src/robots*.txt',
@@ -43,6 +45,7 @@ const paths = {
       'src/manifest.json',
       'src/ai-discovery.json',
       'src/ai-info.html',
+      'src/mantenimiento.html',
       'src/google*.html'
     ],
     dest: 'dist'

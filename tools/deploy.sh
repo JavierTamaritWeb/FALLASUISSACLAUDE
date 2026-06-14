@@ -9,11 +9,17 @@
 #   tools/deploy.sh [opciones]
 #
 # Opciones:
-#   --dry-run     Ensayo: muestra qué haría rsync SIN tocar el servidor.
-#   --skip-build  Salta "npm run build" (sube el dist/ actual tal cual).
-#   -y, --yes     No pide confirmación antes de sincronizar (--delete borra
-#                 archivos huérfanos en producción; úsalo con cabeza).
-#   -h, --help    Muestra esta ayuda.
+#   --dry-run            Ensayo: muestra qué haría rsync SIN tocar el servidor.
+#   --skip-build         Salta "npm run build" (sube el dist/ actual tal cual).
+#   -y, --yes            No pide confirmación antes de sincronizar (--delete borra
+#                        archivos huérfanos en producción; úsalo con cabeza).
+#   --maintenance on     Activa el modo mantenimiento (sube el centinela .maintenance:
+#                        el sitio devuelve 503 a todos menos a la IP del equipo).
+#   --maintenance off    Desactiva el modo mantenimiento (borra el centinela).
+#   -h, --help           Muestra esta ayuda.
+#
+# Nota: --maintenance NO construye ni sincroniza; solo enciende/apaga el centinela
+# por SSH y verifica el resultado. El bloque que lo aplica vive en .htaccess.
 #
 # Variables de entorno (override opcional):
 #   SSH_USER SSH_HOST SSH_PORT REMOTE_DIR LOCAL_DIR ASSUME_YES
@@ -55,12 +61,18 @@ usage() { awk 'NR==1{next} /^#/{sub(/^# ?/,""); print; next} {exit}' "${BASH_SOU
 DRY_RUN=0
 SKIP_BUILD=0
 ASSUME_YES="${ASSUME_YES:-0}"
+MAINTENANCE=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --dry-run)    DRY_RUN=1 ;;
     --skip-build) SKIP_BUILD=1 ;;
     -y|--yes)     ASSUME_YES=1 ;;
+    --maintenance)
+      shift
+      MAINTENANCE="${1:-}"
+      [[ "$MAINTENANCE" == "on" || "$MAINTENANCE" == "off" ]] || die "Uso: --maintenance on|off"
+      ;;
     -h|--help)    usage ;;
     *) die "Opción desconocida: $1 (usa --help)" ;;
   esac
@@ -68,6 +80,30 @@ while [[ $# -gt 0 ]]; do
 done
 
 SSH_CMD="ssh -p $SSH_PORT"
+MAINT_FILE="$REMOTE_DIR/.maintenance"
+
+# --- Modo mantenimiento (cortocircuita: no construye ni sincroniza) ---------
+if [[ -n "$MAINTENANCE" ]]; then
+  if [[ "$MAINTENANCE" == "on" ]]; then
+    info "Activando modo mantenimiento (centinela .maintenance)…"
+    $SSH_CMD "$SSH_USER@$SSH_HOST" "touch '$MAINT_FILE'" || die "No se pudo crear el centinela por SSH."
+  else
+    info "Desactivando modo mantenimiento (borrando centinela)…"
+    $SSH_CMD "$SSH_USER@$SSH_HOST" "rm -f '$MAINT_FILE'" || die "No se pudo borrar el centinela por SSH."
+  fi
+  info "Verificando $SITE_URL …"
+  code="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL" || echo "000")"
+  if [[ "$MAINTENANCE" == "on" ]]; then
+    [[ "$code" == "503" ]] \
+      && ok "Mantenimiento ACTIVO — el sitio responde 503 (tu IP del equipo sigue viendo la web real)." \
+      || fail "Centinela creado, pero el sitio devolvió HTTP $code (esperado 503; revisa el .htaccess / tu IP de bypass)."
+  else
+    [[ "$code" == "200" ]] \
+      && ok "Mantenimiento DESACTIVADO — el sitio responde 200." \
+      || fail "Centinela borrado, pero el sitio devolvió HTTP $code (esperado 200; revisa manualmente)."
+  fi
+  exit 0
+fi
 
 # --- 1. Build ---------------------------------------------------------------
 if [[ "$SKIP_BUILD" -eq 1 ]]; then
@@ -99,7 +135,10 @@ if [[ "$DRY_RUN" -eq 0 && "$ASSUME_YES" -eq 0 ]]; then
 fi
 
 # --- 4. Sincronización rsync ------------------------------------------------
-RSYNC_FLAGS=(-avz --delete --exclude='.DS_Store')
+# --exclude='.maintenance': el centinela del modo mantenimiento vive en el
+# servidor (no en dist/); sin esta exclusión, --delete lo borraría y un deploy
+# normal durante el mantenimiento apagaría el 503 sin querer.
+RSYNC_FLAGS=(-avz --delete --exclude='.DS_Store' --exclude='.maintenance')
 [[ "$DRY_RUN" -eq 1 ]] && { RSYNC_FLAGS+=(-n); info "DRY-RUN: no se modificará el servidor."; }
 
 info "Sincronizando con rsync…"
