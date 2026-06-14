@@ -94,9 +94,13 @@ if [[ -n "$MAINTENANCE" ]]; then
   info "Verificando $SITE_URL …"
   code="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL" || echo "000")"
   if [[ "$MAINTENANCE" == "on" ]]; then
-    [[ "$code" == "503" ]] \
-      && ok "Mantenimiento ACTIVO — el sitio responde 503 (tu IP del equipo sigue viendo la web real)." \
-      || fail "Centinela creado, pero el sitio devolvió HTTP $code (esperado 503; revisa el .htaccess / tu IP de bypass)."
+    case "$code" in
+      503) ok "Mantenimiento ACTIVO — el sitio responde 503 para los visitantes." ;;
+      200) ok "Mantenimiento ACTIVO (centinela creado)."
+           info "Tu IP está en el bypass del .htaccess, por eso ves 200 desde aquí; el resto de visitantes recibe 503."
+           info "Para confirmar el 503 real, abre $SITE_URL desde otra red (p. ej. el móvil con datos)." ;;
+      *)   fail "Centinela creado, pero el sitio devolvió HTTP $code (esperado 503/200; revisa el .htaccess)." ;;
+    esac
   else
     [[ "$code" == "200" ]] \
       && ok "Mantenimiento DESACTIVADO — el sitio responde 200." \

@@ -126,6 +126,7 @@ Qué hace, en orden:
 | `--dry-run` | Ensayo: muestra qué cambiaría rsync **sin** tocar el servidor. Úsalo antes de un deploy dudoso. |
 | `--skip-build` | Sube el `dist/` actual sin reconstruir. |
 | `-y`, `--yes` | No pide confirmación (automatización; salta la red de seguridad del `--delete`). |
+| `--maintenance on\|off` | Enciende/apaga el modo mantenimiento (no construye ni sincroniza). Ver más abajo. |
 | `-h`, `--help` | Ayuda. |
 
 **Conexión** (datos en la cabecera del script, sobreescribibles por variable de entorno: `SSH_USER`, `SSH_HOST`, `SSH_PORT`, `REMOTE_DIR`, `LOCAL_DIR`):
@@ -140,6 +141,24 @@ ssh-copy-id -p 65002 REDACTED_USER@REDACTED_HOST
 ```
 
 El script funciona con o sin clave; sin ella, `ssh`/`rsync` pedirán la contraseña.
+
+### Modo mantenimiento ("En mantenimiento")
+
+Para mostrar una pantalla "En mantenimiento" durante un rediseño sin perder SEO:
+
+```bash
+tools/deploy.sh --maintenance on    # activa: el sitio devuelve 503 a los visitantes
+tools/deploy.sh --maintenance off   # desactiva: vuelve a la normalidad (200)
+```
+
+Cómo funciona:
+- Sube/borra por SSH un archivo centinela `.maintenance` en la raíz del servidor. **No reconstruye ni re-despliega** nada: es un interruptor instantáneo.
+- Mientras el centinela existe, el bloque de mantenimiento del `.htaccess` responde **HTTP 503 + `Retry-After`** y sirve `mantenimiento.html` (página autocontenida, bilingüe ES/VA, `noindex`). El 503 evita que Google desindexe el sitio.
+- **Bypass por IP**: la IP del equipo definida en `src/.htaccess` (`RewriteCond %{REMOTE_ADDR} !=...`) sigue viendo la web real. Por eso, si ejecutas el toggle desde esa IP, `curl`/el navegador te darán **200** aunque el mantenimiento esté activo; el resto de visitantes ve 503. Para confirmar el 503 real, abre el sitio desde otra red (móvil con datos).
+- ⚠️ Si cambia la IP pública del equipo (las residenciales suelen ser dinámicas), actualiza la línea `RewriteCond %{REMOTE_ADDR} !=...` en `src/.htaccess`, `npm run build` y `npm run deploy`, o te quedarás fuera junto con todos.
+- Un `npm run deploy` normal **no apaga** el mantenimiento: el rsync excluye `.maintenance` (`--exclude='.maintenance'`).
+
+Primer despliegue: `mantenimiento.html` y el bloque del `.htaccess` deben subirse una vez con un `npm run deploy` normal. El bloque queda **dormido** hasta el primer `--maintenance on`, así que desplegarlo no afecta a producción.
 
 ### Alternativas manuales
 
