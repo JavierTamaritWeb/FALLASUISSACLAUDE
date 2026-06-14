@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.9.0 · **Última actualización:** 14 de junio de 2026
+**Versión:** 4.9.1 · **Última actualización:** 14 de junio de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -125,7 +125,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.9.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.9.1).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -275,6 +275,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.9.1** — Optimización de imagen: `Escudo_falla.png` (4.1MB, 1936×2400, con alfa) — fuente desproporcionado (se muestra ≤80×100) — pasa a 640px + pngquant (**120KB**, alfa intacto); el build regenera AVIF 30KB / WebP 48KB. Sin cambios de formato ni HTML (sigue PNG con el mismo nombre, referenciado en 39 archivos vía `<picture>`/schema/sitemap). Los blobs PNG antiguos de 4.1MB se purgaron del historial git (`git filter-repo --strip-blobs-with-ids` + force-push; hashes cambiados, re-clonar clones viejos).
 - **4.9.0** — Tres bloques de trabajo: **(1) Modo mantenimiento** — nueva `mantenimiento.html` autocontenida (CSS inline, sin assets externos, bilingüe ES/VA, `noindex`), tratada como standalone igual que `ai-info.html` (excluida de `htmlTask`, copiada por `rootFilesTask`, sin `/va/`). El `.htaccess` devuelve **HTTP 503 + `Retry-After`** cuando existe el centinela `~/.../public_html/.maintenance`, con bypass por **token secreto** (`?preview=TOKEN` → cookie) y `ErrorDocument 503`. Se enciende/apaga con `tools/deploy.sh --maintenance on|off`. **(2) Seguridad del deploy** — los datos sensibles (SSH + token) salen del repo a `tools/deploy.env` (gitignored; plantilla `deploy.env.example`); `deploy.sh` los lee y aborta si faltan. El `.htaccess` versionado lleva el placeholder `__MAINT_TOKEN__` que `deploy.sh` inyecta en el servidor tras cada rsync (`--exclude='.maintenance'` para no apagar el modo en un deploy). Se reescribió el historial git (`git filter-repo` + force-push) para purgar una IP del equipo y credenciales SSH que se habían commiteado, y los blobs PNG gigantes. **(3) Optimización de imágenes** — `foto_2425_02.png` (67MB) y `foto_2425_01.png` (12MB), fotos de cámara solo usadas en slides comentados, pasan a JPEG 1920px; `fondo_traje.png` (8.4MB, fondo de 5 secciones) pasa a JPEG 2560px servido vía `image-set()` (AVIF/WebP con fallback) en `_falla/_meteo/_forecast/_galeria/_ofrenda.scss`. Ver restricción *Deploy, secretos y mantenimiento*.
 - **4.8.2** — Fix responsive: `.seccion-hr` (separador de la sección Ofrenda, `_ofrenda.scss`) era `display: none` por defecto y solo visible en `@media (min-width: 768px)`; ahora es `display: block` fijo, visible en todos los tamaños (incluido <768px).
 - **4.8.1** — Tooling de despliegue: nuevo `tools/deploy.sh` que construye (`npm run build`) y sincroniza `dist/` a Hostinger vía `rsync -avz --delete` sobre SSH (espejo a `~/domains/fallasuissa.es/public_html`), con verificación `curl 200` final y flags `--dry-run`/`--skip-build`/`-y`. Atajo `npm run deploy` en `package.json`. Documentado en [`docs/build-and-deploy.md`](./docs/build-and-deploy.md). Sin cambios en el sitio servido (solo herramienta de release).
