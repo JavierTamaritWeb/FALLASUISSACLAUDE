@@ -235,7 +235,9 @@
         "galeria6": "Cremá 2025-26",
         "galeria6-texto": "Galería de imágenes de la Cremà 2025-26",
         "galeria7": "San Juan 2026",
-        "galeria7-texto": "Galería de imágenes de San Juan 2026"
+        "galeria7-texto": "Galería de imágenes de San Juan 2026",
+        "galeria8": "Representantes 2026-27",
+        "galeria8-texto": "Galería de imágenes de los Representantes 2026-27"
       },
       "calendario":{
         "titulo": "Calendario",
@@ -752,7 +754,9 @@
         "galeria6": "Cremà 2025-26",
         "galeria6-texto": "Galeria d'imatges de la Cremà 2025-26",
         "galeria7": "Sant Joan 2026",
-        "galeria7-texto": "Galeria d'imatges de Sant Joan 2026"
+        "galeria7-texto": "Galeria d'imatges de Sant Joan 2026",
+        "galeria8": "Representants 2026-27",
+        "galeria8-texto": "Galeria d'imatges dels Representants 2026-27"
       },
       "calendario":{
         "titulo": "Calendari",

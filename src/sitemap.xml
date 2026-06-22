@@ -362,6 +362,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://fallasuissa.es/galeria_8.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_8.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_8.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_8.html"/>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fallasuissa.es/va/galeria_8.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/galeria_8.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/galeria_8.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/galeria_8.html"/>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://fallasuissa.es/ofrenda.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://fallasuissa.es/ofrenda.html"/>
     <xhtml:link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/ofrenda.html"/>
