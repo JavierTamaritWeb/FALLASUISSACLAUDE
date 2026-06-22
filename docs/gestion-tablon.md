@@ -11,13 +11,15 @@ Esta es la guía canónica del tablón dinámico. El contenido se edita en un JS
 | Eventos / general | `src/data/board.json` | `index.html`, `eventos.html` | `#notesBoard` (sin `data-board-source` → cae al default) |
 | Deportes JCF | `src/data/sports-board.json` | `deportes.html` | `#sportsBoard` con `data-board-source="data/sports-board.json"` |
 
+> **Estado actual (v4.11.0):** `board.json` (Eventos) se sirve **vacío** y muestra el empty-state simpático (ver sección *Tablón vacío*). Para volver a publicar anuncios basta con añadir notas al array `notas` — aparecen automáticamente y el marcador desaparece. `sports-board.json` (Deportes) mantiene sus notas.
+
 Recursos comunes:
 
 - renderizado: `src/js/board.js` (multi-instancia, descubre todos los `<div class="board">` del DOM)
 - estilos: `src/scss/components/_board.scss` + overrides locales en `src/scss/components/_deportes.scss` (`__board-wrapper`, `__tablon-titulo`, `__marco-tablon`)
-- textos genéricos del componente: `src/data/translations.json` (`board.empty`, labels accesibles de adjuntos; en Deportes además `deportes.tablonTitulo` y `deportes.tablonAriaLabel`)
+- textos genéricos del componente: `src/data/translations.json` (`board.empty` = mensaje del empty-state cuando el tablón no tiene notas; labels accesibles de adjuntos; en Deportes además `deportes.tablonTitulo` y `deportes.tablonAriaLabel`)
 - skills agent-ready: `events-board` y `sports-board` (en el array `skills` de `wellKnownTask` en `gulpfile.js`); se publican en `dist/.well-known/agent-skills/index.json` con `sha256` automático
-- tests: `tests/board.e2e.spec.js` (incluye bloque `Tablón Deportes (#sportsBoard)` con 3 tests)
+- tests: `tests/board.e2e.spec.js` — como Eventos se sirve vacío, las aserciones de render de notas se ejecutan sobre `#sportsBoard` (que tiene contenido); Eventos valida el empty-state. Incluye el bloque `Tablón Deportes (#sportsBoard)`
 
 ## 🧱 Estructura del archivo
 
@@ -98,6 +100,22 @@ Consecuencia práctica:
 - `adjuntos[]` con `tipo: "img"`: se renderiza como un enlace tipo "Ver imagen" que abre el archivo en otra pestaña. No se muestra inline.
 
 Pueden combinarse: imagen visible en la nota + enlace "Ver cartel completo" para abrirlo a tamaño real (ver ejemplo más abajo).
+
+## 📭 Tablón vacío (empty-state)
+
+Desde **v4.11.0**, cuando un tablón no tiene **ninguna nota activa** (array `notas` vacío o todas con `activo: false`), `board.js` renderiza automáticamente una **nota de marcador** con el mismo aspecto que una real (tarjeta blanca + pinza), en vez de una caja gris plana.
+
+- El texto sale de la clave i18n **`board.empty`** (`src/data/translations.json`, en `es` y `va`). El mismo string está duplicado como *fallback* en `src/js/board.js` (función `renderBoardInto`) para evitar un parpadeo del texto antiguo antes de que carguen las traducciones: **si cambias el mensaje, actualiza los dos sitios**.
+- Estilo en `src/scss/components/_board.scss`: el modificador `.board__empty` solo centra el texto; la tarjeta y la pinza se heredan de `.board__note`. El **modo oscuro** es propio (`body.modo-oscuro .board__empty`): tarjeta oscura (`$negro-casi`) con texto claro (`$blanco-hueso`).
+- **Comportamiento automático**: no hay que tocar código para alternar entre "vacío" y "con anuncios". Añade notas al JSON → se muestran y el marcador desaparece. Vacía el JSON → vuelve el marcador.
+
+Para vaciar el tablón de Eventos basta con dejar `src/data/board.json` así:
+
+```json
+{
+  "notas": []
+}
+```
 
 ## ✍️ Flujo recomendado para añadir o editar una nota
 
@@ -240,14 +258,15 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 `tests/board.e2e.spec.js` cubre:
 
-- carga de notas desde `src/data/board.json`
+- **empty-state de Eventos**: `#notesBoard` muestra `.board__empty` con el mensaje de "sin anuncios" y ninguna nota real (`article:not(.board__empty)` == 0), en `index.html` y `eventos.html`; el mensaje se re-renderiza al cambiar de idioma
 - presencia del contenedor `#notesBoard`
-- renderizado de notas con y sin adjuntos
-- filtrado de adjuntos inválidos y degradación a nota simple cuando corresponde
+- renderizado de notas con y sin adjuntos (sobre `#sportsBoard`, el tablón con contenido)
 - accesibilidad básica (`role="article"`, `aria-hidden`, `aria-label`)
 - comportamiento responsive
 - re-renderizado cuando cambia el idioma
 - convivencia con modo oscuro
+
+> Cuando el tablón de Eventos se repueble con notas, conviene devolver las aserciones de render a `#notesBoard` (o duplicarlas) para volver a cubrir filtrado de adjuntos, degradación a nota simple, etc., sobre la fuente real de Eventos.
 
 ## 🛠 Troubleshooting
 
@@ -356,4 +375,4 @@ Desde v4.7.2 ya no hace falta tocar `board.js`. Pasos:
 
 ---
 
-Última actualización: 16 de mayo de 2026 - v4.7.3
+Última actualización: 22 de junio de 2026 - v4.11.0

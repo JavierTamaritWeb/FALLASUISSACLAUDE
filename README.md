@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 16 de mayo de 2026 - v4.7.3 - Pulido visual del tablón JCF en Deportes (título coral en modo claro, centrado y tipografía reducida en móvil; notas y nombres de archivo más pequeños en `<768px` en ambos tableros). Nueva guía [`docs/well-known-agent-readiness.md`](./docs/well-known-agent-readiness.md) explicando `/.well-known/`, `api-catalog` (RFC 9727) y Agent Skills v0.2.
+🆕 Última actualización: 22 de junio de 2026 - v4.11.0 - Nuevas galerías **San Juan 2026** (`galeria_7`, 16 fotos) y **Representantes 2026-27** (`galeria_8`), elevando el total a 8 galerías. Tablón de Eventos (`board.json`) vaciado con un **empty-state** simpático que se renderiza como una nota real (tarjeta blanca + pinza, con modo oscuro) y vuelve a mostrar anuncios automáticamente al repoblar el JSON. El historial detallado vive en el **Changelog de [`CLAUDE.md`](./CLAUDE.md)** (fuente canónica).
 
 ## 🌐 Vista Previa
 
@@ -140,7 +140,7 @@ WEBFALLASUISSA/
 │   ├── eventos.json           # Gestión de eventos
 │   ├── calendarData.json      # Datos del calendario
 │   ├── fallas.json            # Información de fallas
-│   └── dataPages[1-4].json    # Datos para galerías
+│   └── dataPages[1-8].json    # Datos para galerías (una por galeria_1–galeria_8)
 ├── 📂 img/                    # Recursos visuales
 ├── 📂 pdf/                    # Documentos oficiales
 ├── 📂 favicon_io/             # Iconos y favicons

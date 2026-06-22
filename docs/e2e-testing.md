@@ -200,7 +200,7 @@ Archivo de test:
 Cobertura concreta:
 
 - `index.html`: reentrada en viewport de un bloque estático
-- `eventos.html`: rerender del tablón al cambiar idioma
+- `eventos.html`: rerender del empty-state del tablón (Eventos se sirve vacío desde v4.11.0) al cambiar idioma
 - `calendario.html`: rerender tras filtrar y limpiar
 - `meteo.html`: reveal de wrappers y exclusión de `.forecast-day`
 

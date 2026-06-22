@@ -58,6 +58,8 @@ Reglas importantes:
 
 Las dos páginas pueden incorporar nodos `Event` generados desde `src/data/board.json` durante el build.
 
+> **Estado actual (v4.11.0):** `board.json` se sirve **vacío** (el tablón de Eventos muestra solo su empty-state), por lo que ahora mismo **no se inyecta ningún nodo `Event`**. Al repoblar el tablón con notas que sigan el patrón `📝 Cita<br>` + fecha `DD-MM-YYYY`, los `Event` reaparecen automáticamente en el build.
+
 Reglas importantes:
 
 - solo se emiten eventos cuando la fecha extraída del tablón es real y válida
@@ -146,4 +148,4 @@ Ejecuta además `npm run test:e2e:full` si el cambio también toca navegación, 
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.2
+Última actualización: 22 de junio de 2026 - v4.11.0

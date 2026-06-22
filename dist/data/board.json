@@ -1,29 +1,3 @@
 {
-  "notas": [
-    {
-      "id": "apunta-2026",
-      "activo": true,
-      "imagen": {
-        "url": "img/eventos/apunta-2026.jpg",
-        "alt": {
-          "es": "Cartel de La Apuntà 2026 en la Falla Suïssa - L'Alqueria del Favero, 16 de mayo a partir de las 11 h, con arroz de periquitos, campeonato de futbolín, torneo de parchís y truc, juegos tradicionales y zona infantil",
-          "va": "Cartell de La Apuntà 2026 a la Falla Suïssa - L'Alqueria del Favero, 16 de maig a partir de les 11 h, amb arròs de periquitos, campionat de futbolí, torneig de parxís i truc, jocs tradicionals i zona infantil"
-        }
-      },
-      "contenido": {
-        "es": "📌 ANUNCIO <br> 16-05-2026 11:00 h<br>📝 Cita<br> La Apuntà 2026 — Arroz de periquitos, juegos y buen ambiente",
-        "va": "📌 ANUNCI <br> 16-05-2026 11:00 h<br>📝 Cita<br> La Apuntà 2026 — Arròs de periquitos, jocs i bon ambient"
-      },
-      "adjuntos": [
-        {
-          "tipo": "img",
-          "url": "img/eventos/apunta-2026.jpg",
-          "nombre": {
-            "es": "Ver cartel completo",
-            "va": "Veure cartell complet"
-          }
-        }
-      ]
-    }
-  ]
+  "notas": []
 }

@@ -29,7 +29,7 @@
       "description": "Tablón de avisos y citas vigentes (notas con fecha, hora y ubicación) de Falla Suïssa.",
       "url": "https://fallasuissa.es/data/board.json",
       "contentType": "application/json",
-      "sha256": "9ec2412049e1271b0136d61fb195274f7bdcf152f7d4a58e44a8774fcc59956e"
+      "sha256": "fa77d0ea1f0e5e47f43b8aba4e17c507fa5e66db074db5a54c6fe6e1178e3d2e"
     },
     {
       "name": "sports-board",

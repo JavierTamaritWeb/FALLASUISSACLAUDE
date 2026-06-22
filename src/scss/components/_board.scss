@@ -23,12 +23,15 @@ $icon-img-color: v.$turquesa;
   border: 1px solid v.$gris-medio-azulado;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 
-  // Mensaje cuando no hay notas
+  // Nota de "tablón vacío": reutiliza el estilo de board__note (tarjeta blanca
+  // + pinza); solo centra el texto del mensaje. El modo oscuro se define al final.
   &__empty {
-    font-size: 1.6rem;
-    color: v.$gris-medio-oscuro;
     text-align: center;
-    padding: 2rem;
+
+    .board__note-content {
+      justify-content: center;
+      text-align: center;
+    }
   }
 
   // Tarjeta contenedora (nota + adjuntos)
@@ -333,6 +336,18 @@ $icon-img-color: v.$turquesa;
 @media (min-width: 1200px) {
   .board {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Modo oscuro: la nota de "tablón vacío" pasa a tarjeta oscura con texto claro
+// (las notas reales no llevan modo oscuro; esta solo aparece con el tablón vacío,
+// nunca junto a notas blancas, así que no hay inconsistencia visible).
+body.modo-oscuro .board__empty {
+  background: v.$negro-casi;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+
+  .board__note-content {
+    color: v.$blanco-hueso;
   }
 }
 

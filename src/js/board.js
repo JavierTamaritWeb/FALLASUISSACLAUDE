@@ -300,8 +300,15 @@ function renderBoardInto(el, data) {
   const notasActivas = data.notas.filter(nota => nota.activo !== false);
 
   if (notasActivas.length === 0) {
-    const emptyMessage = getBoardTranslation('board.empty', 'No hay anuncios en este momento.');
-    el.innerHTML = `<p class="board__empty reveal reveal--soft">${emptyMessage}</p>`;
+    const emptyMessage = getBoardTranslation('board.empty', '📭 ¡Tablón al día! No hay anuncios pendientes por ahora. ¡Vuelve pronto, que la fiesta nunca para! 😊');
+    // Empty-state con el mismo aspecto que una nota real (tarjeta blanca + pinza);
+    // el modificador board__empty solo centra el texto y aplica el modo oscuro.
+    el.innerHTML = `
+      <article class="board__note board__empty reveal reveal--soft" role="article">
+        <div class="clamp-screw" aria-hidden="true"></div>
+        <div class="clamp-spring" aria-hidden="true"></div>
+        <p class="board__note-content">${emptyMessage}</p>
+      </article>`;
     refreshBoardReveal(el);
     return;
   }

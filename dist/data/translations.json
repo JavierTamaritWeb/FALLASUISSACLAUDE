@@ -192,7 +192,7 @@
         }
       },
       "board": {
-        "empty": "No hay anuncios en este momento.",
+        "empty": "📭 ¡Tablón al día! No hay anuncios pendientes por ahora. ¡Vuelve pronto, que la fiesta nunca para! 😊",
         "downloadFile": "Descargar",
         "viewImage": "Ver imagen"
       },
@@ -710,7 +710,7 @@
         }
       },
       "board": {
-        "empty": "No hi ha anuncis en este moment.",
+        "empty": "📭 Tauler al dia! No hi ha anuncis pendents de moment. Torna prompte, que la festa mai s'atura! 😊",
         "downloadFile": "Descarregar",
         "viewImage": "Veure imatge"
       },
