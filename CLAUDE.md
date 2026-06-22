@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.10.0 · **Última actualización:** 22 de junio de 2026
+**Versión:** 4.10.1 · **Última actualización:** 22 de junio de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -125,7 +125,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.10.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.10.1).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -275,6 +275,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.10.1** — Galería **San Juan 2026** (`galeria_7`): +3 fotos diurnas (`sanjuan-2026-014/015/016.jpeg`), pasa de 13 a 16 imágenes. Las nuevas se intercalan en su posición cronológica dentro del bloque de día reordenando el array de `src/data/dataPages7.json` (paella servida tras la paella, chicas+niña junto a las familias, grupo del patrocinador posando junto a su foto análoga). El orden de visualización lo fija el array del JSON, no el número de archivo, así que no se renombra ninguna de las 13 existentes; el conteo "/ 16" y el render se calculan solos. Sin cambios en HTML/teaser/i18n/sitemap.
 - **4.10.0** — Nueva galería **San Juan 2026** (`galeria_7`), séptima galería del sitio, replicando el patrón de bloc-notes existente: nueva `src/galeria_7.html` (+ variante `/va/` y SEO inyectados por el build), `src/js/galeria_7.js` (fetch a `dataPages7.json`), `src/data/dataPages7.json` (13 imágenes) y 13 fotos fuente en `src/img/sanjuan/sanjuan-2026/` (`sanjuan-2026-001…013.jpeg`; el build genera AVIF/WebP). Las fotos se ordenan cronológicamente día→noche (convivencia/cócteles/paella/niños → reparto de camisetas y lotes → retratos nocturnos → hoguera como clímax). Tarjeta añadida en `galerias.html` y en el teaser de la home (`index.html`, ahora 7 tarjetas), claves i18n `galeria.galeria7`/`galeria7-texto` en ES ("San Juan 2026") y VA ("Sant Joan 2026"), y dos `<url>` (ES + `/va/`) en `sitemap.xml`. Como en las 6 galerías previas, el `<h1>` lleva `<span>` anidado: el pre-render VA omite ese nodo (texto fuente en estático), pero el `data-i18n` se conserva y el toggle a valenciano funciona en runtime.
 - **4.9.1** — Optimización de imagen: `Escudo_falla.png` (4.1MB, 1936×2400, con alfa) — fuente desproporcionado (se muestra ≤80×100) — pasa a 640px + pngquant (**120KB**, alfa intacto); el build regenera AVIF 30KB / WebP 48KB. Sin cambios de formato ni HTML (sigue PNG con el mismo nombre, referenciado en 39 archivos vía `<picture>`/schema/sitemap). Los blobs PNG antiguos de 4.1MB se purgaron del historial git (`git filter-repo --strip-blobs-with-ids` + force-push; hashes cambiados, re-clonar clones viejos).
 - **4.9.0** — Tres bloques de trabajo: **(1) Modo mantenimiento** — nueva `mantenimiento.html` autocontenida (CSS inline, sin assets externos, bilingüe ES/VA, `noindex`), tratada como standalone igual que `ai-info.html` (excluida de `htmlTask`, copiada por `rootFilesTask`, sin `/va/`). El `.htaccess` devuelve **HTTP 503 + `Retry-After`** cuando existe el centinela `~/.../public_html/.maintenance`, con bypass por **token secreto** (`?preview=TOKEN` → cookie) y `ErrorDocument 503`. Se enciende/apaga con `tools/deploy.sh --maintenance on|off`. **(2) Seguridad del deploy** — los datos sensibles (SSH + token) salen del repo a `tools/deploy.env` (gitignored; plantilla `deploy.env.example`); `deploy.sh` los lee y aborta si faltan. El `.htaccess` versionado lleva el placeholder `__MAINT_TOKEN__` que `deploy.sh` inyecta en el servidor tras cada rsync (`--exclude='.maintenance'` para no apagar el modo en un deploy). Se reescribió el historial git (`git filter-repo` + force-push) para purgar una IP del equipo y credenciales SSH que se habían commiteado, y los blobs PNG gigantes. **(3) Optimización de imágenes** — `foto_2425_02.png` (67MB) y `foto_2425_01.png` (12MB), fotos de cámara solo usadas en slides comentados, pasan a JPEG 1920px; `fondo_traje.png` (8.4MB, fondo de 5 secciones) pasa a JPEG 2560px servido vía `image-set()` (AVIF/WebP con fallback) en `_falla/_meteo/_forecast/_galeria/_ofrenda.scss`. Ver restricción *Deploy, secretos y mantenimiento*.
