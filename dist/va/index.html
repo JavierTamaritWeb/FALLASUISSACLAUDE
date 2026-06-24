@@ -93,85 +93,129 @@
   <!-- Datos estructurados -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://fallasuissa.es/#organization",
-        "name": "Falla Suïssa - L'Alqueria del Favero",
-        "foundingDate": "2024",
-        "description": "Falla Suïssa-L'Alqueria del Favero es una comisión fallera ubicada en Valencia, España. Promueve la cultura y las tradiciones valencianas mediante actividades comunitarias y culturales.",
-        "founder": {
-          "@type": "Person",
-          "name": "José Santos Quiles"
-        },
-        "url": "https://fallasuissa.es/",
-        "logo": "https://fallasuissa.es/img/Escudo_falla.png",
-        "image": "https://fallasuissa.es/img/Escudo_falla.png",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "Información general",
-          "email": "info@fallasuissa.es",
-          "availableLanguage": ["es", "va"]
-        },
-        "sameAs": [
-          "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
-          "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
-          "https://tiktok.com/@fallasuissaalqueria"
-        ],
-        "knowsAbout": [
-          "Tradiciones valencianas",
-          "Fallas de Valencia",
-          "Cultura popular",
-          "Comunidad fallera",
-          "Colaboraciones solidarias en Valencia"
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://fallasuissa.es/#organization",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "foundingDate": "2024",
+      "description": "Falla Suïssa-L'Alqueria del Favero es una comisión fallera ubicada en Valencia, España. Promueve la cultura y las tradiciones valencianas mediante actividades comunitarias y culturales.",
+      "founder": {
+        "@type": "Person",
+        "name": "José Santos Quiles"
+      },
+      "url": "https://fallasuissa.es/",
+      "logo": "https://fallasuissa.es/img/Escudo_falla.png",
+      "image": "https://fallasuissa.es/img/Escudo_falla.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Información general",
+        "email": "info@fallasuissa.es",
+        "availableLanguage": [
+          "es",
+          "va"
         ]
       },
-      {
-        "@type": "WebSite",
-        "@id": "https://fallasuissa.es/#website",
-        "url": "https://fallasuissa.es/",
-        "name": "Falla Suïssa - L'Alqueria del Favero",
-        "publisher": {
+      "sameAs": [
+        "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
+        "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
+        "https://tiktok.com/@fallasuissaalqueria"
+      ],
+      "knowsAbout": [
+        "Tradiciones valencianas",
+        "Fallas de Valencia",
+        "Cultura popular",
+        "Comunidad fallera",
+        "Colaboraciones solidarias en Valencia"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://fallasuissa.es/#website",
+      "url": "https://fallasuissa.es/",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "publisher": {
+        "@id": "https://fallasuissa.es/#organization"
+      },
+      "inLanguage": [
+        "es-ES",
+        "ca-ES"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://fallasuissa.es/#webpage",
+      "url": "https://fallasuissa.es/",
+      "name": "Falla Suïssa - L'Alqueria del Favero",
+      "description": "Comisión fallera Suïssa - L'Alqueria del Favero en Valencia. Tradición valenciana desde 2024, eventos culturales y colaboración solidaria con HOPE-INCLIVA para apoyar la investigación del Linfoma No Hodgkin Pediátrico.",
+      "isPartOf": {
+        "@id": "https://fallasuissa.es/#website"
+      },
+      "about": [
+        {
           "@id": "https://fallasuissa.es/#organization"
         },
-        "inLanguage": ["es-ES", "ca-ES"]
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://fallasuissa.es/#webpage",
-        "url": "https://fallasuissa.es/",
+        {
+          "@id": "https://hope-incliva.com/#website"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "https://hope-incliva.com/#website"
+        }
+      ],
+      "inLanguage": "es-ES"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://hope-incliva.com/#website",
+      "url": "https://hope-incliva.com/",
+      "name": "HOPE",
+      "alternateName": "HOPE - INCLIVA",
+      "description": "Proyecto solidario vinculado a INCLIVA que destina parte de los beneficios de su merchandising al estudio del Linfoma No Hodgkin Pediátrico.",
+      "inLanguage": "es-ES"
+    },
+    {
+      "@type": "Event",
+      "@id": "https://fallasuissa.es/eventos.html#preseleccion-fmiv-2027",
+      "name": "Preselección de la Fallera Mayor Infantil de Valencia — Daniela Cortés i Caravantes, candidata FMIV 2027",
+      "startDate": "2026-07-04T00:00:00",
+      "endDate": "2026-07-04T00:00:00",
+      "description": "Evento de Falla Suïssa - L'Alqueria del Favero. 📌 ANUNCIO\n04-07-2026\n📝 Cita\nPreselección de la Fallera Mayor Infantil de Valencia — Daniela Cortés i Caravantes, candidata FMIV 2027",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "organizer": {
+        "@type": "Organization",
         "name": "Falla Suïssa - L'Alqueria del Favero",
-        "description": "Comisión fallera Suïssa - L'Alqueria del Favero en Valencia. Tradición valenciana desde 2024, eventos culturales y colaboración solidaria con HOPE-INCLIVA para apoyar la investigación del Linfoma No Hodgkin Pediátrico.",
-        "isPartOf": {
-          "@id": "https://fallasuissa.es/#website"
-        },
-        "about": [
-          {
-            "@id": "https://fallasuissa.es/#organization"
-          },
-          {
-            "@id": "https://hope-incliva.com/#website"
-          }
-        ],
-        "mentions": [
-          {
-            "@id": "https://hope-incliva.com/#website"
-          }
-        ],
-        "inLanguage": "es-ES"
+        "url": "https://fallasuissa.es/",
+        "logo": "https://fallasuissa.es/img/Escudo_falla.png"
       },
-      {
-        "@type": "WebSite",
-        "@id": "https://hope-incliva.com/#website",
-        "url": "https://hope-incliva.com/",
-        "name": "HOPE",
-        "alternateName": "HOPE - INCLIVA",
-        "description": "Proyecto solidario vinculado a INCLIVA que destina parte de los beneficios de su merchandising al estudio del Linfoma No Hodgkin Pediátrico.",
-        "inLanguage": "es-ES"
-      }
-    ]
-  }
+      "location": {
+        "@type": "Place",
+        "name": "Falla Suïssa - L'Alqueria del Favero",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Valencia",
+          "addressRegion": "Comunidad Valenciana",
+          "addressCountry": "ES"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://fallasuissa.es/eventos.html",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "validFrom": "2024-01-01T00:00:00"
+      },
+      "image": [
+        "https://fallasuissa.es/img/Escudo_falla.png"
+      ],
+      "url": "https://fallasuissa.es/eventos.html"
+    }
+  ]
+}
   </script>
 
   <!-- Google Fonts -->

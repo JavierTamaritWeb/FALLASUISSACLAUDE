@@ -1,3 +1,29 @@
 {
-  "notas": []
+  "notas": [
+    {
+      "id": "preseleccion-fmiv-2027",
+      "activo": true,
+      "imagen": {
+        "url": "img/eventos/preseleccion-fmiv-2027.jpg",
+        "alt": {
+          "es": "Cartel de la candidata a Fallera Mayor Infantil de Valencia 2027, Daniela Cortés i Caravantes, de la Falla Suïssa - L'Alqueria del Favero",
+          "va": "Cartell de la candidata a Fallera Major Infantil de València 2027, Daniela Cortés i Caravantes, de la Falla Suïssa - L'Alqueria del Favero"
+        }
+      },
+      "contenido": {
+        "es": "📌 ANUNCIO <br> 04-07-2026<br>📝 Cita<br> Preselección de la Fallera Mayor Infantil de Valencia — Daniela Cortés i Caravantes, candidata FMIV 2027",
+        "va": "📌 ANUNCI <br> 04-07-2026<br>📝 Cita<br> Preselecció de la Fallera Major Infantil de València — Daniela Cortés i Caravantes, candidata FMIV 2027"
+      },
+      "adjuntos": [
+        {
+          "tipo": "img",
+          "url": "img/eventos/preseleccion-fmiv-2027.jpg",
+          "nombre": {
+            "es": "Ver cartel completo",
+            "va": "Veure cartell complet"
+          }
+        }
+      ]
+    }
+  ]
 }

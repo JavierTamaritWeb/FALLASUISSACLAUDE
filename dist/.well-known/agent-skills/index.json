@@ -5,7 +5,7 @@
     "name": "Falla Suïssa - L'Alqueria del Favero",
     "url": "https://fallasuissa.es/"
   },
-  "updated": "2026-06-23",
+  "updated": "2026-06-24",
   "skills": [
     {
       "name": "falla-discovery",
@@ -29,7 +29,7 @@
       "description": "Tablón de avisos y citas vigentes (notas con fecha, hora y ubicación) de Falla Suïssa.",
       "url": "https://fallasuissa.es/data/board.json",
       "contentType": "application/json",
-      "sha256": "fa77d0ea1f0e5e47f43b8aba4e17c507fa5e66db074db5a54c6fe6e1178e3d2e"
+      "sha256": "53085be351505455a608f49b49d8203a93787efacf97b5dd59cfdbf80bcf3964"
     },
     {
       "name": "sports-board",

@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.11.0 · **Última actualización:** 22 de junio de 2026
+**Versión:** 4.11.1 · **Última actualización:** 24 de junio de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -125,7 +125,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.11.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.11.1).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -280,6 +280,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.11.1** — Primera nota real del **tablón de Eventos** tras el empty-state de v4.11.0: se repuebla `src/data/board.json` con el aviso de la **Preselección de la Fallera Mayor Infantil de Valencia** (04-07-2026, candidata Daniela Cortés i Caravantes, FMIV 2027). La nota lleva `imagen` (cartel `src/img/eventos/preseleccion-fmiv-2027.jpg`, el build genera AVIF/WebP) + adjunto "Ver cartel completo", contenido bilingüe ES/VA y el patrón `📝 Cita` + fecha `DD-MM-YYYY` que reactiva el **Schema.org Event** JSON-LD en `index.html`/`eventos.html`. Tests del tablón reorientados: como `#notesBoard` vuelve a tener notas reales, `tests/board.e2e.spec.js` valida el render de notas (en vez del empty-state) y `tests/reveal-on-scroll.e2e.spec.js` apunta a la nota real en lugar de `.board__empty`. El empty-state sigue disponible: al vaciar `board.json` reaparece solo.
 - **4.11.0** — Dos bloques: **(1) Nueva galería Representantes 2026-27** (`galeria_8`, octava galería) replicando el patrón de bloc-notes: `src/galeria_8.html` (+ `/va/` y SEO por el build), `src/js/galeria_8.js` (fetch a `dataPages8.json`), `src/data/dataPages8.json` (3 fotos en `src/img/representantes/representantes-2026-27/`, orden narrativo preparación→retrato→grupo), tarjeta en `galerias.html` + teaser de la home, i18n `galeria.galeria8`/`galeria8-texto` (ES "Representantes 2026-27" / VA "Representants 2026-27") y dos `<url>` en `sitemap.xml`. **(2) Tablón de Eventos vaciado + empty-state simpático**: `board.json` se sirve vacío y `board.js` renderiza un marcador de "sin anuncios" con el aspecto de una nota real (tarjeta blanca + pinza), texto bilingüe en `board.empty`, modo oscuro propio (`v.$negro-casi` + `v.$blanco-hueso`); los anuncios reaparecen solos al repoblar el JSON. Tests del tablón repuntados (Eventos valida el empty-state; el render de notas se valida en `#sportsBoard`). El de Deportes (`sports-board.json`) queda intacto. Ver patrón *Tablón de anuncios* y restricción *Empty-state del tablón*.
 - **4.10.1** — Galería **San Juan 2026** (`galeria_7`): +3 fotos diurnas (`sanjuan-2026-014/015/016.jpeg`), pasa de 13 a 16 imágenes. Las nuevas se intercalan en su posición cronológica dentro del bloque de día reordenando el array de `src/data/dataPages7.json` (paella servida tras la paella, chicas+niña junto a las familias, grupo del patrocinador posando junto a su foto análoga). El orden de visualización lo fija el array del JSON, no el número de archivo, así que no se renombra ninguna de las 13 existentes; el conteo "/ 16" y el render se calculan solos. Sin cambios en HTML/teaser/i18n/sitemap.
 - **4.10.0** — Nueva galería **San Juan 2026** (`galeria_7`), séptima galería del sitio, replicando el patrón de bloc-notes existente: nueva `src/galeria_7.html` (+ variante `/va/` y SEO inyectados por el build), `src/js/galeria_7.js` (fetch a `dataPages7.json`), `src/data/dataPages7.json` (13 imágenes) y 13 fotos fuente en `src/img/sanjuan/sanjuan-2026/` (`sanjuan-2026-001…013.jpeg`; el build genera AVIF/WebP). Las fotos se ordenan cronológicamente día→noche (convivencia/cócteles/paella/niños → reparto de camisetas y lotes → retratos nocturnos → hoguera como clímax). Tarjeta añadida en `galerias.html` y en el teaser de la home (`index.html`, ahora 7 tarjetas), claves i18n `galeria.galeria7`/`galeria7-texto` en ES ("San Juan 2026") y VA ("Sant Joan 2026"), y dos `<url>` (ES + `/va/`) en `sitemap.xml`. Como en las 6 galerías previas, el `<h1>` lleva `<span>` anidado: el pre-render VA omite ese nodo (texto fuente en estático), pero el `data-i18n` se conserva y el toggle a valenciano funciona en runtime.
