@@ -126,7 +126,9 @@ window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/
     const root = window.SITE_ROOT;
     loadAfterPaint([root + 'js/cookie-banner.js']);
     loadOnIdle([root + 'js/timeline.js', root + 'js/acc.js']);
-    loadOnVisible('#videoDron', [root + 'js/video-dron.js'], '320px');
+    // Visor de vídeo (plantilla, v4.17.0): la sección .video-dron se retiró de la
+    // home; para reactivar un visor con js/video-dron.js, ver docs/visor-video-plantilla.md
+    // loadOnVisible('#videoDron', [root + 'js/video-dron.js'], '320px');
     loadOnVisible('#videoOfrenda', [root + 'js/ofrenda-video.js'], '320px');
   }
 

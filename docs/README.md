@@ -49,6 +49,7 @@
 - [`swiper-monumento.md`](./swiper-monumento.md): slider principal, protección frente a recortes y hook temporal de la foto real de 2026.
 - [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md): procedimiento anual para cambiar imágenes del monumento sin arrastrar lógica temporal que ya no haga falta.
 - [`meteo-ui.md`](./meteo-ui.md): icono meteorológico y layout asociado.
+- [`visor-video-plantilla.md`](./visor-video-plantilla.md): plantilla del visor de vídeo (markup inline + overlay fullscreen, `video-dron.js`, i18n) conservada tras retirar el vídeo del dron de la home en v4.17.0.
 
 ### 🧩 Contenido y datos editables
 
@@ -58,7 +59,7 @@
 
 ## 📝 Notas de Mantenimiento
 
-- La versión funcional documentada del proyecto es `v4.16.1` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.17.0` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta
@@ -83,4 +84,4 @@ Actualiza estas guías cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 9 de septiembre de 2026 - v4.16.1*
+*Última actualización: 9 de septiembre de 2026 - v4.17.0*
