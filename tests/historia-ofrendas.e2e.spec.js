@@ -82,10 +82,38 @@ for (const pagina of PAGINAS) {
         expect(cajaVideo.x).toBeGreaterThanOrEqual(cajaInner.x - 0.5);
         expect(cajaVideo.x + cajaVideo.width).toBeLessThanOrEqual(cajaInner.x + cajaInner.width + 0.5);
         expect(Math.abs(cajaVideo.width / cajaVideo.height - 16 / 9)).toBeLessThan(0.05);
+
+        // Botón de descarga del MP4 bajo la figura (v4.20.0): enlace .boton con
+        // `download`, apunta al mismo archivo que el <source> y queda centrado
+        const enlace = panel.locator('.ofrendas-video__descarga a.boton[download]');
+        await expect(enlace).toHaveCount(1);
+        await expect(enlace).toBeVisible();
+        await expect(enlace).toHaveText('Descargar vídeo de la Ofrenda');
+        await expect(enlace).toHaveAttribute('download', 'falla-suissa-ofrenda-2026.mp4');
+        await expect(enlace).toHaveAttribute('aria-label', 'Descargar el vídeo de la Ofrenda 2026 (MP4, 30 MB)');
+        const hrefEnlace = await enlace.getAttribute('href');
+        expect(new URL(hrefEnlace, page.url()).href).toBe(new URL(src, page.url()).href);
+        const headEnlace = await request.head(new URL(hrefEnlace, page.url()).href);
+        expect(headEnlace.status()).toBe(200);
+        expect(headEnlace.headers()['content-type']).toContain('video/mp4');
+        // Geometría relativa (ambas cajas comparten la misma transformación de
+        // la animación reveal, así que la diferencia de centros no se ve afectada)
+        const geo = await enlace.evaluate((el) => {
+          const caja = el.getBoundingClientRect();
+          const contenedor = el.parentElement.getBoundingClientRect();
+          const figura = el.closest('.accordion__content-inner').querySelector('.ofrendas-video').getBoundingClientRect();
+          return {
+            desvioCentro: (caja.left + caja.width / 2) - (contenedor.left + contenedor.width / 2),
+            top: caja.top,
+            finFigura: figura.bottom
+          };
+        });
+        expect(Math.abs(geo.desvioCentro)).toBeLessThan(2);
+        expect(geo.top).toBeGreaterThanOrEqual(geo.finFigura - 0.5);
       });
     }
 
-    test('variante /va/: titular, aria-label del vídeo y pie pre-renderizados en valenciano', async ({ page }) => {
+    test('variante /va/: titular, aria-label del vídeo, pie y botón de descarga pre-renderizados en valenciano', async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 800 });
       await page.goto(`/va/${pagina}`);
       const sufijo = pagina.replace('.html', '');
@@ -99,9 +127,13 @@ for (const pagina of PAGINAS) {
       // El poster y el mp4 se sirven desde la raíz (../img/) en /va/
       const poster = await panel.locator('video').getAttribute('poster');
       expect(poster.startsWith('../img/')).toBe(true);
+      const enlace = panel.locator('.ofrendas-video__descarga a.boton[download]');
+      await expect(enlace).toHaveText("Descarregar vídeo de l'Ofrena");
+      await expect(enlace).toHaveAttribute('aria-label', "Descarregar el vídeo de l'Ofrena 2026 (MP4, 30 MB)");
+      expect((await enlace.getAttribute('href')).startsWith('../img/')).toBe(true);
     });
 
-    test('toggle ES→VA en runtime traduce titular y pie', async ({ page }) => {
+    test('toggle ES→VA en runtime traduce titular, pie y botón de descarga', async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 800 });
       await page.goto(`/${pagina}`);
       const { titular, figura } = await abrirPanel(page, pagina);
@@ -110,6 +142,8 @@ for (const pagina of PAGINAS) {
       await expect(titular).toContainText('Ofrena 2026');
       await expect(figura.locator('.ofrendas-video__pie'))
         .toHaveText('Ofrena a la Mare de Déu dels Desamparats, març de 2026');
+      await expect(page.locator('.accordion--ofrendas a.boton[download]'))
+        .toHaveText("Descarregar vídeo de l'Ofrena");
     });
   });
 }

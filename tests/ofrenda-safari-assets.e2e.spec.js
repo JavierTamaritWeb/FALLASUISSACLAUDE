@@ -58,6 +58,36 @@ for (const pagePath of ['/index.html', '/ofrenda.html']) {
     expect(velo).toContain('0.72');
   });
 
+  // v4.20.0: en Safari la galería desaparecía (alto 0) porque .ofrenda__figura
+  // solo tiene hijos absolutos y WebKit ignoraba el aspect-ratio del item de
+  // grid estirado. El pseudoelemento ::before reserva el alto 3:4 por padding.
+  test(`${pagePath}: la galería reserva el alto 3:4 sin depender de aspect-ratio`, async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(pagePath);
+    const figuras = page.locator('.ofrenda__galeria .ofrenda__figura');
+    await expect(figuras).toHaveCount(3);
+    await figuras.first().scrollIntoViewIfNeeded();
+    for (let i = 0; i < 3; i += 1) {
+      const geo = await figuras.nth(i).evaluate((el) => {
+        const cs = getComputedStyle(el);
+        const before = getComputedStyle(el, '::before');
+        return {
+          w: el.offsetWidth, h: el.offsetHeight, alignSelf: cs.alignSelf,
+          beforeDisplay: before.display, beforePadding: parseFloat(before.paddingTop)
+        };
+      });
+      expect(geo.h).toBeGreaterThan(100);
+      expect(Math.abs(geo.h / geo.w - 4 / 3)).toBeLessThan(0.02);
+      expect(geo.alignSelf).toBe('start');
+      expect(geo.beforeDisplay).toBe('block');
+      // padding-top del ::before = 133,333 % del ancho de la figura
+      expect(Math.abs(geo.beforePadding - geo.w * 4 / 3)).toBeLessThan(1);
+      const img = figuras.nth(i).locator('img.ofrenda__imagen');
+      await expect.poll(() => img.evaluate((el) => el.complete && el.naturalWidth > 0)).toBe(true);
+      expect(await img.evaluate((el) => el.getBoundingClientRect().height)).toBeGreaterThan(100);
+    }
+  });
+
   test(`/va${pagePath} pre-renderiza el rótulo en valenciano`, async ({ page }) => {
     await page.goto('/va' + pagePath);
     await expect(page.locator('.ofrenda .ofrenda__proxima-texto')).toHaveText('Pròxima Ofrena');

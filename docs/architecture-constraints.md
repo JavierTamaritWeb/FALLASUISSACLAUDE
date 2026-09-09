@@ -410,7 +410,23 @@ grep -o 'data-i18n="nav.inicio"[^>]*>[^<]*' dist/index.html      # Debe contener
 npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 ```
 
-## 12. Qué hacer antes de tocar una zona sensible
+## 12. Galería de Ofrenda: alto de la figura sin depender de `aspect-ratio` (v4.20.0)
+
+**Síntoma:** en Safari (macOS e iOS) las 3 fotos de `.ofrenda__galeria` (`index.html` + `ofrenda.html`) no se veían; en Chrome y Firefox sí. Los archivos estaban en el servidor y respondían 200: era un fallo de layout, no de deploy.
+
+**Causa:** `.ofrenda__figura` solo tiene hijos en `position: absolute` (el trigger del lightbox y la `<img>`), así que no aporta contenido en flujo. Su alto dependía únicamente de `aspect-ratio: 3/4` dentro de un grid con `align-items: stretch`. WebKit estira el item al alto de la fila (0 px, porque ninguna figura tiene contenido) e ignora el `aspect-ratio`; Blink y Gecko lo calculan a partir del ancho.
+
+**Solución (`src/scss/components/_ofrenda.scss`):**
+- `.ofrenda__figura { align-self: start; }` (no se estira al alto de la fila).
+- `.ofrenda__figura::before { content: ''; display: block; padding-top: 133.333%; }` reserva el alto 3:4 por padding, que todos los motores respetan. El `aspect-ratio: 3/4` se conserva; en Chrome/Firefox ambos coinciden y el render no cambia (baselines visuales intactos).
+
+**Reglas:**
+1. NO quites el `::before` ni devuelvas la figura a `align-self: stretch` "porque en Chrome se ve bien": comprueba siempre en Safari real (no basta con el WebKit de Playwright, que renderizó bien).
+2. Si cambias la proporción de la galería, cambia `aspect-ratio` **y** el `padding-top` del `::before` a la vez (`padding-top = alto/ancho × 100 %`).
+3. Cualquier contenedor nuevo con **solo hijos absolutos** + `aspect-ratio` dentro de un grid/flex debe seguir este mismo patrón (o tener un hijo en flujo que aporte alto).
+4. Test guardia: `tests/ofrenda-safari-assets.e2e.spec.js` › "la galería reserva el alto 3:4 sin depender de aspect-ratio" (3 figuras con alto 4/3 del ancho, `align-self: start`, `::before` en bloque con el padding correcto e imágenes cargadas).
+
+## 13. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
 
@@ -434,4 +450,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 9 de septiembre de 2026 - v4.19.1
+Última actualización: 9 de septiembre de 2026 - v4.20.0

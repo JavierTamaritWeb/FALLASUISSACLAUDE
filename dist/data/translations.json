@@ -486,7 +486,9 @@
           "pies": {
             "video2026": "Ofrenda a la Mare de Déu dels Desamparats, marzo de 2026"
           },
-          "videoAria": "Vídeo de la Ofrenda de la Falla Suïssa, marzo de 2026"
+          "videoAria": "Vídeo de la Ofrenda de la Falla Suïssa, marzo de 2026",
+          "descargarVideo": "Descargar vídeo de la Ofrenda",
+          "descargarVideoAria": "Descargar el vídeo de la Ofrenda 2026 (MP4, 30 MB)"
         },
         "representantes": {
           "titulo": "Representantes",
@@ -1042,7 +1044,9 @@
           "pies": {
             "video2026": "Ofrena a la Mare de Déu dels Desamparats, març de 2026"
           },
-          "videoAria": "Vídeo de l'Ofrena de la Falla Suïssa, març de 2026"
+          "videoAria": "Vídeo de l'Ofrena de la Falla Suïssa, març de 2026",
+          "descargarVideo": "Descarregar vídeo de l'Ofrena",
+          "descargarVideoAria": "Descarregar el vídeo de l'Ofrena 2026 (MP4, 30 MB)"
         },
         "representantes": {
           "titulo": "Representants",

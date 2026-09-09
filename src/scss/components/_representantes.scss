@@ -327,6 +327,14 @@ body.modo-oscuro .accordion--representantes {
       text-align: center;
       max-width: 64rem;
     }
+
+    // Botón de descarga del MP4 (mismo patrón que Monumentos): enlace .boton
+    // global con `download`, centrado bajo la figura
+    &__descarga {
+      display: flex;
+      justify-content: center;
+      margin-top: 2.4rem;
+    }
   }
 }
 

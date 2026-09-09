@@ -128,6 +128,18 @@
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   aspect-ratio: 3 / 4;
+  // Safari (v4.20.0): como la figura solo tiene hijos absolutos, en WebKit el
+  // item de grid con `align-items: stretch` se quedaba con alto 0 e ignoraba
+  // el aspect-ratio (la galería desaparecía). El pseudoelemento reserva el
+  // alto 3:4 por padding, que todos los motores respetan; en Chrome/Firefox
+  // coincide con el aspect-ratio y no cambia nada.
+  align-self: start;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 133.333%;
+  }
 
   &:hover {
     transform: translateY(-4px);
