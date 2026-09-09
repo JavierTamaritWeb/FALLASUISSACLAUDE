@@ -6,8 +6,31 @@
 // HTML/PDF garantiza que los navegadores repitan ese thead en cada página.
 
 const { test, expect } = require('@playwright/test');
-const fs = require('fs');
-const path = require('path');
+const zlib = require('zlib');
+
+// Cuenta operadores `Do` (dibujo de XObject: imágenes) dentro de los content
+// streams del PDF. Chromium comprime los streams con FlateDecode, así que
+// buscar `Do` sobre el binario crudo devuelve ruido (bytes casuales) y NO el
+// número real de imágenes dibujadas; hay que inflar cada stream antes.
+function contarDoEnStreams(pdfBuffer) {
+  const s = pdfBuffer.toString('binary');
+  const re = /stream\r?\n/g;
+  let total = 0;
+  let m;
+  while ((m = re.exec(s))) {
+    const start = m.index + m[0].length;
+    const end = s.indexOf('endstream', start);
+    if (end < 0) break;
+    let contenido;
+    try {
+      contenido = zlib.inflateSync(pdfBuffer.subarray(start, end)).toString('binary');
+    } catch (_) {
+      contenido = s.slice(start, end); // stream sin comprimir
+    }
+    total += (contenido.match(/\bDo\b/g) || []).length;
+  }
+  return total;
+}
 
 const URLS = [
   { url: '/autorizacion-imagen.html', titulo: 'adultos' },
@@ -85,12 +108,12 @@ for (const { url, titulo } of URLS) {
 
       // 3) El thead repetible se traduce en una referencia al XObject de imagen
       // en CADA página del PDF. Chromium reutiliza el mismo XObject y emite
-      // un operador `Do` en el content stream de cada página. Contamos las
-      // ocurrencias de `Do` en el PDF y exigimos al menos `numPages` (una por
-      // página). Hay otras formas en que aparece "Do" en PDFs, pero como
-      // sólo este HTML embebe imágenes, este umbral es seguro.
-      const doOps = pdfString.match(/\bDo\b/g) || [];
-      expect(doOps.length, `El operador Do (referencia a XObject) debería aparecer ≥ ${numPages} veces (1 por página). Apariciones: ${doOps.length}`).toBeGreaterThanOrEqual(numPages);
+      // un operador `Do` en el content stream de cada página. Contamos los
+      // `Do` en los streams DESCOMPRIMIDOS (ver contarDoEnStreams) y exigimos
+      // al menos `numPages` (una por página). Como sólo este HTML embebe
+      // imágenes, este umbral es seguro.
+      const doOps = contarDoEnStreams(pdfBuffer);
+      expect(doOps, `El operador Do (referencia a XObject) debería aparecer ≥ ${numPages} veces (1 por página). Apariciones: ${doOps}`).toBeGreaterThanOrEqual(numPages);
     });
   });
 }
