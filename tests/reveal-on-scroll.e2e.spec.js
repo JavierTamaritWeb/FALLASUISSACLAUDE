@@ -39,33 +39,33 @@ test.describe('Reveal on scroll global', () => {
     await expectReveal(blogCard, true);
   });
 
-  test('eventos.html reaplica reveal a la nota del tablón tras rerender por idioma', async ({ page }) => {
-    // Las notas del tablón de Eventos heredan las clases reveal reveal--soft, así
-    // que deben revelarse y volver a registrarse en scroll-reveal tras el re-render
-    // por cambio de idioma.
+  test('eventos.html reaplica reveal al empty-state del tablón tras rerender por idioma', async ({ page }) => {
+    // El tablón de Eventos se sirve vacío: el empty-state (.board__empty) hereda
+    // las clases reveal reveal--soft, así que debe revelarse y volver a registrarse
+    // en scroll-reveal tras el re-render por cambio de idioma, igual que una nota.
     await page.setViewportSize({ width: 1280, height: 640 });
     await page.goto('/eventos.html');
 
-    const note = page.locator('#notesBoard article:not(.board__empty)').first();
-    await expect(note).toBeAttached();
+    const emptyState = page.locator('#notesBoard .board__empty');
+    await expect(emptyState).toBeAttached();
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-    await expectReveal(note, false);
+    await expectReveal(emptyState, false);
 
-    await note.scrollIntoViewIfNeeded();
-    await expectReveal(note, true);
+    await emptyState.scrollIntoViewIfNeeded();
+    await expectReveal(emptyState, true);
 
     await page.locator('#langSwitcher').click();
     await page.locator('.header__lang-option[data-lang="va"]').click();
 
-    const rerenderedNote = page.locator('#notesBoard article:not(.board__empty)').first();
-    await expect(rerenderedNote).toBeAttached();
+    const rerenderedEmpty = page.locator('#notesBoard .board__empty');
+    await expect(rerenderedEmpty).toBeAttached();
     await expect.poll(async () => {
-      const className = await rerenderedNote.getAttribute('class');
+      const className = await rerenderedEmpty.getAttribute('class');
       return className || '';
     }).toContain('reveal');
 
-    await rerenderedNote.scrollIntoViewIfNeeded();
-    await expectReveal(rerenderedNote, true);
+    await rerenderedEmpty.scrollIntoViewIfNeeded();
+    await expectReveal(rerenderedEmpty, true);
   });
 
   test('calendario.html vuelve a registrar tarjetas tras filtrar y limpiar', async ({ page }) => {

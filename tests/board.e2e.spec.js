@@ -7,19 +7,23 @@ const PAGES_WITH_BOARD = ['index.html', 'eventos.html'];
 
 test.describe('Tablón Dinámico (.board)', () => {
 
-  // El tablón de Eventos (#notesBoard, data/board.json) tiene notas reales: al
-  // menos la preselección FMIV. Cuando se vacía, board.js pinta un empty-state
-  // (board.empty); esa rama se cubre indirectamente por los tests de board.js.
-  test.describe('Render de notas (tablón de Eventos)', () => {
+  // El tablón de Eventos (#notesBoard, data/board.json) se sirve vacío: muestra
+  // un empty-state simpático vía board.empty. Las aserciones de render de notas
+  // se apoyan en el tablón de Deportes (#sportsBoard), que sí tiene contenido.
+  test.describe('Empty-state (tablón de Eventos vacío)', () => {
     for (const pageName of PAGES_WITH_BOARD) {
-      test(`${pageName}: renderiza notas reales y ningún empty-state`, async ({ page }) => {
+      test(`${pageName}: muestra el mensaje de "sin anuncios" y ninguna nota`, async ({ page }) => {
         await page.goto(`/${pageName}`);
-        await page.waitForSelector('#notesBoard article:not(.board__empty)', { timeout: 5000 });
+        await page.waitForSelector('#notesBoard .board__empty', { timeout: 5000 });
 
-        // Hay al menos una nota real y no se muestra el marcador de "sin anuncios".
+        const empty = page.locator('#notesBoard .board__empty');
+        await expect(empty).toBeVisible();
+        await expect(empty).toContainText('anuncios');
+
+        // El empty-state se renderiza como una nota (tarjeta blanca + pinza), pero
+        // no debe haber ninguna nota real (sin el modificador board__empty).
         const realNotes = page.locator('#notesBoard article:not(.board__empty)');
-        expect(await realNotes.count()).toBeGreaterThan(0);
-        expect(await page.locator('#notesBoard .board__empty').count()).toBe(0);
+        expect(await realNotes.count()).toBe(0);
       });
 
       test(`${pageName}: contenedor board existe`, async ({ page }) => {
@@ -139,12 +143,13 @@ test.describe('Tablón Dinámico (.board)', () => {
       }
     });
 
-    test('eventos.html: la nota se re-renderiza al cambiar idioma', async ({ page }) => {
+    test('eventos.html: el empty-state se traduce al cambiar idioma', async ({ page }) => {
       await page.goto('/eventos.html');
-      await page.waitForSelector('#notesBoard article:not(.board__empty)');
+      await page.waitForSelector('#notesBoard .board__empty');
 
-      const noteContent = page.locator('#notesBoard .board__note-content').first();
-      await expect(noteContent).toBeVisible();
+      const empty = page.locator('#notesBoard .board__empty');
+      const textEs = (await empty.textContent()).trim();
+      expect(textEs.length).toBeGreaterThan(0);
 
       const langSwitcher = page.locator('#langSwitcher');
       if (await langSwitcher.isVisible()) {
@@ -153,8 +158,8 @@ test.describe('Tablón Dinámico (.board)', () => {
         if (await vaOption.isVisible()) {
           await vaOption.click();
           await page.waitForTimeout(300);
-          // La nota sigue visible tras el re-render por idioma.
-          await expect(page.locator('#notesBoard .board__note-content').first()).toBeVisible();
+          // El empty-state sigue visible tras el re-render por idioma.
+          await expect(page.locator('#notesBoard .board__empty')).toBeVisible();
         }
       }
     });
@@ -230,16 +235,16 @@ test.describe('Tablón Dinámico (.board)', () => {
       expect(await cards.count()).toBeGreaterThanOrEqual(6);
     });
 
-    test('#notesBoard y #sportsBoard son independientes (comparten board.js)', async ({ page }) => {
-      // Cada tablón lee su propia fuente: Deportes mantiene sus 6 cards y Eventos
-      // sus notas; uno no afecta al otro aunque compartan board.js.
+    test('#notesBoard de eventos.html está vacío y no afecta a #sportsBoard', async ({ page }) => {
+      // El tablón de Eventos vacío no debe romper el de Deportes (páginas distintas,
+      // pero comparten board.js): Deportes mantiene sus 6 cards.
       await page.goto('/deportes.html');
       await page.waitForSelector('#sportsBoard .board__card');
       expect(await page.locator('#sportsBoard .board__card').count()).toBeGreaterThanOrEqual(6);
 
       await page.goto('/eventos.html');
-      await page.waitForSelector('#notesBoard article:not(.board__empty)');
-      expect(await page.locator('#notesBoard article:not(.board__empty)').count()).toBeGreaterThan(0);
+      await page.waitForSelector('#notesBoard .board__empty');
+      expect(await page.locator('#notesBoard article:not(.board__empty)').count()).toBe(0);
     });
   });
 });
