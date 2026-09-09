@@ -185,3 +185,67 @@
     margin-bottom: 1.5rem;
   }
 }
+
+// =============================================================================
+// PRÓXIMA OFRENDA (v4.19.0)
+// Sustituye al visor de vídeo: foto de la Fallera Mayor del ejercicio con el
+// rótulo "Próxima Ofrenda" superpuesto en la parte superior. Sin JS.
+// =============================================================================
+
+.ofrenda__proxima {
+  position: relative;
+  margin: 0 auto;
+  max-width: 48rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 2px solid v.$primary-color;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.25);
+
+  picture {
+    display: block;
+  }
+
+  &-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: top center;
+    // Sin accessibility.js (ofrenda.html) la imagen lazy quedaría al 10 % de
+    // opacidad por el skeleton de _image-optimization.scss (igual que .ofrenda__imagen)
+    opacity: 1 !important;
+    filter: none;
+  }
+
+  // Velo degradado superior para que el rótulo se lea sobre cualquier foto
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.18) 32%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &-texto {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 2;
+    margin: 0;
+    padding: 2.4rem 1.6rem 0;
+    text-align: center;
+    font-family: v.$font-family;
+    font-weight: 800;
+    font-size: clamp(3.2rem, 7vw, 5.6rem);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: v.$blanco;
+    text-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.7), 0 0 2.4rem rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+  }
+}
+
+body.modo-oscuro .ofrenda__proxima {
+  box-shadow: 0 0.5rem 1.5rem rgba(255, 111, 97, 0.2);
+}

@@ -92,7 +92,7 @@
 
   <!-- Swiper CSS -->
 <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=dc15b5ce0c3f">
+  <link rel="stylesheet" href="css/main.css?v=3ec922135c03">
 
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
@@ -192,62 +192,16 @@
         </div>
       </div>
 
-      <!-- Visor de vídeo -->
-      <div class="video-dron__frame">
-        <div class="video-dron__video-wrapper">
-          <video id="videoOfrenda" class="video-dron__video"
-            poster="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
-            aria-label="Vídeo de la Ofrenda Floral 2025-26 de la Falla Suïssa"
-            data-i18n-aria-label="ofrenda.videoAria">
-            <source src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
-            <span data-i18n="ofrenda.fallback">Tu navegador no soporta la reproducción de vídeo.</span>
-          </video>
-          <button class="video-dron__poster-overlay" id="videoOfrendaPosterPlay"
-            aria-label="Reproducir vídeo"
-            data-i18n-aria-label="ofrenda.playAria">
-            <svg class="video-dron__play-icon" viewBox="0 0 70 70" aria-hidden="true">
-              <circle cx="35" cy="35" r="34" fill="rgba(4,18,35,0.76)" stroke="rgba(255,255,255,0.22)"/>
-              <polygon points="28,20 28,50 52,35" fill="#fff"/>
-            </svg>
-          </button>
-        </div>
-        <!-- Barra de progreso -->
-        <div class="video-dron__progress-container">
-          <input type="range" class="video-dron__progress" id="videoOfrendaProgress"
-            min="0" max="100" value="0" step="0.1"
-            aria-label="Progreso del vídeo"
-            data-i18n-aria-label="ofrenda.progressAria">
-        </div>
-        <div class="video-dron__controls" role="group" aria-label="Controles de vídeo">
-          <button class="video-dron__btn" id="videoOfrendaPlay"
-            aria-label="Reproducir vídeo" data-i18n-aria-label="ofrenda.playAria">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="3,1 3,15 14,8"/></svg>
-            <span data-i18n="ofrenda.play">Reproducir</span>
-          </button>
-          <button class="video-dron__btn" id="videoOfrendaRestart"
-            aria-label="Reiniciar vídeo desde el principio" data-i18n-aria-label="ofrenda.restartAria">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7h-2a5 5 0 1 1-5-5V0L3 4l5 4V5a3 3 0 0 1 0 6"/></svg>
-            <span data-i18n="ofrenda.restart">Reiniciar</span>
-          </button>
-          <button class="video-dron__btn" id="videoOfrendaFullscreenBtn"
-            aria-label="Ver vídeo en pantalla completa" data-i18n-aria-label="ofrenda.fullscreenAria">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 1h5V0H0v6h1V1zm14 0h-5V0h6v6h-1V1zM1 15h5v1H0v-6h1v5zm14 0h-5v1h6v-6h-1v5z"/></svg>
-            <span data-i18n="ofrenda.fullscreen">Ampliar</span>
-          </button>
-          <button class="video-dron__btn" id="videoOfrendaMute"
-            aria-label="Silenciar vídeo" data-i18n-aria-label="ofrenda.muteAria">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z"/><path d="M11 5.5c.7.7.7 2.3 0 3M12.8 3.5c1.4 1.4 1.4 4.6 0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span data-i18n="ofrenda.mute">Silenciar</span>
-          </button>
-          <div class="video-dron__volume-wrapper">
-            <input type="range" class="video-dron__volume" id="videoOfrendaVolume"
-              min="0" max="100" value="100" step="1"
-              aria-label="Volumen del vídeo"
-              data-i18n-aria-label="ofrenda.volumeAria">
-          </div>
-        </div>
-        <p class="video-dron__status" id="videoOfrendaStatus" hidden role="status" aria-live="polite" data-i18n="ofrenda.loadError">No se ha podido cargar el vídeo. Vuelve a intentarlo.</p>
-      </div>
+      <!-- Próxima Ofrenda (v4.19.0): foto de la Fallera Mayor con el rótulo superpuesto. Sustituye al visor de vídeo
+           (.video-dron__frame + #videoOfrendaFullscreen); el vídeo de 2026 se reproduce en Historia/Archivos/Ofrendas -->
+      <figure class="ofrenda__proxima">
+        <picture>
+          <source srcset="img/FalleraMayor-2026-27.avif" type="image/avif">
+          <source srcset="img/FalleraMayor-2026-27.webp" type="image/webp">
+          <img class="ofrenda__proxima-imagen" src="img/FalleraMayor-2026-27.jpg" width="1066" height="1600" alt="Lucía Gutiérrez Martín, Fallera Mayor de la Falla Suïssa 2026-2027" data-i18n-alt="falla.nosotros.alt.falleraMayor" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="ofrenda__proxima-texto" data-i18n="ofrenda.proxima">Próxima Ofrenda</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -264,55 +218,6 @@
         <p class="colaboraciones-lightbox__caption"></p>
       </div>
     </div>
-  </div>
-
-  <!-- Overlay Fullscreen Vídeo Ofrenda -->
-  <div class="video-dron__fullscreen" id="videoOfrendaFullscreen"
-    role="dialog" aria-modal="true" aria-hidden="true"
-    aria-label="Vídeo en pantalla completa"
-    data-i18n-aria-label="ofrenda.fullscreenAria">
-    <button class="video-dron__fullscreen-close" id="videoOfrendaFsClose"
-      aria-label="Cerrar pantalla completa" data-i18n-aria-label="ofrenda.closeAria">&times;</button>
-    <div class="video-dron__fullscreen-wrapper">
-      <video id="videoOfrendaFs" class="video-dron__fullscreen-video"
-        poster="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" preload="none" playsinline
-        aria-label="Vídeo de la Ofrenda Floral 2025-26 de la Falla Suïssa"
-        data-i18n-aria-label="ofrenda.videoAria">
-        <source src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
-        <span data-i18n="ofrenda.fallback">Tu navegador no soporta la reproducción de vídeo.</span>
-      </video>
-    </div>
-    <!-- Barra de progreso fullscreen -->
-    <div class="video-dron__progress-container video-dron__progress-container--fs">
-      <input type="range" class="video-dron__progress" id="videoOfrendaFsProgress"
-        min="0" max="100" value="0" step="0.1"
-        aria-label="Progreso del vídeo"
-        data-i18n-aria-label="ofrenda.progressAria">
-    </div>
-    <div class="video-dron__fullscreen-controls" role="group" aria-label="Controles de vídeo">
-      <button class="video-dron__btn" id="videoOfrendaFsPlay"
-        aria-label="Reproducir vídeo" data-i18n-aria-label="ofrenda.playAria">
-        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="3,1 3,15 14,8"/></svg>
-        <span data-i18n="ofrenda.play">Reproducir</span>
-      </button>
-      <button class="video-dron__btn" id="videoOfrendaFsRestart"
-        aria-label="Reiniciar vídeo desde el principio" data-i18n-aria-label="ofrenda.restartAria">
-        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7h-2a5 5 0 1 1-5-5V0L3 4l5 4V5a3 3 0 0 1 0 6"/></svg>
-        <span data-i18n="ofrenda.restart">Reiniciar</span>
-      </button>
-      <button class="video-dron__btn" id="videoOfrendaFsMute"
-        aria-label="Silenciar vídeo" data-i18n-aria-label="ofrenda.muteAria">
-        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1L4 5H1v6h3l4 4V1z"/><path d="M11 5.5c.7.7.7 2.3 0 3M12.8 3.5c1.4 1.4 1.4 4.6 0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span data-i18n="ofrenda.mute">Silenciar</span>
-      </button>
-      <div class="video-dron__volume-wrapper">
-        <input type="range" class="video-dron__volume" id="videoOfrendaFsVolume"
-          min="0" max="100" value="100" step="1"
-          aria-label="Volumen del vídeo"
-          data-i18n-aria-label="ofrenda.volumeAria">
-      </div>
-    </div>
-    <p class="video-dron__status video-dron__status--fs" id="videoOfrendaFsStatus" hidden role="status" aria-live="polite" data-i18n="ofrenda.loadError">No se ha podido cargar el vídeo. Vuelve a intentarlo.</p>
   </div>
 
   <!-- Frieze Inferior con modificador bordered -->
@@ -363,13 +268,12 @@
     </nav>
   </footer>
 
-  <script src="js/ofrenda-video.js?v=dc15b5ce0c3f" defer></script>
-  <script src="js/colaboraciones-lightbox.js?v=dc15b5ce0c3f" defer></script>
-  <script src="js/lang.js?v=dc15b5ce0c3f"></script>
-  <script src="js/dark.js?v=dc15b5ce0c3f"></script>
-  <script src="js/nav-menu.js?v=dc15b5ce0c3f"></script>
-  <script src="js/scroll-reveal.js?v=dc15b5ce0c3f" defer></script>
+  <script src="js/colaboraciones-lightbox.js?v=3ec922135c03" defer></script>
+  <script src="js/lang.js?v=3ec922135c03"></script>
+  <script src="js/dark.js?v=3ec922135c03"></script>
+  <script src="js/nav-menu.js?v=3ec922135c03"></script>
+  <script src="js/scroll-reveal.js?v=3ec922135c03" defer></script>
 
-  <script src="js/cookie-banner.js?v=dc15b5ce0c3f" defer></script>
+  <script src="js/cookie-banner.js?v=3ec922135c03" defer></script>
 </body>
 </html>

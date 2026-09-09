@@ -129,7 +129,9 @@ window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/
     // Visor de vídeo (plantilla, v4.17.0): la sección .video-dron se retiró de la
     // home; para reactivar un visor con js/video-dron.js, ver docs/visor-video-plantilla.md
     // loadOnVisible('#videoDron', [root + 'js/video-dron.js'], '320px');
-    loadOnVisible('#videoOfrenda', [root + 'js/ofrenda-video.js'], '320px');
+    // Visor de vídeo de Ofrenda (v4.19.0): retirado de la home (sustituido por la figura
+    // "Próxima Ofrenda"); js/ofrenda-video.js se conserva como plantilla. Descomentar al reactivarlo.
+    // loadOnVisible('#videoOfrenda', [root + 'js/ofrenda-video.js'], '320px');
   }
 
   if (document.readyState === 'loading') {

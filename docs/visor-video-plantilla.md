@@ -7,12 +7,12 @@
 | Pieza | Ruta | Estado |
 | --- | --- | --- |
 | Lógica del reproductor | `src/js/video-dron.js` | Intacta. Busca los ids `videoDron*`; si no existen hace `return` sin error. |
-| Estilos (`.video-dron__*`) | `src/scss/components/_video-dron.scss` (+ modo oscuro en `_modo-oscuro.scss`) | Intactos. **Los usa el visor de Ofrenda** (`ofrenda-video.js` reutiliza las mismas clases), así que siguen compilándose. |
+| Estilos (`.video-dron__*`) | `src/scss/components/_video-dron.scss` (+ modo oscuro en `_modo-oscuro.scss`) | Intactos y compilados. Desde v4.19.0 (retirada del visor de Ofrenda) ninguna página los usa; se conservan como parte de la plantilla. |
 | Traducciones | `src/data/translations.json` → `falla.videoDron.{play,restart,fullscreen,mute,playAria,restartAria,fullscreenAria,muteAria,closeAria,videoAria,progressAria,volumeAria}` (ES/VA) | Intactas, reutilizables tal cual. |
 | Vídeo | `src/img/dron/dron-001-2026.mp4` | Sigue en uso: botón de descarga del panel *Historia/Archivos/Monumentos 2025-26*. |
 | Carga diferida en la home | `src/js/home-deferred.js` | La línea `loadOnVisible('#videoDron', …)` queda **comentada**; descoméntala si vuelves a poner el visor en `index.html`. |
 
-El visor de **Ofrenda** (`ofrenda.html` + sección en `index.html`, `src/js/ofrenda-video.js`) es una copia viva de este mismo patrón con ids `videoOfrenda*`: sirve como segunda referencia funcionando en producción.
+El visor de **Ofrenda** (`src/js/ofrenda-video.js`, ids `videoOfrenda*`, claves `ofrenda.{play,pause,restart,fullscreen,mute,unmute,…}`) era una copia de este mismo patrón; se retiró de `ofrenda.html` e `index.html` en v4.19.0 (sustituido por la figura "Próxima Ofrenda") y su JS se conserva como segunda plantilla. El vídeo de la Ofrenda 2026 se reproduce ahora con `<video controls>` nativo en *Historia/Archivos/Ofrendas*.
 
 ## Cómo montar un visor nuevo
 
@@ -145,4 +145,4 @@ Decisión de contenido: el vídeo del dron era del ejercicio 2025-26 y ya se ofr
 
 ---
 
-_Última actualización: v4.18.0 (9 de septiembre de 2026)._
+_Última actualización: v4.19.0 (9 de septiembre de 2026)._
