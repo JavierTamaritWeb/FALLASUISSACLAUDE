@@ -45,6 +45,17 @@ for (const pagePath of ['/index.html', '/ofrenda.html']) {
     expect(geo.txtTop + geo.txtH).toBeLessThanOrEqual(geo.imgTop + geo.imgH);
     expect(geo.txtLeft).toBeGreaterThanOrEqual(0);
     expect(geo.txtLeft + geo.txtW).toBeLessThanOrEqual(geo.figW + 1);
+    // Rótulo en color primario, centrado verticalmente sobre la foto sombreada (v4.19.1)
+    const estilo = await texto.evaluate((el) => {
+      const cs = getComputedStyle(el);
+      return { color: cs.color, alignItems: cs.alignItems, inset: cs.bottom };
+    });
+    expect(estilo.color).toBe('rgb(255, 111, 97)');
+    expect(estilo.alignItems).toBe('center');
+    expect(estilo.inset).toBe('0px');
+    const velo = await figura.evaluate((el) => getComputedStyle(el, '::after').backgroundImage);
+    expect(velo).toContain('linear-gradient');
+    expect(velo).toContain('0.72');
   });
 
   test(`/va${pagePath} pre-renderiza el rótulo en valenciano`, async ({ page }) => {

@@ -434,4 +434,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 9 de septiembre de 2026 - v4.19.0
+Última actualización: 9 de septiembre de 2026 - v4.19.1
