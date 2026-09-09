@@ -479,6 +479,14 @@
           "descargarVideo": "Descargar vídeo del dron",
           "descargarVideoAria": "Descargar el vídeo aéreo del monumento 2025-26 (MP4, 15 MB)"
         },
+        "ofrendas": {
+          "titulo": "Ofrendas",
+          "edicion2026": "Ofrenda 2026",
+          "pies": {
+            "video2026": "Ofrenda a la Mare de Déu dels Desamparats, marzo de 2026"
+          },
+          "videoAria": "Vídeo de la Ofrenda de la Falla Suïssa, marzo de 2026"
+        },
         "representantes": {
           "titulo": "Representantes",
           "edicion202627": "Representantes 2026-27",
@@ -1025,6 +1033,14 @@
           },
           "descargarVideo": "Descarregar vídeo del dron",
           "descargarVideoAria": "Descarregar el vídeo aeri del monument 2025-26 (MP4, 15 MB)"
+        },
+        "ofrendas": {
+          "titulo": "Ofrenes",
+          "edicion2026": "Ofrena 2026",
+          "pies": {
+            "video2026": "Ofrena a la Mare de Déu dels Desamparats, març de 2026"
+          },
+          "videoAria": "Vídeo de l'Ofrena de la Falla Suïssa, març de 2026"
         },
         "representantes": {
           "titulo": "Representants",

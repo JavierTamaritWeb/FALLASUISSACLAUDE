@@ -936,6 +936,32 @@
                 </div>
               </div>
 
+              <!-- Ofrendas: vídeo de la Ofrenda por ejercicio (vídeo nativo del navegador, sin visor) -->
+              <div class="historia__archivos-seccion">
+                <h5 class="historia__archivos-subtitulo" data-i18n="historia.archivos.ofrendas.titulo">Ofrendas</h5>
+
+                <div class="accordion accordion--representantes accordion--ofrendas">
+                  <section class="accordion__section">
+                    <button type="button" class="accordion__titular" aria-expanded="false" aria-controls="ofrenda-2026-lafalla">
+                      <h6 class="accordion__header" data-i18n="historia.archivos.ofrendas.edicion2026">Ofrenda 2026</h6>
+                      <span class="accordion__icon" aria-hidden="true">▼</span>
+                    </button>
+                    <div id="ofrenda-2026-lafalla" class="accordion__content" role="region" aria-label="Ofrenda 2026" data-i18n-aria-label="historia.archivos.ofrendas.edicion2026">
+                      <div class="accordion__content-inner">
+                        <figure class="ofrendas-video">
+                          <!-- Sin id ni clases .video-dron__*: ningún script (home-deferred, ofrenda-video) debe tocarlo. preload="none" por los 30 MB del MP4 -->
+                          <video class="ofrendas-video__video" controls preload="none" playsinline width="1280" height="720" poster="img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" aria-label="Vídeo de la Ofrenda de la Falla Suïssa, marzo de 2026" data-i18n-aria-label="historia.archivos.ofrendas.videoAria">
+                            <source src="img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
+                            <p data-i18n="ofrenda.fallback">Tu navegador no soporta la reproducción de vídeo.</p>
+                          </video>
+                          <figcaption class="ofrendas-video__pie representantes-grid__cargo" data-i18n="historia.archivos.ofrendas.pies.video2026">Ofrenda a la Mare de Déu dels Desamparats, marzo de 2026</figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
           </div>
         </div>
 

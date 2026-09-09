@@ -189,7 +189,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="../css/main.css?v=0fefcdc63bff">
+  <link rel="stylesheet" href="../css/main.css?v=dc15b5ce0c3f">
 
   <!-- Preload LCP Images -->
   <link rel="preload" as="image" href="../img/Escudo_falla.avif" type="image/avif" fetchpriority="high">
@@ -1080,6 +1080,32 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                 </div>
               </div>
 
+              <!-- Ofrendas: vídeo de la Ofrenda por ejercicio (vídeo nativo del navegador, sin visor) -->
+              <div class="historia__archivos-seccion">
+                <h5 class="historia__archivos-subtitulo" data-i18n="historia.archivos.ofrendas.titulo">Ofrenes</h5>
+
+                <div class="accordion accordion--representantes accordion--ofrendas">
+                  <section class="accordion__section">
+                    <button type="button" class="accordion__titular" aria-expanded="false" aria-controls="ofrenda-2026-index">
+                      <h6 class="accordion__header" data-i18n="historia.archivos.ofrendas.edicion2026">Ofrena 2026</h6>
+                      <span class="accordion__icon" aria-hidden="true">▼</span>
+                    </button>
+                    <div id="ofrenda-2026-index" class="accordion__content" role="region" data-i18n-aria-label="historia.archivos.ofrendas.edicion2026" aria-label="Ofrena 2026">
+                      <div class="accordion__content-inner">
+                        <figure class="ofrendas-video">
+                          <!-- Sin id ni clases .video-dron__*: ningún script (home-deferred, ofrenda-video) debe tocarlo. preload="none" por los 30 MB del MP4 -->
+                          <video class="ofrendas-video__video" controls preload="none" playsinline width="1280" height="720" poster="../img/ofrenda/ofenda-2026/ofrenda-2026-001.jpeg" data-i18n-aria-label="historia.archivos.ofrendas.videoAria" aria-label="Vídeo de l'Ofrena de la Falla Suïssa, març de 2026">
+                            <source src="../img/ofrenda/ofenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
+                            <p data-i18n="ofrenda.fallback">El teu navegador no suporta la reproducció de vídeo.</p>
+                          </video>
+                          <figcaption class="ofrendas-video__pie representantes-grid__cargo" data-i18n="historia.archivos.ofrendas.pies.video2026">Ofrena a la Mare de Déu dels Desamparats, març de 2026</figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
           </div>
         </div>
 
@@ -1630,17 +1656,17 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
   <!-- Scripts JavaScript -->
    
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="../js/swiper.js?v=0fefcdc63bff"></script>
-  <script src="../js/meteo.js?v=0fefcdc63bff" defer></script>
-  <script src="../js/dark.js?v=0fefcdc63bff"></script>
-  <script src="../js/lang.js?v=0fefcdc63bff"></script>
-  <script src="../js/nav-menu.js?v=0fefcdc63bff"></script>
-  <script src="../js/scroll-reveal.js?v=0fefcdc63bff" defer></script>
-  <script src="../js/board.js?v=0fefcdc63bff" defer></script>
-  <script src="../js/countdown.js?v=0fefcdc63bff" defer></script>
-  <script src="../js/colaboraciones-lightbox.js?v=0fefcdc63bff" defer></script>
-  <script src="../js/accessibility.js?v=0fefcdc63bff" defer></script>
-  <script src="../js/home-deferred.js?v=0fefcdc63bff"></script>
+  <script src="../js/swiper.js?v=dc15b5ce0c3f"></script>
+  <script src="../js/meteo.js?v=dc15b5ce0c3f" defer></script>
+  <script src="../js/dark.js?v=dc15b5ce0c3f"></script>
+  <script src="../js/lang.js?v=dc15b5ce0c3f"></script>
+  <script src="../js/nav-menu.js?v=dc15b5ce0c3f"></script>
+  <script src="../js/scroll-reveal.js?v=dc15b5ce0c3f" defer></script>
+  <script src="../js/board.js?v=dc15b5ce0c3f" defer></script>
+  <script src="../js/countdown.js?v=dc15b5ce0c3f" defer></script>
+  <script src="../js/colaboraciones-lightbox.js?v=dc15b5ce0c3f" defer></script>
+  <script src="../js/accessibility.js?v=dc15b5ce0c3f" defer></script>
+  <script src="../js/home-deferred.js?v=dc15b5ce0c3f"></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -1663,8 +1689,8 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
       });
     }
   </script>
-  <script src="../js/envia.js?v=0fefcdc63bff" defer></script>
-  <script src="../js/banner-subvencion.js?v=0fefcdc63bff" defer></script>
-  <script src="../js/cookie-banner.js?v=0fefcdc63bff" defer></script>
+  <script src="../js/envia.js?v=dc15b5ce0c3f" defer></script>
+  <script src="../js/banner-subvencion.js?v=dc15b5ce0c3f" defer></script>
+  <script src="../js/cookie-banner.js?v=dc15b5ce0c3f" defer></script>
 </body>
 </html>

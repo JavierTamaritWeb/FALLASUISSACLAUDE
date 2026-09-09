@@ -290,3 +290,52 @@ body.modo-oscuro .accordion--representantes {
     margin-top: 2.4rem;
   }
 }
+
+// ---------------------------------------------------------------
+// Ofrendas (Historia/Archivos, v4.18.0): panel por ejercicio con el vídeo
+// de la Ofrenda reproducido por el <video controls> nativo del navegador
+// (sin visor .video-dron__* ni JS). Reutiliza el acordeón de Representantes;
+// aquí solo se estiliza la figura del vídeo con el mismo borde coral y
+// sombra que las miniaturas de Archivos.
+// ---------------------------------------------------------------
+.accordion--ofrendas {
+  .ofrendas-video {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem auto 0;
+    padding: 1rem;
+    max-width: 64rem;
+
+    @media (min-width: 768px) {
+      padding: 2rem;
+    }
+
+    &__video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      background-color: v.$negro;
+      border-radius: v.$border-radius;
+      border: 2px solid v.$primary-color;
+      box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.35);
+    }
+
+    &__pie {
+      text-align: center;
+      max-width: 64rem;
+    }
+  }
+}
+
+body.modo-oscuro .accordion--ofrendas {
+  .ofrendas-video__video {
+    box-shadow: 0 0.3rem 0.8rem rgba(255, 111, 97, 0.18);
+  }
+
+  .ofrendas-video__pie {
+    color: v.$gris-muy-claro;
+  }
+}
