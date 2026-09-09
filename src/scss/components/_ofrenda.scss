@@ -101,83 +101,11 @@
 }
 
 // =============================================================================
-// GALERIA DE IMAGENES
+// GALERIA DE IMAGENES — retirada en v4.21.0
+// Las 3 fotos de la Ofrenda 2026 pasaron a Historia/Archivos/Ofrendas como
+// miniaturas ampliables (`.ofrendas-grid` en _representantes.scss, lightbox
+// compartido de Colaboraciones). Aquí ya no queda markup ni CSS de galería.
 // =============================================================================
-
-.ofrenda__galeria {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: stretch;
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto 3rem;
-  padding: 0 1rem;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    padding: 0;
-  }
-}
-
-.ofrenda__figura {
-  position: relative;
-  margin: 0;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  aspect-ratio: 3 / 4;
-  // Safari (v4.20.0): como la figura solo tiene hijos absolutos, en WebKit el
-  // item de grid con `align-items: stretch` se quedaba con alto 0 e ignoraba
-  // el aspect-ratio (la galería desaparecía). El pseudoelemento reserva el
-  // alto 3:4 por padding, que todos los motores respetan; en Chrome/Firefox
-  // coincide con el aspect-ratio y no cambia nada.
-  align-self: start;
-
-  &::before {
-    content: '';
-    display: block;
-    padding-top: 133.333%;
-  }
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.2);
-  }
-
-  .colaboraciones-mosaic__trigger {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0 !important;
-    margin: 0;
-    border: none;
-    background: none !important;
-    cursor: pointer;
-    display: block;
-    overflow: hidden;
-
-    // Ocultar el icono "+" de colaboraciones
-    &::after {
-      display: none !important;
-    }
-  }
-
-  // La imagen necesita position absolute respecto a .ofrenda__figura (no al button)
-  .ofrenda__imagen {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center;
-    display: block;
-    filter: none;
-    opacity: 1 !important;
-  }
-}
 
 // =============================================================================
 // RESPONSIVE

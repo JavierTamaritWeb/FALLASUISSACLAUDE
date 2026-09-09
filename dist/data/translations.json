@@ -484,6 +484,9 @@
           "titulo": "Ofrendas",
           "edicion2026": "Ofrenda 2026",
           "pies": {
+            "fm": "Fallera Mayor en la Ofrenda",
+            "fmm": "Fallera Mayor y acompañamiento",
+            "general": "Ofrenda Floral a la Mare de Déu",
             "video2026": "Ofrenda a la Mare de Déu dels Desamparats, marzo de 2026"
           },
           "videoAria": "Vídeo de la Ofrenda de la Falla Suïssa, marzo de 2026",
@@ -1042,6 +1045,9 @@
           "titulo": "Ofrenes",
           "edicion2026": "Ofrena 2026",
           "pies": {
+            "fm": "Fallera Major en l'Ofrena",
+            "fmm": "Fallera Major i acompanyament",
+            "general": "Ofrena Floral a la Mare de Déu",
             "video2026": "Ofrena a la Mare de Déu dels Desamparats, març de 2026"
           },
           "videoAria": "Vídeo de l'Ofrena de la Falla Suïssa, març de 2026",

@@ -63,9 +63,10 @@ for (const pagina of PAGINAS) {
         await expect(figura.locator('.ofrendas-video__pie'))
           .toHaveText('Ofrenda a la Mare de Déu dels Desamparats, marzo de 2026');
 
-        // Solo el vídeo: nada del visor .video-dron__*, ni Swiper, ni botones propios
+        // Vídeo nativo: nada del visor .video-dron__*, ni Swiper, ni botones propios
+        // (los únicos botones del panel son los triggers del lightbox de las miniaturas)
         await expect(panel.locator('[class*="video-dron"]')).toHaveCount(0);
-        await expect(panel.locator('.swiper, button, [id^="videoOfrenda"]')).toHaveCount(0);
+        await expect(panel.locator('.swiper, button:not(.colaboraciones-mosaic__trigger), [id^="videoOfrenda"]')).toHaveCount(0);
 
         // El MP4 se sirve como video/mp4 y no se ha descargado (preload="none")
         const src = await video.locator('source[type="video/mp4"]').getAttribute('src');
@@ -113,6 +114,58 @@ for (const pagina of PAGINAS) {
       });
     }
 
+    // v4.21.0: las 3 fotos de la Ofrenda 2026 (antes galería de la sección Ofrenda)
+    // son miniaturas ampliables con el lightbox compartido de Colaboraciones
+    test('3 miniaturas ampliables: badge "+", lightbox con pie y cierre con "×" y Escape', async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 800 });
+      await page.goto(`/${pagina}`);
+      const { panel } = await abrirPanel(page, pagina);
+
+      const grid = panel.locator('.ofrendas-grid');
+      await expect(grid).toBeVisible();
+      const triggers = grid.locator('button.colaboraciones-mosaic__trigger.ofrendas-grid__trigger');
+      await expect(triggers).toHaveCount(3);
+      // 3 columnas en desktop: las tres miniaturas comparten fila
+      const tops = await triggers.evaluateAll((els) => els.map((el) => Math.round(el.getBoundingClientRect().top)));
+      expect(new Set(tops).size).toBe(1);
+
+      for (let i = 0; i < 3; i += 1) {
+        const img = triggers.nth(i).locator('img.representantes-grid__imagen');
+        await img.scrollIntoViewIfNeeded();
+        await expect.poll(() => img.evaluate((el) => el.complete && el.naturalWidth > 0)).toBe(true);
+        expect(await img.evaluate((el) => getComputedStyle(el).objectFit)).toBe('cover');
+        expect(await img.evaluate((el) => el.currentSrc)).toMatch(/ofrenda-2026-(fm|fmm|001)\.(avif|webp|jpeg)$/);
+      }
+      await expect(grid.locator('.representantes-grid__cargo')).toHaveText([
+        'Fallera Mayor en la Ofrenda', 'Fallera Mayor y acompañamiento', 'Ofrenda Floral a la Mare de Déu'
+      ]);
+
+      // Badge "+" dibujado con dos barras (background-image), no con el glifo
+      const badge = await triggers.first().evaluate((el) => {
+        const cs = getComputedStyle(el, '::after');
+        return { content: cs.content.replace(/["']/g, ''), size: cs.backgroundSize };
+      });
+      expect(badge.content).toBe('');
+      expect(badge.size.split(',').length).toBe(2);
+
+      // Lightbox compartido: abre con la miniatura, pie = alt, cierra con "×" y con Escape
+      const lightbox = page.locator('#colaboracionesLightbox');
+      await expect(lightbox).toHaveCount(1);
+      await triggers.nth(2).click();
+      await expect(lightbox).toHaveClass(/open/);
+      await expect(lightbox.locator('.colaboraciones-lightbox__image')).toHaveAttribute('src', /ofrenda-2026-001\.(avif|webp|jpeg)$/);
+      await expect(lightbox.locator('.colaboraciones-lightbox__caption')).toHaveText('Ofrenda Floral a la Virgen de los Desamparados 2025-26');
+      await lightbox.locator('.colaboraciones-lightbox__close').click();
+      await expect(lightbox).not.toHaveClass(/open/);
+
+      await triggers.first().click();
+      await expect(lightbox).toHaveClass(/open/);
+      await expect(lightbox.locator('.colaboraciones-lightbox__image')).toHaveAttribute('src', /ofrenda-2026-fm\.(avif|webp|jpeg)$/);
+      await page.keyboard.press('Escape');
+      await expect(lightbox).not.toHaveClass(/open/);
+      await expect(triggers.first()).toBeFocused();
+    });
+
     test('variante /va/: titular, aria-label del vídeo, pie y botón de descarga pre-renderizados en valenciano', async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 800 });
       await page.goto(`/va/${pagina}`);
@@ -131,6 +184,10 @@ for (const pagina of PAGINAS) {
       await expect(enlace).toHaveText("Descarregar vídeo de l'Ofrena");
       await expect(enlace).toHaveAttribute('aria-label', "Descarregar el vídeo de l'Ofrena 2026 (MP4, 30 MB)");
       expect((await enlace.getAttribute('href')).startsWith('../img/')).toBe(true);
+      // Miniaturas: alt (pie del lightbox) y pie pre-renderizados en valenciano
+      await expect(panel.locator('.ofrendas-grid img.representantes-grid__imagen').first())
+        .toHaveAttribute('alt', "Fallera Major de la Falla Suïssa en l'Ofrena Floral 2025-26");
+      await expect(panel.locator('.ofrendas-grid .representantes-grid__cargo').first()).toHaveText("Fallera Major en l'Ofrena");
     });
 
     test('toggle ES→VA en runtime traduce titular, pie y botón de descarga', async ({ page }) => {
