@@ -58,7 +58,7 @@
 
 ## 📝 Notas de Mantenimiento
 
-- La versión funcional documentada del proyecto es `v4.15.3` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.16.0` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta
@@ -71,7 +71,7 @@ Actualiza estas guías cuando cambies:
 - archivos SEO de raíz (`robots*.txt`, `sitemap*.xml`, verificaciones `google*.html`)
 - JSON-LD inline, metadatos OG/Twitter o referencias a HOPE-INCLIVA
 - scrollbars, modo oscuro, gradientes, reveal on scroll o compatibilidad Safari/WebKit/Firefox
-- geometría o set de imágenes del Swiper del monumento, especialmente si tocas `swiper-slide--monumento-real`
+- geometría o set de imágenes del Swiper del monumento (rotación anual: `docs/monumento-rotacion-anual.md`)
 - navegación fija, overlay móvil, z-index o banner de subvención
 - sistema de traducciones (`src/data/translations.json`, claves `data-i18n`, renderizado por párrafos en `src/js/lang.js`, pre-render VA en `gulpfile.js → prerenderTranslations`)
 - coordinación entre i18n y módulos dinámicos como `src/js/meteo.js`
@@ -83,4 +83,4 @@ Actualiza estas guías cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 9 de septiembre de 2026 - v4.15.3*
+*Última actualización: 9 de septiembre de 2026 - v4.16.0*

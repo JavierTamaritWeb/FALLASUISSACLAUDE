@@ -27,16 +27,10 @@ El visor del monumento vive hoy en `index.html` y `lafalla.html` con la misma es
 <div class="swiper swiper--autoheight contenedor" data-testid="monumento-swiper">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <img src="img/falla2026.avif" alt="Monumento fallero principal de la Falla Suïssa 2026">
+      <img src="img/falla2027.avif" width="1068" height="1473" alt="Boceto del monumento fallero principal de la Falla Suïssa 2026-27" loading="eager" fetchpriority="high">
     </div>
     <div class="swiper-slide">
-      <img src="img/falla2026-Infantil.avif" alt="Monumento fallero infantil de la Falla Suïssa 2026">
-    </div>
-    <div class="swiper-slide swiper-slide--monumento-real">
-      <img src="img/falla2026-real.avif" alt="Vista real del monumento fallero principal de la Falla Suïssa 2026">
-    </div>
-    <div class="swiper-slide">
-      <img src="img/falla2026-infantil-real.avif" alt="Vista real del monumento fallero infantil de la Falla Suïssa 2026">
+      <img src="img/falla2027-Infantil.avif" width="1049" height="1499" alt="Boceto del monumento fallero infantil de la Falla Suïssa 2026-27" loading="lazy">
     </div>
   </div>
 
@@ -47,25 +41,21 @@ El visor del monumento vive hoy en `index.html` y `lafalla.html` con la misma es
 </div>
 ```
 
-## Estado actual del slider (marzo 2026)
+## Estado actual del slider (ejercicio 2026-27, v4.16.0)
 
-El visor del monumento trabaja con 4 slides base no duplicadas:
+El visor del monumento trabaja con 2 slides base no duplicadas, los bocetos del ejercicio 2026-27:
 
-- `src/img/falla2026.avif`
-- `src/img/falla2026-Infantil.avif`
-- `src/img/falla2026-real.avif`
-- `src/img/falla2026-infantil-real.avif`
+- `src/img/falla2027.jpg` (el build genera `dist/img/falla2027.{avif,webp}`)
+- `src/img/falla2027-Infantil.jpg` (→ `falla2027-Infantil.{avif,webp}`)
 
-Convención actual de carga:
+Convención de nombres: `falla<año de plantà>` (`falla2026` = ejercicio 2025-26, `falla2027` = 2026-27). La fuente se guarda como JPEG (~440 KB) y no como el PNG original (~3 MB).
 
-- las 2 primeras imágenes usan carga prioritaria o eager
-- las 2 fotos reales usan `loading="lazy"`
+Convención de carga:
 
-La tercera slide, la de `src/img/falla2026-real.avif`, lleva una clase extra:
+- la primera imagen usa `loading="eager"` + `fetchpriority="high"` (y `<link rel="preload">` en `index.html`)
+- la segunda usa `loading="lazy"`
 
-- `swiper-slide--monumento-real`
-
-Esa clase no forma parte del contrato general del componente. Es un hook visual temporal que existe únicamente para la foto real principal de 2026.
+Las 4 imágenes del ejercicio 2025-26 (`falla2026*`) siguen en `src/img/` porque las usa el panel *Historia/Archivos/Monumentos → "Monumento 2025-26"* (ver `CLAUDE.md`, patrón *Monumentos*). Ya no existe ninguna clase por slide: el hook `swiper-slide--monumento-real` se retiró en v4.16.0 (ver nota histórica más abajo).
 
 ## Relación con `src/js/swiper.js`
 
@@ -119,9 +109,11 @@ Ese padding cumple dos funciones a la vez:
 
 Con 3rem como valor general, el botón previo podía llegar a invadir algunos píxeles del área útil de la imagen. Por eso el valor general estable quedó en 3.5rem.
 
-## Hook temporal de `falla2026-real.avif`
+## Nota histórica: hook temporal de `falla2026-real.avif` (retirado en v4.16.0)
 
-### Qué problema resuelve
+Este hook existió entre v4.6.2 y v4.15.3, mientras el visor mostraba la foto real principal de 2026. Al rotar el visor a los bocetos 2026-27 la slide desapareció y el hook se retiró completo (clase HTML + 4 reglas `:has(...)` de `_swiper.scss`). Se conserva la explicación por si una futura foto real vuelve a necesitar un ajuste parecido.
+
+### Qué problema resolvía
 
 La foto real principal `src/img/falla2026-real.avif` se veía más pequeña de lo deseado en pantallas superiores a 768px. El usuario pidió que se viera más grande en ambos visores, pero sin romper ninguna de estas garantías:
 
@@ -214,18 +206,17 @@ La suite `tests/monumento-swiper.e2e.spec.js` valida el visor sobre `index.html`
 
 Cobertura relevante:
 
-- el set exacto de 4 slides base
+- el set exacto de 2 slides base
 - `object-fit: contain` en la imagen activa
 - una sola slide visible en tablet y desktop
 - ausencia de overflow horizontal en desktop
 - ausencia de solape entre botones y la imagen activa
 - estabilidad de `autoHeight`
-- navegación hasta la tercera slide `falla2026-real.avif`
+- dos transiciones con `next`: a `falla2027-Infantil.avif` y, gracias a `loop: true`, de vuelta a `falla2027.avif`
 
 Detalle importante:
 
-- la suite ya no valida solo la slide inicial y la segunda
-- ahora también navega hasta la tercera slide para proteger específicamente el hook temporal
+- cada transición vuelve a validar layout, altura y ausencia de solape con los botones
 
 ## Interacción con `.reveal`
 
@@ -245,9 +236,8 @@ Checklist rápido:
 
 1. cambiar imágenes y `alt` en `index.html` y `lafalla.html`
 2. actualizar el set esperado de `tests/monumento-swiper.e2e.spec.js`
-3. revisar visualmente si la nueva foto real principal sigue necesitando el hook
-4. si no lo necesita, eliminar `swiper-slide--monumento-real` y las reglas `:has(...)`
-5. ejecutar build y tests antes de darlo por cerrado
+3. revisar visualmente en 375/768/1280 px que no haya recorte ni solape con botones (si una foto lo necesitara, valorar un hook por slide como el retirado en v4.16.0)
+4. regenerar los baselines visuales de `index`/`lafalla` y ejecutar build y tests antes de darlo por cerrado
 
 Guía detallada de esa rotación: `docs/monumento-rotacion-anual.md`
 

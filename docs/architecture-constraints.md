@@ -270,13 +270,13 @@ npm run build
 npx playwright test tests/modal-transition.e2e.spec.js tests/modal-dark-to-light.e2e.spec.js tests/modal-quieres-elements.e2e.spec.js
 ```
 
-## 8. Swiper del monumento: hook temporal de la foto real
+## 8. Swiper del monumento: hook temporal de la foto real (retirado en v4.16.0)
 
-Regla:
+Regla (histórica):
 
-- `swiper-slide--monumento-real` no es una convención general del componente
-- el selector `:has(.swiper-slide-active.swiper-slide--monumento-real)` es un ajuste temporal ligado a la foto real principal de 2026
-- no debe eliminarse ni reutilizarse sin revisar antes la proporción y el comportamiento de la imagen real activa
+- `swiper-slide--monumento-real` no era una convención general del componente
+- el selector `:has(.swiper-slide-active.swiper-slide--monumento-real)` fue un ajuste temporal ligado a la foto real principal de 2026
+- se retiró completo (HTML + SCSS) al rotar el visor a los 2 bocetos 2026-27; no lo reintroduzcas salvo que una nueva foto real lo justifique visualmente
 
 Por qué:
 
@@ -434,4 +434,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 9 de septiembre de 2026 - v4.15.3
+Última actualización: 9 de septiembre de 2026 - v4.16.0

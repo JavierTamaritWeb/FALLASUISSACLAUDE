@@ -5,7 +5,7 @@ Esta guía existe para el mantenimiento del visor del monumento cuando cambia el
 - cambiar solo los nombres de archivo y dejar lógica visual heredada que ya no aplica
 - borrar el hook temporal de 2026 sin comprobar antes si la nueva foto real necesita un ajuste similar
 
-Si solo necesitas entender el visor actual, consulta `docs/swiper-monumento.md`. Esta guía está centrada en la rotación anual y en la posible retirada del hook `swiper-slide--monumento-real`.
+Si solo necesitas entender el visor actual, consulta `docs/swiper-monumento.md`. Esta guía está centrada en la rotación anual. **Estado (v4.16.0)**: el visor muestra los 2 bocetos 2026-27 (`falla2027.avif`, `falla2027-Infantil.avif`) y el hook `swiper-slide--monumento-real` **ya no existe** — las secciones sobre el hook quedan como referencia por si una futura foto real vuelve a necesitar un ajuste propio. Las imágenes del ejercicio saliente no se borran: pasan al panel *Historia/Archivos/Monumentos* de ese ejercicio.
 
 ## Qué cambia normalmente cada año
 
@@ -33,14 +33,12 @@ No edites `dist/` a mano. Regénéralo con build.
 
 Antes de tocar nada, busca al menos estas cadenas en el repo:
 
-- `falla2026.avif`
-- `falla2026-Infantil.avif`
-- `falla2026-real.avif`
-- `falla2026-infantil-real.avif`
-- `swiper-slide--monumento-real`
-- `falla2026-real\\.avif`
+- `falla2027.avif`
+- `falla2027-Infantil.avif`
+- `falla2027-Infantil\\.avif` (regex del test E2E)
+- `monumento-swiper`
 
-La última es importante porque aparece en la validación del test E2E.
+Y para el panel de Archivos del ejercicio saliente: `falla2026` (HTML, `tests/historia-monumentos.e2e.spec.js`).
 
 ## Secuencia recomendada de cambio anual
 
@@ -176,4 +174,4 @@ Cuando cambie el juego de imágenes del monumento, asume por defecto que el hook
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.2
+Última actualización: 9 de septiembre de 2026 - v4.16.0
