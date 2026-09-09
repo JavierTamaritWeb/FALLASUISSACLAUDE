@@ -506,6 +506,7 @@ Smoke suite por defecto:
 - `tests/countdown.e2e.spec.js`
 - `tests/banner-subvencion.e2e.spec.js`
 - `tests/index-colaboraciones.e2e.spec.js`
+- `tests/historia-monumentos.e2e.spec.js` (v4.15.0: panel Monumento 2025-26, grid 2/4 columnas, lightbox compartido, botón de descarga del vídeo dron con `HEAD` → `video/mp4`, variante `/va/`, toggle ES→VA)
 - `tests/scss-guardrails.e2e.spec.js`
 
 Suite completa:
@@ -612,4 +613,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 9 de septiembre de 2026 - v4.14.2
+Última actualización: 9 de septiembre de 2026 - v4.15.0

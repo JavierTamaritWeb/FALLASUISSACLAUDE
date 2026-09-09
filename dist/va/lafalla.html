@@ -95,7 +95,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="../css/main.css?v=ab6f729c2f2e">
+  <link rel="stylesheet" href="../css/main.css?v=80a8d0ca6fc6">
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
   <link rel="canonical" href="https://fallasuissa.es/va/lafalla.html">
@@ -853,12 +853,110 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                 </div>
               </div>
 
+              <!-- Monumentos: miniaturas del monumento por ejercicio (lightbox reutilizado de Colaboraciones) + descarga del vídeo dron -->
+              <div class="historia__archivos-seccion">
+                <h5 class="historia__archivos-subtitulo" data-i18n="historia.archivos.monumentos.titulo">Monuments</h5>
+
+                <div class="accordion accordion--representantes accordion--monumentos">
+                  <section class="accordion__section">
+                    <button type="button" class="accordion__titular" aria-expanded="false" aria-controls="monumento-2025-26-lafalla">
+                      <h6 class="accordion__header" data-i18n="historia.archivos.monumentos.edicion202526">Monument 2025-26</h6>
+                      <span class="accordion__icon" aria-hidden="true">▼</span>
+                    </button>
+                    <div id="monumento-2025-26-lafalla" class="accordion__content" role="region" data-i18n-aria-label="historia.archivos.monumentos.edicion202526" aria-label="Monument 2025-26">
+                      <div class="accordion__content-inner">
+                        <ul class="representantes-grid monumentos-grid" role="list">
+                          <li class="representantes-grid__item">
+                            <figure class="representantes-grid__figura">
+                              <button class="colaboraciones-mosaic__trigger monumentos-grid__trigger" type="button">
+                                <picture>
+                                  <source srcset="../img/falla2026.avif" type="image/avif">
+                                  <source srcset="../img/falla2026.webp" type="image/webp">
+                                  <img class="representantes-grid__imagen" src="../img/falla2026.jpg" width="300" height="400" data-i18n-alt="historia.archivos.monumentos.alt.principal" loading="lazy" decoding="async" alt="Monument principal de la Falla Suïssa 2025-26 (esbós)">
+                                </picture>
+                                <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
+                              </button>
+                              <figcaption class="representantes-grid__caption">
+                                <p class="representantes-grid__cargo" data-i18n="historia.archivos.monumentos.pies.principal">Monument principal (esbós)</p>
+                              </figcaption>
+                            </figure>
+                          </li>
+                          <li class="representantes-grid__item">
+                            <figure class="representantes-grid__figura">
+                              <button class="colaboraciones-mosaic__trigger monumentos-grid__trigger" type="button">
+                                <picture>
+                                  <source srcset="../img/falla2026-Infantil.avif" type="image/avif">
+                                  <source srcset="../img/falla2026-Infantil.webp" type="image/webp">
+                                  <img class="representantes-grid__imagen" src="../img/falla2026-Infantil.jpg" width="300" height="400" data-i18n-alt="historia.archivos.monumentos.alt.infantil" loading="lazy" decoding="async" alt="Monument infantil de la Falla Suïssa 2025-26 (esbós)">
+                                </picture>
+                                <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
+                              </button>
+                              <figcaption class="representantes-grid__caption">
+                                <p class="representantes-grid__cargo" data-i18n="historia.archivos.monumentos.pies.infantil">Monument infantil (esbós)</p>
+                              </figcaption>
+                            </figure>
+                          </li>
+                          <li class="representantes-grid__item">
+                            <figure class="representantes-grid__figura">
+                              <button class="colaboraciones-mosaic__trigger monumentos-grid__trigger" type="button">
+                                <picture>
+                                  <source srcset="../img/falla2026-real.avif" type="image/avif">
+                                  <source srcset="../img/falla2026-real.webp" type="image/webp">
+                                  <img class="representantes-grid__imagen" src="../img/falla2026-real.jpeg" width="300" height="400" data-i18n-alt="historia.archivos.monumentos.alt.principalReal" loading="lazy" decoding="async" alt="Monument principal de la Falla Suïssa 2025-26 plantat">
+                                </picture>
+                                <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
+                              </button>
+                              <figcaption class="representantes-grid__caption">
+                                <p class="representantes-grid__cargo" data-i18n="historia.archivos.monumentos.pies.principalReal">Monument principal plantat</p>
+                              </figcaption>
+                            </figure>
+                          </li>
+                          <li class="representantes-grid__item">
+                            <figure class="representantes-grid__figura">
+                              <button class="colaboraciones-mosaic__trigger monumentos-grid__trigger" type="button">
+                                <picture>
+                                  <source srcset="../img/falla2026-infantil-real.avif" type="image/avif">
+                                  <source srcset="../img/falla2026-infantil-real.webp" type="image/webp">
+                                  <img class="representantes-grid__imagen" src="../img/falla2026-infantil-real.jpg" width="300" height="400" data-i18n-alt="historia.archivos.monumentos.alt.infantilReal" loading="lazy" decoding="async" alt="Monument infantil de la Falla Suïssa 2025-26 plantat">
+                                </picture>
+                                <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
+                              </button>
+                              <figcaption class="representantes-grid__caption">
+                                <p class="representantes-grid__cargo" data-i18n="historia.archivos.monumentos.pies.infantilReal">Monument infantil plantat</p>
+                              </figcaption>
+                            </figure>
+                          </li>
+                        </ul>
+                        <div class="monumentos-grid__descarga">
+                          <a class="boton" href="../img/dron/dron-001-2026.mp4" download="falla-suissa-monumento-2025-26-dron.mp4" data-i18n="historia.archivos.monumentos.descargarVideo" data-i18n-aria-label="historia.archivos.monumentos.descargarVideoAria" aria-label="Descarregar el vídeo aeri del monument 2025-26 (MP4, 15 MB)">Descarregar vídeo del dron</a>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
           </div>
         </div>
 
       </div>
       </div>
      
+    </div>
+
+    <!-- Lightbox compartido (Colaboraciones/Ofrenda/Monumentos): lo abre js/colaboraciones-lightbox.js -->
+    <div class="colaboraciones-lightbox" id="colaboracionesLightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="colaboracionesLightboxTitle">
+      <div class="colaboraciones-lightbox__dialog">
+        <h2 class="visually-hidden" id="colaboracionesLightboxTitle" data-i18n="colaboraciones.lightbox.titulo">Imatge ampliada de HOPE</h2>
+        <button class="colaboraciones-lightbox__close" type="button">
+          <span aria-hidden="true">&times;</span>
+          <span class="visually-hidden" data-i18n="colaboraciones.lightbox.cerrar">Tancar imatge ampliada</span>
+        </button>
+        <div class="colaboraciones-lightbox__frame">
+          <img class="colaboraciones-lightbox__image" src="" alt="">
+          <p class="colaboraciones-lightbox__caption"></p>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -952,12 +1050,12 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
   
   <!-- Scripts JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="../js/swiper.js?v=ab6f729c2f2e"></script>
-  <script src="../js/acc.js?v=ab6f729c2f2e"></script>
-  <script src="../js/dark.js?v=ab6f729c2f2e"></script>
-  <script src="../js/lang.js?v=ab6f729c2f2e"></script>
-  <script src="../js/nav-menu.js?v=ab6f729c2f2e"></script>
-  <script src="../js/scroll-reveal.js?v=ab6f729c2f2e" defer></script>
+  <script src="../js/swiper.js?v=80a8d0ca6fc6"></script>
+  <script src="../js/acc.js?v=80a8d0ca6fc6"></script>
+  <script src="../js/dark.js?v=80a8d0ca6fc6"></script>
+  <script src="../js/lang.js?v=80a8d0ca6fc6"></script>
+  <script src="../js/nav-menu.js?v=80a8d0ca6fc6"></script>
+  <script src="../js/scroll-reveal.js?v=80a8d0ca6fc6" defer></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -968,8 +1066,10 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
       });
     }
   </script>
-  <script src="../js/video-dron.js?v=ab6f729c2f2e"></script>
+  <script src="../js/video-dron.js?v=80a8d0ca6fc6"></script>
+  <script src="../js/colaboraciones-lightbox.js?v=80a8d0ca6fc6" defer></script>
+  <script src="../js/accessibility.js?v=80a8d0ca6fc6" defer></script>
 
-  <script src="../js/cookie-banner.js?v=ab6f729c2f2e" defer></script>
+  <script src="../js/cookie-banner.js?v=80a8d0ca6fc6" defer></script>
 </body>
 </html>

@@ -208,3 +208,68 @@ body.modo-oscuro .accordion--representantes {
     }
   }
 }
+
+// ---------------------------------------------------------------
+// Monumentos (Historia/Archivos, v4.15.0): reutiliza el acordeón y el
+// grid de Representantes; cada miniatura va dentro de un trigger del
+// lightbox compartido (`.colaboraciones-mosaic__trigger`, abierto por
+// js/colaboraciones-lightbox.js). Aquí solo se neutraliza el estilo del
+// trigger base de _colaboraciones.scss para que la miniatura conserve el
+// aspecto de Representantes, y se centra el botón de descarga del vídeo.
+// ---------------------------------------------------------------
+.accordion--monumentos {
+  .monumentos-grid__trigger {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0.8rem;
+    background: none;
+    cursor: zoom-in;
+
+    // El trigger base tiene `overflow: hidden`: aquí NO, para que el
+    // translateY del hover de la miniatura y el "+" no se recorten.
+    overflow: visible;
+
+    picture {
+      display: block;
+    }
+
+    // Recupera el aspecto de Representantes: el trigger base fuerza
+    // `object-fit: contain` y tamaño 100% en sus img.
+    .representantes-grid__imagen {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 24rem;
+      margin: 0 auto;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      filter: none;
+    }
+
+    // Mismo hover que Representantes (el trigger base aplica scale(1.03))
+    &:hover .representantes-grid__imagen,
+    &:focus-visible .representantes-grid__imagen {
+      transform: translateY(-0.4rem);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: none;
+    }
+
+    &:focus-visible {
+      outline: 3px solid v.$primary-color;
+      outline-offset: 0.3rem;
+    }
+  }
+
+  .monumentos-grid__descarga {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.4rem;
+  }
+}

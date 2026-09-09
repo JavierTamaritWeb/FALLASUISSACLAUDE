@@ -466,6 +466,24 @@
           "llibret202425Aria": "Ver Llibret 2024-25 en una pestaña nueva",
           "llibret202526Aria": "Ver Llibret 2025-26 en una pestaña nueva",
           "llibretDigitalAria": "Abrir Llibret digital 2025-2026 en una pestaña nueva",
+          "monumentos": {
+            "titulo": "Monumentos",
+            "edicion202526": "Monumento 2025-26",
+            "pies": {
+              "principal": "Monumento principal (boceto)",
+              "infantil": "Monumento infantil (boceto)",
+              "principalReal": "Monumento principal plantado",
+              "infantilReal": "Monumento infantil plantado"
+            },
+            "alt": {
+              "principal": "Monumento principal de la Falla Suïssa 2025-26 (boceto)",
+              "infantil": "Monumento infantil de la Falla Suïssa 2025-26 (boceto)",
+              "principalReal": "Monumento principal de la Falla Suïssa 2025-26 plantado",
+              "infantilReal": "Monumento infantil de la Falla Suïssa 2025-26 plantado"
+            },
+            "descargarVideo": "Descargar vídeo del dron",
+            "descargarVideoAria": "Descargar el vídeo aéreo del monumento 2025-26 (MP4, 15 MB)"
+          },
           "representantes": {
             "titulo": "Representantes",
             "edicion202627": "Representantes 2026-27",
@@ -987,6 +1005,24 @@
           "llibret202425Aria": "Veure Llibret 2024-25 en una pestanya nova",
           "llibret202526Aria": "Veure Llibret 2025-26 en una pestanya nova",
           "llibretDigitalAria": "Obrir Llibret digital 2025-2026 en una pestanya nova",
+          "monumentos": {
+            "titulo": "Monuments",
+            "edicion202526": "Monument 2025-26",
+            "pies": {
+              "principal": "Monument principal (esbós)",
+              "infantil": "Monument infantil (esbós)",
+              "principalReal": "Monument principal plantat",
+              "infantilReal": "Monument infantil plantat"
+            },
+            "alt": {
+              "principal": "Monument principal de la Falla Suïssa 2025-26 (esbós)",
+              "infantil": "Monument infantil de la Falla Suïssa 2025-26 (esbós)",
+              "principalReal": "Monument principal de la Falla Suïssa 2025-26 plantat",
+              "infantilReal": "Monument infantil de la Falla Suïssa 2025-26 plantat"
+            },
+            "descargarVideo": "Descarregar vídeo del dron",
+            "descargarVideoAria": "Descarregar el vídeo aeri del monument 2025-26 (MP4, 15 MB)"
+          },
           "representantes": {
             "titulo": "Representants",
             "edicion202627": "Representants 2026-27",

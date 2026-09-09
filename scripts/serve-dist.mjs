@@ -32,6 +32,7 @@ const MIME = {
   '.jpeg': 'image/jpeg',
   '.webp': 'image/webp',
   '.avif': 'image/avif',
+  '.mp4': 'video/mp4',
   '.ico': 'image/x-icon',
   '.pdf': 'application/pdf'
 };
