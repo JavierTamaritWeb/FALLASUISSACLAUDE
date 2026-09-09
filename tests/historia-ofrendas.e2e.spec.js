@@ -136,9 +136,8 @@ for (const pagina of PAGINAS) {
         expect(await img.evaluate((el) => getComputedStyle(el).objectFit)).toBe('cover');
         expect(await img.evaluate((el) => el.currentSrc)).toMatch(/ofrenda-2026-(fm|fmm|001)\.(avif|webp|jpeg)$/);
       }
-      await expect(grid.locator('.representantes-grid__cargo')).toHaveText([
-        'Fallera Mayor en la Ofrenda', 'Fallera Mayor y acompañamiento', 'Ofrenda Floral a la Mare de Déu'
-      ]);
+      // Sin pies de foto bajo las miniaturas (retirados por el usuario)
+      await expect(grid.locator('figcaption, .representantes-grid__cargo')).toHaveCount(0);
 
       // Badge "+" dibujado con dos barras (background-image), no con el glifo
       const badge = await triggers.first().evaluate((el) => {
@@ -184,10 +183,9 @@ for (const pagina of PAGINAS) {
       await expect(enlace).toHaveText("Descarregar vídeo de l'Ofrena");
       await expect(enlace).toHaveAttribute('aria-label', "Descarregar el vídeo de l'Ofrena 2026 (MP4, 30 MB)");
       expect((await enlace.getAttribute('href')).startsWith('../img/')).toBe(true);
-      // Miniaturas: alt (pie del lightbox) y pie pre-renderizados en valenciano
+      // Miniaturas: alt (pie del lightbox) pre-renderizado en valenciano
       await expect(panel.locator('.ofrendas-grid img.representantes-grid__imagen').first())
         .toHaveAttribute('alt', "Fallera Major de la Falla Suïssa en l'Ofrena Floral 2025-26");
-      await expect(panel.locator('.ofrendas-grid .representantes-grid__cargo').first()).toHaveText("Fallera Major en l'Ofrena");
     });
 
     test('toggle ES→VA en runtime traduce titular, pie y botón de descarga', async ({ page }) => {
