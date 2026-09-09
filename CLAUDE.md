@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.12.1 · **Última actualización:** 9 de septiembre de 2026
+**Versión:** 4.12.2 · **Última actualización:** 9 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -121,11 +121,11 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 **Visor de imagen a pantalla completa** (`src/js/fullscreen.js`): las imágenes tipo bloc de la galería se pueden ampliar vía la Fullscreen API nativa (Chrome, Firefox, Safari macOS); en iPhone Safari (sin API) cae a un lightbox overlay dinámico. Tests: `tests/fullscreen-fallback.e2e.spec.js`.
 
-**Testing**: los tests sirven `dist/` vía `scripts/serve-dist.mjs` en `http://127.0.0.1:4173`. Playwright pre-establece `localStorage.bannerSubvencionCerrado=true` para ocultar el banner. Usa `PLAYWRIGHT_REUSE_SERVER=true` para evitar reiniciar el servidor al depurar. **Tests flaky conocidos** (no regresiones): snapshots de regresión visual, animación de meteo (timing de opacidad), UI de countdown (timing), `reveal-on-scroll` de calendario (timing de IntersectionObserver — pasa al reintentar).
+**Testing**: los tests sirven `dist/` vía `scripts/serve-dist.mjs` en `http://127.0.0.1:4173`. Playwright pre-establece `localStorage.bannerSubvencionCerrado=true` para ocultar el banner. Usa `PLAYWRIGHT_REUSE_SERVER=true` para evitar reiniciar el servidor al depurar. **Tests flaky conocidos** (no regresiones): snapshots de regresión visual, animación de meteo (timing de opacidad), UI de countdown (timing). El test `reveal-on-scroll` de calendario ya NO es flaky: desde v4.12.2 fija el reloj del navegador (`page.clock.setFixedTime`) al mes con más eventos de `src/data/eventos.json`, porque `calendario.js` sin filtros solo lista el mes en curso y fallaba en cualquier mes sin eventos.
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.12.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.12.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -280,6 +280,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.12.2** — Fix de test: `tests/reveal-on-scroll.e2e.spec.js › calendario.html` dependía del mes real (sin filtros, `calendario.js` lista solo el mes en curso; en septiembre 2026 no hay eventos y fallaba de forma determinista). Ahora lee `src/data/eventos.json`, elige el mes con más eventos y fija el reloj del navegador con `page.clock.setFixedTime` antes de navegar. Sin cambios en el sitio servido.
 - **4.12.1** — **Tablón de Eventos vaciado de nuevo**: se retira de `src/data/board.json` la nota de la Preselección FMIV 2027 (evento del 04-07-2026 ya pasado); el JSON vuelve a `{ "notas": [] }` y `#notesBoard` muestra solo el empty-state de v4.11.0. El cartel `src/img/eventos/preseleccion-fmiv-2027.jpg` se conserva en el repo por si se reutiliza. Sin `Event` JSON-LD en `index.html`/`eventos.html` hasta que se repueble. Tests `tests/board.e2e.spec.js` y `tests/reveal-on-scroll.e2e.spec.js` restaurados a la variante empty-state de v4.11.0 (el render de notas se valida en `#sportsBoard`).
 - **4.12.0** — Nueva edición **Representantes 2026-27** en el acordeón de Historia/Archivos (`index.html` + `lafalla.html`): tercer panel, colocado el primero, con los retratos oficiales de Lucía Gutiérrez Martín (Fallera Mayor), José Santos Quiles (Presidente, misma foto `Presidente.jpg`), Sofía Gómez Medina (Fallera Mayor Infantil) y Diego Gómez Medina (Presidente Infantil). Nuevas fuentes `src/img/{FalleraMayor,FalleraMayorInfantil,PresidenteInfantil}-2026-27.jpg` (1066×1600, el build genera AVIF/WebP), clave i18n `historia.archivos.representantes.edicion202627` (ES "Representantes 2026-27" / VA "Representants 2026-27") pre-renderizada en `/va/`. Sin cambios en `_representantes.scss` ni `acc.js` (el acordeón es N-paneles). Ver patrón *Representantes*.
 - **4.11.1** — Primera nota real del **tablón de Eventos** tras el empty-state de v4.11.0: se repuebla `src/data/board.json` con el aviso de la **Preselección de la Fallera Mayor Infantil de Valencia** (04-07-2026, candidata Daniela Cortés i Caravantes, FMIV 2027). La nota lleva `imagen` (cartel `src/img/eventos/preseleccion-fmiv-2027.jpg`, el build genera AVIF/WebP) + adjunto "Ver cartel completo", contenido bilingüe ES/VA y el patrón `📝 Cita` + fecha `DD-MM-YYYY` que reactiva el **Schema.org Event** JSON-LD en `index.html`/`eventos.html`. Tests del tablón reorientados: como `#notesBoard` vuelve a tener notas reales, `tests/board.e2e.spec.js` valida el render de notas (en vez del empty-state) y `tests/reveal-on-scroll.e2e.spec.js` apunta a la nota real en lugar de `.board__empty`. El empty-state sigue disponible: al vaciar `board.json` reaparece solo.

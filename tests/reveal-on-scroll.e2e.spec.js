@@ -1,4 +1,6 @@
 const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
 
 async function getRevealState(locator) {
   return locator.evaluate((element) => {
@@ -69,6 +71,20 @@ test.describe('Reveal on scroll global', () => {
   });
 
   test('calendario.html vuelve a registrar tarjetas tras filtrar y limpiar', async ({ page }) => {
+    // Sin filtros, calendario.js lista solo los eventos del mes en curso, así que
+    // el test fallaría en cualquier mes sin eventos (p. ej. septiembre). Se fija
+    // el reloj del navegador al día 15 del mes con más eventos de eventos.json
+    // para que la aserción no dependa ni de la fecha real ni de los datos.
+    const eventos = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'eventos.json'), 'utf8')).eventos;
+    const porMes = {};
+    for (const e of eventos) {
+      const ym = String(e.date).slice(0, 7);
+      porMes[ym] = (porMes[ym] || 0) + 1;
+    }
+    const [mesConEventos] = Object.entries(porMes).sort((a, b) => b[1] - a[1])[0];
+    const [anio, mes] = mesConEventos.split('-').map(Number);
+    await page.clock.setFixedTime(new Date(anio, mes - 1, 15, 12, 0, 0));
+
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto('/calendario.html');
 
