@@ -612,4 +612,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 9 de septiembre de 2026 - v4.12.4
+Última actualización: 9 de septiembre de 2026 - v4.13.2
