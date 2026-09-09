@@ -48,7 +48,7 @@ El visor del monumento trabaja con 2 slides base no duplicadas, los bocetos del 
 - `src/img/falla2027.jpg` (el build genera `dist/img/falla2027.{avif,webp}`)
 - `src/img/falla2027-Infantil.jpg` (→ `falla2027-Infantil.{avif,webp}`)
 
-Convención de nombres: `falla<año de plantà>` (`falla2026` = ejercicio 2025-26, `falla2027` = 2026-27). La fuente se guarda como JPEG (~440 KB) y no como el PNG original (~3 MB).
+Convención de nombres: `falla<año de plantà>` (`falla2026` = ejercicio 2025-26, `falla2027` = 2026-27). La fuente que usa el visor se guarda como JPEG (~440 KB); los PNG originales (con y sin rótulo) quedan archivados en `src/img/monument/bocetos/` sin referencia desde HTML (v4.16.1).
 
 Convención de carga:
 
