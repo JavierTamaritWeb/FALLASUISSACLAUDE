@@ -220,19 +220,25 @@
     position: relative;
     width: 100%;
 
+    // El "+" se dibuja con dos barras (background-image) en vez de con el glifo
+    // de la fuente: el glifo '+' de Plus Jakarta Sans queda descentrado
+    // verticalmente dentro del circulo (metricas del tipo), y con geometria
+    // el centrado es exacto e independiente de la fuente.
     &::after {
-      align-items: center;
-      background: rgba(4, 26, 50, 0.7);
+      background-color: rgba(4, 26, 50, 0.7);
+      background-image:
+        linear-gradient(currentColor, currentColor),
+        linear-gradient(currentColor, currentColor);
+      background-position: center center, center center;
+      background-repeat: no-repeat;
+      background-size: 1.3rem 0.2rem, 0.2rem 1.3rem;
       border: 1px solid rgba(255, 255, 255, 0.36);
       border-radius: 999px;
       box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
       color: v.$blanco;
-      content: '+';
-      display: flex;
-      font-size: 2rem;
-      font-weight: 300;
+      content: '';
+      display: block;
       height: 3.2rem;
-      justify-content: center;
       position: absolute;
       right: 0.85rem;
       top: 0.85rem;
@@ -241,9 +247,10 @@
       z-index: 2;
     }
 
+    // Solo background-color: un `background` completo borraria las barras
     &:hover::after,
     &:focus-visible::after {
-      background: rgba(255, 111, 97, 0.78);
+      background-color: rgba(255, 111, 97, 0.78);
       transform: scale(1.06);
     }
 
@@ -263,12 +270,15 @@
       height: 100%;
       object-fit: contain;
       object-position: center;
-      transition: transform 0.35s ease;
+      transition: transform 0.35s ease, filter 0.35s ease;
       width: 100%;
     }
 
+    // En hover/foco la imagen se acerca y se oscurece (v4.15.1), para que
+    // destaque el circulo del "+" y se lea como "ampliable"
     &:hover img,
     &:focus-visible img {
+      filter: brightness(0.72) drop-shadow(0 12px 18px rgba(1, 25, 52, 0.14));
       transform: scale(1.03);
     }
   }
@@ -324,7 +334,6 @@ body.lightbox-open {
     color: v.$blanco;
     cursor: pointer;
     display: inline-flex;
-    font-size: 3rem;
     height: 4.4rem;
     justify-content: center;
     position: absolute;
@@ -333,6 +342,34 @@ body.lightbox-open {
     transition: background-color 0.2s ease, transform 0.2s ease;
     width: 4.4rem;
     z-index: 2;
+
+    // La cruz se dibuja con dos barras giradas en vez de usar el glifo &times;
+    // del HTML: ese glifo se apoyaba en la linea base y quedaba ~5px bajo
+    // dentro del circulo. El <span aria-hidden> del markup se oculta (el
+    // nombre accesible lo aporta el .visually-hidden hermano).
+    > span[aria-hidden='true'] {
+      display: none;
+    }
+
+    &::before,
+    &::after {
+      background: currentColor;
+      border-radius: 0.1rem;
+      content: '';
+      height: 0.2rem;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      width: 1.8rem;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
 
     &:hover,
     &:focus-visible {

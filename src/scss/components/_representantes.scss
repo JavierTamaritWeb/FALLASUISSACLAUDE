@@ -248,11 +248,14 @@ body.modo-oscuro .accordion--representantes {
       aspect-ratio: 3 / 4;
       object-fit: cover;
       filter: none;
+      transition: transform 0.35s ease, filter 0.35s ease;
     }
 
     // Mismo hover que Representantes (el trigger base aplica scale(1.03))
+    // mas el oscurecido de las miniaturas ampliables (v4.15.1)
     &:hover .representantes-grid__imagen,
     &:focus-visible .representantes-grid__imagen {
+      filter: brightness(0.72);
       transform: translateY(-0.4rem);
     }
 
