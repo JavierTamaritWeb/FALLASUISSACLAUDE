@@ -15,6 +15,7 @@ module.exports = defineConfig({
     '**/index-colaboraciones.e2e.spec.js',
     '**/historia-monumentos.e2e.spec.js',
     '**/historia-representantes.e2e.spec.js',
+    '**/nosotros-plana-mayor.e2e.spec.js',
     '**/scss-guardrails.e2e.spec.js'
   ]
 });

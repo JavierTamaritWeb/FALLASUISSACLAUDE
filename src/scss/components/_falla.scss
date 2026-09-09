@@ -282,6 +282,72 @@
             
           }
         }
+        // Miniaturas ampliables de la Plana Mayor (v4.15.3): el <picture> va
+        // dentro de un `.colaboraciones-mosaic__trigger` para reutilizar el
+        // lightbox compartido de Colaboraciones, de modo que el badge "+" y el
+        // oscurecido del hover se heredan del trigger base. Aqui solo se
+        // neutraliza ese trigger para que la foto conserve su aspecto original.
+        .accordion__planamayor-trigger {
+          display: block;
+          width: fit-content;
+          max-width: 100%;
+          height: auto;
+          // El margen vertical pasa del <img> al boton: si se queda en la
+          // imagen, el badge "+" (anclado al borde del trigger) flota sobre el
+          // hueco superior en vez de sobre la foto.
+          margin: 3rem auto 1rem;
+          padding: 0;
+          background: none;
+          border: 0;
+          border-radius: 1rem;
+          cursor: zoom-in;
+          // El trigger base recorta con `overflow: hidden`: aqui no, para que
+          // no se corten el "+" ni la sombra de la foto.
+          overflow: visible;
+
+          picture {
+            display: block;
+          }
+
+          // El badge "+" base mide 3,2rem: sobre la foto de 10rem de movil
+          // tapaba la cara, asi que aqui se reduce.
+          @media (max-width: 480px) {
+            &::after {
+              width: 2.4rem;
+              height: 2.4rem;
+              top: 0.5rem;
+              right: 0.5rem;
+              background-size: 1rem 0.18rem, 0.18rem 1rem;
+            }
+          }
+
+          // El trigger base fuerza `object-fit: contain`, `height: 100%` y un
+          // drop-shadow en sus img.
+          .accordion__planamayor {
+            margin: 0;
+            height: auto;
+            object-fit: cover;
+            filter: none;
+            transition: transform 0.35s ease, filter 0.35s ease,
+              box-shadow 0.3s ease;
+          }
+
+          &:hover .accordion__planamayor,
+          &:focus-visible .accordion__planamayor {
+            filter: brightness(0.72);
+            transform: scale(1.03);
+          }
+
+          &:hover,
+          &:focus-visible {
+            background: none;
+          }
+
+          &:focus-visible {
+            outline: 3px solid v.$primary-color;
+            outline-offset: 0.3rem;
+          }
+        }
         .accordion__nombre-plana-mayor {
           color: v.$primary-color;
           background-color: v.$naranja-suave;

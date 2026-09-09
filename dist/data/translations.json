@@ -46,6 +46,12 @@
         "mapa": "Mapa",
         "mapaInteractivo": {
           "texto": "El mapa interactivo de la Falla Suïssa - L'Alqueria del Favero es una herramienta que permite a los visitantes explorar los diferentes puntos de interés de la Falla. Incluye información sobre las ubicaciones de los monumentos, las casetas, los actos y otros eventos relacionados con las Fallas. Es una manera fácil y divertida de conocer mejor nuestra Falla y participar en las celebraciones."
+        },
+        "alt": {
+          "falleraMayor": "Lucía Gutiérrez Martín, Fallera Mayor de la Falla Suïssa 2026-2027",
+          "presidente": "José Santos Quiles, Presidente de la Falla Suïssa",
+          "falleraMayorInfantil": "Sofía Gómez Medina, Fallera Mayor Infantil de la Falla Suïssa 2026-2027",
+          "presidenteInfantil": "Diego Gómez Medina, Presidente Infantil de la Falla Suïssa 2026-2027"
         }
       },
       "videoDron": {
@@ -587,6 +593,12 @@
         "mapa": "Mapa",
         "mapaInteractivo": {
           "texto": "El mapa interactiu de la Falla Suïssa - L'Alqueria del Favero és una eina que permet als visitants explorar els diferents punts d'interès de la Falla. Inclou informació sobre les ubicacions dels monuments, les casetes, els actes i altres esdeveniments relacionats amb les Falles. És una manera fàcil i divertida de conèixer millor la nostra Falla i participar en les celebracions."
+        },
+        "alt": {
+          "falleraMayor": "Lucía Gutiérrez Martín, Fallera Major de la Falla Suïssa 2026-2027",
+          "presidente": "José Santos Quiles, President de la Falla Suïssa",
+          "falleraMayorInfantil": "Sofía Gómez Medina, Fallera Major Infantil de la Falla Suïssa 2026-2027",
+          "presidenteInfantil": "Diego Gómez Medina, President Infantil de la Falla Suïssa 2026-2027"
         }
       },
       "videoDron": {
