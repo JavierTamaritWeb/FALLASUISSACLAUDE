@@ -217,13 +217,23 @@ body.modo-oscuro .accordion--representantes {
 // trigger base de _colaboraciones.scss para que la miniatura conserve el
 // aspecto de Representantes, y se centra el botón de descarga del vídeo.
 // ---------------------------------------------------------------
-.accordion--monumentos {
+// Miniaturas ampliables (Representantes desde v4.15.2, Monumentos desde
+// v4.15.0): el `<picture>` va dentro de un `.colaboraciones-mosaic__trigger`
+// para reutilizar el lightbox compartido. Aquí solo se neutraliza el estilo
+// del trigger base de _colaboraciones.scss para que la miniatura conserve el
+// aspecto de Representantes; el badge "+" y el oscurecido del hover se
+// heredan del trigger base.
+.accordion--representantes {
+  .representantes-grid__trigger,
   .monumentos-grid__trigger {
     display: block;
     width: 100%;
     height: auto;
     padding: 0;
-    margin: 0;
+    // Mismo ancho maximo que la miniatura para que el badge "+" (anclado al
+    // borde derecho del trigger) quede siempre sobre la imagen
+    max-width: 24rem;
+    margin: 0 auto;
     border: 0;
     border-radius: 0.8rem;
     background: none;
@@ -248,7 +258,8 @@ body.modo-oscuro .accordion--representantes {
       aspect-ratio: 3 / 4;
       object-fit: cover;
       filter: none;
-      transition: transform 0.35s ease, filter 0.35s ease;
+      transition: transform 0.35s ease, filter 0.35s ease,
+        box-shadow 0.3s ease;
     }
 
     // Mismo hover que Representantes (el trigger base aplica scale(1.03))
@@ -270,6 +281,9 @@ body.modo-oscuro .accordion--representantes {
     }
   }
 
+}
+
+.accordion--monumentos {
   .monumentos-grid__descarga {
     display: flex;
     justify-content: center;

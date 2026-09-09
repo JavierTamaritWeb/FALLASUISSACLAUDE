@@ -14,6 +14,7 @@ module.exports = defineConfig({
     '**/banner-subvencion.e2e.spec.js',
     '**/index-colaboraciones.e2e.spec.js',
     '**/historia-monumentos.e2e.spec.js',
+    '**/historia-representantes.e2e.spec.js',
     '**/scss-guardrails.e2e.spec.js'
   ]
 });
