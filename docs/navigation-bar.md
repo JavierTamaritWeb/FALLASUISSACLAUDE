@@ -1,8 +1,10 @@
-# 🧭 Barra de navegación (Header fijo + Menú móvil)
+# 🧭 Barra de navegación (Header fijo + Menú hamburguesa global)
 
 Esta guía documenta **exactamente** cómo funciona la barra de navegación (navbar) del proyecto: estilos, comportamiento en móvil/desktop, accesibilidad y consideraciones especiales (Safari/iOS).
 
-> Objetivo: que la barra se vea **siempre** durante el scroll, que sea **táctil (44px)**, que el estado activo sea claro y accesible, y que el menú móvil sea un overlay robusto.
+> Objetivo: que la barra se vea **siempre** durante el scroll, que sea **táctil (44px)**, que el estado activo sea claro y accesible, y que el menú desplegable sea un overlay robusto en **todos** los tamaños.
+
+> **Desde v4.14.0** la navegación es un desplegable con botón hamburguesa también en desktop (antes, en ≥768px, los enlaces se mostraban en línea). La sección *Menú desplegable* de abajo describe el estado actual.
 
 ---
 
@@ -276,24 +278,24 @@ Por eso **no** hay overrides de `body.modo-oscuro` para los enlaces activos. Los
 
 ---
 
-## 📱 Menú móvil (overlay dropdown)
+## 🍔 Menú desplegable (overlay dropdown, todos los tamaños)
 
 ### Activación
 
-En móvil (≤767px):
+En **cualquier** viewport (desde v4.14.0; antes solo ≤767px):
 
-- Se crea/usa un botón hamburguesa `.header__menu-toggle`.
-- La navegación `.navegacion` se convierte en panel overlay.
-- Se crea un backdrop `.nav-backdrop` para cerrar al tocar fuera.
+- Se crea/usa un botón hamburguesa `.header__menu-toggle` (siempre visible, a la derecha de la barra).
+- La navegación `.navegacion` es un panel overlay cerrado por defecto.
+- Se crea un backdrop `.nav-backdrop` para cerrar al tocar/clicar fuera.
 
-Toda la lógica está en `src/js/nav-menu.js`.
+Toda la lógica está en `src/js/nav-menu.js`, **sin guardas por breakpoint** (no queda ningún `matchMedia('(max-width: 767px)')`).
 
 ### Comportamiento exacto
 
-- La hamburguesa solo abre/cierra en móvil (media query en JS: `(max-width: 767px)`).
+- La hamburguesa abre/cierra en todos los tamaños.
 - Al abrir:
   - `.navegacion` recibe `.is-open`
-  - `body` recibe `.nav-open` (bloquea scroll)
+  - `body` recibe `.nav-open` (bloquea el scroll **solo en <768px**)
   - `.nav-backdrop` recibe `.is-active`
   - se intenta enfocar el primer link (mejor UX teclado)
 - Al cerrar:
@@ -302,33 +304,43 @@ Toda la lógica está en `src/js/nav-menu.js`.
   - click en un enlace del menú (antes de navegar)
   - tecla `Escape`
   - click en backdrop
-  - resize a desktop
+  - cualquier resize (evita un desplegable mal posicionado)
 
 ### CSS del overlay
 
-En `src/scss/layout/_header.scss` (bloque responsive móvil):
+En `src/scss/layout/_header.scss` (reglas **globales**, sin media query):
 
 ```scss
-@media (max-width: 767px) {
-  .navegacion {
-    display: none;
-    position: absolute;      // ⚠️ CRÍTICO: necesario para dropdown
-    top: calc(100% + 0.5rem);
-    left: 0;
-    right: 0;
-    background: rgba(2, 66, 122, 0.85);  // Azul translúcido
-    backdrop-filter: blur(12px);
-    border-radius: 1.2rem;
-    z-index: 2500;
-  }
+.navegacion {
+  display: none;
+  position: absolute;      // ⚠️ CRÍTICO: necesario para dropdown
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  background: rgba(2, 66, 122, 0.85);  // Azul translúcido
+  backdrop-filter: blur(12px);
+  border-radius: 1.2rem;
+  z-index: 2500;
+}
 
-  .navegacion.is-open {
-    display: flex;
+.navegacion.is-open {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  // Desktop: anclado bajo el botón hamburguesa (derecha), no a todo el ancho
+  .navegacion {
+    left: auto;
+    right: 0.75rem;
+    min-width: 26rem;
+    max-width: 32rem;
   }
 }
 ```
 
-### Z-index layering (móvil)
+> ⚠️ **No reintroduzcas** un bloque `@media (min-width: 768px) { .navegacion { display: flex; position: relative; } }`: anularía el `display: none` y la nav volvería a mostrarse en línea en desktop.
+
+### Z-index layering (todos los tamaños)
 
 | Elemento | z-index | Descripción |
 |----------|---------|-------------|
@@ -337,9 +349,14 @@ En `src/scss/layout/_header.scss` (bloque responsive móvil):
 | `.navegacion` | 2500 | Menú desplegable |
 | `.header__menu-toggle` | 2600 | Botón hamburguesa |
 
-### Backdrop transparente
+### Backdrop transparente (y por qué usa insets negativos)
 
 El `.nav-backdrop` es **intencionalmente transparente** (`background: transparent`) para no oscurecer la página, pero sigue siendo funcional para detectar clicks fuera del menú.
+
+Dos detalles imprescindibles para que funcione **dentro de la barra** (v4.14.0):
+
+1. La barra lleva `backdrop-filter`, que la convierte en **bloque contenedor** de sus descendientes `position: fixed`. Con `inset: 0` el backdrop solo cubriría la barra, así que usa `inset: -100vh -100vw` para extenderse hasta cubrir el viewport. La barra **no** debe tener `overflow: hidden`.
+2. La regla de la barra `> *:not(.navegacion):not(.nav-backdrop) { position: relative; z-index: 1 }` (que sube los hijos por encima del `::before` glass) **debe excluir al backdrop**; si no, vuelve al flujo flex con tamaño 0, deja de captar clics y empuja el botón hamburguesa al centro de la barra.
 
 **Nota para tests:** Como el backdrop es transparente, Playwright no puede hacer click directo. Los tests usan `page.evaluate(() => document.querySelector('.nav-backdrop').click())`.
 
@@ -530,4 +547,4 @@ npm run build
 - Hover/focus y activo usan ambos `v.$primary-color` tanto en el texto como en la línea del `::after`.
 - Test `tests/nav.e2e.spec.js` actualizado: ya no espera fondo blanco en el enlace activo móvil; ahora valida `color === rgb(255, 111, 97)` y que el `::after` tiene `opacity: 1` + `background-color` en coral.
 
-Última actualización: 18 de abril de 2026 - v4.6.15
+Última actualización: 9 de septiembre de 2026 - v4.14.2

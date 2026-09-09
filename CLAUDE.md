@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.14.1 · **Última actualización:** 9 de septiembre de 2026
+**Versión:** 4.14.2 · **Última actualización:** 9 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -129,7 +129,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.14.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.14.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -284,6 +284,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.14.2** — Documentación: `docs/navigation-bar.md` reescrito para el menú hamburguesa global (sección *Menú desplegable*, CSS sin media query, anclaje desktop, backdrop con insets negativos y exclusión en la regla de la barra) y `docs/architecture-constraints.md` (constraint 1 ampliada, constraint 2 marcada obsoleta); pies de versión de `README.md` y `docs/` sincronizados. Sin cambios en el sitio servido.
 - **4.14.1** — Fix de test: `tests/autorizacion-print-header.e2e.spec.js` fallaba en el PDF de menores ("3 `Do` en 4 páginas") porque contaba operadores `Do` sobre el binario crudo del PDF, cuyos content streams van comprimidos con FlateDecode (la cuenta era ruido: 3 en ambos PDFs). Nueva `contarDoEnStreams()` infla cada stream con `zlib.inflateSync` antes de contar (4/4 y 3/3 páginas). Verificado con `pdftoppm` que el escudo sí se imprime en la 4ª página de menores: el formulario era correcto, el test no. Deja de figurar como fallo conocido. Sin cambios en el sitio servido.
 - **4.14.0** — **Menú hamburguesa en todos los tamaños**: la barra de navegación desktop (10 enlaces en línea) se sustituye por el mismo botón hamburguesa + desplegable que ya usaban las pantallas <768px. `nav-menu.js` pierde las guardas `isMobile()`; en `_header.scss` el toggle, el `.nav-backdrop` y el dropdown `.navegacion` salen del `@media (max-width: 767px)` y se elimina el bloque desktop que forzaba la nav en línea; en ≥768px el desplegable se ancla a la derecha bajo el botón (`min-width: 26rem`). Fix del backdrop: la regla `> *:not(.navegacion)` de la barra pasa a excluir también `.nav-backdrop` y este usa `inset: -100vh -100vw` para cubrir el viewport pese al `backdrop-filter` de la barra (antes en desktop no captaba los clics fuera). Tests: `nav.e2e` desktop y `nav-transition.e2e` adaptados; `background-transition.e2e` corregido (esperaba `fondo_traje.png`, obsoleto desde v4.9.0); baselines visuales regenerados (estaban desfasados desde junio por galería 8, Representantes y tablones). Fallo preexistente y ajeno que sigue en rojo: `autorizacion-print-header.e2e` (menores) cuenta 3 escudos en un PDF de 4 páginas. Ver patrón *Navegación principal* y restricciones *Stacking z-index del menú* / *Z-index de navegación desktop*.
 - **4.13.2** — Documentación: nuevo patrón de Arquitectura **Plana Mayor (Nosotros) y Organigrama** con el checklist de relevo anual de cargos; `README.md` y pies de `docs/` sincronizados con 4.13.x. Sin cambios en el sitio servido.

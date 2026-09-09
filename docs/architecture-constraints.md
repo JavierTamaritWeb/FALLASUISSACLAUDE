@@ -8,11 +8,11 @@ Si esta guía y `CLAUDE.md` se contradicen, prevalece `CLAUDE.md`.
 
 Evitar regresiones que ya ocurrieron y que hoy están controladas por combinaciones concretas de CSS, HTML, JS y tests.
 
-## 1. Menú móvil y stacking context
+## 1. Menú desplegable y stacking context (global desde v4.14.0)
 
 Regla:
 
-El backdrop del menú móvil debe seguir insertándose dentro de `.header__barra`, no en `body`.
+El backdrop del menú desplegable (ahora presente en **todos** los tamaños, no solo en móvil) debe seguir insertándose dentro de `.header__barra`, no en `body`. Además: el backdrop usa `inset: -100vh -100vw` (la barra tiene `backdrop-filter` y es su bloque contenedor) y la regla `> *:not(.navegacion):not(.nav-backdrop)` de la barra debe seguir excluyéndolo.
 
 Por qué:
 
@@ -37,15 +37,15 @@ npm run build
 npx playwright test tests/nav.e2e.spec.js
 ```
 
-## 2. Navegación desktop por encima del glassmorphism
+## 2. Navegación desktop por encima del glassmorphism (obsoleta desde v4.14.0)
 
-Regla:
+Regla (histórica):
 
-En desktop, `.navegacion` necesita `position: relative` y `z-index: 5`.
+En desktop, `.navegacion` necesitaba `position: relative` y `z-index: 5` cuando los enlaces se mostraban en línea.
 
-Por qué:
+Estado actual:
 
-Sin esa capa, la navegación puede quedar por debajo de overlays visuales del header.
+Desde v4.14.0 la nav es un desplegable `position: absolute; z-index: 2500` en todos los tamaños y ese bloque desktop se eliminó. **No lo reintroduzcas**: un `@media (min-width: 768px) { .navegacion { display: flex; position: relative } }` anularía el `display: none` del desplegable.
 
 Archivos implicados:
 
@@ -434,4 +434,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 7 de mayo de 2026 - v4.6.23
+Última actualización: 9 de septiembre de 2026 - v4.14.2
