@@ -58,7 +58,7 @@ Reglas importantes:
 
 Las dos páginas pueden incorporar nodos `Event` generados desde `src/data/board.json` durante el build.
 
-> **Estado actual (v4.11.0):** `board.json` se sirve **vacío** (el tablón de Eventos muestra solo su empty-state), por lo que ahora mismo **no se inyecta ningún nodo `Event`**. Al repoblar el tablón con notas que sigan el patrón `📝 Cita<br>` + fecha `DD-MM-YYYY`, los `Event` reaparecen automáticamente en el build.
+> **Estado actual (v4.12.3):** `board.json` se sirve **vacío** (la nota de la Preselección FMIV 2027 de v4.11.1 se retiró en v4.12.1) (el tablón de Eventos muestra solo su empty-state), por lo que ahora mismo **no se inyecta ningún nodo `Event`**. Al repoblar el tablón con notas que sigan el patrón `📝 Cita<br>` + fecha `DD-MM-YYYY`, los `Event` reaparecen automáticamente en el build.
 
 Reglas importantes:
 
@@ -148,4 +148,4 @@ Ejecuta además `npm run test:e2e:full` si el cambio también toca navegación, 
 
 ---
 
-Última actualización: 22 de junio de 2026 - v4.11.0
+Última actualización: 9 de septiembre de 2026 - v4.12.4

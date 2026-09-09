@@ -11,7 +11,7 @@ Esta es la guía canónica del tablón dinámico. El contenido se edita en un JS
 | Eventos / general | `src/data/board.json` | `index.html`, `eventos.html` | `#notesBoard` (sin `data-board-source` → cae al default) |
 | Deportes JCF | `src/data/sports-board.json` | `deportes.html` | `#sportsBoard` con `data-board-source="data/sports-board.json"` |
 
-> **Estado actual (v4.11.0):** `board.json` (Eventos) se sirve **vacío** y muestra el empty-state simpático (ver sección *Tablón vacío*). Para volver a publicar anuncios basta con añadir notas al array `notas` — aparecen automáticamente y el marcador desaparece. `sports-board.json` (Deportes) mantiene sus notas.
+> **Estado actual (v4.12.3):** **ambos** JSON (`board.json` de Eventos y `sports-board.json` de Deportes) se sirven **vacíos** y muestran el empty-state simpático (ver sección *Tablón vacío*). Para volver a publicar anuncios basta con añadir notas al array `notas` — aparecen automáticamente y el marcador desaparece. Los PDFs JCF 2026-27 siguen en `src/pdf/JCF-2026-27/` para reutilizarlos al repoblar Deportes.
 
 Recursos comunes:
 
@@ -19,7 +19,7 @@ Recursos comunes:
 - estilos: `src/scss/components/_board.scss` + overrides locales en `src/scss/components/_deportes.scss` (`__board-wrapper`, `__tablon-titulo`, `__marco-tablon`)
 - textos genéricos del componente: `src/data/translations.json` (`board.empty` = mensaje del empty-state cuando el tablón no tiene notas; labels accesibles de adjuntos; en Deportes además `deportes.tablonTitulo` y `deportes.tablonAriaLabel`)
 - skills agent-ready: `events-board` y `sports-board` (en el array `skills` de `wellKnownTask` en `gulpfile.js`); se publican en `dist/.well-known/agent-skills/index.json` con `sha256` automático
-- tests: `tests/board.e2e.spec.js` — como Eventos se sirve vacío, las aserciones de render de notas se ejecutan sobre `#sportsBoard` (que tiene contenido); Eventos valida el empty-state. Incluye el bloque `Tablón Deportes (#sportsBoard)`
+- tests: `tests/board.e2e.spec.js` — **data-driven** desde v4.12.3: lee `board.json` y `sports-board.json` en Node y, por tablón, valida el empty-state si no hay notas activas o el render exacto (nº de `article`, `board__card` vs `board__note`, hrefs de adjuntos, re-render ES→VA) si las hay. Vaciar o repoblar un tablón **no exige tocar el spec**; las comprobaciones de adjuntos se saltan (`test.skip` con motivo) mientras ningún tablón tenga notas
 
 ## 🧱 Estructura del archivo
 
@@ -366,7 +366,7 @@ Desde v4.7.2 ya no hace falta tocar `board.js`. Pasos:
    ```
 4. (Opcional) Añade la skill correspondiente al array `skills` en `wellKnownTask` (`gulpfile.js`) si quieres exponer el JSON a agentes IA.
 5. (Opcional) Reutiliza estilos `.tablon-titulo` + `.marco-tablon` o define un wrapper propio según el fondo de la sección. Si el fondo no es blanco/gris, sigue el patrón de `_deportes.scss` (`background: transparent` en el marco, color de título acorde al contraste).
-6. Añade un test en `tests/board.e2e.spec.js` siguiendo el patrón del bloque `Tablón Deportes (#sportsBoard)`.
+6. No hace falta añadir tests: `tests/board.e2e.spec.js` lee el JSON y valida el nuevo tablón si lo añades al array `BOARDS` (página, `id` y JSON fuente).
 
 ## 🔗 Relacionado
 
@@ -375,4 +375,4 @@ Desde v4.7.2 ya no hace falta tocar `board.js`. Pasos:
 
 ---
 
-Última actualización: 22 de junio de 2026 - v4.11.0
+Última actualización: 9 de septiembre de 2026 - v4.12.4

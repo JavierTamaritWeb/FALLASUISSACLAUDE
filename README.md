@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 22 de junio de 2026 - v4.11.0 - Nuevas galerías **San Juan 2026** (`galeria_7`, 16 fotos) y **Representantes 2026-27** (`galeria_8`), elevando el total a 8 galerías. Tablón de Eventos (`board.json`) vaciado con un **empty-state** simpático que se renderiza como una nota real (tarjeta blanca + pinza, con modo oscuro) y vuelve a mostrar anuncios automáticamente al repoblar el JSON. El historial detallado vive en el **Changelog de [`CLAUDE.md`](./CLAUDE.md)** (fuente canónica).
+🆕 Última actualización: 9 de septiembre de 2026 - v4.12.4 - Nueva edición **Representantes 2026-27** en el acordeón de Historia/Archivos (`index.html` y `lafalla.html`): Lucía Gutiérrez Martín, José Santos Quiles, Sofía Gómez Medina y Diego Gómez Medina. Los dos tablones de anuncios (`board.json` de Eventos y `sports-board.json` de Deportes) se sirven **vacíos** y muestran el empty-state; `tests/board.e2e.spec.js` es ahora data-driven y el test del calendario ya no depende del mes real. El historial detallado vive en el **Changelog de [`CLAUDE.md`](./CLAUDE.md)** (fuente canónica).
 
 ## 🌐 Vista Previa
 

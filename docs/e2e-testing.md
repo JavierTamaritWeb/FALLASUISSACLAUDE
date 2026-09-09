@@ -200,8 +200,8 @@ Archivo de test:
 Cobertura concreta:
 
 - `index.html`: reentrada en viewport de un bloque estático
-- `eventos.html`: rerender del empty-state del tablón (Eventos se sirve vacío desde v4.11.0) al cambiar idioma
-- `calendario.html`: rerender tras filtrar y limpiar
+- `eventos.html`: rerender del empty-state del tablón (Eventos se sirve vacío) al cambiar idioma
+- `calendario.html`: rerender tras filtrar y limpiar. Desde v4.12.2 fija el reloj del navegador con `page.clock.setFixedTime` al mes con más eventos de `src/data/eventos.json`, porque `calendario.js` sin filtros solo lista el mes en curso y el test fallaba en cualquier mes sin eventos
 - `meteo.html`: reveal de wrappers y exclusión de `.forecast-day`
 
 ### 📸 Visual Regression
@@ -501,7 +501,7 @@ Smoke suite por defecto:
 
 - `tests/nav.e2e.spec.js`
 - `tests/i18n.e2e.spec.js`
-- `tests/board.e2e.spec.js`
+- `tests/board.e2e.spec.js` (data-driven desde v4.12.3: lee `board.json`/`sports-board.json` y valida empty-state o render según el contenido real de cada tablón)
 - `tests/reveal-on-scroll.e2e.spec.js`
 - `tests/countdown.e2e.spec.js`
 - `tests/banner-subvencion.e2e.spec.js`
@@ -612,4 +612,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 20 de marzo de 2026 - v4.6.2
+Última actualización: 9 de septiembre de 2026 - v4.12.4

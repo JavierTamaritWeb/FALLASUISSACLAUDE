@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.12.3 · **Última actualización:** 9 de septiembre de 2026
+**Versión:** 4.12.4 · **Última actualización:** 9 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -125,7 +125,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.12.3).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.12.4).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -280,6 +280,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.12.4** — Sincronización de documentación con el estado 4.12.x: `README.md` (cabecera de última actualización), `docs/gestion-tablon.md` (ambos tablones vacíos, spec data-driven, alta de tablones sin tests nuevos), `docs/structured-data.md` (estado de `Event` sin notas), `docs/e2e-testing.md` (reloj fijo del test de calendario, spec del tablón) y `docs/README.md` (versión). Sin cambios en el sitio servido.
 - **4.12.3** — **Tablón de Deportes vaciado**: `src/data/sports-board.json` pasa a `{ "notas": [] }` (las 6 notas JCF 2026-27 se retiran; los PDFs quedan en `src/pdf/JCF-2026-27/` sin enlazar). `#sportsBoard` muestra el empty-state de v4.11.0 (modo claro y oscuro). `tests/board.e2e.spec.js` reescrito **data-driven**: lee los JSON fuente y valida empty-state o render según el contenido real de cada tablón, con `test.skip` explícito para las comprobaciones de adjuntos cuando ningún tablón tiene notas. Sin cambios en `board.js`, SCSS ni HTML.
 - **4.12.2** — Fix de test: `tests/reveal-on-scroll.e2e.spec.js › calendario.html` dependía del mes real (sin filtros, `calendario.js` lista solo el mes en curso; en septiembre 2026 no hay eventos y fallaba de forma determinista). Ahora lee `src/data/eventos.json`, elige el mes con más eventos y fija el reloj del navegador con `page.clock.setFixedTime` antes de navegar. Sin cambios en el sitio servido.
 - **4.12.1** — **Tablón de Eventos vaciado de nuevo**: se retira de `src/data/board.json` la nota de la Preselección FMIV 2027 (evento del 04-07-2026 ya pasado); el JSON vuelve a `{ "notas": [] }` y `#notesBoard` muestra solo el empty-state de v4.11.0. El cartel `src/img/eventos/preseleccion-fmiv-2027.jpg` se conserva en el repo por si se reutiliza. Sin `Event` JSON-LD en `index.html`/`eventos.html` hasta que se repueble. Tests `tests/board.e2e.spec.js` y `tests/reveal-on-scroll.e2e.spec.js` restaurados a la variante empty-state de v4.11.0 (el render de notas se valida en `#sportsBoard`).
