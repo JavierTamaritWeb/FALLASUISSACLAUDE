@@ -1,87 +1,141 @@
 // tests/board.e2e.spec.js
-// Tests E2E para el tablón dinámico
+// Tests E2E para el tablón dinámico (multi-instancia, src/js/board.js).
+//
+// Data-driven: cada tablón se valida según el contenido REAL de su JSON fuente.
+// Si el JSON no tiene notas activas se comprueba el empty-state (nota de marcador
+// con pinza y texto board.empty); si las tiene, se comprueba el render de notas.
+// Así el spec no hay que tocarlo al vaciar o repoblar un tablón.
 
 const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
 
-const PAGES_WITH_BOARD = ['index.html', 'eventos.html'];
+function leerNotasActivas(jsonRelativo) {
+  const ruta = path.join(__dirname, '..', 'src', 'data', jsonRelativo);
+  const data = JSON.parse(fs.readFileSync(ruta, 'utf8'));
+  return (data.notas || []).filter(n => n.activo !== false);
+}
+
+// Tableros desplegados: { página, id del contenedor, JSON fuente }.
+const BOARDS = [
+  { page: 'index.html',    id: 'notesBoard',  source: 'board.json' },
+  { page: 'eventos.html',  id: 'notesBoard',  source: 'board.json' },
+  { page: 'deportes.html', id: 'sportsBoard', source: 'sports-board.json' },
+];
+
+for (const b of BOARDS) {
+  b.notas = leerNotasActivas(b.source);
+  b.vacio = b.notas.length === 0;
+  // Selector que espera a que board.js haya pintado algo (nota real o marcador).
+  b.anyNote = `#${b.id} article.board__note, #${b.id} article.board__card`;
+}
+
+// Primer tablón con notas reales (si lo hay) para los tests de render de contenido.
+const BOARD_CON_NOTAS = BOARDS.find(b => !b.vacio) || null;
+
+async function cambiarAValenciano(page) {
+  const langSwitcher = page.locator('#langSwitcher');
+  if (!(await langSwitcher.isVisible())) return false;
+  await langSwitcher.click();
+  const vaOption = page.locator('.header__lang-option[data-lang="va"]');
+  if (!(await vaOption.isVisible())) return false;
+  await vaOption.click();
+  await page.waitForTimeout(300);
+  return true;
+}
 
 test.describe('Tablón Dinámico (.board)', () => {
 
-  // El tablón de Eventos (#notesBoard, data/board.json) se sirve vacío: muestra
-  // un empty-state simpático vía board.empty. Las aserciones de render de notas
-  // se apoyan en el tablón de Deportes (#sportsBoard), que sí tiene contenido.
-  test.describe('Empty-state (tablón de Eventos vacío)', () => {
-    for (const pageName of PAGES_WITH_BOARD) {
-      test(`${pageName}: muestra el mensaje de "sin anuncios" y ninguna nota`, async ({ page }) => {
-        await page.goto(`/${pageName}`);
-        await page.waitForSelector('#notesBoard .board__empty', { timeout: 5000 });
-
-        const empty = page.locator('#notesBoard .board__empty');
-        await expect(empty).toBeVisible();
-        await expect(empty).toContainText('anuncios');
-
-        // El empty-state se renderiza como una nota (tarjeta blanca + pinza), pero
-        // no debe haber ninguna nota real (sin el modificador board__empty).
-        const realNotes = page.locator('#notesBoard article:not(.board__empty)');
-        expect(await realNotes.count()).toBe(0);
+  test.describe('Estado de cada tablón según su JSON', () => {
+    for (const b of BOARDS) {
+      test(`${b.page} › #${b.id}: contenedor board visible`, async ({ page }) => {
+        await page.goto(`/${b.page}`);
+        await expect(page.locator(`#${b.id}`)).toBeVisible();
       });
 
-      test(`${pageName}: contenedor board existe`, async ({ page }) => {
-        await page.goto(`/${pageName}`);
-        const board = page.locator('#notesBoard');
-        await expect(board).toBeVisible();
-      });
+      if (b.vacio) {
+        test(`${b.page} › #${b.id}: ${b.source} vacío → empty-state y ninguna nota real`, async ({ page }) => {
+          await page.goto(`/${b.page}`);
+          await page.waitForSelector(`#${b.id} .board__empty`, { timeout: 5000 });
+
+          const empty = page.locator(`#${b.id} .board__empty`);
+          await expect(empty).toBeVisible();
+          await expect(empty).toContainText('anuncios');
+
+          // El marcador se renderiza como nota (tarjeta + pinza) pero no debe haber
+          // ninguna nota real (sin el modificador board__empty).
+          expect(await page.locator(`#${b.id} article:not(.board__empty)`).count()).toBe(0);
+        });
+
+        test(`${b.page} › #${b.id}: el empty-state se re-renderiza al cambiar idioma`, async ({ page }) => {
+          await page.goto(`/${b.page}`);
+          await page.waitForSelector(`#${b.id} .board__empty`);
+          const textoEs = (await page.locator(`#${b.id} .board__empty`).textContent()).trim();
+          expect(textoEs.length).toBeGreaterThan(0);
+
+          if (await cambiarAValenciano(page)) {
+            const empty = page.locator(`#${b.id} .board__empty`);
+            await expect(empty).toBeVisible();
+            const textoVa = (await empty.textContent()).trim();
+            expect(textoVa.length).toBeGreaterThan(0);
+          }
+        });
+      } else {
+        test(`${b.page} › #${b.id}: renderiza las ${b.notas.length} notas activas de ${b.source}`, async ({ page }) => {
+          await page.goto(`/${b.page}`);
+          await page.waitForSelector(`#${b.id} article:not(.board__empty)`, { timeout: 5000 });
+
+          expect(await page.locator(`#${b.id} article:not(.board__empty)`).count()).toBe(b.notas.length);
+          expect(await page.locator(`#${b.id} .board__empty`).count()).toBe(0);
+
+          // Notas con imagen/adjuntos → board__card; simples → board__note.
+          const conExtras = b.notas.filter(n => n.imagen || (n.adjuntos && n.adjuntos.length)).length;
+          expect(await page.locator(`#${b.id} article.board__card`).count()).toBe(conExtras);
+          expect(await page.locator(`#${b.id} article.board__note:not(.board__empty)`).count()).toBe(b.notas.length - conExtras);
+        });
+
+        test(`${b.page} › #${b.id}: los adjuntos enlazan a sus URLs y sobreviven al cambio ES→VA`, async ({ page }) => {
+          await page.goto(`/${b.page}`);
+          await page.waitForSelector(`#${b.id} article:not(.board__empty)`);
+
+          const urls = b.notas.flatMap(n => (n.adjuntos || []).map(a => a.url));
+          for (const url of urls) {
+            expect(await page.locator(`#${b.id} .board__file-link[href*="${url}"]`).count()).toBeGreaterThan(0);
+          }
+
+          await cambiarAValenciano(page);
+          expect(await page.locator(`#${b.id} article:not(.board__empty)`).count()).toBe(b.notas.length);
+          for (const url of urls) {
+            expect(await page.locator(`#${b.id} .board__file-link[href*="${url}"]`).count()).toBeGreaterThan(0);
+          }
+        });
+      }
     }
   });
 
-  test.describe('Tipos de notas', () => {
-    test('renderiza nota sin adjuntos correctamente', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
-
-      // Notas simples tienen article.board__note directamente (sin board__card padre)
-      const simpleNotes = page.locator('#sportsBoard article.board__note');
-      // Puede haber 0 o más notas simples dependiendo del contenido
-      const count = await simpleNotes.count();
-      expect(count).toBeGreaterThanOrEqual(0);
-    });
-
-    test('renderiza nota con adjuntos', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
-
-      // Notas con adjuntos tienen article.board__card como contenedor
-      const cardsWithFiles = page.locator('#sportsBoard article.board__card');
-      const count = await cardsWithFiles.count();
-      expect(count).toBeGreaterThan(0);
-    });
-  });
-
+  // Los tests estructurales usan el tablón de Deportes; valen tanto con notas
+  // reales como con el empty-state (ambos son article.board__note con pinza).
   test.describe('Accesibilidad', () => {
-    test('elementos decorativos tienen aria-hidden', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
+    const b = BOARDS.find(x => x.id === 'sportsBoard');
 
-      const clampScrews = page.locator('#sportsBoard .clamp-screw[aria-hidden="true"]');
-      const count = await clampScrews.count();
-      expect(count).toBeGreaterThan(0);
+    test('elementos decorativos tienen aria-hidden', async ({ page }) => {
+      await page.goto(`/${b.page}`);
+      await page.waitForSelector(b.anyNote);
+      expect(await page.locator(`#${b.id} .clamp-screw[aria-hidden="true"]`).count()).toBeGreaterThan(0);
     });
 
     test('notas tienen role article', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
-
-      // Las notas (article) deben tener role="article"
-      const articles = page.locator('#sportsBoard article[role="article"]');
-      const count = await articles.count();
-      expect(count).toBeGreaterThan(0);
+      await page.goto(`/${b.page}`);
+      await page.waitForSelector(b.anyNote);
+      expect(await page.locator(`#${b.id} article[role="article"]`).count()).toBeGreaterThan(0);
     });
 
-    test('enlaces de archivo tienen aria-label descriptivo', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
+    test('enlaces de archivo tienen aria-label descriptivo (si hay adjuntos)', async ({ page }) => {
+      test.skip(!BOARD_CON_NOTAS, 'Ningún tablón tiene notas activas: no hay adjuntos que validar');
+      await page.goto(`/${BOARD_CON_NOTAS.page}`);
+      await page.waitForSelector(`#${BOARD_CON_NOTAS.id} article:not(.board__empty)`);
 
-      const fileLinks = page.locator('#sportsBoard .board__file-link[aria-label]');
+      const fileLinks = page.locator(`#${BOARD_CON_NOTAS.id} .board__file-link[aria-label]`);
       const count = await fileLinks.count();
       if (count > 0) {
         const label = await fileLinks.first().getAttribute('aria-label');
@@ -92,13 +146,13 @@ test.describe('Tablón Dinámico (.board)', () => {
   });
 
   test.describe('Responsive', () => {
+    const b = BOARDS.find(x => x.id === 'sportsBoard');
+
     test('mobile: 1 columna', async ({ page }) => {
       await page.setViewportSize({ width: 360, height: 740 });
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
-
-      const board = page.locator('#sportsBoard');
-      const cols = await board.evaluate(el =>
+      await page.goto(`/${b.page}`);
+      await page.waitForSelector(b.anyNote);
+      const cols = await page.locator(`#${b.id}`).evaluate(el =>
         getComputedStyle(el).gridTemplateColumns.split(' ').length
       );
       expect(cols).toBe(1);
@@ -106,145 +160,58 @@ test.describe('Tablón Dinámico (.board)', () => {
 
     test('desktop: múltiples columnas', async ({ page }) => {
       await page.setViewportSize({ width: 1200, height: 800 });
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
-
-      const board = page.locator('#sportsBoard');
-      const cols = await board.evaluate(el =>
+      await page.goto(`/${b.page}`);
+      await page.waitForSelector(b.anyNote);
+      const cols = await page.locator(`#${b.id}`).evaluate(el =>
         getComputedStyle(el).gridTemplateColumns.split(' ').length
       );
       expect(cols).toBeGreaterThan(1);
     });
   });
 
-  test.describe('Idioma', () => {
-    test('contenido se actualiza al cambiar idioma', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
-
-      // Obtener contenido en español (idioma por defecto)
-      const noteContent = page.locator('#sportsBoard .board__note-content').first();
-      await expect(noteContent).toBeVisible();
-
-      // Cambiar a valenciano usando el selector de idioma
-      const langSwitcher = page.locator('#langSwitcher');
-      if (await langSwitcher.isVisible()) {
-        await langSwitcher.click();
-        const vaOption = page.locator('.header__lang-option[data-lang="va"]');
-        if (await vaOption.isVisible()) {
-          await vaOption.click();
-          // Esperar un momento para que se actualice el contenido
-          await page.waitForTimeout(300);
-
-          // El contenido podría cambiar o ser igual si la traducción es idéntica
-          // Lo importante es que no hay errores y el contenido sigue visible
-          await expect(noteContent).toBeVisible();
-        }
-      }
-    });
-
-    test('eventos.html: el empty-state se traduce al cambiar idioma', async ({ page }) => {
-      await page.goto('/eventos.html');
-      await page.waitForSelector('#notesBoard .board__empty');
-
-      const empty = page.locator('#notesBoard .board__empty');
-      const textEs = (await empty.textContent()).trim();
-      expect(textEs.length).toBeGreaterThan(0);
-
-      const langSwitcher = page.locator('#langSwitcher');
-      if (await langSwitcher.isVisible()) {
-        await langSwitcher.click();
-        const vaOption = page.locator('.header__lang-option[data-lang="va"]');
-        if (await vaOption.isVisible()) {
-          await vaOption.click();
-          await page.waitForTimeout(300);
-          // El empty-state sigue visible tras el re-render por idioma.
-          await expect(page.locator('#notesBoard .board__empty')).toBeVisible();
-        }
-      }
-    });
-  });
-
   test.describe('Modo Oscuro', () => {
-    test('board tiene estilos de modo oscuro', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
+    const b = BOARDS.find(x => x.id === 'sportsBoard');
 
-      // Activar modo oscuro
+    test('board sigue visible con modo oscuro activo', async ({ page }) => {
+      await page.goto(`/${b.page}`);
+      await page.waitForSelector(b.anyNote);
+
       const darkModeButton = page.locator('.header__modo-boton');
       if (await darkModeButton.isVisible()) {
         await darkModeButton.click();
         await page.waitForTimeout(500);
-
-        // Verificar que el body tiene la clase modo-oscuro
-        const bodyClass = await page.locator('body').getAttribute('class');
-        expect(bodyClass).toContain('modo-oscuro');
-
-        // Verificar que el board tiene estilos aplicados
-        const board = page.locator('#sportsBoard');
-        await expect(board).toBeVisible();
+        expect(await page.locator('body').getAttribute('class')).toContain('modo-oscuro');
+        await expect(page.locator(`#${b.id}`)).toBeVisible();
+        await expect(page.locator(b.anyNote).first()).toBeVisible();
       }
     });
   });
 
   test.describe('SVG de archivos', () => {
-    test('iconos SVG tienen clases correctas', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__note');
+    test('iconos SVG tienen clase de tipo (si hay adjuntos)', async ({ page }) => {
+      test.skip(!BOARD_CON_NOTAS, 'Ningún tablón tiene notas activas: no hay iconos que validar');
+      await page.goto(`/${BOARD_CON_NOTAS.page}`);
+      await page.waitForSelector(`#${BOARD_CON_NOTAS.id} article:not(.board__empty)`);
 
-      const fileIcons = page.locator('#sportsBoard .board__file-icon');
-      const count = await fileIcons.count();
-
-      if (count > 0) {
-        // Verificar que los iconos tienen clase de tipo (pdf o img)
-        const firstIcon = fileIcons.first();
-        const classList = await firstIcon.getAttribute('class');
+      const fileIcons = page.locator(`#${BOARD_CON_NOTAS.id} .board__file-icon`);
+      if (await fileIcons.count() > 0) {
+        const classList = await fileIcons.first().getAttribute('class');
         expect(classList).toMatch(/board__file-icon--(pdf|img)/);
       }
     });
   });
 
-  test.describe('Tablón Deportes (#sportsBoard)', () => {
-    test('deportes.html: 6 cards JCF con PDFs en pdf/JCF-2026-27/', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__card', { timeout: 5000 });
+  test.describe('Independencia entre tablones', () => {
+    test('#notesBoard y #sportsBoard leen fuentes distintas y no se afectan', async ({ page }) => {
+      const eventos = BOARDS.find(x => x.page === 'eventos.html');
+      const deportes = BOARDS.find(x => x.id === 'sportsBoard');
 
-      const cards = page.locator('#sportsBoard .board__card');
-      expect(await cards.count()).toBeGreaterThanOrEqual(6);
-
-      const jcfLinks = page.locator('#sportsBoard .board__file-link[href*="pdf/JCF-2026-27/"]');
-      expect(await jcfLinks.count()).toBeGreaterThanOrEqual(6);
-    });
-
-    test('deportes.html: cambio ES→VA re-renderiza adjuntos', async ({ page }) => {
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__file-name');
-
-      const langSwitcher = page.locator('#langSwitcher');
-      if (await langSwitcher.isVisible()) {
-        await langSwitcher.click();
-        const vaOption = page.locator('.header__lang-option[data-lang="va"]');
-        if (await vaOption.isVisible()) {
-          await vaOption.click();
-          await page.waitForTimeout(300);
-        }
+      for (const b of [deportes, eventos]) {
+        await page.goto(`/${b.page}`);
+        await page.waitForSelector(b.anyNote);
+        expect(await page.locator(`#${b.id} article:not(.board__empty)`).count()).toBe(b.notas.length);
+        expect(await page.locator(`#${b.id} .board__empty`).count()).toBe(b.vacio ? 1 : 0);
       }
-
-      // Tras el re-render siguen existiendo 6+ cards con sus archivos.
-      const cards = page.locator('#sportsBoard .board__card');
-      expect(await cards.count()).toBeGreaterThanOrEqual(6);
-    });
-
-    test('#notesBoard de eventos.html está vacío y no afecta a #sportsBoard', async ({ page }) => {
-      // El tablón de Eventos vacío no debe romper el de Deportes (páginas distintas,
-      // pero comparten board.js): Deportes mantiene sus 6 cards.
-      await page.goto('/deportes.html');
-      await page.waitForSelector('#sportsBoard .board__card');
-      expect(await page.locator('#sportsBoard .board__card').count()).toBeGreaterThanOrEqual(6);
-
-      await page.goto('/eventos.html');
-      await page.waitForSelector('#notesBoard .board__empty');
-      expect(await page.locator('#notesBoard article:not(.board__empty)').count()).toBe(0);
     });
   });
 });
