@@ -22,15 +22,22 @@ const PAGES = [
 
 test.describe('Navbar responsive + idioma', () => {
   for (const pageName of PAGES) {
-    test(`${pageName} (desktop): nav visible y label idioma`, async ({ page }) => {
+    test(`${pageName} (desktop): toggle visible, nav desplegable cerrada y label idioma`, async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 800 });
       await page.goto(`/${pageName}`);
 
-      const nav = page.locator('nav.navegacion');
-      await expect(nav).toBeVisible();
-
+      // Desde v4.14.0 la nav es un desplegable también en desktop.
       const toggle = page.locator('button.header__menu-toggle');
-      await expect(toggle).toBeHidden();
+      await expect(toggle).toBeVisible();
+
+      const nav = page.locator('nav.navegacion');
+      await expect(nav).toBeHidden();
+
+      await toggle.click();
+      await expect(nav).toBeVisible();
+      await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+      await page.keyboard.press('Escape');
+      await expect(nav).toBeHidden();
 
       const lang = page.locator('#langSwitcher');
       await expect(lang).toBeVisible();

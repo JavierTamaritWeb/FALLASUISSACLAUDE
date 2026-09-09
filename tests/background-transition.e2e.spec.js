@@ -41,7 +41,8 @@ test.describe('Debug Body & Falla Background Transition', () => {
 
     // .falla debe tener imagen pero NO gradiente
     expect(fallaState.bgImage).not.toContain('linear-gradient');
-    expect(fallaState.bgImage).toContain('fondo_traje.png');
+    // Desde v4.9.0 el fondo es image-set() con fondo_traje.{avif,webp,jpg} (ya no PNG)
+    expect(fallaState.bgImage).toContain('fondo_traje');
 
     // ::before debe tener overlay claro
     // Playwright/Chrome normalize colors to rgb/rgba

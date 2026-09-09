@@ -688,9 +688,13 @@ body.modo-oscuro {
   align-items: center;
 }
 
-// Botón hamburguesa (solo móvil)
+// Botón hamburguesa (todos los tamaños desde v4.14.0: la nav siempre es un desplegable)
 .header__menu-toggle {
-  display: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2600; // Por encima del menú (2500) y del backdrop (1500)
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(3, 49, 95, 0.95);
   color: v.$blanco;
@@ -723,14 +727,6 @@ body.modo-oscuro {
   &:active {
     transform: scale(0.96);
     box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
-  }
-
-  @media (max-width: 767px) {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 2600; // Asegurar que el botón esté por encima del menú y el backdrop
   }
 }
 
@@ -790,29 +786,32 @@ body.modo-oscuro {
 }
 
 // ---------------------------------------------------------
-// Ajustes Responsivos para Navegación
+// Navegación desplegable (todos los tamaños desde v4.14.0)
+// El menú es siempre un dropdown bajo la barra, abierto con el botón
+// hamburguesa. Antes (<v4.14.0) solo lo era en <768px y en desktop la
+// nav se mostraba en línea.
 // ---------------------------------------------------------
 .nav-backdrop {
   display: none;
+  position: fixed;
+  // La barra (ancestro) lleva backdrop-filter, lo que la convierte en bloque
+  // contenedor de este fixed: con inset:0 solo cubriría la barra. Los insets
+  // negativos lo extienden más allá de ella hasta cubrir todo el viewport
+  // (la barra no tiene overflow:hidden). NO mover el backdrop a body (ver
+  // restricción *Stacking z-index del menú*).
+  inset: -100vh -100vw;
+  // Backdrop invisible visualmente pero funcional para clicks
+  background: transparent;
+  backdrop-filter: none;
+  z-index: 1500; // Capa intermedia
 }
 
-@media (max-width: 767px) {
-  .nav-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    // Hacemos el backdrop invisible visualmente pero funcional para clicks
-    background: transparent;
-    backdrop-filter: none;
-    z-index: 1500; // Capa intermedia
-  }
+.nav-backdrop.is-active {
+  display: block;
+}
 
-  .nav-backdrop.is-active {
-    display: block;
-  }
-
-  // Menú móvil como dropdown overlay bajo la barra
-  .navegacion {
+// Dropdown overlay bajo la barra (móvil y desktop)
+.navegacion {
     display: none;
     position: absolute;
     top: calc(100% + 0.5rem);
@@ -857,6 +856,8 @@ body.modo-oscuro {
     }
   }
 
+@media (max-width: 767px) {
+  // Solo en móvil bloqueamos el scroll del documento con el menú abierto
   body.nav-open {
     overflow: hidden;
     touch-action: none;
@@ -864,12 +865,14 @@ body.modo-oscuro {
 }
 
 @media (min-width: 768px) {
+  // Desktop: el desplegable se ancla bajo el botón hamburguesa (derecha)
+  // en vez de ocupar todo el ancho de la barra
   .navegacion {
-    position: relative; // Cambiado de static a relative para gestionar z-index
-    z-index: 5;         // Asegurar que esté por encima del ::before (overlay)
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
+    left: auto;
+    right: 0.75rem;
+    min-width: 26rem;
+    max-width: 32rem;
+    z-index: 2500;
   }
 }
 
@@ -1001,9 +1004,11 @@ body.modo-oscuro {
   // Transición sincronizada con el tema (2.4s)
   transition: background 2.4s ease-in-out, box-shadow 2.4s ease-in-out, border-color 2.4s ease-in-out;
 
-  // Asegurar que el contenido esté por encima del pseudo-elemento
-  // Excluimos .navegacion porque necesita position:absolute en móvil
-  > *:not(.navegacion) {
+  // Asegurar que el contenido esté por encima del pseudo-elemento.
+  // Excluimos .navegacion (position:absolute, dropdown) y .nav-backdrop
+  // (position:fixed a pantalla completa; si entrara en el flujo flex
+  // desplazaría el botón hamburguesa y no captaría los clics fuera).
+  > *:not(.navegacion):not(.nav-backdrop) {
     position: relative;
     z-index: 1;
   }

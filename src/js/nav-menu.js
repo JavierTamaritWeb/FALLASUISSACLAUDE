@@ -1,10 +1,8 @@
 // js/nav-menu.js
 
 (function () {
-  function isMobile() {
-    return window.matchMedia('(max-width: 767px)').matches;
-  }
-
+  // Desde v4.14.0 el menú es un desplegable en TODOS los tamaños (antes solo
+  // en <768px), así que no hay guardas por breakpoint.
   function init() {
     const headerBars = document.querySelectorAll('.header__barra, .header-inner__barra');
 
@@ -66,7 +64,7 @@
       headerBar.insertBefore(toggle, nav);
     }
 
-    // Backdrop (solo móvil): permite cerrar al clicar fuera del panel
+    // Backdrop: permite cerrar al clicar fuera del panel
     let backdrop = document.querySelector('.nav-backdrop');
     if (!backdrop) {
       backdrop = document.createElement('div');
@@ -98,7 +96,6 @@
 
     toggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (!isMobile()) return;
       setOpen(!isOpen());
     });
 
@@ -108,7 +105,7 @@
       if (!(target instanceof Element)) return;
       const link = target.closest('a');
       if (!link) return;
-      if (isMobile()) setOpen(false);
+      setOpen(false);
     });
 
     // Close on Escape.
@@ -125,9 +122,9 @@
       setOpen(false);
     });
 
-    // Keep state consistent across resize.
+    // Cerrar al redimensionar para evitar un desplegable mal posicionado.
     window.addEventListener('resize', () => {
-      if (!isMobile() && isOpen()) setOpen(false);
+      if (isOpen()) setOpen(false);
     });
   }
 

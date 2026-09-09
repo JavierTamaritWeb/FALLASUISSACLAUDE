@@ -59,6 +59,8 @@ test.describe('UI: transición nav principal', () => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/index.html');
 
+    // La nav es un desplegable también en desktop (v4.14.0): abrirla primero.
+    await page.click('button.header__menu-toggle');
     const link = page.locator('nav.navegacion .navegacion__enlace').first();
     await expect(link).toBeVisible();
 

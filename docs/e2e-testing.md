@@ -22,8 +22,8 @@ Los tests se centran en:
 
 ### 🧭 Navbar (desktop y móvil)
 
-- Desktop: navegación visible, botón hamburguesa oculto, selector de idioma con etiqueta "IDIOMA · …".
-- Móvil (<768px): botón hamburguesa visible, navegación cerrada por defecto y apertura/cierre correcto.
+- Desktop (desde v4.14.0 la nav es un desplegable también aquí): botón hamburguesa visible, navegación cerrada por defecto, se abre con clic y se cierra con Escape; selector de idioma con etiqueta "IDIOMA · …".
+- Móvil (<768px): botón hamburguesa visible, navegación cerrada por defecto y apertura/cierre correcto (toggle, Escape, clic fuera).
 - Interacciones: cierre con Escape, click fuera (backdrop) y cierre al clicar un enlace.
 - Accesibilidad: ARIA básico (por ejemplo `aria-expanded`, `aria-label`).
 
@@ -612,4 +612,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 9 de septiembre de 2026 - v4.13.2
+Última actualización: 9 de septiembre de 2026 - v4.14.0
