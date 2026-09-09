@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.13.0 · **Última actualización:** 9 de septiembre de 2026
+**Versión:** 4.13.1 · **Última actualización:** 9 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -125,7 +125,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.13.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.13.1).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -280,6 +280,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.13.1** — **Organigrama con representantes 2026-27**: nueva fila `organigrama__representantes` (bajo el nodo del Presidente y antes de `organigrama__level`) en `index.html`, `lafalla.html` y `organigrama.html` con tres `organigrama__node` (Lucía Gutiérrez Martín · Fallera Mayor, Sofía Gómez Medina · Fallera Mayor Infantil, Diego Gómez Medina · Presidente Infantil). Estilo en `_organigrama.scss` (flex centrado con wrap; reutiliza `.organigrama__node`/`.nombre`/`.cargo`, sin modo oscuro propio como el resto del organigrama). Claves i18n `organigrama.{falleraMayor,falleraMayorInfantil,presidenteInfantil}` en ES/VA/EN/FR y leyenda `organigrama.leyenda` actualizada a "ejercicio 2026-27" (4 idiomas + fallbacks HTML).
 - **4.13.0** — **Nosotros / Plana Mayor 2026-27** (`index.html` + `lafalla.html`, acordeón `falla.nosotros`): Fallera Mayor pasa a **Lucía Gutiérrez Martín** (foto `FalleraMayor-2026-27.*`, nombre y texto **genérico provisional** en `falla.nosotros.falleraMayor.texto` ES/VA hasta recibir el definitivo); Fallera Mayor Infantil pasa a **Sofía Gómez Medina** (foto `FalleraMayorInfantil-2026-27.*`, nombre y texto genérico provisional en `falla.nosotros.falleramayoraI.texto`); Presidente Infantil (Diego Gómez Medina) solo cambia la foto a `PresidenteInfantil-2026-27.*` (nombre y texto intactos); Presidente sin cambios. Los `alt` de las tres fotos pasan a "Nombre, Cargo de la Falla Suïssa 2026-2027". Schema.org `Person` de `eventos.html`/`organigrama.html` actualizado con los nombres nuevos. Las fotos 2025-26 (`FalleraMayor.jpg`, `FalleraMayorInfantil.jpg`, `PresidenteInfantil.jpg`) siguen en uso en el panel Representantes 2025-26. `llibret_2026.html` conserva los nombres 2025-26 (documento histórico).
 - **4.12.4** — Sincronización de documentación con el estado 4.12.x: `README.md` (cabecera de última actualización), `docs/gestion-tablon.md` (ambos tablones vacíos, spec data-driven, alta de tablones sin tests nuevos), `docs/structured-data.md` (estado de `Event` sin notas), `docs/e2e-testing.md` (reloj fijo del test de calendario, spec del tablón) y `docs/README.md` (versión). Sin cambios en el sitio servido.
 - **4.12.3** — **Tablón de Deportes vaciado**: `src/data/sports-board.json` pasa a `{ "notas": [] }` (las 6 notas JCF 2026-27 se retiran; los PDFs quedan en `src/pdf/JCF-2026-27/` sin enlazar). `#sportsBoard` muestra el empty-state de v4.11.0 (modo claro y oscuro). `tests/board.e2e.spec.js` reescrito **data-driven**: lee los JSON fuente y valida empty-state o render según el contenido real de cada tablón, con `test.skip` explícito para las comprobaciones de adjuntos cuando ningún tablón tiene notas. Sin cambios en `board.js`, SCSS ni HTML.

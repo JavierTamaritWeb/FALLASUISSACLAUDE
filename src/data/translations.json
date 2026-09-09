@@ -493,6 +493,9 @@
       "organigrama": {
         "titulo": "Organigrama de la Falla",
         "presidente": "Presidente",
+        "falleraMayor": "Fallera Mayor",
+        "falleraMayorInfantil": "Fallera Mayor Infantil",
+        "presidenteInfantil": "Presidente Infantil",
         "vicepresidentes": "Vicepresidentes",
         "secretaria": "Secretaría",
         "economica": "Área Económica",
@@ -503,7 +506,7 @@
         "web": "Delegado Web",
         "loteria": "Delegada Lotería",
         "deportes": "Delegado Deportes",
-        "leyenda": "Este es el organigrama de la Falla, donde se pueden ver los diferentes cargos y sus respectivas funciones. En el ejercicio 2025-26, queda conformado de esta manera."
+        "leyenda": "Este es el organigrama de la Falla, donde se pueden ver los diferentes cargos y sus respectivas funciones. En el ejercicio 2026-27, queda conformado de esta manera."
       },
       "colaboraciones": {
         "titulo": "Colaboraciones",
@@ -1013,6 +1016,9 @@
       "organigrama": {
         "titulo": "Organigrama de la Falla",
         "presidente": "President",
+        "falleraMayor": "Fallera Major",
+        "falleraMayorInfantil": "Fallera Major Infantil",
+        "presidenteInfantil": "President Infantil",
         "vicepresidentes": "Vicepresidents",
         "secretaria": "Secretaria",
         "economica": "Àrea Econòmica",
@@ -1023,7 +1029,7 @@
         "web": "Delegat Web",
         "loteria": "Delegada Loteria",
         "deportes": "Delegat Esports",
-        "leyenda": "Aquest és l'organigrama de la Falla, on es poden veure els diferents càrrecs i les seves respectives funcions. En l'exercici 2025-26, queda conformada d'aquesta manera."
+        "leyenda": "Aquest és l'organigrama de la Falla, on es poden veure els diferents càrrecs i les seves respectives funcions. En l'exercici 2026-27, queda conformada d'aquesta manera."
       },
       "colaboraciones": {
         "titulo": "Col·laboracions",
@@ -1208,6 +1214,9 @@
       "organigrama": {
         "titulo": "Falla Organizational Chart",
         "presidente": "President",
+        "falleraMayor": "Fallera Mayor",
+        "falleraMayorInfantil": "Fallera Mayor Infantil",
+        "presidenteInfantil": "Children's President",
         "vicepresidentes": "Vice Presidents",
         "secretaria": "Secretary",
         "economica": "Economic Area",
@@ -1218,7 +1227,7 @@
         "web": "Web Delegate",
         "loteria": "Lottery Delegate",
         "deportes": "Sports Delegate",
-        "leyenda": "This is the organizational chart of the Falla, where you can see the different positions and their respective functions. In the 2025-26 exercise, it is configured this way."
+        "leyenda": "This is the organizational chart of the Falla, where you can see the different positions and their respective functions. In the 2026-27 exercise, it is configured this way."
       }
     },
     "fr": {
@@ -1394,6 +1403,9 @@
       "organigrama": {
         "titulo": "Organigramme de la Falla",
         "presidente": "Président",
+        "falleraMayor": "Fallera Mayor",
+        "falleraMayorInfantil": "Fallera Mayor Infantil",
+        "presidenteInfantil": "Président des enfants",
         "vicepresidentes": "Vice-présidents",
         "secretaria": "Secrétariat",
         "economica": "Zone Économique",
@@ -1404,7 +1416,7 @@
         "web": "Délégué Web",
         "loteria": "Déléguée Loterie",
         "deportes": "Délégué Sports",
-        "leyenda": "Voici l'organigramme de la Falla, où vous pouvez voir les différents postes et leurs fonctions respectives. Dans l'exercice 2025-26, il est configuré de cette manière."
+        "leyenda": "Voici l'organigramme de la Falla, où vous pouvez voir les différents postes et leurs fonctions respectives. Dans l'exercice 2026-27, il est configuré de cette manière."
         
       }
     }
