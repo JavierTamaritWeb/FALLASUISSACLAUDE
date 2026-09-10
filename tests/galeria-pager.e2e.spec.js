@@ -140,6 +140,23 @@ test.describe('galeria-pager — navegación en el navegador', () => {
     expect(medidas.numero).toBeGreaterThanOrEqual(30);
   });
 
+  test('en pantallas anchas el fondo claro cubre todo el ancho y el contenido queda centrado', async ({ page }) => {
+    await page.setViewportSize({ width: 2000, height: 900 });
+    await page.goto('/galeria_9.html');
+    const nav = page.locator('.galeria-pager');
+    await nav.scrollIntoViewIfNeeded();
+    const m = await nav.evaluate((el) => {
+      const r = el.getBoundingClientRect();
+      const lista = el.querySelector('.galeria-pager__lista').getBoundingClientRect();
+      return { left: r.left, width: r.width, inner: window.innerWidth, centro: lista.left + lista.width / 2, bg: getComputedStyle(el).backgroundColor };
+    });
+    // Antes de v4.26.1 el nav medía 1200px centrado y a los lados asomaba el azul de la página
+    expect(m.left).toBe(0);
+    expect(Math.abs(m.width - m.inner)).toBeLessThanOrEqual(1);
+    expect(Math.abs(m.centro - m.inner / 2)).toBeLessThan(2);
+    expect(m.bg).toBe('rgb(245, 245, 245)');
+  });
+
   test('el selector de idioma traduce la paginación en runtime (ES → VA)', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/galeria_2.html');

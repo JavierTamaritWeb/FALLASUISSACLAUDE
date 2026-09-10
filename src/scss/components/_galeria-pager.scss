@@ -19,8 +19,12 @@
     align-items: center;
     column-gap: 2rem;
     row-gap: 2.4rem;
-    max-width: 120rem;
-    margin: 0 auto;
+    // El nav ocupa TODO el ancho (su fondo claro debe cubrir de lado a lado,
+    // como .visor: con max-width + margin auto asomaba el azul de la página en
+    // pantallas anchas, v4.26.1); el contenido se centra a 120rem con padding.
+    width: 100%;
+    padding-left: max(1.5rem, calc((100% - 120rem) / 2));
+    padding-right: max(1.5rem, calc((100% - 120rem) / 2));
   }
 
   // Enlace a la galería vecina (o hueco deshabilitado en los extremos)
