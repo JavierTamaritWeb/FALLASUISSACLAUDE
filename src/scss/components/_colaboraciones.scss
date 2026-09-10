@@ -79,10 +79,6 @@
       max-width: 100%;
     }
 
-    .accordion__section.active .accordion__content {
-      max-height: 220rem;
-    }
-
     .accordion__content-inner {
       width: 100%;
     }
@@ -92,10 +88,6 @@
     &__accordion {
       .falleros__nosotros {
         padding: 1rem 0.75rem;
-      }
-
-      .accordion__section.active .accordion__content {
-        max-height: 260rem;
       }
     }
   }

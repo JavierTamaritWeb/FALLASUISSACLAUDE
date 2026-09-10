@@ -506,6 +506,7 @@ Smoke suite por defecto:
 - `tests/countdown.e2e.spec.js`
 - `tests/banner-subvencion.e2e.spec.js`
 - `tests/index-colaboraciones.e2e.spec.js`
+- `tests/accordion-sin-recorte.e2e.spec.js` (v4.23.1, en la smoke): recorre todas las `.accordion__section` de `colaboraciones.html` (ES y `/va/`), `index.html` y `lafalla.html` a 375/768/1280 px — alto 0 cerrado, `max-height: none` tras abrir (fijado por `acc.js`), alto de layout del interior (`offsetHeight`, ignora el `translateY` de los `.reveal`) ≤ alto visible, y vuelta a 0 al cerrar.
 - `tests/nosotros-directiva.e2e.spec.js` (v4.23.0, en la smoke): panel La Directiva como tarjetas por cargo — 5 tarjetas con icono, 8 nombres en orden, chips sin viñeta y presidente en coral, grid 1→3 columnas, modo oscuro y pre-render VA.
 - `tests/html-integrity.e2e.spec.js` (auditoría sep-2026, en la smoke): balance de etiquetas de todos los `dist/*.html` (un `</div>` sobrante pasó meses inadvertido) y comprobación de que `/va/galeria_1.html` carga sus imágenes desde `/img/` (rutas del JSON resueltas con `SITE_ROOT`).
 - `tests/historia-ofrendas.e2e.spec.js` (v4.18.0: panel Ofrenda 2026 con el `<video controls preload="none">` nativo — sin visor —, póster, `HEAD` del MP4 → `video/mp4`, ancho ≤ 64rem y 16:9, variante `/va/`, toggle ES→VA; v4.20.0: botón `.boton[download]` de descarga del MP4 — `HEAD` → `video/mp4`, centrado bajo la figura, texto VA; v4.21.3: 3 miniaturas `.ofrendas-grid` en una fila, badge `+` dibujado, lightbox compartido con pie y cierre `×`/Escape, alt/pie VA)
@@ -619,4 +620,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 10 de septiembre de 2026 - v4.23.0
+Última actualización: 10 de septiembre de 2026 - v4.23.1

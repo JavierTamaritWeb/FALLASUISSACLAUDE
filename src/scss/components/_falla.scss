@@ -381,21 +381,15 @@
       }
     }
     
-    // Estado activo: muestra el contenido y rota el icono
+    // Estado activo: rota el icono. El alto del panel abierto NO se fija aquí:
+    // lo calcula js/acc.js (scrollHeight y después `max-height: none`), porque
+    // cualquier tope fijo (antes 100rem) recortaba los paneles más altos
+    // (HOPE en colaboraciones.html, Organigrama y Plana Mayor en móvil).
     &.active {
-      .accordion__content {
-        max-height: none; // Se muestra todo el contenido
-      }
-      
       .accordion__header .accordion__icon {
         transform: rotate(180deg);
       }
     }
-  }
-  &__section.active .accordion__content {
-    max-height: 100rem;
-    transition: max-height 0.5s ease;
-
   }
   
   @media (max-width: 480px) {
@@ -933,6 +927,11 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  // Sin transición de alto: acc.js fija `max-height: none` por temporizador
+  .accordion__section .accordion__content {
+    transition: none;
+  }
+
   .directiva__card {
     transition: none;
 
