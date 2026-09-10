@@ -828,38 +828,116 @@ p {
 
 }
 
-.accordion__directiva {
-  font-size: 2rem;
-  color: v.$primary-color;
-  background-color: v.$naranja-suave;
-  padding: 1rem 1.5rem;
-  margin: 1rem 0;
-  border-left: 4px solid v.$primary-color;
-  border-radius: 4px;
-  text-transform: none;
-  
-  ul {
+// La Directiva (Nosotros, v4.23.0): tarjetas por cargo dentro del panel azul
+// del acordeón. Grid de 1 columna en móvil, 2 en ≥768px y 3 en ≥1200px; la
+// tarjeta del presidente encabeza el bloque a todo el ancho y la de
+// vicepresidentes ocupa dos columnas para que sus tres chips vayan en fila.
+// Mismo lenguaje visual que las miniaturas de Archivos (borde coral, sombra,
+// hover con translateY) y que los nodos del organigrama.
+.directiva {
+  width: 100%;
+  max-width: 96rem;
+  margin: 1rem auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.6rem;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  &__card {
+    margin: 0;
+    padding: 1.4rem 1.6rem;
+    background-color: v.$blanco-hueso;
+    border: 2px solid v.$primary-color;
+    border-radius: v.$border-radius;
+    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-0.3rem);
+      box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.5);
+    }
+
+    // El presidente encabeza el bloque a todo el ancho
+    &--presidente {
+      grid-column: 1 / -1;
+    }
+
+    // Tres vicepresidencias: dos columnas para que los chips no se apilen
+    @media (min-width: 768px) {
+      &--vicepresidentes {
+        grid-column: span 2;
+      }
+    }
+  }
+
+  &__cargo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0 0 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 111, 97, 0.35);
+    font-family: v.$font-family;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: v.$primary-color;
+    line-height: 1.2;
+  }
+
+  &__icono {
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &__nombres {
     list-style: none;
     margin: 0;
     padding: 0;
-    
-    li {
-      margin-bottom: 0.5rem;
-      padding-left: 1.2rem;
-      position: relative;
-      
-      ul {
-        margin-top: 0.5rem;
-        padding-left: 3rem;
-        list-style: disc;
-        
-        li {
-          margin-bottom: 1rem;
-          padding: 0;
-          color: v.$secondary-color;
-          font-size: 1.6rem;
-        }
-      }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  &__nombre {
+    margin: 0;
+    padding: 0.5rem 1.2rem;
+    background-color: v.$blanco;
+    border: 1px solid v.$gris-medio-claro;
+    border-radius: 999px;
+    color: v.$secondary-color;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: nowrap;
+    text-transform: none;
+  }
+
+  // Chip del presidente en coral (patrón .destacado del organigrama)
+  &__card--presidente &__nombre {
+    background-color: v.$primary-color;
+    border-color: v.$primary-color;
+    color: v.$blanco;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .directiva__card {
+    transition: none;
+
+    &:hover {
+      transform: none;
     }
   }
 }

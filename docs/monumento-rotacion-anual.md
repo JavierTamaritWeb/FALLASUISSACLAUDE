@@ -174,4 +174,4 @@ Cuando cambie el juego de imágenes del monumento, asume por defecto que el hook
 
 ---
 
-Última actualización: 10 de septiembre de 2026 - v4.22.11
+Última actualización: 10 de septiembre de 2026 - v4.23.0

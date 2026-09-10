@@ -53,7 +53,8 @@ body,
 .accordion__titular,
 .accordion__header,
 .accordion__icon,
-.accordion__directiva,
+.directiva__card,
+.directiva__nombre,
 // Sección Eventos
 .eventos,
 .eventos-nota-calendario,
@@ -645,29 +646,32 @@ body.modo-oscuro {
     }
   }
 }
-body.modo-oscuro .accordion__directiva {
-    background-color: v.$secondary-color;
-    color: v.$blanco-hueso;
-    border-left: 4px solid v.$blanco;
-    ul {
-    
+body.modo-oscuro .directiva {
+  .directiva__card {
+    background-color: v.$negro-casi;
+    border-color: v.$primary-color;
+    box-shadow: 0 0.3rem 0.8rem rgba(255, 111, 97, 0.18);
 
-    li {
-      
-
-     
-
-      // Estilo para sublistas
-      ul {
-         // Usamos viñetas de lista para subnivel
-        li {
-          
-          color: v.$blanco-hueso;
-          
-          
-        }
-      }
+    &:hover {
+      box-shadow: 0 0.6rem 1.4rem rgba(255, 111, 97, 0.32);
     }
+  }
+
+  .directiva__cargo {
+    color: v.$primary-color;
+    border-bottom-color: rgba(255, 111, 97, 0.45);
+  }
+
+  .directiva__nombre {
+    background-color: v.$gris-muy-oscuro;
+    border-color: v.$gris-oscuro;
+    color: v.$blanco-hueso;
+  }
+
+  .directiva__card--presidente .directiva__nombre {
+    background-color: v.$primary-color;
+    border-color: v.$primary-color;
+    color: v.$blanco;
   }
 }
 // Organigrama

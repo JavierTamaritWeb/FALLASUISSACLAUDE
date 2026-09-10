@@ -18,6 +18,7 @@ module.exports = defineConfig({
     '**/historia-ofrendas.e2e.spec.js',
     '**/historia-representantes.e2e.spec.js',
     '**/nosotros-plana-mayor.e2e.spec.js',
+    '**/nosotros-directiva.e2e.spec.js',
     '**/scss-guardrails.e2e.spec.js'
   ]
 });
