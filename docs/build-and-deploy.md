@@ -90,7 +90,7 @@ El build ejecuta `updateDistSitemapsLastmod` para actualizar `lastmod` en:
 
 La fecha se calcula usando el `mtime` real de los archivos en `dist/`.
 
-**`rsync --checksum` (v4.26.2):** el espejo compara por contenido, no por fecha+tamaño: `gulp dest` conserva la fecha del fuente en `dist/` y el token `?v=` de los assets no cambia el tamaño del HTML, así que sin `--checksum` las páginas no editadas no se subían y seguían enlazando el CSS/JS anterior (cacheado un año). Verificación tras el deploy: el `?v=` de `main.css` en una página no tocada debe coincidir con el de `dist/`.
+**`rsync --checksum` (v4.26.2):** el espejo compara por contenido, no por fecha+tamaño: `gulp dest` conserva la fecha del fuente en `dist/` y el token `?v=` de los assets no cambia el tamaño del HTML, así que sin `--checksum` las páginas no editadas no se subían y seguían enlazando el CSS/JS anterior (cacheado un año). Además rsync va sin `-t` (`-rlpgoDvz`, v4.26.3): si conserva la fecha del fuente, Apache responde `304` a la revalidación de la CDN y esta sigue sirviendo el HTML antiguo. Verificación tras el deploy: el `?v=` de `main.css` en una página no tocada (con `?nc=$RANDOM`) debe coincidir con el de `dist/`.
 
 **Sitemaps fuente antes de cada commit (v4.21.4):** los `lastmod` de `dist/` se recalculan solos, pero los de `src/` deben mantenerse coherentes. Antes de cada commit se revisa que cada `src/*.html` publicable tenga sus dos `<url>` (ES + `/va/`, con los 3 `hreflang`) en `src/sitemap.xml`, que no queden URLs de páginas retiradas, y se pone `lastmod` a la fecha del día (ES y VA) en `src/sitemap.xml`, `src/sitemap-google.xml` y `src/sitemap-ai-optimized.xml` para las páginas tocadas en ese commit; si cambia algún sitemap, `src/sitemap-index.xml` pasa también a la fecha del día. Las páginas standalone (`ai-info.html`, `mantenimiento.html`, `google-site-verification.html`, `base.html`) no van en el sitemap.
 
@@ -252,4 +252,4 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 10 de septiembre de 2026 - v4.26.2
+Última actualización: 10 de septiembre de 2026 - v4.26.3

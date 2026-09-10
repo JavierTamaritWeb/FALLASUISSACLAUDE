@@ -176,7 +176,12 @@ fi
 # había cambiado: seguían apuntando al CSS/JS con el token antiguo (cacheado
 # un año como immutable) y los cambios de estilo no se veían. Comparar por
 # contenido cuesta unos segundos más y garantiza el espejo.
-RSYNC_FLAGS=(-avz --checksum --delete --exclude='.DS_Store' --exclude='.maintenance')
+# SIN -t (v4.26.3): -a incluye -t, que copiaba al servidor la fecha antigua del
+# fuente; Apache respondía 304 Not Modified a la revalidación de la CDN de
+# Hostinger (mismo Last-Modified/ETag) y esta seguía sirviendo el HTML viejo
+# aunque el archivo ya fuera nuevo. Sin -t, cada archivo transferido recibe la
+# fecha del momento y la CDN obtiene el cuerpo nuevo. -rlpgoD = -a menos -t.
+RSYNC_FLAGS=(-rlpgoDvz --checksum --delete --exclude='.DS_Store' --exclude='.maintenance')
 [[ "$DRY_RUN" -eq 1 ]] && { RSYNC_FLAGS+=(-n); info "DRY-RUN: no se modificará el servidor."; }
 
 info "Sincronizando con rsync…"
