@@ -59,7 +59,7 @@
 
 ## 📝 Notas de Mantenimiento
 
-- La versión funcional documentada del proyecto es `v4.22.1` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.22.2` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta
@@ -84,4 +84,4 @@ Actualiza estas guías cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 10 de septiembre de 2026 - v4.22.1*
+*Última actualización: 10 de septiembre de 2026 - v4.22.2*

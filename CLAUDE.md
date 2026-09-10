@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.22.1 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.22.2 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -136,7 +136,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.22.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.22.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -156,7 +156,7 @@ Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problem
   5. **Listeners de `translationsReady` antes de cualquier `await`** (`board.js`): registrado después del fetch del tablón, el evento podía haberse disparado ya y el tablón quedaba en castellano en `/va/`.
   6. **Enter/Espacio en `role="button"`**: `accessibility.js` convierte esas teclas en `click()` para todo `[tabindex="0"]`/`role="button"`; cualquier otro script que haga lo mismo (como `acc.js` en los titulares `<div>` del acordeón) debe hacer `preventDefault()` y ambos deben comprobar `event.defaultPrevented`, o el elemento recibe dos clicks y el acordeón se abre y se cierra.
   7. **Contraste**: `.weather-current`/`.actual-desc` (texto blanco sobre `$melocotin-claro`, 1,3:1) y el `:hover` de los inputs de `#quieres-form` (blanco sobre `$azul-verdoso`, 1,8:1) eran ilegibles en modo claro; ahora `$gris-oscuro`/`$negro-casi` con el modo oscuro reponiendo el claro. `padding: auto` no existe en CSS (6 declaraciones descartadas por el navegador, eliminadas). Todas las media queries móviles usan `max-width: 767px` (quedaban 23 con `768px` solapando con `min-width: 768px`; los baselines *tablet* se regeneraron).
-  8. **Metadatos**: 11 páginas compartían la `meta description` de la home ("Página de inicio de Fallas Suïssa…"); cada página lleva la suya. TikTok apunta a `https://tiktok.com/@fallasuissaalqueria` en todos los footers. Pendiente de decisión del usuario: URL del canal de YouTube (todos los footers enlazan `https://youtube.com`), URL de Facebook (conviven `fallasuïssal'alqueriadelfavero`, `FallaSuissaLalqueriadelFavero` y `fallasuissa`), grafía "Cristina Camaña/Camañas" en el organigrama, y `organigrama.html` sin enlace entrante.
+  8. **Metadatos**: 11 páginas compartían la `meta description` de la home ("Página de inicio de Fallas Suïssa…"); cada página lleva la suya. TikTok apunta a `https://tiktok.com/@fallasuissaalqueria` en todos los footers. Pendiente de decisión del usuario: URL del canal de YouTube (todos los footers enlazan `https://youtube.com`), URL de Facebook (conviven `fallasuïssal'alqueriadelfavero`, `FallaSuissaLalqueriadelFavero` y `fallasuissa`), y `organigrama.html` sin enlace entrante (el nodo "Cristina Camaña/Camañas" se retiró en v4.22.2).
   9. **`updateDistSitemapsLastmod` cubre los tres sitemaps de URLs** (`sitemap.xml`, `sitemap-google.xml`, `sitemap-ai-optimized.xml`, conservando el formato fecha-hora de estos dos últimos) además de `sitemap-index.xml`.
   10. **`.htaccess`**: `img-src` de la CSP incluye `https://unpkg.com` (icono de pantalla completa de Leaflet; la URL del CSS de `leaflet.fullscreen` estaba mal formada y no cargaba), el modo mantenimiento excluye `/.well-known/` (renovación de certificados) y los `AddType` de fuentes usan `font/woff` y `font/woff2`.
 
@@ -310,6 +310,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.22.2** — Organigrama (`index.html`, `lafalla.html`, `organigrama.html`): se retira el nodo "Cristina Camaña" de Delegación Infantil (quedan Delia Caravantes, Raquel Rubio, Vanessa Alarcón y Patricia Alarcón). Baselines visuales de organigrama (móvil y tablet) regenerados.
 - **4.22.1** — Organigrama (`index.html`, `lafalla.html`, `organigrama.html`): se retira el nodo "Mamen Ramos · Delegada Lotería" (y su `Person` del Schema.org de `eventos.html`/`organigrama.html`) y las tarjetas pasan a tener **tamaño uniforme** en todos los breakpoints (cabeceras y columnas con `flex: 1 1 0`, tarjetas de columna al 100 % con altura mínima de dos líneas); `.desplazado` eliminado. Baselines visuales de organigrama regenerados.
 - **4.22.0** — **Auditoría severa de errores** (3 revisiones paralelas: JS runtime, HTML/a11y/SEO e infraestructura, más barrido de consola en las 58 páginas ES/VA): ~40 errores confirmados y corregidos. Funcionalidad: galerías en `/va/` cargaban `/va/img/...` (JSON sin `SITE_ROOT`), regex de `SITE_ROOT` que recortaba carpetas acabadas en "va", `.ics` del calendario con fecha fija 18-03-2025, `flatpickr`/Leaflet sin guarda, listener de `translationsReady` del tablón tras el `await`, `</div>` sobrante en el modal de contacto, URL malformada del CSS de `leaflet.fullscreen`, guardas null en `dark.js`/`countdown.js`/`board.js`, validación de `cod` en meteo. Servidor: el HTML se servía con caché de 7 días (`.htaccess`), `img-src` con unpkg, `.well-known` fuera del modo mantenimiento, `sw.js` (que nunca se ha registrado) con `startsWith('/')` y sin filtro GET. Contenido/a11y/SEO: 277 enlaces del menú sin texto, Ofrenda ausente del menú en 3 páginas, "Lorem ipsum" en galerías 1-4 y Presidente Infantil, 11 `meta description` duplicadas, TikTok genérico en 27 footers, `©`, alt erróneos en `galerias.html`, acordeones `<div>` operables por teclado (con `defaultPrevented` compartido con `accessibility.js`), jerarquía h1→h2 en Nuevos Falleros, `aria-controls` en el selector de idioma, fallbacks alineados con `translations.json` y claves nuevas `calendario.*`/`countdown.finalizado`/`consentimientoTituloMenor`. CSS: contraste de la tarjeta meteo y del hover del formulario, `padding: auto` eliminado, media queries móviles a `767px` (11 baselines *tablet* regenerados). Build: `updateDistSitemapsLastmod` cubre también `sitemap-google.xml` y `sitemap-ai-optimized.xml`. Nuevo `tests/html-integrity.e2e.spec.js` en la smoke (14 specs). Ver restricción *Auditoría de errores de sep-2026*; decisiones pendientes del usuario listadas en su punto 8.
 - **4.21.4** — Documentación: nueva regla de trabajo en *Reglas importantes* — **revisar los sitemaps de `src/` antes de cada commit** (entradas ES + `/va/` de cada página publicable, sin URLs retiradas, `lastmod` del día en `sitemap.xml`/`sitemap-google.xml`/`sitemap-ai-optimized.xml` para las páginas tocadas y `sitemap-index.xml` si cambia alguno); procedimiento detallado en `docs/build-and-deploy.md`. Pies de versión de `README.md` y `docs/` sincronizados. Sin cambios en el sitio servido.
