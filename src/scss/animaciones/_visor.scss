@@ -13,10 +13,24 @@
     font-style: normal;
     background: v.$blanco-hueso;
     display: flex;
+    flex-direction: column; // título + bloc (v4.24.2)
     justify-content: center;
     align-items: center;
+    gap: 2.4rem;
     // min-height: 100vh;
     padding: 5rem 0;
+
+    // Nombre de la galería sobre el bloc, para saber dónde estamos
+    &__titulo {
+      margin: 0;
+      padding: 0 1.5rem;
+      text-align: center;
+      font-family: v.$font-family-secondary;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 700;
+      color: v.$primary-color;
+      text-transform: none;
+    }
   }
  .notepad {
     position: relative;

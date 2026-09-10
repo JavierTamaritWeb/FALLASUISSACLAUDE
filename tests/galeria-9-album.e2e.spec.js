@@ -53,6 +53,8 @@ test.describe('galeria_9 — álbum a doble página (≥1200px)', () => {
 
   test('muestra 40 páginas, dos activas lado a lado y el indicador de rango', async ({ page }) => {
     await abrirGaleria(page);
+    // Nombre de la galería sobre el bloc (v4.24.2, en las 9 galerías)
+    await expect(page.locator('.visor__titulo')).toHaveText('Fallera Mayor Infantil 2026-27');
     const s = await estadoAlbum(page);
     expect(s.total).toBe(TOTAL);
     expect(s.activas).toBe(2);
@@ -201,6 +203,7 @@ test.describe('galeria_9 — /va/ pre-renderizado', () => {
     await page.goto('/va/galeria_9.html');
     await page.waitForSelector('.notepad__page--active img', { timeout: 10000 });
     await expect(page.locator('h1.heading-inner')).toContainText('Fallera Major Infantil 2026-27');
+    await expect(page.locator('.visor__titulo')).toHaveText('Fallera Major Infantil 2026-27');
     await expect(page.locator('.galeria-video__titulo')).toHaveText('Vídeo de la proclamació');
     await expect(page.locator('#galeriaVideoAmpliar')).toHaveText('Ampliar vídeo');
     await expect(page.locator('.galeria-video__acciones a.boton[download]')).toHaveText('Descarregar vídeo');

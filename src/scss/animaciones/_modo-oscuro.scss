@@ -907,6 +907,9 @@ body.modo-oscuro .visor {
 body.modo-oscuro .notepad__page {
     background-color: v.$gris-medio-azulado;
 }
+body.modo-oscuro .visor__titulo {
+    color: v.$primary-color;
+}
 
 // Vídeo de galería (galeria_9): mismo fondo que .visor, glow coral
 body.modo-oscuro .galeria-video {
