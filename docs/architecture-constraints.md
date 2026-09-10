@@ -410,9 +410,9 @@ grep -o 'data-i18n="nav.inicio"[^>]*>[^<]*' dist/index.html      # Debe contener
 npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 ```
 
-## 12. Galería de Ofrenda: alto de la figura sin depender de `aspect-ratio` (v4.20.0 — galería retirada en v4.21.1)
+## 12. Galería de Ofrenda: alto de la figura sin depender de `aspect-ratio` (v4.20.0 — galería retirada en v4.21.2)
 
-> **Estado:** la galería `.ofrenda__galeria`/`.ofrenda__figura` ya no existe (v4.21.1: las 3 fotos son miniaturas de Historia/Archivos/Ofrendas con el patrón trigger + lightbox compartido, que tiene un `<img>` en flujo y no sufre este fallo). Se conserva como **lección de WebKit** para cualquier contenedor futuro con solo hijos absolutos; el test guardia de la galería se sustituyó por "la sección Ofrenda no lleva galería de fotos".
+> **Estado:** la galería `.ofrenda__galeria`/`.ofrenda__figura` ya no existe (v4.21.2: las 3 fotos son miniaturas de Historia/Archivos/Ofrendas con el patrón trigger + lightbox compartido, que tiene un `<img>` en flujo y no sufre este fallo). Se conserva como **lección de WebKit** para cualquier contenedor futuro con solo hijos absolutos; el test guardia de la galería se sustituyó por "la sección Ofrenda no lleva galería de fotos".
 
 **Síntoma:** en Safari (macOS e iOS) las 3 fotos de `.ofrenda__galeria` (`index.html` + `ofrenda.html`) no se veían; en Chrome y Firefox sí. Los archivos estaban en el servidor y respondían 200: era un fallo de layout, no de deploy.
 
@@ -452,4 +452,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 9 de septiembre de 2026 - v4.21.1
+Última actualización: 9 de septiembre de 2026 - v4.21.2
