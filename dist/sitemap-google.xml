@@ -6,7 +6,7 @@
   <!-- Homepage with rich content -->
   <url>
     <loc>https://fallasuissa.es/</loc>
-    <lastmod>2026-09-09T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -19,7 +19,7 @@
   <!-- La Falla - Historia -->
   <url>
     <loc>https://fallasuissa.es/lafalla.html</loc>
-    <lastmod>2026-09-09T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -27,7 +27,7 @@
   <!-- Llibret digital 2025-2026 -->
   <url>
     <loc>https://fallasuissa.es/llibret_2026.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -35,7 +35,7 @@
   <!-- Organigrama -->
   <url>
     <loc>https://fallasuissa.es/organigrama.html</loc>
-    <lastmod>2026-09-09T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -43,7 +43,7 @@
   <!-- Eventos - High priority para Google -->
   <url>
     <loc>https://fallasuissa.es/eventos.html</loc>
-    <lastmod>2026-09-09T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -51,21 +51,21 @@
   <!-- Blog/Noticias -->
   <url>
     <loc>https://fallasuissa.es/blog.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/blog-somni.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/blog-anima.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -73,35 +73,35 @@
   <!-- Galerías -->
   <url>
     <loc>https://fallasuissa.es/galerias.html</loc>
-    <lastmod>2026-06-22T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/galeria_1.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/galeria_2.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/galeria_3.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/galeria_4.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -109,7 +109,7 @@
   <!-- Calendario -->
   <url>
     <loc>https://fallasuissa.es/calendario.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -117,7 +117,7 @@
   <!-- Meteo -->
   <url>
     <loc>https://fallasuissa.es/meteo.html</loc>
-    <lastmod>2026-06-12T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -125,7 +125,7 @@
   <!-- Mapa -->
   <url>
     <loc>https://fallasuissa.es/mapa.html</loc>
-    <lastmod>2026-06-13T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>

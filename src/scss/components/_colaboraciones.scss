@@ -47,7 +47,7 @@
     font-weight: bold;
     color: v.$primary-color;
     font-size: clamp(2.8rem, 4vw, 4.2rem);
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       font-size: v.$font-size-medium;
     }
   }

@@ -83,8 +83,8 @@ Tras editar `src/data/translations.json` corre `npm run build` para regenerar el
 
 El build ejecuta `updateDistSitemapsLastmod` para actualizar `lastmod` en:
 
-- `dist/sitemap.xml`
-- `dist/sitemap-index.xml`
+- `dist/sitemap.xml`, `dist/sitemap-google.xml` y `dist/sitemap-ai-optimized.xml` (por URL, según el mtime del HTML; los dos últimos conservan su formato fecha-hora `T00:00:00+01:00`)
+- `dist/sitemap-index.xml` (por sitemap, según el mtime del archivo)
 
 La fecha se calcula usando el `mtime` real de los archivos en `dist/`.
 
@@ -248,4 +248,4 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 10 de septiembre de 2026 - v4.21.4
+Última actualización: 10 de septiembre de 2026 - v4.22.0

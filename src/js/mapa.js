@@ -1,6 +1,12 @@
 // Definir límites para Web Mercator: Sur: -85.0511, Norte: 85.0511, Oeste: -180, Este: 180.
 const bounds = [[-85.0511, -180], [85.0511, 180]];
 
+// Leaflet viene de un CDN: sin él no hay mapa, pero tampoco un ReferenceError
+if (typeof L === 'undefined') {
+  console.error('Leaflet no está disponible: el mapa no se inicializa.');
+  throw new Error('Leaflet no disponible');
+}
+
 const map = L.map('map', {
   fullscreenControl: true,
   maxBounds: bounds // Se restringe el desplazamiento a estos límites.

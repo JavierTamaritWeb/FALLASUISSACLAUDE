@@ -40,7 +40,7 @@
         padding: 1rem;
       }
       
-      @media (max-width: 768px) {
+      @media (max-width: 767px) {
         padding: 0.5rem;
       }
     }
@@ -65,7 +65,7 @@
       }
 
       // Ajustes específicos para móviles
-      @media (max-width: 768px) {
+      @media (max-width: 767px) {
         margin: 0.5rem auto;
         padding: 0.75rem;
         border-radius: 6px;

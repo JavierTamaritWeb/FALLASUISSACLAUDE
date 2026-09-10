@@ -158,7 +158,10 @@
   
       const diff = target - now;
       if (diff <= 0) {
-        countdownMessage.textContent = "¡El ciclo ha finalizado!";
+        const rawFinalizado = getNestedTranslation("countdown.finalizado");
+        if (countdownMessage) {
+          countdownMessage.textContent = rawFinalizado === "countdown.finalizado" ? "¡El ciclo ha finalizado!" : rawFinalizado;
+        }
         if (clock) clock.style.display = "none";
         if (fallasMessage) fallasMessage.style.display = "block";
       } else {
@@ -174,7 +177,7 @@
         secondsSpan.textContent = seconds;
       }
     } else {
-      countdownMessage.textContent = "Fechas no configuradas";
+      if (countdownMessage) countdownMessage.textContent = "Fechas no configuradas";
       if (clock) clock.style.display = "none";
       if (fallasMessage) fallasMessage.style.display = "none";
     }

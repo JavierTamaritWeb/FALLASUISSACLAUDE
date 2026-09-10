@@ -124,7 +124,7 @@
     @media (max-width: 480px) {
       padding: 0 0.5rem;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       padding: 0 1rem;
     }
   }
@@ -139,7 +139,7 @@
       font-size: 1.8rem !important;
     }
   }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     padding: 1rem;
     margin: 1rem;
     &__titulo {
@@ -256,7 +256,7 @@
             flex-direction: column;
             padding: 0 0.5rem;
           }
-          @media (max-width: 768px) {
+          @media (max-width: 767px) {
             padding: 0 1rem;
           }
         }
@@ -359,7 +359,7 @@
           @media (max-width: 480px) {
             font-size: 1.5rem;
           }
-          @media (max-width: 768px) {
+          @media (max-width: 767px) {
             font-size: 1.8rem;
           }
           @media (min-width: 768px) {
@@ -449,7 +449,7 @@ p {
       font-size: 1.8rem !important;
     }
   }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     padding: 0rem !important;
     margin: 0rem !important;
     margin-top: 2rem !important;
@@ -474,7 +474,7 @@ p {
       margin: 0 auto;
       padding: 0 0.5rem;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       padding: 0 1rem;
       margin: 0 auto;
       width: 100%;
@@ -521,7 +521,7 @@ p {
       font-size: 1.4rem !important;
     }
   }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     padding: 1rem;
     margin: 1rem;
     &__texto1,
@@ -543,7 +543,7 @@ p {
     @media (max-width: 480px) {
       font-size: 1.8rem;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       font-size: 2rem;
     }
     @media (min-width: 768px) {
@@ -565,7 +565,7 @@ p {
       margin-left: 0;
       padding: 1rem;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       margin-left: 0;
       padding: 1rem;
     }
@@ -581,7 +581,7 @@ p {
       font-size: 1.8rem;
       padding-top: 0;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       font-size: 2rem;
       padding-top: 0;
     }

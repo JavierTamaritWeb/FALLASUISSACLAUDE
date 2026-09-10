@@ -21,6 +21,19 @@ function initAccordion() {
 
   // Añade el evento click a cada encabezado
   headers.forEach(function(header) {
+    // Los titulares antiguos son <div>: sin esto no reciben foco ni responden
+    // a Enter/Espacio (los <button> ya lo hacen de forma nativa).
+    if (header.tagName !== 'BUTTON') {
+      if (!header.hasAttribute('role')) header.setAttribute('role', 'button');
+      if (!header.hasAttribute('tabindex')) header.setAttribute('tabindex', '0');
+      if (!header.hasAttribute('aria-expanded')) header.setAttribute('aria-expanded', 'false');
+      header.addEventListener('keydown', function(e) {
+        if ((e.key === 'Enter' || e.key === ' ') && !e.defaultPrevented) {
+          e.preventDefault();
+          header.click();
+        }
+      });
+    }
     header.addEventListener('click', function() {
       const section = this.parentElement; // La sección actual
 

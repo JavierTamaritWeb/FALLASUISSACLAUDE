@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Falla Suissa - L'Alqueria del Favero - La Falla</title>
-  <meta name="description" content="Página de inicio de Fallas Suïssa - L'Alqueria del Favero. Descubre nuestros eventos, noticias y galería para vivir la experiencia completa de la Falla.">
+  <meta name="description" content="Conoce la Falla Suïssa - L'Alqueria del Favero: el monumento, la Plana Mayor, la historia, el organigrama y los archivos de la comisión.">
   <meta name="keywords" content="fallas, tradición, suïssa, eventos, noticias, galería">
   <meta name="robots" content="index, follow">
 <!-- Compatibilidad para IE -->
@@ -83,7 +83,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet">
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
@@ -95,7 +95,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=ce83844c8ef1">
+  <link rel="stylesheet" href="css/main.css?v=bae7f5345fa7">
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
   <link rel="canonical" href="https://fallasuissa.es/lafalla.html">
@@ -110,7 +110,7 @@
       <div class="header-inner__barra header-inner__barra--fixed">
         <div class="header__botones">
           <div class="header__lang">
-            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma">IDIOMA</button>
+            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma" aria-haspopup="true" aria-controls="langOptions" aria-expanded="false">IDIOMA</button>
             <div class="header__lang-options" id="langOptions">
               <button class="header__lang-option" data-lang="es">ESPAÑOL</button>
               <button class="header__lang-option" data-lang="va">VALENCIÀ</button>
@@ -129,15 +129,16 @@
         </div>
         <div class="header__notificacion" id="notificacion"></div>
         <nav class="navegacion" role="navigation" aria-label="Menú principal">
-          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html"></a>
-          <a class="navegacion__enlace active" data-i18n="nav.lafalla" href="lafalla.html" aria-current="page"></a>
-          <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.nuevosFalleros" href="nuevos-falleros.html"></a>
+          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html">Inicio</a>
+          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
+          <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html">Ofrenda</a>
+          <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Colaboraciones</a>
+          <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html">Eventos</a>
+          <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html">Deportes</a>
+          <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html">Meteo</a>
+          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html">Blog</a>
+          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html">Galería</a>
+          <a class="navegacion__enlace" data-i18n="nav.nuevosFalleros" href="nuevos-falleros.html">Nuevos Falleros</a>
         </nav>
       </div>
         
@@ -220,7 +221,7 @@
                                                   <picture>
                                                         <source srcset="img/FalleraMayor-2026-27.avif" type="image/avif">
                                                         <source srcset="img/FalleraMayor-2026-27.webp" type="image/webp">
-                                                        <img class="accordion__planamayor" src="img/FalleraMayor-2026-27.jpg" alt="Lucía Gutiérrez Martín, Fallera Mayor de la Falla Suïssa 2026-2027" data-i18n-alt="falla.nosotros.alt.falleraMayor" loading="eager">
+                                                        <img class="accordion__planamayor" width="300" height="400" src="img/FalleraMayor-2026-27.jpg" alt="Lucía Gutiérrez Martín, Fallera Mayor de la Falla Suïssa 2026-2027" data-i18n-alt="falla.nosotros.alt.falleraMayor" loading="eager">
                                                   </picture>
                                                   <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Abrir imagen ampliada</span>
                                                 </button>
@@ -253,7 +254,7 @@ Vivirá este reinado junto a su familia, sus amigas y toda la comisión, compart
                                                   <picture>
                                                         <source srcset="img/Presidente.avif" type="image/avif">
                                                         <source srcset="img/Presidente.webp" type="image/webp">
-                                                        <img class="accordion__planamayor" src="img/Presidente.jpg" alt="José Santos Quiles, Presidente de la Falla Suïssa" data-i18n-alt="falla.nosotros.alt.presidente" loading="eager">
+                                                        <img class="accordion__planamayor" width="300" height="400" src="img/Presidente.jpg" alt="José Santos Quiles, Presidente de la Falla Suïssa" data-i18n-alt="falla.nosotros.alt.presidente" loading="eager">
                                                   </picture>
                                                   <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Abrir imagen ampliada</span>
                                                 </button>
@@ -285,7 +286,7 @@ Vivirá este reinado junto a su familia, sus amigas y toda la comisión, compart
                                                     <picture>
                                                           <source srcset="img/FalleraMayorInfantil-2026-27.avif" type="image/avif">
                                                           <source srcset="img/FalleraMayorInfantil-2026-27.webp" type="image/webp">
-                                                          <img class="accordion__planamayor" src="img/FalleraMayorInfantil-2026-27.jpg" alt="Sofía Gómez Medina, Fallera Mayor Infantil de la Falla Suïssa 2026-2027" data-i18n-alt="falla.nosotros.alt.falleraMayorInfantil" loading="eager">
+                                                          <img class="accordion__planamayor" width="300" height="400" src="img/FalleraMayorInfantil-2026-27.jpg" alt="Sofía Gómez Medina, Fallera Mayor Infantil de la Falla Suïssa 2026-2027" data-i18n-alt="falla.nosotros.alt.falleraMayorInfantil" loading="eager">
                                                     </picture>
                                                     <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Abrir imagen ampliada</span>
                                                   </button>
@@ -321,7 +322,7 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
                                                   <picture>
                                                         <source srcset="img/PresidenteInfantil-2026-27.avif" type="image/avif">
                                                         <source srcset="img/PresidenteInfantil-2026-27.webp" type="image/webp">
-                                                        <img class="accordion__planamayor" src="img/PresidenteInfantil-2026-27.jpg" alt="Diego Gómez Medina, Presidente Infantil de la Falla Suïssa 2026-2027" data-i18n-alt="falla.nosotros.alt.presidenteInfantil" loading="eager">
+                                                        <img class="accordion__planamayor" width="300" height="400" src="img/PresidenteInfantil-2026-27.jpg" alt="Diego Gómez Medina, Presidente Infantil de la Falla Suïssa 2026-2027" data-i18n-alt="falla.nosotros.alt.presidenteInfantil" loading="eager">
                                                   </picture>
                                                   <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Abrir imagen ampliada</span>
                                                 </button>
@@ -330,9 +331,8 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
                                           </div>
                                           
 
-                                          <p class="accordion__texto" data-i18n="falla.nosotros.presiI.texto">
-                                            Contenido del nuevo apartado... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur nobis ipsam corporis dolorum fugit repellat earum assumenda?
-                                          </p>
+                                          <p class="accordion__texto" data-i18n="falla.nosotros.presiI.texto">Diego es energía, compañerismo y entusiasmo. Apasionado del fútbol y del espíritu de equipo, lleva en el corazón los valores del esfuerzo, la constancia y el juego limpio, cualidades que también lo definen como Presidente Infantil.
+Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra comisión, demostrando que liderar también es animar, sumar y hacer piña. Con su sonrisa y su pasión, Diego es fuerza e ilusión para nuestro presente y nuestro futuro.</p>
 
                                       </div>
                                 </div>
@@ -351,7 +351,7 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
                                           <picture>
                                               <source srcset="img/Escudo_falla.avif" type="image/avif">
                                               <source srcset="img/Escudo_falla.webp" type="image/webp">
-                                              <img class="accordion__escudo" src="img/Escudo_falla.png" alt="Imagen para La Directiva" loading="lazy">
+                                              <img class="accordion__escudo" src="img/Escudo_falla.png" alt="La Directiva de la Falla Suïssa" loading="lazy">
                                           </picture>
 
                                           <div class="accordion__directiva">
@@ -419,7 +419,7 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
                                           <div class="organigrama-contenedor">
 
                                               <section class="organigrama clickable" role="tree" aria-label="Organigrama">
-                                                <h2 class="organigrama__title" data-i18n="organigrama.titulo">Organigrama de La Falla</h2>
+                                                <h2 class="organigrama__title" data-i18n="organigrama.titulo">Organigrama de la Falla</h2>
                                                 
                                                 <!-- Presidente -->
                                                 <div class="organigrama__top" role="treeitem" aria-label="Presidente: José Santos Quiles">
@@ -457,7 +457,7 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
                                                             <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
                                                             <circle cx="9" cy="7" r="4"/>
                                                           </svg>
-                                                      <span data-i18n="organigrama.vicepresidentes">Vicepresidencias</span>    
+                                                      <span data-i18n="organigrama.vicepresidentes">Vicepresidentes</span>    
                                                       
                                                     </h3>
                                                     <div class="organigrama__subhead">
@@ -1073,13 +1073,13 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
           <a class="sociales__enlace" href="https://youtube.com">
             <span class="sociales__accesible">YouTube</span>
           </a>
-          <a class="sociales__enlace" href="https://tiktok.com">
+          <a class="sociales__enlace" href="https://tiktok.com/@fallasuissaalqueria">
             <span class="sociales__accesible">TikTok</span>
           </a>
         </nav>
       </div>
     </div>
-    <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados.</p>
+    <p class="derechos" data-i18n="footer.derechos">&copy; 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados.</p>
     <nav class="footer__legal">
       <a href="aviso-legal.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.aviso">Aviso Legal</a>
       <a href="privacidad.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.privacidad">Privacidad</a>
@@ -1089,12 +1089,12 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
   
   <!-- Scripts JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/swiper.js?v=ce83844c8ef1"></script>
-  <script src="js/acc.js?v=ce83844c8ef1"></script>
-  <script src="js/dark.js?v=ce83844c8ef1"></script>
-  <script src="js/lang.js?v=ce83844c8ef1"></script>
-  <script src="js/nav-menu.js?v=ce83844c8ef1"></script>
-  <script src="js/scroll-reveal.js?v=ce83844c8ef1" defer></script>
+  <script src="js/swiper.js?v=bae7f5345fa7"></script>
+  <script src="js/acc.js?v=bae7f5345fa7"></script>
+  <script src="js/dark.js?v=bae7f5345fa7"></script>
+  <script src="js/lang.js?v=bae7f5345fa7"></script>
+  <script src="js/nav-menu.js?v=bae7f5345fa7"></script>
+  <script src="js/scroll-reveal.js?v=bae7f5345fa7" defer></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -1105,9 +1105,9 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
       });
     }
   </script>
-  <script src="js/colaboraciones-lightbox.js?v=ce83844c8ef1" defer></script>
-  <script src="js/accessibility.js?v=ce83844c8ef1" defer></script>
+  <script src="js/colaboraciones-lightbox.js?v=bae7f5345fa7" defer></script>
+  <script src="js/accessibility.js?v=bae7f5345fa7" defer></script>
 
-  <script src="js/cookie-banner.js?v=ce83844c8ef1" defer></script>
+  <script src="js/cookie-banner.js?v=bae7f5345fa7" defer></script>
 </body>
 </html>

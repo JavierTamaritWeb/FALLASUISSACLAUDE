@@ -88,7 +88,6 @@
     gap: 2rem;
     justify-content: center;
     align-items: center;
-    padding: auto;
     
   }
 }
@@ -103,7 +102,9 @@
   padding: 1.5rem;
   background-color: v.$melocotin-claro;
   box-shadow: v.$box-shadow;
-  color: v.$blanco-hueso;
+  // Texto oscuro sobre melocotón: con $blanco-hueso la descripción, la
+  // sensación térmica y mín/máx eran ilegibles (contraste 1,3:1)
+  color: v.$gris-oscuro;
   border-radius: 1rem;
   margin-top: 2.5rem;
   position: relative;
@@ -249,7 +250,7 @@
 .clima-actual {
   font-size: v.$font-size-medium;
   color: v.$primary-color;
-  @media  (max-width: 768px) {
+  @media  (max-width: 767px) {
     font-size: v.$font-size-regular;
     
   }
@@ -355,7 +356,7 @@
 }
 
 .actual-desc {
-  color: v.$blanco;
+  color: v.$gris-oscuro; // legible sobre melocotón (modo oscuro lo repone en _modo-oscuro.scss)
   font-size: 2rem;
   text-transform: none;
 }

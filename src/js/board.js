@@ -2,7 +2,7 @@
 // para soportar servir la web desde un subdirectorio (p. ej. Live Server
 // sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
 // archivo y el segmento va/ final de la ruta actual.
-window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/, '').replace(/(^|\/)va\/$/, '$1');
 
 // js/board.js
 // Tablón de anuncios dinámico — multi-instancia
@@ -251,7 +251,9 @@ function renderNota(nota) {
   const lang = getCurrentBoardLang();
   // El contenido admite HTML de formato intencionado (<br>, énfasis, enlaces),
   // por eso se sanea con allowlist en vez de escaparse por completo.
-  const contenido = sanitizeBoardHtml(nota.contenido[lang] || nota.contenido.es);
+  // Una nota sin `contenido` (JSON editado a mano) no debe tumbar el tablón entero
+  const textoNota = (nota.contenido && (nota.contenido[lang] || nota.contenido.es)) || '';
+  const contenido = sanitizeBoardHtml(textoNota);
   const adjuntosValidos = getAdjuntosValidos(nota.adjuntos, lang);
   const hasAdjuntos = adjuntosValidos.length > 0;
   const imagenHTML = renderImagen(nota.imagen, lang);
@@ -355,9 +357,16 @@ async function initAllBoards() {
     return;
   }
 
+  // El listener se registra ANTES de esperar los fetch: si translations.json
+  // (cacheado) resolvía antes que board.json, translationsReady ya había pasado
+  // y el tablón se quedaba con el fallback en castellano en /va/.
+  document.addEventListener('translationsReady', renderAllBoards, { once: true });
+
   await Promise.all(Array.from(boards).map((el, i) => initBoardEl(el, i)));
 
-  document.addEventListener('translationsReady', renderAllBoards, { once: true });
+  if (window.translations) {
+    renderAllBoards();
+  }
 }
 
 document.addEventListener('langChanged', renderAllBoards);

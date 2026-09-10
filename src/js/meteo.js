@@ -2,7 +2,7 @@
 // para soportar servir la web desde un subdirectorio (p. ej. Live Server
 // sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
 // archivo y el segmento va/ final de la ruta actual.
-window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/, '').replace(/(^|\/)va\/$/, '$1');
 
 // js/meteo.js
 
@@ -184,7 +184,9 @@ function waitForTranslationsReady(timeoutMs = 2000) {
 
     const timeoutId = setTimeout(finish, timeoutMs);
 
-    document.addEventListener('translationsReady', handleTranslationsReady, { once: true });
+    // Sin { once: true }: el handler solo termina cuando las traducciones están
+    // realmente listas; finish() ya retira el listener.
+    document.addEventListener('translationsReady', handleTranslationsReady);
   });
 }
 
@@ -270,6 +272,10 @@ async function fetchCurrentWeather() {
   try {
     const response = await fetch(url);
     const data = await response.json();
+    // OpenWeather responde 200 con { cod: 401 } si la clave no es válida
+    if (!response.ok || (data.cod !== undefined && String(data.cod) !== '200')) {
+      throw new Error(`OpenWeather (actual): ${data.cod} ${data.message || ''}`.trim());
+    }
     updateCurrentWeather(data);
   } catch (error) {
     console.error('Error al obtener el clima actual:', error);
@@ -287,6 +293,9 @@ async function fetchForecast() {
   try {
     const response = await fetch(url);
     const data = await response.json();
+    if (!response.ok || (data.cod !== undefined && String(data.cod) !== '200')) {
+      throw new Error(`OpenWeather (previsión): ${data.cod} ${data.message || ''}`.trim());
+    }
     updateForecast(data);
   } catch (error) {
     console.error('Error al obtener la previsión:', error);

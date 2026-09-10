@@ -207,7 +207,7 @@ a:focus, button:focus, input:focus {
 /* 11. MOBILE PERFORMANCE */
 
 /* Reduce layout complexity on mobile */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .complex-layout {
     display: block;
   }

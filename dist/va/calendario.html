@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Falla Suïssa - L'Alqueria del Favero - Calendario</title>
-  <meta name="description" content="Página de inicio de Fallas Suïssa - L'Alqueria del Favero. Descubre nuestros eventos, noticias y galería para vivir la experiencia completa de la Falla.">
+  <meta name="description" content="Calendario de la Falla Suïssa - L'Alqueria del Favero: consulta por mes, día o categoría todos los actos falleros y añádelos a tu agenda.">
   <meta name="keywords" content="fallas, tradición, suïssa, eventos, noticias, galería">
   <meta name="robots" content="index, follow">
 <!-- Compatibilidad para IE -->
@@ -83,7 +83,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet">
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
@@ -94,7 +94,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" crossorigin="anonymous">
   <!-- Swiper CSS -->
 <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="../css/main.css?v=ce83844c8ef1">
+  <link rel="stylesheet" href="../css/main.css?v=bae7f5345fa7">
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
   <link rel="canonical" href="https://fallasuissa.es/va/calendario.html">
@@ -108,7 +108,7 @@
       <div class="header-inner__barra header-inner__barra--fixed">
         <div class="header__botones">
           <div class="header__lang">
-            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma" aria-expanded="false" tabindex="0">IDIOMA</button>
+            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma" aria-haspopup="true" aria-controls="langOptions" aria-expanded="false" tabindex="0">IDIOMA</button>
             <div class="header__lang-options" id="langOptions" role="menu" aria-labelledby="langSwitcher">
               <button class="header__lang-option" data-lang="es" role="menuitem" tabindex="-1">ESPAÑOL</button>
               <button class="header__lang-option" data-lang="va" role="menuitem" tabindex="-1">VALENCIÀ</button>
@@ -245,7 +245,7 @@
   <div id="icsModal" class="ics-modal oculto">
     <div class="ics-modal__contenido">
       <button class="ics-modal__cerrar" id="icsCerrarBtn">×</button>
-      <h2 id="icsModalTitulo" class="ics-modal__titulo" data-i18n="icsModal.titulo">Dia {date} ({dayName})</h2>
+      <h2 id="icsModalTitulo" class="ics-modal__titulo" data-i18n="icsModal.titulo" data-i18n-dynamic="true">Día {date} ({dayName})</h2>
       <label for="icsEvento" class="ics-modal__label" data-i18n="icsModal.evento">Esdeveniment</label>
       <!-- <input type="text" id="icsEvento" class="ics-modal__input" value=""> -->
       <input type="text" id="icsEvento" class="ics-modal__input" data-i18n-placeholder="icsModal.placeholderEvento" placeholder="Introduïu el títol de l'esdeveniment">
@@ -294,13 +294,13 @@
           <a class="sociales__enlace" href="https://youtube.com">
             <span class="sociales__accesible">YouTube</span>
           </a>
-          <a class="sociales__enlace" href="https://tiktok.com">
+          <a class="sociales__enlace" href="https://tiktok.com/@fallasuissaalqueria">
             <span class="sociales__accesible">TikTok</span>
           </a>
         </nav>
       </div>
     </div>
-    <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats.</p>
+    <p class="derechos" data-i18n="footer.derechos">© 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats.</p>
     <nav class="footer__legal">
       <a href="aviso-legal.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.aviso">Avís Legal</a>
       <a href="privacidad.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.privacidad">Privacitat</a>
@@ -308,14 +308,14 @@
     </nav>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="../js/dark.js?v=ce83844c8ef1"></script>
-  <script src="../js/lang.js?v=ce83844c8ef1"></script>
-  <script src="../js/nav-menu.js?v=ce83844c8ef1"></script>
-  <script src="../js/scroll-reveal.js?v=ce83844c8ef1" defer></script>
-  <script src="../js/calendario.js?v=ce83844c8ef1"></script>
-  <script src="../js/accessibility.js?v=ce83844c8ef1" defer></script>
+  <script src="../js/dark.js?v=bae7f5345fa7"></script>
+  <script src="../js/lang.js?v=bae7f5345fa7"></script>
+  <script src="../js/nav-menu.js?v=bae7f5345fa7"></script>
+  <script src="../js/scroll-reveal.js?v=bae7f5345fa7" defer></script>
+  <script src="../js/calendario.js?v=bae7f5345fa7"></script>
+  <script src="../js/accessibility.js?v=bae7f5345fa7" defer></script>
  
   
-  <script src="../js/cookie-banner.js?v=ce83844c8ef1" defer></script>
+  <script src="../js/cookie-banner.js?v=bae7f5345fa7" defer></script>
 </body>
 </html>

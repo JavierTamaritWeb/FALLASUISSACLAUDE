@@ -5,8 +5,8 @@
 // en cada subida de versión. Al cambiar los nombres, el handler de activate
 // purga los caches antiguos — sin el bump, los visitantes recurrentes con el
 // SW registrado seguirían viendo el HTML/CSS cacheado de la versión anterior.
-const CACHE_NAME = 'falla-suissa-v4.21.4';
-const CRITICAL_CACHE = 'falla-critical-v4.21.4';
+const CACHE_NAME = 'falla-suissa-v4.22.0';
+const CRITICAL_CACHE = 'falla-critical-v4.22.0';
 
 // Recursos críticos para cache inmediato
 const CRITICAL_RESOURCES = [
@@ -73,8 +73,8 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Solo manejar requests del mismo origen
-  if (url.origin !== location.origin) {
+  // Solo manejar requests GET del mismo origen (cache.put rechaza POST/HEAD)
+  if (request.method !== 'GET' || url.origin !== location.origin) {
     return;
   }
 
@@ -168,9 +168,9 @@ async function updateCacheInBackground(request) {
 
 // Detectar recursos críticos
 function isCriticalResource(pathname) {
-  return CRITICAL_RESOURCES.some(resource => 
-    pathname === resource || pathname.startsWith(resource)
-  );
+  // Igualdad estricta: con startsWith, '/' casaba con TODAS las rutas y el HTML
+  // acababa en cache-first (la rama network-first era inalcanzable)
+  return CRITICAL_RESOURCES.includes(pathname);
 }
 
 // Detectar páginas HTML

@@ -15,7 +15,6 @@
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    padding: auto;
   }
   &__pluma {
     width: 6rem;
@@ -246,7 +245,7 @@
     opacity: 0.85;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     padding: 3.5rem 0;
 
     &__article {

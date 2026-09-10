@@ -2,7 +2,7 @@
 // para soportar servir la web desde un subdirectorio (p. ej. Live Server
 // sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
 // archivo y el segmento va/ final de la ruta actual.
-window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/, '').replace(/(^|\/)va\/$/, '$1');
 
 // js/galeria_3.js
  
@@ -32,6 +32,14 @@ async function loadPages() {
   }
 }
 
+// Resuelve las rutas de imagen del JSON (relativas a la raíz del sitio, tipo
+// "img/...") con SITE_ROOT: en /va/ una ruta relativa cruda apuntaba a
+// va/img/... (404 en local, 301 en producción por la regla A2 del .htaccess).
+function resolveImageUrl(url) {
+  if (!url || /^(?:[a-z]+:|\/|\.\.?\/|#)/i.test(url)) return url;
+  return window.SITE_ROOT + url;
+}
+
 // 2. Generar las páginas en el DOM a partir del array "data"
 function createPages(dataPages) {
   dataPages.forEach((item, index) => {
@@ -49,7 +57,7 @@ function createPages(dataPages) {
     // Asigna data-i18n al caption si "note" contiene una clave,
     // y en caso contrario muestra el texto (o nada)
     article.innerHTML = `
-      <img src="${item.src}" alt="${item.alt}" />
+      <img src="${resolveImageUrl(item.src)}" alt="${item.alt}" />
       <div class="notepad__caption" ${item.note ? `data-i18n="${item.note}"` : ""}>
         ${!item.note ? "" : ""}
       </div>

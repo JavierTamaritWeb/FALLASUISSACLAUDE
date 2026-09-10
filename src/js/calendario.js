@@ -2,7 +2,7 @@
 // para soportar servir la web desde un subdirectorio (p. ej. Live Server
 // sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
 // archivo y el segmento va/ final de la ruta actual.
-window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/, '').replace(/(^|\/)va\/$/, '$1');
 
 // js/calendario.js
 
@@ -39,8 +39,8 @@ function renderizarLista(eventosFiltrados) {
   lista.innerHTML = '';
   if (eventosFiltrados.length === 0) {
     lista.innerHTML = `
-      <p class="reveal reveal--soft">No se han encontrado eventos que coincidan con los filtros seleccionados.</p>
-      <button id="btn-reset-filtros">Borrar filtros</button>
+      <p class="reveal reveal--soft">${translate("calendario.sinResultados")}</p>
+      <button id="btn-reset-filtros">${translate("calendario.borrarFiltros")}</button>
     `;
     document.getElementById('btn-reset-filtros').addEventListener('click', resetearFiltros);
     refreshCalendarReveal(lista);
@@ -102,6 +102,7 @@ function renderizarLista(eventosFiltrados) {
     
       abrirICSModal({
         date: d,
+        dateObj: dateObj,
         dayName: dayName,
         eventTitle: eventTitleTranslated,
         startTime: "00:00",
@@ -175,79 +176,6 @@ function getPriorityEvent(eventsArray) {
 // ================================
 // RENDERIZACIÓN DEL CALENDARIO
 // ================================
-
-function renderCalendarDetails(lang) {
-  const container = document.getElementById('descripcion-eventos-mes');
-  if (!container) return;
-  if (!window.translations || !window.translations[lang]) {
-    console.error("Las traducciones no están definidas para el idioma:", lang);
-    return;
-  }
-  const year = "2025";
-  const monthIndex = 3; // Abril
-  const monthName = (window.calendarData && window.calendarData[year] && window.calendarData[year].monthNames)
-                      ? window.calendarData[year].monthNames[monthIndex]
-                      : (window.MESES ? window.MESES[monthIndex] : "Abril");
-  let headerTemplate = window.translations[lang].calendario.eventosMes;
-  headerTemplate = headerTemplate.replace('{month}', monthName).replace('{year}', year);
-  container.innerHTML = `<h2>${headerTemplate}</h2>`;
-}
-
-function renderCalendarEvents(lang) {
-  const container = document.getElementById('lista-anuncios');
-  if (!container) return;
-  // Los eventos llegan por fetch en DOMContentLoaded: si aún no han cargado
-  // (p. ej. langChanged inmediato), no hay nada que renderizar todavía.
-  if (!Array.isArray(window.eventos)) return;
-  container.innerHTML = '';
-  window.eventos.forEach(event => {
-    const item = document.createElement('div');
-    item.classList.add('calendario-eventos__item');
-    item.classList.add(`calendario-eventos__item--${event.category.toLowerCase()}`);
-    item.classList.add('reveal', 'reveal--soft');
-    const banda = document.createElement('div');
-    banda.classList.add('calendario-eventos__banda');
-    item.appendChild(banda);
-    const titleEl = document.createElement('h2');
-    titleEl.classList.add('calendario-eventos__item-titulo');
-    titleEl.textContent = translateEventName(event.title, lang);
-    item.appendChild(titleEl);
-    const contentEl = document.createElement('p');
-    contentEl.classList.add('calendario-eventos__item-contenido');
-    contentEl.textContent = translateEventName(event.description, lang);
-    item.appendChild(contentEl);
-    const metaEl = document.createElement('div');
-    metaEl.classList.add('calendario-eventos__item-meta');
-    const dateSpan = document.createElement('span');
-    dateSpan.textContent = event.date;
-    metaEl.appendChild(dateSpan);
-    const catSpan = document.createElement('span');
-    catSpan.textContent = translateEventName(event.category, lang);
-    metaEl.appendChild(catSpan);
-    item.appendChild(metaEl);
-    item.addEventListener('click', () => {
-      const [year, m, d] = event.date.split('-').map(Number);
-      const dateObj = new Date(year, m - 1, d);
-      const dayName = obtenerNombreDia(dateObj);
-      abrirICSModal({
-        date: d,
-        dayName: dayName,
-        eventTitle: event.title,
-        startTime: "00:00",
-        endTime: "23:59",
-        notes: event.description
-      });
-    });
-    container.appendChild(item);
-  });
-
-  refreshCalendarReveal(container);
-}
-
-function renderCalendarContent(lang) {
-  renderCalendarDetails(lang);
-  renderCalendarEvents(lang);
-}
 
 // ================================
 // FUNCIONES DEL MINI CALENDARIO
@@ -337,6 +265,7 @@ function crearCeldaDia(d, mes, anio, eventosDelDia) {
     }
     abrirICSModal({
       date: d,
+      dateObj: dateObj,
       dayName: dayName,
       eventTitle: prefillEvent.eventTitle,
       startTime: "00:00",
@@ -494,11 +423,11 @@ function toggleModo() {
   if (contenedor.classList.contains('modo-sencillo')) {
     contenedor.classList.remove('modo-sencillo');
     contenedor.classList.add('modo-avanzado');
-    boton.textContent = "Cambiar a Modo Sencillo";
+    boton.textContent = translate("calendario.sencillo");
   } else {
     contenedor.classList.remove('modo-avanzado');
     contenedor.classList.add('modo-sencillo');
-    boton.textContent = "Cambiar a Modo Avanzado";
+    boton.textContent = translate("calendario.avanzado");
   }
 }
 
@@ -532,15 +461,14 @@ function getMonthName(index) {
 function mostrarDescripcionMes(eventosDelMes, mes, anio) {
   const contenedor = document.getElementById('descripcion-eventos-mes');
   contenedor.innerHTML = '';
-  const nombreMes = (window.calendarData && window.calendarData["2025"] && window.calendarData["2025"].monthNames)
-                      ? window.calendarData["2025"].monthNames[mes]
-                      : (window.MESES ? window.MESES[mes] : "Mes");
+  // Nombre del mes en el idioma activo (calendarData.json solo lo tiene en castellano)
+  const nombreMes = getMonthName(mes);
   const titulo = document.createElement('h2');
   titulo.textContent = translate("calendario.eventosMes").replace("{month}", nombreMes).replace("{year}", anio);
   contenedor.appendChild(titulo);
   if (eventosDelMes.length === 0) {
     const p = document.createElement('p');
-    p.textContent = "No hay eventos para este mes.";
+    p.textContent = translate("calendario.sinEventosMes");
     contenedor.appendChild(p);
     return;
   }
@@ -566,7 +494,14 @@ const icsHoraInicio = document.getElementById('icsHoraInicio');
 const icsHoraFin = document.getElementById('icsHoraFin');
 const icsNotas = document.getElementById('icsNotas');
 
-function abrirICSModal({ date, dayName, eventTitle, startTime, endTime, notes }) {
+// Fecha (objeto Date) del día elegido en el modal ICS; la usa generarICS.
+// Antes se generaba el .ics con una fecha fija (18-03-2025) y el día del
+// título se parseaba del texto del <h2>, así que cualquier evento se añadía
+// al calendario en esa fecha.
+let icsFechaSeleccionada = null;
+
+function abrirICSModal({ date, dateObj, dayName, eventTitle, startTime, endTime, notes }) {
+  icsFechaSeleccionada = dateObj instanceof Date ? dateObj : null;
   const rawTitulo = translate("icsModal.titulo");
   const tituloModal = rawTitulo.replace("{date}", date).replace("{dayName}", dayName);
   icsModalTitulo.textContent = tituloModal;
@@ -582,14 +517,12 @@ function cerrarICSModal() {
 }
 icsCerrarBtn.addEventListener('click', cerrarICSModal);
 icsAceptarBtn.addEventListener('click', () => {
-  const titulo = icsModalTitulo.textContent;
-  const [ , rawDay ] = titulo.split(" ");
   const eventTitle = icsEventoInput.value;
   const startTime = icsHoraInicio.value;
   const endTime = icsHoraFin.value;
   const notes = icsNotas.value;
   const icsData = generarICS({
-    dayLabel: rawDay,
+    fecha: icsFechaSeleccionada || new Date(),
     eventTitle,
     startTime,
     endTime,
@@ -604,14 +537,15 @@ icsAceptarBtn.addEventListener('click', () => {
   a.click();
   document.body.removeChild(a);
   cerrarICSModal();
-  mostrarNotificacion("Archivo ICS descargado con éxito", 4000);
+  if (typeof mostrarNotificacion === 'function') {
+    mostrarNotificacion(translate("calendario.icsDescargado"), 4000);
+  }
 });
 
-function generarICS({ dayLabel, eventTitle, startTime, endTime, notes }) {
-  const fakeDate = new Date(2025, 2, 18);
+function generarICS({ fecha, eventTitle, startTime, endTime, notes }) {
   const dtStamp = formatearFechaICS(new Date());
-  const dtStart = formatearFechaICS(combinarFechaHora(fakeDate, startTime));
-  const dtEnd   = formatearFechaICS(combinarFechaHora(fakeDate, endTime));
+  const dtStart = formatearFechaICS(combinarFechaHora(fecha, startTime));
+  const dtEnd   = formatearFechaICS(combinarFechaHora(fecha, endTime));
   return `
 BEGIN:VCALENDAR
 VERSION:2.0
@@ -656,12 +590,16 @@ function limpiarICS(str) {
 // ================================
 
 document.addEventListener('DOMContentLoaded', function() {
-  flatpickr("#filtro-rango-fecha", {
-    inline: false, 
-    mode: "range",
-    dateFormat: "d/m/Y",
-    rangeSeparator: " a "
-  });
+  // flatpickr viene de un CDN: si no ha cargado, el filtro de rango queda como
+  // input de texto pero el calendario y los eventos deben funcionar igual.
+  if (typeof flatpickr === 'function') {
+    flatpickr("#filtro-rango-fecha", {
+      inline: false,
+      mode: "range",
+      dateFormat: "d/m/Y",
+      rangeSeparator: " a "
+    });
+  }
   
   Promise.all([
     fetch(window.SITE_ROOT + 'data/eventos.json').then(response => response.json()),
@@ -734,7 +672,6 @@ function updateLanguage(newLang) {
     // Safari con localStorage bloqueado lanza SecurityError; la elección no persiste.
   }
   updateTranslations();
-  renderCalendarContent(currentLang);
   const event = new Event("langChanged");
   document.dispatchEvent(event);
   if (typeof actualizarVista === 'function') {
@@ -742,7 +679,15 @@ function updateLanguage(newLang) {
   }
 }
 
-// Suscribirse al evento "langChanged" para actualizar la interfaz
-document.addEventListener("langChanged", function() {
-  renderCalendarContent(currentLang);
-});
+// Re-render completo (leyenda, cuadrícula, descripción y lista con los filtros
+// activos) al cambiar de idioma y cuando llegan las traducciones: los eventos y
+// translations.json se cargan en paralelo y, si el calendario pintaba antes, se
+// veían las claves crudas ("calendarioLeyenda", "calendario.eventosMes").
+function refrescarCalendarioSiListo() {
+  if (Array.isArray(window.eventos)) {
+    currentLang = (typeof window.currentLanguage === 'string' && window.currentLanguage) || currentLang;
+    actualizarVista();
+  }
+}
+document.addEventListener("langChanged", refrescarCalendarioSiListo);
+document.addEventListener("translationsReady", refrescarCalendarioSiListo);

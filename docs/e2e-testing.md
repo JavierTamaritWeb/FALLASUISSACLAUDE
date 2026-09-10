@@ -506,6 +506,7 @@ Smoke suite por defecto:
 - `tests/countdown.e2e.spec.js`
 - `tests/banner-subvencion.e2e.spec.js`
 - `tests/index-colaboraciones.e2e.spec.js`
+- `tests/html-integrity.e2e.spec.js` (auditoría sep-2026, en la smoke): balance de etiquetas de todos los `dist/*.html` (un `</div>` sobrante pasó meses inadvertido) y comprobación de que `/va/galeria_1.html` carga sus imágenes desde `/img/` (rutas del JSON resueltas con `SITE_ROOT`).
 - `tests/historia-ofrendas.e2e.spec.js` (v4.18.0: panel Ofrenda 2026 con el `<video controls preload="none">` nativo — sin visor —, póster, `HEAD` del MP4 → `video/mp4`, ancho ≤ 64rem y 16:9, variante `/va/`, toggle ES→VA; v4.20.0: botón `.boton[download]` de descarga del MP4 — `HEAD` → `video/mp4`, centrado bajo la figura, texto VA; v4.21.3: 3 miniaturas `.ofrendas-grid` en una fila, badge `+` dibujado, lightbox compartido con pie y cierre `×`/Escape, alt/pie VA)
 - `tests/ofrenda-safari-assets.e2e.spec.js` (sección Ofrenda sin visor, figura "Próxima Ofrenda" y, desde v4.21.3, comprobación de que la sección ya no lleva galería de fotos — la guardia del alto 3:4 de v4.20.0 desapareció con la galería)
 - `tests/historia-monumentos.e2e.spec.js` (v4.15.0: panel Monumento 2025-26, grid 2/4 columnas, lightbox compartido, botón de descarga del vídeo dron con `HEAD` → `video/mp4`, variante `/va/`, toggle ES→VA)
@@ -617,4 +618,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 10 de septiembre de 2026 - v4.21.4
+Última actualización: 10 de septiembre de 2026 - v4.22.0

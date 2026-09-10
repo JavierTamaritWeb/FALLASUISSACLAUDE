@@ -36,6 +36,7 @@ RewriteCond %{DOCUMENT_ROOT}/.maintenance -f
 RewriteCond %{HTTP_COOKIE} !maint_bypass=__MAINT_TOKEN__
 RewriteCond %{QUERY_STRING} !(^|&)preview=__MAINT_TOKEN__($|&)
 RewriteCond %{REQUEST_URI} !=/mantenimiento.html
+RewriteCond %{REQUEST_URI} !^/\.well-known/
 RewriteRule ^ - [R=503,L]
 
 ErrorDocument 503 /mantenimiento.html
@@ -103,7 +104,8 @@ ErrorDocument 503 /mantenimiento.html
     ExpiresByType application/pdf "access plus 1 month"
 
     # HTML
-    ExpiresByType text/html "access plus 1 week"
+    # HTML sin caché de navegador: con "1 week" un deploy tardaba 7 días en verse
+    ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 
 # =======================================================================
@@ -112,6 +114,10 @@ ErrorDocument 503 /mantenimiento.html
 <IfModule mod_headers.c>
     <FilesMatch "\.(?:css|js|jpe?g|png|gif|svg|webp|avif|ico|woff|woff2|ttf|eot|otf)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    # El HTML se revalida siempre (los assets llevan cache-buster ?v=hash)
+    <FilesMatch "\.html$">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
     </FilesMatch>
 
     <Files "sw.js">
@@ -141,7 +147,7 @@ ErrorDocument 503 /mantenimiento.html
     # futuro, migrar esos inline a hashes o nonces y retirar 'unsafe-inline'.
     # Se emite por CABECERA HTTP (no por <meta>) para no romper el iframe de
     # Google Drive en nuevos-falleros.html (ver restricción en CLAUDE.md).
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.basemaps.cartocdn.com https://openweathermap.org https://*.openweathermap.org; connect-src 'self' https://api.openweathermap.org https://api.emailjs.com; frame-src https://drive.google.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.basemaps.cartocdn.com https://openweathermap.org https://*.openweathermap.org https://unpkg.com; connect-src 'self' https://api.openweathermap.org https://api.emailjs.com; frame-src https://drive.google.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
 
     # Referrer Policy
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
@@ -253,8 +259,8 @@ ErrorDocument 503 /mantenimiento.html
     AddType video/mp4 .mp4 .m4v
     
     # Fuentes
-    AddType application/font-woff .woff
-    AddType application/font-woff2 .woff2
+    AddType font/woff .woff
+    AddType font/woff2 .woff2
     
     # Manifesto
     AddType application/manifest+json .webmanifest

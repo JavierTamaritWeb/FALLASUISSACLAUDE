@@ -893,12 +893,17 @@ function updateLastmodInBlock(block, lastmod) {
 
 async function updateDistSitemapsLastmod() {
   const fallbackDate = new Date();
-  const distSitemapPath = path.join('dist', 'sitemap.xml');
   const distIndexPath = path.join('dist', 'sitemap-index.xml');
 
-  // 1) Actualizar dist/sitemap.xml: lastmod por URL basado en mtime del HTML en dist/
+  // 1) Actualizar los sitemaps de URLs (sitemap.xml, sitemap-google.xml y
+  //    sitemap-ai-optimized.xml): lastmod por URL según el mtime del HTML en
+  //    dist/. Se conserva el formato de fecha de cada archivo (solo fecha o
+  //    fecha-hora con zona).
+  for (const sitemapFile of ['sitemap.xml', 'sitemap-google.xml', 'sitemap-ai-optimized.xml']) {
+    const distSitemapPath = path.join('dist', sitemapFile);
   try {
     const sitemapXml = await fs.readFile(distSitemapPath, 'utf8');
+    const usesDateTime = /<lastmod>\d{4}-\d{2}-\d{2}T/.test(sitemapXml);
     const urlBlocks = [];
     let match;
     const urlRegex = /<url>([\s\S]*?)<\/url>/g;
@@ -929,7 +934,8 @@ async function updateDistSitemapsLastmod() {
         continue;
       }
 
-      const lastmod = await getFileLastmodISODate(distTargetPath, fallbackDate);
+      const lastmodDate = await getFileLastmodISODate(distTargetPath, fallbackDate);
+      const lastmod = usesDateTime ? `${lastmodDate}T00:00:00+01:00` : lastmodDate;
       const newBlock = updateLastmodInBlock(full, lastmod);
       if (newBlock !== full) {
         updatedSitemap = updatedSitemap.replace(full, newBlock);
@@ -943,6 +949,7 @@ async function updateDistSitemapsLastmod() {
     if (!(err && err.code === 'ENOENT')) {
       throw err;
     }
+  }
   }
 
   // 2) Actualizar dist/sitemap-index.xml: lastmod por sitemap basado en mtime del archivo sitemap en dist/

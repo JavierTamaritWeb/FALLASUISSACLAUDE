@@ -177,7 +177,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet">
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
@@ -218,7 +218,7 @@
         
         <div class="header__botones">
           <div class="header__lang">
-            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma" aria-expanded="false" tabindex="0">IDIOMA</button>
+            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma" aria-haspopup="true" aria-controls="langOptions" aria-expanded="false" tabindex="0">IDIOMA</button>
             <div class="header__lang-options" id="langOptions" role="menu" aria-labelledby="langSwitcher">
               <button class="header__lang-option" data-lang="es" role="menuitem" tabindex="-1">ESPAÑOL</button>
               <button class="header__lang-option" data-lang="va" role="menuitem" tabindex="-1">VALENCIÀ</button>
@@ -238,16 +238,16 @@
        
         <div class="header__notificacion" id="notificacion" aria-live="polite" aria-atomic="true"></div>
         <nav class="navegacion" role="navigation" aria-label="Navegación principal">
-          <a class="navegacion__enlace active" data-i18n="nav.inicio" href="index.html" aria-current="page"></a>
-          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html"></a>
-          <a class="navegacion__enlace" data-i18n="nav.nuevosFalleros" href="nuevos-falleros.html"></a>
+          <a class="navegacion__enlace active" data-i18n="nav.inicio" href="index.html" aria-current="page">Inicio</a>
+          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
+          <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html">Ofrenda</a>
+          <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Colaboraciones</a>
+          <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html">Eventos</a>
+          <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html">Deportes</a>
+          <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html">Meteo</a>
+          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html">Blog</a>
+          <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html">Galería</a>
+          <a class="navegacion__enlace" data-i18n="nav.nuevosFalleros" href="nuevos-falleros.html">Nuevos Falleros</a>
         </nav>
       </div>
       
@@ -488,9 +488,8 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
                                           </div>
                                           
 
-                                          <p class="accordion__texto" data-i18n="falla.nosotros.presiI.texto">
-                                            Contenido del nuevo apartado... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur nobis ipsam corporis dolorum fugit repellat earum assumenda?
-                                          </p>
+                                          <p class="accordion__texto" data-i18n="falla.nosotros.presiI.texto">Diego es energía, compañerismo y entusiasmo. Apasionado del fútbol y del espíritu de equipo, lleva en el corazón los valores del esfuerzo, la constancia y el juego limpio, cualidades que también lo definen como Presidente Infantil.
+Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra comisión, demostrando que liderar también es animar, sumar y hacer piña. Con su sonrisa y su pasión, Diego es fuerza e ilusión para nuestro presente y nuestro futuro.</p>
 
                                       </div>
                                 </div>
@@ -576,7 +575,7 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
                                           <div class="organigrama-contenedor">
 
                                               <section class="organigrama clickable" role="tree" aria-label="Organigrama">
-                                                <h2 class="organigrama__title" data-i18n="organigrama.titulo">Organigrama de La Falla</h2>
+                                                <h2 class="organigrama__title" data-i18n="organigrama.titulo">Organigrama de la Falla</h2>
                                                 
                                                 <!-- Presidente -->
                                                 <div class="organigrama__top" role="treeitem" aria-label="Presidente: José Santos Quiles">
@@ -614,7 +613,7 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
                                                             <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
                                                             <circle cx="9" cy="7" r="4"/>
                                                           </svg>
-                                                      <span data-i18n="organigrama.vicepresidentes">Vicepresidencias</span>    
+                                                      <span data-i18n="organigrama.vicepresidentes">Vicepresidentes</span>    
                                                       
                                                     </h3>
                                                     <div class="organigrama__subhead">
@@ -1325,7 +1324,7 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
           </a>
         </div>
 
-        <h3 class="tablon-titulo reveal reveal--soft" data-i18n="eventos.tablon">Tablón</h3>
+        <h3 class="tablon-titulo reveal reveal--soft" data-i18n="eventos.tablon">Tablón de anuncios</h3>
         <div class="marco-tablon">
           <div class="board" id="notesBoard">
             <!-- Contenido cargado dinámicamente por js/board.js -->
@@ -1436,30 +1435,30 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
       </div>
       <div class="galerias__grid">
         <div class="galeria reveal reveal--soft">
-          <h3 class="galeria__title" data-i18n="galeria.galeria1">Galeria 1</h3>
+          <h3 class="galeria__title" data-i18n="galeria.galeria1">Apuntá 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/apunta/Apunta25_26_15.jpg" alt="Evento 'Apúntate' temporada 2025-2026 - Falla Suïssa" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria1-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
+          <p class="galeria__texto" data-i18n="galeria.galeria1-texto">Galería de imágenes de la Apuntá 2025-26</p>
           <a class="boton" href="galeria_1.html" data-i18n="ver">Ver más</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
-          <h3 class="galeria__title" data-i18n="galeria.galeria2">Galeria 2</h3>
+          <h3 class="galeria__title" data-i18n="galeria.galeria2">Fallera Mayor Infantil 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/nombramientoFMI/Nombramiento_FMI2526-02.jpg" alt="Nombramiento Fallera Mayor Infantil 2025-2026" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria2-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
+          <p class="galeria__texto" data-i18n="galeria.galeria2-texto">Galerías de imágenes del Nombramiento de la Fallera Mayor Infantil 2025-26</p>
           <a class="boton" href="galeria_2.html" data-i18n="ver">Ver más</a>
 
         </div>
         <div class="galeria reveal reveal--soft">
-          <h3 class="galeria__title" data-i18n="galeria.galeria3">Galeria 3</h3>
+          <h3 class="galeria__title" data-i18n="galeria.galeria3">Monumento 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/monument/firma/2025_26/Firma_monumento_25_26.avif" alt="Firma del monumento fallero temporada 2025-2026" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria3-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
+          <p class="galeria__texto" data-i18n="galeria.galeria3-texto">Galería de imágenes del Monumento 2025-26</p>
           <a class="boton" href="galeria_3.html" data-i18n="ver">Ver más</a>
   
         </div>
         <div class="galeria reveal reveal--soft">
-          <h3 class="galeria__title" data-i18n="galeria.galeria4">Galeria 4</h3>
+          <h3 class="galeria__title" data-i18n="galeria.galeria4">Proclamación 2025-26</h3>
           <img class="galeria__imagen galeria__foto-mini" width="350" height="200" src="img/proclamacion/Proclamacion_12.jpg" alt="Proclamación de representantes - Valencia 2025" loading="lazy" decoding="async">
-          <p class="galeria__texto" data-i18n="galeria.galeria4-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate cumque molestiae ipsam vero quisquam vitae</p>
+          <p class="galeria__texto" data-i18n="galeria.galeria4-texto">Galería de imágenes de la Proclamación 2025-26</p>
           <a class="boton" href="galeria_4.html" data-i18n="ver">Ver más</a>
 
         </div>
@@ -1564,7 +1563,6 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
 
     </div>
   </div>
-  </div>
   <!-- Frieze Inferior con modificador bordered -->
   <div class="frieze frieze--bordered"></div>
   <!-- Footer -->
@@ -1605,7 +1603,7 @@ La comisión le desea un ejercicio inolvidable y estará a su lado para acompañ
         </nav>
       </div>
     </div>
-          <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados.</p>
+          <p class="derechos" data-i18n="footer.derechos">&copy; 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados.</p>
     <nav class="footer__legal">
       <a href="aviso-legal.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.aviso">Aviso Legal</a>
       <a href="privacidad.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.privacidad">Privacidad</a>

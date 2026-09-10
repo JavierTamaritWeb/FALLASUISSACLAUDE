@@ -18,7 +18,8 @@
       "horas": "horas",
       "minutos": "minutos",
       "segundos": "segundos",
-      "ongoing": "¡Estamos en Fallas!"
+      "ongoing": "¡Estamos en Fallas!",
+      "finalizado": "¡El ciclo ha finalizado!"
     },
     "falla": {
       "lafalla": "La Falla",
@@ -150,7 +151,7 @@
       "abrirExternoAria": "Abrir el documento de Nuevos Falleros en una pestaña nueva"
     },
     "quieres": {
-      "titulo": "¿Quieres saber mas sobre nuestra Falla?",
+      "titulo": "¿Quieres saber más sobre nuestra Falla?",
       "pregunta": "¿Quieres formar parte de nuestra Falla?",
       "nombre": "Nombre",
       "telefono": "Teléfono",
@@ -235,7 +236,7 @@
       "galeria4-texto": "Galería de imágenes de la Proclamación 2025-26",
       "galeria5": "Ofrenda de Frutos 2025-26",
       "galeria5-texto": "Galería de imágenes de la Ofrenda de Frutos 2025-26",
-      "galeria6": "Cremá 2025-26",
+      "galeria6": "Cremà 2025-26",
       "galeria6-texto": "Galería de imágenes de la Cremà 2025-26",
       "galeria7": "San Juan 2026",
       "galeria7-texto": "Galería de imágenes de San Juan 2026",
@@ -264,7 +265,12 @@
       "listaAnuncios": "Lista de anuncios",
       "eventosMes": "Eventos de {month} {year}",
       "nota1": "En nuestro calendario tenéis a vuestra disposición una práctica opción para incorporar cualquier evento a vuestra agenda personal. Además, podéis editar fácilmente la fecha, el título y añadir las observaciones que necesitéis.",
-      "nota2": "¡Todo está pensado para que mantener al día vuestra agenda fallera sea tan cómodo como ameno!"
+      "nota2": "¡Todo está pensado para que mantener al día vuestra agenda fallera sea tan cómodo como ameno!",
+      "sencillo": "Cambiar a modo sencillo",
+      "sinResultados": "No se han encontrado eventos que coincidan con los filtros seleccionados.",
+      "borrarFiltros": "Borrar filtros",
+      "sinEventosMes": "No hay eventos para este mes.",
+      "icsDescargado": "Archivo ICS descargado con éxito"
     },
     "calendarioEventos": {
       "Festivo": "Festivo",
@@ -329,7 +335,7 @@
     },
     "calendarioLeyenda": "Mostrando eventos de {mes} {anio}",
     "footer": {
-      "derechos": "@ 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados."
+      "derechos": "© 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados."
     },
     "legal": {
       "aviso": "Aviso Legal",
@@ -425,7 +431,8 @@
         "firmaProgenitor1": "Firma del progenitor / tutor 1",
         "firmaProgenitor2": "Firma del progenitor / tutor 2 (si patria potestad compartida)",
         "notaDobleFirma": "Cuando la patria potestad sea compartida, ambos progenitores deben firmar. En caso de patria potestad única, marque la casilla correspondiente del apartado anterior y adjunte la documentación acreditativa."
-      }
+      },
+      "consentimientoTituloMenor": "13. Consentimientos otorgados"
     },
     "notepad": {
       "caption": "",
@@ -576,7 +583,8 @@
       "horas": "hores",
       "minutos": "minuts",
       "segundos": "segons",
-      "ongoing": "Ja estem en Falles!"
+      "ongoing": "Ja estem en Falles!",
+      "finalizado": "El cicle ha finalitzat!"
     },
     "falla": {
       "lafalla": "La Falla",
@@ -822,7 +830,12 @@
       "listaAnuncios": "Llista d'anuncis",
       "eventosMes": "Esdeveniments de {month} {year}",
       "nota1": "Al nostre calendari teniu a la vostra disposició una pràctica opció per incorporar qualsevol esdeveniment a la vostra agenda personal. A més, podeu editar fàcilment la data, el títol i afegir les observacions que necessiteu.",
-      "nota2": "Tot està pensat perquè mantenir al dia la vostra agenda fallera sigui tan còmode com amè!"
+      "nota2": "Tot està pensat perquè mantenir al dia la vostra agenda fallera sigui tan còmode com amè!",
+      "sencillo": "Canvi a mode senzill",
+      "sinResultados": "No s'han trobat esdeveniments que coincidisquen amb els filtres seleccionats.",
+      "borrarFiltros": "Esborrar filtres",
+      "sinEventosMes": "No hi ha esdeveniments per a este mes.",
+      "icsDescargado": "Arxiu ICS descarregat amb èxit"
     },
     "calendarioEventos": {
       "Festivo": "Festiu",
@@ -887,7 +900,7 @@
     },
     "calendarioLeyenda": "Mostrant esdeveniments de {mes} {anio}",
     "footer": {
-      "derechos": "@ 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats."
+      "derechos": "© 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats."
     },
     "legal": {
       "aviso": "Avís Legal",
@@ -983,7 +996,8 @@
         "firmaProgenitor1": "Signatura del progenitor / tutor 1",
         "firmaProgenitor2": "Signatura del progenitor / tutor 2 (si pàtria potestat compartida)",
         "notaDobleFirma": "Quan la pàtria potestat siga compartida, ambdós progenitors han de signar. En cas de pàtria potestat única, marque la casella corresponent de l'apartat anterior i adjunte la documentació acreditativa."
-      }
+      },
+      "consentimientoTituloMenor": "13. Consentiments atorgats"
     },
     "notepad": {
       "caption": "",

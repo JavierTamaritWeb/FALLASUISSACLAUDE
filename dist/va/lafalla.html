@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Falla Suissa - L'Alqueria del Favero - La Falla</title>
-  <meta name="description" content="Página de inicio de Fallas Suïssa - L'Alqueria del Favero. Descubre nuestros eventos, noticias y galería para vivir la experiencia completa de la Falla.">
+  <meta name="description" content="Conoce la Falla Suïssa - L'Alqueria del Favero: el monumento, la Plana Mayor, la historia, el organigrama y los archivos de la comisión.">
   <meta name="keywords" content="fallas, tradición, suïssa, eventos, noticias, galería">
   <meta name="robots" content="index, follow">
 <!-- Compatibilidad para IE -->
@@ -83,7 +83,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet">
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
@@ -95,7 +95,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="../css/main.css?v=ce83844c8ef1">
+  <link rel="stylesheet" href="../css/main.css?v=bae7f5345fa7">
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
   <link rel="canonical" href="https://fallasuissa.es/va/lafalla.html">
@@ -110,7 +110,7 @@
       <div class="header-inner__barra header-inner__barra--fixed">
         <div class="header__botones">
           <div class="header__lang">
-            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma">IDIOMA</button>
+            <button class="header__lang-switcher" id="langSwitcher" aria-label="Cambiar idioma" aria-haspopup="true" aria-controls="langOptions" aria-expanded="false">IDIOMA</button>
             <div class="header__lang-options" id="langOptions">
               <button class="header__lang-option" data-lang="es">ESPAÑOL</button>
               <button class="header__lang-option" data-lang="va">VALENCIÀ</button>
@@ -130,7 +130,8 @@
         <div class="header__notificacion" id="notificacion"></div>
         <nav class="navegacion" role="navigation" aria-label="Menú principal">
           <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html">Inici</a>
-          <a class="navegacion__enlace active" data-i18n="nav.lafalla" href="lafalla.html" aria-current="page">La Falla</a>
+          <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
+          <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html">Ofrena</a>
           <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Col·laboracions</a>
           <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html">Esdeveniments</a>
           <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html">Esports</a>
@@ -218,7 +219,7 @@
                                                   <picture>
                                                         <source srcset="../img/FalleraMayor-2026-27.avif" type="image/avif">
                                                         <source srcset="../img/FalleraMayor-2026-27.webp" type="image/webp">
-                                                        <img class="accordion__planamayor" src="../img/FalleraMayor-2026-27.jpg" data-i18n-alt="falla.nosotros.alt.falleraMayor" loading="eager" alt="Lucía Gutiérrez Martín, Fallera Major de la Falla Suïssa 2026-2027">
+                                                        <img class="accordion__planamayor" width="300" height="400" src="../img/FalleraMayor-2026-27.jpg" data-i18n-alt="falla.nosotros.alt.falleraMayor" loading="eager" alt="Lucía Gutiérrez Martín, Fallera Major de la Falla Suïssa 2026-2027">
                                                   </picture>
                                                   <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
                                                 </button>
@@ -247,7 +248,7 @@ Viurà este regnat al costat de la seua família, les seues amigues i tota la co
                                                   <picture>
                                                         <source srcset="../img/Presidente.avif" type="image/avif">
                                                         <source srcset="../img/Presidente.webp" type="image/webp">
-                                                        <img class="accordion__planamayor" src="../img/Presidente.jpg" data-i18n-alt="falla.nosotros.alt.presidente" loading="eager" alt="José Santos Quiles, President de la Falla Suïssa">
+                                                        <img class="accordion__planamayor" width="300" height="400" src="../img/Presidente.jpg" data-i18n-alt="falla.nosotros.alt.presidente" loading="eager" alt="José Santos Quiles, President de la Falla Suïssa">
                                                   </picture>
                                                   <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
                                                 </button>
@@ -275,7 +276,7 @@ Viurà este regnat al costat de la seua família, les seues amigues i tota la co
                                                     <picture>
                                                           <source srcset="../img/FalleraMayorInfantil-2026-27.avif" type="image/avif">
                                                           <source srcset="../img/FalleraMayorInfantil-2026-27.webp" type="image/webp">
-                                                          <img class="accordion__planamayor" src="../img/FalleraMayorInfantil-2026-27.jpg" data-i18n-alt="falla.nosotros.alt.falleraMayorInfantil" loading="eager" alt="Sofía Gómez Medina, Fallera Major Infantil de la Falla Suïssa 2026-2027">
+                                                          <img class="accordion__planamayor" width="300" height="400" src="../img/FalleraMayorInfantil-2026-27.jpg" data-i18n-alt="falla.nosotros.alt.falleraMayorInfantil" loading="eager" alt="Sofía Gómez Medina, Fallera Major Infantil de la Falla Suïssa 2026-2027">
                                                     </picture>
                                                     <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
                                                   </button>
@@ -307,7 +308,7 @@ La comissió li desitja un exercici inoblidable i estarà al seu costat per a ac
                                                   <picture>
                                                         <source srcset="../img/PresidenteInfantil-2026-27.avif" type="image/avif">
                                                         <source srcset="../img/PresidenteInfantil-2026-27.webp" type="image/webp">
-                                                        <img class="accordion__planamayor" src="../img/PresidenteInfantil-2026-27.jpg" data-i18n-alt="falla.nosotros.alt.presidenteInfantil" loading="eager" alt="Diego Gómez Medina, President Infantil de la Falla Suïssa 2026-2027">
+                                                        <img class="accordion__planamayor" width="300" height="400" src="../img/PresidenteInfantil-2026-27.jpg" data-i18n-alt="falla.nosotros.alt.presidenteInfantil" loading="eager" alt="Diego Gómez Medina, President Infantil de la Falla Suïssa 2026-2027">
                                                   </picture>
                                                   <span class="visually-hidden" data-i18n="ofrenda.ampliarAria">Obrir imatge ampliada</span>
                                                 </button>
@@ -334,7 +335,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
                                           <picture>
                                               <source srcset="../img/Escudo_falla.avif" type="image/avif">
                                               <source srcset="../img/Escudo_falla.webp" type="image/webp">
-                                              <img class="accordion__escudo" src="../img/Escudo_falla.png" alt="Imagen para La Directiva" loading="lazy">
+                                              <img class="accordion__escudo" src="../img/Escudo_falla.png" alt="La Directiva de la Falla Suïssa" loading="lazy">
                                           </picture>
 
                                           <div class="accordion__directiva">
@@ -1049,13 +1050,13 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
           <a class="sociales__enlace" href="https://youtube.com">
             <span class="sociales__accesible">YouTube</span>
           </a>
-          <a class="sociales__enlace" href="https://tiktok.com">
+          <a class="sociales__enlace" href="https://tiktok.com/@fallasuissaalqueria">
             <span class="sociales__accesible">TikTok</span>
           </a>
         </nav>
       </div>
     </div>
-    <p class="derechos" data-i18n="footer.derechos">@ 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats.</p>
+    <p class="derechos" data-i18n="footer.derechos">© 2026 Falla Suïssa - L'Alqueria del Favero. Tots els drets reservats.</p>
     <nav class="footer__legal">
       <a href="aviso-legal.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.aviso">Avís Legal</a>
       <a href="privacidad.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.privacidad">Privacitat</a>
@@ -1065,12 +1066,12 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
   
   <!-- Scripts JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="../js/swiper.js?v=ce83844c8ef1"></script>
-  <script src="../js/acc.js?v=ce83844c8ef1"></script>
-  <script src="../js/dark.js?v=ce83844c8ef1"></script>
-  <script src="../js/lang.js?v=ce83844c8ef1"></script>
-  <script src="../js/nav-menu.js?v=ce83844c8ef1"></script>
-  <script src="../js/scroll-reveal.js?v=ce83844c8ef1" defer></script>
+  <script src="../js/swiper.js?v=bae7f5345fa7"></script>
+  <script src="../js/acc.js?v=bae7f5345fa7"></script>
+  <script src="../js/dark.js?v=bae7f5345fa7"></script>
+  <script src="../js/lang.js?v=bae7f5345fa7"></script>
+  <script src="../js/nav-menu.js?v=bae7f5345fa7"></script>
+  <script src="../js/scroll-reveal.js?v=bae7f5345fa7" defer></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -1081,9 +1082,9 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
       });
     }
   </script>
-  <script src="../js/colaboraciones-lightbox.js?v=ce83844c8ef1" defer></script>
-  <script src="../js/accessibility.js?v=ce83844c8ef1" defer></script>
+  <script src="../js/colaboraciones-lightbox.js?v=bae7f5345fa7" defer></script>
+  <script src="../js/accessibility.js?v=bae7f5345fa7" defer></script>
 
-  <script src="../js/cookie-banner.js?v=ce83844c8ef1" defer></script>
+  <script src="../js/cookie-banner.js?v=bae7f5345fa7" defer></script>
 </body>
 </html>

@@ -129,7 +129,8 @@
 
   &:hover {
     background-color: v.$azul-verdoso;
-    color: v.$blanco;
+    // Texto oscuro sobre turquesa: en blanco el texto escrito desaparecía (1,8:1)
+    color: v.$negro-casi;
   }
 }
 

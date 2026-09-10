@@ -2,7 +2,7 @@
 // para soportar servir la web desde un subdirectorio (p. ej. Live Server
 // sirviendo la raíz del repo con el sitio en /dist/). Elimina el nombre de
 // archivo y el segmento va/ final de la ruta actual.
-window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/(?:va\/)?[^/]*$/, '');
+window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/, '').replace(/(^|\/)va\/$/, '$1');
 
 //js/lang.es
 
@@ -205,6 +205,8 @@ if (langSwitcher && langOptions) {
         console.warn('No se pudo guardar el idioma seleccionado (localStorage bloqueado).');
       }
       window.currentLanguage = currentLang;
+      // <html lang> debe seguir al idioma mostrado (lectores de pantalla, corrector, SEO)
+      document.documentElement.lang = currentLang === 'va' ? 'ca' : currentLang;
       langOptions.classList.remove('active');
       langSwitcher.setAttribute('aria-expanded', 'false');
       actualizarLabelIdioma();

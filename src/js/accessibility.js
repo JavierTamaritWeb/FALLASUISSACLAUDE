@@ -14,7 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
     interactiveElements.forEach(element => {
       element.addEventListener('keydown', function(e) {
         // Enter y Espacio para activar elementos
-        if (e.key === 'Enter' || e.key === ' ') {
+        // Si otro script ya ha gestionado la tecla (p. ej. acc.js en los
+        // titulares del acordeón), no volver a hacer click: se anularía.
+        if ((e.key === 'Enter' || e.key === ' ') && !e.defaultPrevented) {
           if (element.tagName === 'BUTTON' || element.getAttribute('role') === 'button') {
             e.preventDefault();
             element.click();

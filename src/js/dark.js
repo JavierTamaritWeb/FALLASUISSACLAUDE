@@ -101,7 +101,9 @@ function forzarActualizacionTemaIOS() {
 }
 
 const botonModoOscuro = document.getElementById('botonModoOscuro');
-botonModoOscuro.setAttribute('aria-label', 'Alternar modo oscuro');
+if (botonModoOscuro) {
+  botonModoOscuro.setAttribute('aria-label', 'Alternar modo oscuro');
+}
 
 let transicionAClaroTimeoutId;
 
@@ -314,7 +316,8 @@ let notificationTimeout;
  */
 function mostrarNotificacion(mensaje, duracion = 4000) {
   const notificacion = document.getElementById('notificacion');
-  
+  if (!notificacion) return;
+
   // Evitar duplicados inmediatos del mismo mensaje
   if (notificacion.classList.contains('mostrar') && notificacion.textContent === mensaje) {
     return;
