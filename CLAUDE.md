@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.22.3 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.22.4 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -136,7 +136,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.22.3).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.22.4).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -310,6 +310,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.22.4** — Organigrama (`index.html`, `lafalla.html`, `organigrama.html`), Delegación Infantil: se retiran Raquel Rubio, Vanessa Alarcón y Patricia Alarcón y entra Marta Pastor (que sigue también como delegada de Eventos); queda Sara Medina → Delia Caravantes, Marta Pastor. Baselines visuales de organigrama regenerados.
 - **4.22.3** — Organigrama: las cabeceras coral del `organigrama__subhead` (vicepresidentes, secretaría, área económica, delegación infantil) pasan a tener la misma altura en todas las secciones (`min-height` de dos líneas) y **reborde negro** (`border-color: v.$negro`, antes coral sobre coral). Baselines visuales de organigrama regenerados.
 - **4.22.2** — Organigrama (`index.html`, `lafalla.html`, `organigrama.html`): se retira el nodo "Cristina Camaña" de Delegación Infantil (quedan Delia Caravantes, Raquel Rubio, Vanessa Alarcón y Patricia Alarcón). Baselines visuales de organigrama (móvil y tablet) regenerados.
 - **4.22.1** — Organigrama (`index.html`, `lafalla.html`, `organigrama.html`): se retira el nodo "Mamen Ramos · Delegada Lotería" (y su `Person` del Schema.org de `eventos.html`/`organigrama.html`) y las tarjetas pasan a tener **tamaño uniforme** en todos los breakpoints (cabeceras y columnas con `flex: 1 1 0`, tarjetas de columna al 100 % con altura mínima de dos líneas); `.desplazado` eliminado. Baselines visuales de organigrama regenerados.
