@@ -21,6 +21,7 @@ module.exports = defineConfig({
     '**/nosotros-directiva.e2e.spec.js',
     '**/accordion-sin-recorte.e2e.spec.js',
     '**/escudo-enlace.e2e.spec.js',
+    '**/galeria-9-album.e2e.spec.js',
     '**/scss-guardrails.e2e.spec.js'
   ]
 });

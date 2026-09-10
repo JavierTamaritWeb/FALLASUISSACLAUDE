@@ -908,6 +908,17 @@ body.modo-oscuro .notepad__page {
     background-color: v.$gris-medio-azulado;
 }
 
+// Vídeo de galería (galeria_9): mismo fondo que .visor, glow coral
+body.modo-oscuro .galeria-video {
+    background-color: v.$secondary-color;
+}
+body.modo-oscuro .galeria-video__video {
+    box-shadow: 0 0.3rem 0.8rem rgba(255, 111, 97, 0.18);
+}
+body.modo-oscuro .galeria-video__pie {
+    color: v.$gris-muy-claro;
+}
+
 /* ----------------------------------------------
    MODO OSCURO QUIERES
 ------------------------------------------------ */

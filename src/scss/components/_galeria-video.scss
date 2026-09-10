@@ -1,0 +1,57 @@
+// components/_galeria-video.scss
+// Vídeo vertical (9:16) bajo el álbum de una galería (v4.24.0, galeria_9).
+// <video controls> nativo, sin visor propio: mismo lenguaje visual que el
+// vídeo de Historia/Archivos/Ofrendas pero con proporción retrato.
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.galeria-video {
+  background: v.$blanco-hueso;
+  padding: 0 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  &__titulo {
+    font-family: v.$font-family-secondary;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    color: v.$primary-color;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__figura {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    width: 100%;
+    max-width: 36rem; // retrato: 360px de ancho → 640px de alto
+  }
+
+  &__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    background-color: v.$negro;
+    border-radius: v.$border-radius;
+    border: 2px solid v.$primary-color;
+    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.35);
+  }
+
+  &__pie {
+    text-align: center;
+    font-size: 1.5rem;
+    color: v.$gris-oscuro;
+  }
+
+  &__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+}

@@ -242,7 +242,18 @@
       "galeria7": "San Juan 2026",
       "galeria7-texto": "Galería de imágenes de San Juan 2026",
       "galeria8": "Representantes 2026-27",
-      "galeria8-texto": "Galería de imágenes de los Representantes 2026-27"
+      "galeria8-texto": "Galería de imágenes de los Representantes 2026-27",
+      "galeria9": "Fallera Mayor Infantil 2026-27",
+      "galeria9-texto": "Galería de la proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27",
+      "galeria9Video": {
+        "titulo": "Vídeo de la proclamación",
+        "pie": "Proclamación de Sofía Gómez Medina, Fallera Mayor Infantil 2026-27",
+        "aria": "Vídeo de la proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa",
+        "ampliar": "Ampliar vídeo",
+        "ampliarAria": "Ver el vídeo de la proclamación a pantalla completa",
+        "descargar": "Descargar vídeo",
+        "descargarAria": "Descargar el vídeo de la proclamación (MP4, 19 MB)"
+      }
     },
     "calendario": {
       "titulo": "Calendario",
@@ -437,7 +448,8 @@
     },
     "notepad": {
       "caption": "",
-      "indicator": "Página {current} de {total}"
+      "indicator": "Página {current} de {total}",
+      "indicadorRango": "Páginas {from}-{to} de {total}"
     },
     "ver": "Ver más",
     "anterior": "Anterior",
@@ -808,7 +820,18 @@
       "galeria7": "Sant Joan 2026",
       "galeria7-texto": "Galeria d'imatges de Sant Joan 2026",
       "galeria8": "Representants 2026-27",
-      "galeria8-texto": "Galeria d'imatges dels Representants 2026-27"
+      "galeria8-texto": "Galeria d'imatges dels Representants 2026-27",
+      "galeria9": "Fallera Major Infantil 2026-27",
+      "galeria9-texto": "Galeria de la proclamació de Sofía Gómez Medina com a Fallera Major Infantil 2026-27",
+      "galeria9Video": {
+        "titulo": "Vídeo de la proclamació",
+        "pie": "Proclamació de Sofía Gómez Medina, Fallera Major Infantil 2026-27",
+        "aria": "Vídeo de la proclamació de Sofía Gómez Medina com a Fallera Major Infantil 2026-27 de la Falla Suïssa",
+        "ampliar": "Ampliar vídeo",
+        "ampliarAria": "Veure el vídeo de la proclamació a pantalla completa",
+        "descargar": "Descarregar vídeo",
+        "descargarAria": "Descarregar el vídeo de la proclamació (MP4, 19 MB)"
+      }
     },
     "calendario": {
       "titulo": "Calendari",
@@ -1003,7 +1026,8 @@
     },
     "notepad": {
       "caption": "",
-      "indicator": "Pàgina {current} de {total}"
+      "indicator": "Pàgina {current} de {total}",
+      "indicadorRango": "Pàgines {from}-{to} de {total}"
     },
     "ver": "Veure més",
     "anterior": "Anterior",

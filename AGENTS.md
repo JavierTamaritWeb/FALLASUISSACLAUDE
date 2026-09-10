@@ -85,7 +85,7 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
 - `src/` - **All source files**:
   - `src/scss/` - Modular SCSS (imports order in `main.scss`: abstracts > base > optimization > layout > animaciones > components > sociales)
   - `src/js/` - ES6+ modules loaded per page
-  - `src/data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-6].json` (note: `blog.json` removed in v4.6.0)
+  - `src/data/` - JSON: `translations.json`, `board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-9].json` (one per gallery `galeria_1`–`galeria_9`; `blog.json` removed in v4.6.0)
   - `src/img/` - Raster + vector source images (build copies + generates WebP/AVIF into `dist/img/`)
   - `src/pdf/` - PDFs with HTML wrappers for favicon/social preview
   - `src/seo/` - Sitemaps, schema, robots variants

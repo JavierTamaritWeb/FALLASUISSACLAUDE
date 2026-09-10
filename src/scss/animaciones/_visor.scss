@@ -200,6 +200,65 @@
     }
 }
   
+// ---------------------------------------------------------------
+// Modo álbum (v4.24.0): solo con .notepad--album y a partir de 1200px.
+// Dos páginas a la vez (izquierda / derecha) con lomo central; el JS
+// (galeria_9.js) marca la segunda con --derecha y pasa de dos en dos.
+// Por debajo de 1200px este bloque no aplica: bloc idéntico al resto.
+// ---------------------------------------------------------------
+@media (min-width: 1200px) {
+  .notepad--album {
+    max-width: 1180px;      // dos páginas de ~575px
+    aspect-ratio: 16 / 10;  // 1180 × 737: cabe un retrato 9:16 de ~560px de alto
+
+    // Lomo central: sombra suave a ambos lados de la costura
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 6rem;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 3;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.06) 42%,
+        rgba(0, 0, 0, 0.18) 50%,
+        rgba(0, 0, 0, 0.06) 58%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+
+    .notepad__page {
+      width: 50%;
+      left: 0;
+      padding: 24px 28px 72px; // hueco inferior para la navegación
+      transform-origin: right center; // la hoja izquierda gira sobre el lomo
+
+      img {
+        max-width: 92%;
+        max-height: 100%;
+
+        &:hover {
+          transform: scale(1.06); // el 1.2 base se sale de media página
+        }
+      }
+
+      &--derecha {
+        left: 50%;
+        transform-origin: left center; // la hoja derecha gira sobre el lomo
+      }
+    }
+
+    .notepad__navigation {
+      padding: 0 32px;
+    }
+  }
+}
+
 .animate-icon {
   animation: fadeInIcon 2s ease-in-out;
 }
