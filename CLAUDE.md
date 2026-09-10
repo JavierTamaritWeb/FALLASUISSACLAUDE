@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.22.8 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.22.9 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -136,7 +136,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.22.8).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.22.9).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -310,6 +310,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.22.9** — Fix: el traslado de Pablo Pallardó a Secretaría de v4.22.8 solo se aplicó en `index.html`/`lafalla.html`; se completa en `organigrama.html` (y su typo "Javie Tamarit"). Baselines visuales de organigrama regenerados.
 - **4.22.8** — Organigrama (`index.html`/`lafalla.html`/`organigrama.html`): la tarjeta "Pablo Pallardó · Delegado Deportes" pasa de la columna de Protocolo y Deportes (que queda solo con la cabecera de Prados Ramos) a la sección Secretaría, debajo de Javier Tamarit (Delegado Web); typo "Javie Tamarit" corregido en `organigrama.html`. Baselines visuales de organigrama regenerados.
 - **4.22.7** — Organigrama, Vicepresidencias (`index.html`/`lafalla.html`/`organigrama.html` + Schema.org `Person` de `eventos.html`/`organigrama.html`): se retira Rodrigo Sobero; Pablo Cortés pasa a vicepresidente de Festejos y Maite Cabezuelo a vicepresidenta de Eventos (sale de la columna de delegados; en `organigrama.html` sustituye a Marta Soriano, con lo que las tres páginas quedan por fin con las mismas cabeceras: Maite Cabezuelo · Eventos, Prados Ramos · Protocolo y Deportes, Pablo Cortés · Festejos). Baselines visuales de organigrama regenerados.
 - **4.22.6** — Organigrama, Festejos: se retira Miguel Prieto (`index.html`/`lafalla.html`/`organigrama.html` y `Person` del Schema.org de `eventos.html`/`organigrama.html`). Baselines visuales de organigrama regenerados.
