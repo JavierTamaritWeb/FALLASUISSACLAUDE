@@ -1,5 +1,6 @@
 // tests/fullscreen-fallback.e2e.spec.js
 // Verifica que el visor de imágenes funciona con y sin Fullscreen API (iPhone Safari fallback)
+// Desde v4.25.0 el bloc muestra dos páginas activas a ≥1200px: se usa .first().
 
 const { test, expect } = require('@playwright/test');
 
@@ -21,7 +22,7 @@ test.describe('Fullscreen / Lightbox fallback en galerías', () => {
     await disableFullscreenAPI(page);
 
     // Clic en la imagen activa
-    await page.locator('.notepad__page--active img').click();
+    await page.locator('.notepad__page--active img').first().click();
 
     // El overlay debe aparecer
     const overlay = page.locator('#fullscreen-fallback');
@@ -41,7 +42,7 @@ test.describe('Fullscreen / Lightbox fallback en galerías', () => {
     await disableFullscreenAPI(page);
 
     // Abrir
-    await page.locator('.notepad__page--active img').click();
+    await page.locator('.notepad__page--active img').first().click();
     const overlay = page.locator('#fullscreen-fallback');
     await expect(overlay).toBeVisible({ timeout: 3000 });
 
@@ -57,7 +58,7 @@ test.describe('Fullscreen / Lightbox fallback en galerías', () => {
     await disableFullscreenAPI(page);
 
     // Abrir
-    await page.locator('.notepad__page--active img').click();
+    await page.locator('.notepad__page--active img').first().click();
     const overlay = page.locator('#fullscreen-fallback');
     await expect(overlay).toBeVisible({ timeout: 3000 });
 
@@ -75,7 +76,7 @@ test.describe('Fullscreen / Lightbox fallback en galerías', () => {
     expect(hasFs).toBe(true);
 
     // Clic en imagen - usa API nativa, no overlay
-    await page.locator('.notepad__page--active img').click();
+    await page.locator('.notepad__page--active img').first().click();
     await page.waitForTimeout(500);
 
     // El overlay fallback NO debe existir o no ser visible

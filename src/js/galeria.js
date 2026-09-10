@@ -4,15 +4,18 @@
 // archivo y el segmento va/ final de la ruta actual.
 window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/, '').replace(/(^|\/)va\/$/, '$1');
 
-// js/galeria_9.js — Fallera Mayor Infantil 2026-27
+// js/galeria.js — bloc de notas compartido por TODAS las galerías (v4.25.0).
 //
-// Mismo bloc de notas que galeria_1-8 con un MODO ÁLBUM (v4.24.0): a partir
-// de 1200px (.notepad--album) se muestran DOS páginas a la vez, izquierda y
-// derecha, como un álbum de fotos abierto; los botones pasan de dos en dos y
-// el indicador usa la clave notepad.indicadorRango. Por debajo de 1200px el
-// comportamiento es idéntico al de las demás galerías (una página).
-// Cada foto sigue siendo un <article class="notepad__page"> con su <img>:
-// es el contrato que espera fullscreen.js para ampliarlas.
+// Sustituye a los nueve clones galeria_1.js … galeria_9.js (idénticos salvo
+// el JSON que cargaban). El JSON lo indica el HTML en el propio bloc:
+//   <div class="notepad notepad--album" data-source="data/dataPagesN.json">
+//
+// MODO ÁLBUM: con la clase .notepad--album y a partir de 1200px se muestran
+// DOS páginas a la vez, izquierda y derecha, como un álbum de fotos abierto;
+// los botones pasan de dos en dos y el indicador usa notepad.indicadorRango.
+// Por debajo de 1200px (o sin la clase) se muestra una página, como siempre.
+// Cada foto es un <article class="notepad__page"> con su <img>: es el
+// contrato que espera fullscreen.js para ampliarlas.
 
 // Selección de elementos
 const notepad = document.querySelector(".notepad");
@@ -42,8 +45,9 @@ function alinear(index) {
 // 1. Cargar JSON y crear páginas
 async function loadPages() {
   try {
-    const response = await fetch(window.SITE_ROOT + "data/dataPages9.json");
-    if (!response.ok) throw new Error("No se pudo cargar dataPages9.json");
+    const fuente = (notepad && notepad.dataset.source) || "data/dataPages1.json";
+    const response = await fetch(window.SITE_ROOT + fuente);
+    if (!response.ok) throw new Error("No se pudo cargar " + fuente);
     const data = await response.json();
     createPages(data);
     updateUI();
@@ -70,9 +74,13 @@ function createPages(dataPages) {
     article.classList.add("notepad__page");
     article.setAttribute("aria-hidden", "true");
 
-    // Asigna data-i18n al caption si "note" contiene una clave
+    // Asigna data-i18n al caption si "note" contiene una clave. Una página
+    // sin "src" (p. ej. el "Fin" de galeria_3) solo lleva el texto, sin <img>.
+    const imagen = item.src
+      ? `<img src="${resolveImageUrl(item.src)}" alt="${item.alt}" loading="lazy" decoding="async" />`
+      : "";
     article.innerHTML = `
-      <img src="${resolveImageUrl(item.src)}" alt="${item.alt}" loading="lazy" decoding="async" />
+      ${imagen}
       <div class="notepad__caption" ${item.note ? `data-i18n="${item.note}"` : ""}></div>
     `;
 
@@ -81,7 +89,13 @@ function createPages(dataPages) {
     pages.push(article);
   });
   // Las dos primeras páginas se cargan de inmediato (son las visibles)
-  pages.slice(0, 2).forEach((pg) => pg.querySelector("img").removeAttribute("loading"));
+  pages.slice(0, 2).forEach((pg) => quitarLazy(pg));
+}
+
+// Quita el lazy de la imagen de una página (si la tiene) para precargarla
+function quitarLazy(pg) {
+  const img = pg.querySelector("img");
+  if (img) img.removeAttribute("loading");
 }
 
 // 3. Mostrar la vista que empieza en el índice actual (1 o 2 páginas)
@@ -104,9 +118,7 @@ function showPage(index) {
     pg.style.zIndex = "3";
   });
   // Precarga de la siguiente vista para que el paso de hoja no muestre huecos
-  pages.slice(index + porVista(), index + porVista() * 2).forEach((pg) => {
-    pg.querySelector("img").removeAttribute("loading");
-  });
+  pages.slice(index + porVista(), index + porVista() * 2).forEach((pg) => quitarLazy(pg));
 }
 
 // 4. Actualizar la interfaz (botones e indicador)
@@ -183,7 +195,7 @@ document.addEventListener("translationsReady", () => {
   if (pages.length) updateUI();
 });
 
-// 7. Vídeo de la proclamación: botón "Ampliar" con la Fullscreen API nativa
+// 7. Vídeo bajo el álbum (solo en las galerías que lo tengan): botón "Ampliar" con la Fullscreen API nativa
 // (webkitEnterFullscreen es la única vía en iPhone Safari). Solo se encadena
 // .catch si la llamada devuelve promesa (la API prefijada devuelve undefined).
 (function initVideoAmpliar() {

@@ -165,7 +165,8 @@
   <section class="visor reveal">
     <!-- Nombre de la galería sobre el bloc (v4.24.2): el h1 del header queda fuera de vista al hacer scroll -->
     <h2 class="visor__titulo" data-i18n="galeria.galeria3">Monumento 2025-26</h2>
-    <div class="notepad" role="region" aria-label="Bloc de notas interactivo">
+    <!-- .notepad--album: a partir de 1200px el bloc se abre a doble página (js/galeria.js, v4.25.0) -->
+    <div class="notepad notepad--album" role="region" aria-label="Bloc de notas interactivo" data-source="data/dataPages3.json">
         <!-- Aquí NO hay páginas estáticas; se generarán en JS. -->
         <div class="notepad__navigation">
           <button id="prevBtn" class="notepad__button" disabled data-i18n="anterior">← Anterior</button>
@@ -227,7 +228,7 @@
   </footer>
 
   <script src="js/fullscreen.js" defer></script>
-  <script src="js/galeria_3.js"></script>
+  <script src="js/galeria.js"></script>
   <script src="js/lang.js"></script>
   <script src="js/dark.js"></script>
   <script src="js/nav-menu.js"></script>

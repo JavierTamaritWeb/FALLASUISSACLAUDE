@@ -1,7 +1,9 @@
 // tests/galeria-9-album.e2e.spec.js
 // Galería Fallera Mayor Infantil 2026-27 (galeria_9, v4.24.0): bloc en modo
 // álbum (dos páginas a partir de 1200px, una por debajo) y vídeo vertical
-// nativo con botón de ampliar y descarga. Corre contra dist/ (npm run build).
+// nativo con botón de ampliar y descarga. Desde v4.25.0 el modo álbum lo
+// comparten las 9 galerías (js/galeria.js): el último bloque lo comprueba en
+// galeria_1–galeria_8. Corre contra dist/ (npm run build).
 
 const { test, expect } = require('@playwright/test');
 
@@ -37,8 +39,9 @@ async function estadoAlbum(page) {
           left: r.left - nb.left,
           top: r.top - nb.top,
           width: r.width,
-          src: img.currentSrc || img.src,
-          cargada: img.complete && img.naturalWidth > 0,
+          // Páginas solo de texto (sin src en el JSON, p. ej. "Fin" de galeria_3) no llevan <img>
+          src: img ? (img.currentSrc || img.src) : '',
+          cargada: img ? img.complete && img.naturalWidth > 0 : null,
           ariaHidden: a.getAttribute('aria-hidden')
         };
       })
@@ -216,4 +219,35 @@ test.describe('galeria_9 — /va/ pre-renderizado', () => {
     expect(s.paginas.every((p) => p.cargada && IMG_RE.test(p.src))).toBe(true);
     expect(malas).toEqual([]);
   });
+});
+
+test.describe('modo álbum compartido (js/galeria.js) en galeria_1–galeria_8', () => {
+  for (const n of [1, 2, 3, 4, 5, 6, 7, 8]) {
+    test(`galeria_${n}: dos páginas a 1280px, una a 1024px, JSON propio`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      const fuentes = [];
+      page.on('request', (req) => { if (/dataPages\d+\.json/.test(req.url())) fuentes.push(req.url()); });
+      await abrirGaleria(page, `/galeria_${n}.html`);
+      // Carga SU JSON (y no el de otra galería): data-source del bloc
+      expect(fuentes.some((u) => u.endsWith(`/data/dataPages${n}.json`))).toBe(true);
+      expect(fuentes.every((u) => u.endsWith(`/data/dataPages${n}.json`))).toBe(true);
+      await expect(page.locator('script[src*="js/galeria.js?"], script[src$="js/galeria.js"]')).toHaveCount(1);
+      await expect(page.locator(`script[src*="js/galeria_${n}.js"]`)).toHaveCount(0);
+
+      const s = await estadoAlbum(page);
+      expect(s.total).toBeGreaterThan(0);
+      const esperadas = Math.min(2, s.total);
+      expect(s.activas).toBe(esperadas);
+      if (esperadas === 2) {
+        expect(s.derechas).toBe(1);
+        expect(s.indicador).toBe(`Páginas 1-2 de ${s.total}`);
+        expect(Math.abs(s.paginas[1].left - s.notepadWidth / 2)).toBeLessThan(1.5);
+      }
+      expect(s.paginas.every((p) => p.cargada !== false)).toBe(true);
+
+      await page.setViewportSize({ width: 1024, height: 800 });
+      await expect.poll(() => page.locator('.notepad__page--active').count()).toBe(1);
+      expect((await estadoAlbum(page)).indicador).toBe(`Página 1 de ${s.total}`);
+    });
+  }
 });

@@ -92,7 +92,7 @@
   
   <!-- Swiper CSS -->
 <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="../css/main.css?v=8a09204a25a0">
+  <link rel="stylesheet" href="../css/main.css?v=60e6fe6ce5fb">
 
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
@@ -167,7 +167,8 @@
   <section class="visor reveal">
     <!-- Nombre de la galería sobre el bloc (v4.24.2): el h1 del header queda fuera de vista al hacer scroll -->
     <h2 class="visor__titulo" data-i18n="galeria.galeria4">Proclamació 2025-26</h2>
-    <div class="notepad" role="region" aria-label="Bloc de notas interactivo">
+    <!-- .notepad--album: a partir de 1200px el bloc se abre a doble página (js/galeria.js, v4.25.0) -->
+    <div class="notepad notepad--album" role="region" aria-label="Bloc de notas interactivo" data-source="data/dataPages4.json">
         <!-- Aquí NO hay páginas estáticas; se generarán en JS. -->
         <div class="notepad__navigation">
           <button id="prevBtn" class="notepad__button" disabled data-i18n="anterior">Anterior</button>
@@ -228,13 +229,13 @@
     </nav>
   </footer>
 
-  <script src="../js/fullscreen.js?v=8a09204a25a0" defer></script>
-  <script src="../js/galeria_4.js?v=8a09204a25a0"></script>
-  <script src="../js/lang.js?v=8a09204a25a0"></script>
-  <script src="../js/dark.js?v=8a09204a25a0"></script>
-  <script src="../js/nav-menu.js?v=8a09204a25a0"></script>
-  <script src="../js/scroll-reveal.js?v=8a09204a25a0" defer></script>
+  <script src="../js/fullscreen.js?v=60e6fe6ce5fb" defer></script>
+  <script src="../js/galeria.js?v=60e6fe6ce5fb"></script>
+  <script src="../js/lang.js?v=60e6fe6ce5fb"></script>
+  <script src="../js/dark.js?v=60e6fe6ce5fb"></script>
+  <script src="../js/nav-menu.js?v=60e6fe6ce5fb"></script>
+  <script src="../js/scroll-reveal.js?v=60e6fe6ce5fb" defer></script>
   
-  <script src="../js/cookie-banner.js?v=8a09204a25a0" defer></script>
+  <script src="../js/cookie-banner.js?v=60e6fe6ce5fb" defer></script>
 </body>
 </html>
