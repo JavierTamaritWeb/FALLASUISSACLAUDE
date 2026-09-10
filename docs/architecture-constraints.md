@@ -12,7 +12,7 @@ Evitar regresiones que ya ocurrieron y que hoy están controladas por combinacio
 
 Regla:
 
-El backdrop del menú desplegable (ahora presente en **todos** los tamaños, no solo en móvil) debe seguir insertándose dentro de `.header__barra`, no en `body`. Además: el backdrop usa `inset: -100vh -100vw` (la barra tiene `backdrop-filter` y es su bloque contenedor) y la regla `> *:not(.navegacion):not(.nav-backdrop)` de la barra debe seguir excluyéndolo.
+El backdrop del menú desplegable (ahora presente en **todos** los tamaños, no solo en móvil) debe seguir insertándose dentro de `.header__barra`, no en `body`. Además: el backdrop usa `inset: -100vh -100vw` (se introdujo cuando la barra llevaba `backdrop-filter` en el propio elemento y era su bloque contenedor; desde v4.23.6 el blur vive solo en el `::before` de la barra — ver §13 — y el backdrop se posiciona respecto al viewport, donde los insets negativos siguen cubriéndolo entero: consérvalos) y la regla `> *:not(.navegacion):not(.nav-backdrop)` de la barra debe seguir excluyéndolo.
 
 Por qué:
 
@@ -428,7 +428,28 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 3. Cualquier contenedor nuevo con **solo hijos absolutos** + `aspect-ratio` dentro de un grid/flex debe seguir este mismo patrón (o tener un hijo en flujo que aporte alto).
 4. Test guardia: `tests/ofrenda-safari-assets.e2e.spec.js` › "la galería reserva el alto 3:4 sin depender de aspect-ratio" (3 figuras con alto 4/3 del ancho, `align-self: start`, `::before` en bloque con el padding correcto e imágenes cargadas).
 
-## 13. Qué hacer antes de tocar una zona sensible
+## 13. Menú desplegable: cristal real y apilamiento del header (v4.23.5-v4.23.6)
+
+**Síntoma (10-sep-2026):** con el menú hamburguesa abierto, en escritorio (1) en modo oscuro el panel conservaba el azul del modo claro, (2) el hero, la cenefa de azulejos y las tarjetas del organigrama se veían **nítidos** a través del panel, y (3) en `organigrama.html`, al hacer scroll, la cenefa y la cabecera blanca "Organigrama de la Falla" se pintaban **encima** del menú. Hicieron falta tres releases (4.23.5 subió la opacidad, luego opaco, y 4.23.6 dio con las dos causas reales); no repetir el rodeo.
+
+**Causas (dos, independientes):**
+1. **Backdrop root.** `.header__barra`/`.header-inner__barra` llevaban `backdrop-filter: blur(10px)` en el propio elemento además de en su `::before`. Un elemento con `backdrop-filter` es *backdrop root*: sus descendientes solo pueden difuminar lo que hay dentro de él. El desplegable `.navegacion` es hijo de la barra, así que su `backdrop-filter` no veía la página: el panel era translúcido **sin** blur y cualquier opacidad menor de 1 dejaba ver el contenido. Además, la regla oscura `body.modo-oscuro .navegacion` estaba dentro de `@media (max-width: 767px)` desde antes de v4.14.0 (cuando la nav pasó a ser desplegable en todos los tamaños) y en escritorio no se aplicaba.
+2. **Contexto de apilamiento del header.** `.header`/`.header-inner` tenían `position: relative; z-index: 10`. La barra fija (`z-index: 2000`) y el menú (`2500`) viven dentro de ese contexto, así que frente al resto de la página valen 10. La cenefa (`.frieze`, 10), el título sticky del organigrama (`.organigrama__title`, 10), el timeline (100) y los tooltips (100) van después en el DOM y se pintaban por encima del menú abierto.
+
+**Solución:**
+- `src/scss/layout/_header.scss`: la barra pierde el `backdrop-filter` del elemento (su `::before` ya difumina con `blur(15px)`; el aspecto de la barra no cambia, snapshots *Header* intactos). `.navegacion` pasa al mismo cristal que la barra: degradado azul `rgba(…, 0.7)` + `backdrop-filter: blur(15px)` + borde `rgba(255,255,255,.18)`. `.header`/`.header-inner` → `z-index: 500` (sobre el contenido; por debajo de modales y banners, que van de 1000 en adelante).
+- `src/scss/animaciones/_modo-oscuro.scss`: `body.modo-oscuro .navegacion` sin media query, `rgba(51,51,51,.8)` + blur (igual que la barra oscura).
+- `src/js/nav-menu.js`: el foco solo pasa al primer enlace al abrir con teclado (`e.detail === 0`); con ratón dejaba un anillo de foco sobre "Inicio".
+
+**Reglas:**
+1. NO pongas `backdrop-filter` en `.header__barra`/`.header-inner__barra` (ni en ningún ancestro del desplegable): solo en el `::before`. Si un panel hijo de un elemento con `backdrop-filter` "no difumina", esta es la causa.
+2. NO bajes el `z-index` de `.header`/`.header-inner` por debajo de cualquier elemento del contenido con z-index (cenefa 10, sticky del organigrama 10, timeline/tooltips 100). Si añades contenido con `z-index` ≥ 500, súbelo o revisa el menú abierto sobre él.
+3. El degradado del menú va al 70 % (la barra usa .25-.30): con el valor de la barra el texto blanco se pierde sobre contenido blanco difuminado. Aprobado por el usuario en 4.23.6.
+4. Las reglas del desplegable (fondo claro y oscuro, transición de tema) van **sin** `@media (max-width: 767px)`: la nav es un desplegable en todos los tamaños.
+5. Verifica cambios de menú en Chromium con capturas sobre `organigrama.html` **con scroll** (título sticky y cenefa bajo el panel), en modo claro y oscuro; `elementFromPoint` sobre los enlaces detecta el apilamiento, pero no la transparencia — mira la captura.
+6. Test guardia: `tests/nav.e2e.spec.js` (degradado + `blur(15px)` en el panel, `backdrop-filter: none` en la barra, fondo oscuro en desktop, `z-index: 500` y menú por encima del contenido en `organigrama.html`, foco con ratón/teclado).
+
+## 14. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
 
