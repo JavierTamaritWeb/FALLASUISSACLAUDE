@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.21.3 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.21.4 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -48,6 +48,7 @@ npm run generate:og      # Regenera src/img/og-share.png (1200x630)
 
 - TODOS los archivos fuente viven bajo `src/`. NUNCA pongas nuevos archivos fuente (HTML, JS, SCSS, datos JSON, imágenes, PDFs, sitemaps, etc.) en la raíz del repo — ahí solo van configs/tooling (`package.json`, `gulpfile.js`, `playwright*.config.js`, `.gitignore`, `README.md`, `CLAUDE.md`, `LICENSE*`)
 - SIEMPRE ejecuta `npm run build` antes de hacer commit
+- SIEMPRE revisa los sitemaps de `src/` antes de hacer commit (regla del 10-sep-2026): cada `src/*.html` publicable con sus dos `<url>` (ES + `/va/`, 3 `hreflang`), sin URLs de páginas retiradas, y `lastmod` a la fecha del día en `sitemap.xml`, `sitemap-google.xml` y `sitemap-ai-optimized.xml` para las páginas tocadas en el commit (ES y VA); si cambia algún sitemap, `sitemap-index.xml` también
 - SIEMPRE ejecuta `npm run test:e2e` tras cambios en CSS/JS
 - Ejecuta `npm run test:e2e:full` al tocar navegación, modo oscuro, transiciones de gradiente, metadatos OG, UI de meteo, Swiper o snapshots visuales
 - NUNCA edites archivos en `dist/` directamente (son generados)
@@ -135,7 +136,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.21.3).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.21.4).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -297,6 +298,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.21.4** — Documentación: nueva regla de trabajo en *Reglas importantes* — **revisar los sitemaps de `src/` antes de cada commit** (entradas ES + `/va/` de cada página publicable, sin URLs retiradas, `lastmod` del día en `sitemap.xml`/`sitemap-google.xml`/`sitemap-ai-optimized.xml` para las páginas tocadas y `sitemap-index.xml` si cambia alguno); procedimiento detallado en `docs/build-and-deploy.md`. Pies de versión de `README.md` y `docs/` sincronizados. Sin cambios en el sitio servido.
 - **4.21.3** — **Texto definitivo de la Fallera Mayor** (Lucía Gutiérrez Martín) en el panel Nosotros/Plana Mayor de `index.html` y `lafalla.html`: `falla.nosotros.falleraMayor.texto` pasa del genérico provisional de v4.13.0 a la presentación definitiva de 2 párrafos (ES + traducción VA; fallback estático de ambos HTML actualizado). Ya no queda ningún texto provisional en la Plana Mayor 2026-27.
 - **4.21.2** — **Texto definitivo de la Fallera Mayor Infantil** (Sofía Gómez Medina) en el panel Nosotros/Plana Mayor de `index.html` y `lafalla.html`: `falla.nosotros.falleramayoraI.texto` pasa del genérico provisional de v4.13.0 a la presentación definitiva de 5 párrafos (ES + traducción VA, separados por `\n`; el fallback estático de ambos HTML también se actualiza). Queda provisional únicamente el texto de la Fallera Mayor.
 - **4.21.1** — Dos retoques: **(1) las 3 miniaturas del panel "Ofrenda 2026"** de Historia/Archivos/Ofrendas (`index.html` + `lafalla.html`) pierden el pie de foto (se retiran los `figcaption` y las claves `historia.archivos.ofrendas.pies.{fm,fmm,general}` ES/VA; el `alt` sigue siendo el pie del lightbox); `tests/historia-ofrendas.e2e.spec.js` comprueba que el grid no lleva pies. **(2) Sitemaps sincronizados**: los `lastmod` de `src/sitemap.xml`, `sitemap-google.xml` y `sitemap-ai-optimized.xml` (desfasados entre enero y mayo) pasan a la fecha real de la última confirmación en git de cada página, igualando lo que el build calcula en `dist/`; `sitemap-index.xml` a 2026-09-09.

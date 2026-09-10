@@ -88,6 +88,8 @@ El build ejecuta `updateDistSitemapsLastmod` para actualizar `lastmod` en:
 
 La fecha se calcula usando el `mtime` real de los archivos en `dist/`.
 
+**Sitemaps fuente antes de cada commit (v4.21.4):** los `lastmod` de `dist/` se recalculan solos, pero los de `src/` deben mantenerse coherentes. Antes de cada commit se revisa que cada `src/*.html` publicable tenga sus dos `<url>` (ES + `/va/`, con los 3 `hreflang`) en `src/sitemap.xml`, que no queden URLs de páginas retiradas, y se pone `lastmod` a la fecha del día (ES y VA) en `src/sitemap.xml`, `src/sitemap-google.xml` y `src/sitemap-ai-optimized.xml` para las páginas tocadas en ese commit; si cambia algún sitemap, `src/sitemap-index.xml` pasa también a la fecha del día. Las páginas standalone (`ai-info.html`, `mantenimiento.html`, `google-site-verification.html`, `base.html`) no van en el sitemap.
+
 ## ⚙️ Configuración del Servidor (.htaccess)
 
 El proyecto incluye un archivo `.htaccess` optimizado para servidores Apache. Este archivo se debe subir a la raíz del servidor (`dist/` incluye el contenido que debe ir al servidor, pero asegúrate de que el archivo `.htaccess` oculto se copie también).
@@ -246,4 +248,4 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 13 de junio de 2026 - v4.8.0
+Última actualización: 10 de septiembre de 2026 - v4.21.4
