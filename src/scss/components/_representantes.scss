@@ -10,18 +10,8 @@
 .accordion--representantes {
   margin-top: 1.5rem;
 
-  // Estilos del titular como <button>. Se usa selector con especificidad
-  // (0,0,2,0) idéntica al :hover de _falla.scss para que :hover sí mande.
-  .accordion__titular {
-    background-color: v.$naranja-suave;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:focus-visible {
-      outline: 2px solid v.$primary-color;
-      outline-offset: 2px;
-    }
-  }
+  // El titular hereda del .accordion base (_falla.scss) el hover de `.boton`
+  // (v4.27.0): aquí no se redefine fondo, foco ni transición.
 
   // Neutralizar defaults nativos cuando el titular es un <button>.
   button.accordion__titular {
@@ -170,17 +160,15 @@
 // __content-inner desde _modo-oscuro.scss. Aquí se incrementa la especificidad
 // con `.accordion--representantes` para garantizar:
 //   - botón titular: fondo $negro (no $naranja-suave residual de modo claro)
-//   - hover/focus: tono ligeramente más claro para que el feedback siga visible
+//   - hover/focus: el degradado de .boton lo aporta el titular base
 //   - imagen y textos: contraste alto sobre fondo oscuro
 //   - sombra coral suave en lugar de la negra invisible
 body.modo-oscuro .accordion--representantes {
+  // Sin hover propio: lo aporta `body.modo-oscuro .accordion__titular`
+  // (_modo-oscuro.scss, degradado salmón→amarillo como .boton).
   .accordion__titular {
     background-color: v.$negro;
     color: v.$blanco-hueso;
-
-    &:hover {
-      background-color: v.$negro-casi;
-    }
   }
 
   .accordion__content {

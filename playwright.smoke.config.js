@@ -23,6 +23,7 @@ module.exports = defineConfig({
     '**/escudo-enlace.e2e.spec.js',
     '**/galeria-9-album.e2e.spec.js',
     '**/galeria-pager.e2e.spec.js',
+    '**/accordion-hover.e2e.spec.js',
     '**/scss-guardrails.e2e.spec.js'
   ]
 });

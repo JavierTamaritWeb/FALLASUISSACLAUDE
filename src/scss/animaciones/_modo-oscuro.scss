@@ -607,9 +607,44 @@ body.modo-oscuro .accordion__content {
 body.modo-oscuro .accordion__content-inner {
     background-color: v.$negro;
 }
+// Titular del acordeón en oscuro: mismo hover que `body.modo-oscuro .boton`
+// (degradado salmón→amarillo, brillo coral, texto en $negro-casi).
 body.modo-oscuro .accordion__titular {
-    background-color: v.$negro;
+  background-color: v.$negro;
 
+  &::before {
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 24%,
+      rgba(v.$primary-color, 0.24) 50%,
+      transparent 78%
+    );
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: linear-gradient(
+      135deg,
+      rgba(v.$rojo-salmon, 0.98) 0%,
+      rgba(v.$amarillo-anaranjado, 0.94) 100%
+    );
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    color: v.$negro-casi;
+    filter: saturate(1.08) brightness(1.04);
+
+    .accordion__header,
+    .accordion__icon,
+    .accordion__icon--active {
+      color: v.$negro-casi;
+    }
+  }
+
+  &:focus-visible {
+    box-shadow:
+      0 0 0 0.35rem rgba(v.$amarillo-anaranjado, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
 }
 body.modo-oscuro .accordion__header {
     color: v.$blanco-hueso;
