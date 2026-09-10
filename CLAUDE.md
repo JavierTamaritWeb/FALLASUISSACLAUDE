@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.24.0 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.24.1 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -138,7 +138,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.24.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.24.1).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -324,6 +324,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.24.1** — SEO: `src/sitemap-google.xml` incorpora `galeria_5`–`galeria_9` (se había quedado en `galeria_4`; el resto de galerías solo figuraban en `sitemap.xml`). Sin cambios en las páginas.
 - **4.24.0** — **Nueva galería "Fallera Mayor Infantil 2026-27"** (`galeria_9`, novena galería): 40 fotos de la proclamación de Sofía Gómez Medina (`src/img/fallera-mayor-infantil/fmi-2026-27/fmi-2026-27-001…040.jpeg`, el build genera AVIF/WebP) con el bloc de notas en **modo álbum a doble página a partir de 1200 px** (clase `notepad--album` + `galeria_9.js`: dos páginas lado a lado con lomo central, paso de dos en dos, indicador `notepad.indicadorRango`; una página por debajo de 1200 px como las demás galerías) y, debajo, el **vídeo vertical de la proclamación** (`<video controls preload="none">` 9:16 con póster extraído del MP4, botón "Ampliar vídeo" con la Fullscreen API nativa y descarga; 19 MB en `video/fmi-2026-27.mp4`), sin visor propio. Tarjeta en `galerias.html` y en el teaser de la home (9 tarjetas), i18n `galeria.galeria9`/`galeria9-texto`/`galeria9Video.*` ES/VA, dos `<url>` en `sitemap.xml`, nuevo parcial `_galeria-video.scss` y modo oscuro. Nuevo `tests/galeria-9-album.e2e.spec.js` (7 tests) en la smoke (18 specs). Baselines visuales de `galerias`/`index`/`footer` regenerados. Ver patrón *Galería álbum a doble página y vídeo*.
 - **4.23.7** — Documentación: el error del menú desplegable de 4.23.5-4.23.6 queda registrado como §13 de `docs/architecture-constraints.md` (backdrop root de la barra + z-index 10 del header; síntoma, causas, solución, reglas y test guardia) y se aclara en §1 y en la restricción *Stacking z-index del menú* que la barra ya no lleva `backdrop-filter` en el elemento. Sin cambios en el sitio servido.
 - **4.23.6** — **Fix definitivo del menú desplegable** (tras 4.23.5, que solo subió la opacidad): (1) el menú tiene ahora el **mismo cristal que la barra principal** (degradado azul translúcido + `backdrop-filter: blur(15px)`; gris translúcido en modo oscuro). El blur no funcionaba porque la barra llevaba `backdrop-filter` en el propio elemento y era *backdrop root* del desplegable: se retira de la barra (su `::before` ya difumina). (2) **z-index del header**: `.header`/`.header-inner` pasan de 10 a 500 — la cenefa, el título sticky "Organigrama de la Falla" y los tooltips (10-100, posteriores en el DOM) se pintaban encima del menú abierto. Reproducido en Chromium sobre `organigrama.html`. `tests/nav.e2e.spec.js` actualizado (cristal, barra sin backdrop-filter, menú por encima del contenido); snapshots *Header* y *Navigation menu* regenerados. Ver restricción *Desplegable de cristal y apilamiento del header*.

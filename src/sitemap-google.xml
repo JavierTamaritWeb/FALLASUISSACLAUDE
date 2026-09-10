@@ -106,6 +106,41 @@
     <priority>0.6</priority>
   </url>
 
+  <url>
+    <loc>https://fallasuissa.es/galeria_5.html</loc>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://fallasuissa.es/galeria_6.html</loc>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://fallasuissa.es/galeria_7.html</loc>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://fallasuissa.es/galeria_8.html</loc>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://fallasuissa.es/galeria_9.html</loc>
+    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Calendario -->
   <url>
     <loc>https://fallasuissa.es/calendario.html</loc>
