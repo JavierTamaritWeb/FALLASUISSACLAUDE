@@ -174,7 +174,8 @@
     }
     &__subhead {
         .organigrama__subnode {
-          border-color: var(--primary-color);
+          // Reborde negro (10-sep-2026) para separar la tarjeta del fondo coral
+          border-color: v.$negro;
           background: v.$primary-color;
           font-weight: bold;
      }
@@ -251,6 +252,10 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        // Misma altura en todas las secciones: dos líneas (nombre + cargo)
+        // aunque la tarjeta solo lleve el nombre
+        min-height: calc(2 * 1.5 * var(--font-base) + 2 * 0.5rem + 4px);
+        box-sizing: border-box;
       }
     }
     &__branches {
