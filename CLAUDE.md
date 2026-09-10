@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.23.6 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.23.7 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -136,7 +136,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.23.6).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.23.7).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -322,6 +322,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.23.7** — Documentación: el error del menú desplegable de 4.23.5-4.23.6 queda registrado como §13 de `docs/architecture-constraints.md` (backdrop root de la barra + z-index 10 del header; síntoma, causas, solución, reglas y test guardia) y se aclara en §1 y en la restricción *Stacking z-index del menú* que la barra ya no lleva `backdrop-filter` en el elemento. Sin cambios en el sitio servido.
 - **4.23.6** — **Fix definitivo del menú desplegable** (tras 4.23.5, que solo subió la opacidad): (1) el menú tiene ahora el **mismo cristal que la barra principal** (degradado azul translúcido + `backdrop-filter: blur(15px)`; gris translúcido en modo oscuro). El blur no funcionaba porque la barra llevaba `backdrop-filter` en el propio elemento y era *backdrop root* del desplegable: se retira de la barra (su `::before` ya difumina). (2) **z-index del header**: `.header`/`.header-inner` pasan de 10 a 500 — la cenefa, el título sticky "Organigrama de la Falla" y los tooltips (10-100, posteriores en el DOM) se pintaban encima del menú abierto. Reproducido en Chromium sobre `organigrama.html`. `tests/nav.e2e.spec.js` actualizado (cristal, barra sin backdrop-filter, menú por encima del contenido); snapshots *Header* y *Navigation menu* regenerados. Ver restricción *Desplegable de cristal y apilamiento del header*.
 - **4.23.5** — **Fix: menú desplegable transparente.** El fondo oscuro del desplegable (`body.modo-oscuro .navegacion`) vivía en `@media (max-width: 767px)`, así que en escritorio el menú en modo oscuro conservaba el azul del modo claro; además, con `rgba(…, 0.85)` el hero, la cenefa de azulejos y las tarjetas se transparentaban en ambos modos (el `backdrop-filter` del desplegable no alcanza la página porque la barra ya lleva `backdrop-filter`). Ahora el fondo es casi opaco en todos los tamaños (`rgba(2,66,122,.98)` claro / `rgba(0,0,0,.98)` oscuro). `nav-menu.js` solo mueve el foco al primer enlace cuando el menú se abre con teclado (`e.detail === 0`): con ratón dejaba un anillo de foco sobre "Inicio"; `.navegacion__enlace:focus-visible` lleva contorno coral interior. `tests/nav.e2e.spec.js` gana tres casos desktop (fondo oscuro, foco con ratón/teclado); snapshot *Navigation menu - mobile open* regenerado. Ver restricción *Desplegable opaco*.
 - **4.23.4** — `organigrama.html`: el título de la página pasa de "Organigrama 2025-26" a "Organigrama 2026-27" (h1, `meta description`, `og:title` y `twitter:title`). Baselines visuales de organigrama regenerados.
