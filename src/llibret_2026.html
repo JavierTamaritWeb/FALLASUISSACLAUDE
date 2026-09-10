@@ -124,6 +124,17 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* Enlace a la home alrededor del escudo (v4.23.2) */
+        .cover__escudo-enlace {
+            display: block;
+            border-radius: 12px;
+        }
+
+        .cover__escudo-enlace:focus-visible {
+            outline: 3px solid #FF6F61;
+            outline-offset: 4px;
+        }
+
         .cover__image {
             width: min(250px, 58vw);
             max-width: 100%;
@@ -910,7 +921,7 @@
 
     <!-- PORTADA -->
     <header role="banner" class="cover">
-        <img class="cover__image" src="img/Escudo_falla.png" alt="Escut oficial de la Falla Suïssa - L'Alqueria del Favero, comissió fallera del barri de Les Moreres, València">
+        <a class="cover__escudo-enlace" href="https://fallasuissa.es/" aria-label="Anar a la pàgina d'inici de la Falla Suïssa"><img class="cover__image" src="img/Escudo_falla.png" alt="Escut oficial de la Falla Suïssa - L'Alqueria del Favero, comissió fallera del barri de Les Moreres, València"></a>
         <h1 class="cover__heading">Falla Suïssa<br>L'Alqueria del Favero</h1>
         <h2 class="cover__subheading">TEMPORADA 2025-2026</h2>
         <p class="cover__text">Llibret de la Falla Suïssa</p>

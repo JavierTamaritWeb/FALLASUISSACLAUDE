@@ -405,12 +405,19 @@
         margin-bottom: 1rem;
     }
 
-    .autorizacion-imagen__cabecera-escudo-wrap {
+    // Desde v4.23.2 el <picture> va dentro del enlace a la home
+    // (`.escudo-enlace--cabecera`): la celda es el enlace y el picture un bloque.
+    .escudo-enlace--cabecera {
         display: table-cell !important;
         width: 2.5cm !important;
         vertical-align: middle;
         padding-right: 0.6rem;
         box-sizing: border-box;
+    }
+
+    .autorizacion-imagen__cabecera-escudo-wrap {
+        display: block !important;
+        width: 2.5cm !important;
     }
 
     .autorizacion-imagen__cabecera-escudo {

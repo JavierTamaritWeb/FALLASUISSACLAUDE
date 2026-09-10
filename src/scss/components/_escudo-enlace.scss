@@ -1,0 +1,59 @@
+// components/_escudo-enlace.scss
+// Enlace a la home (https://fallasuissa.es/) alrededor de todos los escudos de
+// la Falla (v4.23.2): header, header-inner, footer, paneles del acordeón,
+// encabezado "La Falla" y cabecera de las autorizaciones.
+// El <a> envuelve al <picture>, que no admite hijos intermedios, así que la
+// caja del enlace replica la del `picture` global de _image-optimization.scss
+// (block al 100 %) para que el layout no se mueva ni un píxel.
+
+@use '../abstracts/variables' as v;
+
+.escudo-enlace {
+  display: block;
+  width: 100%;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  // La regla global de elementos interactivos (_accessibility.scss) eleva y
+  // sombrea todo `a` en hover/focus: aquí dibujaría un rectángulo alrededor
+  // del escudo. El feedback es un halo coral sobre la propia imagen.
+  &:hover,
+  &:focus {
+    transform: none;
+    box-shadow: none;
+  }
+
+  img {
+    transition: filter 0.3s ease;
+  }
+
+  &:hover img,
+  &:focus-visible img {
+    filter: drop-shadow(0 0 0.6rem rgba(255, 111, 97, 0.65));
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 3px solid v.$primary-color;
+    outline-offset: 0.3rem;
+  }
+
+  // Envuelve un <img> suelto dentro de un flex (`.falla__escudo`): el enlace
+  // se ajusta a la imagen y hereda su `flex-shrink: 0`.
+  &--img {
+    display: inline-block;
+    width: auto;
+    flex-shrink: 0;
+    line-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .escudo-enlace img {
+    transition: none;
+  }
+}

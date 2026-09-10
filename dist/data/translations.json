@@ -10,7 +10,8 @@
       "meteo": "Meteo",
       "galeria": "Galería",
       "colaboraciones": "Colaboraciones",
-      "nuevosFalleros": "Nuevos Falleros"
+      "nuevosFalleros": "Nuevos Falleros",
+      "escudoInicio": "Ir a la página de inicio de la Falla Suïssa"
     },
     "countdown": {
       "message": "Cuenta atrás para las Fallas",
@@ -575,7 +576,8 @@
       "meteo": "Oratge",
       "galeria": "Galeria",
       "colaboraciones": "Col·laboracions",
-      "nuevosFalleros": "Nous Fallers"
+      "nuevosFalleros": "Nous Fallers",
+      "escudoInicio": "Anar a la pàgina d'inici de la Falla Suïssa"
     },
     "countdown": {
       "message": "Compte enrere per a les Fallas",
@@ -1138,7 +1140,8 @@
       "blog": "Blog",
       "meteo": "Weather",
       "galeria": "Gallery",
-      "nuevosFalleros": "New Members"
+      "nuevosFalleros": "New Members",
+      "escudoInicio": "Go to the Falla Suïssa home page"
     },
     "eventos": {
       "titulo": "Events",
@@ -1321,7 +1324,8 @@
       "blog": "Blog",
       "meteo": "Météo",
       "galeria": "Galerie",
-      "nuevosFalleros": "Nouveaux Falleros"
+      "nuevosFalleros": "Nouveaux Falleros",
+      "escudoInicio": "Aller à la page d'accueil de la Falla Suïssa"
     },
     "eventos": {
       "titulo": "Événements",

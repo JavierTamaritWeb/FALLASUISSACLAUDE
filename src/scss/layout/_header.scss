@@ -735,6 +735,11 @@ body.modo-oscuro {
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: 700; // Más grueso para mejor legibilidad
+  // Menú en mayúsculas (v4.23.2): se aplica con CSS, así el texto fuente
+  // (translations.json y fallbacks HTML) sigue en minúsculas para lectores de
+  // pantalla y buscadores. NUNCA `capitalize` (ver CLAUDE.md).
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   padding: 0.1rem 0.3rem;
   border-radius: 0.3rem;
   display: inline-flex;

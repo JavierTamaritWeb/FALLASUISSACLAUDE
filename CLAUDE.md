@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.23.1 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.23.2 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -66,7 +66,7 @@ npm run generate:og      # Regenera src/img/og-share.png (1200x630)
 - **Frontend**: HTML5, SCSS (BEM), módulos JavaScript ES6+
 - **Librerías (CDN)**: Swiper.js v11 (carruseles, jsDelivr), Anime.js v3.2.1 (animaciones, cdnjs), EmailJS v4 (formulario de contacto, jsDelivr)
 - **Librerías (npm)**: Flatpickr v4.6.13 (selector de fechas)
-- **Testing**: Playwright E2E (41 suites en la matriz completa, 16 specs smoke por defecto). La suite smoke (`npm run test:e2e`) ejecuta: nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, scss-guardrails
+- **Testing**: Playwright E2E (42 suites en la matriz completa, 17 specs smoke por defecto). La suite smoke (`npm run test:e2e`) ejecuta: nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, escudo-enlace, scss-guardrails
 
 ### Estructura de directorios
 
@@ -136,7 +136,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.23.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.23.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -264,6 +264,10 @@ Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problem
 
 - **Stacking de imagen de Blog-detail (v4.3.11):** `.blog-detail__figure` necesita `z-index: 2` para quedar por encima del `::before` (gradiente azul, z-index: 0) de `.blog-detail__article`. El centrado usa `margin: 1.5rem auto` + `max-width: 48rem` (no flexbox, que rompe `<picture>`); la imagen es `display: block; width: 100%`. En móvil: la figura cambia a `max-width: 100%`.
 
+- **Menú y pie en mayúsculas (v4.23.2):** `.navegacion__enlace` y `.footer__enlace` llevan `text-transform: uppercase; letter-spacing: 0.04em`. La mayúscula es **solo de CSS**: NO escribas en mayúsculas los textos `nav.*` de `translations.json` ni los textos de reserva del HTML (los lectores de pantalla deletrean algunas palabras en mayúsculas y los buscadores indexan el texto fuente). Sigue prohibido `capitalize`.
+
+- **Escudos enlazados a la home (v4.23.2):** todo escudo de la Falla (`img/Escudo_falla.*` y `img/logos/logo-escudo-cutty.svg`) va dentro de `<a class="escudo-enlace" href="https://fallasuissa.es/" data-i18n-aria-label="nav.escudoInicio" aria-label="…">` (70 escudos en 31 páginas: header, header-inner, footer, paneles del acordeón, encabezado *La Falla*, cabecera de impresión de las autorizaciones, portada del Llibret y `ai-info.html`). La URL es **absoluta a producción** por decisión del usuario (también desde `/va/` y bajo Live Server). Reglas: (1) `<picture>` no admite hijos intermedios, así que el enlace envuelve al `<picture>` completo y replica su caja global (`display: block; width: 100%` en `src/scss/components/_escudo-enlace.scss`): verificado que ningún escudo se mueve un píxel en 62 páginas × 2 anchos; un `<img>` suelto dentro de un flex (`.falla__escudo`) usa el modificador `--img` (`inline-block`, `flex-shrink: 0`). (2) El enlace neutraliza la elevación y sombra que `_accessibility.scss` pone a todo `a` en hover/focus; el feedback es un halo coral `drop-shadow` sobre la imagen y un contorno coral en `:focus-visible`. (3) En la hoja de impresión de las autorizaciones la celda de tabla pasa a ser el enlace (`.escudo-enlace--cabecera`) y el `<picture>` un bloque. (4) `llibret_2026.html` y `ai-info.html` no cargan `main.css` ni `lang.js`: llevan `aria-label` fijo en su idioma (VA / ES) y estilo propio. (5) Un escudo nuevo debe enlazarse igual o fallará `tests/escudo-enlace.e2e.spec.js` (smoke). Clave `nav.escudoInicio` en ES/VA/EN/FR.
+
 - **Patrón de subrayado hover de nav y footer (v4.6.15):** `.navegacion__enlace` (header) y `.footer__enlace` comparten un patrón — un subrayado `::after` (2px `v.$primary-color`) que anima `width: 0 → calc(100% - padding*2)` y `opacity: 0 → 1`. El texto pasa a `v.$primary-color` en `:hover`, `:focus-visible`, `.active`/`[aria-current="page"]`. Sin pastilla de fondo en estado activo — el texto coloreado + el subrayado permanente SON el indicador. NO reañadas overrides de `background-color` para el estado activo. El bloque del footer mantiene `!important` en varias declaraciones por batallas históricas de especificidad — consérvalos al editar.
 
 - **Sin `text-transform: capitalize` (v4.6.8):** nunca lo uses — pone en mayúscula cada palabra incluyendo preposiciones/artículos a mitad de frase ("Blog De Nuestra Falla"). Toda la capitalización viene del texto fuente (translations.json, HTML). Usa `text-transform: none` u omítelo.
@@ -316,6 +320,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.23.2** — Dos cambios de navegación en las 31 páginas: **(1) menú desplegable y pie en mayúsculas** (`text-transform: uppercase` + `letter-spacing: 0.04em` en `.navegacion__enlace` y `.footer__enlace`; solo CSS, el texto fuente sigue en minúscula) y **(2) todos los escudos de la Falla enlazan a `https://fallasuissa.es/`** (70 escudos: header, header-inner, footer, acordeones, encabezado *La Falla*, cabecera de impresión de las autorizaciones, portada del Llibret y `ai-info.html`), con `aria-label` traducido (`nav.escudoInicio`, ES/VA/EN/FR), halo coral en hover y contorno coral en foco; nuevo parcial `_escudo-enlace.scss` y verificado que ningún escudo cambia de posición. Nuevo `tests/escudo-enlace.e2e.spec.js` en la smoke (17 specs). Baselines visuales regenerados (el pie cambia en todas las páginas). Ver restricciones *Menú y pie en mayúsculas* y *Escudos enlazados a la home*.
 - **4.23.1** — **Fix: acordeones sin recorte en todas las pantallas.** El panel HOPE de `colaboraciones.html` se veía cortado (el mosaico de 6 fotos quedaba fuera): el acordeón base limitaba el panel abierto a `max-height: 100rem` (1000 px) y el panel mide 1518-2131 px; el mismo tope recortaba el Organigrama (375/768 px) y La Fallera Mayor Infantil (375 px) en `index`/`lafalla`. Ahora `acc.js` fija el alto real al abrir y lo deja en `none` tras la transición (respaldo por temporizador), los topes fijos desaparecen de `_falla.scss` y `_colaboraciones.scss` (220/260 rem) y `prefers-reduced-motion` anula la transición. Nuevo `tests/accordion-sin-recorte.e2e.spec.js` (12 casos: 4 páginas × 3 anchos, todos los paneles) en la smoke, que pasa a 16 specs. Ver restricción *Acordeón sin tope de altura*.
 - **4.23.0** — **La Directiva rediseñada como tarjetas por cargo** (`index.html` + `lafalla.html`): la lista anidada con viñetas sobre `$naranja-suave` (`.accordion__directiva`) se sustituye por el componente `.directiva` — grid de cinco tarjetas (Presidente a todo el ancho con chip coral; Vicepresidentes a dos columnas; Secretaría, Área Económica y Delegación Infantil), cada una con icono Lucide inline reutilizado del organigrama, cargo en coral con `data-i18n="directiva.*"` (ES/VA existentes, pre-render VA) y nombres como chips; 1/2/3 columnas por breakpoint, modo oscuro propio y `prefers-reduced-motion`. El escudo decorativo de `lafalla.html` se unifica con el de `index.html` (`alt=""`, `aria-hidden`, `width/height`). Nuevo `tests/nosotros-directiva.e2e.spec.js` (9 tests: tarjetas, nombres, chips, grid responsivo, modo oscuro, pre-render VA) en la smoke, que pasa a 15 specs. Verificado también en Chrome real. Snapshots visuales sin cambios (el panel va cerrado).
 - **4.22.11** — Nosotros / La Directiva (`index.html` + `lafalla.html`, lista `.accordion__directiva`): sincronizada con el organigrama vigente y con nombres completos — Presidente José Santos Quiles; Vicepresidencias Maite Cabezuelo, Prados Ramos, Pablo Cortés (antes Pablo, Prados, Rodrigo); Secretaría Paula Peiró; Área Económica David Gómez y Miguel Ángel Pallardó; Delegación Infantil Sara Medina. Al relevar cargos, esta lista debe cambiarse junto con el organigrama y el Schema `Person`.

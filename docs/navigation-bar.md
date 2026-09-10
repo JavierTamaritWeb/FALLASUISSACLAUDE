@@ -251,7 +251,7 @@ Desde v4.6.15 tanto `.navegacion__enlace` (header) como `.footer__enlace` (foote
 
 ### Patrón compartido
 
-- En reposo: texto `v.$blanco`, sin fondo.
+- En reposo: texto `v.$blanco`, sin fondo, **en mayúsculas** (`text-transform: uppercase; letter-spacing: 0.04em`, v4.23.2). La mayúscula se aplica solo con CSS: `translations.json` y los textos de reserva del HTML siguen en minúscula (así los leen los lectores de pantalla y los buscadores). Nunca `capitalize`.
 - Pseudo-elemento `::after` (anclado `position: absolute; bottom`, `height: 2px`, `background-color: v.$primary-color`) con `width: 0; opacity: 0`.
 - En `:hover` y `:focus-visible`: `color: v.$primary-color` y el `::after` anima `width: 0 → calc(100% - padding*2)` + `opacity: 0 → 1` con `transition: width 0.3s ease, opacity 0.3s ease`.
 - En `.active` / `[aria-current="page"]`: mismo resultado que hover pero **permanente** (texto coral + subrayado al 100%).
@@ -274,6 +274,7 @@ Por eso **no** hay overrides de `body.modo-oscuro` para los enlaces activos. Los
 
 - No re-añadir `background-color: rgba(255, 255, 255, 0.75)` en el enlace activo del header.
 - No re-añadir `background-color: #03315f` ni `background-color: v.$gris-claro` en el enlace activo del footer.
+- No escribir en mayúsculas los textos de `nav.*` en `translations.json` ni en el HTML para conseguir el efecto: la mayúscula es solo de CSS.
 - No cambiar `:focus-visible` por `:focus` (rompe la accesibilidad: haría que el subrayado quede "pegado" tras un click de ratón).
 
 ---
@@ -547,4 +548,4 @@ npm run build
 - Hover/focus y activo usan ambos `v.$primary-color` tanto en el texto como en la línea del `::after`.
 - Test `tests/nav.e2e.spec.js` actualizado: ya no espera fondo blanco en el enlace activo móvil; ahora valida `color === rgb(255, 111, 97)` y que el `::after` tiene `opacity: 1` + `background-color` en coral.
 
-Última actualización: 10 de septiembre de 2026 - v4.23.1
+Última actualización: 10 de septiembre de 2026 - v4.23.2
