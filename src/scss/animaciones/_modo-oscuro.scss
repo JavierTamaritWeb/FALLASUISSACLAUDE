@@ -186,11 +186,9 @@ body.transicion-a-claro .header-inner__barra::before {
   transition: opacity 2.4s ease-in-out !important;
 }
 
-// Transición para el menú desplegable en móvil
-@media (max-width: 767px) {
-  body.transicion-a-claro .navegacion {
-    transition: background 2.4s ease-in-out !important;
-  }
+// Transición para el menú desplegable (todos los tamaños)
+body.transicion-a-claro .navegacion {
+  transition: background 2.4s ease-in-out !important;
 }
 
 // Transición de oscuro a claro para el banner subvención
@@ -1000,13 +998,14 @@ body.modo-oscuro .header-inner__barra--scrolled {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-// Menú desplegable translúcido en modo oscuro (móvil)
-@media (max-width: 767px) {
-  body.modo-oscuro .navegacion {
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
+// Menú desplegable en modo oscuro (todos los tamaños desde v4.23.5: la nav es
+// un desplegable también en desktop, antes solo se cubría <768px y en escritorio
+// quedaba el azul translúcido del modo claro con el hero transparentándose).
+// Casi opaco: el blur no ve la página porque la barra ya lleva backdrop-filter.
+body.modo-oscuro .navegacion {
+  background: rgba(0, 0, 0, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 //  MODAL QUIERES

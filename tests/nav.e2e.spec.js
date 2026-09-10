@@ -144,7 +144,7 @@ test.describe('Navbar responsive + idioma', () => {
     expect(navState.left).toBe('0px');
     expect(navState.right).toBe('0px');
     expect(navState.overflow).not.toBe('hidden');
-    expect(navState.backgroundColor).toMatch(/rgba\(2,\s*66,\s*122,\s*0\.85\)/);
+    expect(navState.backgroundColor).toMatch(/rgba\(2,\s*66,\s*122,\s*0\.98\)/);
     expect(navState.backdropFilter).toContain('blur');
     expect(navState.visibleLinkCount).toBeGreaterThan(0);
     expect(navState.activeLinks).toBe(1);
@@ -169,6 +169,44 @@ test.describe('Navbar responsive + idioma', () => {
       return window.getComputedStyle(nav).backgroundColor;
     });
 
-    expect(backgroundColor).toMatch(/rgba\(0,\s*0,\s*0,\s*0\.85\)/);
+    expect(backgroundColor).toMatch(/rgba\(0,\s*0,\s*0,\s*0\.98\)/);
+  });
+
+  test('desktop: el desplegable en modo oscuro usa el fondo negro (no el azul del modo claro)', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/index.html');
+
+    await page.click('.header__modo-boton');
+    await page.waitForTimeout(500);
+    await page.click('.header__menu-toggle');
+    await page.waitForTimeout(300);
+
+    const backgroundColor = await page.evaluate(() => {
+      const nav = document.querySelector('.navegacion');
+      return window.getComputedStyle(nav).backgroundColor;
+    });
+
+    // Antes de v4.23.5 la regla oscura vivía en @media (max-width: 767px) y en
+    // escritorio el menú conservaba rgba(2, 66, 122, .85) con el hero transparentándose
+    expect(backgroundColor).toMatch(/rgba\(0,\s*0,\s*0,\s*0\.98\)/);
+  });
+
+  test('desktop: abrir el menú con ratón no deja foco en el primer enlace', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/index.html');
+    await page.click('.header__menu-toggle');
+    await expect(page.locator('nav.navegacion')).toBeVisible();
+    const focused = await page.evaluate(() => document.activeElement && document.activeElement.className);
+    expect(focused).not.toContain('navegacion__enlace');
+  });
+
+  test('desktop: abrir el menú con teclado mueve el foco al primer enlace', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/index.html');
+    await page.locator('.header__menu-toggle').focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('nav.navegacion')).toBeVisible();
+    const focused = await page.evaluate(() => document.activeElement && document.activeElement.className);
+    expect(focused).toContain('navegacion__enlace');
   });
 });

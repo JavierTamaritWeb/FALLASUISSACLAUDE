@@ -73,7 +73,9 @@
       headerBar.appendChild(backdrop);
     }
 
-    function setOpen(open) {
+    // focusFirst: mover el foco al primer enlace solo al abrir con teclado;
+    // con ratón dejaba un anillo de foco sobre "Inicio" nada más abrir.
+    function setOpen(open, focusFirst = false) {
       const shouldOpen = Boolean(open);
       nav.classList.toggle('is-open', shouldOpen);
       toggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
@@ -81,7 +83,7 @@
       document.body.classList.toggle('nav-open', shouldOpen);
       backdrop.classList.toggle('is-active', shouldOpen);
 
-      if (shouldOpen) {
+      if (shouldOpen && focusFirst) {
         const firstLink = nav.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
         if (firstLink) firstLink.focus({ preventScroll: true });
       }
@@ -96,7 +98,8 @@
 
     toggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      setOpen(!isOpen());
+      // e.detail === 0 → activación por teclado (Enter/Espacio)
+      setOpen(!isOpen(), e.detail === 0);
     });
 
     // Close on link click (before navigation).

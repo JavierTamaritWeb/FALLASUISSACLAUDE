@@ -825,8 +825,9 @@ body.modo-oscuro {
     align-items: stretch;
     gap: 0.25rem;
     padding: 0.6rem;
-    // Fondo translúcido con blur para modo claro
-    background: rgba(2, 66, 122, 0.85);
+    // Fondo casi opaco (v4.23.5): el blur no alcanza la página porque la barra
+    // ya lleva backdrop-filter, y con 0.85 el hero y la cenefa se transparentaban
+    background: rgba(2, 66, 122, 0.98);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 1.2rem;
@@ -857,6 +858,13 @@ body.modo-oscuro {
     &.active::after,
     &[aria-current="page"]::after {
       width: calc(100% - 1.7rem);
+    }
+
+    // Foco de teclado coral por dentro del panel (evita el anillo azul del navegador)
+    &:focus-visible {
+      outline: 3px solid v.$primary-color;
+      outline-offset: -3px;
+      border-radius: 0.9rem;
     }
   }
 

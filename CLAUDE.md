@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.23.4 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.23.5 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -136,7 +136,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.23.4).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.23.5).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -241,6 +241,8 @@ Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problem
   3. **NO uses URLs `?lang=ca`/`?lang=es`** como destino de hreflang — no son crawlables (el cambio de idioma es client-side).
   4. `sitemap.xml` mantiene ambas entradas ES y VA por página, cada una con `<xhtml:link rel="alternate">` para `es`, `ca`, `x-default`. Al añadir una página, añade SUS DOS entradas con los 3 alternates.
 
+- **Desplegable opaco (v4.23.5):** el fondo de `.navegacion` es casi opaco (`.98`) en modo claro (`_header.scss`) y oscuro (`_modo-oscuro.scss`, **sin media query**: la nav es un desplegable en todos los tamaños desde v4.14.0). NO vuelvas a bajar la opacidad ni a meter la regla oscura en `@media (max-width: 767px)`: el `backdrop-filter` del desplegable no difumina la página (su raíz de backdrop es la barra, que ya lleva `backdrop-filter`), así que cualquier transparencia deja ver el hero, la cenefa y las tarjetas a través del menú. `nav-menu.js` solo enfoca el primer enlace al abrir con teclado.
+
 - **Stacking z-index del menú (v4.0.0, global desde v4.14.0):** el backdrop se inserta dentro de `.header__barra` (no en `body`). Z-index: menú 2500, backdrop 1500, botón de menú 2600. Mover el backdrop a `body` rompe el contexto de apilamiento. Dos detalles que hacen funcionar el backdrop dentro de la barra: (1) la barra lleva `backdrop-filter`, que la convierte en **bloque contenedor** de su descendiente `position: fixed` — con `inset: 0` el backdrop solo cubriría la barra, por eso usa `inset: -100vh -100vw` para extenderse hasta cubrir el viewport (la barra NO debe tener `overflow: hidden`); (2) la regla `> *:not(.navegacion):not(.nav-backdrop)` de la barra (que pone `position: relative; z-index: 1` a sus hijos para quedar sobre el `::before`) DEBE seguir excluyendo al backdrop, o vuelve al flujo flex con tamaño 0, deja de captar clics y desplaza el botón hamburguesa al centro.
 
 - **Transiciones de gradiente (v4.1.0):** `.quieres-mas` y `.countdown__contenedor` usan `::before` para el overlay de gradiente; el modo oscuro desvanece la opacidad a 0. Tests: `quieres-mas-transition.e2e.spec.js`, `countdown-transition.e2e.spec.js`. (`.countdown__contenedor` lleva además un `border: 2px solid v.$primary-color` base en ambos modos, añadido en v4.7.6.)
@@ -320,6 +322,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.23.5** — **Fix: menú desplegable transparente.** El fondo oscuro del desplegable (`body.modo-oscuro .navegacion`) vivía en `@media (max-width: 767px)`, así que en escritorio el menú en modo oscuro conservaba el azul del modo claro; además, con `rgba(…, 0.85)` el hero, la cenefa de azulejos y las tarjetas se transparentaban en ambos modos (el `backdrop-filter` del desplegable no alcanza la página porque la barra ya lleva `backdrop-filter`). Ahora el fondo es casi opaco en todos los tamaños (`rgba(2,66,122,.98)` claro / `rgba(0,0,0,.98)` oscuro). `nav-menu.js` solo mueve el foco al primer enlace cuando el menú se abre con teclado (`e.detail === 0`): con ratón dejaba un anillo de foco sobre "Inicio"; `.navegacion__enlace:focus-visible` lleva contorno coral interior. `tests/nav.e2e.spec.js` gana tres casos desktop (fondo oscuro, foco con ratón/teclado); snapshot *Navigation menu - mobile open* regenerado. Ver restricción *Desplegable opaco*.
 - **4.23.4** — `organigrama.html`: el título de la página pasa de "Organigrama 2025-26" a "Organigrama 2026-27" (h1, `meta description`, `og:title` y `twitter:title`). Baselines visuales de organigrama regenerados.
 - **4.23.3** — Organigrama (`index.html`, `lafalla.html`, `organigrama.html`): Marta Pastor sale de la columna de delegados de Eventos (queda solo en Delegación Infantil; su `Person` del Schema.org de `eventos.html`/`organigrama.html` pasa a "Delegada de Infantil") y Pablo Pallardó (Delegado Deportes) vuelve de Secretaría a la columna de Prados Ramos (Protocolo y Deportes), que deja de estar vacía (la `organigrama__branch` `aria-hidden` de v4.22.10 se sustituye por su tarjeta). Baselines visuales de organigrama regenerados.
 - **4.23.2** — Dos cambios de navegación en las 31 páginas: **(1) menú desplegable y pie en mayúsculas** (`text-transform: uppercase` + `letter-spacing: 0.04em` en `.navegacion__enlace` y `.footer__enlace`; solo CSS, el texto fuente sigue en minúscula) y **(2) todos los escudos de la Falla enlazan a `https://fallasuissa.es/`** (70 escudos: header, header-inner, footer, acordeones, encabezado *La Falla*, cabecera de impresión de las autorizaciones, portada del Llibret y `ai-info.html`), con `aria-label` traducido (`nav.escudoInicio`, ES/VA/EN/FR), halo coral en hover y contorno coral en foco; nuevo parcial `_escudo-enlace.scss` y verificado que ningún escudo cambia de posición. Nuevo `tests/escudo-enlace.e2e.spec.js` en la smoke (17 specs). Baselines visuales regenerados (el pie cambia en todas las páginas). Ver restricciones *Menú y pie en mayúsculas* y *Escudos enlazados a la home*.
