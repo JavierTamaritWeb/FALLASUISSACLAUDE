@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.26.1 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.26.2 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -138,7 +138,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.26.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.26.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -148,7 +148,8 @@ Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problem
   1. **NUNCA versionar datos sensibles.** El repo es público. Las credenciales SSH (`SSH_USER/HOST/PORT/REMOTE_DIR`) y el token de mantenimiento (`MAINT_TOKEN`) viven en `tools/deploy.env` (en `.gitignore`); plantilla en `tools/deploy.env.example`. `tools/deploy.sh` los lee al arrancar y aborta si faltan `SSH_USER/HOST`. Antes (v4.8.x) se hardcodeó una IP del equipo y datos SSH en `src/.htaccess`/`deploy.sh`/docs; se purgaron del historial con `git filter-repo` + force-push (los hashes cambiaron — re-clona cualquier clon antiguo).
   2. **Modo mantenimiento** (`tools/deploy.sh --maintenance on|off`): sube/borra el centinela `.maintenance` en la raíz web. El bloque del `.htaccess` da **HTTP 503 + Retry-After** mientras exista, sirviendo `mantenimiento.html` vía `ErrorDocument 503`. Queda **dormido** sin el centinela. NO uses 200 para una pantalla de mantenimiento (Google la indexaría / pensaría que el contenido se fue).
   3. **Bypass por token, NO por IP**: `?preview=<MAINT_TOKEN>` fija una cookie de bypass. El `.htaccess` versionado lleva el placeholder `__MAINT_TOKEN__`; `deploy.sh → inject_maint_token()` sustituye el valor real en el `.htaccess` del servidor **después de cada rsync** (por eso el token nunca entra en git). El rsync usa `--exclude='.maintenance'` para no apagar un mantenimiento en curso al desplegar.
-  4. **`mantenimiento.html` es standalone** como `ai-info.html`: excluida del glob `html` de `gulpfile.js` y copiada por `rootFilesTask` (sin canonical/hreflang ni variante `/va/`). Debe ser autocontenida (CSS inline, sin assets externos) para no depender de la CSP ni de archivos que podrían faltar durante un rediseño.
+  4. **`rsync` compara por contenido (`--checksum`, v4.26.2).** `gulp dest` conserva en `dist/` la fecha del archivo fuente y el token `?v=hash` de CSS/JS no cambia el tamaño del HTML, así que con la comparación por fecha+tamaño rsync NO subía las páginas cuyo fuente no había cambiado: en producción seguían enlazando `main.css?v=<token viejo>` (cacheado un año como `immutable`) y los cambios de estilo no se veían en esas páginas (detectado en 4.26.1: `galeria_9.html` en el servidor apuntaba al CSS de 4.26.0). NO quites `--checksum`; tras cada deploy comprueba que el `?v=` de una página no tocada coincide con el de `dist/`.
+  5. **`mantenimiento.html` es standalone** como `ai-info.html`: excluida del glob `html` de `gulpfile.js` y copiada por `rootFilesTask` (sin canonical/hreflang ni variante `/va/`). Debe ser autocontenida (CSS inline, sin assets externos) para no depender de la CSP ni de archivos que podrían faltar durante un rediseño.
 
 - **Auditoría de errores de sep-2026 (v4.22.0) — lecciones que no deben repetirse:**
   1. **Service worker sin registrar.** Ningún HTML llama a `navigator.serviceWorker.register()` (el único registrador, `pwa-manager.js`, nunca se cargó desde HTML y se borró en v4.7.9). `src/sw.js` se publica pero está inactivo; se corrigieron igualmente dos bugs latentes (`isCriticalResource` con `startsWith('/')` metía todo el HTML en cache-first; el handler `fetch` no filtraba `POST/HEAD`). Registrarlo es una decisión de producto (caché offline con riesgo de contenido obsoleto): NO lo actives sin revisar `handleFetch` y sin un test de actualización tras deploy.
@@ -326,6 +327,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.26.2** — **Fix del deploy**: `tools/deploy.sh` añade `--checksum` a rsync. Hasta ahora las páginas HTML cuyo fuente no cambiaba no se subían (misma fecha y tamaño pese al nuevo token `?v=` de los assets) y en producción seguían cargando el CSS/JS anterior desde caché: el fix de 4.26.1 no se veía en `galeria_9.html`. Ver restricción *Deploy, secretos y mantenimiento* (punto 4).
 - **4.26.1** — Fix visual de la paginación de galerías: el `<nav class="galeria-pager">` tenía `max-width: 120rem; margin: 0 auto` y su fondo claro solo cubría esos 1200 px, así que en pantallas anchas asomaba el azul de la página a ambos lados. Ahora ocupa todo el ancho (como `.visor`) y centra el contenido con `padding-inline: max(1.5rem, calc((100% - 120rem) / 2))`. Test nuevo a 2000 px en `tests/galeria-pager.e2e.spec.js`.
 - **4.26.0** — **Paginación entre galerías**: bajo el bloc de cada galería, Anterior/Siguiente con el nombre de la galería vecina, tira numérica 1…9 con la actual marcada (nombre en `title`/`aria-label`, ES/VA) y botón "Todas las galerías". La genera el build (`gulpfile.js → buildGaleriaPager`) a partir de las galerías existentes y de `galeria.galeriaN`, sustituyendo el marcador `<!-- galeria-pager -->` de cada `galeria_N.html` antes del pre-render VA; enlaces relativos (desde `/va/` se sigue en `/va/`), sin bucle en los extremos. Nuevo `_galeria-pager.scss` (+ modo oscuro), claves `galeriasPager.*` ES/VA y `tests/galeria-pager.e2e.spec.js` (18 comprobaciones estáticas ES/VA + 5 en navegador) en la smoke (19 specs). Ver patrón *Galerías* y restricción *Paginación de galerías generada en build*.
 - **4.25.0** — **Álbum a doble página en las 9 galerías** (antes solo en galeria_9): los nueve scripts clonados `galeria_1.js`…`galeria_9.js` se sustituyen por un único `src/js/galeria.js` con el modo álbum; cada bloc declara su JSON con `data-source="data/dataPagesN.json"` y lleva la clase `notepad--album`. A partir de 1200 px todas las galerías muestran dos páginas lado a lado (lomo central, paso de dos en dos, indicador de rango); por debajo, una página como siempre. `tests/galeria-9-album.e2e.spec.js` gana 8 casos (galeria_1–8: dos páginas a 1280 px, una a 1024 px, JSON propio). Ver patrón *Galerías: bloc compartido con álbum*.

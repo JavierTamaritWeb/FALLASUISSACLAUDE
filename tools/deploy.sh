@@ -170,7 +170,13 @@ fi
 # --exclude='.maintenance': el centinela del modo mantenimiento vive en el
 # servidor (no en dist/); sin esta exclusión, --delete lo borraría y un deploy
 # normal durante el mantenimiento apagaría el 503 sin querer.
-RSYNC_FLAGS=(-avz --delete --exclude='.DS_Store' --exclude='.maintenance')
+# --checksum (v4.26.2): gulp conserva en dist/ la fecha del archivo fuente y
+# el token ?v=hash de los assets no cambia el tamaño del HTML, así que la
+# comparación por fecha+tamaño de rsync NO subía las páginas cuyo fuente no
+# había cambiado: seguían apuntando al CSS/JS con el token antiguo (cacheado
+# un año como immutable) y los cambios de estilo no se veían. Comparar por
+# contenido cuesta unos segundos más y garantiza el espejo.
+RSYNC_FLAGS=(-avz --checksum --delete --exclude='.DS_Store' --exclude='.maintenance')
 [[ "$DRY_RUN" -eq 1 ]] && { RSYNC_FLAGS+=(-n); info "DRY-RUN: no se modificará el servidor."; }
 
 info "Sincronizando con rsync…"
