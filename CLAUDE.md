@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.22.6 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.22.7 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -136,7 +136,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.22.6).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.22.7).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -156,7 +156,7 @@ Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problem
   5. **Listeners de `translationsReady` antes de cualquier `await`** (`board.js`): registrado después del fetch del tablón, el evento podía haberse disparado ya y el tablón quedaba en castellano en `/va/`.
   6. **Enter/Espacio en `role="button"`**: `accessibility.js` convierte esas teclas en `click()` para todo `[tabindex="0"]`/`role="button"`; cualquier otro script que haga lo mismo (como `acc.js` en los titulares `<div>` del acordeón) debe hacer `preventDefault()` y ambos deben comprobar `event.defaultPrevented`, o el elemento recibe dos clicks y el acordeón se abre y se cierra.
   7. **Contraste**: `.weather-current`/`.actual-desc` (texto blanco sobre `$melocotin-claro`, 1,3:1) y el `:hover` de los inputs de `#quieres-form` (blanco sobre `$azul-verdoso`, 1,8:1) eran ilegibles en modo claro; ahora `$gris-oscuro`/`$negro-casi` con el modo oscuro reponiendo el claro. `padding: auto` no existe en CSS (6 declaraciones descartadas por el navegador, eliminadas). Todas las media queries móviles usan `max-width: 767px` (quedaban 23 con `768px` solapando con `min-width: 768px`; los baselines *tablet* se regeneraron).
-  8. **Metadatos**: 11 páginas compartían la `meta description` de la home ("Página de inicio de Fallas Suïssa…"); cada página lleva la suya. TikTok apunta a `https://tiktok.com/@fallasuissaalqueria` en todos los footers. Pendiente de decisión del usuario: URL del canal de YouTube (todos los footers enlazan `https://youtube.com`), URL de Facebook (conviven `fallasuïssal'alqueriadelfavero`, `FallaSuissaLalqueriadelFavero` y `fallasuissa`), y `organigrama.html` sin enlace entrante (el nodo "Cristina Camaña/Camañas" se retiró en v4.22.2).
+  8. **Metadatos**: 11 páginas compartían la `meta description` de la home ("Página de inicio de Fallas Suïssa…"); cada página lleva la suya. TikTok apunta a `https://tiktok.com/@fallasuissaalqueria` en todos los footers. Pendiente de decisión del usuario: URL del canal de YouTube (todos los footers enlazan `https://youtube.com`), URL de Facebook (conviven `fallasuïssal'alqueriadelfavero`, `FallaSuissaLalqueriadelFavero` y `fallasuissa`), y `organigrama.html` sin enlace entrante (el nodo "Cristina Camaña/Camañas" se retiró en v4.22.2; la discrepancia Pablo Cortés/Marta Soriano en Eventos se resolvió en v4.22.7).
   9. **`updateDistSitemapsLastmod` cubre los tres sitemaps de URLs** (`sitemap.xml`, `sitemap-google.xml`, `sitemap-ai-optimized.xml`, conservando el formato fecha-hora de estos dos últimos) además de `sitemap-index.xml`.
   10. **`.htaccess`**: `img-src` de la CSP incluye `https://unpkg.com` (icono de pantalla completa de Leaflet; la URL del CSS de `leaflet.fullscreen` estaba mal formada y no cargaba), el modo mantenimiento excluye `/.well-known/` (renovación de certificados) y los `AddType` de fuentes usan `font/woff` y `font/woff2`.
 
@@ -310,6 +310,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.22.7** — Organigrama, Vicepresidencias (`index.html`/`lafalla.html`/`organigrama.html` + Schema.org `Person` de `eventos.html`/`organigrama.html`): se retira Rodrigo Sobero; Pablo Cortés pasa a vicepresidente de Festejos y Maite Cabezuelo a vicepresidenta de Eventos (sale de la columna de delegados; en `organigrama.html` sustituye a Marta Soriano, con lo que las tres páginas quedan por fin con las mismas cabeceras: Maite Cabezuelo · Eventos, Prados Ramos · Protocolo y Deportes, Pablo Cortés · Festejos). Baselines visuales de organigrama regenerados.
 - **4.22.6** — Organigrama, Festejos: se retira Miguel Prieto (`index.html`/`lafalla.html`/`organigrama.html` y `Person` del Schema.org de `eventos.html`/`organigrama.html`). Baselines visuales de organigrama regenerados.
 - **4.22.5** — Deportes: se retiran Jose Luis Damaso y Hugo Santos como delegados de Deportes (columna Protocolo y Deportes del organigrama en `index.html`/`lafalla.html`/`organigrama.html`, lista de delegados de `deportes.html` y `Person` del Schema.org de `eventos.html`/`organigrama.html`); queda Pablo Pallardó. Baselines visuales de organigrama regenerados.
 - **4.22.4** — Organigrama (`index.html`, `lafalla.html`, `organigrama.html`), Delegación Infantil: se retiran Raquel Rubio, Vanessa Alarcón y Patricia Alarcón y entra Marta Pastor (que sigue también como delegada de Eventos); queda Sara Medina → Delia Caravantes, Marta Pastor. Baselines visuales de organigrama regenerados.
