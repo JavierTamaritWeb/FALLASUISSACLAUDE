@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.23.3 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.23.4 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -136,7 +136,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.23.3).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.23.4).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -320,6 +320,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.23.4** — `organigrama.html`: el título de la página pasa de "Organigrama 2025-26" a "Organigrama 2026-27" (h1, `meta description`, `og:title` y `twitter:title`). Baselines visuales de organigrama regenerados.
 - **4.23.3** — Organigrama (`index.html`, `lafalla.html`, `organigrama.html`): Marta Pastor sale de la columna de delegados de Eventos (queda solo en Delegación Infantil; su `Person` del Schema.org de `eventos.html`/`organigrama.html` pasa a "Delegada de Infantil") y Pablo Pallardó (Delegado Deportes) vuelve de Secretaría a la columna de Prados Ramos (Protocolo y Deportes), que deja de estar vacía (la `organigrama__branch` `aria-hidden` de v4.22.10 se sustituye por su tarjeta). Baselines visuales de organigrama regenerados.
 - **4.23.2** — Dos cambios de navegación en las 31 páginas: **(1) menú desplegable y pie en mayúsculas** (`text-transform: uppercase` + `letter-spacing: 0.04em` en `.navegacion__enlace` y `.footer__enlace`; solo CSS, el texto fuente sigue en minúscula) y **(2) todos los escudos de la Falla enlazan a `https://fallasuissa.es/`** (70 escudos: header, header-inner, footer, acordeones, encabezado *La Falla*, cabecera de impresión de las autorizaciones, portada del Llibret y `ai-info.html`), con `aria-label` traducido (`nav.escudoInicio`, ES/VA/EN/FR), halo coral en hover y contorno coral en foco; nuevo parcial `_escudo-enlace.scss` y verificado que ningún escudo cambia de posición. Nuevo `tests/escudo-enlace.e2e.spec.js` en la smoke (17 specs). Baselines visuales regenerados (el pie cambia en todas las páginas). Ver restricciones *Menú y pie en mayúsculas* y *Escudos enlazados a la home*.
 - **4.23.1** — **Fix: acordeones sin recorte en todas las pantallas.** El panel HOPE de `colaboraciones.html` se veía cortado (el mosaico de 6 fotos quedaba fuera): el acordeón base limitaba el panel abierto a `max-height: 100rem` (1000 px) y el panel mide 1518-2131 px; el mismo tope recortaba el Organigrama (375/768 px) y La Fallera Mayor Infantil (375 px) en `index`/`lafalla`. Ahora `acc.js` fija el alto real al abrir y lo deja en `none` tras la transición (respaldo por temporizador), los topes fijos desaparecen de `_falla.scss` y `_colaboraciones.scss` (220/260 rem) y `prefers-reduced-motion` anula la transición. Nuevo `tests/accordion-sin-recorte.e2e.spec.js` (12 casos: 4 páginas × 3 anchos, todos los paneles) en la smoke, que pasa a 16 specs. Ver restricción *Acordeón sin tope de altura*.
