@@ -92,7 +92,7 @@
   
   <!-- Swiper CSS -->
 <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=60e6fe6ce5fb">
+  <link rel="stylesheet" href="css/main.css?v=7b73cf74297f">
 
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
@@ -176,7 +176,32 @@
           <button id="nextBtn" class="notepad__button" data-i18n="siguiente">Siguiente →</button>
         </div>
       </div>
-  </section>  
+  </section>
+
+  <!-- Paginación entre galerías: la genera el build a partir de las galerías existentes (NO escribirla a mano) -->
+    <!-- Paginación entre galerías: generada por el build (gulpfile.js → buildGaleriaPager) -->
+  <nav class="galeria-pager" aria-label="Navegación entre galerías" data-i18n-aria-label="galeriasPager.aria">
+    <a class="galeria-pager__vecina galeria-pager__vecina--anterior" href="galeria_2.html" rel="prev">
+      <span class="visually-hidden" data-i18n="galeriasPager.anterior">Galería anterior:</span>
+      <span class="galeria-pager__nombre" data-i18n="galeria.galeria2">Fallera Mayor Infantil 2025-26</span>
+    </a>
+    <ol class="galeria-pager__lista">
+      <li><a class="galeria-pager__numero" href="galeria_1.html" aria-label="Apuntá 2025-26" data-i18n-aria-label="galeria.galeria1" title="Apuntá 2025-26" data-i18n-title="galeria.galeria1">1</a></li>
+      <li><a class="galeria-pager__numero" href="galeria_2.html" aria-label="Fallera Mayor Infantil 2025-26" data-i18n-aria-label="galeria.galeria2" title="Fallera Mayor Infantil 2025-26" data-i18n-title="galeria.galeria2">2</a></li>
+      <li><a class="galeria-pager__numero" href="galeria_3.html" aria-current="page" aria-label="Monumento 2025-26" data-i18n-aria-label="galeria.galeria3" title="Monumento 2025-26" data-i18n-title="galeria.galeria3">3</a></li>
+      <li><a class="galeria-pager__numero" href="galeria_4.html" aria-label="Proclamación 2025-26" data-i18n-aria-label="galeria.galeria4" title="Proclamación 2025-26" data-i18n-title="galeria.galeria4">4</a></li>
+      <li><a class="galeria-pager__numero" href="galeria_5.html" aria-label="Ofrenda de Frutos 2025-26" data-i18n-aria-label="galeria.galeria5" title="Ofrenda de Frutos 2025-26" data-i18n-title="galeria.galeria5">5</a></li>
+      <li><a class="galeria-pager__numero" href="galeria_6.html" aria-label="Cremà 2025-26" data-i18n-aria-label="galeria.galeria6" title="Cremà 2025-26" data-i18n-title="galeria.galeria6">6</a></li>
+      <li><a class="galeria-pager__numero" href="galeria_7.html" aria-label="San Juan 2026" data-i18n-aria-label="galeria.galeria7" title="San Juan 2026" data-i18n-title="galeria.galeria7">7</a></li>
+      <li><a class="galeria-pager__numero" href="galeria_8.html" aria-label="Representantes 2026-27" data-i18n-aria-label="galeria.galeria8" title="Representantes 2026-27" data-i18n-title="galeria.galeria8">8</a></li>
+      <li><a class="galeria-pager__numero" href="galeria_9.html" aria-label="Fallera Mayor Infantil 2026-27" data-i18n-aria-label="galeria.galeria9" title="Fallera Mayor Infantil 2026-27" data-i18n-title="galeria.galeria9">9</a></li>
+    </ol>
+    <a class="galeria-pager__vecina galeria-pager__vecina--siguiente" href="galeria_4.html" rel="next">
+      <span class="visually-hidden" data-i18n="galeriasPager.siguiente">Galería siguiente:</span>
+      <span class="galeria-pager__nombre" data-i18n="galeria.galeria4">Proclamación 2025-26</span>
+    </a>
+    <a class="boton galeria-pager__todas" href="galerias.html" data-i18n="galeriasPager.todas">Todas las galerías</a>
+  </nav>  
     
   
   <!-- Frieze Inferior con modificador bordered -->
@@ -229,13 +254,13 @@
     </nav>
   </footer>
 
-  <script src="js/fullscreen.js?v=60e6fe6ce5fb" defer></script>
-  <script src="js/galeria.js?v=60e6fe6ce5fb"></script>
-  <script src="js/lang.js?v=60e6fe6ce5fb"></script>
-  <script src="js/dark.js?v=60e6fe6ce5fb"></script>
-  <script src="js/nav-menu.js?v=60e6fe6ce5fb"></script>
-  <script src="js/scroll-reveal.js?v=60e6fe6ce5fb" defer></script>
+  <script src="js/fullscreen.js?v=7b73cf74297f" defer></script>
+  <script src="js/galeria.js?v=7b73cf74297f"></script>
+  <script src="js/lang.js?v=7b73cf74297f"></script>
+  <script src="js/dark.js?v=7b73cf74297f"></script>
+  <script src="js/nav-menu.js?v=7b73cf74297f"></script>
+  <script src="js/scroll-reveal.js?v=7b73cf74297f" defer></script>
   
-  <script src="js/cookie-banner.js?v=60e6fe6ce5fb" defer></script>
+  <script src="js/cookie-banner.js?v=7b73cf74297f" defer></script>
 </body>
 </html>

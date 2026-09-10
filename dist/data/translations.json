@@ -575,6 +575,14 @@
         "abrir": "Abrir imagen ampliada",
         "cerrar": "Cerrar imagen ampliada"
       }
+    },
+    "galeriasPager": {
+      "aria": "Navegación entre galerías",
+      "anterior": "Galería anterior:",
+      "siguiente": "Galería siguiente:",
+      "sinAnterior": "No hay galería anterior",
+      "sinSiguiente": "No hay galería siguiente",
+      "todas": "Todas las galerías"
     }
   },
   "va": {
@@ -1153,6 +1161,14 @@
         "abrir": "Obrir imatge ampliada",
         "cerrar": "Tancar imatge ampliada"
       }
+    },
+    "galeriasPager": {
+      "aria": "Navegació entre galeries",
+      "anterior": "Galeria anterior:",
+      "siguiente": "Galeria següent:",
+      "sinAnterior": "No hi ha galeria anterior",
+      "sinSiguiente": "No hi ha galeria següent",
+      "todas": "Totes les galeries"
     }
   },
   "en": {

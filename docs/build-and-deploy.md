@@ -79,6 +79,8 @@ Detalles funcionales y reglas: [`i18n-translations.md`](./i18n-translations.md).
 
 Tras editar `src/data/translations.json` corre `npm run build` para regenerar el HTML pre-renderizado, y `npm run test:e2e` (incluye `i18n-prerender.e2e.spec.js` en el smoke).
 
+**Paginación entre galerías (v4.26.0):** antes del pre-render, `gulpfile.js → injectGaleriaPager()` sustituye el marcador `<!-- galeria-pager -->` de cada `src/galeria_N.html` por el `<nav class="galeria-pager">` generado con `listGalerias()` (glob `src/galeria_*.html`, orden numérico) y los nombres `galeria.galeriaN` de `translations.json`. Si falta el marcador, el build avisa `[galeria-pager] sin marcador …` y la página queda sin paginación; no se escribe la paginación a mano.
+
 ## 🗺️ Sitemaps y `lastmod`
 
 El build ejecuta `updateDistSitemapsLastmod` para actualizar `lastmod` en:
@@ -248,4 +250,4 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 10 de septiembre de 2026 - v4.25.0
+Última actualización: 10 de septiembre de 2026 - v4.26.0

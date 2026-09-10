@@ -911,6 +911,17 @@ body.modo-oscuro .visor__titulo {
     color: v.$primary-color;
 }
 
+// Paginación entre galerías (v4.26.0): mismo fondo que .visor
+body.modo-oscuro .galeria-pager {
+    background-color: v.$secondary-color;
+}
+body.modo-oscuro .galeria-pager__vecina[aria-disabled="true"] {
+    color: v.$gris-medio-oscuro;
+}
+body.modo-oscuro .galeria-pager__numero[aria-current="page"] {
+    color: v.$negro;
+}
+
 // Vídeo de galería (galeria_9): mismo fondo que .visor, glow coral
 body.modo-oscuro .galeria-video {
     background-color: v.$secondary-color;

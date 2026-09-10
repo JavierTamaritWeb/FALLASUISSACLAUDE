@@ -593,7 +593,84 @@ function prerenderTranslations(html, langTable, fileName, missingKeyTracker) {
   return html;
 }
 
-function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missingKeyTracker) {
+// ---------------------------------------------------------------------------
+// Paginación entre galerías (v4.26.0). Se genera en el build a partir de las
+// galerías existentes (src/galeria_N.html) y de los nombres de translations.json
+// (galeria.galeriaN, ES como texto de reserva; el pre-render VA rellena los
+// data-i18n* después). Cada galeria_N.html lleva el marcador
+// <!-- galeria-pager --> justo bajo el bloc; NO se escribe la paginación a mano.
+// Enlaces relativos (galeria_N.html) para que desde /va/ se siga en /va/.
+// Sin bucle: en los extremos la vecina inexistente es un <span aria-disabled>.
+// ---------------------------------------------------------------------------
+async function listGalerias() {
+  const files = await glob('src/galeria_*.html');
+  return files
+    .map((f) => {
+      const m = path.basename(f).match(/^galeria_(\d+)\.html$/);
+      return m ? { n: Number(m[1]), file: path.basename(f) } : null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.n - b.n);
+}
+
+function nombreGaleria(esTable, n) {
+  const g = esTable && esTable.galeria;
+  return (g && g[`galeria${n}`]) || `Galería ${n}`;
+}
+
+function buildGaleriaPager(n, galerias, esTable) {
+  const idx = galerias.findIndex((g) => g.n === n);
+  if (idx === -1) return '';
+  const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  const prev = galerias[idx - 1];
+  const next = galerias[idx + 1];
+
+  const vecina = (g, tipo) => {
+    // tipo: 'anterior' | 'siguiente'
+    if (!g) {
+      const clave = tipo === 'anterior' ? 'sinAnterior' : 'sinSiguiente';
+      const texto = tipo === 'anterior' ? 'No hay galería anterior' : 'No hay galería siguiente';
+      return `    <span class="galeria-pager__vecina galeria-pager__vecina--${tipo}" aria-disabled="true">
+      <span class="visually-hidden" data-i18n="galeriasPager.${clave}">${texto}</span>
+    </span>`;
+    }
+    const rel = tipo === 'anterior' ? 'prev' : 'next';
+    const etiqueta = tipo === 'anterior' ? 'Galería anterior:' : 'Galería siguiente:';
+    return `    <a class="galeria-pager__vecina galeria-pager__vecina--${tipo}" href="${g.file}" rel="${rel}">
+      <span class="visually-hidden" data-i18n="galeriasPager.${tipo}">${etiqueta}</span>
+      <span class="galeria-pager__nombre" data-i18n="galeria.galeria${g.n}">${esc(nombreGaleria(esTable, g.n))}</span>
+    </a>`;
+  };
+
+  const numeros = galerias.map((g) => {
+    const nombre = esc(nombreGaleria(esTable, g.n));
+    const actual = g.n === n ? ' aria-current="page"' : '';
+    return `      <li><a class="galeria-pager__numero" href="${g.file}"${actual} aria-label="${nombre}" data-i18n-aria-label="galeria.galeria${g.n}" title="${nombre}" data-i18n-title="galeria.galeria${g.n}">${g.n}</a></li>`;
+  }).join('\n');
+
+  return `  <!-- Paginación entre galerías: generada por el build (gulpfile.js → buildGaleriaPager) -->
+  <nav class="galeria-pager" aria-label="Navegación entre galerías" data-i18n-aria-label="galeriasPager.aria">
+${vecina(prev, 'anterior')}
+    <ol class="galeria-pager__lista">
+${numeros}
+    </ol>
+${vecina(next, 'siguiente')}
+    <a class="boton galeria-pager__todas" href="galerias.html" data-i18n="galeriasPager.todas">Todas las galerías</a>
+  </nav>`;
+}
+
+function injectGaleriaPager(html, fileName, galerias, esTable) {
+  const m = fileName.match(/^galeria_(\d+)\.html$/);
+  if (!m || !galerias) return html;
+  const marcador = '<!-- galeria-pager -->';
+  if (!html.includes(marcador)) {
+    console.warn(`[galeria-pager] sin marcador ${marcador} en ${fileName}: la página queda sin paginación`);
+    return html;
+  }
+  return html.replace(marcador, buildGaleriaPager(Number(m[1]), galerias, esTable));
+}
+
+function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missingKeyTracker, pagerCtx) {
   return new Transform({
     objectMode: true,
     transform(file, enc, cb) {
@@ -607,6 +684,12 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missi
       if (lang === 'ca') {
         html = html.replace(/<html\s+([^>]*)lang="es"/i, '<html $1lang="ca"');
         html = html.replace(/<html\s+lang="es"(.*)?>/i, '<html lang="ca"$1>');
+      }
+
+      // 1a. Paginación entre galerías (antes del pre-render para que /va/
+      // salga con los nombres en valenciano horneados).
+      if (pagerCtx) {
+        html = injectGaleriaPager(html, path.basename(file.path), pagerCtx.galerias, pagerCtx.esTable);
       }
 
       // 1b. Pre-render de traducciones (solo VA por ahora). El toggle ES/VA
@@ -692,16 +775,22 @@ async function htmlTask() {
 
   const missingKeyTracker = new Set();
 
+  // Paginación entre galerías: lista de galerías existentes + nombres ES de reserva
+  const pagerCtx = {
+    galerias: await listGalerias(),
+    esTable: translations && translations.es ? translations.es : null
+  };
+
   // Buffer process (no encoding flag para que cargue bin pero el Transform convierte a utf8 y viceversa)
   const esPromise = streamToPromise(
     src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaString, 'es', assetVersion, null, null))
+      .pipe(modifyHtmlStream(schemaString, 'es', assetVersion, null, null, pagerCtx))
       .pipe(dest(paths.html.dest))
   );
 
   const caPromise = streamToPromise(
     src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaString, 'ca', assetVersion, langTableCa, missingKeyTracker))
+      .pipe(modifyHtmlStream(schemaString, 'ca', assetVersion, langTableCa, missingKeyTracker, pagerCtx))
       .pipe(dest(path.join(paths.html.dest, 'va')))
   );
 
