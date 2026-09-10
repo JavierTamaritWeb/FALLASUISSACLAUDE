@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.26.3 · **Última actualización:** 10 de septiembre de 2026
+**Versión:** 4.26.4 · **Última actualización:** 10 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -138,7 +138,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.26.3).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.26.4).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -148,7 +148,7 @@ Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problem
   1. **NUNCA versionar datos sensibles.** El repo es público. Las credenciales SSH (`SSH_USER/HOST/PORT/REMOTE_DIR`) y el token de mantenimiento (`MAINT_TOKEN`) viven en `tools/deploy.env` (en `.gitignore`); plantilla en `tools/deploy.env.example`. `tools/deploy.sh` los lee al arrancar y aborta si faltan `SSH_USER/HOST`. Antes (v4.8.x) se hardcodeó una IP del equipo y datos SSH en `src/.htaccess`/`deploy.sh`/docs; se purgaron del historial con `git filter-repo` + force-push (los hashes cambiaron — re-clona cualquier clon antiguo).
   2. **Modo mantenimiento** (`tools/deploy.sh --maintenance on|off`): sube/borra el centinela `.maintenance` en la raíz web. El bloque del `.htaccess` da **HTTP 503 + Retry-After** mientras exista, sirviendo `mantenimiento.html` vía `ErrorDocument 503`. Queda **dormido** sin el centinela. NO uses 200 para una pantalla de mantenimiento (Google la indexaría / pensaría que el contenido se fue).
   3. **Bypass por token, NO por IP**: `?preview=<MAINT_TOKEN>` fija una cookie de bypass. El `.htaccess` versionado lleva el placeholder `__MAINT_TOKEN__`; `deploy.sh → inject_maint_token()` sustituye el valor real en el `.htaccess` del servidor **después de cada rsync** (por eso el token nunca entra en git). El rsync usa `--exclude='.maintenance'` para no apagar un mantenimiento en curso al desplegar.
-  4. **`rsync` compara por contenido (`--checksum`, v4.26.2).** `gulp dest` conserva en `dist/` la fecha del archivo fuente y el token `?v=hash` de CSS/JS no cambia el tamaño del HTML, así que con la comparación por fecha+tamaño rsync NO subía las páginas cuyo fuente no había cambiado: en producción seguían enlazando `main.css?v=<token viejo>` (cacheado un año como `immutable`) y los cambios de estilo no se veían en esas páginas (detectado en 4.26.1: `galeria_9.html` en el servidor apuntaba al CSS de 4.26.0). Además (v4.26.3) rsync va **sin `-t`** (`-rlpgoDvz`, es decir `-a` menos `-t`): con `-t` el servidor recibía la fecha antigua del fuente, Apache contestaba `304 Not Modified` a la revalidación de la CDN de Hostinger (mismo `Last-Modified`/`ETag`) y la CDN seguía sirviendo el HTML viejo aunque el archivo ya estuviera actualizado (con `--checksum` solo se transfieren los archivos que cambian, y esos reciben la fecha del momento). NO quites `--checksum` ni reintroduzcas `-a`/`-t`; tras cada deploy comprueba con `?nc=$RANDOM` que el `?v=` de `main.css` en una página no tocada coincide con el de `dist/` (si no coincide, la CDN aún sirve la copia antigua).
+  4. **`rsync` compara por contenido (`--checksum`, v4.26.2).** `gulp dest` conserva en `dist/` la fecha del archivo fuente y el token `?v=hash` de CSS/JS no cambia el tamaño del HTML, así que con la comparación por fecha+tamaño rsync NO subía las páginas cuyo fuente no había cambiado: en producción seguían enlazando `main.css?v=<token viejo>` (cacheado un año como `immutable`) y los cambios de estilo no se veían en esas páginas (detectado en 4.26.1: `galeria_9.html` en el servidor apuntaba al CSS de 4.26.0). Además (v4.26.3) rsync va **sin `-t`** (`-rlpgoDvz`, es decir `-a` menos `-t`): con `-t` el servidor recibía la fecha antigua del fuente, Apache contestaba `304 Not Modified` a la revalidación de la CDN de Hostinger (mismo `Last-Modified`/`ETag`) y la CDN seguía sirviendo el HTML viejo aunque el archivo ya estuviera actualizado (con `--checksum` solo se transfieren los archivos que cambian, y esos reciben la fecha del momento). NO quites `--checksum` ni reintroduzcas `-a`/`-t` (registro completo en `docs/architecture-constraints.md` §14); tras cada deploy comprueba con `?nc=$RANDOM` que el `?v=` de `main.css` en una página no tocada coincide con el de `dist/` (si no coincide, la CDN aún sirve la copia antigua).
   5. **`mantenimiento.html` es standalone** como `ai-info.html`: excluida del glob `html` de `gulpfile.js` y copiada por `rootFilesTask` (sin canonical/hreflang ni variante `/va/`). Debe ser autocontenida (CSS inline, sin assets externos) para no depender de la CSP ni de archivos que podrían faltar durante un rediseño.
 
 - **Auditoría de errores de sep-2026 (v4.22.0) — lecciones que no deben repetirse:**
@@ -327,6 +327,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.26.4** — Documentación: el fallo del deploy de 4.26.2-4.26.3 (rsync por fecha+tamaño y CDN revalidando con 304) queda registrado como §14 de `docs/architecture-constraints.md` con síntoma, causas, solución y la verificación del `?v=` tras cada deploy. Sin cambios en el sitio servido.
 - **4.26.3** — **Fix del deploy (2/2)**: rsync sin `-t`. Con `--checksum` (4.26.2) el HTML sí se subía, pero conservaba la fecha del fuente y la CDN de Hostinger, al revalidar, recibía `304` de Apache y seguía sirviendo la versión anterior. Ahora los archivos transferidos reciben la fecha del momento. Ver restricción *Deploy, secretos y mantenimiento* (punto 4).
 - **4.26.2** — **Fix del deploy**: `tools/deploy.sh` añade `--checksum` a rsync. Hasta ahora las páginas HTML cuyo fuente no cambiaba no se subían (misma fecha y tamaño pese al nuevo token `?v=` de los assets) y en producción seguían cargando el CSS/JS anterior desde caché: el fix de 4.26.1 no se veía en `galeria_9.html`. Ver restricción *Deploy, secretos y mantenimiento* (punto 4).
 - **4.26.1** — Fix visual de la paginación de galerías: el `<nav class="galeria-pager">` tenía `max-width: 120rem; margin: 0 auto` y su fondo claro solo cubría esos 1200 px, así que en pantallas anchas asomaba el azul de la página a ambos lados. Ahora ocupa todo el ancho (como `.visor`) y centra el contenido con `padding-inline: max(1.5rem, calc((100% - 120rem) / 2))`. Test nuevo a 2000 px en `tests/galeria-pager.e2e.spec.js`.

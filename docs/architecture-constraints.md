@@ -449,7 +449,23 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 5. Verifica cambios de menú en Chromium con capturas sobre `organigrama.html` **con scroll** (título sticky y cenefa bajo el panel), en modo claro y oscuro; `elementFromPoint` sobre los enlaces detecta el apilamiento, pero no la transparencia — mira la captura.
 6. Test guardia: `tests/nav.e2e.spec.js` (degradado + `blur(15px)` en el panel, `backdrop-filter: none` en la barra, fondo oscuro en desktop, `z-index: 500` y menú por encima del contenido en `organigrama.html`, foco con ratón/teclado).
 
-## 14. Qué hacer antes de tocar una zona sensible
+## 14. Deploy: rsync por contenido y sin conservar fechas (v4.26.2-v4.26.3)
+
+**Síntoma (10-sep-2026):** tras publicar el fix de la paginación de galerías (4.26.1), `md5` de `main.css` en producción coincidía con `dist/`, pero en Chrome real la página seguía mostrando el estilo antiguo. `galeria_9.html`, `galeria_1.html` e `index.html` en producción enlazaban `main.css?v=<token de una versión anterior>` (cacheado un año como `immutable`), mientras `lafalla.html` ya llevaba el token nuevo.
+
+**Causas (dos, encadenadas):**
+1. **rsync por fecha+tamaño no subía las páginas no editadas.** `gulp dest` conserva en `dist/` la fecha del archivo fuente, y el token `?v=hash` de CSS/JS que el build inserta en el HTML no cambia su tamaño (misma longitud). Para rsync (`-a`, comparación rápida por mtime+size) el HTML "no había cambiado" y no se transfería: en el servidor seguía la versión con el token viejo. Afectaba a cualquier deploy que cambiara CSS/JS sin tocar el fuente de una página.
+2. **La CDN revalidaba con 304 y servía el cuerpo antiguo.** Con `--checksum` el HTML sí subía, pero `-t` copiaba al servidor la fecha antigua del fuente; Apache contestaba `304 Not Modified` a la revalidación de la CDN de Hostinger (mismo `Last-Modified`/`ETag`) y esta seguía sirviendo la copia anterior aunque el archivo fuera nuevo. `x-hcdn-cache-status: DYNAMIC` engaña: la CDN sí conserva y revalida el HTML pese a `max-age=0, must-revalidate`.
+
+**Solución (`tools/deploy.sh`):** `RSYNC_FLAGS=(-rlpgoDvz --checksum --delete …)` — `--checksum` compara por contenido y, sin `-t` (`-a` menos `-t`), cada archivo transferido recibe la fecha del momento, así el `Last-Modified` cambia y la CDN obtiene el cuerpo nuevo. Los archivos que ya coincidían en el servidor conservaban la fecha vieja: hubo que hacer un `touch` único de los `*.html` remotos por SSH.
+
+**Reglas:**
+1. NO reintroduzcas `-a`/`-t` ni quites `--checksum` en `deploy.sh`.
+2. Tras cada deploy, verifica con cache-buster que el `?v=` de `main.css` en **una página no tocada en ese commit** coincide con el de `dist/`: `curl -s "https://fallasuissa.es/galeria_1.html?nc=$RANDOM" | grep -o 'main.css?v=[a-z0-9]*'`. Si no coincide, mira `last-modified` en las cabeceras: si es antiguo, la CDN sirve copia vieja (solución: `touch` remoto del archivo).
+3. `md5` del CSS/JS en producción **no basta** como verificación: el fallo estaba en el HTML que lo referencia.
+4. La comprobación final de un cambio visual reportado por el usuario se hace en Chrome real contra producción, no solo contra `dist/`.
+
+## 15. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
 
@@ -473,4 +489,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 10 de septiembre de 2026 - v4.26.3
+Última actualización: 10 de septiembre de 2026 - v4.26.4
