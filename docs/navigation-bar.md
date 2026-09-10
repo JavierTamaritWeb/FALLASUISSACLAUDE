@@ -251,7 +251,7 @@ Desde v4.6.15 tanto `.navegacion__enlace` (header) como `.footer__enlace` (foote
 
 ### Patrón compartido
 
-- Fondo del desplegable **casi opaco** (`rgba(2,66,122,.98)` claro / `rgba(0,0,0,.98)` oscuro, v4.23.5) en todos los tamaños: el `backdrop-filter` del panel no difumina la página (la barra ya lleva `backdrop-filter`), así que con transparencia se veían el hero y la cenefa a través del menú.
+- Fondo del desplegable de **cristal como la barra** (v4.23.6): degradado azul al 70 % + `backdrop-filter: blur(15px)` en claro, `rgba(51,51,51,.8)` + blur en oscuro, en todos los tamaños. Para que el blur vea la página, la barra NO lleva `backdrop-filter` en el propio elemento (solo en su `::before`): un elemento con `backdrop-filter` es *backdrop root* de sus hijos. `.header`/`.header-inner` llevan `z-index: 500` para que el menú quede sobre la cenefa y los títulos sticky.
 - En reposo: texto `v.$blanco`, sin fondo, **en mayúsculas** (`text-transform: uppercase; letter-spacing: 0.04em`, v4.23.2). La mayúscula se aplica solo con CSS: `translations.json` y los textos de reserva del HTML siguen en minúscula (así los leen los lectores de pantalla y los buscadores). Nunca `capitalize`.
 - Pseudo-elemento `::after` (anclado `position: absolute; bottom`, `height: 2px`, `background-color: v.$primary-color`) con `width: 0; opacity: 0`.
 - En `:hover` y `:focus-visible`: `color: v.$primary-color` y el `::after` anima `width: 0 → calc(100% - padding*2)` + `opacity: 0 → 1` con `transition: width 0.3s ease, opacity 0.3s ease`.
@@ -549,4 +549,4 @@ npm run build
 - Hover/focus y activo usan ambos `v.$primary-color` tanto en el texto como en la línea del `::after`.
 - Test `tests/nav.e2e.spec.js` actualizado: ya no espera fondo blanco en el enlace activo móvil; ahora valida `color === rgb(255, 111, 97)` y que el `::after` tiene `opacity: 1` + `background-color` en coral.
 
-Última actualización: 10 de septiembre de 2026 - v4.23.5
+Última actualización: 10 de septiembre de 2026 - v4.23.6

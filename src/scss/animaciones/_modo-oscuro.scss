@@ -1001,11 +1001,13 @@ body.modo-oscuro .header-inner__barra--scrolled {
 // Menú desplegable en modo oscuro (todos los tamaños desde v4.23.5: la nav es
 // un desplegable también en desktop, antes solo se cubría <768px y en escritorio
 // quedaba el azul translúcido del modo claro con el hero transparentándose).
-// Casi opaco: el blur no ve la página porque la barra ya lleva backdrop-filter.
+// Cristal oscuro como la barra en modo oscuro (v4.23.6): mismo gris
+// translúcido que .header__barra--scrolled, con blur real de la página.
 body.modo-oscuro .navegacion {
-  background: rgba(0, 0, 0, 0.98);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(51, 51, 51, 0.8);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 //  MODAL QUIERES

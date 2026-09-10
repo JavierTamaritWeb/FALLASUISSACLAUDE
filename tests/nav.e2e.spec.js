@@ -126,7 +126,9 @@ test.describe('Navbar responsive + idioma', () => {
         activeUnderlineBackground: activeAfter ? activeAfter.backgroundColor : '',
         activeLinks: activeLinks.length,
         backdropFilter: window.getComputedStyle(nav).backdropFilter,
+        barBackdropFilter: window.getComputedStyle(bar).backdropFilter,
         backgroundColor: window.getComputedStyle(nav).backgroundColor,
+        backgroundImage: window.getComputedStyle(nav).backgroundImage,
         left: window.getComputedStyle(nav).left,
         overflow: window.getComputedStyle(bar).overflow,
         position: window.getComputedStyle(nav).position,
@@ -144,8 +146,13 @@ test.describe('Navbar responsive + idioma', () => {
     expect(navState.left).toBe('0px');
     expect(navState.right).toBe('0px');
     expect(navState.overflow).not.toBe('hidden');
-    expect(navState.backgroundColor).toMatch(/rgba\(2,\s*66,\s*122,\s*0\.98\)/);
-    expect(navState.backdropFilter).toContain('blur');
+    // Cristal como la barra (v4.23.6): degradado azul translúcido + blur real de la página
+    expect(navState.backgroundImage).toContain('linear-gradient');
+    expect(navState.backgroundImage).toMatch(/rgba\(2,\s*66,\s*122,\s*0\.7\)/);
+    expect(navState.backdropFilter).toContain('blur(15px)');
+    // La barra NO debe llevar backdrop-filter en el propio elemento (sería backdrop root
+    // y el blur del desplegable dejaría de ver la página); lo lleva su ::before
+    expect(navState.barBackdropFilter).toBe('none');
     expect(navState.visibleLinkCount).toBeGreaterThan(0);
     expect(navState.activeLinks).toBe(1);
     // El enlace activo ahora se distingue con texto en color primario (#FF6F61) + subrayado permanente,
@@ -169,7 +176,7 @@ test.describe('Navbar responsive + idioma', () => {
       return window.getComputedStyle(nav).backgroundColor;
     });
 
-    expect(backgroundColor).toMatch(/rgba\(0,\s*0,\s*0,\s*0\.98\)/);
+    expect(backgroundColor).toMatch(/rgba\(51,\s*51,\s*51,\s*0\.8\)/);
   });
 
   test('desktop: el desplegable en modo oscuro usa el fondo negro (no el azul del modo claro)', async ({ page }) => {
@@ -187,8 +194,9 @@ test.describe('Navbar responsive + idioma', () => {
     });
 
     // Antes de v4.23.5 la regla oscura vivía en @media (max-width: 767px) y en
-    // escritorio el menú conservaba rgba(2, 66, 122, .85) con el hero transparentándose
-    expect(backgroundColor).toMatch(/rgba\(0,\s*0,\s*0,\s*0\.98\)/);
+    // escritorio el menú conservaba el azul del modo claro. Desde v4.23.6: gris
+    // translúcido de la barra oscura + blur real
+    expect(backgroundColor).toMatch(/rgba\(51,\s*51,\s*51,\s*0\.8\)/);
   });
 
   test('desktop: abrir el menú con ratón no deja foco en el primer enlace', async ({ page }) => {
@@ -208,5 +216,29 @@ test.describe('Navbar responsive + idioma', () => {
     await expect(page.locator('nav.navegacion')).toBeVisible();
     const focused = await page.evaluate(() => document.activeElement && document.activeElement.className);
     expect(focused).toContain('navegacion__enlace');
+  });
+
+  test('desktop: el menú abierto se pinta por encima del título sticky y la cenefa (organigrama)', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/organigrama.html');
+    // Scroll hasta que el título sticky "Organigrama de la Falla" y la cenefa quedan bajo el menú
+    await page.evaluate(() => window.scrollTo(0, 420));
+    await page.waitForTimeout(300);
+    await page.click('.header__menu-toggle');
+    await expect(page.locator('nav.navegacion')).toBeVisible();
+
+    // Antes de v4.23.6 .header-inner tenía z-index 10 (igual que la cenefa y el título
+    // sticky, posteriores en el DOM), así que el contenido se pintaba sobre el menú
+    const encima = await page.evaluate(() => {
+      const nav = document.querySelector('nav.navegacion');
+      const r = nav.getBoundingClientRect();
+      const puntos = [0.15, 0.35, 0.55, 0.75, 0.95].map((f) => [r.left + r.width / 2, r.top + r.height * f]);
+      return puntos.map(([x, y]) => {
+        const el = document.elementFromPoint(x, y);
+        return el ? nav.contains(el) : false;
+      });
+    });
+    expect(encima.every(Boolean)).toBe(true);
+    expect(await page.evaluate(() => getComputedStyle(document.querySelector('.header-inner')).zIndex)).toBe('500');
   });
 });

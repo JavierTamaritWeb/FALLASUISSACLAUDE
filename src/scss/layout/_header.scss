@@ -16,7 +16,12 @@
   position: relative;
   overflow: hidden; // Recorte imagen monumento
   padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
-  z-index: 10; // Asegurar contexto de apilamiento
+  // Contexto de apilamiento del header (v4.23.6): la barra fija y el menú desplegable
+  // (z 2000/2500) viven DENTRO de este contexto, así que su z-index efectivo en la
+  // página es este. Con 10, la cenefa (10), el título sticky del organigrama (10),
+  // el timeline (100) y los tooltips (100) se pintaban encima del menú abierto.
+  // 500: por encima del contenido, por debajo de modales/banners (≥1000).
+  z-index: 500;
   
   // Pseudo-elemento para el fondo gradiente azul (modo claro)
   &::before {
@@ -310,7 +315,7 @@
   background-color: transparent;
   padding: 0;
   position: relative;
-  z-index: 10;
+  z-index: 500; // Mismo motivo que .header (ver comentario arriba, v4.23.6)
   padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
 
   // Pseudo-elemento para el gradiente azul (transición suave)
@@ -825,11 +830,14 @@ body.modo-oscuro {
     align-items: stretch;
     gap: 0.25rem;
     padding: 0.6rem;
-    // Fondo casi opaco (v4.23.5): el blur no alcanza la página porque la barra
-    // ya lleva backdrop-filter, y con 0.85 el hero y la cenefa se transparentaban
-    background: rgba(2, 66, 122, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    // Cristal como la barra principal (v4.23.6): mismo degradado azul con
+    // blur real de la página (posible porque la barra ya no lleva
+    // backdrop-filter en el propio elemento). Al 70 % (la barra usa .25-.30)
+    // para que el texto blanco siga legible sobre tarjetas blancas difuminadas.
+    background: linear-gradient(135deg, rgba(10, 75, 141, 0.7) 0%, rgba(2, 66, 122, 0.7) 60%, rgba(0, 51, 102, 0.7) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 1.2rem;
     box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
     z-index: 2500;
@@ -1009,8 +1017,11 @@ body.modo-oscuro {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  // SIN backdrop-filter en la propia barra (v4.23.6): el ::before ya difumina
+  // su fondo (blur 15px). Si la barra lleva backdrop-filter se convierte en
+  // "backdrop root" y el desplegable .navegacion (hijo suyo) solo puede
+  // difuminar el contenido de la barra, nunca la página: el menú quedaba
+  // transparente sin blur. Ver restricción *Desplegable de cristal*.
   z-index: 2000;
   // NO usar overflow:hidden - recorta el menú desplegable en móvil
   // Transición sincronizada con el tema (2.4s)
