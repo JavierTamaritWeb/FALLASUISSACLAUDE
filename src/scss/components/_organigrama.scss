@@ -236,14 +236,45 @@
       font-weight: bold;
       color: v.$secondary-color;
     }
-    
+
+    // Tamaño uniforme de las tarjetas (10-sep-2026): las cabeceras del
+    // subhead y las columnas de delegados reparten el ancho a partes iguales
+    // y cada tarjeta reserva la altura de dos líneas (nombre + cargo), de
+    // modo que las de una sola línea miden lo mismo que las de dos en todos
+    // los breakpoints.
+    &__subhead {
+      align-items: stretch;
+
+      .organigrama__subnode {
+        flex: 1 1 0;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+    &__branches {
+      align-items: flex-start;
+    }
+    &__branch {
+      flex: 1 1 0;
+      min-width: 0;
+      align-items: stretch;
+
+      .organigrama__subnode {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: calc(2 * 1.5 * var(--font-base) + 2 * 0.5rem + 4px);
+      }
+    }
+    &__subnode p {
+      overflow-wrap: anywhere;
+    }
 }
    
-    /* Clase para desplazar el nodo a la derecha */
-    .desplazado {
-      margin-left: 120px;
-      align-self: flex-start;
-    }
     .destacado {
       background: v.$primary-color;
       color: v.$blanco;
