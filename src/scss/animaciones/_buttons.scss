@@ -12,7 +12,9 @@
     0 0.9rem 1.9rem rgba(0, 0, 0, 0.12),
     0 0.25rem 0.6rem rgba(v.$primary-color, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.92);
-  color: v.$primary-color;
+  // Texto en coral oscuro (v4.29.0): el coral de marca sobre blanco daba 2,7:1;
+  // $coral-texto da 5,5:1. Borde, brillo y hover conservan el coral de marca.
+  color: v.$coral-texto;
   cursor: pointer;
   display: inline-flex;
   gap: 0.75rem;
@@ -114,6 +116,26 @@
   transform: translateY(-1px) scale(0.985);
 }
 
+// Estado deshabilitado propio (v4.29.0): identificable por borde discontinuo y
+// texto gris, sin elevación ni brillo. Exento de ratio (WCAG 1.4.3) pero legible.
+.boton:disabled,
+.boton[aria-disabled="true"] {
+  background: rgba(v.$blanco, 0.94);
+  border-color: v.$gris-medio-claro;
+  border-style: dashed;
+  box-shadow: none;
+  color: v.$gris-medio-oscuro;
+  cursor: not-allowed;
+  filter: none;
+  opacity: 0.7;
+  pointer-events: none;
+  transform: none;
+
+  &::before {
+    opacity: 0;
+  }
+}
+
 /* Botón Modal*/
 
 
@@ -128,7 +150,7 @@
   border: 1px solid v.$primary-color;
   border-radius: v.$border-radius;
   padding: 0.5rem 1rem;
-  color: v.$primary-color;
+  color: v.$coral-texto; // 5,5:1 sobre blanco (v4.29.0)
   margin-top: 1rem;
   font-size: 1.6rem;
   font-weight: 700;

@@ -9,7 +9,7 @@
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: v.$primary-color !important;
+    background-color: v.$coral-texto !important; // blanco sobre coral daba 2,7:1 (v4.29.0)
     color: v.$blanco;
     padding: 1rem 2rem;
     border-radius: 0.5rem;
@@ -19,6 +19,15 @@
     transition: opacity 0.5s ease, visibility 0.5s ease;
     text-align: center;
 }
+
+/* Variantes de estado (v4.29.0): siempre con texto; el icono lo pone ::before */
+#notificacion.notificacion--exito { background-color: v.$estado-exito !important; }
+#notificacion.notificacion--error { background-color: v.$estado-error !important; }
+#notificacion.notificacion--aviso { background-color: v.$estado-aviso !important; }
+#notificacion.notificacion--info  { background-color: v.$estado-info !important; }
+#notificacion.notificacion--exito::before { content: '\2713\00A0'; }
+#notificacion.notificacion--error::before { content: '\26A0\FE0E\00A0'; }
+#notificacion.notificacion--aviso::before { content: '\26A0\FE0E\00A0'; }
 
 /* Clase que activa la animación */
 #notificacion.mostrar {

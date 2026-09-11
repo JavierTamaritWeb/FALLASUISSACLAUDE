@@ -35,7 +35,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+      background: v.$gradiente-institucional;
       border-radius: inherit;
       opacity: 1;
       transition: opacity 2.4s ease-in-out;
@@ -92,7 +92,7 @@
     box-shadow: v.$box-shadow;
     font-size: 1.2rem;
     font-weight: bold;
-    color: v.$primary-color;
+    color: v.$coral-texto; // 5,1:1 sobre $blanco-hueso (v4.29.0)
     min-width: 8rem;
     
     // Estilo para el texto descriptivo (Días, Horas, etc.)

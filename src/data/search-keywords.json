@@ -1,0 +1,303 @@
+{
+  "$comment": "Palabras clave editoriales del buscador (v4.29.0). Clave = id de registro del índice (ver gulpfile.js → buildSearchIndex). Solo para consultas que el título/descripción no cubren; máximo ~20 entradas. Se fusionan en el índice en el build (dist/data/search-index.json); NO es un catálogo de contenidos.",
+  "page:nuevos-falleros": {
+    "es": [
+      "apuntarme",
+      "apuntarse",
+      "inscripción",
+      "inscribirse",
+      "hacerse fallero",
+      "nuevos falleros",
+      "formar parte"
+    ],
+    "va": [
+      "apuntar-me",
+      "apuntar-se",
+      "inscripció",
+      "inscriure's",
+      "fer-se faller",
+      "nous fallers",
+      "formar part"
+    ]
+  },
+  "page:autorizacion-imagen-menor": {
+    "es": [
+      "menores",
+      "autorización imagen menor",
+      "consentimiento padres"
+    ],
+    "va": [
+      "menors",
+      "autorització imatge menor",
+      "consentiment pares"
+    ]
+  },
+  "page:autorizacion-imagen": {
+    "es": [
+      "mayores de edad",
+      "derechos de imagen",
+      "rgpd"
+    ],
+    "va": [
+      "majors d'edat",
+      "drets d'imatge",
+      "rgpd"
+    ]
+  },
+  "page:calendario": {
+    "es": [
+      "agenda",
+      "actos",
+      "fechas",
+      "calendario de la falla"
+    ],
+    "va": [
+      "calendari",
+      "agenda",
+      "actes",
+      "dates"
+    ]
+  },
+  "page:mapa": {
+    "es": [
+      "casal",
+      "dónde estamos",
+      "ubicación",
+      "cómo llegar"
+    ],
+    "va": [
+      "casal",
+      "on estem",
+      "ubicació",
+      "com arribar"
+    ]
+  },
+  "page:meteo": {
+    "es": [
+      "tiempo",
+      "el tiempo en valencia",
+      "previsión",
+      "clima"
+    ],
+    "va": [
+      "oratge",
+      "temps",
+      "previsió",
+      "clima"
+    ]
+  },
+  "page:organigrama": {
+    "es": [
+      "directiva",
+      "cargos",
+      "presidente",
+      "vicepresidentes",
+      "delegados"
+    ],
+    "va": [
+      "directiva",
+      "càrrecs",
+      "president",
+      "vicepresidents",
+      "delegats"
+    ]
+  },
+  "page:eventos": {
+    "es": [
+      "tablón",
+      "anuncios",
+      "avisos"
+    ],
+    "va": [
+      "tauler",
+      "anuncis",
+      "avisos"
+    ]
+  },
+  "page:deportes": {
+    "es": [
+      "torneos",
+      "equipos",
+      "jcf deportes"
+    ],
+    "va": [
+      "tornejos",
+      "equips",
+      "esports jcf"
+    ]
+  },
+  "page:colaboraciones": {
+    "es": [
+      "hope",
+      "incliva",
+      "solidaridad"
+    ],
+    "va": [
+      "hope",
+      "incliva",
+      "solidaritat"
+    ]
+  },
+  "sec:llibrets-2025-26": {
+    "es": [
+      "llibret",
+      "llibrets",
+      "libro de la falla"
+    ],
+    "va": [
+      "llibret",
+      "llibrets",
+      "llibre de la falla"
+    ]
+  },
+  "sec:llibrets-2024-25": {
+    "es": [
+      "llibret",
+      "llibrets"
+    ],
+    "va": [
+      "llibret",
+      "llibrets"
+    ]
+  },
+  "doc:llibret-2025-26-digital": {
+    "es": [
+      "llibret",
+      "llibrets",
+      "llibret digital"
+    ],
+    "va": [
+      "llibret",
+      "llibrets",
+      "llibret digital"
+    ]
+  },
+  "sec:ofrenda-2026": {
+    "es": [
+      "ofrenda floral",
+      "virgen de los desamparados",
+      "vídeo ofrenda"
+    ],
+    "va": [
+      "ofrena floral",
+      "mare de déu dels desemparats",
+      "vídeo ofrena"
+    ]
+  },
+  "page:ofrenda": {
+    "es": [
+      "ofrenda floral",
+      "próxima ofrenda"
+    ],
+    "va": [
+      "ofrena floral",
+      "pròxima ofrena"
+    ]
+  },
+  "gal:1": {
+    "es": [
+      "apuntà",
+      "apunta"
+    ],
+    "va": [
+      "apuntà",
+      "apunta"
+    ]
+  },
+  "gal:7": {
+    "es": [
+      "hoguera",
+      "paella",
+      "sant joan"
+    ],
+    "va": [
+      "foguera",
+      "paella",
+      "san juan"
+    ]
+  },
+  "post:somni": {
+    "es": [
+      "fundación",
+      "historia de la falla",
+      "sueño"
+    ],
+    "va": [
+      "fundació",
+      "història de la falla",
+      "somni"
+    ]
+  },
+  "post:anima": {
+    "es": [
+      "jardín del turia",
+      "federico trénor",
+      "barrio"
+    ],
+    "va": [
+      "jardí del túria",
+      "federico trénor",
+      "barri"
+    ]
+  },
+  "page:index": {
+    "es": [
+      "falla suïssa",
+      "suissa",
+      "alqueria del favero",
+      "inicio",
+      "portada",
+      "comisión 396"
+    ],
+    "va": [
+      "falla suïssa",
+      "suissa",
+      "alqueria del favero",
+      "inici",
+      "portada",
+      "comissió 396"
+    ]
+  },
+  "page:lafalla": {
+    "es": [
+      "falla suïssa",
+      "nosotros",
+      "plana mayor",
+      "historia",
+      "monumento",
+      "archivos"
+    ],
+    "va": [
+      "falla suïssa",
+      "nosaltres",
+      "plana major",
+      "història",
+      "monument",
+      "arxius"
+    ]
+  },
+  "page:galerias": {
+    "es": [
+      "fotos",
+      "imágenes",
+      "galerías"
+    ],
+    "va": [
+      "fotos",
+      "imatges",
+      "galeries"
+    ]
+  },
+  "page:blog": {
+    "es": [
+      "noticias",
+      "crónicas",
+      "artículos"
+    ],
+    "va": [
+      "notícies",
+      "cròniques",
+      "articles"
+    ]
+  }
+}

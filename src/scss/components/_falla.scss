@@ -263,6 +263,9 @@
     @media (max-width: 767px) {
       font-size: 1.4rem; // Más pequeño para móviles
       padding: 0.8rem 1rem;
+      // A 14px el coral de marca sobre el azul da 3,2:1 (solo válido para texto
+      // grande); el coral claro da 5,1:1 (v4.29.0). En hover manda .accordion__titular.
+      color: v.$coral-claro;
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {
@@ -289,6 +292,9 @@
     transition: transform 0.3s ease;
   }
   &__section {
+    // Deep links del buscador (v4.29.0): al desplazar hasta el panel abierto,
+    // deja hueco para la barra fija de la cabecera.
+    scroll-margin-top: 8rem;
     border-bottom: 1px solid v.$gris-medio-claro;
 
     // Contenido del acordeón (oculto por defecto)
@@ -296,7 +302,7 @@
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.5s ease;
-      background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+      background: v.$gradiente-institucional;
       
       .accordion__content-inner {
         padding: 1em;
@@ -429,7 +435,7 @@
           }
         }
         .accordion__nombre-plana-mayor {
-          color: v.$primary-color;
+          color: v.$coral-texto; // 5,0:1 sobre $naranja-suave (v4.29.0)
           background-color: v.$naranja-suave;
           padding: 1rem 1.5rem;
           margin: 1rem 0;
@@ -533,7 +539,7 @@ p {
   }
   &__prologo {
     font-family: v.$font-family;
-    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    background: v.$gradiente-institucional;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -965,7 +971,7 @@ p {
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: v.$primary-color;
+    color: v.$coral-texto; // 5,1:1 sobre $blanco-hueso (v4.29.0)
     line-height: 1.2;
   }
 

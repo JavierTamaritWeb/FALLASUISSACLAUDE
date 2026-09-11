@@ -23,6 +23,9 @@
 | [`well-known-agent-readiness.md`](./well-known-agent-readiness.md) | Carpeta `.well-known/`: `api-catalog` (RFC 9727), `agent-skills/index.json` (v0.2), pipeline `wellKnownTask`, descubrimiento por agentes IA y reglas de mantenimiento | 16/05/2026 |
 | [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping, autoheight y hook temporal de la foto real 2026 | 20/03/2026 |
 | [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md) | Checklist anual para cambiar imágenes del monumento y decidir si el hook temporal debe mantenerse o eliminarse | 20/03/2026 |
+| [`visor-video-plantilla.md`](./visor-video-plantilla.md) | Plantilla del visor de vídeo (markup inline + overlay, `video-dron.js`, i18n) conservada tras retirar el vídeo del dron | 11/09/2026 |
+| [`buscador.md`](./buscador.md) | Buscador general v1: índice generado por el build (`search-index.json` + `<meta search-index>`), panel `js/buscador.js`, relevancia bilingüe, vigencia, `search-keywords.json`, `npm run search:eval` | 11/09/2026 |
+| [`paleta-y-degradados.md`](./paleta-y-degradados.md) | Paleta funcional por tema: tokens aditivos (`$coral-texto`, `$coral-claro`, estados…), inventario de degradados, ratios WCAG y regla del coral como texto | 11/09/2026 |
 
 ## 🎯 Documentos por Categoría
 
@@ -59,7 +62,7 @@
 
 ## 📝 Notas de Mantenimiento
 
-- La versión funcional documentada del proyecto es `v4.28.1` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.29.0` y `package.json`/`package-lock.json` ya están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta
@@ -84,4 +87,4 @@ Actualiza estas guías cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 11 de septiembre de 2026 - v4.28.1*
+*Última actualización: 11 de septiembre de 2026 - v4.29.0*

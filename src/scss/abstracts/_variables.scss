@@ -113,3 +113,29 @@ $falleret-size-tablet: 30%;   // Proporcional en tablet
 $falleret-size-desktop: 25%;  // Proporcional en escritorio
 $falleret-size-large: 50%;    // Pantallas grandes (>1200px)
 
+
+// =============================================================================
+// PALETA FUNCIONAL (v4.29.0) — tokens ADITIVOS; ninguno sustituye a los de marca
+// Regla: el coral $primary-color es de marca (bordes, badges, brillos, texto
+// grande ≥24px sobre azul). Como TEXTO normal usa $coral-texto en claro y
+// $coral-claro sobre azul/gris oscuro. Ratios WCAG en docs/paleta-y-degradados.md
+// =============================================================================
+
+// Degradado institucional: única fuente (antes 11 copias literales)
+$gradiente-institucional: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+
+$coral-texto: #B83F35;              // Coral oscuro para texto sobre fondos claros (5,5:1 blanco / 5,0:1 marfil)
+$coral-claro: #FFB4AA;              // Coral claro para texto pequeño sobre azul o gris oscuro (5,1:1 sobre #0a4b8d)
+$azul-enlace-oscuro: #8FB8FF;       // Enlaces y acción principal en modo oscuro (9,4:1 sobre #111)
+$texto-secundario-oscuro: #B9C4D0;  // Texto secundario en modo oscuro (10,7:1 sobre #111)
+$superficie-elevada-oscuro: #172334; // Tarjeta elevada en modo oscuro (navy)
+
+// Estados (siempre acompañados de texto o icono)
+$estado-error: #B3261E;             // 6,5:1 sobre blanco
+$estado-exito: #1B6E3A;             // 6,3:1 sobre blanco
+$estado-aviso: #8A5A00;             // 5,9:1 sobre blanco
+$estado-info: $color-azul-falla;
+$estado-error-oscuro: #FF8A80;      // 6,9:1 sobre #172334
+$estado-exito-oscuro: #7BD389;      // 8,7:1 sobre #172334
+$estado-aviso-oscuro: #FFC857;      // 10,3:1 sobre #172334
+$estado-info-oscuro: $azul-enlace-oscuro;

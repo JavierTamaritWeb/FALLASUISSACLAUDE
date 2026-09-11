@@ -54,6 +54,7 @@ El JSON tiene un objeto raíz con un array `notas`.
 | ------- | ------ | ----------- | ------------- |
 | `id` | `string` | Sí | Identificador único y estable. Útil para localizar una nota concreta. |
 | `activo` | `boolean` | No | Si es `false`, la nota queda oculta sin necesidad de borrarla. |
+| `hasta` | `string` | No | Fecha de caducidad `YYYY-MM-DD` (v4.29.0). Al pasar ese día la nota deja de mostrarse en el tablón y el buscador la marca «Pasado», **sin rebuild** (se evalúa en el navegador). Para retirarla del índice del buscador sigue haciendo falta `activo: false` + build. |
 | `imagen` | `object` | No | Imagen embebida visible dentro de la nota (cartel, infografía…). Si se omite, la nota no muestra imagen embebida. |
 | `imagen.url` | `string` | Sí (si hay `imagen`) | URL desde la raíz pública del sitio (la usa el `<img src="…">` del render), p. ej. `img/eventos/cartel.jpg` — la imagen vive en `src/img/eventos/cartel.jpg`. |
 | `imagen.alt` | `object` o `string` | No | Texto alternativo accesible. Se recomienda objeto bilingüe `{ "es": "...", "va": "..." }`. |
@@ -375,4 +376,4 @@ Desde v4.7.2 ya no hace falta tocar `board.js`. Pasos:
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.28.1
+Última actualización: 11 de septiembre de 2026 - v4.29.0

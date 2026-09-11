@@ -24,7 +24,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    background: v.$gradiente-institucional;
     opacity: 1;
     transition: opacity 2.4s ease-in-out;
     z-index: 0;
@@ -55,7 +55,7 @@
 
   &__title {
   
-    color: v.$primary-color;
+    color: v.$coral-claro; // 16px negrita sobre azul: 5,1:1 (v4.29.0)
     margin-top: 1rem;
     font-size: 1.6rem;
     font-weight: 700;
@@ -64,7 +64,7 @@
     @include m.transition(color 200ms);
     display: inline-block;
     cursor: pointer;
-    text-shadow: 1px 1px 0px rgba(255, 111, 97, 1);
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.35);
   
     &:hover {
       color: v.$dorado
@@ -168,6 +168,41 @@
 
   .modal-title {
     margin-bottom: 0;
+  }
+}
+
+// Cabecera del modal de resultado por estado (v4.29.0): antes envia.js usaba
+// las clases Bootstrap bg-success/bg-danger, sin CSS propio. Color + icono.
+#modal-quieres .modal-header--exito,
+#modal-quieres .modal-header--error {
+  color: v.$blanco;
+  padding: 1rem 1.4rem;
+  border-radius: v.$border-radius v.$border-radius 0 0;
+
+  .modal-title::before {
+    display: inline-block;
+    margin-right: 0.6rem;
+    font-weight: 800;
+  }
+
+  .btn-close {
+    color: v.$blanco;
+  }
+}
+
+#modal-quieres .modal-header--exito {
+  background-color: v.$estado-exito;
+
+  .modal-title::before {
+    content: '\2713'; // ✓
+  }
+}
+
+#modal-quieres .modal-header--error {
+  background-color: v.$estado-error;
+
+  .modal-title::before {
+    content: '\26A0\FE0E'; // ⚠
   }
 }
 

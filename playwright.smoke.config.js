@@ -25,6 +25,8 @@ module.exports = defineConfig({
     '**/galeria-pager.e2e.spec.js',
     '**/accordion-hover.e2e.spec.js',
     '**/schema-jsonld.e2e.spec.js',
-    '**/scss-guardrails.e2e.spec.js'
+    '**/scss-guardrails.e2e.spec.js',
+    '**/buscador.e2e.spec.js',
+    '**/color-tokens.e2e.spec.js'
   ]
 });

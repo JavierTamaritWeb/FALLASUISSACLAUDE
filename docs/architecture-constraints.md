@@ -465,6 +465,21 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 3. `md5` del CSS/JS en producción **no basta** como verificación: el fallo estaba en el HTML que lo referencia.
 4. La comprobación final de un cambio visual reportado por el usuario se hace en Chrome real contra producción, no solo contra `dist/`.
 
+## 16. Buscador: panel bajo la barra y grupo de botones sobre el backdrop (v4.29.0)
+
+**Síntoma evitado:** el botón lupa (`.header__search-toggle`, dentro de `.header__botones`) no se podía pulsar con el menú abierto: el `.nav-backdrop` (z-index 1500) lo tapaba porque la regla `> *:not(.navegacion):not(.nav-backdrop)` de la barra fija `z-index: 1` a todos los hijos. Además esa regla convertía el panel `.buscador` (hijo directo de la barra, `position: absolute`) en `position: relative`.
+
+**Reglas:**
+1. La regla de hijos de la barra excluye también `.buscador` y `.header__botones`; `.header__botones` lleva `position: relative; z-index: 2600` (como el botón hamburguesa). Si añades otro control a la barra que deba funcionar con el menú abierto, ponlo dentro de `.header__botones`.
+2. El panel del buscador y el menú son **excluyentes**: `nav-menu.js` emite `nav:open` y escucha `buscador:open`; `buscador.js` hace lo simétrico. No abras los dos a la vez (se solaparían con el mismo z-index 2500).
+3. `js/buscador.js` crea el botón y el panel; el HTML solo lleva el `<script defer>` y el build inyecta `<meta name="search-index">`. Si falta la meta (kill-switch `DISABLE_SEARCH_INDEX=1`), el script no crea nada.
+4. **Cierre por clic exterior con `composedPath()`** (fix del 11-sep-2026, detectado en Chrome): el handler de clic de `.buscador__cuerpo` corre antes que el de `document` y repinta el cuerpo con `innerHTML`; al llegar el clic a `document`, el botón pulsado (sugerencia, «Mostrar más», «Reintentar») ya no estaba en el DOM, `panel.contains(e.target)` daba `false` y el panel se cerraba aunque acabara de mostrar resultados. `clicDentro(e)` comprueba la ruta del evento (fijada al despacharlo) y deja `contains` solo de reserva. No vuelvas a decidir el cierre a partir de `e.target` tras un repintado.
+5. Test guardia: `tests/buscador.e2e.spec.js` (menú y buscador excluyentes, foco, `/va/`, sugerencias y «Mostrar más» sin cerrar el panel).
+
+## 17. Coral de marca como texto: solo grande o sobre azul (v4.29.0)
+
+`#FF6F61` sobre blanco/marfil da 2,5-2,7:1 y sobre el stop más claro del degradado (`#0a4b8d`) 3,2:1: vale como texto grande (≥ 24 px o ≥ 19 px negrita) sobre azul y como decoración (bordes, badges, subrayados, brillos), pero **no como texto normal**. Como texto usa `$coral-texto` (#B83F35, 5,0-5,5:1 sobre claros) y `$coral-claro` (#FFB4AA, 5,1:1 sobre azul, 11:1 sobre #111). Los degradados no se han tocado: siempre se corrige el color del texto. Detalle y tabla de ratios en [`paleta-y-degradados.md`](./paleta-y-degradados.md); guardia: `tests/color-tokens.e2e.spec.js`.
+
 ## 15. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
@@ -489,4 +504,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.28.1
+Última actualización: 11 de septiembre de 2026 - v4.29.0

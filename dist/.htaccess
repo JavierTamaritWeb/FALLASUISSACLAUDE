@@ -119,6 +119,12 @@ ErrorDocument 503 /mantenimiento.html
     <FilesMatch "\.html$">
         Header set Cache-Control "public, max-age=0, must-revalidate"
     </FilesMatch>
+    # Los JSON de datos (tablones, eventos, traducciones, índice del buscador) no
+    # llevan ?v= en sus fetch: se revalidan siempre para que la CDN no retenga
+    # una nota caducada o un índice antiguo (v4.29.0)
+    <FilesMatch "\.json$">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </FilesMatch>
 
     <Files "sw.js">
         Header set Cache-Control "no-cache, no-store, must-revalidate"

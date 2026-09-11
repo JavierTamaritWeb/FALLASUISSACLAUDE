@@ -119,7 +119,7 @@
   // Mayor), cargo y placeholder en blanco-hueso (igual que .accordion__texto).
   &__nombre {
     font-family: v.$font-family;
-    color: v.$primary-color;
+    color: v.$coral-claro; // 20px normal sobre el azul: coral 3,2:1 → coral claro 5,1:1 (v4.29.0)
     font-weight: 700;
     font-size: v.$font-size-regular;
     line-height: 1.25;

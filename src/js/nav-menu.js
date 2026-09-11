@@ -82,6 +82,8 @@
       toggle.setAttribute('aria-label', shouldOpen ? 'Cerrar menú' : 'Abrir menú');
       document.body.classList.toggle('nav-open', shouldOpen);
       backdrop.classList.toggle('is-active', shouldOpen);
+      // El buscador (js/buscador.js) escucha este evento para cerrarse (v4.29.0)
+      if (shouldOpen) document.dispatchEvent(new CustomEvent('nav:open'));
 
       if (shouldOpen && focusFirst) {
         const firstLink = nav.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
@@ -123,6 +125,11 @@
     backdrop.addEventListener('click', () => {
       if (!isOpen()) return;
       setOpen(false);
+    });
+
+    // Cerrar cuando se abre el buscador (son excluyentes bajo la misma barra).
+    document.addEventListener('buscador:open', () => {
+      if (isOpen()) setOpen(false);
     });
 
     // Cerrar al redimensionar para evitar un desplegable mal posicionado.

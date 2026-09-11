@@ -8,10 +8,14 @@
    =================================== */
 
 // Estilo de foco visible personalizado
+// Doble anillo (v4.29.0): el coral solo da 2,7:1 sobre blanco; el anillo
+// interior casi negro garantiza ≥3:1 (WCAG 1.4.11) sobre cualquier fondo claro
+// y el coral exterior lo hace sobre azul/negro. En modo oscuro: ver _modo-oscuro.
 :focus-visible {
   outline: 3px solid v.$primary-color;
   outline-offset: 2px;
   border-radius: 4px;
+  box-shadow: 0 0 0 2px v.$negro-casi;
 }
 
 // Remover outline por defecto solo cuando focus-visible está disponible

@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function() {
           if (submitBtn) { submitBtn.disabled = false; }
           console.error('EmailJS no está disponible', error);
           renderizarModalResultado({
-            headerClass: 'bg-danger',
+            headerClass: 'modal-header--error',
             titleKey: 'modalerror.title',
             titleFallback: 'Error Enviando Mensaje',
             messageKey: 'modalerror.mensaje',
@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (submitBtn) { submitBtn.disabled = false; }
         console.error('EmailJS no está disponible');
         renderizarModalResultado({
-          headerClass: 'bg-danger',
+          headerClass: 'modal-header--error',
           titleKey: 'modalerror.title',
           titleFallback: 'Error Enviando Mensaje',
           messageKey: 'modalerror.mensaje',
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function() {
           document.body.style.cursor = 'default';
           if (submitBtn) { submitBtn.disabled = false; }
           renderizarModalResultado({
-            headerClass: 'bg-success',
+            headerClass: 'modal-header--exito',
             titleKey: 'modalexito.title',
             titleFallback: 'Mensaje enviado',
             messageKey: 'modalexito.mensaje',
@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function() {
           if (submitBtn) { submitBtn.disabled = false; }
           console.error('Error al enviar el mensaje:', error);
           renderizarModalResultado({
-            headerClass: 'bg-danger',
+            headerClass: 'modal-header--error',
             titleKey: 'modalerror.title',
             titleFallback: 'Error Enviando Mensaje',
             messageKey: 'modalerror.mensaje',

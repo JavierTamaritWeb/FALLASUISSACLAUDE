@@ -16,7 +16,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    background: v.$gradiente-institucional;
     z-index: 0;
     opacity: 1;
     transition: opacity var(--theme-transition, 2.4s ease-in-out);
@@ -106,7 +106,7 @@
 
     &:hover,
     &:focus-visible {
-      color: v.$primary-color !important;
+      color: v.$coral-claro !important; // 6,0:1 sobre #02427a (v4.29.0)
       background-color: transparent !important;
     }
 

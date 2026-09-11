@@ -81,6 +81,10 @@ Ejemplo (incorrecto):
 
 ---
 
+## 🔎 Botón del buscador (v4.29.0)
+
+`js/buscador.js` añade al final de `.header__botones` un `<button class="header__search-toggle" aria-controls="siteSearch" aria-expanded>` (lupa + «Buscar»/«Cercar»; en <768 px solo el icono, el texto queda como nombre accesible) y, como hijo de la barra tras la `nav`, el panel `#siteSearch.buscador` con el mismo cristal que el desplegable. Menú y buscador son excluyentes (eventos `nav:open`/`buscador:open`). `.header__botones` tiene `z-index: 2600` para quedar por encima del backdrop del menú. Guía completa: [`buscador.md`](./buscador.md).
+
 ## 📌 Barra fija en scroll (siempre visible)
 
 ### Qué se hace
@@ -549,4 +553,4 @@ npm run build
 - Hover/focus y activo usan ambos `v.$primary-color` tanto en el texto como en la línea del `::after`.
 - Test `tests/nav.e2e.spec.js` actualizado: ya no espera fondo blanco en el enlace activo móvil; ahora valida `color === rgb(255, 111, 97)` y que el `::after` tiene `opacity: 1` + `background-color` en coral.
 
-Última actualización: 11 de septiembre de 2026 - v4.28.1
+Última actualización: 11 de septiembre de 2026 - v4.29.0

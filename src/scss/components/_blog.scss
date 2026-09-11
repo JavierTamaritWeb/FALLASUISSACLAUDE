@@ -69,7 +69,7 @@
   &__date {
     display: block;
     font-size: v.$font-size-small;
-    color: v.$primary-color;
+    color: v.$coral-texto; // 5,5:1 sobre blanco (v4.29.0)
     margin-bottom: 1rem;
   }
   &__post-content {
@@ -130,7 +130,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+      background: v.$gradiente-institucional;
       border-radius: inherit;
       opacity: 1;
       transition: opacity var(--theme-transition);

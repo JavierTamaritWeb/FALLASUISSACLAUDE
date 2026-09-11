@@ -1,0 +1,329 @@
+// components/_buscador.scss
+// Buscador general (v4.29.0): botón lupa en .header__botones + panel desplegable
+// bajo la barra con el mismo cristal que el menú (.navegacion, v4.23.6). Ambos
+// los crea js/buscador.js. z-index 2500 como el menú (dentro del header, 500).
+
+@use '../abstracts/variables' as v;
+
+// Botón lupa + «Buscar» (mismo relieve que .header__menu-toggle)
+.header__search-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0.45rem 0.7rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(3, 49, 95, 0.95);
+  border-radius: 0.8rem;
+  color: v.$blanco;
+  cursor: pointer;
+  font-family: v.$font-family;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, background-color var(--theme-transition), box-shadow var(--theme-transition), border-color var(--theme-transition);
+
+  svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  &:hover,
+  &[aria-expanded="true"] {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$primary-color;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px v.$negro-casi;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  // En móvil solo el icono; el texto sigue en el DOM para el nombre accesible
+  @media (max-width: 767px) {
+    padding: 0.45rem;
+
+    .header__search-toggle-texto {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+  }
+}
+
+// Panel bajo la barra (todos los tamaños; anclado a la derecha en escritorio)
+.buscador {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
+  padding: 1.2rem;
+  color: v.$blanco;
+  background: linear-gradient(135deg, rgba(10, 75, 141, 0.7) 0%, rgba(2, 66, 122, 0.7) 60%, rgba(0, 51, 102, 0.7) 100%);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1.2rem;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+  z-index: 2500;
+  text-align: left;
+  transition: background 2.4s ease-in-out;
+
+  @media (min-width: 768px) {
+    left: auto;
+    right: 0.75rem;
+    width: min(44rem, calc(100vw - 1.5rem));
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  &__etiqueta {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  &__cerrar,
+  &__borrar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3.6rem;
+    min-height: 3.6rem;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: v.$blanco;
+    font-size: 2.2rem;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__campo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  &__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 1rem 1.2rem;
+    font-family: v.$font-family;
+    font-size: 1.6rem;
+    color: v.$negro-casi;
+    background: rgba(255, 255, 255, 0.96);
+    border: 2px solid rgba(v.$primary-color, 0.7);
+    border-radius: 0.9rem;
+    appearance: none;
+    -webkit-appearance: none;
+
+    &::placeholder {
+      color: v.$gris-medio-oscuro; // 7,5:1
+    }
+
+    &:focus-visible {
+      outline: 3px solid v.$primary-color;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 2px v.$negro-casi;
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  &__ayuda {
+    margin: 0.7rem 0 0;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  &__ayuda-enlace,
+  &__enlace-secundario {
+    color: v.$coral-claro; // 5,1:1 sobre el azul más claro
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    font-weight: 700;
+
+    &:hover,
+    &:focus-visible {
+      color: v.$blanco;
+    }
+  }
+
+  &__cuerpo {
+    margin-top: 1rem;
+  }
+
+  &__mensaje,
+  &__mensaje-secundario,
+  &__ejemplos-titulo {
+    margin: 0 0 0.6rem;
+    font-size: 1.35rem;
+    line-height: 1.4;
+  }
+
+  &__mensaje--error {
+    color: v.$estado-aviso-oscuro; // 10:1 sobre el azul
+    font-weight: 700;
+  }
+
+  &__ejemplos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__ejemplo,
+  &__mas,
+  &__reintentar {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    color: v.$blanco;
+    font-family: v.$font-family;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+  }
+
+  &__lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  &__resultado {
+    display: block;
+    padding: 0.8rem 1rem;
+    border-radius: 0.9rem;
+    color: v.$blanco;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid transparent;
+    transition: background-color 150ms ease, border-color 150ms ease;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(v.$primary-color, 0.7);
+    }
+
+    &:focus-visible {
+      outline: 3px solid v.$primary-color;
+      outline-offset: 1px;
+      box-shadow: none;
+    }
+  }
+
+  &__titulo {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  &__desc {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.88); // ≈7,5:1
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  &__chip {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: v.$blanco;
+
+    &--tipo {
+      background: rgba(v.$primary-color, 0.28);
+    }
+
+    &--pasado {
+      background: rgba(0, 0, 0, 0.35);
+      color: v.$coral-claro;
+    }
+  }
+
+  &__acciones {
+    margin: 0.9rem 0 0;
+    font-size: 1.3rem;
+  }
+}
+
+// Modo oscuro: mismo gris translúcido que el menú desplegable
+body.modo-oscuro .buscador {
+  background: rgba(51, 51, 51, 0.8);
+}
+
+body.modo-oscuro .header__search-toggle {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(70, 70, 70, 0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buscador,
+  .buscador__resultado,
+  .header__search-toggle {
+    transition: none;
+  }
+}

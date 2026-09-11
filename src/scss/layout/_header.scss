@@ -28,7 +28,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    background: v.$gradiente-institucional;
     z-index: -1;
     transition: opacity var(--theme-transition);
     opacity: 1; // Visible por defecto (modo claro)
@@ -323,7 +323,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    background: v.$gradiente-institucional;
     z-index: -1;
     opacity: 1;
     transition: opacity var(--theme-transition);
@@ -442,7 +442,7 @@
 // Barras de Navegación Fijas para .header y .header-inner
 // ---------------------------------------------------------
 :root {
-  --header-bar-bg: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+  --header-bar-bg: v.$gradiente-institucional;
 }
 
 .header__barra,
@@ -770,9 +770,11 @@ body.modo-oscuro {
     pointer-events: none;
   }
 
+  // Coral claro (v4.29.0): a 12px el coral de marca sobre el azul daba 3,2:1;
+  // $coral-claro da 5,1:1. El subrayado ::after conserva el coral de marca.
   &:hover,
   &:focus-visible {
-    color: v.$primary-color;
+    color: v.$coral-claro;
   }
 
   &:hover::after,
@@ -784,7 +786,7 @@ body.modo-oscuro {
   // Enlace activo: subrayado permanente + texto en color primario (sin fondo)
   &.active,
   &[aria-current="page"] {
-    color: v.$primary-color;
+    color: v.$coral-claro;
   }
 
   &.active::after,
@@ -1031,9 +1033,18 @@ body.modo-oscuro {
   // Excluimos .navegacion (position:absolute, dropdown) y .nav-backdrop
   // (position:fixed a pantalla completa; si entrara en el flujo flex
   // desplazaría el botón hamburguesa y no captaría los clics fuera).
-  > *:not(.navegacion):not(.nav-backdrop) {
+  // Desde v4.29.0 también se excluye .buscador (panel absoluto del buscador).
+  > *:not(.navegacion):not(.nav-backdrop):not(.buscador):not(.header__botones) {
     position: relative;
     z-index: 1;
+  }
+
+  // El grupo de botones (idioma, tema y lupa del buscador) queda por encima del
+  // backdrop del menú (1500), como el botón hamburguesa (2600): así el buscador
+  // se puede abrir con el menú desplegado y viceversa (v4.29.0).
+  > .header__botones {
+    position: relative;
+    z-index: 2600;
   }
 }
 

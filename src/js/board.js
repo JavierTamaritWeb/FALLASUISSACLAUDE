@@ -294,12 +294,26 @@ function renderNota(nota) {
 /**
  * Renderiza un tablón concreto a partir de sus datos.
  */
+function notaCaducada(nota) {
+  if (!nota || typeof nota.hasta !== 'string') return false;
+  const m = nota.hasta.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!m) return false;
+  const limite = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]), 23, 59, 59);
+  return Number.isFinite(limite.getTime()) && limite.getTime() < Date.now();
+}
+
+/**
+ * Renderiza un tablón concreto a partir de sus datos.
+ */
 function renderBoardInto(el, data) {
   if (!data || !Array.isArray(data.notas)) {
     return;
   }
 
-  const notasActivas = data.notas.filter(nota => nota.activo !== false);
+  // Vigencia (v4.29.0): `activo: false` la oculta editorialmente y `hasta`
+  // (YYYY-MM-DD, opcional) la caduca sola en runtime al pasar ese día, sin
+  // rebuild. El buscador (js/buscador.js) aplica la misma regla.
+  const notasActivas = data.notas.filter(nota => nota.activo !== false && !notaCaducada(nota));
 
   if (notasActivas.length === 0) {
     const emptyMessage = getBoardTranslation('board.empty', '📭 ¡Tablón al día! No hay anuncios pendientes por ahora. ¡Vuelve pronto, que la fiesta nunca para! 😊');

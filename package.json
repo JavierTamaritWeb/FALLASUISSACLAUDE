@@ -1,6 +1,6 @@
 {
   "name": "web-falla",
-  "version": "4.28.1",
+  "version": "4.29.0",
   "description": "Proyecto Gulp para la Falla Suïssa - L'Alqueria del Favero",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,8 @@
     "test:e2e:visual": "playwright test tests/visual-regression.e2e.spec.js",
     "test:e2e:install": "playwright install",
     "generate:og": "node scripts/generate-og-image.mjs",
-    "deploy": "bash tools/deploy.sh"
+    "deploy": "bash tools/deploy.sh",
+    "search:eval": "node scripts/search-eval.mjs"
   },
   "author": "TuNombre",
   "license": "MIT",

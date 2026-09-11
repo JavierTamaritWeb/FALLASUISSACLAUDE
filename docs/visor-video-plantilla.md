@@ -145,4 +145,4 @@ Decisión de contenido: el vídeo del dron era del ejercicio 2025-26 y ya se ofr
 
 ---
 
-_Última actualización: v4.28.1 (11 de septiembre de 2026)._
+_Última actualización: v4.29.0 (11 de septiembre de 2026)._

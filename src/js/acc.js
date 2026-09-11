@@ -129,8 +129,35 @@ function initAccordion() {
   });
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initAccordion, { once: true });
-} else {
+// Apertura por hash (v4.29.0): los resultados del buscador enlazan a los
+// paneles de Archivos por su id (el del .accordion__content, destino del
+// aria-controls). Si la URL trae ese hash, se abre el panel y se desplaza.
+function abrirPorHash() {
+  const id = decodeURIComponent((window.location.hash || '').slice(1));
+  if (!id) return;
+  const destino = document.getElementById(id);
+  if (!destino) return;
+  const content = destino.classList.contains('accordion__content') ? destino : destino.closest('.accordion__content');
+  if (!content) return;
+  const section = content.closest('.accordion__section');
+  const titular = section ? section.querySelector('.accordion__titular') : null;
+  if (section && titular && !section.classList.contains('active')) {
+    titular.click();
+  }
+  // Tras la transición de max-height (0,5 s) el panel ya tiene su alto real
+  window.setTimeout(function () {
+    (section || destino).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 650);
+}
+
+function initAccordionConHash() {
   initAccordion();
+  abrirPorHash();
+  window.addEventListener('hashchange', abrirPorHash);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAccordionConHash, { once: true });
+} else {
+  initAccordionConHash();
 }

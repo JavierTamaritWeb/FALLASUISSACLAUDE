@@ -155,9 +155,9 @@ test.describe('Navbar responsive + idioma', () => {
     expect(navState.barBackdropFilter).toBe('none');
     expect(navState.visibleLinkCount).toBeGreaterThan(0);
     expect(navState.activeLinks).toBe(1);
-    // El enlace activo ahora se distingue con texto en color primario (#FF6F61) + subrayado permanente,
-    // sin pastilla de fondo blanca.
-    expect(navState.activeColor).toMatch(/rgb\(255,\s*111,\s*97\)/);
+    // El enlace activo se distingue con texto en coral claro (#FFB4AA, 5,1:1 sobre el azul; v4.29.0)
+    // + subrayado permanente coral, sin pastilla de fondo blanca.
+    expect(navState.activeColor).toMatch(/rgb\(255,\s*180,\s*170\)/);
     expect(navState.activeUnderlineBackground).toMatch(/rgb\(255,\s*111,\s*97\)/);
     expect(parseFloat(navState.activeUnderlineOpacity)).toBe(1);
   });

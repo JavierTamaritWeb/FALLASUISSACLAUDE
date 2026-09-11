@@ -21,7 +21,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+    background: v.$gradiente-institucional;
     opacity: 1;
     transition: opacity 2.4s ease-in-out;
     z-index: 0;

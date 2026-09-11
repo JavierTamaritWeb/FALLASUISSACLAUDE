@@ -946,6 +946,237 @@ function injectGaleriaPager(html, fileName, galerias, esTable) {
   return html.replace(marcador, buildGaleriaPager(Number(m[1]), galerias, esTable));
 }
 
+
+// ===================================
+// BUSCADOR: índice estático (v4.29.0)
+// ===================================
+// El índice se genera en el build a partir de fuentes que YA se mantienen
+// (títulos y meta description de src/*.html, translations.json, dataPagesN.json,
+// eventos.json, tablones y wrappers PDF) y se escribe en dist/data/search-index.json.
+// Cada página recibe <meta name="search-index" content="data/search-index.json?v=<hash>">
+// que js/buscador.js lee (anteponiendo SITE_ROOT) al abrir el panel.
+// Kill-switch: DISABLE_SEARCH_INDEX=1 (no se genera el índice ni la meta).
+const SEARCH_INDEX_FILE = 'search-index.json';
+// Entradas de prueba/marcador de eventos.json (títulos genéricos, "Prueba"):
+// exclusión explícita por id, nunca por una palabra suelta.
+const EVENTOS_EXCLUIDOS_DEL_INDICE = new Set([23, 24, 25, 48, 49]);
+// Categorías de eventos.json que no son contenido de la Falla (festivos civiles genéricos)
+const CATEGORIAS_EVENTOS_EXCLUIDAS = new Set(['Festivo']);
+// Páginas que no entran como "página" (llibret_2026 entra como documento)
+const PAGINAS_EXCLUIDAS_DEL_INDICE = new Set(['llibret_2026.html']);
+// Páginas standalone fuera del glob de htmlTask (sin /va/, sin canonical)
+const STANDALONE_HTML = new Set(['ai-info.html', 'base.html', 'mantenimiento.html']);
+// Clave i18n del título de cada página (para el título VA); el resto usa el <title> ES
+const SEARCH_PAGE_TITLE_KEY = {
+  'index.html': 'nav.inicio', 'lafalla.html': 'nav.lafalla', 'ofrenda.html': 'nav.ofrenda',
+  'eventos.html': 'nav.eventos', 'deportes.html': 'nav.deportes', 'blog.html': 'nav.blog',
+  'meteo.html': 'nav.meteo', 'galerias.html': 'nav.galeria', 'colaboraciones.html': 'nav.colaboraciones',
+  'nuevos-falleros.html': 'nav.nuevosFalleros', 'calendario.html': 'calendario.titulo',
+  'organigrama.html': 'organigrama.titulo',
+  'autorizacion-imagen.html': 'nuevosFalleros.formMayores.titulo',
+  'autorizacion-imagen-menor.html': 'nuevosFalleros.formMenores.titulo'
+};
+const SEARCH_PAGE_DESC_KEY = {
+  'autorizacion-imagen.html': 'nuevosFalleros.formMayores.desc',
+  'autorizacion-imagen-menor.html': 'nuevosFalleros.formMenores.desc',
+  'nuevos-falleros.html': 'nuevosFalleros.intro'
+};
+const SEARCH_PAGE_TYPE = {
+  'autorizacion-imagen.html': 'formulario', 'autorizacion-imagen-menor.html': 'formulario',
+  'aviso-legal.html': 'legal', 'privacidad.html': 'legal', 'cookies.html': 'legal'
+};
+// Secciones de Archivos (paneles de acordeón): un registro cada una, apuntando a
+// lafalla.html (la home tiene copia). El id es el del .accordion__content.
+const SEARCH_SECTIONS = [
+  { id: 'sec:representantes-2026-27', url: 'lafalla.html#representantes-2026-27-lafalla', padre: 'historia.archivos.representantes.titulo', key: 'historia.archivos.representantes.edicion202627', ejercicio: '2026-27' },
+  { id: 'sec:representantes-2025-26', url: 'lafalla.html#representantes-2025-26-lafalla', padre: 'historia.archivos.representantes.titulo', key: 'historia.archivos.representantes.edicion202526', ejercicio: '2025-26' },
+  { id: 'sec:representantes-2024-25', url: 'lafalla.html#representantes-2024-25-lafalla', padre: 'historia.archivos.representantes.titulo', key: 'historia.archivos.representantes.edicion202425', ejercicio: '2024-25' },
+  { id: 'sec:monumento-2025-26', url: 'lafalla.html#monumento-2025-26-lafalla', padre: 'historia.archivos.monumentos.titulo', key: 'historia.archivos.monumentos.edicion202526', ejercicio: '2025-26' },
+  { id: 'sec:ofrenda-2026', url: 'lafalla.html#ofrenda-2026-lafalla', padre: 'historia.archivos.ofrendas.titulo', key: 'historia.archivos.ofrendas.edicion2026', ejercicio: '2025-26' },
+  { id: 'sec:llibrets-2024-25', url: 'lafalla.html#historia-llibrets-edicion-202425-lafalla', padre: 'historia.archivos.titulo', key: 'historia.archivos.edicion202425', ejercicio: '2024-25', extra: 'Llibret' },
+  { id: 'sec:llibrets-2025-26', url: 'lafalla.html#historia-llibrets-edicion-lafalla', padre: 'historia.archivos.titulo', key: 'historia.archivos.edicion202526', ejercicio: '2025-26', extra: 'Llibret' },
+  { id: 'sec:hope', url: 'colaboraciones.html#hope-colaboracion', padre: 'colaboraciones.titulo', key: 'colaboraciones.hope.titulo', ejercicio: '' }
+];
+const SEARCH_PRIO = { pagina: 1, formulario: 1, galeria: 2, post: 2, documento: 2, seccion: 3, legal: 3, evento: 4, anuncio: 4 };
+
+function tituloSinMarca(title) {
+  return String(title || '')
+    .replace(/^Falla Su[iï]ssa\s*-\s*L'Alqueria del Favero\s*[-|]\s*/i, '')
+    .replace(/\s*[|—-]\s*Falla Su[iï]ssa[^|]*$/i, '')
+    .replace(/\s*\|\s*Blog\s*$/i, '')
+    .trim();
+}
+
+// Ejercicio fallero AAAA-AA a partir de un texto ("2026-27", "2025-2026", "San Juan 2026")
+function ejercicioDeTexto(text) {
+  const s = String(text || '');
+  let m = s.match(/\b(20\d{2})-(\d{2})\b/);
+  if (m) return `${m[1]}-${m[2]}`;
+  m = s.match(/\b(20\d{2})-(20\d{2})\b/);
+  if (m) return `${m[1]}-${m[2].slice(2)}`;
+  m = s.match(/\b(20\d{2})\b/);
+  if (m) return ejercicioDeFecha(`${m[1]}-06-01`);
+  return '';
+}
+// Ejercicio de una fecha ISO: de septiembre a agosto (ej. 2026-03-19 → 2025-26)
+function ejercicioDeFecha(iso) {
+  const m = String(iso || '').match(/^(\d{4})-(\d{2})/);
+  if (!m) return '';
+  const y = Number(m[1]); const mes = Number(m[2]);
+  const inicio = mes >= 9 ? y : y - 1;
+  return `${inicio}-${String((inicio + 1) % 100).padStart(2, '0')}`;
+}
+
+function textoPlano(html) {
+  return decodeHtmlEntities(String(html || '').replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+}
+
+function fechaDeNota(contenidoEs) {
+  const m = String(contenidoEs || '').match(/(\d{2})-(\d{2})-(\d{4})/);
+  return m ? `${m[3]}-${m[2]}-${m[1]}` : '';
+}
+
+async function buildSearchIndex({ translations, galerias }) {
+  const es = (translations && translations.es) || {};
+  const va = (translations && translations.va) || {};
+  const t = (table, key) => { const v = getNestedKey(table, key); return typeof v === 'string' ? v : ''; };
+  const registros = [];
+  const add = (r) => registros.push({
+    id: r.id, tipo: r.tipo, prio: SEARCH_PRIO[r.tipo] || 3,
+    titulo: { es: r.tituloEs, va: r.tituloVa || r.tituloEs },
+    desc: { es: r.descEs || '', va: r.descVa || r.descEs || '' },
+    seccion: r.seccion || '', url: r.url, fecha: r.fecha || '', ejercicio: r.ejercicio || '',
+    hasta: r.hasta || '', kw: []
+  });
+
+  // 1. Páginas, posts y galerías desde src/*.html
+  // glob() no aplica las exclusiones '!…' del array de gulp: se filtran a mano
+  const htmlFiles = (await glob('src/*.html')).map((f) => path.basename(f)).filter((f) => !/^google/.test(f)).sort();
+  for (const fileName of htmlFiles) {
+    if (PAGINAS_EXCLUIDAS_DEL_INDICE.has(fileName) || STANDALONE_HTML.has(fileName)) continue;
+    const html = await fs.readFile(path.join(__dirname, 'src', fileName), 'utf8');
+    const meta = readHeadMeta(html);
+    const slug = fileName.replace(/\.html$/, '');
+    const gal = fileName.match(/^galeria_(\d+)\.html$/);
+    const post = fileName.match(/^blog-([a-z0-9-]+)\.html$/);
+    if (gal) {
+      const n = gal[1];
+      add({ id: `gal:${n}`, tipo: 'galeria', url: fileName, seccion: 'galeria',
+        tituloEs: t(es, `galeria.galeria${n}`) || tituloSinMarca(meta.title), tituloVa: t(va, `galeria.galeria${n}`),
+        descEs: t(es, `galeria.galeria${n}-texto`) || meta.description, descVa: t(va, `galeria.galeria${n}-texto`),
+        ejercicio: ejercicioDeTexto(t(es, `galeria.galeria${n}`) || meta.title) });
+      continue;
+    }
+    if (post) {
+      const s = post[1];
+      const fecha = (html.match(/<meta\s+property="article:published_time"\s+content="([^"]*)"/i) || [, ''])[1];
+      add({ id: `post:${s}`, tipo: 'post', url: fileName, seccion: 'blog',
+        tituloEs: t(es, `blog.${s}.cardTitle`) || tituloSinMarca(meta.title), tituloVa: t(va, `blog.${s}.cardTitle`),
+        descEs: t(es, `blog.${s}.excerpt`) || meta.description, descVa: t(va, `blog.${s}.excerpt`),
+        fecha, ejercicio: ejercicioDeFecha(fecha) });
+      continue;
+    }
+    const titleKey = SEARCH_PAGE_TITLE_KEY[fileName];
+    const descKey = SEARCH_PAGE_DESC_KEY[fileName];
+    const parentKey = Object.keys(BREADCRUMB_PARENT).find((prefix) => fileName.startsWith(prefix));
+    add({ id: `page:${slug}`, tipo: SEARCH_PAGE_TYPE[fileName] || 'pagina', url: fileName === 'index.html' ? '' : fileName,
+      seccion: parentKey ? BREADCRUMB_PARENT[parentKey].nav : (BREADCRUMB_NAV_KEY[fileName] || ''),
+      tituloEs: (titleKey && t(es, titleKey)) || tituloSinMarca(meta.title), tituloVa: titleKey ? t(va, titleKey) : '',
+      descEs: (descKey && t(es, descKey)) || meta.description, descVa: descKey ? t(va, descKey) : '',
+      ejercicio: ejercicioDeTexto(meta.title) });
+  }
+
+  // 2. Secciones de Archivos y HOPE (paneles de acordeón)
+  for (const sec of SEARCH_SECTIONS) {
+    const compon = (table) => {
+      const padre = t(table, sec.padre); const nombre = t(table, sec.key);
+      return [padre, sec.extra, nombre].filter(Boolean).join(' · ');
+    };
+    add({ id: sec.id, tipo: 'seccion', url: sec.url, seccion: sec.url.startsWith('colaboraciones') ? 'colaboraciones' : 'lafalla',
+      tituloEs: compon(es), tituloVa: compon(va), descEs: '', ejercicio: sec.ejercicio });
+  }
+
+  // 3. Documentos: wrappers HTML de src/pdf/**, llibret digital y documento Drive
+  const wrappers = (await glob('src/pdf/**/*.html')).sort();
+  for (const w of wrappers) {
+    const html = await fs.readFile(w, 'utf8');
+    const meta = readHeadMeta(html);
+    const rel = path.relative(path.join(__dirname, 'src'), w).split(path.sep).join('/');
+    const base = path.basename(w, '.html').toLowerCase().replace(/_/g, '-');
+    add({ id: `doc:${base}`, tipo: 'documento', url: rel, seccion: 'lafalla',
+      tituloEs: tituloSinMarca(meta.title), descEs: meta.description, ejercicio: ejercicioDeTexto(meta.title) });
+  }
+  {
+    const html = await fs.readFile(path.join(__dirname, 'src', 'llibret_2026.html'), 'utf8');
+    const meta = readHeadMeta(html);
+    add({ id: 'doc:llibret-2025-26-digital', tipo: 'documento', url: 'llibret_2026.html', seccion: 'lafalla',
+      tituloEs: tituloSinMarca(meta.title), descEs: meta.description, ejercicio: '2025-26' });
+  }
+  add({ id: 'doc:nuevos-falleros-drive', tipo: 'documento', url: 'nuevos-falleros.html#nuevos-falleros-documento', seccion: 'nuevosFalleros',
+    tituloEs: `${t(es, 'nuevosFalleros.docInteresTitulo')} · ${t(es, 'nuevosFalleros.iframeTitle')}`,
+    tituloVa: `${t(va, 'nuevosFalleros.docInteresTitulo')} · ${t(va, 'nuevosFalleros.iframeTitle')}`,
+    descEs: t(es, 'nuevosFalleros.intro'), descVa: t(va, 'nuevosFalleros.intro'), ejercicio: '2026-27' });
+
+  // 4. Eventos (eventos.json, solo castellano; sin festivos genéricos ni marcadores)
+  try {
+    const ev = JSON.parse(await fs.readFile(path.join(__dirname, 'src', 'data', 'eventos.json'), 'utf8'));
+    for (const e of (ev.eventos || [])) {
+      if (EVENTOS_EXCLUIDOS_DEL_INDICE.has(Number(e.id)) || CATEGORIAS_EVENTOS_EXCLUIDAS.has(e.category)) continue;
+      add({ id: `evt:${e.id}`, tipo: 'evento', url: 'calendario.html', seccion: 'eventos',
+        tituloEs: e.title, descEs: e.description, fecha: e.date, hasta: e.date, ejercicio: ejercicioDeFecha(e.date) });
+    }
+  } catch (err) {
+    console.warn('[buscador] eventos.json no disponible:', err.message);
+  }
+
+  // 5. Notas de los tablones (vigencia editorial: activo; caducidad: hasta, en runtime)
+  for (const [file, url] of [['board.json', 'eventos.html#notesBoard'], ['sports-board.json', 'deportes.html#sportsBoard']]) {
+    try {
+      const board = JSON.parse(await fs.readFile(path.join(__dirname, 'src', 'data', file), 'utf8'));
+      for (const nota of (board.notas || [])) {
+        if (nota.activo === false || !nota.contenido || !nota.contenido.es) continue;
+        const plainEs = textoPlano(nota.contenido.es); const plainVa = textoPlano(nota.contenido.va || nota.contenido.es);
+        const fecha = fechaDeNota(nota.contenido.es);
+        add({ id: `nota:${nota.id || plainEs.slice(0, 24)}`, tipo: 'anuncio', url, seccion: file === 'board.json' ? 'eventos' : 'deportes',
+          tituloEs: plainEs.split(/[.!?]\s/)[0].slice(0, 90), tituloVa: plainVa.split(/[.!?]\s/)[0].slice(0, 90),
+          descEs: plainEs.slice(0, 220), descVa: plainVa.slice(0, 220), fecha, hasta: nota.hasta || '', ejercicio: ejercicioDeFecha(fecha) });
+      }
+    } catch (err) {
+      console.warn(`[buscador] ${file} no disponible:`, err.message);
+    }
+  }
+
+  // 6. Palabras clave editoriales
+  try {
+    const kws = JSON.parse(await fs.readFile(path.join(__dirname, 'src', 'data', 'search-keywords.json'), 'utf8'));
+    const porId = new Map(registros.map((r) => [r.id, r]));
+    for (const [id, val] of Object.entries(kws)) {
+      if (id.startsWith('$')) continue;
+      const r = porId.get(id);
+      if (!r) { console.warn(`[buscador] search-keywords.json: id desconocido "${id}"`); continue; }
+      r.kw = [...new Set([...(val.es || []), ...(val.va || [])])];
+    }
+  } catch (err) {
+    console.warn('[buscador] search-keywords.json no disponible:', err.message);
+  }
+
+  // Ids únicos
+  const ids = new Set();
+  for (const r of registros) {
+    if (ids.has(r.id)) throw new Error(`[buscador] id duplicado en el índice: ${r.id}`);
+    ids.add(r.id);
+  }
+  registros.sort((a, b) => a.prio - b.prio || a.id.localeCompare(b.id));
+  const payload = { version: 1, generado: new Date().toISOString().slice(0, 10), total: registros.length, registros };
+  const json = JSON.stringify(payload);
+  const hash = crypto.createHash('sha1').update(json).digest('hex').slice(0, 12);
+  const outFile = path.join(paths.data.dest, SEARCH_INDEX_FILE);
+  await ensureDirForFile(outFile);
+  await fs.writeFile(outFile, json);
+  console.log(`[buscador] ${registros.length} registros → ${outFile} (v=${hash})`);
+  return { hash, total: registros.length };
+}
+
 function modifyHtmlStream(schemaCtx, lang, assetVersion, langTable, missingKeyTracker, pagerCtx) {
   return new Transform({
     objectMode: true,
@@ -1030,6 +1261,12 @@ function modifyHtmlStream(schemaCtx, lang, assetVersion, langTable, missingKeyTr
 
       injections += schemaScriptToInject;
 
+      // 2b. Índice del buscador (v4.29.0): URL relativa con hash de contenido;
+      // js/buscador.js antepone SITE_ROOT (también desde /va/).
+      if (pagerCtx && pagerCtx.searchVersion) {
+        injections += `  <meta name="search-index" content="data/${SEARCH_INDEX_FILE}?v=${pagerCtx.searchVersion}">\n`;
+      }
+
       // 3. Inyectar justo antes del cierre de head
       html = html.replace('</head>', injections + '</head>');
       html = appendAssetVersionToHtml(html, assetVersion);
@@ -1080,6 +1317,15 @@ async function htmlTask() {
     galerias: await listGalerias(),
     esTable: translations && translations.es ? translations.es : null
   };
+
+  // Índice del buscador (v4.29.0): se genera aquí porque necesita translations
+  // y la lista de galerías, y su hash se inyecta en cada página como <meta>.
+  if (process.env.DISABLE_SEARCH_INDEX === '1') {
+    console.warn('[buscador] índice desactivado por DISABLE_SEARCH_INDEX=1');
+  } else {
+    const idx = await buildSearchIndex({ translations, galerias: pagerCtx.galerias });
+    pagerCtx.searchVersion = idx.hash;
+  }
 
   // Buffer process (no encoding flag para que cargue bin pero el Transform convierte a utf8 y viceversa)
   const esPromise = streamToPromise(
@@ -1425,6 +1671,7 @@ exports.pdf = pdfTask;
 exports.images = imagesTask;
 exports.favicon = faviconTask;
 exports.html = htmlTask;
+exports.searchIndex = async () => { const tr = JSON.parse(await fs.readFile(path.join(__dirname, 'src', 'data', 'translations.json'), 'utf8')); return buildSearchIndex({ translations: tr, galerias: await listGalerias() }); };
 exports.rootFiles = rootFilesTask;
 exports.seo = seoTask;
 exports.seoDist = seoTask;

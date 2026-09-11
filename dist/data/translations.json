@@ -13,6 +13,52 @@
       "nuevosFalleros": "Nuevos Falleros",
       "escudoInicio": "Ir a la página de inicio de la Falla Suïssa"
     },
+    "buscador": {
+      "abrir": "Buscar",
+      "cerrar": "Cerrar el buscador",
+      "etiqueta": "Buscar en la web",
+      "placeholder": "Escribe qué buscas…",
+      "borrar": "Borrar la búsqueda",
+      "ayuda": "Para filtrar los actos por día o categoría usa el",
+      "ayudaEnlace": "calendario",
+      "ejemplosTitulo": "Prueba con:",
+      "ejemplos": [
+        "Ofrenda 2026",
+        "autorización menores",
+        "galería Cremà",
+        "calendario"
+      ],
+      "minimo": "Escribe al menos 2 letras.",
+      "cargando": "Cargando el índice…",
+      "resultados": "{n} resultados",
+      "resultado": "1 resultado",
+      "sinResultados": "Sin coincidencias para «{q}».",
+      "sinResultadosAyuda": "Revisa la ortografía o prueba con una de estas búsquedas:",
+      "error": "No se ha podido cargar el buscador.",
+      "reintentar": "Reintentar",
+      "verGalerias": "Ver todas las galerías",
+      "mostrarMas": "Mostrar más resultados",
+      "pasado": "Pasado",
+      "tipo": {
+        "pagina": "Página",
+        "seccion": "Sección",
+        "galeria": "Galería",
+        "post": "Blog",
+        "evento": "Evento",
+        "anuncio": "Anuncio",
+        "documento": "Documento",
+        "formulario": "Formulario",
+        "legal": "Legal"
+      }
+    },
+    "cookieBanner": {
+      "aria": "Consentimiento de cookies",
+      "texto": "Este sitio web utiliza almacenamiento local y servicios de terceros para mejorar tu experiencia. Consulta nuestra",
+      "enlace": "Política de Cookies",
+      "textoFin": "para más información.",
+      "aceptar": "Aceptar todas",
+      "necesarias": "Solo necesarias"
+    },
     "countdown": {
       "message": "Cuenta atrás para las Fallas",
       "dias": "días",
@@ -599,6 +645,52 @@
       "colaboraciones": "Col·laboracions",
       "nuevosFalleros": "Nous Fallers",
       "escudoInicio": "Anar a la pàgina d'inici de la Falla Suïssa"
+    },
+    "buscador": {
+      "abrir": "Cercar",
+      "cerrar": "Tancar el cercador",
+      "etiqueta": "Cercar en la web",
+      "placeholder": "Escriu què busques…",
+      "borrar": "Esborrar la cerca",
+      "ayuda": "Per a filtrar els actes per dia o categoria fes servir el",
+      "ayudaEnlace": "calendari",
+      "ejemplosTitulo": "Prova amb:",
+      "ejemplos": [
+        "Ofrena 2026",
+        "autorització menors",
+        "galeria Cremà",
+        "calendari"
+      ],
+      "minimo": "Escriu almenys 2 lletres.",
+      "cargando": "Carregant l'índex…",
+      "resultados": "{n} resultats",
+      "resultado": "1 resultat",
+      "sinResultados": "Sense coincidències per a «{q}».",
+      "sinResultadosAyuda": "Revisa l'ortografia o prova amb una d'aquestes cerques:",
+      "error": "No s'ha pogut carregar el cercador.",
+      "reintentar": "Reintentar",
+      "verGalerias": "Veure totes les galeries",
+      "mostrarMas": "Mostrar més resultats",
+      "pasado": "Passat",
+      "tipo": {
+        "pagina": "Pàgina",
+        "seccion": "Secció",
+        "galeria": "Galeria",
+        "post": "Blog",
+        "evento": "Esdeveniment",
+        "anuncio": "Anunci",
+        "documento": "Document",
+        "formulario": "Formulari",
+        "legal": "Legal"
+      }
+    },
+    "cookieBanner": {
+      "aria": "Consentiment de cookies",
+      "texto": "Aquest lloc web utilitza emmagatzematge local i serveis de tercers per a millorar la teua experiència. Consulta la nostra",
+      "enlace": "Política de Cookies",
+      "textoFin": "per a més informació.",
+      "aceptar": "Acceptar-les totes",
+      "necesarias": "Només les necessàries"
     },
     "countdown": {
       "message": "Compte enrere per a les Fallas",

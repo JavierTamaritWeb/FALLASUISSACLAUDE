@@ -314,6 +314,7 @@ body.modo-oscuro .countdown__message {
 
 body.modo-oscuro .countdown__time-box {
   background-color: v.$gris-medio-claro;
+  color: v.$negro-casi; // $coral-texto sobre #ccc daría 3,3:1 (v4.29.0)
 }
 
 /* ----------------------------------------------
@@ -340,7 +341,7 @@ body.modo-oscuro .calendario-eventos{
 }
 
 body.modo-oscuro .calendario-eventos__mini-encabezado {
-  color: v.$primary-color;
+  color: v.$coral-claro; // 5,7:1 sobre #444 (v4.29.0)
 }
 
 body.modo-oscuro .calendario-eventos__mini-dia {
@@ -354,22 +355,36 @@ body.modo-oscuro .calendario-eventos__detalles-mes {
 
 body.modo-oscuro .calendario-eventos__mini-dia.sabado,
 body.modo-oscuro .calendario-eventos__mini-dia.domingo {
-  background-color: v.$gris-oscuro-medio;
+  background-color: v.$negro-casi; // fin de semana más oscuro que #444 (v4.29.0)
 }
 
 body.modo-oscuro .calendario-eventos__mini-dia.domingo {
-  color: v.$primary-color; 
+  color: v.$coral-claro; // 11:1 sobre #111
 }
 
 body.modo-oscuro .calendario-eventos__mini-dia:hover {
   background-color: v.$naranja-quemado;
-  color: v.$blanco;
+  color: v.$negro-casi; // 5,3:1 (blanco daba 3,5)
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
 }
 
 body.modo-oscuro .calendario-eventos__detalles-mes p {
   color: v.$blanco;
+}
+
+// Rótulos coral del calendario en oscuro (v4.29.0): $coral-texto sobre #444 daría
+// 1,7:1; el coral claro da 5,7:1. Los números de día eran #333 sobre #444 (invisibles).
+body.modo-oscuro .calendario-eventos__control,
+body.modo-oscuro .calendario-eventos__leyenda,
+body.modo-oscuro .calendario-eventos__cabecera-titulo,
+body.modo-oscuro .calendario-eventos__detalles-mes h2,
+body.modo-oscuro .ics-modal__cerrar {
+  color: v.$coral-claro;
+}
+
+body.modo-oscuro .calendario-eventos__mini-dia {
+  color: v.$blanco-hueso;
 }
 
 /* ----------------------------------------------
@@ -381,7 +396,7 @@ body.modo-oscuro .ics-modal__contenido {
 }
 
 body.modo-oscuro .ics-modal__label {
-  color: v.$primary-color; /* O #fff, según preferencia */
+  color: v.$coral-claro; // 5,7:1 sobre #444 (v4.29.0)
 }
 
 body.modo-oscuro .ics-modal__input,
@@ -392,8 +407,8 @@ body.modo-oscuro .ics-modal__textarea {
 }
 
 body.modo-oscuro .ics-modal__boton {
-  background-color: v.$primary-color;
-  color: v.$blanco;
+  background-color: v.$rojo-salmon;
+  color: v.$negro-casi; // 8,4:1
 }
 
 /* ----------------------------------------------
@@ -841,7 +856,7 @@ body.modo-oscuro .board__file-link:hover {
 // Nombre de archivo en modo oscuro
 body.modo-oscuro .board__file-name,
 body.modo-oscuro .board__file-text {
-    color: v.$primary-color;
+    color: v.$coral-claro; // 5,7:1 sobre #444 (v4.29.0)
     background-color: transparent;
 }
 
@@ -865,6 +880,9 @@ body.modo-oscuro .blog__post-title {
 }
 body.modo-oscuro .blog__post-content {
     color: v.$blanco-hueso;
+}
+body.modo-oscuro .blog__date {
+    color: v.$coral-claro; // $coral-texto sobre #444 daría 1,7:1 (v4.29.0)
 }
 
 /* ----------------------------------------------
@@ -928,6 +946,24 @@ body.modo-oscuro .boton {
     filter: saturate(1.08) brightness(1.04);
   }
 }
+
+body.modo-oscuro .boton:disabled,
+body.modo-oscuro .boton[aria-disabled="true"] {
+  background: rgba(v.$negro, 0.88);
+  border-color: v.$gris-oscuro;
+  color: v.$gris-plateado;
+}
+
+// Foco en oscuro (v4.29.0): ámbar 9,9:1 sobre #111; anillo interior claro
+body.modo-oscuro :focus-visible {
+  outline-color: v.$amarillo-anaranjado;
+  box-shadow: 0 0 0 2px v.$blanco-hueso;
+}
+
+body.modo-oscuro #notificacion.notificacion--exito { background-color: v.$estado-exito-oscuro !important; color: v.$negro-casi; }
+body.modo-oscuro #notificacion.notificacion--error { background-color: v.$estado-error-oscuro !important; color: v.$negro-casi; }
+body.modo-oscuro #notificacion.notificacion--aviso { background-color: v.$estado-aviso-oscuro !important; color: v.$negro-casi; }
+body.modo-oscuro #notificacion.notificacion--info  { background-color: v.$estado-info-oscuro !important; color: v.$negro-casi; }
 
 body.modo-oscuro .boton:focus-visible {
   box-shadow:

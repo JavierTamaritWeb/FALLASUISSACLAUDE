@@ -63,6 +63,10 @@ npx gulp updateDistSitemapsLastmod
 
 Para scripts utilitarios que no forman parte del flujo diario de Gulp, consulta [`scripts-utilities.md`](./scripts-utilities.md).
 
+## 🔎 Índice del buscador (v4.29.0)
+
+`htmlTask` llama a `buildSearchIndex` (gulpfile) antes de procesar las páginas: lee títulos y `meta description` de `src/*.html`, `translations.json`, `eventos.json` (sin la categoría `Festivo` ni los ids de prueba `EVENTOS_EXCLUIDOS_DEL_INDICE`), los dos tablones, los wrappers de `src/pdf/**` y `src/data/search-keywords.json`, y escribe `dist/data/search-index.json` (≈60 registros, ≈4-5 KB gz). El hash del contenido se inyecta en cada página como `<meta name="search-index" content="data/search-index.json?v=<hash>">`. Tarea suelta: `npx gulp searchIndex`. Kill-switch: `DISABLE_SEARCH_INDEX=1 npm run build`. Evaluación de las consultas de aceptación: `npm run search:eval` (tras el build). Los `.json` de `data/` se sirven con `Cache-Control: max-age=0, must-revalidate` (`.htaccess`).
+
 ## 🌍 Pre-render de valenciano (v4.6.23)
 
 Desde v4.6.23 el build pre-renderiza las traducciones VA en `dist/va/*.html`: el cuerpo HTML se sirve con texto valenciano horneado, sin depender de que JS arranque. Lo gestiona `gulpfile.js → prerenderTranslations()` reusando `src/data/translations.json`.
@@ -254,4 +258,4 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.28.1
+Última actualización: 11 de septiembre de 2026 - v4.29.0

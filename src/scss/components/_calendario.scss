@@ -59,7 +59,7 @@
 
         &-titulo {
         font-size: 2.5rem;
-        color: v.$primary-color;
+        color: v.$coral-texto;
         margin: 0;
         }
     }
@@ -108,7 +108,7 @@
         display: flex;
         flex-direction: column;    // 1. El label se coloca encima del input
         align-items: flex-start;
-        color: v.$primary-color;
+        color: v.$coral-texto; // 5,0:1 sobre $naranja-suave (v4.29.0)
         font-weight: 700; 
         text-transform: none; 
         font-size: 1.2rem; // 2. Alineación a la izquierda
@@ -140,11 +140,15 @@
           }
         }
       
+        // Hover (v4.29.0): antes texto blanco sobre coral (2,7:1). Ahora el
+        // texto sigue oscuro y el énfasis va en borde y halo coral.
         &:hover &-texto,
         &:hover &-fecha,
         &:hover &-busqueda {
-          background-color: v.$primary-color !important;
-          color: v.$blanco !important;
+          background-color: v.$blanco !important;
+          border-color: v.$coral-texto;
+          box-shadow: 0 0 0 2px rgba(v.$primary-color, 0.35);
+          color: v.$negro-casi !important;
         }
       }
   
@@ -217,7 +221,7 @@
     &__leyenda {
       margin: v.$espaciado 0;
       font-size: 1.2rem;
-      color: v.$primary-color;
+      color: v.$coral-texto;
       text-align: center;
       font-weight: bold;
       text-transform: none;
@@ -234,7 +238,7 @@
       h2 {
         margin-top: 0;
         font-size: 1.3rem;
-        color: v.$primary-color;
+        color: v.$coral-texto;
       }
       p {
         color: #000;
@@ -353,7 +357,7 @@
       &-titulo {
         font-size: 1.5rem;
         margin-bottom: 0.75rem;
-        color: v.$primary-color;
+        color: v.$coral-texto;
       }
   
       &-contenido {
@@ -375,12 +379,12 @@
         .calendario-eventos__item-meta {
           span {
             &:first-child {
-              color: v.$primary-color;
+              color: v.$coral-texto;
               font-weight: bold;
               font-size: 0.8rem;
             }
             &:last-child {
-              color: v.$primary-color;
+              color: v.$coral-texto;
               text-transform: none;
               font-weight: bold;
               font-size: 0.8rem;
@@ -389,7 +393,7 @@
         }
       }
      &--festivo h2 {
-            color: v.$primary-color;
+            color: v.$coral-texto;
      }
       &--falla {
         border-left: 6px solid v.$turquesa;
@@ -466,12 +470,12 @@
         .calendario-eventos__item-meta {
           span {
             &:first-child {
-              color: v.$dorado;
+              color: v.$estado-aviso; // dorado sobre blanco daba 1,4:1 (v4.29.0)
               font-weight: bold;
               font-size: 0.8rem;
             }
             &:last-child {
-              color: v.$dorado;
+              color: v.$estado-aviso;
               text-transform: none;
               font-weight: bold;
               font-size: 0.8rem;
@@ -480,7 +484,7 @@
         }
       }
         &--informacion h2 {
-            color: v.$dorado;
+            color: v.$estado-aviso;
         }
   
       &--recordatorio {
@@ -537,10 +541,7 @@
                 transition: color v.$transicion;
             }
             &:hover::placeholder {
-                color: v.$blanco;               /* Cambiar el color del placeholder */
-            }
-            :hover {
-                background-color: v.$primary-color;
+                color: v.$gris-medio-oscuro;
             }
         }
         &-texto{
@@ -555,10 +556,7 @@
                 transition: color v.$transicion;
             }
             &:hover::placeholder {
-                color: v.$blanco;               /* Cambiar el color del placeholder */
-            }
-            &:hover {
-                background-color: v.$primary-color;
+                color: v.$gris-medio-oscuro;
             }
 
         }
@@ -574,10 +572,7 @@
                 transition: color var(--transicion);
             }
             &:hover::placeholder {
-                color: v.$blanco;               /* Cambiar el color del placeholder */
-            }
-            &:hover {
-                background-color: v.$primary-color;
+                color: v.$gris-medio-oscuro;
             }
         }
     }
@@ -592,7 +587,7 @@
 /* Domingo con fondo suave y texto #FF6F61 */
 .calendario-eventos__mini-dia.domingo {
     background-color: #fae9e8; 
-    color: v.$primary-color; /* Texto de los domingos en este color */
+    color: v.$coral-texto; /* Domingos en coral oscuro: 4,7:1 (v4.29.0) */
 }
 /* Asegúrate de no tener pointer-events: none; */
 .calendario-eventos__mini-dia {
@@ -602,7 +597,7 @@
 
 .calendario-eventos__mini-dia:hover {
     background-color: #00909E;      /* Fondo azul verdoso */
-    color: v.$blanco;                    /* Texto blanco */
+    color: v.$negro-casi;           /* Texto oscuro: 4,9:1 (blanco daba 3,8) */
     font-weight: bold;              /* Texto en negrita */
     transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
 }
@@ -644,7 +639,7 @@
         background: transparent;
         border: none;
         font-size: 2.2rem;
-        color: v.$primary-color;
+        color: v.$coral-texto;
         cursor: pointer;
 
         &:hover {
@@ -690,7 +685,7 @@
 
     &__boton {
         background-color: v.$primary-color;
-        color: v.$blanco;
+        color: v.$negro-casi; // botón destacado: coral + texto oscuro, 6,9:1 (v4.29.0)
         border: none;
         border-radius: 5px;
         padding: 0.6rem 1rem;

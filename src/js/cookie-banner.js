@@ -19,29 +19,64 @@ function initCookieBanner() {
     console.warn('El acceso a localStorage está bloqueado por el navegador.');
   }
 
+  // Textos bilingües (v4.29.0): antes el banner iba siempre en castellano, también
+  // en /va/. Se toman de translations.json (cookieBanner.*) con el valor ES como
+  // reserva y se re-aplican en translationsReady/langChanged.
+  const FALLBACK = {
+    aria: 'Consentimiento de cookies',
+    texto: 'Este sitio web utiliza almacenamiento local y servicios de terceros para mejorar tu experiencia. Consulta nuestra',
+    enlace: 'Política de Cookies',
+    textoFin: 'para más información.',
+    aceptar: 'Aceptar todas',
+    necesarias: 'Solo necesarias'
+  };
+
+  function idioma() {
+    if (window.currentLanguage === 'va' || window.currentLanguage === 'es') return window.currentLanguage;
+    return document.documentElement.lang === 'ca' ? 'va' : 'es';
+  }
+
+  function t(clave) {
+    const tabla = window.translations && window.translations[idioma()];
+    const v = tabla && tabla.cookieBanner && tabla.cookieBanner[clave];
+    return typeof v === 'string' ? v : FALLBACK[clave];
+  }
+
   // Crear el banner dinámicamente
   const banner = document.createElement('div');
   banner.id = 'cookie-banner';
   banner.className = 'cookie-banner';
   banner.setAttribute('role', 'dialog');
-  banner.setAttribute('aria-label', 'Consentimiento de cookies');
+  banner.setAttribute('aria-label', FALLBACK.aria);
 
   banner.innerHTML = `
     <div class="cookie-banner__content">
       <p class="cookie-banner__text">
-        Este sitio web utiliza almacenamiento local y servicios de terceros para mejorar tu experiencia.
-        Consulta nuestra <a href="cookies.html">Política de Cookies</a> para más información.
+        <span data-i18n="cookieBanner.texto">${FALLBACK.texto}</span>
+        <a href="cookies.html" data-i18n="cookieBanner.enlace">${FALLBACK.enlace}</a>
+        <span data-i18n="cookieBanner.textoFin">${FALLBACK.textoFin}</span>
       </p>
       <div class="cookie-banner__actions">
-        <button class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAcceptAll" type="button">
-          Aceptar todas
+        <button class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAcceptAll" type="button" data-i18n="cookieBanner.aceptar">
+          ${FALLBACK.aceptar}
         </button>
-        <button class="cookie-banner__btn cookie-banner__btn--necessary" id="cookieNecessary" type="button">
-          Solo necesarias
+        <button class="cookie-banner__btn cookie-banner__btn--necessary" id="cookieNecessary" type="button" data-i18n="cookieBanner.necesarias">
+          ${FALLBACK.necesarias}
         </button>
       </div>
     </div>
   `;
+
+  function traducirBanner() {
+    banner.setAttribute('aria-label', t('aria'));
+    banner.querySelectorAll('[data-i18n]').forEach((el) => {
+      const clave = el.getAttribute('data-i18n').replace('cookieBanner.', '');
+      el.textContent = t(clave);
+    });
+  }
+  traducirBanner();
+  document.addEventListener('translationsReady', traducirBanner);
+  document.addEventListener('langChanged', traducirBanner);
 
   // Asegurarnos de que el body está disponible (salvataje para Safari en algunas condiciones de defer)
   if (!document.body) {
