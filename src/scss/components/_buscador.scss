@@ -43,7 +43,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid v.$primary-color;
+    outline: 2px solid var(--coral-marca);
     outline-offset: 2px;
     box-shadow: 0 0 0 2px v.$negro-casi;
   }
@@ -286,11 +286,11 @@
     &:hover,
     &:focus-visible {
       background: rgba(255, 255, 255, 0.16);
-      border-color: rgba(v.$primary-color, 0.7);
+      border-color: rgba(var(--coral-marca-rgb), 0.7);
     }
 
     &:focus-visible {
-      outline: 3px solid v.$primary-color;
+      outline: 3px solid var(--coral-marca);
       outline-offset: 1px;
       box-shadow: none;
     }
@@ -330,7 +330,7 @@
     color: v.$blanco;
 
     &--tipo {
-      background: rgba(v.$primary-color, 0.28);
+      background: rgba(var(--coral-marca-rgb), 0.28);
     }
 
     &--pasado {

@@ -61,7 +61,7 @@
   }
   &__title {
     font-size: v.$font-size-large;
-    color: v.$primary-color;
+    color: var(--coral-marca);
     margin-top: 1rem;
     text-align: center;
     @media (max-width: 767px) {

@@ -119,6 +119,8 @@ $falleret-size-large: 50%;    // Pantallas grandes (>1200px)
 // Regla: el coral $primary-color es de marca (bordes, badges, brillos, texto
 // grande ≥24px sobre azul). Como TEXTO normal usa $coral-texto en claro y
 // $coral-claro sobre azul/gris oscuro. Ratios WCAG en docs/paleta-y-degradados.md
+// En propiedades CSS NO uses $primary-color directamente: var(--coral-marca)
+// (_globales.scss), que en modo oscuro vale $coral-texto (v4.30.0)
 // =============================================================================
 
 // Degradado institucional: única fuente (antes 11 copias literales)

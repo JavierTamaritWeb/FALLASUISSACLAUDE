@@ -48,15 +48,15 @@
   }
 
   &:focus-visible {
-    outline: 2px solid v.$primary-color;
+    outline: 2px solid var(--coral-marca);
     outline-offset: 3px;
   }
 
   // Estado activo
   &.is-active {
-    border-color: v.$primary-color;
-    background: v.$primary-color;
-    box-shadow: 0 0 8px rgba(v.$primary-color, 0.6);
+    border-color: var(--coral-marca);
+    background: var(--coral-marca);
+    box-shadow: 0 0 8px rgba(var(--coral-marca-rgb), 0.6);
   }
 }
 
@@ -77,9 +77,9 @@
   }
 
   &.is-active {
-    border-color: v.$primary-color;
-    background: v.$primary-color;
-    box-shadow: 0 0 8px rgba(v.$primary-color, 0.4);
+    border-color: var(--coral-marca);
+    background: var(--coral-marca);
+    box-shadow: 0 0 8px rgba(var(--coral-marca-rgb), 0.4);
   }
 }
 
@@ -99,7 +99,7 @@
     -webkit-appearance: none;
 
     &.is-active {
-      box-shadow: 0 0 6px rgba(v.$primary-color, 0.6);
+      box-shadow: 0 0 6px rgba(var(--coral-marca-rgb), 0.6);
     }
   }
 

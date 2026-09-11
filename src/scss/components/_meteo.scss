@@ -249,7 +249,7 @@
 ------------------------------------------------ */
 .clima-actual {
   font-size: v.$font-size-medium;
-  color: v.$primary-color;
+  color: var(--coral-marca);
   @media  (max-width: 767px) {
     font-size: v.$font-size-regular;
     
@@ -259,7 +259,7 @@
 
 .pronostico {
   font-size: v.$font-size-medium;
-  color: v.$primary-color;
+  color: var(--coral-marca);
   text-transform: none;
 }
 
@@ -304,7 +304,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: v.$primary-color;
+      background: var(--coral-marca);
       opacity: 0.1;
       transform: skewX(-30deg);
       transition: left 0.5s;
@@ -316,7 +316,7 @@
 
     h3 {
       margin: 0.5rem 0;
-      color: v.$primary-color;
+      color: var(--coral-marca);
     }
 
     .forecast-icon {
@@ -351,7 +351,7 @@
    ESTILOS PARA TEXTOS ESPECÍFICOS
 ------------------------------------------------ */
 .actual-temp {
-  color: v.$primary-color;
+  color: var(--coral-marca);
   font-size: 2.8rem;
 }
 
@@ -386,7 +386,7 @@
 }
 
 .forecast-temp {
-  color: v.$primary-color !important;
+  color: var(--coral-marca) !important;
 }
 
 .valor-pronostico {
@@ -435,13 +435,13 @@
   /* Títulos */
   .pronostico {
     font-size: v.$font-size-medium;
-    color: v.$primary-color !important;
+    color: var(--coral-marca) !important;
     margin: 3rem;
     text-transform: none;
   }
   .clima-actual {
     font-size: v.$font-size-medium;
-    color: v.$primary-color;
+    color: var(--coral-marca);
     margin: 3rem;
     text-transform: none;
   }
@@ -538,7 +538,7 @@
 @media (min-width: 1200px) {
   #current-temp {
     font-size: 5rem !important;
-    color: v.$primary-color;
+    color: var(--coral-marca);
   }
   #current-feels-like {
     font-size: 1.6rem !important;

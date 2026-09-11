@@ -481,6 +481,8 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 
 `#FF6F61` sobre blanco/marfil da 2,5-2,7:1 y sobre el stop más claro del degradado (`#0a4b8d`) 3,2:1: vale como texto grande (≥ 24 px o ≥ 19 px negrita) sobre azul y como decoración (bordes, badges, subrayados, brillos), pero **no como texto normal**. Como texto usa `$coral-texto` (#B83F35, 5,0-5,5:1 sobre claros) y `$coral-claro` (#FFB4AA, 5,1:1 sobre azul, 11:1 sobre #111). Los degradados no se han tocado: siempre se corrige el color del texto. Detalle y tabla de ratios en [`paleta-y-degradados.md`](./paleta-y-degradados.md); guardia: `tests/color-tokens.e2e.spec.js`.
 
+**Desde v4.30.0, en modo oscuro el coral de marca es `#B83F35` en todos sus usos** (decisión del usuario): `var(--coral-marca)` / `rgba(var(--coral-marca-rgb), a)` en lugar de `v.$primary-color` en cualquier propiedad; las custom properties viven en `abstracts/_globales.scss` con un bloque `:root` y otro `html.modo-oscuro, body.modo-oscuro`. Un `v.$primary-color` o un `#FF6F61` literal nuevo se quedaría claro en oscuro y lo detecta `tests/color-tokens.e2e.spec.js` (barrido de estilos computados en oscuro).
+
 ## 15. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
@@ -505,4 +507,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.29.1
+Última actualización: 11 de septiembre de 2026 - v4.30.0

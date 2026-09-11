@@ -24,7 +24,7 @@
     }
 
     h1 {
-        color: #ff6f61;
+        color: var(--coral-marca);
         font-size: 2.5rem;
         margin-bottom: 1.5rem;
         text-align: left;
@@ -36,10 +36,10 @@
     }
 
     h2 {
-        color: #ff6f61;
+        color: var(--coral-marca);
         font-size: 1.8rem;
         margin: 2rem 0 1rem;
-        border-bottom: 2px solid #ff6f61;
+        border-bottom: 2px solid var(--coral-marca);
         padding-bottom: 0.5rem;
 
         @media (max-width: 767px) {
@@ -96,7 +96,7 @@
     }
 
     a {
-        color: #ff6f61;
+        color: var(--coral-marca);
         text-decoration: none;
         font-weight: 500;
         transition: color 0.3s ease;
@@ -110,7 +110,7 @@
     // Fecha de actualización destacada
     p:first-of-type {
         background-color: #fdf2e9;
-        border-left: 4px solid #ff6f61;
+        border-left: 4px solid var(--coral-marca);
         border-radius: 4px;
         padding: 1rem 1.5rem;
         margin-bottom: 2rem;

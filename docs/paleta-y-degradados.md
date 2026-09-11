@@ -61,6 +61,21 @@ Los tokens de marca (`$primary-color #FF6F61`, `$color-azul-falla #004BCF`, `$do
 | Modal de envío | clases Bootstrap `bg-success`/`bg-danger` sin CSS | `.modal-header--exito/--error` con color e icono |
 | `:focus-visible` | coral sobre blanco (2,7) | doble anillo |
 
+## Coral de marca en modo oscuro (v4.30.0)
+
+Decisión del usuario (11-sep-2026): en modo oscuro **todo** lo que usa `$primary-color` (#FF6F61) pasa a `$coral-texto` (#B83F35), incluido el texto normal, aun sabiendo que sobre `#111` da 3,4:1, sobre `#333` 2,3:1 y sobre `#444` 1,8:1 (en claro #FF6F61 sobre negro daba 7,5:1).
+
+Mecanismo, sin duplicar reglas:
+
+| Custom property | `:root` (claro) | `html/body.modo-oscuro` |
+|---|---|---|
+| `--coral-marca` | `#FF6F61` | `#B83F35` |
+| `--coral-marca-rgb` | `255, 111, 97` | `184, 63, 53` |
+| `--coral-marca-claro10` | `color.adjust(+10%)` | ídem sobre `#B83F35` |
+| `--coral-marca-oscuro8` / `-oscuro10` | `color.adjust(-8% / -10%)` | ídem |
+
+Declaradas en `src/scss/abstracts/_globales.scss`. En los SCSS: `v.$primary-color` → `var(--coral-marca)`; `rgba(v.$primary-color, a)` → `rgba(var(--coral-marca-rgb), a)`; `color.adjust(v.$primary-color, $lightness: …)` → la derivada correspondiente. `$primary-color` sigue en `_variables.scss` como fuente de los valores (tests y Sass). No cambian los literales de JS/HTML (sol de `dark.js`, iconos SVG, color «Festivo» de `calendario.js`). Guardia: `tests/color-tokens.e2e.spec.js` (en oscuro ningún elemento computa `rgb(255, 111, 97)`).
+
 ## Inventario de degradados (sin cambios)
 
 | Dónde | Valor | Modo oscuro |
@@ -88,4 +103,4 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.29.1
+Última actualización: 11 de septiembre de 2026 - v4.30.0

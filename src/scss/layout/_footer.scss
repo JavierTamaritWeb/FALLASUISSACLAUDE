@@ -5,7 +5,7 @@
 
 .footer {
   position: relative;
-  border-top: 4px solid v.$primary-color;
+  border-top: 4px solid var(--coral-marca);
   background-color: #02427a; // Color sólido de base para transición
   padding-top: 1.5rem;
   text-align: center;
@@ -98,7 +98,7 @@
       left: 0.55rem;
       width: 0;
       height: 2px;
-      background-color: v.$primary-color;
+      background-color: var(--coral-marca);
       opacity: 0;
       transition: width 0.3s ease, opacity 0.3s ease;
       pointer-events: none;
@@ -117,7 +117,7 @@
     }
 
     &:focus-visible {
-      outline: 2px solid v.$primary-color;
+      outline: 2px solid var(--coral-marca);
       outline-offset: 4px;
     }
 
@@ -141,7 +141,7 @@
   // Enlace activo: subrayado permanente + texto coral (sin fondo)
   &__enlace.active,
   &__enlace[aria-current="page"] {
-    color: v.$primary-color !important;
+    color: var(--coral-marca) !important;
     background-color: transparent !important;
   }
 
@@ -169,7 +169,7 @@
 .derechos {
   font-size: 1.3rem;
   margin: 0;
-  background-color: v.$primary-color;
+  background-color: var(--coral-marca);
 }
 
 .footer__legal {
@@ -178,7 +178,7 @@
   align-items: center;
   gap: 1.5rem;
   padding: 0.3rem 0;
-  background-color: v.$primary-color;
+  background-color: var(--coral-marca);
   font-size: 0.8rem;
   line-height: 1;
 

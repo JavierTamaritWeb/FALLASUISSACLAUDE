@@ -8,7 +8,7 @@
   
   padding: 5rem 0;
   background-color: v.$naranja-suave;
-  border-top: 1px solid v.$primary-color;
+  border-top: 1px solid var(--coral-marca);
 
   &__titulo {
     display: flex;
@@ -25,7 +25,7 @@
   }
   &__title {
     font-size: v.$font-size-large;
-    color: v.$primary-color;
+    color: var(--coral-marca);
     margin-bottom: 2rem;
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;
@@ -58,7 +58,7 @@
     }
   }
   &__post--featured {
-    border: 1px solid rgba(v.$primary-color, 0.18);
+    border: 1px solid rgba(var(--coral-marca-rgb), 0.18);
     box-shadow: 0 1.2rem 2.6rem rgba(0, 0, 0, 0.12);
   }
   &__post-title {
@@ -106,7 +106,7 @@
 .blog-detail {
   padding: 5rem 0;
   background-color: v.$naranja-suave;
-  border-top: 1px solid v.$primary-color;
+  border-top: 1px solid var(--coral-marca);
   transition: background-color var(--theme-transition);
 
   &__article {
@@ -116,7 +116,7 @@
     // Color base para modo oscuro (transicionable)
     background-color: #111111;
     border-radius: v.$border-radius;
-    border: 2px solid v.$primary-color;
+    border: 2px solid var(--coral-marca);
     box-shadow: 0 1.35rem 3rem rgba(0, 0, 0, 0.14);
     color: v.$blanco;
     position: relative;
@@ -152,7 +152,7 @@
     gap: 0.5rem;
     margin-top: 2.5rem;
     padding: 1rem 2.5rem;
-    background-color: v.$primary-color;
+    background-color: var(--coral-marca);
     color: v.$blanco;
     font-size: 1.5rem;
     font-weight: 700;
@@ -171,7 +171,7 @@
 
     &:hover,
     &:focus-visible {
-      background-color: color.adjust(v.$primary-color, $lightness: -10%);
+      background-color: var(--coral-marca-oscuro10);
       transform: translateY(-2px);
       text-decoration: none;
     }
@@ -199,7 +199,7 @@
     margin: 0 0 1.8rem;
     font-size: 2.3rem;
     line-height: 1.35;
-    color: v.$primary-color;
+    color: var(--coral-marca);
     text-align: center;
     font-weight: 700;
   }
@@ -233,7 +233,7 @@
     height: auto;
     border-radius: v.$border-radius;
     box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(v.$primary-color, 0.25);
+    border: 1px solid rgba(var(--coral-marca-rgb), 0.25);
     object-fit: cover;
   }
 

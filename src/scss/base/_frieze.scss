@@ -25,8 +25,8 @@
 
   /* MODIFIER: frieze--bordered */
   &--bordered {
-    border-top: 2px solid v.$primary-color;
-    border-bottom: 2px solid v.$primary-color;
+    border-top: 2px solid var(--coral-marca);
+    border-bottom: 2px solid var(--coral-marca);
     box-sizing: border-box; 
   }
   // El tamaño responsive (30px móvil / 50px desktop) lo resuelve el clamp()

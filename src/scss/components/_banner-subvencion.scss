@@ -36,14 +36,14 @@
   isolation: isolate;
   padding: 1.2rem 1.3rem 1rem;
   border-radius: 1.25rem;
-  border: 1px solid rgba(v.$primary-color, 0.18);
+  border: 1px solid rgba(var(--coral-marca-rgb), 0.18);
   box-shadow: 0 1.25rem 3.5rem rgba(0, 0, 0, 0.22);
   text-align: center;
   transition: background-color 2.4s ease-in-out, border-color 2.4s ease-in-out, color 2.4s ease-in-out, box-shadow 0.3s ease;
 }
 
 .banner-subvencion--forzado .banner-subvencion__contenido {
-  outline: 0.2rem solid rgba(v.$primary-color, 0.22);
+  outline: 0.2rem solid rgba(var(--coral-marca-rgb), 0.22);
   outline-offset: 0.15rem;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.28);
 }
@@ -61,8 +61,8 @@
   cursor: pointer;
   pointer-events: auto;
   touch-action: manipulation;
-  color: v.$primary-color;
-  background-color: rgba(v.$primary-color, 0.08);
+  color: var(--coral-marca);
+  background-color: rgba(var(--coral-marca-rgb), 0.08);
   border: none;
   border-radius: 999px;
   line-height: 1;
@@ -70,7 +70,7 @@
 
   &:hover,
   &:focus-visible {
-    background-color: rgba(v.$primary-color, 0.16);
+    background-color: rgba(var(--coral-marca-rgb), 0.16);
     transform: scale(1.04);
   }
 }

@@ -5,7 +5,7 @@
 
 
 :root {
-      --primary-color: #FF6F61;
+      --primary-color: var(--coral-marca);
       --secondary-color: #333333;
       --background-color: #F4F4F9;
       --white: #FFFFFF;
@@ -120,7 +120,7 @@
       .nombre { font-weight: bold; font-size: var(--font-lg); }
       .cargo {
       font-weight: bold;
-      color: v.$primary-color;
+      color: var(--coral-marca);
       text-transform: none;
       font-size: var(--font-base);
     }
@@ -176,7 +176,7 @@
         .organigrama__subnode {
           // Reborde negro (10-sep-2026) para separar la tarjeta del fondo coral
           border-color: v.$negro;
-          background: v.$primary-color;
+          background: var(--coral-marca);
           font-weight: bold;
      }
     }
@@ -281,7 +281,7 @@
 }
    
     .destacado {
-      background: v.$primary-color;
+      background: var(--coral-marca);
       color: v.$blanco;
       font-weight: bold;
     }

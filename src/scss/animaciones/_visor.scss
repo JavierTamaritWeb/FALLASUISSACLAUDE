@@ -28,7 +28,7 @@
       font-family: v.$font-family-secondary;
       font-size: clamp(2.4rem, 4.5vw, 3.6rem);
       font-weight: 700;
-      color: v.$primary-color;
+      color: var(--coral-marca);
       text-transform: none;
     }
   }
@@ -39,7 +39,7 @@
     aspect-ratio: 4 / 3;
     background: v.$naranja-suave;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    border-left: 30px solid v.$primary-color;
+    border-left: 30px solid var(--coral-marca);
     border-radius: 10px;
     overflow: hidden;
   
@@ -50,7 +50,7 @@
       top: 0;
       width: 30px;
       height: 100%;
-      background: linear-gradient(to right, v.$blanco-hueso 0%, v.$primary-color 10%, v.$blanco-hueso 40%, v.$primary-color 50%, v.$blanco-hueso 60%, v.$primary-color 90%, v.$blanco-hueso 100%);
+      background: linear-gradient(to right, v.$blanco-hueso 0%, var(--coral-marca) 10%, v.$blanco-hueso 40%, var(--coral-marca) 50%, v.$blanco-hueso 60%, var(--coral-marca) 90%, v.$blanco-hueso 100%);
       transition: width 0.3s ease;
     }
   
@@ -137,8 +137,8 @@
     }
   
     &__button {
-      background: v.$primary-color;
-      border: 2px solid v.$primary-color;
+      background: var(--coral-marca);
+      border: 2px solid var(--coral-marca);
       padding: 10px 25px;
       font-family: inherit;
       font-size: 16px;
@@ -149,7 +149,7 @@
   
       &:hover:not(:disabled) {
         transform: scale(1.1);
-        background: v.$primary-color;
+        background: var(--coral-marca);
       }
   
       &:disabled {

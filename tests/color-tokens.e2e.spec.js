@@ -75,4 +75,35 @@ test.describe('color-tokens — paleta funcional', () => {
     // y NO como texto normal sobre claro: documenta por qué existe $coral-texto
     expect(ratio(hex('primary-color'), hex('blanco'))).toBeLessThan(4.5);
   });
+
+  test('modo oscuro (v4.30.0): todo el coral de marca pasa a $coral-texto vía --coral-marca', async ({ page }) => {
+    await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
+    await page.goto('/index.html');
+    const leer = () => page.evaluate(() => ({
+      coral: getComputedStyle(document.body).getPropertyValue('--coral-marca').trim(),
+      rgb: getComputedStyle(document.body).getPropertyValue('--coral-marca-rgb').trim(),
+      borde: getComputedStyle(document.querySelector('.countdown__contenedor')).borderTopColor,
+    }));
+    const claro = await leer();
+    expect(claro.coral).toBe('#ff6f61');
+    expect(claro.rgb.replace(/\s/g, '')).toBe('255,111,97');
+    expect(claro.borde).toBe('rgb(255, 111, 97)');
+
+    await page.click('.header__modo-boton');
+    await expect.poll(async () => (await leer()).coral).toBe('#b83f35');
+    const oscuro = await leer();
+    expect(oscuro.rgb.replace(/\s/g, '')).toBe('184,63,53');
+    expect(oscuro.borde).toBe('rgb(184, 63, 53)');
+    // Ningún elemento del DOM conserva el coral claro como color, borde o fondo
+    // (las transiciones de tema duran hasta 2,4 s: se espera a que acaben)
+    await expect.poll(() => page.evaluate(() => {
+      const out = [];
+      for (const el of document.querySelectorAll('body *')) {
+        const s = getComputedStyle(el);
+        if ([s.color, s.borderTopColor, s.backgroundColor, s.outlineColor].includes('rgb(255, 111, 97)')) out.push(el.tagName + '.' + el.className);
+        if (out.length > 5) break;
+      }
+      return out;
+    }), { timeout: 8000 }).toEqual([]);
+  });
 });

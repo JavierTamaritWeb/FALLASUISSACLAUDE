@@ -10,7 +10,7 @@
   background-color: v.$secondary-color;
   padding: 3rem 0 4rem;
   text-align: center;
-  border-top: 1px solid v.$primary-color;
+  border-top: 1px solid var(--coral-marca);
   position: relative;
 
   // Gradiente en pseudo-elemento para poder transicionar con opacity
@@ -45,7 +45,7 @@
 
   &__heading-texto {
     font-weight: bold;
-    color: v.$primary-color;
+    color: var(--coral-marca);
     font-size: clamp(2.8rem, 4vw, 4.2rem);
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;
@@ -93,7 +93,7 @@
   }
 
   &__link {
-    color: v.$primary-color;
+    color: var(--coral-marca);
     margin-top: 2rem;
     font-size: 1.6rem;
     font-weight: 700;

@@ -35,7 +35,7 @@ Archivo principal:
 Claves:
 
 - WebKit:
-  - `::-webkit-scrollbar-thumb` con `#FF6F61`
+  - `::-webkit-scrollbar-thumb` con `var(--coral-marca)` (`#FF6F61` en claro; desde v4.30.0 `#B83F35` en modo oscuro)
   - `::-webkit-scrollbar-track` con gris claro
   - overrides oscuros en `body.modo-oscuro`, `html.modo-oscuro` y `html:has(body.modo-oscuro)`
 - Firefox:
@@ -139,4 +139,4 @@ Con la opción del sistema “Mostrar barras de desplazamiento: Automáticamente
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.29.1
+Última actualización: 11 de septiembre de 2026 - v4.30.0

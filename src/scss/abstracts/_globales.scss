@@ -1,7 +1,29 @@
 // scss/abstracts/_globales.scss
 // Reset global y estilos base para html/body
 
+@use 'sass:color';
 @use 'variables' as v;
+
+// Coral de marca como custom property (v4.30.0): en modo oscuro TODO lo que usa
+// $primary-color pasa a $coral-texto (#B83F35, decisión del usuario del
+// 11-sep-2026) sin duplicar reglas. En SCSS no se escribe v.$primary-color en
+// propiedades: se usa var(--coral-marca) / rgba(var(--coral-marca-rgb), a).
+:root {
+  --coral-marca: #{v.$primary-color};
+  --coral-marca-rgb: 255, 111, 97;
+  --coral-marca-claro10: #{color.adjust(v.$primary-color, $lightness: 10%)};
+  --coral-marca-oscuro8: #{color.adjust(v.$primary-color, $lightness: -8%)};
+  --coral-marca-oscuro10: #{color.adjust(v.$primary-color, $lightness: -10%)};
+}
+
+html.modo-oscuro,
+body.modo-oscuro {
+  --coral-marca: #{v.$coral-texto};
+  --coral-marca-rgb: 184, 63, 53;
+  --coral-marca-claro10: #{color.adjust(v.$coral-texto, $lightness: 10%)};
+  --coral-marca-oscuro8: #{color.adjust(v.$coral-texto, $lightness: -8%)};
+  --coral-marca-oscuro10: #{color.adjust(v.$coral-texto, $lightness: -10%)};
+}
 
 *,
 *::before,

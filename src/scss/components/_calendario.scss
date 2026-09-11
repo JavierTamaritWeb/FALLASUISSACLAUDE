@@ -20,7 +20,7 @@
     position: relative;
 
     &__boton-quitar {
-        background-color: v.$primary-color;
+        background-color: var(--coral-marca);
         color: v.$blanco;
         border: none;
         border-radius: 5px;
@@ -36,7 +36,7 @@
         }
     }
     &__modo-boton {
-        background-color: v.$primary-color;
+        background-color: var(--coral-marca);
         color: v.$blanco;
         border: none;
         border-radius: 5px;
@@ -147,7 +147,7 @@
         &:hover &-busqueda {
           background-color: v.$blanco !important;
           border-color: v.$coral-texto;
-          box-shadow: 0 0 0 2px rgba(v.$primary-color, 0.35);
+          box-shadow: 0 0 0 2px rgba(var(--coral-marca-rgb), 0.35);
           color: v.$negro-casi !important;
         }
       }
@@ -374,7 +374,7 @@
       }
   
       &--festivo {
-        border-left: 6px solid v.$primary-color;
+        border-left: 6px solid var(--coral-marca);
   
         .calendario-eventos__item-meta {
           span {
@@ -629,7 +629,7 @@
         width: 300px;
         position: relative;
         padding: 1.5rem;
-        border: 1px solid v.$primary-color;
+        border: 1px solid var(--coral-marca);
     }
 
     &__cerrar {
@@ -651,13 +651,13 @@
         margin-top: 0;
         margin-bottom: 1rem;
         font-size: 1.4rem;
-        color: v.$primary-color;
+        color: var(--coral-marca);
     }
 
     &__label {
         display: block;
         margin-bottom: 0.3rem;
-        color: v.$primary-color;
+        color: var(--coral-marca);
         font-weight: bold;
     }
 
@@ -684,7 +684,7 @@
     }
 
     &__boton {
-        background-color: v.$primary-color;
+        background-color: var(--coral-marca);
         color: v.$negro-casi; // botón destacado: coral + texto oscuro, 6,9:1 (v4.29.0)
         border: none;
         border-radius: 5px;

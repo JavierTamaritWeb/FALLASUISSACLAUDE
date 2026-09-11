@@ -53,7 +53,7 @@
 
 .seccion-hr {
   border: none;
-  border-top: 3px solid v.$primary-color;
+  border-top: 3px solid var(--coral-marca);
   margin: 0;
   display: block;
 }
@@ -90,7 +90,7 @@
 }
 
 .ofrenda__titulo {
-  color: v.$primary-color;
+  color: var(--coral-marca);
   text-transform: none;
   font-size: v.$font-size-medium;
   font-family: v.$font-family;
@@ -138,7 +138,7 @@
   max-width: 48rem;
   border-radius: 1rem;
   overflow: hidden;
-  border: 2px solid v.$primary-color;
+  border: 2px solid var(--coral-marca);
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.25);
 
   picture {
@@ -183,7 +183,7 @@
     font-size: clamp(3.2rem, 7vw, 5.6rem);
     line-height: 1.1;
     letter-spacing: 0.02em;
-    color: v.$primary-color;
+    color: var(--coral-marca);
     text-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.85), 0 0 2.4rem rgba(0, 0, 0, 0.6);
     pointer-events: none;
   }

@@ -11,8 +11,10 @@ test.describe('Scrollbar (Safari/WebKit): thumb fijo y track #111 en oscuro', ()
   test('dist/css/main.css contiene reglas para html en modo oscuro', async () => {
     const css = readDistCss();
 
-    // Thumb siempre primary (#ff6f61) para WebKit
-    expect(css).toMatch(/::-webkit-scrollbar-thumb\{[^}]*background-color:#ff6f61/i);
+    // Thumb en coral de marca vía custom property (v4.30.0: #ff6f61 en claro, #b83f35 en oscuro)
+    expect(css).toMatch(/::-webkit-scrollbar-thumb\{[^}]*background-color:var\(--coral-marca\)/i);
+    expect(css).toMatch(/:root\{[^}]*--coral-marca:#ff6f61/i);
+    expect(css).toMatch(/modo-oscuro[^{]*\{[^}]*--coral-marca:#b83f35/i);
 
     // Track claro (gris) para WebKit
     expect(css).toMatch(/::-webkit-scrollbar-track\{[^}]*background-color:#e3e2e2/i);
@@ -22,7 +24,7 @@ test.describe('Scrollbar (Safari/WebKit): thumb fijo y track #111 en oscuro', ()
     expect(css).toMatch(/html(?:\.modo-oscuro|:has\(body\.modo-oscuro\))::-webkit-scrollbar-track\{[^}]*background-color:#111(?:111)?/i);
 
     // Firefox: scrollbar-color aplicado a html en oscuro
-    expect(css).toMatch(/html(?:\.modo-oscuro|:has\(body\.modo-oscuro\))\{[^}]*scrollbar-color:#ff6f61 #111(?:111)?/i);
+    expect(css).toMatch(/html(?:\.modo-oscuro|:has\(body\.modo-oscuro\))\{[^}]*scrollbar-color:var\(--coral-marca\) #111(?:111)?/i);
   });
 
   test('al arrancar con localStorage.darkMode=true, <html> recibe modo-oscuro', async ({ page }) => {

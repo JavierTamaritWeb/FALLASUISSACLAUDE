@@ -6,7 +6,7 @@
 .deportes {
   position: relative;
   background: v.$gradiente-institucional;
-  border-top: 1px solid v.$primary-color;
+  border-top: 1px solid var(--coral-marca);
   padding: 6rem 0;
   overflow: hidden;
 
@@ -36,7 +36,7 @@
 
   &__heading-texto {
     font-weight: bold;
-    color: v.$primary-color;
+    color: var(--coral-marca);
 
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;
@@ -48,7 +48,7 @@
     height: 6.4rem;
     aspect-ratio: 1 / 1;
     object-fit: contain;
-    color: v.$primary-color;
+    color: var(--coral-marca);
   }
 
   &__intro {
@@ -139,7 +139,7 @@
   }
 
   &__tablon-titulo {
-    color: v.$primary-color;
+    color: var(--coral-marca);
     justify-content: flex-start;
     padding-block: 2rem;
     padding-inline: 0;
@@ -181,7 +181,7 @@ body.modo-oscuro .deportes {
   }
 
   &__heading-texto {
-    color: v.$primary-color;
+    color: var(--coral-marca);
   }
 
   &__intro {

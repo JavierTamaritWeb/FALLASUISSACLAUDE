@@ -13,7 +13,7 @@
   background-color: v.$secondary-color;
   padding-top: .5rem;
   text-align: center;
-  border-top: 1px solid v.$primary-color;
+  border-top: 1px solid var(--coral-marca);
   position: relative;
 
   // Gradiente en pseudo-elemento para poder transicionar con opacity
@@ -104,7 +104,7 @@
   width: 90%;
   max-width: 600px;
   border-radius: 1rem;
-  border: 2px solid v.$primary-color;
+  border: 2px solid var(--coral-marca);
   animation: scaleIn 0.25s ease;
   text-align: left;
   // Transición explícita con valores fijos para máxima compatibilidad
@@ -146,13 +146,13 @@
   right: 1.8rem;
   font-size: 3rem;
   cursor: pointer;
-  color: v.$primary-color;
+  color: var(--coral-marca);
   transition: color 2.4s ease-in-out;
 }
 
 #modal-quieres .modal-title {
   font-size: v.$font-size-medium;
-  color: v.$primary-color;
+  color: var(--coral-marca);
   margin-bottom: 1rem;
   transition: color 2.4s ease-in-out;
 }
@@ -213,7 +213,7 @@
   line-height: 1;
   padding: 0 0.4rem;
   cursor: pointer;
-  color: v.$primary-color;
+  color: var(--coral-marca);
   transition: color 2.4s ease-in-out;
 }
 
@@ -254,7 +254,7 @@ body.modo-oscuro #modal-quieres .modal-body .lead {
 
 #quieres-form label {
   font-size: v.$font-size-small;
-  color: v.$primary-color;
+  color: var(--coral-marca);
   text-align: left; // Alinea el texto a la izquierda
   width: 100%;
   transition: color 2.4s ease-in-out;
@@ -271,7 +271,7 @@ body.modo-oscuro #modal-quieres .modal-body .lead {
 #quieres-form input:focus,
 #quieres-form textarea:focus {
   outline: none;
-  box-shadow: 1px 0 5px v.$primary-color;
+  box-shadow: 1px 0 5px var(--coral-marca);
 }
 
 // Fila de consentimiento RGPD: checkbox pequeño a la izquierda del texto
@@ -303,8 +303,8 @@ body.modo-oscuro #modal-quieres .modal-body .lead {
   box-shadow: none;
 
   &:checked {
-    background-color: v.$primary-color;
-    border-color: v.$primary-color;
+    background-color: var(--coral-marca);
+    border-color: var(--coral-marca);
 
     // Tick centrado horizontal y verticalmente dentro del cuadrado
     &::after {
@@ -322,14 +322,14 @@ body.modo-oscuro #modal-quieres .modal-body .lead {
   }
 
   &:focus-visible {
-    outline: 2px solid v.$primary-color;
+    outline: 2px solid var(--coral-marca);
     outline-offset: 2px;
   }
 }
 
 #quieres-form .form-consentimiento__label {
   font-size: v.$font-size-small;
-  color: v.$primary-color;
+  color: var(--coral-marca);
   cursor: pointer;
   transition: color 2.4s ease-in-out;
   line-height: 1.3;

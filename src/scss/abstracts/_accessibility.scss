@@ -12,7 +12,7 @@
 // interior casi negro garantiza ≥3:1 (WCAG 1.4.11) sobre cualquier fondo claro
 // y el coral exterior lo hace sobre azul/negro. En modo oscuro: ver _modo-oscuro.
 :focus-visible {
-  outline: 3px solid v.$primary-color;
+  outline: 3px solid var(--coral-marca);
   outline-offset: 2px;
   border-radius: 4px;
   box-shadow: 0 0 0 2px v.$negro-casi;

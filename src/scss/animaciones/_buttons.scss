@@ -6,11 +6,11 @@
 .boton {
   align-items: center;
   background-color: rgba(v.$blanco, 0.94);
-  border: 1px solid rgba(v.$primary-color, 0.34);
+  border: 1px solid rgba(var(--coral-marca-rgb), 0.34);
   border-radius: 1.2rem;
   box-shadow:
     0 0.9rem 1.9rem rgba(0, 0, 0, 0.12),
-    0 0.25rem 0.6rem rgba(v.$primary-color, 0.1),
+    0 0.25rem 0.6rem rgba(var(--coral-marca-rgb), 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.92);
   // Texto en coral oscuro (v4.29.0): el coral de marca sobre blanco daba 2,7:1;
   // $coral-texto da 5,5:1. Borde, brillo y hover conservan el coral de marca.
@@ -65,12 +65,12 @@
   &:focus-visible {
     background: linear-gradient(
       135deg,
-      rgba(v.$primary-color, 0.98) 0%,
+      rgba(var(--coral-marca-rgb), 0.98) 0%,
       rgba(v.$rojo-salmon, 0.95) 100%
     );
     border-color: rgba(v.$rojo-salmon, 0.95);
     box-shadow:
-      0 1.1rem 2.4rem rgba(v.$primary-color, 0.24),
+      0 1.1rem 2.4rem rgba(var(--coral-marca-rgb), 0.24),
       0 0.45rem 0.95rem rgba(0, 0, 0, 0.12),
       inset 0 1px 0 rgba(255, 255, 255, 0.28);
     color: v.$negro-casi;
@@ -93,8 +93,8 @@
   &:focus-visible {
     outline: none;
     box-shadow:
-      0 0 0 0.35rem rgba(v.$primary-color, 0.16),
-      0 1.15rem 2.45rem rgba(v.$primary-color, 0.22),
+      0 0 0 0.35rem rgba(var(--coral-marca-rgb), 0.16),
+      0 1.15rem 2.45rem rgba(var(--coral-marca-rgb), 0.22),
       inset 0 1px 0 rgba(255, 255, 255, 0.28);
   }
 
@@ -107,10 +107,10 @@
 .boton:active {
   background: linear-gradient(
     135deg,
-    rgba(v.$primary-color, 1) 0%,
+    rgba(var(--coral-marca-rgb), 1) 0%,
     rgba(v.$rojo-salmon, 0.98) 100%
   );
-  border-color: v.$primary-color;
+  border-color: var(--coral-marca);
   color: v.$negro-casi;
   filter: saturate(1.02);
   transform: translateY(-1px) scale(0.985);
@@ -147,7 +147,7 @@
   white-space: nowrap;         // Opcional, para que el texto no se parta en varias líneas
   
   background-color: v.$blanco; 
-  border: 1px solid v.$primary-color;
+  border: 1px solid var(--coral-marca);
   border-radius: v.$border-radius;
   padding: 0.5rem 1rem;
   color: v.$coral-texto; // 5,5:1 sobre blanco (v4.29.0)
@@ -160,7 +160,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: v.$primary-color;
+    background-color: var(--coral-marca);
     color: v.$blanco;
   }
 }
@@ -178,7 +178,7 @@
 
 .btn-direccion {
   position: relative;
-  background: linear-gradient(45deg, v.$primary-color, v.$dorado);
+  background: linear-gradient(45deg, var(--coral-marca), v.$dorado);
   color: v.$blanco;
   border: none;
   padding: 1.5rem 3rem;

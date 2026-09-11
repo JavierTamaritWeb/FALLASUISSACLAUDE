@@ -65,7 +65,7 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: v.$primary-color;
+  color: var(--coral-marca);
 }
 
 .swiper-pagination-bullet {
@@ -73,7 +73,7 @@
 }
 
 .swiper-pagination-bullet-active {
-  background-color: v.$primary-color;
+  background-color: var(--coral-marca);
 }
 .swiper-slide img {
   width: 100%;

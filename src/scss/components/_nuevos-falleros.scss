@@ -6,7 +6,7 @@
 .nuevos-falleros {
   position: relative;
   background-color: v.$blanco-hueso;
-  border-top: 1px solid v.$primary-color;
+  border-top: 1px solid var(--coral-marca);
   padding: 6rem 0;
   overflow: hidden;
   transition: background-color var(--theme-transition, 2.4s ease-in-out);
@@ -22,7 +22,7 @@
 
   &__heading-texto {
     font-weight: bold;
-    color: v.$primary-color;
+    color: var(--coral-marca);
 
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;
@@ -63,7 +63,7 @@
 
   &__subtitulo {
     text-align: center;
-    color: v.$primary-color;
+    color: var(--coral-marca);
     margin: 4rem auto 2rem;
     font-size: v.$font-size-medium;
     font-weight: bold;
@@ -102,7 +102,7 @@
     display: flex;
     flex-direction: column;
     background-color: v.$blanco;
-    border: 1px solid v.$primary-color;
+    border: 1px solid var(--coral-marca);
     border-radius: v.$border-radius;
     padding: 2.5rem 2rem;
     box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.08);
@@ -157,10 +157,10 @@
     margin: 3rem auto 0;
     max-width: 110rem;
     aspect-ratio: 4 / 5;
-    border: 1px solid v.$primary-color;
+    border: 1px solid var(--coral-marca);
     border-radius: v.$border-radius;
     box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.25);
-    background-color: v.$primary-color;
+    background-color: var(--coral-marca);
     overflow: hidden;
     transition: box-shadow var(--theme-transition, 2.4s ease-in-out);
 
@@ -173,7 +173,7 @@
       left: 0;
       right: 0;
       height: 2rem;
-      background-color: v.$primary-color;
+      background-color: var(--coral-marca);
       z-index: 2;
       pointer-events: none;
     }
@@ -254,7 +254,7 @@ body.modo-oscuro .nuevos-falleros {
 
   &__card {
     background-color: v.$gris-muy-oscuro;
-    border-color: v.$primary-color;
+    border-color: var(--coral-marca);
     box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.5);
 
     &:hover,
@@ -264,7 +264,7 @@ body.modo-oscuro .nuevos-falleros {
   }
 
   &__card-titulo {
-    color: v.$primary-color;
+    color: var(--coral-marca);
   }
 
   &__card-desc {
@@ -272,7 +272,7 @@ body.modo-oscuro .nuevos-falleros {
   }
 
   &__doc-wrapper {
-    background-color: v.$primary-color;
+    background-color: var(--coral-marca);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
   }
 

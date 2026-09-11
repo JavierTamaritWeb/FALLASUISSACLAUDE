@@ -5,7 +5,7 @@
 
 
 .eventos {
-  border-top: 1px solid v.$primary-color;
+  border-top: 1px solid var(--coral-marca);
   background-color: v.$naranja-suave;
   
 
@@ -20,7 +20,7 @@
   }
   &__heading-texto {
     font-weight: bold;
-    color: v.$primary-color;
+    color: var(--coral-marca);
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;
 
@@ -61,7 +61,7 @@
   }
   &__title {
     font-size: v.$font-size-large;
-    color: v.$primary-color;
+    color: var(--coral-marca);
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;
       
@@ -87,7 +87,7 @@
   transition: all 0.3s;
   
   &:hover {
-    background-color: v.$primary-color;
+    background-color: var(--coral-marca);
     color: v.$blanco;
     transform: scale(1.1);
   }
@@ -108,7 +108,7 @@
 
 .tablon-titulo {
   font-size: 3rem;
-  color: v.$primary-color;
+  color: var(--coral-marca);
   padding: 4rem 6rem;
   display: flex;
   align-items: center;
