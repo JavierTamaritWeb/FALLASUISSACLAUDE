@@ -624,4 +624,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.27.1
+Última actualización: 11 de septiembre de 2026 - v4.27.2

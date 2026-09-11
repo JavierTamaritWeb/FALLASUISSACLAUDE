@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.27.1 · **Última actualización:** 11 de septiembre de 2026
+**Versión:** 4.27.2 · **Última actualización:** 11 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -140,7 +140,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.27.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.27.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -329,6 +329,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.27.2** — Organigrama (`index.html`, `lafalla.html`, `organigrama.html`): entra **Rodrigo Sobero** como delegado de Festejos, al final de la columna de Pablo Cortés (tras Israel Lopez), y su `Person` ("Delegado Festejos") en el Schema.org de `eventos.html`/`organigrama.html`. Baselines visuales de organigrama regenerados.
 - **4.27.1** — Corrección del segundo apellido del Presidente: **José Santos Quilis** (antes "Quiles") en `index.html`, `lafalla.html`, `organigrama.html`, `eventos.html` (Schema.org `Person`), `src/seo/schema-organization.json`, `translations.json` (ES/VA), tests `nosotros-plana-mayor`/`nosotros-directiva`, README y CLAUDE.md. Sin cambios de estilo ni de estructura.
 - **4.27.0** — **Titulares de acordeón con el hover de `.boton`**: los 26 titulares de acordeón del sitio (Nosotros, Mapa, HOPE y los paneles de Archivos) pasan del fondo gris en hover al mismo efecto que el botón "Ver Deportes": degradado coral→salmón (salmón→amarillo en modo oscuro), título y ▼ en `$negro-casi`, brillo que recorre la fila, ▼ desplazado y anillo coral en foco por teclado; sin elevación (en filas apiladas pisaría la fila anterior) y anulando el `translateY(-1px)` global de `button:hover`. `_representantes.scss` pierde sus overrides de fondo/foco/hover del titular. Nuevo `tests/accordion-hover.e2e.spec.js` (7 tests) en la smoke (20 specs). Ver patrón *Titulares de acordeón con el hover de `.boton`*.
 - **4.26.4** — Documentación: el fallo del deploy de 4.26.2-4.26.3 (rsync por fecha+tamaño y CDN revalidando con 304) queda registrado como §14 de `docs/architecture-constraints.md` con síntoma, causas, solución y la verificación del `?v=` tras cada deploy. Sin cambios en el sitio servido.
