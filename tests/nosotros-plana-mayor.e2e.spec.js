@@ -8,7 +8,7 @@ const { test, expect } = require('@playwright/test');
 const PAGINAS = ['index.html', 'lafalla.html'];
 const CARGOS = [
   { src: 'FalleraMayor-2026-27', alt: 'Lucía Gutiérrez Martín, Fallera Mayor de la Falla Suïssa 2026-2027', altVa: 'Lucía Gutiérrez Martín, Fallera Major de la Falla Suïssa 2026-2027' },
-  { src: 'Presidente', alt: 'José Santos Quiles, Presidente de la Falla Suïssa', altVa: 'José Santos Quiles, President de la Falla Suïssa' },
+  { src: 'Presidente', alt: 'José Santos Quilis, Presidente de la Falla Suïssa', altVa: 'José Santos Quilis, President de la Falla Suïssa' },
   { src: 'FalleraMayorInfantil-2026-27', alt: 'Sofía Gómez Medina, Fallera Mayor Infantil de la Falla Suïssa 2026-2027', altVa: 'Sofía Gómez Medina, Fallera Major Infantil de la Falla Suïssa 2026-2027' },
   { src: 'PresidenteInfantil-2026-27', alt: 'Diego Gómez Medina, Presidente Infantil de la Falla Suïssa 2026-2027', altVa: 'Diego Gómez Medina, President Infantil de la Falla Suïssa 2026-2027' }
 ];

@@ -148,4 +148,4 @@ Ejecuta además `npm run test:e2e:full` si el cambio también toca navegación, 
 
 ---
 
-Última actualización: 10 de septiembre de 2026 - v4.27.0
+Última actualización: 11 de septiembre de 2026 - v4.27.1

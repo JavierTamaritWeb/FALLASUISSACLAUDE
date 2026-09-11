@@ -9,7 +9,7 @@
   "foundingDate": "2024",
   "founder": {
     "@type": "Person",
-    "name": "José Santos Quiles"
+    "name": "José Santos Quilis"
   },
   "address": {
     "@type": "PostalAddress",
@@ -54,7 +54,7 @@
   "member": [
     {
       "@type": "Person",
-      "name": "José Santos Quiles",
+      "name": "José Santos Quilis",
       "jobTitle": "Presidente"
     },
     {

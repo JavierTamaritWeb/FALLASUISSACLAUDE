@@ -7,7 +7,7 @@ const path = require('path');
 
 const PAGES = ['/index.html', '/lafalla.html'];
 const NOMBRES = [
-  'José Santos Quiles',
+  'José Santos Quilis',
   'Maite Cabezuelo', 'Prados Ramos', 'Pablo Cortés',
   'Paula Peiró',
   'David Gómez', 'Miguel Ángel Pallardó',
