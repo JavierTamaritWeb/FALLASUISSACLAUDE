@@ -4,6 +4,7 @@
 // los crea js/buscador.js. z-index 2500 como el menú (dentro del header, 500).
 
 @use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
 
 // Botón lupa + «Buscar» (mismo relieve que .header__menu-toggle)
 .header__search-toggle {
@@ -67,6 +68,7 @@
 }
 
 // Panel bajo la barra (todos los tamaños; anclado a la derecha en escritorio)
+
 .buscador {
   position: absolute;
   top: calc(100% + 0.5rem);
@@ -110,24 +112,25 @@
     letter-spacing: 0.02em;
   }
 
-  &__cerrar,
-  &__borrar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 3.6rem;
-    min-height: 3.6rem;
-    padding: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 50%;
-    color: v.$blanco;
-    font-size: 2.2rem;
-    line-height: 1;
-    cursor: pointer;
+  &__cerrar {
+    @include m.aspa;
+    --aspa-largo: 1.6rem;
+    flex: 0 0 auto;
+    width: 4rem;
+    height: 4rem;
+    margin-right: -0.6rem;
+    color: rgba(255, 255, 255, 0.85);
 
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
+      color: v.$blanco;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    &:focus-visible {
+      color: v.$blanco;
+      outline: 2px solid v.$blanco-hueso;
+      outline-offset: 2px;
+      box-shadow: none;
     }
   }
 
@@ -135,18 +138,18 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 0.6rem;
   }
 
   &__input {
     flex: 1 1 auto;
     min-width: 0;
-    padding: 1rem 1.2rem;
+    // El padding derecho reserva el sitio del aspa de borrar: el texto nunca pasa por debajo
+    padding: 1rem 4.2rem 1rem 1.2rem;
     font-family: v.$font-family;
     font-size: 1.6rem;
     color: v.$negro-casi;
-    background: rgba(255, 255, 255, 0.96);
-    border: 2px solid rgba(v.$primary-color, 0.7);
+    background: v.$blanco;
+    border: 1px solid rgba(v.$negro-casi, 0.25);
     border-radius: 0.9rem;
     appearance: none;
     -webkit-appearance: none;
@@ -155,13 +158,45 @@
       color: v.$gris-medio-oscuro; // 7,5:1
     }
 
+    // Un solo indicador de foco: anillo blanco con halo oscuro (≥3:1 sobre el azul
+    // y sobre el gris del modo oscuro), sin sumar el borde coral del campo
     &:focus-visible {
-      outline: 3px solid v.$primary-color;
+      border-color: transparent;
+      outline: 3px solid v.$blanco-hueso;
       outline-offset: 2px;
-      box-shadow: 0 0 0 2px v.$negro-casi;
+      box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.45);
     }
 
     &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  &__borrar {
+    @include m.aspa;
+    --aspa-largo: 1.1rem;
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    width: 3rem;
+    height: 3rem;
+    transform: translateY(-50%);
+    color: v.$gris-medio-oscuro; // 7,5:1 sobre blanco
+
+    &:hover {
+      color: v.$negro-casi;
+      background: rgba(v.$negro-casi, 0.08);
+    }
+
+    &:focus-visible {
+      color: v.$negro-casi;
+      outline: 2px solid v.$negro-casi;
+      outline-offset: 0;
+      box-shadow: none;
+    }
+
+    // `display` de autor pisaba el `[hidden]` del navegador: el aspa se veía con el campo vacío
+    &[hidden] {
       display: none;
     }
   }
@@ -313,6 +348,25 @@
 // Modo oscuro: mismo gris translúcido que el menú desplegable
 body.modo-oscuro .buscador {
   background: rgba(51, 51, 51, 0.8);
+}
+
+// Foco del buscador en oscuro: un solo anillo (ámbar del tema oscuro sobre el gris
+// del panel; casi negro dentro del campo blanco), sin el anillo interior blanco
+// global, que sobre el campo blanco no se ve y sumaba contornos
+body.modo-oscuro .buscador__input:focus-visible {
+  outline: 3px solid v.$amarillo-anaranjado;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+body.modo-oscuro .buscador__cerrar:focus-visible {
+  outline: 2px solid v.$amarillo-anaranjado;
+  box-shadow: none;
+}
+
+body.modo-oscuro .buscador__borrar:focus-visible {
+  outline: 2px solid v.$negro-casi;
+  box-shadow: none;
 }
 
 body.modo-oscuro .header__search-toggle {

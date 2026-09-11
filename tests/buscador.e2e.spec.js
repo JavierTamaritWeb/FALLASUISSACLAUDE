@@ -155,6 +155,67 @@ test.describe('buscador — panel en el navegador', () => {
     expect(page.url()).toContain(href.replace(/^\.\//, '').split('#')[0]);
   });
 
+  test('dos aspas con papeles distintos: borrar solo con texto y sin cerrar; cerrar sin círculo', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
+    await page.goto('/index.html');
+    await page.click('.header__search-toggle');
+    const panel = page.locator('#siteSearch');
+    const input = page.locator('#siteSearchInput');
+    const borrar = page.locator('.buscador__borrar');
+    const cerrar = page.locator('.buscador__cerrar');
+    await expect(panel).toBeVisible();
+
+    // Con el campo vacío solo hay un aspa: la de cerrar (el `display` de autor no debe pisar `[hidden]`)
+    await expect(cerrar).toBeVisible();
+    await expect(cerrar).toHaveAttribute('aria-label', 'Cerrar buscador');
+    await expect(borrar).toBeHidden();
+    expect(await borrar.evaluate((el) => getComputedStyle(el).display)).toBe('none');
+    // Sin círculo ni borde: solo el aspa dibujada con pseudoelementos
+    expect(await cerrar.evaluate((el) => {
+      const s = getComputedStyle(el);
+      const antes = getComputedStyle(el, '::before');
+      return { bg: s.backgroundColor, border: s.borderStyle, aspa: antes.content, alto: antes.height };
+    })).toEqual({ bg: 'rgba(0, 0, 0, 0)', border: 'none', aspa: '""', alto: '2px' });
+
+    // Con texto aparece el aspa dentro del campo, a la derecha y sin que el texto la invada
+    await page.fill('#siteSearchInput', 'autorización menores');
+    await expect(borrar).toBeVisible();
+    await expect(borrar).toHaveAttribute('aria-label', 'Borrar la búsqueda');
+    const [ri, rb, padRight] = await Promise.all([
+      input.boundingBox(), borrar.boundingBox(),
+      input.evaluate((el) => parseFloat(getComputedStyle(el).paddingRight)),
+    ]);
+    expect(rb.x).toBeGreaterThan(ri.x + ri.width / 2);
+    expect(rb.x + rb.width).toBeLessThanOrEqual(ri.x + ri.width + 1);
+    expect(Math.abs((rb.y + rb.height / 2) - (ri.y + ri.height / 2))).toBeLessThan(2);
+    expect(padRight).toBeGreaterThanOrEqual(rb.width - 8);
+
+    // Borrar conserva el panel abierto y el cursor en el campo
+    await borrar.click();
+    await expect(panel).toBeVisible();
+    await expect(input).toHaveValue('');
+    await expect(input).toBeFocused();
+    await expect(borrar).toBeHidden();
+    await expect(page.locator('.buscador__cuerpo')).toHaveAttribute('data-estado', 'inicial');
+
+    // Foco del campo: un solo anillo claro (sin el borde coral acumulado)
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Shift+Tab');
+    await expect(input).toBeFocused();
+    const foco = await input.evaluate((el) => {
+      const s = getComputedStyle(el);
+      return { outline: s.outlineColor, borde: s.borderTopColor, sombra: s.boxShadow };
+    });
+    expect(foco.outline).toBe('rgb(245, 245, 245)');
+    expect(foco.borde).toBe('rgba(0, 0, 0, 0)');
+    expect(foco.sombra).toContain('rgba(0, 0, 0, 0.45)');
+
+    // Cerrar cierra todo el buscador
+    await cerrar.click();
+    await expect(panel).toBeHidden();
+  });
+
   test('/va/: textos en valenciano, resultado en VA y destino bajo /va/', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.addInitScript(() => { try { localStorage.removeItem('lang'); } catch (e) { /* noop */ } });

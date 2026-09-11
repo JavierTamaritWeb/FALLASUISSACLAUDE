@@ -474,7 +474,8 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 2. El panel del buscador y el menú son **excluyentes**: `nav-menu.js` emite `nav:open` y escucha `buscador:open`; `buscador.js` hace lo simétrico. No abras los dos a la vez (se solaparían con el mismo z-index 2500).
 3. `js/buscador.js` crea el botón y el panel; el HTML solo lleva el `<script defer>` y el build inyecta `<meta name="search-index">`. Si falta la meta (kill-switch `DISABLE_SEARCH_INDEX=1`), el script no crea nada.
 4. **Cierre por clic exterior con `composedPath()`** (fix del 11-sep-2026, detectado en Chrome): el handler de clic de `.buscador__cuerpo` corre antes que el de `document` y repinta el cuerpo con `innerHTML`; al llegar el clic a `document`, el botón pulsado (sugerencia, «Mostrar más», «Reintentar») ya no estaba en el DOM, `panel.contains(e.target)` daba `false` y el panel se cerraba aunque acabara de mostrar resultados. `clicDentro(e)` comprueba la ruta del evento (fijada al despacharlo) y deja `contains` solo de reserva. No vuelvas a decidir el cierre a partir de `e.target` tras un repintado.
-5. Test guardia: `tests/buscador.e2e.spec.js` (menú y buscador excluyentes, foco, `/va/`, sugerencias y «Mostrar más» sin cerrar el panel).
+5. **Aspas del panel (v4.29.1)** — tres errores corregidos al separar «cerrar» de «borrar»: (a) el aspa de borrar se veía con el campo vacío porque `.buscador__borrar { display: inline-flex }` pisa el `[hidden] { display: none }` del navegador (cualquier declaración de autor gana a la hoja de agente de usuario): ahora lleva `&[hidden] { display: none }`; (b) el primer intento usó un `%placeholder` anidado dentro de `.buscador`, que compila a `.buscador .buscador__borrar` (especificidad 0,2,0) y su `position: relative` ganaba al `position: absolute` de `.buscador__borrar` (0,1,0), dejando el aspa fuera del campo: se sustituyó por el `@mixin aspa` de `abstracts/_mixins.scss` (la guardia `scss-guardrails` no admite mixins en componentes); (c) la regla global `body.modo-oscuro :focus-visible` (0,2,0) sumaba al campo blanco un anillo blanco invisible, así que el foco oscuro de campo, cerrar y borrar se redefine en `_buscador.scss` con la misma especificidad. Regla: el campo y las aspas tienen un único indicador de foco por modo; no añadas bordes coral al campo.
+6. Test guardia: `tests/buscador.e2e.spec.js` (menú y buscador excluyentes, foco, `/va/`, sugerencias y «Mostrar más» sin cerrar el panel, aspas de borrar/cerrar y anillo de foco).
 
 ## 17. Coral de marca como texto: solo grande o sobre azul (v4.29.0)
 
@@ -504,4 +505,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.29.0
+Última actualización: 11 de septiembre de 2026 - v4.29.1

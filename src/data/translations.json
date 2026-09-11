@@ -15,7 +15,7 @@
     },
     "buscador": {
       "abrir": "Buscar",
-      "cerrar": "Cerrar el buscador",
+      "cerrar": "Cerrar buscador",
       "etiqueta": "Buscar en la web",
       "placeholder": "Escribe qué buscas…",
       "borrar": "Borrar la búsqueda",
@@ -648,7 +648,7 @@
     },
     "buscador": {
       "abrir": "Cercar",
-      "cerrar": "Tancar el cercador",
+      "cerrar": "Tancar cercador",
       "etiqueta": "Cercar en la web",
       "placeholder": "Escriu què busques…",
       "borrar": "Esborrar la cerca",

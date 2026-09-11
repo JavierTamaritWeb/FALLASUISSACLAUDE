@@ -186,4 +186,4 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.29.0
+Última actualización: 11 de septiembre de 2026 - v4.29.1

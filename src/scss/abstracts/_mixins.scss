@@ -20,3 +20,40 @@
   }
 }
 
+// Dos aspas con papeles distintos: la de la cabecera cierra TODO el buscador
+// (sin círculo, poco peso visual); la del campo solo borra lo escrito y solo
+// existe cuando hay texto. Ambas se dibujan con dos barras (no con el glifo
+// «×», que no queda centrado en la caja de línea; ver v4.15.1).
+@mixin aspa {
+  position: relative;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  color: inherit;
+  cursor: pointer;
+
+  > span {
+    display: none;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--aspa-largo, 1.4rem);
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}

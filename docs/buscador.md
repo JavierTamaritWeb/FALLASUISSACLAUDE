@@ -48,7 +48,7 @@ Consultas: vacía → estado inicial con ejemplos; 1 carácter → «Escribe al 
 
 ## Interfaz y accesibilidad
 
-Botón `button.header__search-toggle` (lupa + «Buscar»; solo icono < 768 px) con `aria-expanded`/`aria-controls`. Panel `div#siteSearch.buscador[role=search]` (`hidden` + `inert` cerrado): etiqueta visible «Buscar en la web», `input[type=search]` con debounce de 150 ms, botón «Borrar», ayuda «Para filtrar los actos… usa el calendario» (diferencia con `#filtro-busqueda` del calendario), `p.buscador__estado[aria-live=polite]` que anuncia solo el recuento, lista `ol.buscador__lista` con título, descripción (≤ 140 caracteres), chips de tipo / sección / ejercicio o fecha / «Pasado», «Mostrar más» de 10 en 10. Teclado: foco al campo al abrir, ↓ desde el campo al primer resultado, ↑/↓ entre resultados, Escape cierra y devuelve el foco al botón; clic fuera cierra (el detector usa `event.composedPath()`, no `panel.contains(e.target)`: los botones de sugerencia, «Mostrar más» y «Reintentar» repintan el cuerpo antes de que llegue el clic a `document`, y el botón pulsado ya no está en el DOM). La consulta se guarda en `sessionStorage.buscadorQuery` y se restaura al reabrir. Abrir el buscador cierra el menú y viceversa.
+Botón `button.header__search-toggle` (lupa + «Buscar»; solo icono < 768 px) con `aria-expanded`/`aria-controls`. Panel `div#siteSearch.buscador[role=search]` (`hidden` + `inert` cerrado): etiqueta visible «Buscar en la web», `input[type=search]` con debounce de 150 ms, botón «Borrar» (desde v4.29.1 es un aspa pequeña dentro del campo, a la derecha, visible solo con texto; al pulsarla el panel sigue abierto y el cursor vuelve al campo; la ✕ de la cabecera, «Cerrar buscador», es la única que cierra el buscador y va sin círculo; campo blanco con borde fino y un único anillo de foco, ámbar en modo oscuro), ayuda «Para filtrar los actos… usa el calendario» (diferencia con `#filtro-busqueda` del calendario), `p.buscador__estado[aria-live=polite]` que anuncia solo el recuento, lista `ol.buscador__lista` con título, descripción (≤ 140 caracteres), chips de tipo / sección / ejercicio o fecha / «Pasado», «Mostrar más» de 10 en 10. Teclado: foco al campo al abrir, ↓ desde el campo al primer resultado, ↑/↓ entre resultados, Escape cierra y devuelve el foco al botón; clic fuera cierra (el detector usa `event.composedPath()`, no `panel.contains(e.target)`: los botones de sugerencia, «Mostrar más» y «Reintentar» repintan el cuerpo antes de que llegue el clic a `document`, y el botón pulsado ya no está en el DOM). La consulta se guarda en `sessionStorage.buscadorQuery` y se restaura al reabrir. Abrir el buscador cierra el menú y viceversa.
 
 ## Añadir contenido
 
@@ -62,4 +62,4 @@ Pendientes editoriales: traducir al valenciano título y descripción de los eve
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.29.0
+Última actualización: 11 de septiembre de 2026 - v4.29.1

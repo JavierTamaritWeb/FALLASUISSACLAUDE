@@ -122,7 +122,7 @@
 
   // Textos de reserva (= valor ES de translations.json → buscador.*)
   var FALLBACK = {
-    abrir: 'Buscar', cerrar: 'Cerrar el buscador', etiqueta: 'Buscar en la web', placeholder: 'Escribe qué buscas…',
+    abrir: 'Buscar', cerrar: 'Cerrar buscador', etiqueta: 'Buscar en la web', placeholder: 'Escribe qué buscas…',
     borrar: 'Borrar la búsqueda', ayuda: 'Para filtrar los actos por día o categoría usa el', ayudaEnlace: 'calendario',
     ejemplosTitulo: 'Prueba con:', ejemplos: ['Ofrenda 2026', 'autorización menores', 'galería Cremà', 'calendario'],
     minimo: 'Escribe al menos 2 letras.', cargando: 'Cargando el índice…', resultados: '{n} resultados', resultado: '1 resultado',
