@@ -33,7 +33,7 @@
 
   <url>
     <loc>https://fallasuissa.es/llibret_2026.html</loc>
-    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-11T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -47,35 +47,35 @@
 
   <url>
     <loc>https://fallasuissa.es/calendario.html</loc>
-    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-11T00:00:00+01:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/galerias.html</loc>
-    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-11T00:00:00+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/blog.html</loc>
-    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-11T00:00:00+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/blog-somni.html</loc>
-    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-11T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
 
   <url>
     <loc>https://fallasuissa.es/blog-anima.html</loc>
-    <lastmod>2026-09-10T00:00:00+01:00</lastmod>
+    <lastmod>2026-09-11T00:00:00+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>

@@ -30,9 +30,7 @@ const MANAGED_EVENT_PAGES = [
 ];
 
 const LEGACY_CLEANUP_PAGES = [
-  '/base.html',
   '/lafalla.html',
-  '/va/base.html',
   '/va/lafalla.html'
 ];
 

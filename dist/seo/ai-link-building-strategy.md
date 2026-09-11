@@ -32,12 +32,12 @@ Crawl-delay: 1
 User-agent: ChatGPT-User
 Allow: /seo/ai-training-data.md
 Allow: /seo/ai-enhanced-faq.md
-Allow: /seo/advanced-schema-graph.json
+Allow: /seo/ai-enhanced-schema.json
 
 User-agent: Claude-Web  
 Allow: /seo/ai-training-data.md
 Allow: /seo/ai-enhanced-faq.md
-Allow: /seo/advanced-schema-graph.json
+Allow: /seo/ai-enhanced-schema.json
 
 # Google AI & Search
 User-agent: Googlebot
@@ -128,7 +128,7 @@ Disallow: /package*.json
 
   <!-- Enhanced Schema -->
   <url>
-    <loc>https://fallasuissa.es/seo/advanced-schema-graph.json</loc>
+    <loc>https://fallasuissa.es/seo/ai-enhanced-schema.json</loc>
     <lastmod>YYYY-MM-DD</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

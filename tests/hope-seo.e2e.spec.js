@@ -52,4 +52,21 @@ test.describe('SEO HOPE-INCLIVA', () => {
       expect.objectContaining({ '@id': 'https://fallasuissa.es/colaboraciones.html#hope-collaboration' })
     );
   });
+
+  // Variante /va/ (v4.28.0): el build reescribe los @id de página a /va/ y
+  // conserva el nodo externo de HOPE tal cual.
+  test('/va/index.html y /va/colaboraciones.html conservan la relación con HOPE con @id localizados', async ({ page }) => {
+    await page.goto('/va/index.html');
+    let data = await page.locator('script[type="application/ld+json"]').evaluate((element) => JSON.parse(element.textContent || '{}'));
+    let webpage = getGraphNode(data['@graph'], 'https://fallasuissa.es/va/#webpage');
+    expect(webpage).toBeTruthy();
+    expect(webpage.inLanguage).toBe('ca-ES');
+    expect(getGraphNode(data['@graph'], 'https://hope-incliva.com/#website').url).toBe('https://hope-incliva.com/');
+
+    await page.goto('/va/colaboraciones.html');
+    data = await page.locator('script[type="application/ld+json"]').evaluate((element) => JSON.parse(element.textContent || '{}'));
+    webpage = getGraphNode(data['@graph'], 'https://fallasuissa.es/va/colaboraciones.html#webpage');
+    expect(webpage.mainEntity).toEqual(expect.objectContaining({ '@id': 'https://fallasuissa.es/va/colaboraciones.html#hope-collaboration' }));
+    expect(getGraphNode(data['@graph'], 'https://fallasuissa.es/va/colaboraciones.html#hope-collaboration')).toBeTruthy();
+  });
 });

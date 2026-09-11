@@ -1,6 +1,6 @@
 {
   "name": "web-falla",
-  "version": "4.27.3",
+  "version": "4.28.0",
   "description": "Proyecto Gulp para la Falla Suïssa - L'Alqueria del Favero",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
     "git:check-large-files": "node scripts/check-git-file-size.mjs --scope=unpushed",
     "git:check-staged-large-files": "node scripts/check-git-file-size.mjs --scope=staged",
     "seo:dist": "gulp seoDist",
+    "seo:schema-report": "node scripts/schema-report.mjs",
     "test:e2e": "playwright test -c playwright.smoke.config.js",
     "test:e2e:full": "playwright test",
     "test:e2e:ui": "playwright test -c playwright.smoke.config.js --ui",

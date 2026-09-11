@@ -19,32 +19,45 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": "https://fallasuissa.es/blog-somni.html",
-    "mainEntityOfPage": "https://fallasuissa.es/blog-somni.html",
-    "headline": "Somni",
-    "description": "La historia de cómo ocho personas ilusionadas fundaron la Falla Suïssa - L'Alqueria del Favero, la comisión número 396, en el barrio de les Moreres, Valencia.",
-    "datePublished": "2025-03-01",
-    "author": {
-      "@type": "Person",
-      "name": "Paula Peiró"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "@id": "https://fallasuissa.es/#organization",
-      "name": "Falla Suïssa - L'Alqueria del Favero",
-      "url": "https://fallasuissa.es/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://fallasuissa.es/img/Escudo_falla.png"
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://fallasuissa.es/blog-somni.html#webpage",
+        "url": "https://fallasuissa.es/blog-somni.html",
+        "inLanguage": "es-ES",
+        "mainEntity": {
+          "@id": "https://fallasuissa.es/blog-somni.html#article"
+        }
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": "https://fallasuissa.es/blog-somni.html#article",
+        "url": "https://fallasuissa.es/blog-somni.html",
+        "mainEntityOfPage": {
+          "@id": "https://fallasuissa.es/blog-somni.html#webpage"
+        },
+        "headline": "Somni",
+        "description": "La historia de cómo ocho personas ilusionadas fundaron la Falla Suïssa - L'Alqueria del Favero, la comisión número 396, en el barrio de les Moreres, Valencia.",
+        "image": [
+          "https://fallasuissa.es/img/og-share.png?v=20260122"
+        ],
+        "datePublished": "2025-03-01",
+        "dateModified": "2025-03-01",
+        "inLanguage": "es-ES",
+        "articleSection": "Historia de la Falla",
+        "author": {
+          "@type": "Person",
+          "name": "Paula Peiró",
+          "jobTitle": "Secretaria"
+        },
+        "publisher": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/#website"
+        }
       }
-    },
-    "isPartOf": {
-      "@type": "WebSite",
-      "@id": "https://fallasuissa.es/#website",
-      "url": "https://fallasuissa.es/",
-      "name": "Falla Suïssa - L'Alqueria del Favero"
-    }
+    ]
   }
   </script>
 
@@ -56,6 +69,7 @@
   <meta property="og:url" content="https://fallasuissa.es/blog-somni.html">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2025-03-01">
+  <meta property="article:modified_time" content="2025-03-01">
   <meta property="og:locale" content="es_ES">
   <meta property="og:site_name" content="Falla Suïssa - L'Alqueria del Favero">
   <meta property="og:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
@@ -175,7 +189,7 @@
         </a>
 
         <nav class="sociales">
-          <a class="sociales__enlace" href="https://www.facebook.com/fallasuïssal'alqueriadelfavero">
+          <a class="sociales__enlace" href="https://www.facebook.com/FallaSuissaLalqueriadelFavero">
             <span class="sociales__accesible">Facebook</span>
           </a>
           <a class="sociales__enlace" href="https://www.instagram.com/fallasuissa_lalqueriadelfavero/">

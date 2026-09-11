@@ -25,38 +25,17 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://fallasuissa.es/calendario.html",
-    "url": "https://fallasuissa.es/calendario.html",
-    "name": "Calendario - Falla Suïssa - L'Alqueria del Favero",
-    "description": "Calendario de actividades y citas de la Falla Suïssa - L'Alqueria del Favero.",
-    "isPartOf": {
-      "@type": "WebSite",
-      "@id": "https://fallasuissa.es/#website",
-      "url": "https://fallasuissa.es/",
-      "name": "Falla Suïssa - L'Alqueria del Favero"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "@id": "https://fallasuissa.es/#organization",
-      "name": "Falla Suïssa - L'Alqueria del Favero",
-      "url": "https://fallasuissa.es/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://fallasuissa.es/img/Escudo_falla.png"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "Informacion general",
-        "email": "info@fallasuissa.es",
-        "availableLanguage": ["es", "va"]
-      },
-      "sameAs": [
-        "https://www.facebook.com/fallasuïssal'alqueriadelfavero",
-        "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
-        "https://tiktok.com/@fallasuissaalqueria"
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://fallasuissa.es/calendario.html#webpage",
+        "url": "https://fallasuissa.es/calendario.html",
+        "inLanguage": "es-ES",
+        "about": {
+          "@id": "https://fallasuissa.es/#organization"
+        }
+      }
+    ]
   }
   </script>
   
@@ -287,7 +266,7 @@
         </a>
 
         <nav class="sociales">
-          <a class="sociales__enlace" href="https://www.facebook.com/fallasuïssal'alqueriadelfavero">
+          <a class="sociales__enlace" href="https://www.facebook.com/FallaSuissaLalqueriadelFavero">
             <span class="sociales__accesible">Facebook</span>
           </a>
           <a class="sociales__enlace" href="https://www.instagram.com/fallasuissa_lalqueriadelfavero/">

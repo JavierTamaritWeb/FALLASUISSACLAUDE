@@ -61,7 +61,7 @@
       "description": "Grafo Schema.org enriquecido de la organización, eventos y contenido cultural.",
       "url": "https://fallasuissa.es/seo/ai-enhanced-schema.json",
       "contentType": "application/ld+json",
-      "sha256": "8735b4f59f83ad3bf4760426d631f97fa483347b4db5e8f92673650fcf8db8db"
+      "sha256": "bc8a7f0572ee4a6a470a74b87a73514db7046591f6ab2e8cc1b8ee0f363dc38a"
     }
   ]
 }

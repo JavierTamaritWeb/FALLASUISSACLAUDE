@@ -210,54 +210,330 @@ function isManagedBoardEventNode(node) {
     || (!organizerName && locationName === "Falla Suïssa - L'Alqueria del Favero");
 }
 
-function mergeEventSchemaIntoHtml(html, schemaEventsJSON, options = {}) {
-  const { managedEventFilter = null } = options;
+// ---------------------------------------------------------------------------
+// JSON-LD inyectado por el build (v4.28.0)
+// ---------------------------------------------------------------------------
+// Única fuente de los nodos Organization y WebSite: src/seo/schema-organization.json.
+// processJsonLd() lee el PRIMER <script type="application/ld+json"> de cada
+// página, descarta cualquier Organization/WebSite propios escritos inline,
+// completa el nodo de página (name/description desde <title>/<meta>, breadcrumb,
+// primaryImageOfPage), rellena las galerías (ImageObject por foto de
+// dataPagesN.json), la lista de galerías, fusiona los Event del tablón y, en la
+// variante /va/, reescribe las URL de página a /va/ e inLanguage a ca-ES.
+// Siempre deja UN solo <script ld+json> por página (tests/hope-seo lo exige).
+// Kill switch: DISABLE_SCHEMA_INJECT=1 deja los bloques inline tal cual.
+// Ver docs/structured-data.md.
+const SITE_ORIGIN = 'https://fallasuissa.es';
+const ORG_ID = `${SITE_ORIGIN}/#organization`;
+const SITE_ID = `${SITE_ORIGIN}/#website`;
+const GLOBAL_IDS = new Set([ORG_ID, SITE_ID, `${SITE_ORIGIN}/#place`, `${SITE_ORIGIN}/#logo`]);
+const PAGE_TYPES = new Set(['WebPage', 'CollectionPage', 'AboutPage', 'ImageGallery', 'ItemPage', 'ContactPage', 'ProfilePage', 'MediaGallery']);
+const SCHEMA_ASSET_RE = /^https:\/\/fallasuissa\.es\/(?:img|pdf|data|seo|js|css|\.well-known)\//;
+const SCHEMA_SCRIPT_RE = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/i;
+// Padre de cada página en el breadcrumb (clave de nav.* del padre, o null = solo Inicio)
+const BREADCRUMB_PARENT = {
+  'galeria_': { file: 'galerias.html', nav: 'galeria' },
+  'blog-': { file: 'blog.html', nav: 'blog' },
+  'autorizacion-': { file: 'nuevos-falleros.html', nav: 'nuevosFalleros' },
+  'organigrama.html': { file: 'lafalla.html', nav: 'lafalla' }
+};
+// Nombre de página en el breadcrumb: clave nav.* cuando existe
+const BREADCRUMB_NAV_KEY = {
+  'lafalla.html': 'lafalla', 'ofrenda.html': 'ofrenda', 'eventos.html': 'eventos', 'deportes.html': 'deportes',
+  'blog.html': 'blog', 'meteo.html': 'meteo', 'galerias.html': 'galeria', 'colaboraciones.html': 'colaboraciones',
+  'nuevos-falleros.html': 'nuevosFalleros'
+};
 
-  const schemaScriptRegex = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/i;
-  const match = html.match(schemaScriptRegex);
+let baseSchemaCache = null;
+async function loadBaseSchema() {
+  if (baseSchemaCache) return baseSchemaCache;
+  const raw = JSON.parse(await fs.readFile(path.join(__dirname, 'src', 'seo', 'schema-organization.json'), 'utf8'));
+  const org = raw.organization;
+  const site = raw.website;
+  const fallo = (msg) => { throw new Error(`[schema] src/seo/schema-organization.json inválido: ${msg}`); };
+  if (!org || org['@id'] !== ORG_ID) fallo(`organization.@id debe ser ${ORG_ID}`);
+  if (!site || site['@id'] !== SITE_ID) fallo(`website.@id debe ser ${SITE_ID}`);
+  if (org.name !== "Falla Suïssa - L'Alqueria del Favero") fallo('organization.name no es el canónico');
+  if (!Array.isArray(org.sameAs) || org.sameAs.length !== 3) fallo('organization.sameAs debe tener 3 redes');
+  if (!Array.isArray(org.member) || !org.member.some((m) => m.name === 'José Santos Quilis')) fallo('organization.member debe incluir al Presidente');
+  baseSchemaCache = { organization: org, website: site };
+  return baseSchemaCache;
+}
 
-  if (!match) {
-    return { html, merged: false };
+// Fotos de cada galería (dataPagesN.json) para los ImageObject
+async function loadGalleryImages() {
+  const files = await glob('src/data/dataPages*.json');
+  const map = new Map();
+  for (const f of files) {
+    const m = path.basename(f).match(/^dataPages(\d+)\.json$/);
+    if (!m) continue;
+    const data = JSON.parse(await fs.readFile(f, 'utf8'));
+    // Solo entradas con imagen real (galeria_3 tiene una página de cierre sin src)
+    const fotos = (Array.isArray(data) ? data : []).filter((p) => p && typeof p.src === 'string' && /^img\//.test(p.src));
+    const withRaster = [];
+    for (const p of fotos) {
+      // contentUrl al raster original (jpg/jpeg/png) si existe en src/img; si no, el src del JSON
+      const sinExt = p.src.replace(/\.[a-z0-9]+$/i, '');
+      let contentPath = p.src;
+      for (const ext of ['.jpg', '.jpeg', '.png']) {
+        try { await fs.access(path.join(__dirname, 'src', `${sinExt}${ext}`)); contentPath = `${sinExt}${ext}`; break; } catch (_) { /* siguiente */ }
+      }
+      withRaster.push({ src: contentPath, alt: typeof p.alt === 'string' ? p.alt : '' });
+    }
+    map.set(Number(m[1]), withRaster);
   }
+  return map;
+}
 
+function decodeHtmlEntities(text) {
+  return String(text)
+    .replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&apos;/g, "'")
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ');
+}
+
+function readHeadMeta(html) {
+  const title = (html.match(/<title>([^<]*)<\/title>/i) || [, ''])[1].trim();
+  const description = (html.match(/<meta\s+name="description"\s+content="([^"]*)"/i) || [, ''])[1].trim();
+  // og:image se conserva con su ?v= (regla: og-share.png siempre con cache-buster por WhatsApp)
+  const ogImage = (html.match(/<meta\s+property="og:image"\s+content="([^"]*)"/i) || [, ''])[1].trim();
+  return { title: decodeHtmlEntities(title), description: decodeHtmlEntities(description), ogImage };
+}
+
+function hasType(node, type) {
+  if (!node || typeof node !== 'object') return false;
+  const t = node['@type'];
+  return Array.isArray(t) ? t.includes(type) : t === type;
+}
+
+function isOwnOrgNode(node) {
+  if (!hasType(node, 'Organization')) return false;
+  const id = typeof node['@id'] === 'string' ? node['@id'] : '';
+  const url = typeof node.url === 'string' ? node.url : '';
+  return id === ORG_ID || id === '#organizacion' || /^https:\/\/fallasuissa\.es\/?$/.test(url) || /^Falla Su[iï]ssa/i.test(node.name || '');
+}
+
+function isOwnSiteNode(node) {
+  if (!hasType(node, 'WebSite')) return false;
+  const ref = `${node['@id'] || ''} ${node.url || ''}`;
+  return !/hope-incliva/.test(ref);
+}
+
+function extractFirstJsonLd(html, fileName) {
+  const match = html.match(SCHEMA_SCRIPT_RE);
+  if (!match) return { found: false, nodes: [] };
+  let data;
   try {
-    const structuredData = JSON.parse(match[1].trim());
-    if (!structuredData || Array.isArray(structuredData) || !Array.isArray(structuredData['@graph'])) {
-      return { html, merged: false };
-    }
-
-    let graphNodes = structuredData['@graph'];
-    let sanitized = false;
-
-    if (typeof managedEventFilter === 'function') {
-      const filteredGraphNodes = graphNodes.filter((node) => !managedEventFilter(node));
-      sanitized = filteredGraphNodes.length !== graphNodes.length;
-      graphNodes = filteredGraphNodes;
-    }
-
-    const schemaEvents = schemaEventsJSON && schemaEventsJSON !== '[]'
-      ? JSON.parse(schemaEventsJSON).map((event) => {
-        const { ['@context']: _context, ...eventNode } = event;
-        return eventNode;
-      })
-      : [];
-
-    if (!sanitized && !schemaEvents.length) {
-      return { html, merged: false };
-    }
-
-    structuredData['@graph'] = [...graphNodes, ...schemaEvents];
-
-    const mergedScript = `<script type="application/ld+json">\n  ${JSON.stringify(structuredData, null, 2)}\n  </script>`;
-
-    return {
-      html: html.replace(schemaScriptRegex, mergedScript),
-      merged: true
-    };
+    data = JSON.parse(match[1].trim());
   } catch (error) {
-    console.warn('Error fusionando Schema de eventos en HTML:', error);
-    return { html, merged: false };
+    throw new Error(`[schema] ${fileName}: el bloque ld+json del fuente no es JSON válido (${error.message})`);
   }
+  let nodes;
+  if (Array.isArray(data)) nodes = data;
+  else if (Array.isArray(data['@graph'])) nodes = data['@graph'];
+  else nodes = [data];
+  nodes = nodes.map(({ ['@context']: _context, ...node }) => node);
+  return { found: true, nodes };
+}
+
+// Idempotencia: los Organization/WebSite propios inline se descartan y las
+// referencias anidadas (publisher, isPartOf, organizer…) pasan a { "@id" }.
+function normalizeGraph(nodes, fileName) {
+  const kept = nodes.filter((node) => {
+    if (isOwnOrgNode(node) || isOwnSiteNode(node)) {
+      console.warn(`[schema] ${fileName}: nodo ${node['@type']} inline descartado (lo inyecta el build desde src/seo/schema-organization.json)`);
+      return false;
+    }
+    return true;
+  });
+  const walk = (value) => {
+    if (Array.isArray(value)) return value.map(walk);
+    if (value && typeof value === 'object') {
+      if (isOwnOrgNode(value)) return { '@id': ORG_ID };
+      if (isOwnSiteNode(value)) return { '@id': SITE_ID };
+      if (value['@id'] === '#organizacion' && Object.keys(value).length === 1) return { '@id': ORG_ID };
+      const out = {};
+      for (const key of Object.keys(value)) out[key] = walk(value[key]);
+      return out;
+    }
+    return value;
+  };
+  return kept.map(walk);
+}
+
+function ensurePageNode(nodes, meta) {
+  const pageId = `${meta.mainUrl}#webpage`;
+  let page = nodes.find((node) => [...PAGE_TYPES].some((t) => hasType(node, t))
+    && (node['@id'] === pageId || node['@id'] === meta.mainUrl || node.url === meta.mainUrl));
+  if (!page) {
+    page = { '@type': 'WebPage' };
+    nodes.unshift(page);
+  }
+  page['@id'] = pageId;
+  page.url = meta.mainUrl;
+  if (!page.name && meta.title) page.name = meta.title;
+  if (!page.description && meta.description) page.description = meta.description;
+  if (!page.inLanguage) page.inLanguage = 'es-ES';
+  page.isPartOf = { '@id': SITE_ID };
+  if (!page.primaryImageOfPage && meta.ogImage) {
+    page.primaryImageOfPage = { '@type': 'ImageObject', url: meta.ogImage };
+  }
+  return page;
+}
+
+function breadcrumbPageName(fileName, page, table) {
+  const navKey = BREADCRUMB_NAV_KEY[fileName];
+  if (navKey && table && table.nav && table.nav[navKey]) return table.nav[navKey];
+  const gal = fileName.match(/^galeria_(\d+)\.html$/);
+  if (gal && table && table.galeria && table.galeria[`galeria${gal[1]}`]) return table.galeria[`galeria${gal[1]}`];
+  const post = fileName.match(/^blog-([a-z0-9-]+)\.html$/);
+  if (post && table && table.blog && table.blog[post[1]] && table.blog[post[1]].cardTitle) return table.blog[post[1]].cardTitle;
+  // Sin clave i18n: el título de la página sin el sufijo de la organización
+  return String(page.name || fileName)
+    .replace(/^Falla Su[iï]ssa\s*-\s*L'Alqueria del Favero\s*[-|]\s*/i, '')
+    .replace(/\s*[|—-]\s*Falla Su[iï]ssa[^|]*$/i, '')
+    .trim() || fileName;
+}
+
+function buildBreadcrumb(fileName, mainUrl, page, table, lang) {
+  const base = lang === 'ca' ? `${SITE_ORIGIN}/va/` : `${SITE_ORIGIN}/`;
+  const items = [{ name: (table && table.nav && table.nav.inicio) || 'Inicio', item: base }];
+  const parentKey = Object.keys(BREADCRUMB_PARENT).find((prefix) => fileName.startsWith(prefix));
+  if (parentKey) {
+    const parent = BREADCRUMB_PARENT[parentKey];
+    items.push({ name: (table && table.nav && table.nav[parent.nav]) || parent.nav, item: `${base}${parent.file}` });
+  }
+  items.push({ name: breadcrumbPageName(fileName, page, table), item: lang === 'ca' ? mainUrl.replace(`${SITE_ORIGIN}/`, `${SITE_ORIGIN}/va/`) : mainUrl });
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': `${mainUrl}#breadcrumb`,
+    itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.item }))
+  };
+}
+
+function fillImageGallery(nodes, fileName, mainUrl, galleryImages) {
+  const m = fileName.match(/^galeria_(\d+)\.html$/);
+  if (!m) return;
+  const gallery = nodes.find((node) => hasType(node, 'ImageGallery'));
+  const fotos = galleryImages.get(Number(m[1])) || [];
+  if (!gallery) {
+    console.warn(`[schema] ${fileName}: sin nodo ImageGallery en el bloque inline`);
+    return;
+  }
+  gallery.associatedMedia = fotos.map((foto, i) => ({
+    '@type': 'ImageObject',
+    '@id': `${mainUrl}#img-${String(i + 1).padStart(3, '0')}`,
+    contentUrl: `${SITE_ORIGIN}/${foto.src}`,
+    url: `${SITE_ORIGIN}/${foto.src}`,
+    name: foto.alt,
+    caption: foto.alt,
+    representativeOfPage: i === 0,
+    creditText: "Falla Suïssa - L'Alqueria del Favero",
+    copyrightHolder: { '@id': ORG_ID }
+  }));
+  if (fotos.length) gallery.primaryImageOfPage = { '@id': `${mainUrl}#img-001` };
+}
+
+function fillGaleriasList(nodes, mainUrl, galerias, table, esTable) {
+  const list = nodes.find((node) => hasType(node, 'ItemList'));
+  if (!list) return;
+  const base = mainUrl.replace(/galerias\.html$/, '');
+  list.itemListElement = galerias.map((g, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: (table && table.galeria && table.galeria[`galeria${g.n}`]) || nombreGaleria(esTable, g.n),
+    url: `${base}${g.file}`
+  }));
+  list.numberOfItems = galerias.length;
+}
+
+function mergeEventNodes(nodes, schemaEvents, managedEventFilter) {
+  let graphNodes = nodes;
+  if (typeof managedEventFilter === 'function') {
+    graphNodes = graphNodes.filter((node) => !managedEventFilter(node));
+  }
+  const events = (schemaEvents || []).map((event) => {
+    const { ['@context']: _context, ...eventNode } = event;
+    return eventNode;
+  });
+  return [...graphNodes, ...events];
+}
+
+// Variante /va/: URL de página a /va/ e inLanguage ca-ES. Los @id globales
+// (#organization, #website, #place, #logo), los assets y los nodos externos
+// (hope-incliva.com) no cambian: son la misma entidad en ambos idiomas.
+function localizeGraph(nodes, lang) {
+  if (lang !== 'ca') return nodes;
+  const rewriteUrl = (value) => {
+    if (typeof value !== 'string' || !value.startsWith(`${SITE_ORIGIN}/`)) return value;
+    if (GLOBAL_IDS.has(value) || SCHEMA_ASSET_RE.test(value) || value.startsWith(`${SITE_ORIGIN}/va/`)) return value;
+    return value.replace(`${SITE_ORIGIN}/`, `${SITE_ORIGIN}/va/`);
+  };
+  const walk = (value) => {
+    if (Array.isArray(value)) return value.map(walk);
+    if (value && typeof value === 'object') {
+      const ref = `${value['@id'] || ''} ${value.url || ''}`;
+      if (/hope-incliva\.com/.test(ref)) return value;
+      const out = {};
+      for (const key of Object.keys(value)) {
+        const v = value[key];
+        if ((key === '@id' || key === 'url' || key === 'item' || key === 'mainEntityOfPage') && typeof v === 'string') out[key] = rewriteUrl(v);
+        else if (key === 'inLanguage' && (v === 'es-ES' || v === 'es')) out[key] = 'ca-ES';
+        else out[key] = walk(v);
+      }
+      return out;
+    }
+    return value;
+  };
+  return nodes.map(walk);
+}
+
+function collectIds(value, acc) {
+  if (Array.isArray(value)) value.forEach((v) => collectIds(v, acc));
+  else if (value && typeof value === 'object') {
+    if (typeof value['@id'] === 'string' && Object.keys(value).length > 1) acc.push(value['@id']);
+    Object.values(value).forEach((v) => collectIds(v, acc));
+  }
+  return acc;
+}
+
+function assertUniqueIds(graph, fileName) {
+  const ids = collectIds(graph, []);
+  const seen = new Set();
+  for (const id of ids) {
+    if (seen.has(id)) console.warn(`[schema] ${fileName}: @id duplicado ${id}`);
+    seen.add(id);
+  }
+}
+
+function toJsonLdScript(graph) {
+  const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2)
+    .replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+  return `<script type="application/ld+json">\n  ${json.replace(/\n/g, '\n  ')}\n  </script>`;
+}
+
+function processJsonLd(html, ctx) {
+  const { fileName, lang, mainUrl, base, schemaEvents, galleryImages, galerias, langTable, esTable } = ctx;
+  const table = lang === 'ca' && langTable ? langTable : esTable;
+  const meta = readHeadMeta(html);
+  const { found, nodes: rawNodes } = extractFirstJsonLd(html, fileName);
+  let nodes = normalizeGraph(rawNodes, fileName);
+  const page = ensurePageNode(nodes, { ...meta, mainUrl });
+  if (fileName !== 'index.html') {
+    const breadcrumb = buildBreadcrumb(fileName, mainUrl, page, table, lang);
+    page.breadcrumb = { '@id': breadcrumb['@id'] };
+    nodes.push(breadcrumb);
+  }
+  fillImageGallery(nodes, fileName, mainUrl, galleryImages);
+  if (fileName === 'galerias.html') fillGaleriasList(nodes, mainUrl, galerias, table, esTable);
+  if (fileName === 'index.html' || fileName === 'eventos.html') {
+    nodes = mergeEventNodes(nodes, schemaEvents, fileName === 'index.html' ? isManagedBoardEventNode : null);
+  }
+  nodes = localizeGraph(nodes, lang);
+  const graph = [structuredClone(base.organization), structuredClone(base.website), ...nodes];
+  assertUniqueIds(graph, fileName);
+  const script = toJsonLdScript(graph);
+  if (found) return { html: html.replace(SCHEMA_SCRIPT_RE, () => script), script: null };
+  return { html, script };
 }
 
 async function getAssetVersionToken() {
@@ -670,7 +946,7 @@ function injectGaleriaPager(html, fileName, galerias, esTable) {
   return html.replace(marcador, buildGaleriaPager(Number(m[1]), galerias, esTable));
 }
 
-function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missingKeyTracker, pagerCtx) {
+function modifyHtmlStream(schemaCtx, lang, assetVersion, langTable, missingKeyTracker, pagerCtx) {
   return new Transform({
     objectMode: true,
     transform(file, enc, cb) {
@@ -678,7 +954,6 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missi
       if (file.isStream()) return cb(new Error('Streaming en modifyHtmlStream no soportado'));
       
       let html = file.contents.toString('utf8');
-      let mergedEventSchema = false;
       
       // 1. Reemplazar etiqueta de idioma principal para la variante en valenciano
       if (lang === 'ca') {
@@ -710,7 +985,6 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missi
       // 2. Preparar bloque de inyección
       const fileName = path.basename(file.path);
       const isIndex = fileName === 'index.html';
-      const shouldInjectEventSchema = fileName === 'index.html' || fileName === 'eventos.html';
       const mainUrl = `https://fallasuissa.es/${isIndex ? '' : fileName}`;
       const caUrl = `https://fallasuissa.es/va/${isIndex ? '' : fileName}`;
       const canonicalUrl = lang === 'ca' ? caUrl : mainUrl;
@@ -720,12 +994,24 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missi
       html = html.replace(/[ \t]*<link\s+rel="canonical"[^>]*>\s*\n?/gi, '');
       html = html.replace(/[ \t]*<link\s+rel="alternate"\s+hreflang="[^"]*"[^>]*>\s*\n?/gi, '');
 
-      if (shouldInjectEventSchema) {
-        const mergeResult = mergeEventSchemaIntoHtml(html, schemaEventsJSON, {
-          managedEventFilter: fileName === 'index.html' ? isManagedBoardEventNode : null
+      // 2a. JSON-LD: Organization/WebSite desde la fuente única, nodo de página
+      // completado, breadcrumb, galerías, Event del tablón y localización /va/.
+      // Va tras el pre-render y rewriteAssetUrlsToRoot (no tocan el JSON) y
+      // antes de las inyecciones: si la página no tenía ld+json, el script
+      // nuevo se añade junto al canonical.
+      let schemaScriptToInject = '';
+      if (schemaCtx) {
+        const result = processJsonLd(html, {
+          ...schemaCtx,
+          fileName,
+          lang,
+          mainUrl,
+          langTable,
+          esTable: pagerCtx ? pagerCtx.esTable : null,
+          galerias: pagerCtx ? pagerCtx.galerias : []
         });
-        html = mergeResult.html;
-        mergedEventSchema = mergeResult.merged;
+        html = result.html;
+        if (result.script) schemaScriptToInject = `\n  <!-- JSON-LD generado por el build (src/seo/schema-organization.json) -->\n  ${result.script}\n`;
       }
 
       let injections = `
@@ -735,9 +1021,7 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missi
   <link rel="alternate" hreflang="ca" href="${caUrl}">
   <link rel="alternate" hreflang="x-default" href="${mainUrl}">\n`;
 
-      if (shouldInjectEventSchema && schemaEventsJSON && schemaEventsJSON !== '[]' && !mergedEventSchema) {
-         injections += `\n  <!-- Schema.org Eventos Dinámicos -->\n  <script type="application/ld+json">\n  ${schemaEventsJSON}\n  </script>\n`;
-      }
+      injections += schemaScriptToInject;
 
       // 3. Inyectar justo antes del cierre de head
       html = html.replace('</head>', injections + '</head>');
@@ -751,12 +1035,21 @@ function modifyHtmlStream(schemaEventsJSON, lang, assetVersion, langTable, missi
 
 // HTML - Copia HTML del root, pre-renderiza traducciones VA, inyecta canonical/hreflang + Schema
 async function htmlTask() {
-  const [events, translationsRaw, assetVersion] = await Promise.all([
+  const [events, translationsRaw, assetVersion, baseSchema, galleryImages] = await Promise.all([
     getSchemaEvents(),
     fs.readFile(path.join(__dirname, 'src', 'data', 'translations.json'), 'utf8'),
-    getAssetVersionToken()
+    getAssetVersionToken(),
+    loadBaseSchema(),
+    loadGalleryImages()
   ]);
-  const schemaString = JSON.stringify(events, null, 2);
+
+  // Kill switch: DISABLE_SCHEMA_INJECT=1 deja los bloques ld+json inline tal cual.
+  const schemaCtx = process.env.DISABLE_SCHEMA_INJECT === '1'
+    ? null
+    : { base: baseSchema, schemaEvents: events, galleryImages };
+  if (!schemaCtx) {
+    console.warn('[schema] inyección de JSON-LD desactivada por DISABLE_SCHEMA_INJECT=1');
+  }
 
   let translations;
   try {
@@ -784,13 +1077,13 @@ async function htmlTask() {
   // Buffer process (no encoding flag para que cargue bin pero el Transform convierte a utf8 y viceversa)
   const esPromise = streamToPromise(
     src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaString, 'es', assetVersion, null, null, pagerCtx))
+      .pipe(modifyHtmlStream(schemaCtx, 'es', assetVersion, null, null, pagerCtx))
       .pipe(dest(paths.html.dest))
   );
 
   const caPromise = streamToPromise(
     src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaString, 'ca', assetVersion, langTableCa, missingKeyTracker, pagerCtx))
+      .pipe(modifyHtmlStream(schemaCtx, 'ca', assetVersion, langTableCa, missingKeyTracker, pagerCtx))
       .pipe(dest(path.join(paths.html.dest, 'va')))
   );
 

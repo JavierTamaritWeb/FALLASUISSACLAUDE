@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Falla Suissa - L'Alqueria del Favero - Blog</title>
+  <title>Falla Suïssa - L'Alqueria del Favero - Blog</title>
   <meta name="description" content="Blog de la Falla Suïssa - L'Alqueria del Favero: historias, crónicas y noticias de la comisión fallera.">
   <meta name="keywords" content="fallas, tradición, suïssa, eventos, noticias, galería">
   <meta name="robots" content="index, follow">
@@ -24,38 +24,54 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://fallasuissa.es/blog.html",
-    "url": "https://fallasuissa.es/blog.html",
-    "name": "Blog - Falla Suïssa - L'Alqueria del Favero",
-    "description": "Noticias, artículos y novedades de la Falla Suïssa - L'Alqueria del Favero.",
-    "isPartOf": {
-      "@type": "WebSite",
-      "@id": "https://fallasuissa.es/#website",
-      "url": "https://fallasuissa.es/",
-      "name": "Falla Suïssa - L'Alqueria del Favero"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "@id": "https://fallasuissa.es/#organization",
-      "name": "Falla Suïssa - L'Alqueria del Favero",
-      "url": "https://fallasuissa.es/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://fallasuissa.es/img/Escudo_falla.png"
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://fallasuissa.es/blog.html#webpage",
+        "url": "https://fallasuissa.es/blog.html",
+        "inLanguage": "es-ES",
+        "about": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "mainEntity": {
+          "@id": "https://fallasuissa.es/blog.html#blog"
+        }
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "Informacion general",
-        "email": "info@fallasuissa.es",
-        "availableLanguage": ["es", "va"]
-      },
-      "sameAs": [
-        "https://www.facebook.com/fallasuïssal'alqueriadelfavero",
-        "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
-        "https://tiktok.com/@fallasuissaalqueria"
-      ]
-    }
+      {
+        "@type": "Blog",
+        "@id": "https://fallasuissa.es/blog.html#blog",
+        "url": "https://fallasuissa.es/blog.html",
+        "name": "Blog de la Falla Suïssa - L'Alqueria del Favero",
+        "inLanguage": "es-ES",
+        "publisher": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "blogPost": [
+          {
+            "@type": "BlogPosting",
+            "@id": "https://fallasuissa.es/blog-somni.html#article",
+            "headline": "Somni",
+            "url": "https://fallasuissa.es/blog-somni.html",
+            "datePublished": "2025-03-01",
+            "author": {
+              "@type": "Person",
+              "name": "Paula Peiró"
+            }
+          },
+          {
+            "@type": "BlogPosting",
+            "@id": "https://fallasuissa.es/blog-anima.html#article",
+            "headline": "El alma del barrio",
+            "url": "https://fallasuissa.es/blog-anima.html",
+            "datePublished": "2026-03-01",
+            "author": {
+              "@type": "Person",
+              "name": "Javier Tamarit"
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
   
@@ -220,7 +236,7 @@
         </a>
 
         <nav class="sociales">
-          <a class="sociales__enlace" href="https://www.facebook.com/fallasuïssal'alqueriadelfavero">
+          <a class="sociales__enlace" href="https://www.facebook.com/FallaSuissaLalqueriadelFavero">
             <span class="sociales__accesible">Facebook</span>
           </a>
           <a class="sociales__enlace" href="https://www.instagram.com/fallasuissa_lalqueriadelfavero/">

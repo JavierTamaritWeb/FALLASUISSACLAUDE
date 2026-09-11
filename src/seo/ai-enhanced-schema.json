@@ -1,10 +1,15 @@
 {
   "@context": "https://schema.org",
-  "@type": ["Organization", "CulturalOrganization", "LocalBusiness"],
+  "@type": "Organization",
+  "@id": "https://fallasuissa.es/#organization",
   "name": "Falla Suïssa - L'Alqueria del Favero",
-  "alternateName": ["Falla Suïssa", "Falla Suissa", "Comisión Fallera Suïssa"],
+  "alternateName": [
+    "Falla Suïssa",
+    "Falla Suissa",
+    "Comisión Fallera Suïssa"
+  ],
   "description": "Traditional Valencian falla commission preserving UNESCO World Heritage cultural traditions in Valencia, Spain. Community organization founded in 2024 promoting Las Fallas festival, Valencian culture, gastronomy, and local heritage.",
-  "url": "https://fallasuissa.es",
+  "url": "https://fallasuissa.es/",
   "sameAs": [
     "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
     "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
@@ -15,21 +20,21 @@
   "image": "https://fallasuissa.es/img/Escudo_falla.png",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "L'Alqueria del Favero",
-    "addressLocality": "Valencia",
+    "streetAddress": "Calle Suïssa",
+    "addressLocality": "València",
     "addressRegion": "Comunidad Valenciana",
     "postalCode": "46024",
     "addressCountry": "ES"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 39.4699,
-    "longitude": -0.3763
+    "latitude": 39.4537245,
+    "longitude": -0.3376502
   },
   "areaServed": "Valencia, Spain",
   "knowsAbout": [
     "Las Fallas Festival",
-    "Valencian Culture", 
+    "Valencian Culture",
     "Traditional Spanish Festivals",
     "Cultural Heritage Preservation",
     "Community Events",
@@ -41,8 +46,24 @@
   "award": "UNESCO Intangible Cultural Heritage of Humanity",
   "culturalPolicy": "Preservation and promotion of traditional Valencian culture and Las Fallas heritage",
   "memberOf": {
-    "@type": "Organization", 
+    "@type": "Organization",
     "name": "Junta Central Fallera",
-    "description": "Central organization coordinating all Falla commissions in Valencia"
-  }
+    "url": "https://www.fallas.com/"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "José Santos Quilis",
+    "jobTitle": "Presidente"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "Información general",
+      "email": "info@fallasuissa.es",
+      "availableLanguage": [
+        "es",
+        "ca"
+      ]
+    }
+  ]
 }

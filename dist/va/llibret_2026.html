@@ -818,99 +818,565 @@
         }
         </style>
         <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "WebPage",
-                    "@id": "#webpage",
-                    "name": "Llibret Falla Suïssa - L'Alqueria del Favero 2025-2026",
-                    "description": "Llibret digital multilingüe de la Falla Suïssa - L'Alqueria del Favero amb contingut editorial, memòria de barri, entrevistes i programa d'actes de les Falles 2026.",
-                    "inLanguage": ["ca", "es", "en", "pl", "fr", "de"],
-                    "mainEntity": { "@id": "#llibre" },
-                    "about": [
-                        { "@id": "#organizacion" },
-                        { "@id": "#programa-falles-2026" }
-                    ],
-                    "hasPart": [
-                        { "@id": "#editorial" },
-                        { "@id": "#alma-barrio" },
-                        { "@id": "#saluda" },
-                        { "@id": "#despedida" },
-                        { "@id": "#texto-fm" },
-                        { "@id": "#falla-grande" },
-                        { "@id": "#presi-infantil" },
-                        { "@id": "#fmi" },
-                        { "@id": "#entrevistas" },
-                        { "@id": "#programa" }
-                    ]
-                },
-                {
-                    "@type": "CreativeWork",
-                    "@id": "#llibre",
-                    "name": "Llibret Falla Suïssa - L'Alqueria del Favero 2025-2026",
-                    "alternateName": "Llibret digital 2025-2026",
-                    "creator": { "@id": "#organizacion" },
-                    "publisher": { "@id": "#organizacion" },
-                    "genre": ["Llibret faller", "Revista festiva", "Programa d'actes"],
-                    "keywords": ["Falles", "València", "Les Moreres", "Falla Suïssa", "L'Alqueria del Favero", "llibret", "programa 2026"],
-                    "inLanguage": ["ca", "es", "en", "pl", "fr", "de"],
-                    "about": [
-                        { "@id": "#organizacion" },
-                        { "@id": "#programa-falles-2026" }
-                    ],
-                    "hasPart": [
-                        { "@id": "#editorial" },
-                        { "@id": "#alma-barrio" },
-                        { "@id": "#saluda" },
-                        { "@id": "#despedida" },
-                        { "@id": "#texto-fm" },
-                        { "@id": "#falla-grande" },
-                        { "@id": "#presi-infantil" },
-                        { "@id": "#fmi" },
-                        { "@id": "#entrevistas" },
-                        { "@id": "#programa" }
-                    ]
-                },
-                {
-                    "@type": "Organization",
-                    "@id": "#organizacion",
-                    "name": "Falla Suïssa - L'Alqueria del Favero",
-                    "alternateName": "Falla Suïssa - L'Alqueria del Favero de Les Moreres",
-                    "description": "Comissió fallera del barri de Les Moreres, a València.",
-                    "location": {
-                        "@type": "Place",
-                        "name": "Les Moreres, València, Comunitat Valenciana, Espanya"
-                    }
-                },
-                {
-                    "@type": "Event",
-                    "@id": "#programa-falles-2026",
-                    "name": "Programa Falles 2026",
-                    "description": "Programa d'actes recollit al llibret digital de la Falla Suïssa - L'Alqueria del Favero.",
-                    "organizer": { "@id": "#organizacion" },
-                    "eventStatus": "https://schema.org/EventScheduled",
-                    "startDate": "2026-01-11",
-                    "endDate": "2026-04-17",
-                    "location": {
-                        "@type": "Place",
-                        "name": "València, Comunitat Valenciana, Espanya"
-                    },
-                    "inLanguage": ["ca", "es", "en", "pl", "fr", "de"]
-                },
-                { "@type": "WebPageElement", "@id": "#editorial", "name": "Editorial 2026", "position": 1, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] },
-                { "@type": "WebPageElement", "@id": "#alma-barrio", "name": "L'ànima del barri", "position": 2, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] },
-                { "@type": "WebPageElement", "@id": "#saluda", "name": "Salutació", "position": 3, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] },
-                { "@type": "WebPageElement", "@id": "#despedida", "name": "Comiat 2025", "position": 4, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] },
-                { "@type": "WebPageElement", "@id": "#texto-fm", "name": "Text Fallera Major", "position": 5, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] },
-                { "@type": "WebPageElement", "@id": "#falla-grande", "name": "Explicació de la Falla Gran", "position": 6, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] },
-                { "@type": "WebPageElement", "@id": "#presi-infantil", "name": "President Infantil 2026", "position": 7, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] },
-                { "@type": "WebPageElement", "@id": "#fmi", "name": "Fallera Major Infantil 2026", "position": 8, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] },
-                { "@type": "WebPageElement", "@id": "#entrevistas", "name": "Entrevista als representants", "position": 9, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] },
-                { "@type": "WebPageElement", "@id": "#programa", "name": "Programa 2026", "position": 10, "inLanguage": ["ca", "es", "en", "pl", "fr", "de"] }
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://fallasuissa.es/#organization",
+        "name": "Falla Suïssa - L'Alqueria del Favero",
+        "alternateName": "Falla Suïssa",
+        "url": "https://fallasuissa.es/",
+        "description": "Falla Suïssa - L'Alqueria del Favero (comisión nº 396) es una comisión fallera del barrio de les Moreres, en València. Promueve la cultura y las tradiciones valencianas mediante actividades comunitarias, culturales y solidarias.",
+        "foundingDate": "2024",
+        "founder": {
+          "@type": "Person",
+          "name": "José Santos Quilis",
+          "jobTitle": "Presidente"
+        },
+        "logo": {
+          "@type": "ImageObject",
+          "@id": "https://fallasuissa.es/#logo",
+          "url": "https://fallasuissa.es/img/Escudo_falla.png",
+          "contentUrl": "https://fallasuissa.es/img/Escudo_falla.png",
+          "width": 640,
+          "height": 793,
+          "caption": "Escudo de la Falla Suïssa - L'Alqueria del Favero"
+        },
+        "image": {
+          "@id": "https://fallasuissa.es/#logo"
+        },
+        "email": "info@fallasuissa.es",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "Información general",
+            "email": "info@fallasuissa.es",
+            "availableLanguage": [
+              "es",
+              "ca"
             ]
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Calle Suïssa",
+          "addressLocality": "València",
+          "addressRegion": "Comunidad Valenciana",
+          "postalCode": "46024",
+          "addressCountry": "ES"
+        },
+        "location": {
+          "@type": "Place",
+          "@id": "https://fallasuissa.es/#place",
+          "name": "Casal de la Falla Suïssa - L'Alqueria del Favero",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Calle Suïssa",
+            "addressLocality": "València",
+            "addressRegion": "Comunidad Valenciana",
+            "postalCode": "46024",
+            "addressCountry": "ES"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 39.4537245,
+            "longitude": -0.3376502
+          },
+          "hasMap": "https://fallasuissa.es/mapa.html"
+        },
+        "sameAs": [
+          "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
+          "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
+          "https://tiktok.com/@fallasuissaalqueria"
+        ],
+        "memberOf": {
+          "@type": "Organization",
+          "name": "Junta Central Fallera",
+          "url": "https://www.fallas.com/"
+        },
+        "knowsAbout": [
+          "Tradiciones valencianas",
+          "Fallas de Valencia",
+          "Cultura popular",
+          "Comunidad fallera",
+          "Colaboraciones solidarias en Valencia"
+        ],
+        "member": [
+          {
+            "@type": "Person",
+            "name": "José Santos Quilis",
+            "jobTitle": "Presidente"
+          },
+          {
+            "@type": "Person",
+            "name": "Lucía Gutiérrez Martín",
+            "jobTitle": "Fallera Mayor"
+          },
+          {
+            "@type": "Person",
+            "name": "Sofía Gómez Medina",
+            "jobTitle": "Fallera Mayor Infantil"
+          },
+          {
+            "@type": "Person",
+            "name": "Diego Gómez Medina",
+            "jobTitle": "Presidente Infantil"
+          },
+          {
+            "@type": "Person",
+            "name": "Maite Cabezuelo",
+            "jobTitle": "Vicepresidenta"
+          },
+          {
+            "@type": "Person",
+            "name": "Prados Santos Ramos",
+            "jobTitle": "Vicepresidenta"
+          },
+          {
+            "@type": "Person",
+            "name": "Pablo Cortés",
+            "jobTitle": "Vicepresidente"
+          },
+          {
+            "@type": "Person",
+            "name": "Paula Peiró",
+            "jobTitle": "Secretaria"
+          },
+          {
+            "@type": "Person",
+            "name": "David Gómez",
+            "jobTitle": "Área Económica"
+          },
+          {
+            "@type": "Person",
+            "name": "Miguel Ángel Pallardó",
+            "jobTitle": "Área Económica"
+          },
+          {
+            "@type": "Person",
+            "name": "Sara Medina",
+            "jobTitle": "Delegada de Infantil"
+          },
+          {
+            "@type": "Person",
+            "name": "Delia Caravantes",
+            "jobTitle": "Delegada de Infantil"
+          },
+          {
+            "@type": "Person",
+            "name": "Marta Pastor",
+            "jobTitle": "Delegada de Infantil"
+          },
+          {
+            "@type": "Person",
+            "name": "Eusebio Martinez",
+            "jobTitle": "Delegado de Eventos"
+          },
+          {
+            "@type": "Person",
+            "name": "Ada Palerm",
+            "jobTitle": "Delegada de Eventos"
+          },
+          {
+            "@type": "Person",
+            "name": "Pablo Pallardó",
+            "jobTitle": "Delegado Deportes"
+          },
+          {
+            "@type": "Person",
+            "name": "Pepe Palerm",
+            "jobTitle": "Delegado Festejos"
+          },
+          {
+            "@type": "Person",
+            "name": "Vicente Portolés",
+            "jobTitle": "Delegado Festejos"
+          },
+          {
+            "@type": "Person",
+            "name": "Carles Santamaria",
+            "jobTitle": "Delegado Festejos"
+          },
+          {
+            "@type": "Person",
+            "name": "Guille Roa",
+            "jobTitle": "Delegado Festejos"
+          },
+          {
+            "@type": "Person",
+            "name": "Salva Lopez",
+            "jobTitle": "Delegado Festejos"
+          },
+          {
+            "@type": "Person",
+            "name": "Israel Lopez",
+            "jobTitle": "Delegado Festejos"
+          },
+          {
+            "@type": "Person",
+            "name": "Rodrigo Sobero",
+            "jobTitle": "Delegado Festejos"
+          },
+          {
+            "@type": "Person",
+            "name": "Miguel Castillo",
+            "jobTitle": "Delegado Festejos"
+          },
+          {
+            "@type": "Person",
+            "name": "Javier Tamarit",
+            "jobTitle": "Delegado Web"
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://fallasuissa.es/#website",
+        "url": "https://fallasuissa.es/",
+        "name": "Falla Suïssa - L'Alqueria del Favero",
+        "alternateName": "Falla Suïssa",
+        "description": "Sitio web oficial de la Falla Suïssa - L'Alqueria del Favero (València): la Falla, eventos, galerías, blog y colaboraciones.",
+        "inLanguage": [
+          "es-ES",
+          "ca-ES"
+        ],
+        "publisher": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "copyrightHolder": {
+          "@id": "https://fallasuissa.es/#organization"
         }
-        </script>
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage",
+        "url": "https://fallasuissa.es/va/llibret_2026.html",
+        "name": "Llibret Falla Suïssa - L'Alqueria del Favero 2025-2026",
+        "description": "Llibret digital multilingüe de la Falla Suïssa - L'Alqueria del Favero amb contingut editorial, memòria de barri, entrevistes i programa d'actes de les Falles 2026.",
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ],
+        "mainEntity": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#llibre"
+        },
+        "about": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "hasPart": [
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#editorial"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#alma-barrio"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#saluda"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#despedida"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#texto-fm"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#falla-grande"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#presi-infantil"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#fmi"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#entrevistas"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#programa"
+          }
+        ],
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/#website"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://fallasuissa.es/img/og-share.png?v=20260122"
+        },
+        "breadcrumb": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#breadcrumb"
+        }
+      },
+      {
+        "@type": [
+          "CreativeWork",
+          "Book"
+        ],
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#llibre",
+        "url": "https://fallasuissa.es/va/llibret_2026.html",
+        "name": "Llibret Falla Suïssa - L'Alqueria del Favero 2025-2026",
+        "alternateName": "Llibret digital 2025-2026",
+        "creator": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "publisher": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "datePublished": "2026-03",
+        "temporalCoverage": "2025-03/2026-03",
+        "genre": [
+          "Llibret faller",
+          "Revista festiva",
+          "Programa d'actes"
+        ],
+        "keywords": [
+          "Falles",
+          "València",
+          "Les Moreres",
+          "Falla Suïssa",
+          "L'Alqueria del Favero",
+          "llibret",
+          "programa 2026"
+        ],
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ],
+        "about": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "hasPart": [
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#editorial"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#alma-barrio"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#saluda"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#despedida"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#texto-fm"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#falla-grande"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#presi-infantil"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#fmi"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#entrevistas"
+          },
+          {
+            "@id": "https://fallasuissa.es/va/llibret_2026.html#programa"
+          }
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#editorial",
+        "name": "Editorial 2026",
+        "position": 1,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#alma-barrio",
+        "name": "L'ànima del barri",
+        "position": 2,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#saluda",
+        "name": "Salutació",
+        "position": 3,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#despedida",
+        "name": "Comiat 2025",
+        "position": 4,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#texto-fm",
+        "name": "Text Fallera Major",
+        "position": 5,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#falla-grande",
+        "name": "Explicació de la Falla Gran",
+        "position": 6,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#presi-infantil",
+        "name": "President Infantil 2026",
+        "position": 7,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#fmi",
+        "name": "Fallera Major Infantil 2026",
+        "position": 8,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#entrevistas",
+        "name": "Entrevista als representants",
+        "position": 9,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "WebPageElement",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#programa",
+        "name": "Programa 2026",
+        "position": 10,
+        "isPartOf": {
+          "@id": "https://fallasuissa.es/va/llibret_2026.html#webpage"
+        },
+        "inLanguage": [
+          "ca",
+          "es",
+          "en",
+          "pl",
+          "fr",
+          "de"
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://fallasuissa.es/va/llibret_2026.html#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inici",
+            "item": "https://fallasuissa.es/va/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Llibret Falla Suïssa - L'Alqueria del Favero 2025-2026",
+            "item": "https://fallasuissa.es/va/llibret_2026.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->

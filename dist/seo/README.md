@@ -41,8 +41,11 @@ Build recomendado:
 
 ## 🧩 Artefactos (JSON/HTML)
 
-- `schema-organization.json`, `ld-json-enhanced.json`, `advanced-schema-graph.json`, `ai-enhanced-schema.json`
-  - Datos estructurados y grafos. Útiles como referencia/plantillas.
+- `schema-organization.json`
+  - FUENTE ÚNICA del JSON-LD Organization + WebSite: el build (`gulpfile.js → processJsonLd`) lo inyecta en todas las páginas. Al relevar cargos se edita aquí (`member`). Ver `docs/structured-data.md`.
+- `ai-enhanced-schema.json`
+  - Copia en inglés para agentes de IA (enlazada por `ai-info.html` y `/.well-known/`); debe coincidir con la fuente en nombre, URL, redes, dirección y geo.
+- (`ld-json-enhanced.json` y `advanced-schema-graph.json` se eliminaron en v4.28.0: contenían datos inventados.)
 
 - `ai-crawl.html`
   - Página auxiliar orientada a rastreo/IA.

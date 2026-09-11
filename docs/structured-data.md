@@ -1,151 +1,94 @@
-# 🧩 Datos Estructurados y SEO Técnico
+# 🧩 Datos Estructurados (JSON-LD) y SEO Técnico
 
-Esta guía documenta el JSON-LD que vive dentro de las páginas HTML, los artefactos de apoyo de la carpeta `src/seo/` y la validación técnica que protege la colaboración con HOPE-INCLIVA.
+Esta guía documenta cómo se genera el `application/ld+json` de las 30 páginas publicables (ES y `/va/`), qué parte vive en cada `src/*.html`, qué añade el build y cómo se valida.
 
-## 🎯 Alcance
+## 🎯 Resumen
 
-Esta guía cubre:
+Desde v4.28.0 el JSON-LD lo **completa el build** (`gulpfile.js → processJsonLd`), igual que el `canonical`/`hreflang`:
 
-- los bloques inline `application/ld+json` de `index.html` y `colaboraciones.html`
-- los JSON de apoyo en `src/seo/schema-organization.json` y `src/seo/advanced-schema-graph.json`
-- la coherencia entre metadatos `<meta>`, Open Graph y JSON-LD
-- la validación automatizada en `tests/hope-seo.e2e.spec.js`
+- **Organization y WebSite** salen de una **única fuente**: `src/seo/schema-organization.json` (nodos `organization` y `website`). Se inyectan en el `@graph` de todas las páginas. NO se escriben inline.
+- Cada `src/*.html` lleva **solo sus nodos propios** dentro de `{"@context":"https://schema.org","@graph":[…]}`: el nodo de página (`WebPage`, `AboutPage`, `CollectionPage`, `ImageGallery`…) y, si los tiene, `BlogPosting`, `VideoObject`, `CreativeWork`, `Blog`, `ItemList`, `WebPageElement`.
+- El build **completa** el nodo de página (`name` = `<title>`, `description` = meta description, `primaryImageOfPage` = `og:image`, `isPartOf`, `inLanguage`), añade el **`BreadcrumbList`**, rellena las **galerías** (un `ImageObject` por foto de `dataPagesN.json`), la **lista de galerías** de `galerias.html`, fusiona los **`Event` del tablón** (`board.json`, en `index`/`eventos`) y, en `/va/`, reescribe las URL de página a `/va/…` e `inLanguage` a `ca-ES`.
+- Siempre queda **un solo** `<script type="application/ld+json">` por página.
 
-## 📍 Fuentes de verdad actuales
+## 📍 Fuentes de verdad
 
 | Archivo | Papel |
 | -------- | ------- |
-| `index.html` | grafo principal de la home y referencia técnica a HOPE-INCLIVA |
-| `colaboraciones.html` | página específica de colaboración con `mainEntity` enlazando el nodo HOPE |
-| `src/seo/schema-organization.json` | asset de referencia para la organización |
-| `src/seo/advanced-schema-graph.json` | grafo extendido con organización, HOPE, evento y location |
-| `tests/hope-seo.e2e.spec.js` | regresión del SEO técnico de HOPE |
+| `src/seo/schema-organization.json` | Organization (`#organization`, con `founder`, `member` = directiva y delegados vigentes, `address`, `location` `#place`, `logo` `#logo`, `sameAs`, `memberOf` JCF) y WebSite (`#website`) |
+| `src/*.html` | nodos propios de cada página (ver tabla) |
+| `src/data/dataPagesN.json` | fotos (`src`, `alt`) → `ImageObject` de `galeria_N.html` |
+| `src/data/translations.json` | nombres del breadcrumb (`nav.*`, `galeria.galeriaN`, `blog.*.cardTitle`) y de la lista de galerías, en ES y VA |
+| `src/data/board.json` | notas del tablón → `Event` (`getSchemaEvents`) |
+| `src/seo/ai-enhanced-schema.json` | copia en inglés para agentes de IA (enlazada por `ai-info.html`, `ai-discovery.json` y `/.well-known/api-catalog`); debe coincidir con la fuente en `name`, `url`, `sameAs`, `address` y `geo` |
+| `gulpfile.js` | `loadBaseSchema`, `loadGalleryImages`, `processJsonLd` y auxiliares |
 
-## 🧱 Patrón actual por página
+Los antiguos `ld-json-enhanced.json` y `advanced-schema-graph.json` se **eliminaron** en v4.28.0 (contenían directiva, reseñas, premios y un buscador inventados). No los recrees.
 
-### Home: `index.html`
+## 🧱 Qué lleva cada página (inline en `src/`)
 
-La home utiliza un `@graph` con estos nodos principales:
+| Página | Nodo de página | Nodos propios |
+|---|---|---|
+| `index.html` | `WebPage` `https://fallasuissa.es/#webpage` | `about`/`mentions` → HOPE; nodo `WebSite` externo `https://hope-incliva.com/#website` (sin breadcrumb) |
+| `colaboraciones.html` | `WebPage` | `CreativeWork` `#hope-collaboration` (`mainEntity`), WebSite HOPE |
+| `lafalla.html` | `AboutPage` (`mainEntity` → `#organization`) | `VideoObject` `#video-ofrenda-2026` (vídeo de Archivos/Ofrendas) |
+| `organigrama.html` | `AboutPage` (`mainEntity` → `#organization`) | — (las personas viven en `member` de la fuente) |
+| `eventos.html` | `WebPage` (`mainEntity` → `#organization`) | `Event` del tablón (los añade el build) |
+| `galerias.html` | `CollectionPage` | `ItemList` `#lista` (lo rellena el build con todas las galerías) |
+| `galeria_1..9.html` | `ImageGallery` (`name`/`description` = `galeria.galeriaN`/`-texto`) | `associatedMedia: []` (lo rellena el build); `galeria_9` además `VideoObject` `#video` |
+| `blog.html` | `CollectionPage` | `Blog` `#blog` con `blogPost` (resumen de cada post) |
+| `blog-*.html` | `WebPage` (`mainEntity` → `#article`) | `BlogPosting` `#article` completo (`headline`, `description`, `image`, `datePublished`, `dateModified`, `inLanguage`, `articleSection`, `author`, `publisher` → ref) |
+| `mapa.html` | `WebPage` (`mainEntity` → `#place`) | — |
+| `llibret_2026.html` | `WebPage` (`inLanguage` multi) | `["CreativeWork","Book"]` `#llibre` + 10 `WebPageElement` |
+| resto (`meteo`, `calendario`, `deportes`, `ofrenda`, `nuevos-falleros`, legales, autorizaciones) | `WebPage` | `about` → `#organization`; `genre` en legales/formularios |
 
-- `Organization` con `@id` `https://fallasuissa.es/#organization`
-- `WebSite` con `@id` `https://fallasuissa.es/#website`
-- `WebPage` con `@id` `https://fallasuissa.es/#webpage`
-- `WebSite` externo con `@id` `https://hope-incliva.com/#website`
+Convenciones:
 
-Reglas importantes:
+- `@id` del nodo de página = `<url canónica>#webpage` (home: `https://fallasuissa.es/#webpage`). Los demás `@id` propios cuelgan de la misma URL (`#article`, `#video`, `#lista`, `#img-001`…).
+- Referencias a la organización/web siempre como `{ "@id": "https://fallasuissa.es/#organization" }` / `…/#website`. Si escribes un Organization o WebSite propio inline, el build lo descarta con el aviso `[schema] <página>: nodo … inline descartado`.
+- `name`/`description` del nodo de página pueden omitirse: el build los toma de `<title>` y `<meta name="description">`.
+- Assets (`img/`, `pdf/`…) con URL **absoluta** `https://fallasuissa.es/img/...` (no `../`, no `?v=`).
+- `Event` solo desde `board.json`. NO se generan `Event` desde `eventos.json` (festivos genéricos, entradas de prueba y fechas pasadas: sería dato engañoso).
 
-- la descripción y el Open Graph de la home mencionan HOPE-INCLIVA
-- la `WebPage` referencia HOPE en `about`
-- la `WebPage` también lo mantiene en `mentions`
+## ⚙️ Cómo trabaja el build
 
-### Página de colaboraciones: `colaboraciones.html`
+`modifyHtmlStream` (gulpfile) ejecuta `processJsonLd` **después** del pre-render VA y de `rewriteAssetUrlsToRoot` (ninguno toca el JSON) y **antes** de inyectar el `canonical`:
 
-La página dedicada usa también `@graph`, pero con una entidad principal específica:
+1. `extractFirstJsonLd`: lee el primer `<script ld+json>` (nodo suelto, array o `@graph`). JSON inválido en `src` → el build falla.
+2. `normalizeGraph`: descarta Organization/WebSite propios y convierte `publisher`/`isPartOf`/`creator`… inline en `{ "@id" }`.
+3. `ensurePageNode`: localiza o crea el nodo de página y lo completa.
+4. `buildBreadcrumb` (todas menos la home): Inicio › [Galería | Blog | Nuevos Falleros | La Falla] › página, con nombres de `translations.json` en el idioma de la variante.
+5. `fillImageGallery` / `fillGaleriasList`: galerías (solo entradas de `dataPagesN.json` con `src` bajo `img/`; `contentUrl` apunta al JPEG/PNG original si existe en `src/img/`).
+6. `mergeEventNodes`: `Event` del tablón en `index.html` y `eventos.html`.
+7. `localizeGraph` (solo `/va/`): `@id`/`url`/`item`/`mainEntityOfPage` de página → `/va/`; `inLanguage` `es-ES` → `ca-ES`. No cambian `#organization`, `#website`, `#place`, `#logo`, los assets ni los nodos de `hope-incliva.com`.
+8. `toJsonLdScript`: `@graph = [Organization, WebSite, …nodos]`, con `<` y U+2028/2029 escapados. Si la página no tenía ld+json, el script se añade junto al `canonical`.
 
-- `Organization` de Falla Suïssa
-- `WebSite` del sitio
-- `WebPage` con `@id` `https://fallasuissa.es/colaboraciones.html#webpage`
-- `CreativeWork` con `@id` `https://fallasuissa.es/colaboraciones.html#hope-collaboration`
-- `WebSite` externo de HOPE
+`loadBaseSchema` valida la fuente al arrancar (`@id`, nombre canónico, 3 `sameAs`, `member` con el Presidente) y rompe el build si no cumple. Kill-switch: `DISABLE_SCHEMA_INJECT=1 npm run build` deja los bloques inline tal cual.
 
-Reglas importantes:
+## 📏 Reglas
 
-- `WebPage.mainEntity` debe apuntar al nodo `#hope-collaboration`
-- el `CreativeWork` debe seguir mencionando tanto a la organización como a HOPE
-- el título, la descripción y los metadatos OG/Twitter deben estar alineados con la colaboración real, no solo con la galería visual
+1. **Cada cambio de contenido revisa su JSON-LD** (regla del usuario, 11-sep-2026): nombres/cargos, fechas, páginas nuevas, imágenes, vídeos, textos con `datePublished`. En el checklist de commit va junto a la revisión de sitemaps.
+2. **Relevo de cargos**: editar `member`/`founder` en `src/seo/schema-organization.json` **y** el organigrama (`index.html`, `lafalla.html`, `organigrama.html`). Ningún HTML lleva ya `Person` inline.
+3. **Nunca** Organization/WebSite inline; nunca un segundo `<script ld+json>`.
+4. **Página nueva**: bloque mínimo `{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://fallasuissa.es/<file>#webpage","url":"https://fallasuissa.es/<file>","inLanguage":"es-ES","about":{"@id":"https://fallasuissa.es/#organization"}}]}`; el build hace el resto. Si necesita padre en el breadcrumb, añadirlo a `BREADCRUMB_PARENT`/`BREADCRUMB_NAV_KEY` del gulpfile.
+5. **Post nuevo**: `WebPage` + `BlogPosting` `#article` con todos los campos, y su resumen en `blogPost` de `blog.html`; `article:published_time`/`modified_time` en el `<head>`.
+6. **Galería nueva**: `ImageGallery` con `associatedMedia: []`; las fotos salen de `dataPagesN.json`.
+7. Al editar un post o un vídeo, actualiza `dateModified` / `uploadDate`.
+8. El `@id` de HOPE es exactamente `https://hope-incliva.com/#website`; no dupliques la relación con otros ids.
+9. Si cambian datos de la organización, sincroniza `src/seo/ai-enhanced-schema.json` (el test lo compara con la fuente).
 
-### Eventos dinámicos del tablón: `index.html` y `eventos.html`
-
-Las dos páginas pueden incorporar nodos `Event` generados desde `src/data/board.json` durante el build.
-
-> **Estado actual (v4.12.3):** `board.json` se sirve **vacío** (la nota de la Preselección FMIV 2027 de v4.11.1 se retiró en v4.12.1) (el tablón de Eventos muestra solo su empty-state), por lo que ahora mismo **no se inyecta ningún nodo `Event`**. Al repoblar el tablón con notas que sigan el patrón `📝 Cita<br>` + fecha `DD-MM-YYYY`, los `Event` reaparecen automáticamente en el build.
-
-Reglas importantes:
-
-- solo se emiten eventos cuando la fecha extraída del tablón es real y válida
-- fechas placeholder como `00-00-0000` no deben publicarse nunca en JSON-LD
-- cada `Event` válido debe incluir `organizer`, `eventStatus`, `description`, `offers` e `image`
-- ninguna otra página debe conservar bloques heredados de `Schema.org Eventos Dinámicos`
-- el tablón puede seguir mostrando notas informativas en UI aunque no sean aptas para Schema.org
-
-## 🤝 Regla específica de HOPE-INCLIVA
-
-Para evitar romper el SEO técnico que ya está testado, mantén siempre estas condiciones:
-
-1. El nodo externo de HOPE conserva el `@id` exacto `https://hope-incliva.com/#website`.
-2. La home sigue hablando de HOPE como colaboración dentro del contexto general del sitio.
-3. `colaboraciones.html` sigue usando un nodo principal propio con `mainEntity`.
-4. Si cambias el copy de metadatos, actualiza también el JSON-LD y viceversa.
-5. Si añades otro bloque JSON-LD en estas páginas, no desplaces el bloque principal sin revisar los tests y la lectura de crawlers.
-
-## 🗂 Assets de apoyo en `src/seo/`
-
-Los archivos JSON de `src/seo/` no sustituyen al JSON-LD inline de las páginas: sirven como referencia técnica y como parte del material SEO distribuido con el build.
-
-### `src/seo/schema-organization.json`
-
-Útil para centralizar los datos base de la organización:
-
-- identidad de la comisión
-- contacto
-- redes sociales
-- datos fundacionales
-- relación con HOPE y subjectOf
-
-### `src/seo/advanced-schema-graph.json`
-
-Amplía el modelo con:
-
-- organización
-- website
-- nodo externo de HOPE
-- `CreativeWork` de colaboración
-- evento cultural
-- location y breadcrumbs
-
-Si cambias datos base de la organización, la colaboración HOPE o la localización, revisa los dos assets además de los scripts inline de HTML.
-
-## ✍️ Checklist de edición segura
-
-Antes de cerrar un cambio de SEO técnico o Schema.org:
-
-1. Mantén estables los `@id` que ya están enlazados entre nodos.
-2. Alinea `title`, `meta description`, OG y Twitter con el foco de la página.
-3. Revisa `canonical` y `hreflang` si cambia la URL o el tipo de página.
-4. No dupliques la misma relación HOPE con IDs distintos.
-5. Si tocas la colaboración, revisa home y `colaboraciones.html` como un conjunto.
-6. Si cambias campos compartidos de organización, revisa también `src/seo/schema-organization.json` y `src/seo/advanced-schema-graph.json`.
-
-## ✅ Validación recomendada
+## ✅ Validación
 
 ```bash
-# Regenerar dist/
 npm run build
-
-# Validar solo HOPE SEO
-npx playwright test tests/hope-seo.e2e.spec.js
-
-# Validar schema de eventos del tablón
-npx playwright test tests/event-schema.e2e.spec.js
+npm run seo:schema-report          # informe de las 60 páginas (ES + /va/): scripts, tipos, inLanguage, refs sin resolver, nº ImageObject
+npx playwright test tests/schema-jsonld.e2e.spec.js tests/hope-seo.e2e.spec.js tests/event-schema.e2e.spec.js
 ```
 
-Ejecuta además `npm run test:e2e:full` si el cambio también toca navegación, OG global, snapshots, meteo o layout compartido.
+`tests/schema-jsonld.e2e.spec.js` (smoke) comprueba en las 60 páginas: un solo script, JSON válido, `#organization`/`#website` de la fuente (nombre, redes, miembros vigentes, sin `employee`), nodo de página con `url` = canonical e `inLanguage` según ruta, breadcrumb, `@id` únicos, referencias resueltas, ausencia de datos obsoletos (`Quiles`, `Marta Soriano`…) y de la URL de Facebook inválida en el HTML; galerías con un `ImageObject` por foto, `VideoObject` de `galeria_9`, `ItemList` de galerías, `Blog`/`BlogPosting`, llibret sin `Event`, y `ai-enhanced-schema.json` alineado con la fuente. `tests/hope-seo.e2e.spec.js` cubre la relación HOPE (ES y `/va/`); `tests/event-schema.e2e.spec.js`, los `Event` del tablón.
 
-## 🧪 Qué valida hoy `tests/hope-seo.e2e.spec.js`
-
-- que `index.html` menciona HOPE-INCLIVA en descripción y Open Graph
-- que la home contiene un `@graph` válido
-- que la `WebPage` de la home referencia `https://hope-incliva.com/#website`
-- que `colaboraciones.html` dedica su SEO técnico a HOPE-INCLIVA
-- que la página de colaboraciones mantiene `mainEntity` apuntando al nodo `#hope-collaboration`
-
-## 🔗 Relacionado
-
-- [`e2e-testing.md`](./e2e-testing.md): estrategia de validación Playwright
-- [`open-graph-whatsapp.md`](./open-graph-whatsapp.md): `og-share.png` y cache-buster
-- [`../index.html`](../index.html)
-- [`../colaboraciones.html`](../colaboraciones.html)
+Validación externa opcional: pegar el `<script ld+json>` de `dist/<página>.html` en el validador de Schema.org o en la prueba de resultados enriquecidos de Google.
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.27.3
+Última actualización: 11 de septiembre de 2026 - v4.28.0

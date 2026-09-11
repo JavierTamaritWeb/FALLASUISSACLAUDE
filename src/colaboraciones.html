@@ -26,46 +26,12 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
-        "@id": "https://fallasuissa.es/#organization",
-        "name": "Falla Suïssa - L'Alqueria del Favero",
-        "url": "https://fallasuissa.es/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://fallasuissa.es/img/Escudo_falla.png"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "Informacion general",
-          "email": "info@fallasuissa.es",
-          "availableLanguage": ["es", "va"]
-        },
-        "sameAs": [
-          "https://www.facebook.com/FallaSuissaLalqueriadelFavero",
-          "https://www.instagram.com/fallasuissa_lalqueriadelfavero/",
-          "https://tiktok.com/@fallasuissaalqueria"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://fallasuissa.es/#website",
-        "url": "https://fallasuissa.es/",
-        "name": "Falla Suïssa - L'Alqueria del Favero",
-        "publisher": {
-          "@id": "https://fallasuissa.es/#organization"
-        },
-        "inLanguage": ["es-ES", "ca-ES"]
-      },
-      {
         "@type": "WebPage",
         "@id": "https://fallasuissa.es/colaboraciones.html#webpage",
         "url": "https://fallasuissa.es/colaboraciones.html",
+        "inLanguage": "es-ES",
         "name": "Colaboración con HOPE-INCLIVA | Falla Suïssa - L'Alqueria del Favero",
         "description": "Colaboración solidaria de Falla Suïssa - L'Alqueria del Favero con HOPE-INCLIVA en Valencia para apoyar la investigación del Linfoma No Hodgkin Pediátrico.",
-        "inLanguage": "es-ES",
-        "isPartOf": {
-          "@id": "https://fallasuissa.es/#website"
-        },
         "about": [
           {
             "@id": "https://fallasuissa.es/#organization"
@@ -97,7 +63,10 @@
             "@id": "https://hope-incliva.com/#website"
           }
         ],
-        "inLanguage": "es-ES"
+        "inLanguage": "es-ES",
+        "publisher": {
+          "@id": "https://fallasuissa.es/#organization"
+        }
       },
       {
         "@type": "WebSite",
@@ -329,7 +298,7 @@
         </a>
 
         <nav class="sociales">
-          <a class="sociales__enlace" href="https://www.facebook.com/fallasuïssal'alqueriadelfavero">
+          <a class="sociales__enlace" href="https://www.facebook.com/FallaSuissaLalqueriadelFavero">
             <span class="sociales__accesible">Facebook</span>
           </a>
           <a class="sociales__enlace" href="https://www.instagram.com/fallasuissa_lalqueriadelfavero/">
