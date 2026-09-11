@@ -64,7 +64,7 @@
     color: v.$primary-color;
     margin-top: 1rem;
     text-align: center;
-    @media (max-width:768px) {
+    @media (max-width: 767px) {
       font-size: v.$font-size-medium;
     }
   }

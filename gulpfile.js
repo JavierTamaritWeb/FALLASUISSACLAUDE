@@ -989,6 +989,13 @@ function modifyHtmlStream(schemaCtx, lang, assetVersion, langTable, missingKeyTr
       const caUrl = `https://fallasuissa.es/va/${isIndex ? '' : fileName}`;
       const canonicalUrl = lang === 'ca' ? caUrl : mainUrl;
 
+      // 1d. Open Graph de la variante /va/: og:url debe coincidir con el canonical
+      // de la página servida (antes apuntaba a la versión ES) y og:locale con su idioma.
+      if (lang === 'ca') {
+        html = html.replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/i, `$1${caUrl}$2`);
+        html = html.replace(/(<meta\s+property="og:locale"\s+content=")es_ES(")/i, '$1ca_ES$2');
+      }
+
       // Limpiar canonical y hreflang preexistentes en el source para que el build
       // sea la única fuente de verdad y evitar conflictos (ver GSC: "Duplicada").
       html = html.replace(/[ \t]*<link\s+rel="canonical"[^>]*>\s*\n?/gi, '');

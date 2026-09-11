@@ -418,13 +418,13 @@
         "subtituloDoc": "A firmar por padre, madre o tutor/a legal",
         "advertenciaTitulo": "Aviso legal específico para menores",
         "advertenciaTexto": "De conformidad con el artículo 8 del RGPD, el artículo 7 de la LOPDGDD y la Ley Orgánica 1/1996, de 15 de enero, de Protección Jurídica del Menor, el tratamiento de la imagen de personas menores de edad exige el consentimiento expreso del titular o titulares de la patria potestad o tutela. Para menores de catorce (14) años, este consentimiento es obligatorio en todo caso. Para menores entre 14 y 17 años, la asociación recoge igualmente el consentimiento parental como garantía reforzada de la protección del honor, intimidad e imagen del menor.",
-        "datosMenorTitulo": "Datos del menor",
+        "datosMenorTitulo": "10. Datos del menor",
         "campoNombreMenor": "Nombre y apellidos del menor",
         "campoDniMenor": "DNI / NIE del menor (si dispone)",
         "campoFechaNacimiento": "Fecha de nacimiento",
         "campoEdad": "Edad",
         "campoCargoMenor": "Cargo / rol en la comisión infantil (si procede)",
-        "datosTutorTitulo": "Datos del padre, madre o tutor/a legal firmante",
+        "datosTutorTitulo": "11. Datos del padre, madre o tutor/a legal firmante",
         "campoNombreTutor": "Nombre y apellidos",
         "campoDniTutor": "DNI / NIE",
         "campoDireccionTutor": "Dirección postal",
@@ -434,15 +434,16 @@
         "parentescoMadre": "Madre",
         "parentescoPadre": "Padre",
         "parentescoTutor": "Tutor/a legal",
-        "patriaPotestadTitulo": "Declaración sobre patria potestad",
+        "patriaPotestadTitulo": "12. Declaración sobre patria potestad",
         "patriaPotestadIntro": "Indique la situación que corresponda:",
         "patriaPotestadCompartida": "La patria potestad es compartida y firman ambos progenitores.",
         "patriaPotestadUnica": "Ostento la patria potestad o tutela única del menor (en su caso, se adjunta copia de la resolución judicial o documento acreditativo).",
-        "declaracionMenorTitulo": "Declaración y firmas",
+        "declaracionMenorTitulo": "14. Declaración y firmas",
         "declaracionMenorTexto": "Como titular(es) de la patria potestad o tutela legal del menor identificado, declaro/declaramos haber leído y comprendido la información, otorgo/otorgamos libremente el consentimiento conforme a las casillas marcadas en el apartado de finalidades, y entiendo/entendemos que este consentimiento puede ser revocado en cualquier momento mediante comunicación a info@fallasuissa.es.",
         "firmaProgenitor1": "Firma del progenitor / tutor 1",
         "firmaProgenitor2": "Firma del progenitor / tutor 2 (si patria potestad compartida)",
-        "notaDobleFirma": "Cuando la patria potestad sea compartida, ambos progenitores deben firmar. En caso de patria potestad única, marque la casilla correspondiente del apartado anterior y adjunte la documentación acreditativa."
+        "notaDobleFirma": "Cuando la patria potestad sea compartida, ambos progenitores deben firmar. En caso de patria potestad única, marque la casilla correspondiente del apartado anterior y adjunte la documentación acreditativa.",
+        "finalidadesIntro": "La Asociación tratará el nombre y las imágenes (fotografías y vídeos) del menor con las siguientes finalidades, debiendo el firmante marcar expresamente cada una de las que autoriza:"
       },
       "consentimientoTituloMenor": "13. Consentimientos otorgados"
     },
@@ -452,8 +453,8 @@
       "indicadorRango": "Páginas {from}-{to} de {total}"
     },
     "ver": "Ver más",
-    "anterior": "Anterior",
-    "siguiente": "Siguiente",
+    "anterior": "← Anterior",
+    "siguiente": "Siguiente →",
     "modalexito": {
       "title": "Mensaje enviado",
       "mensaje": "Mensaje enviado correctamente"
@@ -1004,13 +1005,13 @@
         "subtituloDoc": "A signar per pare, mare o tutor/a legal",
         "advertenciaTitulo": "Avís legal específic per a menors",
         "advertenciaTexto": "De conformitat amb l'article 8 del RGPD, l'article 7 de la LOPDGDD i la Llei Orgànica 1/1996, de 15 de gener, de Protecció Jurídica del Menor, el tractament de la imatge de persones menors d'edat exigeix el consentiment exprés del titular o titulars de la pàtria potestat o tutela. Per a menors de catorze (14) anys, aquest consentiment és obligatori en tot cas. Per a menors entre 14 i 17 anys, l'associació recull igualment el consentiment parental com a garantia reforçada de la protecció de l'honor, intimitat i imatge del menor.",
-        "datosMenorTitulo": "Dades del menor",
+        "datosMenorTitulo": "10. Dades del menor",
         "campoNombreMenor": "Nom i cognoms del menor",
         "campoDniMenor": "DNI / NIE del menor (si disposa)",
         "campoFechaNacimiento": "Data de naixement",
         "campoEdad": "Edat",
         "campoCargoMenor": "Càrrec / rol a la comissió infantil (si escau)",
-        "datosTutorTitulo": "Dades del pare, mare o tutor/a legal signant",
+        "datosTutorTitulo": "11. Dades del pare, mare o tutor/a legal signant",
         "campoNombreTutor": "Nom i cognoms",
         "campoDniTutor": "DNI / NIE",
         "campoDireccionTutor": "Adreça postal",
@@ -1020,15 +1021,16 @@
         "parentescoMadre": "Mare",
         "parentescoPadre": "Pare",
         "parentescoTutor": "Tutor/a legal",
-        "patriaPotestadTitulo": "Declaració sobre la pàtria potestat",
+        "patriaPotestadTitulo": "12. Declaració sobre la pàtria potestat",
         "patriaPotestadIntro": "Indique la situació que corresponga:",
         "patriaPotestadCompartida": "La pàtria potestat és compartida i signen ambdós progenitors.",
         "patriaPotestadUnica": "Ostente la pàtria potestat o tutela única del menor (si escau, s'adjunta còpia de la resolució judicial o document acreditatiu).",
-        "declaracionMenorTitulo": "Declaració i signatures",
+        "declaracionMenorTitulo": "14. Declaració i signatures",
         "declaracionMenorTexto": "Com a titular(s) de la pàtria potestat o tutela legal del menor identificat, declare/declarem haver llegit i comprès la informació, atorgue/atorguem lliurement el consentiment d'acord amb les caselles marcades a l'apartat de finalitats, i entenc/entenem que aquest consentiment pot ser revocat en qualsevol moment mitjançant comunicació a info@fallasuissa.es.",
         "firmaProgenitor1": "Signatura del progenitor / tutor 1",
         "firmaProgenitor2": "Signatura del progenitor / tutor 2 (si pàtria potestat compartida)",
-        "notaDobleFirma": "Quan la pàtria potestat siga compartida, ambdós progenitors han de signar. En cas de pàtria potestat única, marque la casella corresponent de l'apartat anterior i adjunte la documentació acreditativa."
+        "notaDobleFirma": "Quan la pàtria potestat siga compartida, ambdós progenitors han de signar. En cas de pàtria potestat única, marque la casella corresponent de l'apartat anterior i adjunte la documentació acreditativa.",
+        "finalidadesIntro": "L'Associació tractarà el nom i les imatges (fotografies i vídeos) del menor amb les finalitats següents; el signant haurà de marcar expressament cadascuna de les que autoritza:"
       },
       "consentimientoTituloMenor": "13. Consentiments atorgats"
     },
@@ -1038,8 +1040,8 @@
       "indicadorRango": "Pàgines {from}-{to} de {total}"
     },
     "ver": "Veure més",
-    "anterior": "Anterior",
-    "siguiente": "Següent",
+    "anterior": "← Anterior",
+    "siguiente": "Següent →",
     "modalexito": {
       "title": "Missatge Enviat",
       "mensaje": "Missatge enviat correctament"
@@ -1353,7 +1355,9 @@
       "loteria": "Lottery Delegate",
       "deportes": "Sports Delegate",
       "leyenda": "This is the organizational chart of the Falla, where you can see the different positions and their respective functions. In the 2026-27 exercise, it is configured this way."
-    }
+    },
+    "anterior": "← Previous",
+    "siguiente": "Next →"
   },
   "fr": {
     "nav": {
@@ -1538,6 +1542,8 @@
       "loteria": "Déléguée Loterie",
       "deportes": "Délégué Sports",
       "leyenda": "Voici l'organigramme de la Falla, où vous pouvez voir les différents postes et leurs fonctions respectives. Dans l'exercice 2026-27, il est configuré de cette manière."
-    }
+    },
+    "anterior": "← Précédent",
+    "siguiente": "Suivant →"
   }
 }

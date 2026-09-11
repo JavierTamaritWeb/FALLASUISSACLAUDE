@@ -601,9 +601,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
+  // Un 404/500 no rechaza el fetch: hay que comprobar response.ok antes de parsear
+  const comprobarRespuesta = (response) => {
+    if (!response.ok) throw new Error(`HTTP ${response.status} al cargar ${response.url}`);
+    return response.json();
+  };
+
   Promise.all([
-    fetch(window.SITE_ROOT + 'data/eventos.json').then(response => response.json()),
-    fetch(window.SITE_ROOT + 'data/calendarData.json').then(response => response.json())
+    fetch(window.SITE_ROOT + 'data/eventos.json').then(comprobarRespuesta),
+    fetch(window.SITE_ROOT + 'data/calendarData.json').then(comprobarRespuesta)
   ])
   .then(([eventData, calData]) => {
     window.eventos = eventData.eventos;
