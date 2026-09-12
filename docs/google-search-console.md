@@ -137,7 +137,7 @@ GSC reportó 24 URLs 404 (pico de 36 en abril, descendiendo solo a 24 en mayo). 
 
 ### Cómo lo resuelve el repo
 
-`src/.htaccess` declara 6 reglas (A-F; E = 410 de base.html) dentro del bloque `<IfModule mod_rewrite.c>`, **después** de la redirección `www → no-www` y **antes** de la negociación de Markdown:
+`src/.htaccess` declara 7 reglas (A-G; E = 410 de base.html) dentro del bloque `<IfModule mod_rewrite.c>`, **después** de la redirección `www → no-www` y **antes** de la negociación de Markdown:
 
 ```apache
 # A) /va/pdf/* → /pdf/*
@@ -155,6 +155,9 @@ RewriteRule "^pdf/C6[0-9]+.*\.pdf$" /deportes.html [R=301,L]
 
 # F) Imágenes de interfaz movidas a /img/UI/ (v4.30.2); QSA conserva el ?v=
 RewriteRule "^img/((og-share|fondo_traje|calendario|…)\.(png|jpg|jpeg|avif|webp)|cenefa_sin_fondo\.svg|…)$" /img/UI/$1 [R=301,L,QSA]
+
+# G) Favicons movidos a /img/favicon/ (v4.30.4)
+RewriteRule "^img/(favicon\.ico|favicon-16x16\.png|favicon-32x32\.png|apple-touch-icon\.png|android-chrome-…)$" /img/favicon/$1 [R=301,L,QSA]
 ```
 
 ### Reglas operativas
@@ -189,4 +192,4 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.3
+Última actualización: 12 de septiembre de 2026 - v4.30.4

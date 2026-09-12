@@ -139,4 +139,4 @@ Con la opción del sistema “Mostrar barras de desplazamiento: Automáticamente
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.3
+Última actualización: 12 de septiembre de 2026 - v4.30.4

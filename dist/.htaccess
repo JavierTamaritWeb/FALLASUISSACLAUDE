@@ -242,6 +242,11 @@ ErrorDocument 503 /mantenimiento.html
     #    cacheado siguen pidiendo la ruta antigua; QSA conserva el ?v=.
     RewriteRule "^img/((og-share|fondo_traje|calendario|camara|error|exito|pluma|termometro|Eventos|Masclet2|preguntar|Preguntar)\.(png|PNG|jpg|jpeg|avif|webp)|cenefa_sin_fondo\.svg|blocK\.svg|Calendario\.svg|subvencion\.svg|site\.webmanifest)$" /img/UI/$1 [R=301,L,QSA]
 
+    # G) Favicons movidos a /img/favicon/ en v4.30.4 (los navegadores cachean
+    #    el favicon y el HTML cacheado por la CDN sigue pidiendo /img/favicon-*)
+    RewriteRule "^img/(android-chrome-192x192\.png|android-chrome-512x512\.png|apple-touch-icon\.png|favicon-16x16\.png|favicon-32x32\.png|favicon\.ico)$" /img/favicon/$1 [R=301,L,QSA]
+    RewriteRule "^img/UI/site\.webmanifest$" /img/favicon/site.webmanifest [R=301,L]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
