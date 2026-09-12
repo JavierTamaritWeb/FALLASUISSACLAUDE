@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
             titleFallback: 'Error Enviando Mensaje',
             messageKey: 'modalerror.mensaje',
             messageFallback: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.',
-            imageSrc: window.SITE_ROOT + 'img/error.png',
+            imageSrc: window.SITE_ROOT + 'img/UI/error.png',
             imageAlt: 'Error',
             closeId: 'close-error-modal',
           });
@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function() {
           titleFallback: 'Error Enviando Mensaje',
           messageKey: 'modalerror.mensaje',
           messageFallback: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.',
-          imageSrc: window.SITE_ROOT + 'img/error.png',
+          imageSrc: window.SITE_ROOT + 'img/UI/error.png',
           imageAlt: 'Error',
           closeId: 'close-error-modal',
         });
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function() {
             titleFallback: 'Mensaje enviado',
             messageKey: 'modalexito.mensaje',
             messageFallback: 'Tu mensaje se ha enviado correctamente.',
-            imageSrc: window.SITE_ROOT + 'img/exito.png',
+            imageSrc: window.SITE_ROOT + 'img/UI/exito.png',
             imageAlt: 'Éxito',
             closeId: 'close-success-modal',
           });
@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
             titleFallback: 'Error Enviando Mensaje',
             messageKey: 'modalerror.mensaje',
             messageFallback: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.',
-            imageSrc: window.SITE_ROOT + 'img/error.png',
+            imageSrc: window.SITE_ROOT + 'img/UI/error.png',
             imageAlt: 'Error',
             closeId: 'close-error-modal',
           });

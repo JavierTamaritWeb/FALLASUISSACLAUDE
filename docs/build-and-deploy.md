@@ -222,7 +222,7 @@ Si el cambio toca el banner de subvención, recuerda que la validación real ocu
 
 WhatsApp cachea de forma muy agresiva la URL de `og:image`. Por eso:
 
-- La imagen de Open Graph del proyecto es `src/img/og-share.png` (en `dist/` aparece como `dist/img/og-share.png`).
+- La imagen de Open Graph del proyecto es `src/img/UI/og-share.png` (en `dist/` aparece como `dist/img/UI/og-share.png`).
 - Los HTML deben referenciarla con un query param `?v=...` (por ejemplo `?v=20260122`) para forzar recacheo.
 
 Flujo recomendado cuando cambie la imagen OG:
@@ -258,4 +258,4 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.1
+Última actualización: 12 de septiembre de 2026 - v4.30.2

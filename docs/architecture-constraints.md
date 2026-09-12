@@ -485,7 +485,7 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 
 ## 18. Placeholder de imágenes lazy: sin fondo permanente bajo iconos transparentes (v4.30.1)
 
-**Síntoma:** en modo oscuro, el icono del calendario de `eventos.html` (`img/calendario.png`, con transparencia) aparecía dentro de una caja blanca redondeada. El PNG y sus AVIF/WebP tienen alfa correcto; ninguna regla del componente pone fondo.
+**Síntoma:** en modo oscuro, el icono del calendario de `eventos.html` (`img/UI/calendario.png`, con transparencia) aparecía dentro de una caja blanca redondeada. El PNG y sus AVIF/WebP tienen alfa correcto; ninguna regla del componente pone fondo.
 
 **Causa:** dos placeholders globales para `img[loading="lazy"]`: `optimization/_seo.scss` (`background: #f5f5f5`, la que ganaba en cascada) y `abstracts/_accessibility.scss` (skeleton animado). Solo se retiran con la clase `.loaded`, que añade `accessibility.js`… y ese script lo cargan 4 páginas. En las otras 30 el fondo era permanente; en claro pasaba desapercibido (crema sobre crema), en oscuro no.
 
@@ -517,4 +517,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.1
+Última actualización: 12 de septiembre de 2026 - v4.30.2

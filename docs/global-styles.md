@@ -83,7 +83,7 @@ Para secciones que combinan una imagen de fondo + un overlay de color (como la s
 
 ```scss
 .falla {
-  background: url('../img/fondo_traje.png'); // Imagen fija
+  background: url('../img/UI/fondo_traje.png'); // Imagen fija
   position: relative;
 
   &::before {
@@ -174,13 +174,13 @@ No apliques `.reveal` de forma indiscriminada a zonas frágiles o con animación
 
 ## 👗 Fondo de Sección Falla (Traje Regional)
 
-La sección `.falla` (página principal con información de la Falla) tiene un fondo con imagen de traje regional valenciano (`src/img/fondo_traje.png`).
+La sección `.falla` (página principal con información de la Falla) tiene un fondo con imagen de traje regional valenciano (`src/img/UI/fondo_traje.png`).
 
 ### Implementación actual
 
 ```scss
 .falla {
-  background: url('../img/fondo_traje.png');
+  background: url('../img/UI/fondo_traje.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -214,7 +214,7 @@ body.modo-oscuro .falla::before {
 | --- | --- |
 | `src/scss/components/_falla.scss` | Estilos modo claro |
 | `src/scss/animaciones/_modo-oscuro.scss` | Estilos modo oscuro |
-| `src/img/fondo_traje.png` | Imagen de fondo (traje regional) |
+| `src/img/UI/fondo_traje.png` | Imagen de fondo (traje regional) |
 
 ## 🔄 Transición de Gradiente a Color Sólido
 
@@ -393,13 +393,13 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 | Variable | Valor Defecto | Descripción |
 | --- | --- | --- |
-| `$frieze-img` | `url('../img/cenefa_sin_fondo.svg')` | Imagen SVG de la cenefa |
+| `$frieze-img` | `url('../img/UI/cenefa_sin_fondo.svg')` | Imagen SVG de la cenefa |
 | `$frieze-bg` | `$blanco-hueso` (#F5F5F5) | Color de fondo de la banda (v4.1.3 cambio de transparent a hueso) |
 | `$frieze-size` | `clamp(30px, 8vw, 50px)` | Altura responsive |
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.1
+Última actualización: 12 de septiembre de 2026 - v4.30.2
 
 ## 🏛️ Componente Frieze (Cenefa)
 

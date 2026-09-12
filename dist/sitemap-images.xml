@@ -17,7 +17,7 @@
   <url>
     <loc>https://fallasuissa.es/lafalla.html</loc>
     <image:image>
-      <image:loc>https://fallasuissa.es/img/pluma.png</image:loc>
+      <image:loc>https://fallasuissa.es/img/UI/pluma.png</image:loc>
       <image:caption>Pluma usada en La Falla</image:caption>
       <image:title>La Falla</image:title>
     </image:image>
@@ -37,7 +37,7 @@
   <url>
     <loc>https://fallasuissa.es/eventos.html</loc>
     <image:image>
-      <image:loc>https://fallasuissa.es/img/Eventos.PNG</image:loc>
+      <image:loc>https://fallasuissa.es/img/UI/Eventos.PNG</image:loc>
       <image:caption>Imagen representativa de Eventos</image:caption>
       <image:title>Eventos</image:title>
     </image:image>
@@ -47,7 +47,7 @@
   <url>
     <loc>https://fallasuissa.es/meteo.html</loc>
     <image:image>
-      <image:loc>https://fallasuissa.es/img/termometro.png</image:loc>
+      <image:loc>https://fallasuissa.es/img/UI/termometro.png</image:loc>
       <image:caption>Termómetro usado en la sección Meteo</image:caption>
       <image:title>Meteo</image:title>
     </image:image>
@@ -57,7 +57,7 @@
   <url>
     <loc>https://fallasuissa.es/blog.html</loc>
     <image:image>
-      <image:loc>https://fallasuissa.es/img/pluma.png</image:loc>
+      <image:loc>https://fallasuissa.es/img/UI/pluma.png</image:loc>
       <image:caption>Pluma representativa del Blog</image:caption>
       <image:title>Blog</image:title>
     </image:image>
@@ -66,7 +66,7 @@
   <url>
     <loc>https://fallasuissa.es/blog-somni.html</loc>
     <image:image>
-      <image:loc>https://fallasuissa.es/img/pluma.png</image:loc>
+      <image:loc>https://fallasuissa.es/img/UI/pluma.png</image:loc>
       <image:caption>Imagen representativa del artículo Somni</image:caption>
       <image:title>Somni</image:title>
     </image:image>
@@ -85,7 +85,7 @@
   <url>
     <loc>https://fallasuissa.es/galerias.html</loc>
     <image:image>
-      <image:loc>https://fallasuissa.es/img/camara.png</image:loc>
+      <image:loc>https://fallasuissa.es/img/UI/camara.png</image:loc>
       <image:caption>Cámara de Galerías</image:caption>
       <image:title>Galerías</image:title>
     </image:image>

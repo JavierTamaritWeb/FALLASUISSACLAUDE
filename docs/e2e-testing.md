@@ -242,7 +242,7 @@ PLAYWRIGHT_REUSE_SERVER=true npx playwright test tests/visual-regression.e2e.spe
 
 ### 🟦 Open Graph (WhatsApp)
 
-- La imagen `src/img/og-share.png` debe existir, pesar < 300KB y medir 1200×630.
+- La imagen `src/img/UI/og-share.png` debe existir, pesar < 300KB y medir 1200×630.
 - Ningún HTML debe referenciar `og-share.png` sin cache-buster `?v=...` (evita problemas de caché en WhatsApp).
 - El build en `dist/` también debe contener la URL versionada.
 
@@ -630,4 +630,4 @@ Guía técnica:
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.1
+Última actualización: 12 de septiembre de 2026 - v4.30.2

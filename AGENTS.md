@@ -52,7 +52,7 @@ PLAYWRIGHT_REUSE_SERVER=true npx playwright test  # Skip server restart (debuggi
 
 # SEO & Open Graph
 npm run seo:dist         # Copy SEO folder to dist/
-npm run generate:og      # Regenerate src/img/og-share.png (1200x630)
+npm run generate:og      # Regenerate src/img/UI/og-share.png (1200x630)
 ```
 
 ## Important Rules
@@ -213,7 +213,7 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 
 ### Updating Open Graph image
 
-1. Run `npm run generate:og` (writes to `src/img/og-share.png`)
+1. Run `npm run generate:og` (writes to `src/img/UI/og-share.png`)
 2. Update cache-buster `?v=YYYYMMDD` in ALL HTML files (og:image, twitter:image, image_src)
 3. Run `npm run build` then `npm run test:e2e:full`
 

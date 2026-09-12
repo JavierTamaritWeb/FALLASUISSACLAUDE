@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.1 · **Última actualización:** 12 de septiembre de 2026
+**Versión:** 4.30.2 · **Última actualización:** 12 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -41,7 +41,7 @@ PLAYWRIGHT_REUSE_SERVER=true npx playwright test  # Evita reiniciar el servidor 
 
 # SEO y Open Graph
 npm run seo:dist         # Copia la carpeta SEO a dist/
-npm run generate:og      # Regenera src/img/og-share.png (1200x630)
+npm run generate:og      # Regenera src/img/UI/og-share.png (1200x630)
 
 # Buscador
 npm run search:eval      # Evalúa las consultas de aceptación contra dist/data/search-index.json (tras el build)
@@ -83,7 +83,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
   - `src/scss/` — SCSS modular (orden de imports en `main.scss`: abstracts > base > optimization > layout > animaciones > components > sociales)
   - `src/js/` — Módulos ES6+ cargados por página
   - `src/data/` — JSON: `translations.json`, `board.json`, `sports-board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-9].json` (una por galería `galeria_1`–`galeria_9`; `blog.json` eliminado en v4.6.0), `search-keywords.json` (palabras clave del buscador; el índice `dist/data/search-index.json` lo genera el build)
-  - `src/img/` — Imágenes fuente raster + vectoriales (el build copia + genera WebP/AVIF en `dist/img/`)
+  - `src/img/` — Imágenes fuente raster + vectoriales (el build copia + genera WebP/AVIF en `dist/img/`, también en subcarpetas). `src/img/UI/` (v4.30.2) agrupa las imágenes de interfaz: iconos de sección (`calendario.png`, `camara.png`, `pluma.png`, `termometro.png`), `fondo_traje.jpg` (fondo de 5 secciones vía `image-set()`), `cenefa_sin_fondo.svg` (`$frieze-img`), `og-share.png` (imagen OG, la escribe `npm run generate:og`), `error.png`/`exito.png` (modal de contacto, `envia.js`) y ficheros sin referencia (`blocK.svg`, `Calendario.svg`, `Eventos.PNG`, `Masclet2.png`, `preguntar.jpeg`, `Preguntar.png`, `site.webmanifest`, `subvencion.svg`)
   - `src/pdf/` — PDFs con wrappers HTML para favicon/preview social
   - `src/seo/` — Sitemaps, schema, variantes de robots
   - `src/favicon_io/` — Assets de favicon
@@ -153,7 +153,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -351,7 +351,7 @@ Actualiza los CUATRO sitios en lockstep (el bump de `sw.js` se mantiene por cohe
 5. Ejecuta `npm run build` y `npm run seo:schema-report`
 
 ### Actualizar la imagen Open Graph
-1. Ejecuta `npm run generate:og` (escribe `src/img/og-share.png`)
+1. Ejecuta `npm run generate:og` (escribe `src/img/UI/og-share.png`)
 2. Actualiza el cache-buster `?v=YYYYMMDD` en TODOS los archivos HTML (og:image, twitter:image, image_src)
 3. Ejecuta `npm run build` y luego `npm run test:e2e:full`
 
@@ -376,6 +376,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.30.2** — **Imágenes de interfaz agrupadas en `src/img/UI/`**: se mueven con `git mv` 17 ficheros (`blocK.svg`, `calendario.png`, `Calendario.svg`, `camara.png`, `cenefa_sin_fondo.svg`, `error.png`, `Eventos.PNG`, `exito.png`, `fondo_traje.jpg`, `Masclet2.png`, `og-share.png`, `pluma.png`, `preguntar.jpeg`, `Preguntar.png`, `site.webmanifest`, `subvencion.svg`, `termometro.png`) y se actualizan todas las rutas: `og:image`/`twitter:image`/`image_src` de las 30 páginas y los 3 wrappers PDF (`https://fallasuissa.es/img/UI/og-share.png?v=20260122`), `image-set()` de `fondo_traje` en 5 SCSS, `$frieze-img`, `envia.js`, `sitemap-images.xml`, `scripts/generate-og-image.mjs`, tests (`og-image`, `og-meta-cachebust`, `schema-jsonld`) y docs. Las copias antiguas de `dist/img/` se retiran (el build no limpia `dist/`; rsync `--delete` las borra en producción). Sin cambios visuales.
 - **4.30.1** — **Fix: caja blanca bajo el icono del calendario en modo oscuro** (`eventos.html`, y cualquier PNG/SVG transparente con `loading="lazy"`): `optimization/_seo.scss` ponía `background: #f5f5f5` permanente a toda `img[loading="lazy"]` y `abstracts/_accessibility.scss` un skeleton animado; solo `accessibility.js` añade `.loaded` para retirarlos y 30 páginas no lo cargan. Se elimina el fondo sólido de `_seo.scss`, el skeleton excluye los iconos y escudos transparentes (misma lista que `_image-optimization.scss`) y gana variante oscura. Detectado por el usuario en Chrome; verificado en `eventos.html` (ninguna imagen lazy conserva fondo). Ver restricción *Placeholder de imágenes lazy*.
 - **4.30.0** — **Coral de marca en modo oscuro = `#B83F35`**: a petición del usuario, todo lo que usaba `$primary-color` (#FF6F61) pasa en modo oscuro a `$coral-texto` (#B83F35). Mecanismo: custom properties `--coral-marca`, `--coral-marca-rgb` y derivadas declaradas en `abstracts/_globales.scss` (`:root` claro; `html/body.modo-oscuro` oscuro) y sustitución de los 230 usos de `v.$primary-color` en 33 SCSS (`var(--coral-marca)`, `rgba(var(--coral-marca-rgb), a)`, `var(--coral-marca-claro10|oscuro8|oscuro10)` para los `color.adjust`), más los 5 literales `#ff6f61` de `_contenido-legal.scss` y la `--primary-color` local del organigrama. Sin cambios en modo claro (`$primary-color` intacto en `_variables.scss`). Nuevo test en `tests/color-tokens.e2e.spec.js`; baselines visuales oscuros regenerados. Ver patrón *Paleta funcional* y restricción *Coral de marca como texto*.
 - **4.29.1** — **Buscador: dos aspas con papeles distintos**. La ✕ de la cabecera cierra el buscador («Cerrar buscador»/«Tancar cercador», sin el círculo azul, 4 rem de área); la ✕ de borrar pasa dentro del campo, a la derecha, solo aparece con texto y al pulsarla el panel sigue abierto con el cursor en el campo. Campo blanco con borde fino y `padding-right` reservado para el aspa; un solo indicador de foco (anillo blanco + halo oscuro; ámbar + halo en oscuro) en lugar del borde coral + contorno coral + anillo negro acumulados; ambas aspas dibujadas con dos barras (mixin `m.aspa` en `abstracts/_mixins.scss`). Fix: el aspa de borrar se veía con el campo vacío (el `display` de autor pisaba `[hidden]`). Modo oscuro revisado (foco del campo, cerrar y borrar). Verificado en Chrome (claro y oscuro, clics reales) y cubierto en `tests/buscador.e2e.spec.js`. Ver restricción *Buscador y grupo de botones* (2c).

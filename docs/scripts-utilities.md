@@ -12,12 +12,12 @@ Esta guía documenta los scripts de mantenimiento que no forman parte del flujo 
 
 ### `generate-og-image.mjs`: propósito
 
-Regenera `src/img/og-share.png` con el formato que usa el sitio para Open Graph y WhatsApp.
+Regenera `src/img/UI/og-share.png` con el formato que usa el sitio para Open Graph y WhatsApp.
 
 ### `generate-og-image.mjs`: entrada y salida
 
 - entrada: `src/img/Escudo_falla.avif`
-- salida: `src/img/og-share.png`
+- salida: `src/img/UI/og-share.png`
 
 ### `generate-og-image.mjs`: qué hace
 
@@ -128,4 +128,4 @@ npx playwright test tests/scss-guardrails.e2e.spec.js
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.1
+Última actualización: 12 de septiembre de 2026 - v4.30.2
