@@ -80,10 +80,13 @@ img, video {
 /* 4. LAZY LOADING OPTIMIZATIONS */
 
 /* Lazy loading support - Unificado */
+// Sin fondo sólido: solo accessibility.js marca `.loaded` y 30 páginas no lo
+// cargan, así que el #f5f5f5 se quedaba para siempre bajo los PNG/SVG
+// transparentes (caja blanca del icono del calendario en modo oscuro, v4.30.1).
+// El placeholder de carga vive en abstracts/_accessibility.scss.
 img[loading="lazy"] {
   content-visibility: auto;
   contain-intrinsic-size: 300px 200px;
-  background: #f5f5f5;
 }
 
 /* 5. STRUCTURED DATA SUPPORT */

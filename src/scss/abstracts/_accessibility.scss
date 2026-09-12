@@ -179,15 +179,22 @@ button {
    LOADING STATES & LAZY IMAGES
    =================================== */
 
-// Placeholder para imágenes lazy loading
-img[loading="lazy"] {
+// Placeholder para imágenes lazy loading. Excluye los iconos y escudos con
+// transparencia (misma lista que _image-optimization.scss): como `.loaded` solo
+// lo pone accessibility.js, en las páginas sin ese script el placeholder es
+// permanente y se veía como una caja clara bajo el icono (v4.30.1).
+img[loading="lazy"]:not(.eventos__calendario):not(.forecast__termo):not(.blog__pluma):not(.galerias__camara):not(.quieres-mas__imagen):not(.footer__escudo):not(.header__escudo):not(.header-inner__escudo):not(.board__image) {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
-  
+
   &.loaded:not(.animate-icon) {
     animation: none;
     background: none;
+  }
+
+  body.modo-oscuro & {
+    background-image: linear-gradient(90deg, #262626 25%, #333 50%, #262626 75%);
   }
 }
 

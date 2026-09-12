@@ -483,6 +483,16 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 
 **Desde v4.30.0, en modo oscuro el coral de marca es `#B83F35` en todos sus usos** (decisión del usuario): `var(--coral-marca)` / `rgba(var(--coral-marca-rgb), a)` en lugar de `v.$primary-color` en cualquier propiedad; las custom properties viven en `abstracts/_globales.scss` con un bloque `:root` y otro `html.modo-oscuro, body.modo-oscuro`. Un `v.$primary-color` o un `#FF6F61` literal nuevo se quedaría claro en oscuro y lo detecta `tests/color-tokens.e2e.spec.js` (barrido de estilos computados en oscuro).
 
+## 18. Placeholder de imágenes lazy: sin fondo permanente bajo iconos transparentes (v4.30.1)
+
+**Síntoma:** en modo oscuro, el icono del calendario de `eventos.html` (`img/calendario.png`, con transparencia) aparecía dentro de una caja blanca redondeada. El PNG y sus AVIF/WebP tienen alfa correcto; ninguna regla del componente pone fondo.
+
+**Causa:** dos placeholders globales para `img[loading="lazy"]`: `optimization/_seo.scss` (`background: #f5f5f5`, la que ganaba en cascada) y `abstracts/_accessibility.scss` (skeleton animado). Solo se retiran con la clase `.loaded`, que añade `accessibility.js`… y ese script lo cargan 4 páginas. En las otras 30 el fondo era permanente; en claro pasaba desapercibido (crema sobre crema), en oscuro no.
+
+**Solución:** se elimina el fondo sólido de `_seo.scss`; el skeleton de `_accessibility.scss` excluye los iconos y escudos transparentes (`.eventos__calendario`, `.forecast__termo`, `.blog__pluma`, `.galerias__camara`, `.quieres-mas__imagen`, `.footer__escudo`, `.header__escudo`, `.header-inner__escudo`, `.board__image` — la misma lista de `_image-optimization.scss`) y tiene variante oscura.
+
+**Reglas:** un icono transparente nuevo con `loading="lazy"` entra en ambas listas de exclusión (o su página carga `accessibility.js`); nunca un `background` sólido global para imágenes lazy. Comprobación: en oscuro, `getComputedStyle(img).backgroundColor` de las imágenes lazy transparentes debe ser `rgba(0, 0, 0, 0)`.
+
 ## 15. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
@@ -507,4 +517,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 11 de septiembre de 2026 - v4.30.0
+Última actualización: 12 de septiembre de 2026 - v4.30.1
