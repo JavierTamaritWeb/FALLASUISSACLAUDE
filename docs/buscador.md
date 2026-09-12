@@ -62,4 +62,4 @@ Pendientes editoriales: traducir al valenciano título y descripción de los eve
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.2
+Última actualización: 12 de septiembre de 2026 - v4.30.3

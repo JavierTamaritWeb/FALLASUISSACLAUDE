@@ -236,6 +236,12 @@ ErrorDocument 503 /mantenimiento.html
     #    sin entrada en sitemap); desde v4.7.9 se excluye del build -> 410 Gone
     RewriteRule ^(va/)?base\.html$ - [R=410,L]
 
+    # F) Imágenes de interfaz movidas a /img/UI/ en v4.30.2 (og-share.png,
+    #    fondo del traje, cenefa, iconos de sección, imágenes del modal…).
+    #    Las vistas previas ya compartidas en WhatsApp/Facebook y el HTML
+    #    cacheado siguen pidiendo la ruta antigua; QSA conserva el ?v=.
+    RewriteRule "^img/((og-share|fondo_traje|calendario|camara|error|exito|pluma|termometro|Eventos|Masclet2|preguntar|Preguntar)\.(png|PNG|jpg|jpeg|avif|webp)|cenefa_sin_fondo\.svg|blocK\.svg|Calendario\.svg|subvencion\.svg|site\.webmanifest)$" /img/UI/$1 [R=301,L,QSA]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
