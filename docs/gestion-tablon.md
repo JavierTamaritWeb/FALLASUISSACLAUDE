@@ -376,4 +376,4 @@ Desde v4.7.2 ya no hace falta tocar `board.js`. Pasos:
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.5
+Última actualización: 12 de septiembre de 2026 - v4.30.6

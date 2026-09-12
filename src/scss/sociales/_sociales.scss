@@ -41,37 +41,37 @@
     }
     // FACEBOOK
     &__enlace[href*="facebook.com"]::before {
-        background-image: url(../img/icono_facebook1.svg);
+        background-image: url(../img/iconos-redes-sociales/icono_facebook1.svg);
     
     }
     &__enlace[href*="facebook.com"]:hover::before {
-        background-image: url(../img/icono_facebook.svg);
+        background-image: url(../img/iconos-redes-sociales/icono_facebook.svg);
     }
 
     // INSTAGRAM
 
     &__enlace[href*="instagram.com"]::before {
-        background-image: url(../img/icono_instagram1.svg);
+        background-image: url(../img/iconos-redes-sociales/icono_instagram1.svg);
     }
     &__enlace[href*="instagram.com"]:hover::before {
-        background-image: url(../img/icono_instagram.svg);
+        background-image: url(../img/iconos-redes-sociales/icono_instagram.svg);
     }
 
     // YOUTUBE
     &__enlace[href*="youtube.com"]::before {
        
-        background-image: url(../img/icono_youtube1.svg);
+        background-image: url(../img/iconos-redes-sociales/icono_youtube1.svg);
     }
     &__enlace[href*="youtube.com"]:hover::before {
-        background-image: url(../img/icono_youtube.svg);
+        background-image: url(../img/iconos-redes-sociales/icono_youtube.svg);
     }
 
     // TIKTOK
     &__enlace[href*="tiktok.com"]::before {
-        background-image: url(../img/icono_tiktok1-v2.svg);
+        background-image: url(../img/iconos-redes-sociales/icono_tiktok1-v2.svg);
     }
     &__enlace[href*="tiktok.com"]:hover::before {
-        background-image: url(../img/icono_tiktok-v2.svg);
+        background-image: url(../img/iconos-redes-sociales/icono_tiktok-v2.svg);
     }
 
 

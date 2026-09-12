@@ -247,6 +247,11 @@ ErrorDocument 503 /mantenimiento.html
     RewriteRule "^img/(android-chrome-192x192\.png|android-chrome-512x512\.png|apple-touch-icon\.png|favicon-16x16\.png|favicon-32x32\.png|favicon\.ico)$" /img/favicon/$1 [R=301,L,QSA]
     RewriteRule "^img/UI/site\.webmanifest$" /img/favicon/site.webmanifest [R=301,L]
 
+    # H) Iconos de redes sociales y logo_falla.svg movidos a
+    #    /img/iconos-redes-sociales/ en v4.30.6 (los usa main.css como fondo;
+    #    un main.css antiguo cacheado seguiría pidiendo /img/icono_*.svg)
+    RewriteRule "^img/(icono_(facebook|instagram|tiktok|youtube)[0-9a-z-]*\.svg|logo_falla\.svg)$" /img/iconos-redes-sociales/$1 [R=301,L,QSA]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]

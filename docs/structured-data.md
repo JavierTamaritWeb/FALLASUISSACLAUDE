@@ -91,4 +91,4 @@ Validación externa opcional: pegar el `<script ld+json>` de `dist/<página>.htm
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.5
+Última actualización: 12 de septiembre de 2026 - v4.30.6

@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.5 · **Última actualización:** 12 de septiembre de 2026
+**Versión:** 4.30.6 · **Última actualización:** 12 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -83,7 +83,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
   - `src/scss/` — SCSS modular (orden de imports en `main.scss`: abstracts > base > optimization > layout > animaciones > components > sociales)
   - `src/js/` — Módulos ES6+ cargados por página
   - `src/data/` — JSON: `translations.json`, `board.json`, `sports-board.json`, `eventos.json`, `calendarData.json`, `fallas.json`, `config.json`, `dataPages[1-9].json` (una por galería `galeria_1`–`galeria_9`; `blog.json` eliminado en v4.6.0), `search-keywords.json` (palabras clave del buscador; el índice `dist/data/search-index.json` lo genera el build)
-  - `src/img/` — Imágenes fuente raster + vectoriales (el build copia + genera WebP/AVIF en `dist/img/`, también en subcarpetas). `src/img/UI/` (v4.30.2) agrupa las imágenes de interfaz: iconos de sección (`calendario.png`, `camara.png`, `pluma.png`, `termometro.png`), `fondo_traje.jpg` (fondo de 5 secciones vía `image-set()`), `cenefa_sin_fondo.svg` (`$frieze-img`), `og-share.png` (imagen OG, la escribe `npm run generate:og`), `error.png`/`exito.png` (modal de contacto, `envia.js`) y ficheros sin referencia (`blocK.svg`, `Calendario.svg`, `Eventos.PNG`, `Masclet2.png`, `preguntar.jpeg`, `Preguntar.png`, `subvencion.svg`, `icono-sol.svg`, `icono-luna.svg` — el sol/luna del toggle lo dibuja `dark.js` inline). Las rutas antiguas `/img/<nombre>` redirigen con `301` a `/img/UI/` (regla F del `.htaccess`, v4.30.3). `src/img/favicon/` (v4.30.4): `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png` y `site.webmanifest` (iconos con ruta `/img/favicon/`); los enlazan los `<link rel="icon">`/`apple-touch-icon` de todas las páginas, `manifest.json` y `sw.js`; rutas antiguas `/img/favicon-*` → 301 (regla G). `src/favicon_io/` es la copia independiente que usa `mantenimiento.html`
+  - `src/img/` — Imágenes fuente raster + vectoriales (el build copia + genera WebP/AVIF en `dist/img/`, también en subcarpetas). `src/img/UI/` (v4.30.2) agrupa las imágenes de interfaz: iconos de sección (`calendario.png`, `camara.png`, `pluma.png`, `termometro.png`), `fondo_traje.jpg` (fondo de 5 secciones vía `image-set()`), `cenefa_sin_fondo.svg` (`$frieze-img`), `og-share.png` (imagen OG, la escribe `npm run generate:og`), `error.png`/`exito.png` (modal de contacto, `envia.js`) y ficheros sin referencia (`blocK.svg`, `Calendario.svg`, `Eventos.PNG`, `Masclet2.png`, `preguntar.jpeg`, `Preguntar.png`, `subvencion.svg`, `icono-sol.svg`, `icono-luna.svg` — el sol/luna del toggle lo dibuja `dark.js` inline). Las rutas antiguas `/img/<nombre>` redirigen con `301` a `/img/UI/` (regla F del `.htaccess`, v4.30.3). `src/img/favicon/` (v4.30.4): `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png` y `site.webmanifest` (iconos con ruta `/img/favicon/`); los enlazan los `<link rel="icon">`/`apple-touch-icon` de todas las páginas, `manifest.json` y `sw.js`; rutas antiguas `/img/favicon-*` → 301 (regla G). `src/favicon_io/` es la copia independiente que usa `mantenimiento.html`. `src/img/iconos-redes-sociales/` (v4.30.6): los 8 SVG que `sociales/_sociales.scss` usa como fondo de los enlaces del pie (`icono_facebook*.svg`, `icono_instagram*.svg`, `icono_tiktok-v2.svg`/`icono_tiktok1-v2.svg`, `icono_youtube*.svg`; el sufijo `1` es la variante hover), más `icono_tiktok.svg`/`icono_tiktok1.svg` y `logo_falla.svg` (4 MB) sin referencia; rutas antiguas `/img/icono_*.svg` → 301 (regla H)
   - `src/pdf/` — PDFs con wrappers HTML para favicon/preview social
   - `src/seo/` — Sitemaps, schema, variantes de robots
   - `src/favicon_io/` — Assets de favicon
@@ -153,7 +153,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.5).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.6).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -376,6 +376,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.30.6** — **Iconos de redes sociales agrupados en `src/img/iconos-redes-sociales/`**: `git mv` de los 10 `icono_*.svg` y de `logo_falla.svg`; `sociales/_sociales.scss` apunta a la carpeta nueva (8 fondos: normal + hover de Facebook, Instagram, TikTok `-v2` y YouTube); regla H del `.htaccess` con 301 de `/img/icono_*.svg` y `/img/logo_falla.svg`. Sin cambios visuales.
 - **4.30.5** — `icono-sol.svg` e `icono-luna.svg` pasan de `src/img/` a `src/img/UI/` (sin ninguna referencia: el toggle de modo oscuro dibuja sus SVG inline en `dark.js`). Sin cambios en el sitio servido.
 - **4.30.4** — **Favicons agrupados en `src/img/favicon/`**: `git mv` de los 6 iconos (`favicon.ico`, `favicon-16x16/32x32.png`, `apple-touch-icon.png`, `android-chrome-192/512.png`) y de `site.webmanifest` (desde `img/UI/`; sus iconos apuntaban a la raíz, ahora a `/img/favicon/` con nombre real y `theme_color` institucional); rutas actualizadas en las 30 páginas y los 3 wrappers PDF, `manifest.json` y `sw.js`. Regla G del `.htaccess`: 301 de `/img/favicon-*`, `apple-touch-icon.png`, `android-chrome-*` y `/img/UI/site.webmanifest`. `src/favicon_io/` (copia de `mantenimiento.html`) no cambia.
 - **4.30.3** — **Regla F del `.htaccess`**: `301` de las rutas antiguas de las imágenes movidas en 4.30.2 (`/img/og-share.png`, `fondo_traje.*`, `cenefa_sin_fondo.svg`, iconos, `error/exito.png`…, con sus `.avif/.webp`) a `/img/UI/…`, con `QSA` para conservar el `?v=`: las vistas previas ya compartidas en WhatsApp/Facebook y el HTML cacheado por la CDN siguen resolviendo. Sin cambios en las páginas.
