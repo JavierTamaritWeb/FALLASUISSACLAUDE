@@ -282,4 +282,4 @@ Guía de ejecución: [`e2e-testing.md`](./e2e-testing.md)
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.7
+Última actualización: 12 de septiembre de 2026 - v4.30.8

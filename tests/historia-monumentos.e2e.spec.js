@@ -95,7 +95,7 @@ for (const pagina of PAGINAS) {
 
       await grid.locator('button.colaboraciones-mosaic__trigger').first().click();
       await expect(lightbox).toHaveClass(/open/);
-      await expect(imagen).toHaveAttribute('src', /falla2026\.(avif|webp|jpg)$/);
+      await expect(imagen).toHaveAttribute('src', /boceto-falla-2025-26-Web\.(avif|webp|jpg)$/);
       await lightbox.locator('.colaboraciones-lightbox__close').click();
       await expect(lightbox).not.toHaveClass(/open/);
     });
