@@ -27,10 +27,10 @@ El visor del monumento vive hoy en `index.html` y `lafalla.html` con la misma es
 <div class="swiper swiper--autoheight contenedor" data-testid="monumento-swiper">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <img src="img/falla2027.avif" width="1068" height="1473" alt="Boceto del monumento fallero principal de la Falla Suïssa 2026-27" loading="eager" fetchpriority="high">
+      <img src="img/Visor-Monumento/falla2027.avif" width="1068" height="1473" alt="Boceto del monumento fallero principal de la Falla Suïssa 2026-27" loading="eager" fetchpriority="high">
     </div>
     <div class="swiper-slide">
-      <img src="img/falla2027-Infantil.avif" width="1049" height="1499" alt="Boceto del monumento fallero infantil de la Falla Suïssa 2026-27" loading="lazy">
+      <img src="img/Visor-Monumento/falla2027-Infantil.avif" width="1049" height="1499" alt="Boceto del monumento fallero infantil de la Falla Suïssa 2026-27" loading="lazy">
     </div>
   </div>
 
@@ -45,8 +45,8 @@ El visor del monumento vive hoy en `index.html` y `lafalla.html` con la misma es
 
 El visor del monumento trabaja con 2 slides base no duplicadas, los bocetos del ejercicio 2026-27:
 
-- `src/img/falla2027.jpg` (el build genera `dist/img/falla2027.{avif,webp}`)
-- `src/img/falla2027-Infantil.jpg` (→ `falla2027-Infantil.{avif,webp}`)
+- `src/img/Visor-Monumento/falla2027.jpg` (el build genera `dist/img/Visor-Monumento/falla2027.{avif,webp}`)
+- `src/img/Visor-Monumento/falla2027-Infantil.jpg` (→ `falla2027-Infantil.{avif,webp}`)
 
 Convención de nombres: `falla<año de plantà>` (`falla2026` = ejercicio 2025-26, `falla2027` = 2026-27). La fuente que usa el visor se guarda como JPEG (~440 KB); los PNG originales (con y sin rótulo) quedan archivados en `src/img/monument/bocetos/` sin referencia desde HTML (v4.16.1).
 
@@ -55,7 +55,7 @@ Convención de carga:
 - la primera imagen usa `loading="eager"` + `fetchpriority="high"` (y `<link rel="preload">` en `index.html`)
 - la segunda usa `loading="lazy"`
 
-Las 4 imágenes del ejercicio 2025-26 (`falla2026*`) siguen en `src/img/` porque las usa el panel *Historia/Archivos/Monumentos → "Monumento 2025-26"* (ver `CLAUDE.md`, patrón *Monumentos*). Ya no existe ninguna clase por slide: el hook `swiper-slide--monumento-real` se retiró en v4.16.0 (ver nota histórica más abajo).
+Las 4 imágenes del ejercicio 2025-26 (`falla2026*`) siguen en el repo porque las usa el panel *Historia/Archivos/Monumentos → "Monumento 2025-26"* (ver `CLAUDE.md`, patrón *Monumentos*). Ya no existe ninguna clase por slide: el hook `swiper-slide--monumento-real` se retiró en v4.16.0 (ver nota histórica más abajo).
 
 ## Relación con `src/js/swiper.js`
 
@@ -258,4 +258,4 @@ npm run test:e2e:full
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.14
+Última actualización: 13 de septiembre de 2026 - v4.30.15

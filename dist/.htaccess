@@ -274,6 +274,10 @@ ErrorDocument 503 /mantenimiento.html
     #    schema y el HTML cacheado por la CDN. Un solo 301 desde ambos nombres antiguos.
     RewriteRule "^img/(Escudo_falla|Escudo-Oficial-Falla)\.(png|avif|webp)$" /img/escudo-falla/Escudo-Oficial-Falla.$2 [R=301,L,QSA]
 
+    # M) Imágenes del visor del monumento movidas a /img/Visor-Monumento/ en v4.30.15
+    #    (bocetos falla2027*, fotos plantadas falla2026-*-real y foto_2425_0*)
+    RewriteRule "^img/((falla2026-infantil-real|falla2026-real|falla2027-Infantil|falla2027|foto_2425_01|foto_2425_02)\.(jpg|jpeg|avif|webp))$" /img/Visor-Monumento/$1 [R=301,L,QSA]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]

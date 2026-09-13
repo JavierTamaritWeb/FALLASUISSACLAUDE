@@ -155,4 +155,4 @@ La coordinación actual entre i18n y meteo no es solo un detalle de copy: forma 
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.14
+Última actualización: 13 de septiembre de 2026 - v4.30.15

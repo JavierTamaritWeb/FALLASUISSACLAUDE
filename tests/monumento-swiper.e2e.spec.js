@@ -175,8 +175,8 @@ test.describe('Monumento: Swiper autoHeight sin recortes', () => {
   // Bocetos del ejercicio 2026-27 (v4.16.0); las fotos 2025-26 viven en
   // Historia/Archivos/Monumentos (tests/historia-monumentos.e2e.spec.js)
   const expectedSrcs = [
-    'img/falla2027.avif',
-    'img/falla2027-Infantil.avif'
+    'img/Visor-Monumento/falla2027.avif',
+    'img/Visor-Monumento/falla2027-Infantil.avif'
   ];
 
   for (const pageName of ['index.html', 'lafalla.html']) {

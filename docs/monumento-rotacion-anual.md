@@ -9,6 +9,8 @@ Si solo necesitas entender el visor actual, consulta `docs/swiper-monumento.md`.
 
 ## Qué cambia normalmente cada año
 
+Las imágenes del visor (fuentes JPEG de los bocetos y fotos del monumento) viven en `src/img/Visor-Monumento/` desde v4.30.15; deja ahí los JPEG nuevos y enlázalos como `img/Visor-Monumento/<nombre>.avif`.
+
 En el visor del monumento suelen cambiar:
 
 - las rutas de imagen
@@ -174,4 +176,4 @@ Cuando cambie el juego de imágenes del monumento, asume por defecto que el hook
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.14
+Última actualización: 13 de septiembre de 2026 - v4.30.15
