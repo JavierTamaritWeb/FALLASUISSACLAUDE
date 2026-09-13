@@ -13,6 +13,7 @@ const path = require('path');
 const fs = require('fs').promises;
 const crypto = require('crypto');
 const terser = require('gulp-terser');
+const { pipeline } = require('stream/promises');
 
 const EVENT_BASE_URL = 'https://fallasuissa.es/eventos.html';
 const EVENT_IMAGE_URL = 'https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png';
@@ -57,22 +58,6 @@ const paths = {
 // ===================================
 // HELPERS
 // ===================================
-function streamToPromise(stream) {
-  return new Promise((resolve, reject) => {
-    let resolved = false;
-    const done = () => {
-      if (resolved) return;
-      resolved = true;
-      resolve();
-    };
-
-    stream.on('finish', done);
-    stream.on('end', done);
-    stream.on('close', done);
-    stream.on('error', reject);
-  });
-}
-
 async function fileMtimeMs(filePath) {
   try {
     const stat = await fs.stat(filePath);
@@ -107,9 +92,11 @@ function outputPathForModernFormat(inputFile, ext) {
 
 // CSS - Compila SCSS (entry main.scss) a dist/css
 function cssTask() {
-  const stream = src(paths.cssEntry)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(postcss([
+  // pipeline propaga errores de todas las etapas; logError los ocultaba al build.
+  return pipeline(
+    src(paths.cssEntry),
+    sass(),
+    postcss([
       autoprefixer(),
       cssnano({
         preset: ['default', {
@@ -119,29 +106,28 @@ function cssTask() {
           minifyGradients: true
         }]
       })
-    ]))
-    .pipe(dest('dist/css'));
-
-  return streamToPromise(stream);
+    ]),
+    dest('dist/css')
+  );
 }
 
 // JS - Minifica y copia
 function jsTask() {
-  return streamToPromise(
-    src(paths.js.src)
-      .pipe(terser({ compress: true, mangle: true }))
-      .pipe(dest(paths.js.dest))
+  return pipeline(
+    src(paths.js.src),
+    terser({ compress: true, mangle: true }),
+    dest(paths.js.dest)
   );
 }
 
 // Data - Copia
 function dataTask() {
-  return streamToPromise(src(paths.data.src, { encoding: false }).pipe(dest(paths.data.dest)));
+  return pipeline(src(paths.data.src, { encoding: false }), dest(paths.data.dest));
 }
 
 // PDF - Copia
 function pdfTask() {
-  return streamToPromise(src(paths.pdf.src, { encoding: false }).pipe(dest(paths.pdf.dest)));
+  return pipeline(src(paths.pdf.src, { encoding: false }), dest(paths.pdf.dest));
 }
 
 const { Transform } = require('stream');
@@ -1279,6 +1265,8 @@ function modifyHtmlStream(schemaCtx, lang, assetVersion, langTable, missingKeyTr
 
 // HTML - Copia HTML del root, pre-renderiza traducciones VA, inyecta canonical/hreflang + Schema
 async function htmlTask() {
+  // Los cambios de la fuente SEO deben reflejarse también durante gulp watch.
+  baseSchemaCache = null;
   const [events, translationsRaw, assetVersion, baseSchema, galleryImages] = await Promise.all([
     getSchemaEvents(),
     fs.readFile(path.join(__dirname, 'src', 'data', 'translations.json'), 'utf8'),
@@ -1328,16 +1316,16 @@ async function htmlTask() {
   }
 
   // Buffer process (no encoding flag para que cargue bin pero el Transform convierte a utf8 y viceversa)
-  const esPromise = streamToPromise(
-    src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaCtx, 'es', assetVersion, null, null, pagerCtx))
-      .pipe(dest(paths.html.dest))
+  const esPromise = pipeline(
+    src(paths.html.src),
+    modifyHtmlStream(schemaCtx, 'es', assetVersion, null, null, pagerCtx),
+    dest(paths.html.dest)
   );
 
-  const caPromise = streamToPromise(
-    src(paths.html.src)
-      .pipe(modifyHtmlStream(schemaCtx, 'ca', assetVersion, langTableCa, missingKeyTracker, pagerCtx))
-      .pipe(dest(path.join(paths.html.dest, 'va')))
+  const caPromise = pipeline(
+    src(paths.html.src),
+    modifyHtmlStream(schemaCtx, 'ca', assetVersion, langTableCa, missingKeyTracker, pagerCtx),
+    dest(path.join(paths.html.dest, 'va'))
   );
 
   await Promise.all([esPromise, caPromise]);
@@ -1349,17 +1337,17 @@ async function htmlTask() {
 
 // Root files - robots/sitemaps/.htaccess/manifest/sw/google-verification/etc
 function rootFilesTask() {
-  return streamToPromise(src(paths.root.src, { encoding: false, dot: true, allowEmpty: true }).pipe(dest(paths.root.dest)));
+  return pipeline(src(paths.root.src, { encoding: false, dot: true, allowEmpty: true }), dest(paths.root.dest));
 }
 
 // SEO folder - Copia carpeta seo/
 function seoTask() {
-  return streamToPromise(src(paths.seo.src, { encoding: false, allowEmpty: true }).pipe(dest(paths.seo.dest)));
+  return pipeline(src(paths.seo.src, { encoding: false, allowEmpty: true }), dest(paths.seo.dest));
 }
 
 // Favicon - Copia
 function faviconTask() {
-  return streamToPromise(src(paths.favicon.src, { encoding: false, allowEmpty: true }).pipe(dest(paths.favicon.dest)));
+  return pipeline(src(paths.favicon.src, { encoding: false, allowEmpty: true }), dest(paths.favicon.dest));
 }
 
 // =======================================================================
@@ -1370,9 +1358,9 @@ function faviconTask() {
 // =======================================================================
 async function wellKnownTask() {
   // 1) Copia api-catalog y cualquier otro contenido estático bajo src/.well-known/
-  await streamToPromise(
-    src(paths.wellKnown.src, { encoding: false, dot: true, allowEmpty: true })
-      .pipe(dest(paths.wellKnown.dest))
+  await pipeline(
+    src(paths.wellKnown.src, { encoding: false, dot: true, allowEmpty: true }),
+    dest(paths.wellKnown.dest)
   );
 
   // 2) Define las skills (recursos read-only que un agente puede consumir)
@@ -1473,7 +1461,7 @@ async function wellKnownTask() {
 // Images - Copia todo img/ + genera WebP/AVIF (solo png/jpg/jpeg) incremental por mtime
 async function imagesTask() {
   // 1) Copiar todos los assets de img/ (incluye svg, gif, ico, webmanifest, webp/avif existentes, etc.)
-  await streamToPromise(src(paths.imgAll, { encoding: false, allowEmpty: true }).pipe(dest(paths.imgDest)));
+  await pipeline(src(paths.imgAll, { encoding: false, allowEmpty: true }), dest(paths.imgDest));
 
   // 2) Convertir solo raster elegible (sin GIF)
   const rasterFiles = await glob(paths.imgRasterForConvert, { nodir: true });
@@ -1633,16 +1621,12 @@ async function updateDistSitemapsLastmod() {
 
 // Dev - Watch
 function devTask(done) {
-  watch(paths.scssAll, cssTask);
-  watch(paths.js.src, jsTask);
-  watch(paths.data.src, dataTask);
-  watch(paths.pdf.src, pdfTask);
-  watch(paths.imgAll, imagesTask);
-  watch(paths.favicon.src, faviconTask);
-  watch(paths.html.src, htmlTask);
-  watch(paths.root.src, series(rootFilesTask, updateDistSitemapsLastmod));
-  watch(paths.seo.src, seoTask);
-  watch(paths.wellKnown.src, wellKnownTask);
+  // Una sola cola evita builds solapados y regenera los derivados: HTML VA,
+  // JSON-LD, índice de búsqueda, hashes CSS/JS y catálogo de recursos.
+  watch([
+    paths.scssAll, paths.js.src, paths.data.src, paths.pdf.src, paths.imgAll,
+    paths.favicon.src, 'src/*.html', ...paths.root.src, paths.seo.src, paths.wellKnown.src
+  ], build);
   done();
 }
 

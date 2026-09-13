@@ -29,15 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('lightbox-open');
 
     requestAnimationFrame(() => {
-      closeButton.focus();
+      if (lightbox.classList.contains('open')) closeButton.focus();
     });
   }
 
   function closeLightbox() {
     const shouldRestoreFocus = document.body.classList.contains('lightbox-open') || lightbox.classList.contains('open');
 
-    lightbox.classList.remove('open');
-    lightbox.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('lightbox-open');
     lightboxImage.removeAttribute('src');
     lightboxImage.alt = '';
@@ -47,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
       lastTrigger.focus();
       lastTrigger = null;
     }
+    // Sacar primero el foco del diálogo para no ocultar un descendiente enfocado.
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
   }
 
   document.addEventListener('click', (event) => {

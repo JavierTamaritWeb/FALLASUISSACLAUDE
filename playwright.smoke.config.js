@@ -5,6 +5,7 @@ const baseConfig = require('./playwright.config');
 module.exports = defineConfig({
   ...baseConfig,
   testMatch: [
+    '**/audit-regressions.e2e.spec.js',
     '**/nav.e2e.spec.js',
     '**/i18n.e2e.spec.js',
     '**/i18n-prerender.e2e.spec.js',

@@ -1,8 +1,16 @@
 # 🧪 Tests E2E (Playwright)
 
-**Smoke por defecto: 23 specs** (`playwright.smoke.config.js`) | **Suite completa: 51 ficheros** en `tests/`
+**Smoke por defecto: 24 specs / 346 casos** (`playwright.smoke.config.js`) | **Suite completa: 54 ficheros / 538 casos** | **Node: 17 pruebas** (`tests/unit/`)
 
 Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto, qué validan y qué cobertura mínima se espera cuando cambias SEO técnico, scrollbars, navegación o componentes sensibles.
+
+## Guardias de la auditoría 4.30.20
+
+`npm run test:unit` ejecuta los casos de compilación inválida, conversión de imágenes, regeneración durante watch, caché del service worker, rutas del servidor local y despliegue simulado. Los proyectos temporales y los sustitutos de SSH/rsync/curl evitan modificar fuentes o servidores reales. Playwright excluye `tests/unit/`; su descubrimiento no debe ejecutar el runner de Node.
+
+`tests/audit-regressions.e2e.spec.js` protege el idioma guardado y su atributo `lang`, los textos de reserva, el tema sin almacenamiento, el reintento de EmailJS, el foco del visor y la CSP de documentos incrustados. Está incluido tanto en smoke como en full.
+
+`npm run audit:project` reúne build, pruebas Node, batería completa con cuatro workers y `npm audit --audit-level=high`. Resultado registrado el 13-09-2026: 17/17 Node, 344 smoke superadas con 2 omitidas y 535 E2E completas superadas con 3 omitidas. Las omisiones y los límites están explicados en el [informe de auditoría](auditoria-2026-09-13.md).
 
 ## 🌐 Cobertura mínima por motor
 
@@ -475,7 +483,7 @@ Archivos de test:
 
 ## 📦 Requisitos
 
-- Node.js 18+ (recomendado 20+)
+- Node.js 20.9+ (validado con 22.13; requerido por Sharp 0.35.4)
 - npm 9+
 
 Instala dependencias:

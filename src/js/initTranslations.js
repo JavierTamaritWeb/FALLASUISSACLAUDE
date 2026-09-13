@@ -6,15 +6,16 @@ window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/
 
 // js/initTranslations.js
 
-window.currentLanguage = (() => {
+window.currentLanguage = window.currentLanguage || (() => {
   // try/catch obligatorio: Safari lanza SecurityError con localStorage bloqueado.
   try {
-    return localStorage.getItem('lang');
+    const savedLang = localStorage.getItem('lang');
+    return ['es', 'va', 'en', 'fr'].includes(savedLang) ? savedLang : null;
   } catch (e) {
     console.warn('El acceso a localStorage está bloqueado por el navegador.');
     return null;
   }
-})() || window.currentLanguage || (document.documentElement.lang === 'ca' ? 'va' : 'es');
+})() || (document.documentElement.lang === 'ca' ? 'va' : 'es');
 
 if (typeof window.loadTranslations === 'function') {
   window.loadTranslations().catch(error => {

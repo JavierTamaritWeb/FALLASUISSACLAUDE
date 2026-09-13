@@ -5,6 +5,8 @@ const shouldReuseServer = process.env.PLAYWRIGHT_REUSE_SERVER === 'true';
 
 module.exports = defineConfig({
   testDir: './tests',
+  // Las pruebas de Node tienen su propio runner (npm run test:unit).
+  testIgnore: ['**/unit/**'],
   timeout: 30_000,
   expect: {
     timeout: 10_000,

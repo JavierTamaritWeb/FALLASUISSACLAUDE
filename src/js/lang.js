@@ -17,13 +17,15 @@ const pageLang = document.documentElement.lang === 'ca' ? 'va' : 'es';
 // y, a nivel de módulo, abortaría todo el sistema i18n (ver cookie-banner.js).
 let currentLang = pageLang;
 try {
-  currentLang = localStorage.getItem('lang') || pageLang;
+  const savedLang = localStorage.getItem('lang');
+  if (['es', 'va', 'en', 'fr'].includes(savedLang)) currentLang = savedLang;
 } catch (e) {
   console.warn('El acceso a localStorage está bloqueado por el navegador.');
 }
 let translationsPromise = null;
 
 window.currentLanguage = currentLang;
+document.documentElement.lang = currentLang === 'va' ? 'ca' : currentLang;
 
 // Función helper para obtener traducciones anidadas usando notación de puntos
 
@@ -115,7 +117,7 @@ function updateTranslations () {
 
     const key = elem.getAttribute('data-i18n');
     const translation = getNestedTranslation(key);
-    if (translation) {
+    if (typeof translation === 'string' && translation !== key) {
       // Notas del tablón con saltos de línea (<br>)
       if (elem.getAttribute('data-i18n-format') === 'paragraphs') {
         renderParagraphTranslation(elem, translation);
@@ -136,7 +138,7 @@ function updateTranslations () {
     document.querySelectorAll(selector).forEach(elem => {
       const key = elem.getAttribute(keyAttribute);
       const translation = getNestedTranslation(key);
-      if (translation) elem.setAttribute(targetAttribute, translation);
+      if (typeof translation === 'string' && translation !== key) elem.setAttribute(targetAttribute, translation);
     });
   });
 }

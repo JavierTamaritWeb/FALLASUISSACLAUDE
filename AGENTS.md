@@ -2,9 +2,11 @@
 
 This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
-**Version:** 4.7.0
-**Last Updated:** 15 de mayo de 2026
+**Version:** 4.30.20
+**Last Updated:** 13 de septiembre de 2026
 
+> 4.30.20 — Auditoría de 15 problemas corregidos con 25 pruebas nuevas; informe en [`docs/auditoria-2026-09-13.md`](docs/auditoria-2026-09-13.md).
+>
 > 4.7.0 — Fix condición de carrera en `calendario.html`: `#lista-anuncios` y `#descripcion-eventos-mes` tenían `data-i18n="..."` en lugar de `data-i18n-aria-label="..."`. `lang.js` sobreescribía su `textContent` con las cadenas de traducción ("Lista de anuncios", "Detalles del mes"), borrando los items renderizados dinámicamente por `calendario.js`. Cambiado a `data-i18n-aria-label` para que solo actualice el atributo `aria-label` sin destruir el contenido interior. Test guardia: `tests/reveal-on-scroll.e2e.spec.js` ("calendario.html vuelve a registrar tarjetas tras filtrar y limpiar").
 >
 > 4.6.24 — Reestructuración del repositorio bajo `src/`. Todos los archivos source (las 7 carpetas `src/scss/`, `src/js/`, `src/data/`, `src/img/`, `src/pdf/`, `src/seo/`, `src/favicon_io/`; los 27 HTML; y los archivos sueltos `manifest.json`, `robots*.txt`, `sitemap*.xml`, `sw.js`, `.htaccess`, `ai-discovery.json`) se han movido a `src/` con `git mv` (historial preservado). La raíz queda con tooling y configs (`package.json`, `gulpfile.js`, `playwright*.config.js`, `tests/`, `scripts/`, `docs/`, `dist/`). Paths actualizados en `gulpfile.js`, `scripts/generate-og-image.mjs`, `scripts/refactor-scss-namespaces.mjs`, `tests/scss-guardrails.e2e.spec.js`. `dist/` sigue siendo byte-equivalente al anterior; ninguna URL pública ni el SW cambian.
@@ -55,6 +57,19 @@ npm run seo:dist         # Copy SEO folder to dist/
 npm run generate:og      # Regenerate src/img/UI/og-share.png (1200x630)
 ```
 
+## Auditoría del 13 de septiembre de 2026
+
+Registro de errores y prevención: [`docs/auditoria-2026-09-13.md`](docs/auditoria-2026-09-13.md).
+
+- Ejecutar `npm run test:unit` al modificar Gulp, el service worker, el servidor local o el despliegue.
+- Las tareas de compilación deben propagar errores de todas las etapas con `pipeline`; nunca ocultarlos con `sass.logError` en producción.
+- Mantener una sola cola de watch para regenerar HTML VA, esquema, índice y hashes después de cambios de fuentes.
+- Leer y actualizar cada recurso del SW en la misma caché; limpiar únicamente las cachés con prefijos de esta web.
+- El controlador del visor es el único que cierra el lightbox y devuelve el foco. Los controladores genéricos no deben ocultarlo antes.
+- `--dry-run` nunca puede ejecutar mutaciones remotas, tampoco con `--maintenance`.
+- La CSP debe permitir los documentos propios tanto en `object-src` como en `frame-src`: los wrappers PDF necesitan ambos.
+- `npm run audit:project` reúne build, pruebas unitarias, E2E completas y auditoría npm.
+
 ## Important Rules
 
 - ALL source files live under `src/`. NEVER put new source files (HTML, JS, SCSS, JSON data, images, PDFs, sitemaps, etc.) in the repo root — only configs/tooling belong there (`package.json`, `gulpfile.js`, `playwright*.config.js`, `.gitignore`, `README.md`, `AGENTS.md`, `LICENSE*`)
@@ -76,7 +91,7 @@ npm run generate:og      # Regenerate src/img/UI/og-share.png (1200x630)
 - **Frontend**: HTML5, SCSS (BEM), ES6+ JavaScript modules
 - **Libraries (CDN)**: Swiper.js v11 (carousels, jsDelivr), Anime.js v3.2.1 (animations, cdnjs), EmailJS v4 (contact form, jsDelivr)
 - **Libraries (npm)**: Flatpickr v4.6.13 (date picker)
-- **Testing**: Playwright E2E (34 suites in full matrix, 8 smoke suites by default). Smoke suite (`npm run test:e2e`) runs: nav, i18n, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, scss-guardrails
+- **Testing**: 54 archivos E2E en la batería completa (538 casos), 24 archivos smoke (346 casos) y 17 pruebas Node en `tests/unit/`. Configuraciones: `playwright.config.js` y `playwright.smoke.config.js`; guía: `docs/e2e-testing.md`.
 
 ### Directory Structure
 
@@ -137,7 +152,7 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.7.0).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.30.20).
 
 ## Architecture Decisions & Constraints
 

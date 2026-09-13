@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.19 · **Última actualización:** 13 de septiembre de 2026
+**Versión:** 4.30.20 · **Última actualización:** 13 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -18,6 +18,8 @@ WEBFALLASUISSA es el sitio web oficial de Falla Suissa - L'Alqueria del Favero (
 ```bash
 npm run dev              # Build + watch de cambios
 npm run build            # Build de producción (salida a dist/)
+npm run test:unit        # Pruebas de build, watch, caché, servidor local y despliegue simulado
+npm run audit:project    # Build + pruebas unitarias + E2E completas + npm audit
 npm run test:e2e         # Ejecuta la suite smoke de Playwright E2E
 npm run test:e2e:full    # Ejecuta la suite completa de Playwright E2E
 npm run test:e2e:visual  # Solo snapshots de regresión visual
@@ -73,7 +75,7 @@ npx gulp searchIndex     # Regenera solo el índice del buscador
 - **Frontend**: HTML5, SCSS (BEM), módulos JavaScript ES6+
 - **Librerías (CDN)**: Swiper.js v11 (carruseles, jsDelivr), Anime.js v3.2.1 (animaciones, cdnjs), EmailJS v4 (formulario de contacto, jsDelivr)
 - **Librerías (npm)**: Flatpickr v4.6.13 (selector de fechas)
-- **Testing**: Playwright E2E (51 ficheros de test en la matriz completa, 23 specs smoke por defecto). La suite smoke (`npm run test:e2e`) ejecuta: nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, escudo-enlace, galeria-9-album, galeria-pager, accordion-hover, schema-jsonld, scss-guardrails, buscador, color-tokens
+- **Testing**: Playwright E2E (54 ficheros en la matriz completa, 24 specs smoke por defecto) y 17 pruebas de Node en `tests/unit/`. La suite smoke (`npm run test:e2e`) ejecuta: audit-regressions, nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, escudo-enlace, galeria-9-album, galeria-pager, accordion-hover, schema-jsonld, scss-guardrails, buscador, color-tokens
 
 ### Estructura de directorios
 
@@ -153,11 +155,13 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.19).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.20).
 
 ## Decisiones y restricciones de arquitectura
 
 Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problemas.
+
+- **Auditoría 4.30.20:** errores y guardias documentados en [`docs/auditoria-2026-09-13.md`](docs/auditoria-2026-09-13.md). Las tareas Gulp propagan errores con `pipeline`; watch usa una cola completa e invalida el esquema cacheado; el SW consulta primero la red para HTML, actualiza la misma caché que lee y solo borra sus propios prefijos; el visor gestiona su cierre y restauración de foco; `--dry-run` no ejecuta mutaciones remotas, tampoco durante mantenimiento. Los wrappers PDF necesitan `object-src` y `frame-src` con origen propio. Ejecutar `npm run test:unit` al modificar estos contratos.
 
 - **Buscador y grupo de botones de la barra (v4.29.0):**
   1. La regla `> *:not(.navegacion):not(.nav-backdrop)` de `.header__barra` excluye también `.buscador` y `.header__botones`, y `.header__botones` lleva `position: relative; z-index: 2600`: sin eso el `.nav-backdrop` (1500) tapaba el botón lupa con el menú abierto y el panel absoluto pasaba a `position: relative`. Cualquier control nuevo que deba funcionar con el menú abierto va dentro de `.header__botones`.
@@ -376,6 +380,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.30.20** — Auditoría severa: 15 problemas corregidos en compilación/watch, CSP de wrappers PDF, idioma y textos de reserva, tema con almacenamiento bloqueado, reintento de EmailJS, foco del visor, cachés del SW, servidor local y despliegue simulado/mantenimiento/configuración. Sharp actualizado a 0.35.4 (npm audit: 0 vulnerabilidades). Se añaden 17 pruebas de Node y 8 de navegador, `npm run test:unit` y `npm run audit:project`. Validación: build correcto, 344 smoke superadas (2 omitidas), 535 E2E completas superadas (3 omitidas) y 17/17 unitarias. Registro completo con causas, soluciones y prevención en [`docs/auditoria-2026-09-13.md`](docs/auditoria-2026-09-13.md).
 - **4.30.19** — Errata corregida en la subcarpeta de la Ofrenda: `src/img/ofrenda-virgen-desamparados/ofenda-2026/` → `…/ofrenda-2026/` (`git mv`; fotos `ofrenda-2026-{fm,fmm,001}.jpeg` y `video/ofrenda-2026.mp4`); 26 rutas actualizadas en `index.html` (12) y `lafalla.html` (14, con el `VideoObject`) y regla K del `.htaccess` con un solo 301 desde `/img/ofrenda/ofenda-2026/*` y `/img/ofrenda-virgen-desamparados/ofenda-2026/*`. Sin cambios visuales.
 - **4.30.18** — **Fix: botones de descarga cortados en móvil** («Descargar vídeo de la Ofrenda» y «Descargar vídeo del dron», paneles *Ofrenda 2026* y *Monumento 2025-26* de Archivos en `index.html`/`lafalla.html`, ES y VA). El `.boton` global lleva `white-space: nowrap` y en el panel estrecho de móvil el botón era más ancho que el panel, que recorta con `overflow: hidden`: a 390 px el de la Ofrenda sobresalía 22 px por cada lado. En `_representantes.scss` esos dos botones pasan a `max-width: 100%`, `white-space: normal`, texto centrado con `line-height: 1.3` y, por debajo de 480 px, relleno lateral de 1,6 rem. Verificado midiendo todos los `.boton` de las 58 páginas a 320/375/390/768/1280 px (ninguno cortado); nuevos tests de guardia a 320 y 390 px en `tests/historia-monumentos.e2e.spec.js` y `tests/historia-ofrendas.e2e.spec.js` (fallan sin el arreglo). Sin cambios en escritorio.
 - **4.30.17** — Carpeta `src/img/UI/` renombrada a `src/img/elementos-UXUI/` (`git mv` de las 18 imágenes de interfaz: iconos de sección, `fondo_traje.jpg`, `cenefa_sin_fondo.svg`, `og-share.png`, `error.png`/`exito.png`…); 150 rutas actualizadas en 46 archivos: `og:image`/`twitter:image`/`image_src` de las 30 páginas y los wrappers PDF (`https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122`), `image-set()` de `fondo_traje` en 5 SCSS, `$frieze-img`, `envia.js`, `sitemap-images.xml`, `scripts/generate-og-image.mjs`, `tests/og-image.e2e.spec.js` y docs. `.htaccess`: la regla F apunta a la carpeta nueva, la G lleva `/img/site.webmanifest` y `/img/UI/site.webmanifest` directos a `/img/favicon/`, y la nueva regla N redirige con 301 todo `/img/UI/*` (vistas previas de `og-share.png` ya compartidas y CSS/HTML cacheados). Sin cambios visuales.

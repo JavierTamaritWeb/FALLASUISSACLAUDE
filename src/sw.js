@@ -5,8 +5,8 @@
 // en cada subida de versión. Al cambiar los nombres, el handler de activate
 // purga los caches antiguos — sin el bump, los visitantes recurrentes con el
 // SW registrado seguirían viendo el HTML/CSS cacheado de la versión anterior.
-const CACHE_NAME = 'falla-suissa-v4.30.19';
-const CRITICAL_CACHE = 'falla-critical-v4.30.19';
+const CACHE_NAME = 'falla-suissa-v4.30.20';
+const CRITICAL_CACHE = 'falla-critical-v4.30.20';
 
 // Recursos críticos para cache inmediato
 const CRITICAL_RESOURCES = [
@@ -20,15 +20,6 @@ const CRITICAL_RESOURCES = [
   '/img/escudo-falla/Escudo-Oficial-Falla.avif',
   '/img/favicon/favicon.ico',
   '/manifest.json'
-];
-
-// Recursos para cache bajo demanda
-const CACHEABLE_RESOURCES = [
-  '/calendario.html',
-  '/eventos.html', 
-  '/galerias.html',
-  '/lafalla.html',
-  '/organigrama.html'
 ];
 
 // Instalar Service Worker
@@ -49,19 +40,7 @@ self.addEventListener('install', (event) => {
 // Activar Service Worker
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames
-          .filter((cacheName) => {
-            // Eliminar caches antiguos
-            return cacheName !== CACHE_NAME && cacheName !== CRITICAL_CACHE;
-          })
-          .map((cacheName) => {
-            console.log('SW: Eliminando cache antiguo:', cacheName);
-            return caches.delete(cacheName);
-          })
-      );
-    }).then(() => {
+    cleanOldCaches().then(() => {
       // Controlar inmediatamente todas las pestañas
       return self.clients.claim();
     })
@@ -74,31 +53,26 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
 
   // Solo manejar requests GET del mismo origen (cache.put rechaza POST/HEAD)
-  if (request.method !== 'GET' || url.origin !== location.origin) {
+  if (request.method !== 'GET' || url.origin !== location.origin || request.headers.has('range')) {
     return;
   }
 
   event.respondWith(
-    handleFetch(request)
+    handleFetch(request, event)
   );
 });
 
-async function handleFetch(request) {
+async function handleFetch(request, event) {
   const url = new URL(request.url);
   
-  // Estrategia Cache First para recursos críticos
-  if (isCriticalResource(url.pathname)) {
-    return cacheFirst(request);
-  }
-  
-  // Estrategia Network First para HTML
+  // El HTML siempre consulta la red, incluida la portada precargada.
   if (isHTMLPage(url.pathname)) {
     return networkFirst(request);
   }
   
   // Estrategia Cache First para assets estáticos
   if (isStaticAsset(url.pathname)) {
-    return cacheFirst(request);
+    return cacheFirst(request, event);
   }
   
   // Por defecto, Network First
@@ -106,12 +80,12 @@ async function handleFetch(request) {
 }
 
 // Cache First: buscar en cache, fallback a network
-async function cacheFirst(request) {
-  const cachedResponse = await caches.match(request);
+async function cacheFirst(request, event) {
+  const cachedResponse = await matchCurrentCache(request);
   
   if (cachedResponse) {
     // Actualizar cache en background si es necesario
-    updateCacheInBackground(request);
+    event.waitUntil(updateCacheInBackground(request));
     return cachedResponse;
   }
   
@@ -119,8 +93,7 @@ async function cacheFirst(request) {
     const networkResponse = await fetch(request);
     
     if (networkResponse.ok) {
-      const cache = await caches.open(CACHE_NAME);
-      cache.put(request, networkResponse.clone());
+      await storeResponse(request, networkResponse.clone());
     }
     
     return networkResponse;
@@ -136,13 +109,12 @@ async function networkFirst(request) {
     const networkResponse = await fetch(request);
     
     if (networkResponse.ok) {
-      const cache = await caches.open(CACHE_NAME);
-      cache.put(request, networkResponse.clone());
+      await storeResponse(request, networkResponse.clone());
     }
     
     return networkResponse;
   } catch (error) {
-    const cachedResponse = await caches.match(request);
+    const cachedResponse = await matchCurrentCache(request);
     
     if (cachedResponse) {
       return cachedResponse;
@@ -158,11 +130,33 @@ async function updateCacheInBackground(request) {
     const networkResponse = await fetch(request);
     
     if (networkResponse.ok) {
-      const cache = await caches.open(CACHE_NAME);
-      cache.put(request, networkResponse);
+      await storeResponse(request, networkResponse);
     }
   } catch (error) {
     // Ignorar errores en background updates
+  }
+}
+
+// Leer y escribir siempre en la misma caché: una precarga antigua no debe
+// ocultar una actualización escrita en otra caché de CacheStorage.
+function cacheNameFor(request) {
+  const pathname = new URL(typeof request === 'string' ? request : request.url, location.origin).pathname;
+  return isCriticalResource(pathname) ? CRITICAL_CACHE : CACHE_NAME;
+}
+
+async function matchCurrentCache(request) {
+  try {
+    return await (await caches.open(cacheNameFor(request))).match(request);
+  } catch (error) {
+    return undefined;
+  }
+}
+
+async function storeResponse(request, response) {
+  try {
+    await (await caches.open(cacheNameFor(request))).put(request, response);
+  } catch (error) {
+    // Una cuota agotada no debe impedir entregar la respuesta válida de la red.
   }
 }
 
@@ -192,7 +186,7 @@ async function getOfflineFallback(request) {
   
   // Fallback para páginas HTML
   if (isHTMLPage(url.pathname)) {
-    const offlinePage = await caches.match('/');
+    const offlinePage = await matchCurrentCache('/');
     if (offlinePage) {
       return offlinePage;
     }
@@ -215,14 +209,15 @@ async function getOfflineFallback(request) {
 // Limpiar caches periódicamente
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'CLEAN_CACHE') {
-    cleanOldCaches();
+    event.waitUntil(cleanOldCaches());
   }
 });
 
 async function cleanOldCaches() {
   const cacheNames = await caches.keys();
-  const oldCaches = cacheNames.filter(name => 
-    !name.includes(CACHE_NAME) && !name.includes(CRITICAL_CACHE)
+  const oldCaches = cacheNames.filter(name =>
+    (name.startsWith('falla-suissa-') || name.startsWith('falla-critical-'))
+    && name !== CACHE_NAME && name !== CRITICAL_CACHE
   );
   
   await Promise.all(

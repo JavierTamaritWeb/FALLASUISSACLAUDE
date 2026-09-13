@@ -1,5 +1,5 @@
 import http from 'http';
-import { createReadStream, existsSync, statSync } from 'fs';
+import { createReadStream, existsSync, statSync, realpathSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -17,7 +17,7 @@ function parseArgs(argv) {
 }
 
 const { port, root } = parseArgs(process.argv);
-const rootDir = path.resolve(__dirname, '..', root);
+const rootDir = realpathSync(path.resolve(__dirname, '..', root));
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -38,12 +38,24 @@ const MIME = {
 };
 
 function safePath(urlPath) {
-  const decoded = decodeURIComponent(urlPath.split('?')[0]);
-  const normalized = decoded.replace(/\\/g, '/');
-  const rel = normalized.startsWith('/') ? normalized.slice(1) : normalized;
-  const resolved = path.resolve(rootDir, rel);
-  if (!resolved.startsWith(rootDir)) return null;
-  return resolved;
+  try {
+    const decoded = decodeURIComponent(urlPath.split('?')[0]);
+    if (decoded.includes('\0')) return null;
+    const normalized = decoded.replace(/\\/g, '/');
+    const rel = normalized.startsWith('/') ? normalized.slice(1) : normalized;
+    const resolved = path.resolve(rootDir, rel);
+    if (!isInsideRoot(resolved)) return null;
+    // Comprobar también el destino real de los enlaces simbólicos existentes.
+    if (existsSync(resolved) && !isInsideRoot(realpathSync(resolved))) return null;
+    return resolved;
+  } catch {
+    return null;
+  }
+}
+
+function isInsideRoot(filePath) {
+  const relative = path.relative(rootDir, filePath);
+  return relative !== '..' && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative);
 }
 
 const server = http.createServer((req, res) => {
@@ -65,11 +77,21 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (!isInsideRoot(realpathSync(filePath))) {
+    res.writeHead(400);
+    res.end('Bad request');
+    return;
+  }
+
   const ext = path.extname(filePath).toLowerCase();
   res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
-  createReadStream(filePath).pipe(res);
+  const stream = createReadStream(filePath);
+  // Un archivo retirado durante la lectura no debe derribar el servidor.
+  stream.on('error', () => res.destroy());
+  res.on('close', () => stream.destroy());
+  stream.pipe(res);
 });
 
 server.listen(port, '127.0.0.1', () => {
-  console.log(`[serve-dist] http://127.0.0.1:${port}/ (root: ${rootDir})`);
+  console.log(`[serve-dist] http://127.0.0.1:${server.address().port}/ (root: ${rootDir})`);
 });

@@ -251,6 +251,8 @@ document.addEventListener('DOMContentLoaded', function() {
   function closeModals() {
     const openModals = document.querySelectorAll('.modal.open, [role="dialog"][aria-hidden="false"]');
     openModals.forEach(modal => {
+      // El visor restaura foco, scroll e imagen en su propio controlador de Escape.
+      if (modal.classList.contains('colaboraciones-lightbox')) return;
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
     });

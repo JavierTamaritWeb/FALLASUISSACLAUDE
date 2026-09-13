@@ -6,8 +6,9 @@
 
 | Documento | Descripción | Actualización |
 | ----------- | ------------- | --------------- |
-| [`build-and-deploy.md`](./build-and-deploy.md) | Build con Gulp, pre-render i18n VA, kill switch, contenido de `dist/`, despliegue y relación con tests | 07/05/2026 |
-| [`e2e-testing.md`](./e2e-testing.md) | Estrategia Playwright: smoke suite, banner, modal sobre DOM real, validación HOPE y aislamiento de regresiones visuales | 20/03/2026 |
+| [`auditoria-2026-09-13.md`](./auditoria-2026-09-13.md) | Errores reproducidos, correcciones, pruebas y límites de la auditoría | 13/09/2026 |
+| [`build-and-deploy.md`](./build-and-deploy.md) | Build con errores propagados, watch completo, pre-render VA, despliegue y simulación segura | 13/09/2026 |
+| [`e2e-testing.md`](./e2e-testing.md) | Pruebas Node y Playwright, guardias de auditoría, resultados y cobertura por navegador | 13/09/2026 |
 | [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar general del sitio, caso especial de `llibret_2026.html` y estrategia WebKit/Firefox | 20/03/2026 |
 | [`structured-data.md`](./structured-data.md) | JSON-LD del sitio, referencias HOPE-INCLIVA y validación de metadatos técnicos | 20/03/2026 |
 | [`architecture-constraints.md`](./architecture-constraints.md) | Constraints de arquitectura: navegación, banner, gradientes, reveal, blog, SEO multi-idioma (canonical/hreflang), pre-render i18n VA | 07/05/2026 |

@@ -4,7 +4,13 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    let darkModeEnabled = false;
+    try {
+      darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    } catch (error) {
+      // El bloqueo del almacenamiento no debe abortar iconos, tema ni ajustes iOS.
+      console.warn('No se pudo leer la preferencia de modo oscuro.');
+    }
     if (darkModeEnabled) {
       document.body.classList.add('modo-oscuro');
       document.documentElement.classList.add('modo-oscuro');

@@ -4,7 +4,7 @@ Esta guía describe cómo construir el proyecto, qué genera `dist/`, y cómo de
 
 ## ✅ Requisitos
 
-- Node.js 18+ (recomendado 20+)
+- Node.js 20.9+ (se ha validado con Node.js 22.13; Sharp 0.35.4 requiere 20.9+)
 - npm 9+
 
 ## 📦 Instalación
@@ -259,3 +259,11 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 ---
 
 Última actualización: 13 de septiembre de 2026 - v4.30.19
+
+## Guardias de compilación y despliegue (13-09-2026)
+
+`npm run dev` utiliza una cola de compilación completa para actualizar también el HTML valenciano, el esquema, el índice de búsqueda y los hashes CSS/JS. Un error de Sass o Terser hace fallar `npm run build`; no se debe desplegar su salida parcial.
+
+`npm run test:unit` comprueba estos contratos, el servidor local y el despliegue mediante simuladores sin conexión SSH. `--dry-run --maintenance on|off` solo describe la operación. Las verificaciones de mantenimiento devuelven un código de error si el estado HTTP no coincide. Las variables exportadas tienen prioridad sobre `tools/deploy.env`.
+
+Registro completo: [auditoría del 13-09-2026](auditoria-2026-09-13.md).

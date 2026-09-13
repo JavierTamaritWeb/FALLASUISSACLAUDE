@@ -39,7 +39,19 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 # SSH_USER/HOST/etc. y el token de mantenimiento no se hardcodean en el repo:
 # se leen de deploy.env (copia de deploy.env.example). Las var. de entorno ganan.
 if [[ -f "$SCRIPT_DIR/deploy.env" ]]; then
+  # Conservar los valores exportados por quien invoca el script.
+  ENV_OVERRIDES=()
+  for config_key in SSH_USER SSH_HOST SSH_PORT REMOTE_DIR LOCAL_DIR SITE_URL MAINT_TOKEN; do
+    if printenv "$config_key" >/dev/null; then
+      ENV_OVERRIDES+=("$config_key=${!config_key}")
+    fi
+  done
   set -a; . "$SCRIPT_DIR/deploy.env"; set +a
+  # Bash 3.2 (macOS) trata un array vacío como no definido con set -u.
+  if [[ ${#ENV_OVERRIDES[@]} -gt 0 ]]; then
+    for config_entry in "${ENV_OVERRIDES[@]}"; do export "$config_entry"; done
+  fi
+  unset ENV_OVERRIDES config_key config_entry
 fi
 
 # --- Configuración ----------------------------------------------------------
@@ -61,6 +73,16 @@ info()  { printf '%s==>%s %s\n' "$C_INFO" "$C_RST" "$*"; }
 ok()    { printf '%s✓%s %s\n'  "$C_OK"   "$C_RST" "$*"; }
 fail()  { printf '%s✗ %s%s\n'  "$C_ERR" "$*" "$C_RST" >&2; }
 die()   { fail "$*"; exit 1; }
+
+# No usar curl -f: HTTP 503 es precisamente el resultado válido en mantenimiento.
+http_code() {
+  local result
+  if result="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "$1")"; then
+    printf '%s' "$result"
+  else
+    printf '000'
+  fi
+}
 
 # Imprime el encabezado: líneas de comentario tras el shebang, hasta la primera no-comentario.
 usage() { awk 'NR==1{next} /^#/{sub(/^# ?/,""); print; next} {exit}' "${BASH_SOURCE[0]}"; exit 0; }
@@ -102,26 +124,30 @@ inject_maint_token() {
   if $SSH_CMD "$SSH_USER@$SSH_HOST" "f='$REMOTE_DIR/.htaccess'; [ -f \"\$f\" ] && sed -i 's/__MAINT_TOKEN__/$MAINT_TOKEN/g' \"\$f\""; then
     ok "Token de bypass inyectado en el .htaccess del servidor."
   else
-    fail "No se pudo inyectar el token en el .htaccess del servidor (revisa SSH)."
+    die "No se pudo inyectar el token en el .htaccess del servidor (revisa SSH)."
   fi
 }
 
 # --- Modo mantenimiento (cortocircuita: no construye ni sincroniza) ---------
 if [[ -n "$MAINTENANCE" ]]; then
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    info "DRY-RUN: se solicitaría mantenimiento $MAINTENANCE; no se ejecutan cambios remotos."
+    exit 0
+  fi
   if [[ "$MAINTENANCE" == "on" ]]; then
     info "Activando modo mantenimiento…"
     inject_maint_token   # garantiza el token en el .htaccess antes de cortar el acceso
     $SSH_CMD "$SSH_USER@$SSH_HOST" "touch '$MAINT_FILE'" || die "No se pudo crear el centinela por SSH."
     info "Verificando $SITE_URL …"
-    code="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL" || echo "000")"
+    code="$(http_code "$SITE_URL")"
     [[ "$code" == "503" ]] \
       && ok "Mantenimiento ACTIVO — el sitio responde 503 para los visitantes." \
-      || fail "Centinela creado, pero el sitio devolvió HTTP $code (esperado 503; revisa el .htaccess)."
+      || die "Centinela creado, pero el sitio devolvió HTTP $code (esperado 503; revisa el .htaccess)."
     if [[ -n "$MAINT_TOKEN" ]]; then
-      bcode="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL/?preview=$MAINT_TOKEN" || echo "000")"
+      bcode="$(http_code "$SITE_URL/?preview=$MAINT_TOKEN")"
       [[ "$bcode" == "200" ]] \
         && ok "Bypass OK — con el token el equipo ve la web real (200)." \
-        || fail "El bypass con token devolvió HTTP $bcode (esperado 200)."
+        || die "El bypass con token devolvió HTTP $bcode (esperado 200)."
       info "Enlace de previsualización para el equipo (no compartir públicamente):"
       printf '   %s/?preview=%s\n' "$SITE_URL" "$MAINT_TOKEN"
     fi
@@ -129,10 +155,10 @@ if [[ -n "$MAINTENANCE" ]]; then
     info "Desactivando modo mantenimiento (borrando centinela)…"
     $SSH_CMD "$SSH_USER@$SSH_HOST" "rm -f '$MAINT_FILE'" || die "No se pudo borrar el centinela por SSH."
     info "Verificando $SITE_URL …"
-    code="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL" || echo "000")"
+    code="$(http_code "$SITE_URL")"
     [[ "$code" == "200" ]] \
       && ok "Mantenimiento DESACTIVADO — el sitio responde 200." \
-      || fail "Centinela borrado, pero el sitio devolvió HTTP $code (esperado 200; revisa manualmente)."
+      || die "Centinela borrado, pero el sitio devolvió HTTP $code (esperado 200; revisa manualmente)."
   fi
   exit 0
 fi
@@ -151,8 +177,8 @@ fi
 
 # --- 2. Comprobación previa SSH ---------------------------------------------
 info "Comprobando conexión SSH y rsync remoto…"
-if ! $SSH_CMD "$SSH_USER@$SSH_HOST" "command -v rsync >/dev/null 2>&1 && mkdir -p '$REMOTE_DIR'"; then
-  die "Fallo SSH: o no hay conexión, o el servidor no tiene rsync, o no se pudo crear $REMOTE_DIR."
+if ! $SSH_CMD "$SSH_USER@$SSH_HOST" "command -v rsync >/dev/null 2>&1"; then
+  die "Fallo SSH: o no hay conexión, o el servidor no tiene rsync."
 fi
 ok "Servidor accesible y rsync disponible. Destino: $REMOTE_DIR/"
 
@@ -167,6 +193,10 @@ if [[ "$DRY_RUN" -eq 0 && "$ASSUME_YES" -eq 0 ]]; then
 fi
 
 # --- 4. Sincronización rsync ------------------------------------------------
+# Crear el destino solo tras la confirmación y fuera del modo de simulación.
+if [[ "$DRY_RUN" -eq 0 ]]; then
+  $SSH_CMD "$SSH_USER@$SSH_HOST" "mkdir -p '$REMOTE_DIR'" || die "No se pudo crear $REMOTE_DIR."
+fi
 # --exclude='.maintenance': el centinela del modo mantenimiento vive en el
 # servidor (no en dist/); sin esta exclusión, --delete lo borraría y un deploy
 # normal durante el mantenimiento apagaría el 503 sin querer.
@@ -202,7 +232,7 @@ inject_maint_token
 
 # --- 5. Verificación post-deploy --------------------------------------------
 info "Verificando $SITE_URL …"
-code="$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL" || echo "000")"
+code="$(http_code "$SITE_URL")"
 if [[ "$code" == "200" ]]; then
   ok "Deploy correcto — $SITE_URL responde 200."
 else

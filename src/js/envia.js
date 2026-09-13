@@ -51,6 +51,11 @@ function loadEmailJs() {
   emailJsPromise = new Promise((resolve, reject) => {
     let script = document.querySelector(EMAILJS_SCRIPT_SELECTOR);
 
+    const cleanup = () => {
+      script.removeEventListener('load', handleLoad);
+      script.removeEventListener('error', handleError);
+    };
+
     const handleLoad = () => {
       if (script) {
         script.dataset.loaded = 'true';
@@ -58,15 +63,19 @@ function loadEmailJs() {
 
       const loadedClient = getEmailJsClient();
       if (loadedClient) {
+        cleanup();
         resolve(loadedClient);
         return;
       }
 
-      emailJsPromise = null;
-      reject(new Error('EmailJS se ha cargado pero no está disponible en window.emailjs.'));
+      handleError();
     };
 
     const handleError = () => {
+      cleanup();
+      // Una etiqueta cuyo evento error ya ocurrió nunca vuelve a emitir load.
+      // Retirarla permite que el siguiente intento cree una petición nueva.
+      script.remove();
       emailJsPromise = null;
       reject(new Error('No se pudo cargar EmailJS.'));
     };
