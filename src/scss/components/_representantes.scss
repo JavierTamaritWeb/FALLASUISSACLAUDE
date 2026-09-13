@@ -280,6 +280,24 @@ body.modo-oscuro .accordion--representantes {
   }
 }
 
+// Botones de descarga de Archivos (dron y Ofrenda): el .boton global lleva
+// white-space: nowrap y en móvil el texto largo ("Descargar vídeo de la
+// Ofrenda") desbordaba el panel y quedaba cortado. Aquí el botón no pasa del
+// ancho disponible y el texto puede partirse en dos líneas centradas (v4.30.18).
+.monumentos-grid__descarga .boton,
+.ofrendas-video__descarga .boton {
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.3;
+
+  // En pantallas muy estrechas, menos relleno lateral para no pasar de 2 líneas
+  @media (max-width: 479px) {
+    padding-inline: 1.6rem;
+    letter-spacing: 0.04em;
+  }
+}
+
 // ---------------------------------------------------------------
 // Ofrendas (Historia/Archivos, v4.18.0): panel por ejercicio con el vídeo
 // de la Ofrenda reproducido por el <video controls> nativo del navegador

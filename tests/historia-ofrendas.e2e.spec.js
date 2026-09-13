@@ -116,6 +116,27 @@ for (const pagina of PAGINAS) {
 
     // v4.21.0: las 3 fotos de la Ofrenda 2026 (antes galería de la sección Ofrenda)
     // son miniaturas ampliables con el lightbox compartido de Colaboraciones
+    // Guardia v4.30.18: en móvil el .boton global (white-space: nowrap) desbordaba
+    // el panel y el texto del botón de descarga quedaba cortado.
+    for (const ancho of [320, 390]) {
+      test(`móvil ${ancho} px: el botón de descarga de la Ofrenda no se corta`, async ({ page }) => {
+        await page.setViewportSize({ width: ancho, height: 800 });
+        await page.goto(`/${pagina}`);
+        await abrirPanel(page, pagina);
+        const enlace = page.locator('.ofrendas-video__descarga a.boton[download]').first();
+        await enlace.scrollIntoViewIfNeeded();
+        await expect(enlace).toBeVisible();
+        const geo = await enlace.evaluate((el) => {
+          const b = el.getBoundingClientRect();
+          const p = el.closest('.accordion__content').getBoundingClientRect();
+          return { bl: b.left, br: b.right, pl: p.left, pr: p.right, scroll: el.scrollWidth, client: el.clientWidth };
+        });
+        expect(geo.bl).toBeGreaterThanOrEqual(geo.pl - 0.5);
+        expect(geo.br).toBeLessThanOrEqual(geo.pr + 0.5);
+        expect(geo.scroll).toBeLessThanOrEqual(geo.client + 1);
+      });
+    }
+
     test('3 miniaturas ampliables: badge "+", lightbox con pie y cierre con "×" y Escape', async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 800 });
       await page.goto(`/${pagina}`);
