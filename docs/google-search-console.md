@@ -177,8 +177,10 @@ RewriteRule "^img/ofrenda/(.*)$" /img/ofrenda-virgen-desamparados/$1 [R=301,L,QS
 # L) Escudo oficial renombrado y movido (v4.30.14): Escudo_falla / Escudo-Oficial-Falla → escudo-falla/Escudo-Oficial-Falla
 RewriteRule "^img/(Escudo_falla|Escudo-Oficial-Falla)\.(png|avif|webp)$" /img/escudo-falla/Escudo-Oficial-Falla.$2 [R=301,L,QSA]
 
-# M) Imágenes del visor del monumento → /img/Visor-Monumento/ (v4.30.15)
-RewriteRule "^img/((falla2026-infantil-real|falla2026-real|falla2027-Infantil|falla2027|foto_2425_01|foto_2425_02)\.(jpg|jpeg|avif|webp))$" /img/Visor-Monumento/$1 [R=301,L,QSA]
+# M) Imágenes del visor del monumento → /img/Visor-Monumento/ (v4.30.15), renombradas en v4.30.16;
+#    un solo 301 desde la raíz de /img/ y desde el nombre antiguo dentro de la carpeta (6 reglas)
+RewriteRule "^img/(Visor-Monumento/)?falla2027\.(jpg|jpeg|avif|webp)$" /img/Visor-Monumento/monumento-falla-2026-27-boceto.$2 [R=301,L,QSA]
+# … ídem para falla2027-Infantil, falla2026-real, falla2026-infantil-real, foto_2425_01 y foto_2425_02
 ```
 
 ### Reglas operativas
@@ -213,4 +215,4 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.15
+Última actualización: 13 de septiembre de 2026 - v4.30.16

@@ -85,7 +85,7 @@ for (const pagina of PAGINAS) {
       await trigger.click();
       await expect(lightbox).toHaveClass(/open/);
       await expect(lightbox).toHaveAttribute('aria-hidden', 'false');
-      await expect(imagen).toHaveAttribute('src', /falla2026-real\.(avif|webp|jpeg)$/);
+      await expect(imagen).toHaveAttribute('src', /monumento-falla-2025-26-real\.(avif|webp|jpeg)$/);
       await expect(lightbox.locator('.colaboraciones-lightbox__caption')).toContainText('Monumento principal');
 
       await page.keyboard.press('Escape');

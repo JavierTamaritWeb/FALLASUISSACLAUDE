@@ -5,11 +5,11 @@ Esta guía existe para el mantenimiento del visor del monumento cuando cambia el
 - cambiar solo los nombres de archivo y dejar lógica visual heredada que ya no aplica
 - borrar el hook temporal de 2026 sin comprobar antes si la nueva foto real necesita un ajuste similar
 
-Si solo necesitas entender el visor actual, consulta `docs/swiper-monumento.md`. Esta guía está centrada en la rotación anual. **Estado (v4.16.0)**: el visor muestra los 2 bocetos 2026-27 (`falla2027.avif`, `falla2027-Infantil.avif`) y el hook `swiper-slide--monumento-real` **ya no existe** — las secciones sobre el hook quedan como referencia por si una futura foto real vuelve a necesitar un ajuste propio. Las imágenes del ejercicio saliente no se borran: pasan al panel *Historia/Archivos/Monumentos* de ese ejercicio.
+Si solo necesitas entender el visor actual, consulta `docs/swiper-monumento.md`. Esta guía está centrada en la rotación anual. **Estado (v4.16.0)**: el visor muestra los 2 bocetos 2026-27 (`monumento-falla-2026-27-boceto.avif`, `monumento-falla-2026-27-Infantil-boceto.avif`) y el hook `swiper-slide--monumento-real` **ya no existe** — las secciones sobre el hook quedan como referencia por si una futura foto real vuelve a necesitar un ajuste propio. Las imágenes del ejercicio saliente no se borran: pasan al panel *Historia/Archivos/Monumentos* de ese ejercicio.
 
 ## Qué cambia normalmente cada año
 
-Las imágenes del visor (fuentes JPEG de los bocetos y fotos del monumento) viven en `src/img/Visor-Monumento/` desde v4.30.15; deja ahí los JPEG nuevos y enlázalos como `img/Visor-Monumento/<nombre>.avif`.
+Las imágenes del visor (fuentes JPEG de los bocetos y fotos del monumento) viven en `src/img/Visor-Monumento/` desde v4.30.15; deja ahí los JPEG nuevos con la convención `monumento-falla-<ejercicio>-boceto` / `-Infantil-boceto` (v4.30.16) y enlázalos como `img/Visor-Monumento/<nombre>.avif`.
 
 En el visor del monumento suelen cambiar:
 
@@ -35,9 +35,9 @@ No edites `dist/` a mano. Regénéralo con build.
 
 Antes de tocar nada, busca al menos estas cadenas en el repo:
 
-- `falla2027.avif`
-- `falla2027-Infantil.avif`
-- `falla2027-Infantil\\.avif` (regex del test E2E)
+- `monumento-falla-2026-27-boceto.avif`
+- `monumento-falla-2026-27-Infantil-boceto.avif`
+- `monumento-falla-2026-27-Infantil-boceto\\.avif` (regex del test E2E)
 - `monumento-swiper`
 
 Y para el panel de Archivos del ejercicio saliente: `falla2026` (HTML, `tests/historia-monumentos.e2e.spec.js`).
@@ -176,4 +176,4 @@ Cuando cambie el juego de imágenes del monumento, asume por defecto que el hook
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.15
+Última actualización: 13 de septiembre de 2026 - v4.30.16

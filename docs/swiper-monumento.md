@@ -27,10 +27,10 @@ El visor del monumento vive hoy en `index.html` y `lafalla.html` con la misma es
 <div class="swiper swiper--autoheight contenedor" data-testid="monumento-swiper">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <img src="img/Visor-Monumento/falla2027.avif" width="1068" height="1473" alt="Boceto del monumento fallero principal de la Falla Suïssa 2026-27" loading="eager" fetchpriority="high">
+      <img src="img/Visor-Monumento/monumento-falla-2026-27-boceto.avif" width="1068" height="1473" alt="Boceto del monumento fallero principal de la Falla Suïssa 2026-27" loading="eager" fetchpriority="high">
     </div>
     <div class="swiper-slide">
-      <img src="img/Visor-Monumento/falla2027-Infantil.avif" width="1049" height="1499" alt="Boceto del monumento fallero infantil de la Falla Suïssa 2026-27" loading="lazy">
+      <img src="img/Visor-Monumento/monumento-falla-2026-27-Infantil-boceto.avif" width="1049" height="1499" alt="Boceto del monumento fallero infantil de la Falla Suïssa 2026-27" loading="lazy">
     </div>
   </div>
 
@@ -45,10 +45,10 @@ El visor del monumento vive hoy en `index.html` y `lafalla.html` con la misma es
 
 El visor del monumento trabaja con 2 slides base no duplicadas, los bocetos del ejercicio 2026-27:
 
-- `src/img/Visor-Monumento/falla2027.jpg` (el build genera `dist/img/Visor-Monumento/falla2027.{avif,webp}`)
-- `src/img/Visor-Monumento/falla2027-Infantil.jpg` (→ `falla2027-Infantil.{avif,webp}`)
+- `src/img/Visor-Monumento/monumento-falla-2026-27-boceto.jpg` (el build genera `dist/img/Visor-Monumento/monumento-falla-2026-27-boceto.{avif,webp}`)
+- `src/img/Visor-Monumento/monumento-falla-2026-27-Infantil-boceto.jpg` (→ `monumento-falla-2026-27-Infantil-boceto.{avif,webp}`)
 
-Convención de nombres: `falla<año de plantà>` (`falla2026` = ejercicio 2025-26, `falla2027` = 2026-27). La fuente que usa el visor se guarda como JPEG (~440 KB); los PNG originales (con y sin rótulo) quedan archivados en `src/img/monument/bocetos/` sin referencia desde HTML (v4.16.1).
+Convención de nombres (v4.30.16): `monumento-falla-<ejercicio>-boceto` y `monumento-falla-<ejercicio>-Infantil-boceto` para los bocetos, `monumento-falla-<ejercicio>-real` / `-infantil-real` para las fotos plantadas (antes `falla<año de plantà>`: `falla2026` = 2025-26, `falla2027` = 2026-27). La fuente que usa el visor se guarda como JPEG (~440 KB); los PNG originales (con y sin rótulo) quedan archivados en `src/img/monument/bocetos/` sin referencia desde HTML (v4.16.1).
 
 Convención de carga:
 
@@ -212,7 +212,7 @@ Cobertura relevante:
 - ausencia de overflow horizontal en desktop
 - ausencia de solape entre botones y la imagen activa
 - estabilidad de `autoHeight`
-- dos transiciones con `next`: a `falla2027-Infantil.avif` y, gracias a `loop: true`, de vuelta a `falla2027.avif`
+- dos transiciones con `next`: a `monumento-falla-2026-27-Infantil-boceto.avif` y, gracias a `loop: true`, de vuelta a `monumento-falla-2026-27-boceto.avif`
 
 Detalle importante:
 
@@ -258,4 +258,4 @@ npm run test:e2e:full
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.15
+Última actualización: 13 de septiembre de 2026 - v4.30.16

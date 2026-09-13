@@ -175,8 +175,8 @@ test.describe('Monumento: Swiper autoHeight sin recortes', () => {
   // Bocetos del ejercicio 2026-27 (v4.16.0); las fotos 2025-26 viven en
   // Historia/Archivos/Monumentos (tests/historia-monumentos.e2e.spec.js)
   const expectedSrcs = [
-    'img/Visor-Monumento/falla2027.avif',
-    'img/Visor-Monumento/falla2027-Infantil.avif'
+    'img/Visor-Monumento/monumento-falla-2026-27-boceto.avif',
+    'img/Visor-Monumento/monumento-falla-2026-27-Infantil-boceto.avif'
   ];
 
   for (const pageName of ['index.html', 'lafalla.html']) {
@@ -205,7 +205,7 @@ test.describe('Monumento: Swiper autoHeight sin recortes', () => {
         if (await next.isVisible()) {
           let previousHeight = swiperBox.height;
 
-          for (const expectedSrc of [/falla2027-Infantil\.avif/, /falla2027\.avif/]) {
+          for (const expectedSrc of [/monumento-falla-2026-27-Infantil-boceto\.avif/, /monumento-falla-2026-27-boceto\.avif/]) {
             await next.click();
             await page.waitForTimeout(350);
             await expect(swiper.locator('.swiper-slide-active img')).toHaveAttribute('src', expectedSrc);

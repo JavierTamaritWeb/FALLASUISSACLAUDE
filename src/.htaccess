@@ -274,9 +274,15 @@ ErrorDocument 503 /mantenimiento.html
     #    schema y el HTML cacheado por la CDN. Un solo 301 desde ambos nombres antiguos.
     RewriteRule "^img/(Escudo_falla|Escudo-Oficial-Falla)\.(png|avif|webp)$" /img/escudo-falla/Escudo-Oficial-Falla.$2 [R=301,L,QSA]
 
-    # M) Imágenes del visor del monumento movidas a /img/Visor-Monumento/ en v4.30.15
-    #    (bocetos falla2027*, fotos plantadas falla2026-*-real y foto_2425_0*)
-    RewriteRule "^img/((falla2026-infantil-real|falla2026-real|falla2027-Infantil|falla2027|foto_2425_01|foto_2425_02)\.(jpg|jpeg|avif|webp))$" /img/Visor-Monumento/$1 [R=301,L,QSA]
+    # M) Imágenes del visor del monumento: movidas a /img/Visor-Monumento/ en v4.30.15 y
+    #    renombradas en v4.30.16 (monumento-falla-AAAA-AA-…). Un solo 301 al nombre nuevo
+    #    desde la raíz de /img/ y desde el nombre antiguo dentro de la carpeta.
+    RewriteRule "^img/(Visor-Monumento/)?falla2026-infantil-real\.(jpg|jpeg|avif|webp)$" /img/Visor-Monumento/monumento-falla-2025-26-infantil-real.$2 [R=301,L,QSA]
+    RewriteRule "^img/(Visor-Monumento/)?falla2026-real\.(jpg|jpeg|avif|webp)$" /img/Visor-Monumento/monumento-falla-2025-26-real.$2 [R=301,L,QSA]
+    RewriteRule "^img/(Visor-Monumento/)?falla2027-Infantil\.(jpg|jpeg|avif|webp)$" /img/Visor-Monumento/monumento-falla-2026-27-Infantil-boceto.$2 [R=301,L,QSA]
+    RewriteRule "^img/(Visor-Monumento/)?falla2027\.(jpg|jpeg|avif|webp)$" /img/Visor-Monumento/monumento-falla-2026-27-boceto.$2 [R=301,L,QSA]
+    RewriteRule "^img/(Visor-Monumento/)?foto_2425_01\.(jpg|jpeg|avif|webp)$" /img/Visor-Monumento/monumento-real-foto_2024-25_01.$2 [R=301,L,QSA]
+    RewriteRule "^img/(Visor-Monumento/)?foto_2425_02\.(jpg|jpeg|avif|webp)$" /img/Visor-Monumento/monumento-real-foto_2024-25_02.$2 [R=301,L,QSA]
 
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
