@@ -260,6 +260,10 @@ ErrorDocument 503 /mantenimiento.html
     #    /img/representantes/foto-oficiales-representantes/ en v4.30.11
     RewriteRule "^img/((FalleraMayorInfantil|FalleraMayor|PresidenteInfantil|Presidente)(-2026-27)?\.(jpg|avif|webp))$" /img/representantes/foto-oficiales-representantes/$1 [R=301,L,QSA]
 
+    # K) Carpeta de la Ofrenda a la Virgen renombrada en v4.30.12
+    #    (/img/ofrenda/ -> /img/ofrenda-virgen-desamparados/; /img/ofrenda-frutos/ no cambia)
+    RewriteRule "^img/ofrenda/(.*)$" /img/ofrenda-virgen-desamparados/$1 [R=301,L,QSA]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
