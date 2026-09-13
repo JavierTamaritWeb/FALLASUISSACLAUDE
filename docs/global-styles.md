@@ -322,9 +322,9 @@ Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de
   <div class="banner-subvencion__contenido">
     <button class="banner-subvencion__cerrar" aria-label="Cerrar banner">&times;</button>
     <picture>
-      <source srcset="img/subvencion.avif" type="image/avif">
-      <source srcset="img/subvencion.webp" type="image/webp">
-      <img class="banner-subvencion__imagen" src="img/subvencion.png" alt="Información de subvención">
+      <source srcset="img/subvenciones/subvencion-2026.avif" type="image/avif">
+      <source srcset="img/subvenciones/subvencion-2026.webp" type="image/webp">
+      <img class="banner-subvencion__imagen" src="img/subvenciones/subvencion-2026.png" alt="Información de subvención">
     </picture>
   </div>
 </div>
@@ -399,7 +399,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.8
+Última actualización: 13 de septiembre de 2026 - v4.30.9
 
 ## 🏛️ Componente Frieze (Cenefa)
 

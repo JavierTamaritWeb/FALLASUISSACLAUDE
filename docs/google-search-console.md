@@ -137,7 +137,7 @@ GSC reportó 24 URLs 404 (pico de 36 en abril, descendiendo solo a 24 en mayo). 
 
 ### Cómo lo resuelve el repo
 
-`src/.htaccess` declara 8 reglas (A-H; E = 410 de base.html) dentro del bloque `<IfModule mod_rewrite.c>`, **después** de la redirección `www → no-www` y **antes** de la negociación de Markdown:
+`src/.htaccess` declara 9 reglas (A-I; E = 410 de base.html) dentro del bloque `<IfModule mod_rewrite.c>`, **después** de la redirección `www → no-www` y **antes** de la negociación de Markdown:
 
 ```apache
 # A) /va/pdf/* → /pdf/*
@@ -161,6 +161,9 @@ RewriteRule "^img/(icono_(facebook|instagram|tiktok|youtube)[0-9a-z-]*\.svg|logo
 
 # G) Favicons movidos a /img/favicon/ (v4.30.4)
 RewriteRule "^img/(favicon\.ico|favicon-16x16\.png|favicon-32x32\.png|apple-touch-icon\.png|android-chrome-…)$" /img/favicon/$1 [R=301,L,QSA]
+
+# I) Imagen del banner de subvención → /img/subvenciones/subvencion-2026.* (v4.30.9)
+RewriteRule "^img/subvencion\.(png|avif|webp)$" /img/subvenciones/subvencion-2026.$1 [R=301,L,QSA]
 ```
 
 ### Reglas operativas
@@ -195,4 +198,4 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ---
 
-Última actualización: 12 de septiembre de 2026 - v4.30.8
+Última actualización: 13 de septiembre de 2026 - v4.30.9

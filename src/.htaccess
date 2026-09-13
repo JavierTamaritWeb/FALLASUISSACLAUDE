@@ -252,6 +252,10 @@ ErrorDocument 503 /mantenimiento.html
     #    un main.css antiguo cacheado seguiría pidiendo /img/icono_*.svg)
     RewriteRule "^img/(icono_(facebook|instagram|tiktok|youtube)[0-9a-z-]*\.svg|logo_falla\.svg)$" /img/iconos-redes-sociales/$1 [R=301,L,QSA]
 
+    # I) Imagen del banner de subvención movida a /img/subvenciones/ y
+    #    renombrada con el año en v4.30.9 (HTML de la home cacheado por la CDN)
+    RewriteRule "^img/subvencion\.(png|avif|webp)$" /img/subvenciones/subvencion-2026.$1 [R=301,L,QSA]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
