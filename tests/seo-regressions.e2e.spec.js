@@ -34,7 +34,15 @@ test('la portada no descarga las fotografías de los archivos cerrados', async (
   await expect(pending.first()).toHaveCSS('content-visibility', 'hidden');
 });
 
-test('el banner aparece aunque Swiper tarde en responder', async ({ browser }) => {
+test('el banner se entrega visible sin JavaScript y no espera a Swiper', async ({ browser }) => {
+  const staticPage = await browser.newPage({ javaScriptEnabled: false, serviceWorkers: 'block' });
+  try {
+    await staticPage.goto('/');
+    await expect(staticPage.locator('#banner-subvencion')).toBeVisible();
+    await expect(staticPage.locator('#banner-subvencion')).toHaveAttribute('aria-hidden', 'false');
+  } finally {
+    await staticPage.close();
+  }
   const page = await browser.newPage({ storageState: { cookies: [], origins: [] }, serviceWorkers: 'block' });
   let release;
   const pending = new Promise(resolve => { release = resolve; });

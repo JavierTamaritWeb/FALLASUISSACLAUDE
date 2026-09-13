@@ -284,3 +284,5 @@ Las fotos de acordeones cerrados no deben descargarse al abrir la portada. `_fal
 Los escudos de cabecera se cargan con `loading="eager"` y `width`/`height` reales. El banner también reserva su proporción real y usa prioridad alta. No aplicar el placeholder genérico de imágenes lazy a estos elementos visibles ni a los escudos del pie: su reserva de 200 px causaba saltos de composición.
 
 Las fuentes y los derivados de imagen tienen caché larga. Si cambia su contenido en una versión futura, cambiar también el nombre público (`file`/`output` del manifiesto) y sus referencias para no reutilizar una URL inmutable con bytes distintos.
+
+El banner de subvención se entrega visible desde `src/index.html`, con `aria-hidden="false"` y sin `oculto` ni `inert`. No ocultarlo esperando JavaScript: retrasa su pintura e impide verlo si falla el script. El cierre y la excepción de Playwright siguen gestionados por `banner-subvencion.js`.
