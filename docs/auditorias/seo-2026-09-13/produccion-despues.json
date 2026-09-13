@@ -1,0 +1,914 @@
+{
+  "checkedAt": "2026-09-13T21:21:07.265Z",
+  "version": "4.30.21",
+  "pages": 60,
+  "requests": 133,
+  "results": [
+    {
+      "route": "/sitemap.xml",
+      "status": 200,
+      "location": null,
+      "type": "application/xml",
+      "sha256": "c7e471547ab1d5f1f887e1544cec59a8e4dc5203abb5576f73f9c58a8f543a6b"
+    },
+    {
+      "route": "/sitemap-index.xml",
+      "status": 200,
+      "location": null,
+      "type": "application/xml",
+      "sha256": "5eeea67f3f2959c126d9488d60935db04755a0a60bfdcc27052234bef9af0774"
+    },
+    {
+      "route": "/sitemap-google.xml",
+      "status": 200,
+      "location": null,
+      "type": "application/xml",
+      "sha256": "c7e471547ab1d5f1f887e1544cec59a8e4dc5203abb5576f73f9c58a8f543a6b"
+    },
+    {
+      "route": "/sitemap-ai-optimized.xml",
+      "status": 200,
+      "location": null,
+      "type": "application/xml",
+      "sha256": "c7e471547ab1d5f1f887e1544cec59a8e4dc5203abb5576f73f9c58a8f543a6b"
+    },
+    {
+      "route": "/sitemap-images.xml",
+      "status": 200,
+      "location": null,
+      "type": "application/xml",
+      "sha256": "ed83286b797bfa717f013b8cae57bb9b9f6780bb84333d74f1071a34f7af1016"
+    },
+    {
+      "route": "/sitemap-news.xml",
+      "status": 200,
+      "location": null,
+      "type": "application/xml",
+      "sha256": "95279437ffdebcc3a1e4d769dfea957bd4c837a5d58cb3fc5088f7910c7909c2"
+    },
+    {
+      "route": "/sw.js",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "62f6b60f9c6a269260e27be8f59e396b982256972951d324cb820baa2432128d"
+    },
+    {
+      "route": "/robots.txt",
+      "status": 200,
+      "location": null,
+      "type": "text/plain",
+      "sha256": "09217161970c6cc260baf8311fb678af3754391044a15d47ff39e07915d0710c"
+    },
+    {
+      "route": "/seo/ai-crawl.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "cd844e069ac9fd1e979a3a32280b31069a07a76659c30849632e01dee5e20070"
+    },
+    {
+      "route": "/seo/ai-enhanced-schema.json",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "sha256": "904d62a726d4ac50e29db2b44cff0b2b74dd92a33113df61db0a057a96395115"
+    },
+    {
+      "route": "/seo/ai-training-data.md",
+      "status": 200,
+      "location": null,
+      "type": "text/markdown; charset=utf-8",
+      "sha256": "318f474afe80381e9244513c3bcba4bc72c864c34cb8e236a677dd8fa47fd828"
+    },
+    {
+      "route": "/ai-discovery.json",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "sha256": "dcf6f9081d63af7d6268c2579ec11a4881b41591348e38f05d383b8679dad224"
+    },
+    {
+      "route": "/.well-known/agent-skills/index.json",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "sha256": "6e7331e9c120900723f2d2d48a9a834a8464ead87c893e9572245787cda5fb1c"
+    },
+    {
+      "route": "/data/translations.json",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "sha256": "27af2ebe84e1a0f0788acce2d7a0f85b26a6377f5944c92b4c99667908a7a9b2"
+    },
+    {
+      "route": "/autorizacion-imagen-menor.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "925b85a117e1bc547263a1dceeca76a6c35e1393b09bcc4cc8be376cdb336e60"
+    },
+    {
+      "route": "/blog-somni.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "bd59ab9b8c0f93eae358176a3e0cfce9be9b9faacf7534adc99eb5e6bccfa97f"
+    },
+    {
+      "route": "/autorizacion-imagen.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "fef3214a2e53605f467ec47a37f34248c23a25c882fcb22235801df4b3060841"
+    },
+    {
+      "route": "/blog-anima.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "46a980faf81ad244e58725306b5c171912a6d4b64e58e2afac2b1be3fbf7687e"
+    },
+    {
+      "route": "/blog.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "86c7cffd2fac8542c678ce79e0853f445455d006393708a17636334d571e3f97"
+    },
+    {
+      "route": "/calendario.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "15bf5aa1a3e32e1034b4eef0d9a4e4ccf02fae7f77238a709bdf96a4bac27347"
+    },
+    {
+      "route": "/colaboraciones.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "55a97759c4730c39b5cd1b3581944d005b7557848e8a87cc78f0aa73e38053f4"
+    },
+    {
+      "route": "/cookies.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "548e43ad71151694ea407a1f97513668d40c8839c68a3dba147075b0dcf7083c"
+    },
+    {
+      "route": "/deportes.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "241fbb4b91b1235ad31eded16acda36f29cd8990eb65ba29cdfd0e2c7bda0f2e"
+    },
+    {
+      "route": "/eventos.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "a3b14ea9fe6a697d517a2bd4cba17db086dd2395f947c25e9326050990456efd"
+    },
+    {
+      "route": "/galeria_1.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "3b35cc11ef6a79254f169b9c45170ea24e5bd24bdcc5b0e8e40b0b92a35741a6"
+    },
+    {
+      "route": "/galeria_2.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "00be9fcc9efaaddaf1b513e4cb17ebf8889bcca268b6f9023bf3076a445777e6"
+    },
+    {
+      "route": "/galeria_3.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "fb2ada67df7c641ce04df37b0a0883d93057ceb16ea1ef49913820ba5deee907"
+    },
+    {
+      "route": "/galeria_4.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "57846727e7f864bf9d65c616bede08e5f71e53ebd1bc4f8f50ee56c4afd02f21"
+    },
+    {
+      "route": "/galeria_5.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "fc853cc833d0289cf859c75bd736975a53426369c01338adb2fe67d67f0313a2"
+    },
+    {
+      "route": "/aviso-legal.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "b33d241f53830815a58a6307e9057cee6d95f5efcbd1c742fc2d4622b2f518c0"
+    },
+    {
+      "route": "/galeria_7.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "bb9729c3f52d4e174e36e53b77a9189b8f5433150ded1303bb128c9c1d6e4fbf"
+    },
+    {
+      "route": "/galeria_8.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "22bbd967dac46fd1fa42d4b00eeb2d2a51ef0ec3e7e207d5626e124a2789a736"
+    },
+    {
+      "route": "/galeria_6.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "6b55490f7f3bb6e0e8b30efd7fe7f4c51836ecb6f8d1a7dbbee55d8069762dab"
+    },
+    {
+      "route": "/galeria_9.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "75f9d69dcf2944da22a84cf5b301180fc95d2492aa23fdc4aaadd63ef5ae3331"
+    },
+    {
+      "route": "/galerias.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "c97c9be402326039c1ddb40881ca3e4a6d25c61004150b2732ce73f5589fc702"
+    },
+    {
+      "route": "/",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "38b501e58aa317aecb5babcd947ce6b89fb62b07f632c1d216402efe5b1081f2"
+    },
+    {
+      "route": "/lafalla.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "fc06bd6aba765e420914c4841729eea334a978b672a0239c47502444b3455988"
+    },
+    {
+      "route": "/mapa.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "560c23870cb728d7bb77e44031360183486f762456f44467240caec22f66956c"
+    },
+    {
+      "route": "/meteo.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "7ee015e9bbc4a1700c5e731b3c9610fa665388e571441a4bda8aaf186d9d0604"
+    },
+    {
+      "route": "/llibret_2026.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "192f3f723956d91ec75ed37845ac3d88ab5ee3901fa3d915f1178ed95acbfc2d"
+    },
+    {
+      "route": "/ofrenda.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "46dc1d9cf50b4f8cf7ef2e3a1f323aa79b45a02191f64624f07ab82db081d4fb"
+    },
+    {
+      "route": "/nuevos-falleros.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "3193052f43e296a57c1caa750e89b683c2c03d5aeb357c8d03e6e1440e918294"
+    },
+    {
+      "route": "/organigrama.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "8ee7c15f94d3006b898c2ecb1b3cd6e41c47cdf5230bc08ca583766f8f97d144"
+    },
+    {
+      "route": "/privacidad.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "466a784263b6656bae1f7ebcc72b78d03778b79de18e906d311283e18dc65c63"
+    },
+    {
+      "route": "/va/autorizacion-imagen-menor.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "533276a68a5f98dc49141ac51640c10be1e81155358e04d205c0f9ee1b9fd321"
+    },
+    {
+      "route": "/va/autorizacion-imagen.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "86bfa0acf628163d4d6d48d411af5f18ffc1e4a38033773479356f45734320a9"
+    },
+    {
+      "route": "/va/aviso-legal.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "393c8b43b15f534f2e9204b562adc9863b8ed1d3eef53203f5912fddc11b5ddf"
+    },
+    {
+      "route": "/va/blog-anima.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "d6682fec4d895be8adf3be047356ada2ed0c84ec0d68d97ef05194406e74ad1e"
+    },
+    {
+      "route": "/va/blog-somni.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "08c7ad4d7fc2902367f8e97819d0b992c274096639b0ece7393b9c71205d00cc"
+    },
+    {
+      "route": "/va/blog.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "9202dd23953c2ecbea32e009c42585e6c3c08ca63402b421948d584ef7b3322a"
+    },
+    {
+      "route": "/va/calendario.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "474c8e85a60f8691b6fefe6da3f1f97b2d094f912a3489a4ad55901c8727debc"
+    },
+    {
+      "route": "/va/colaboraciones.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "7288f769905e36f2b46010bb86a995ba06c96ffc6fa213de7e3c7e6831221afb"
+    },
+    {
+      "route": "/va/cookies.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "7e5ca00917a8e64e860c16e09dfc24ca9d8895d524123613ce2aaaa836930b8f"
+    },
+    {
+      "route": "/va/deportes.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "fb536f878e13d534170d012ab60701f1a85d5d08efc8ce0740cfe472eabfc674"
+    },
+    {
+      "route": "/va/eventos.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "2b572dbdcae06aea97ccf0e5d6574d02b44649f0a20fe59890b27b74c1d4016d"
+    },
+    {
+      "route": "/va/galeria_1.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "82cc1d9570304a590b3187213962fad54ae8cfe9a8b34cfe5f196a6f61398d12"
+    },
+    {
+      "route": "/va/galeria_2.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "ed0681190a9c70ab701fd68ab64965ab4130ee26a00c4e11cdb944b19a4ad37e"
+    },
+    {
+      "route": "/va/galeria_3.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "cc709fe91d21bcf1e05658295e345721836e442b38415cba8b6b4e99e73a911b"
+    },
+    {
+      "route": "/va/galeria_5.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "65b551d013c4269707b973a8150e09b130820068949cfac302522daa7970c7f0"
+    },
+    {
+      "route": "/va/galeria_4.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "649a991990caee0bd905baafd51ee5bc457bc02b9282878ad7d77491b0924419"
+    },
+    {
+      "route": "/va/galeria_6.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "e77a739163a0c485304ff5bf00334d5e79835f8400a474ffb2e78625aa4c46b9"
+    },
+    {
+      "route": "/va/galeria_8.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "2e04cd7d43e110ad274956b0b8c5163e09c3c4a0df91affaa340cbbb03daa82e"
+    },
+    {
+      "route": "/va/galeria_9.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "591a9b1ca5d25d795a930354ac198216a1eef8a152fe9565d895d3f7fffad724"
+    },
+    {
+      "route": "/va/galeria_7.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "2582d961e11de25e7e4a6781c7609397eed98793d1a1e2e669cab6a0c53a21d0"
+    },
+    {
+      "route": "/va/galerias.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "623afd53ee9904d811f0c677fb99bb28b681c62f8ee60ec48d4fa03f9efdc01b"
+    },
+    {
+      "route": "/va/lafalla.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "e1e748a9fd7fa8881ee6f8cb195e8b01c1d188d8bc9290271f80b75ea8b6cc08"
+    },
+    {
+      "route": "/va/",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "5a743d5bef23e2c1f74e0da2181b0fb1b5def68acabf7cadaf7b638882d1d903"
+    },
+    {
+      "route": "/va/llibret_2026.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "4042049109684d43d7d6ebc639b91061cb4b424a5132acd51e6f811b481ee5f9"
+    },
+    {
+      "route": "/va/mapa.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "75ad896af3faa4ee3905a336b64204cb6ae00086d83474906c05ed1d2a2c4010"
+    },
+    {
+      "route": "/va/meteo.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "017804b2bc662829b1f349ed71e33ce473cb64af8d7c39a35dc8278bb920c5c5"
+    },
+    {
+      "route": "/va/nuevos-falleros.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "ff3bb19ad625a8bffa7be029b22f39021783344c0e9ee6e475d345d1fa284716"
+    },
+    {
+      "route": "/va/ofrenda.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "7e1acc04683d36efce9d7588aeb19af2b9fdc8069c61240de4aa90ae323f3a0d"
+    },
+    {
+      "route": "/va/organigrama.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "35bcf4b3d7c6d0d3bc3d7a8ed7c5781fd54517fb5b471c6a2d9860e0cf85e8b9"
+    },
+    {
+      "route": "/va/privacidad.html",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "3d53891a66adbd9e1985ac5bda40b1d76a20f47434b62f71867ce0db236a4429"
+    },
+    {
+      "route": "/css/main.css?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "text/css",
+      "sha256": "2c1b35b7097ae7e4a931a5c31d76d201b1fe9897ac992308df27d9171c0324ab"
+    },
+    {
+      "route": "/js/cookie-banner.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "68efa768606ef6bf4ff031615305eac9659245be13cf0b17223339c9b11a32fb"
+    },
+    {
+      "route": "/js/lang.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "192b343c0079b0b50de25c0b356e3f9b4bab1f0bd528408df6d40b82d9f2197c"
+    },
+    {
+      "route": "/js/dark.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "9953f3cf9dc1de030194b87a4220675c8a1f693f57fda180c06b1acf59f27f2f"
+    },
+    {
+      "route": "/js/nav-menu.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "a037b14c41655f744c2d78c9a9b4fe6ed76d2da1c98248d5086da6b48b3ef01d"
+    },
+    {
+      "route": "/js/buscador.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "2b36d5407ef549fa51ae5af62926580ce19042af259d80d4b3d1976a3e14db31"
+    },
+    {
+      "route": "/js/scroll-reveal.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "d37045c9db79d2b4e2410fb9c8615382d78df903dc44af058e983cbfcccd7592"
+    },
+    {
+      "route": "/js/calendario.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "1ff82c7c43e0f6aac635537621b4817bcf820580759d5099d6d96f9738c35cb1"
+    },
+    {
+      "route": "/js/accessibility.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "84fb29c54b6b67ee94505927bb50d983f085020c53950fc1ad11257d6c8543a3"
+    },
+    {
+      "route": "/js/acc.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "34100eae4a7a60eaaf3d95e5afaba1f0639f9cc09af7fa2094658b6d7f908cc4"
+    },
+    {
+      "route": "/js/colaboraciones-lightbox.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "3221aacd1d6b55c0ba72205d80caa8d0a7c70c65119bae104109f275279b1ddd"
+    },
+    {
+      "route": "/js/board.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "a90ca1da4570f839681c5c40207319bc3f257437832c94d259fb9bcbb866b290"
+    },
+    {
+      "route": "/js/fullscreen.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "2268cd1a1acf2eebe21218243355c2477c1292f7df27fe8d792490fe06efecd4"
+    },
+    {
+      "route": "/js/galeria.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "c6b7caf740d7e762c39ec739a875e1202dcb23a236baa2a2af526533726e7052"
+    },
+    {
+      "route": "/js/banner-subvencion.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "454ee647841d10ec7145b3502e7e0aee66c48467c092d067b073bc3971a8d338"
+    },
+    {
+      "route": "/js/swiper.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "2f2f3fe5ee869d70f4299c8af91a4b8fa7a34c8e4e67eb201855c3280c005df6"
+    },
+    {
+      "route": "/js/meteo.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "a421bea138042699678393c62a84ce67fea31a8aa87c63b0289d93a86c0cf0d5"
+    },
+    {
+      "route": "/js/countdown.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "9cde6465136e5723714d6977e533d7e3d465845ab46537c40babcdd6f1324c41"
+    },
+    {
+      "route": "/js/home-deferred.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "17733ca2159dc50c97cafccc3cdfcf044ab01a7d8193a4d07af4167972b78f91"
+    },
+    {
+      "route": "/js/envia.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "59023bee44675f1c477ab7f1c577c673da622f2224c73c5dcc8d80907aa112f8"
+    },
+    {
+      "route": "/js/mapa.js?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "application/x-javascript",
+      "sha256": "8558096d409cf0b2e94774867e448a372223ef444b4112d97da510b000444eb1"
+    },
+    {
+      "route": "/fonts/fonts.css?v=7d4407a3a034",
+      "status": 200,
+      "location": null,
+      "type": "text/css",
+      "sha256": "27cf4a27655931364c1ab98620aab1e157764b94047b033979f7f440cd95598c"
+    },
+    {
+      "route": "/",
+      "accept": "text/markdown",
+      "status": 200,
+      "location": null,
+      "type": "text/html",
+      "sha256": "38b501e58aa317aecb5babcd947ce6b89fb62b07f632c1d216402efe5b1081f2"
+    },
+    {
+      "route": "/index.html",
+      "status": 301,
+      "location": "https://fallasuissa.es/",
+      "type": "text/html",
+      "sha256": "e8b101a7c7f64aad528cc734513cbeb02243c0af37930dc0f3239749cff184b6"
+    },
+    {
+      "route": "/va/index.html",
+      "status": 301,
+      "location": "https://fallasuissa.es/va/",
+      "type": "text/html",
+      "sha256": "e8b101a7c7f64aad528cc734513cbeb02243c0af37930dc0f3239749cff184b6"
+    },
+    {
+      "route": "/blog",
+      "status": 301,
+      "location": "https://fallasuissa.es/blog.html",
+      "type": "text/html",
+      "sha256": "e8b101a7c7f64aad528cc734513cbeb02243c0af37930dc0f3239749cff184b6"
+    },
+    {
+      "route": "/?lang=ca",
+      "status": 301,
+      "location": "https://fallasuissa.es/va/",
+      "type": "text/html",
+      "sha256": "e8b101a7c7f64aad528cc734513cbeb02243c0af37930dc0f3239749cff184b6"
+    },
+    {
+      "route": "/?lang=es",
+      "status": 301,
+      "location": "https://fallasuissa.es/",
+      "type": "text/html",
+      "sha256": "e8b101a7c7f64aad528cc734513cbeb02243c0af37930dc0f3239749cff184b6"
+    },
+    {
+      "route": "/va/?lang=es",
+      "status": 301,
+      "location": "https://fallasuissa.es/",
+      "type": "text/html",
+      "sha256": "e8b101a7c7f64aad528cc734513cbeb02243c0af37930dc0f3239749cff184b6"
+    },
+    {
+      "route": "/no-existe-auditoria-seo-20260913.html",
+      "status": 404,
+      "location": null,
+      "type": "text/html",
+      "sha256": "e7db95c97a5d45787cc3e40cbcb93b748fefc65bc14e162c746e37f979861729"
+    },
+    {
+      "route": "/va/no-existe-auditoria-seo-20260913.html",
+      "status": 404,
+      "location": null,
+      "type": "text/html",
+      "sha256": "e7db95c97a5d45787cc3e40cbcb93b748fefc65bc14e162c746e37f979861729"
+    },
+    {
+      "route": "/base.html",
+      "status": 410,
+      "location": null,
+      "type": "text/html",
+      "sha256": "9e3bca7d97e808d4cf058d92128c1b14ffd351916477c4a2e880720101e033c6"
+    },
+    {
+      "route": "/va/base.html",
+      "status": 410,
+      "location": null,
+      "type": "text/html",
+      "sha256": "9e3bca7d97e808d4cf058d92128c1b14ffd351916477c4a2e880720101e033c6"
+    },
+    {
+      "route": "/fonts/dancing-script-v29-normal-vietnamese.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "11a88b30f1441581bb8ef629548a827c540e9559a7bf68a50c61067c200cf03d"
+    },
+    {
+      "route": "/fonts/plus-jakarta-sans-v12-italic-cyrillic-ext.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "cc79c219f6d0ba881f471300c96d5e5ff9359b25c0128173a71c79bf208e4bc6"
+    },
+    {
+      "route": "/fonts/dancing-script-v29-normal-latin.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "5e08eb55c88b8658453e2ba916023964e0f67b98cd7abfa436eb8150968ee19e"
+    },
+    {
+      "route": "/fonts/dancing-script-v29-normal-latin-ext.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "0be22fbaae6716f7b55ce24268c86381589d31fc8f5f43a9295b740a1c54a457"
+    },
+    {
+      "route": "/fonts/plus-jakarta-sans-v12-normal-cyrillic-ext.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "a16f29d7d2a21a4f9b3249a82eb2725ed5bdb91500dfb5c4758977de27477f20"
+    },
+    {
+      "route": "/fonts/plus-jakarta-sans-v12-italic-vietnamese.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "d0e436354c1d942a46d4e40fa6a1005b35889f38a32ed613a42e3f4f854f308f"
+    },
+    {
+      "route": "/fonts/plus-jakarta-sans-v12-italic-latin.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "f7f3c763fa6749357a187418d736aab5b2acdd1d0a83a408631382bcfd80d141"
+    },
+    {
+      "route": "/fonts/plus-jakarta-sans-v12-italic-latin-ext.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "00b9920a831136ed75903abbc3011a69071dca7397493e944576fa70da89b0e9"
+    },
+    {
+      "route": "/fonts/plus-jakarta-sans-v12-normal-vietnamese.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "5c913fc1b1f86f4b475e5df45a796aa480d1f7f0891ed6f1a5991d6d1be887c3"
+    },
+    {
+      "route": "/fonts/plus-jakarta-sans-v12-normal-latin-ext.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "0303e02b53b0298fb26a0193941a2e8754f0f9a9fce50d90b178d8da3424873f"
+    },
+    {
+      "route": "/fonts/plus-jakarta-sans-v12-normal-latin.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "sha256": "cd8db90cd950e26bc8761f65d323588bd5cd112d326d6d322bc7c8ea86771215"
+    },
+    {
+      "route": "/img/logos/logo-ask.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "a04451d239b5e1d9ae94a543bf70852c15f2e4c957186b38b66de536409715a4"
+    },
+    {
+      "route": "/img/elementos-UXUI/cenefa_sin_fondo.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "8dc37a51a75f5e2399d4bbfce92cb354111f70a23ba092332f79902c9141b9e9"
+    },
+    {
+      "route": "/img/logos/logo-camara.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "8fbed02ffdf1b13769d29c693003fedb1b56db7833ef75f6810cd822176b6764"
+    },
+    {
+      "route": "/img/logos/logo-colaborar.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "546501d1560c241d4d7c9056d0a4422572b81ac2d78f8bd0894b1c2d1c575e0c"
+    },
+    {
+      "route": "/img/logos/logo-eventos.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "67798dc3f7987c5215e34d9d24d1a885e60f1e8fc4faa1d2df68ac31a8bb0e01"
+    },
+    {
+      "route": "/img/logos/logo-nuevos-falleros.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "790b9f1ee1d39b7347b10c5d629184f352ffbdeb78c83babd52390e7d1fe2b77"
+    },
+    {
+      "route": "/img/logos/logo-pluma.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "704b48eb835e1b4a25248c8e0909388019f29f9693c57823637f42bd31a69a0a"
+    },
+    {
+      "route": "/img/logos/logo-virgen.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "d452282b06a5e080b79c4c27be57417a15b7a2a18e8b9ebbae3ae1b2c127ac5c"
+    },
+    {
+      "route": "/img/logos/logo-run.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "3baef9fbe9dc7def75fa1eaa91ed119374e95618518d8a2f3fa0266c201f09e4"
+    },
+    {
+      "route": "/img/logos/logo-termo.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "f0c6cfb0c1dee9bc68a237f948a972de4a580169bdf81203ae4ebef5126ecd15"
+    },
+    {
+      "route": "/img/logos/logo-escudo-cutty.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "ba93d5485d3e79e0ec34a7e509c95520579ea9ddc90a6ea1ad2feed3d0930c63"
+    },
+    {
+      "route": "/img/decoracion/falleretPro.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "3a81b690e6f4838619ea6883fb22814d0ea5a6635148a1dd80ce02a77ce4c2aa"
+    },
+    {
+      "route": "/img/decoracion/falleretaN.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "40c91e63acbd8220b5e3e24b8f455109275f219e8d92db46a67dc46fb7f234f7"
+    },
+    {
+      "route": "/img/colaboracion/hope/hope.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "4624bb7c8b1bac41149c3e1c9d074794fdc1c6813d1abce8f8bad69b2cb46c10"
+    },
+    {
+      "route": "/img/decoracion/falleretaD.seo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "sha256": "8f94a66f76f514e1ff8eb1c609da13d80cb2fce8f6ce9b425248a43722dba537"
+    }
+  ]
+}

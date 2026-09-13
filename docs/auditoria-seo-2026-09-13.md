@@ -24,7 +24,7 @@ No se ha accedido a Search Console, CrUX, analítica, registros de Googlebot ni 
 
 | ID | Prioridad | Hallazgo | Estado |
 | --- | --- | --- | --- |
-| SEO-01 | Alta | Carga móvil excesiva y LCP muy lento | Corregido en 4.30.21 |
+| SEO-01 | Alta | Carga móvil excesiva y LCP muy lento | Carga reducida; LCP de portada todavía alto |
 | SEO-02 | Alta | Artículos ES sin texto principal en la respuesta HTML | Corregido en 4.30.21 |
 | SEO-03 | Alta | Contenido valenciano incompleto, incluidos tres documentos enteros | Corregido en 4.30.21 |
 | SEO-04 | Media | Metadatos idénticos entre ES/VA y texto de schema sin localizar | Corregido en 4.30.21 |
@@ -225,7 +225,7 @@ Las puntuaciones varían con máquina, navegador y red. Comparar siempre con las
 
 | Hallazgo | Solución y protección contra regresiones |
 | --- | --- |
-| SEO-01 | 15 SVG con raster incrustado disponen de derivados WebP transparentes, generados por `gulpfile.js` desde `src/data/image-variants.json`: 367.936 bytes en total (presupuesto de prueba: <400.000). Las fotografías de acordeones nunca abiertos aplazan su renderizado; la primera apertura conserva las transiciones posteriores. Swiper y los scripts de inicialización de la portada se difieren; el póster del vídeo de archivo reutiliza el AVIF disponible. El banner se inicializa inmediatamente después de su HTML y se prueba con Swiper retenido. La foto editorial, el banner y los escudos de cabecera/pie reservan sus dimensiones reales. Los escudos de cabecera usan carga inmediata: su ciclo lazy provocaba dos desplazamientos del contenido que sumaban CLS 0,157 incluso con las fuentes ya locales. Se añade guardia para impedir `loading="lazy"` en esos elementos visibles. Las mismas tipografías se sirven localmente con sus licencias OFL y precarga, evitando la conexión adicional a Google Fonts. Se elimina para los escudos la reserva genérica de 200 px de `content-visibility`, que añadía 138 px al pie móvil o 101 px en escritorio. Se actualizan 12 capturas de La Falla, Meteo y Galerías después de revisar que la diferencia corresponde a ese espacio sobrante, y dos capturas móviles del artículo «El alma del barrio» tras revisar sus diferencias de rasterización del texto y la cenefa. Se conservan contenido y estructura; no se amplía la tolerancia de comparación. Las capturas del artículo se fijan en reposo, sin la capa `translate3d` de su entrada: conservaba diferencias intermitentes de suavizado en todos los párrafos. Esta estabilización solo se aplica en el test visual; las suites de reveal y transiciones siguen comprobando el comportamiento real. |
+| SEO-01 | 15 SVG con raster incrustado disponen de derivados WebP transparentes, generados por `gulpfile.js` desde `src/data/image-variants.json`: 367.936 bytes en total (presupuesto de prueba: <400.000). Las fotografías de acordeones nunca abiertos aplazan su renderizado; la primera apertura conserva las transiciones posteriores. Swiper y los scripts de inicialización de la portada se difieren; el póster del vídeo de archivo reutiliza el AVIF disponible. El banner se entrega visible desde el HTML y su script se ejecuta inmediatamente después; las pruebas exigen visibilidad sin JavaScript y con Swiper retenido. El HTML anterior dependía de JavaScript para hacer visible el aviso; ahora sigue disponible aunque el script falle. El cierre conserva foco, `inert` y `aria-hidden`, y la excepción de Playwright sigue funcionando. La foto editorial, el banner y los escudos de cabecera/pie reservan sus dimensiones reales. Los escudos de cabecera usan carga inmediata: su ciclo lazy provocaba dos desplazamientos del contenido que sumaban CLS 0,157 incluso con las fuentes ya locales. Se añade guardia para impedir `loading="lazy"` en esos elementos visibles. Las mismas tipografías se sirven localmente con sus licencias OFL y precarga, evitando la conexión adicional a Google Fonts. Se elimina para los escudos la reserva genérica de 200 px de `content-visibility`, que añadía 138 px al pie móvil o 101 px en escritorio. Se actualizan 12 capturas de La Falla, Meteo y Galerías después de revisar que la diferencia corresponde a ese espacio sobrante, y dos capturas móviles del artículo «El alma del barrio» tras revisar sus diferencias de rasterización del texto y la cenefa. Se conservan contenido y estructura; no se amplía la tolerancia de comparación. Las capturas del artículo se fijan en reposo, sin la capa `translate3d` de su entrada: conservaba diferencias intermitentes de suavizado en todos los párrafos. Esta estabilización solo se aplica en el test visual; las suites de reveal y transiciones siguen comprobando el comportamiento real. |
 | SEO-02 | Los dos artículos, sus fechas, autores y tarjetas tienen texto ES completo en los HTML fuente. No se activa el pre-render ES global; se conservan las claves de traducción. |
 | SEO-03 | Claves de H1 en sus hojas, manteniendo su color anterior; bloques de párrafos compatibles en build/runtime; 143 segmentos de los tres documentos legales traducidos. El texto español se conserva; únicamente se actualiza el apartado de Google Fonts de Cookies para reflejar que las tipografías se sirven localmente. |
 | SEO-04 | Catálogo `translations.{es,va}.seo` para 30 páginas. `data-i18n-content` funciona en build y runtime. JSON-LD usa las descripciones localizadas, títulos editoriales y de galerías, y nombres/descripciones de los vídeos. Las pruebas comparan el valor exacto del schema con la meta description y detectan confusiones entre `content` y `data-i18n-content`, además de entidades HTML sin decodificar. |
@@ -260,10 +260,33 @@ Pruebas permanentes: `tests/seo-regressions.e2e.spec.js` (68 casos), `tests/sche
 | Búsqueda interna | 14/14 consultas con destino esperado entre los tres primeros; 2/2 sin resultados correctas; 0 destinos rotos |
 | Formato del parche | `git diff --check` correcto |
 
-La última ejecución completa terminó con 602 pruebas superadas, 3 omitidas y una captura intermitente de `blog-anima` móvil oscuro. Se corrigió la preparación estática de esa captura; después pasaron los 73 casos visuales y tres repeticiones de cada tema del artículo. En conjunto quedan verificados los 603 casos ejecutables, sin fallos pendientes. Las omisiones son dos comprobaciones de adjuntos del tablón, que no tiene anuncios activos, y una comprobación exclusiva de WebKit ejecutada en la matriz Chromium. No se presentan como pruebas superadas.
+La última ejecución completa terminó con 602 pruebas superadas, 3 omitidas y una captura intermitente de `blog-anima` móvil oscuro. Se corrigió la preparación estática de esa captura; después pasaron los 73 casos visuales y tres repeticiones de cada tema del artículo. En conjunto quedan verificados los 603 casos ejecutables, sin fallos pendientes. Tras el ajuste final del estado inicial del banner pasaron además los 81 casos específicos de banner y SEO. Las omisiones son dos comprobaciones de adjuntos del tablón, que no tiene anuncios activos, y una comprobación exclusiva de WebKit ejecutada en la matriz Chromium. No se presentan como pruebas superadas.
 
 ### Publicación y mediciones posteriores
 
-El plan de sincronización por SSH se ha verificado sobre `domains/fallasuissa.es/public_html/`, sin borrados anunciados. La comprobación definitiva del sitio y la comparación Lighthouse se incorporan después de publicar el commit de esta versión.
+- **Commits funcionales:** `c6942e5` (auditoría) y `f3cd6a6` (banner visible sin JavaScript), subidos a `origin/main` y desplegados por SSH en `domains/fallasuissa.es/public_html/` el 13/09/2026. Sin borrados anunciados en el ensayo previo; producción responde 200.
+- **Verificación posterior:** `npm run seo:verify:production` confirma las 60 páginas idénticas al build y **133 respuestas** correctas. Incluye CSS/JS con sus URL versionadas, traducciones, fuentes, derivados de imagen, sitemaps, guías institucionales, portada con `Accept: text/markdown`, 301 canónicas y errores reales 404/410. [Registro completo](auditorias/seo-2026-09-13/produccion-despues.json).
+- **Mediciones comparables:** Lighthouse 12.8.2, Chrome 153, móvil simulado y sesiones nuevas, dos ejecuciones por página, con el banner real visible. [Resultados posteriores](auditorias/seo-2026-09-13/lighthouse-despues.json). Los JSON iniciales se conservan separados.
+
+| Página y métrica | Antes (dos ejecuciones) | Después (dos ejecuciones) |
+| --- | --- | --- |
+| Portada: rendimiento | 61 / 61 | 68 / 68 |
+| Portada: LCP | 23,06 / 23,04 s | 7,73 / 7,83 s |
+| Portada: transferencia | 8,30 / 8,30 MiB | 1,43 / 1,43 MiB |
+| Portada: CLS | 0 / 0 | 0 / 0 |
+| Artículo «El alma del barrio»: rendimiento | 55 / 55 | 93 / 92 |
+| Artículo: LCP | 9,26 / 9,35 s | 2,89 / 2,92 s |
+| Artículo: transferencia | 1,43 / 1,43 MiB | 0,37 / 0,37 MiB |
+| Artículo: CLS | 0,211 / 0,211 | 0,079 / 0 |
+| Nota SEO de Lighthouse 12.8.2 | 92 en las cuatro ejecuciones | 92 en las cuatro ejecuciones |
+
+La portada reduce aproximadamente **un 83 % la transferencia** y **un 66 % el LCP**; el artículo reduce aproximadamente un 69 % el LCP. El ajuste posterior que entrega el banner visible sin JavaScript elimina esa dependencia de contenido; no produjo una mejora adicional consistente del LCP en producción. **La portada sigue teniendo un LCP alto**, y el artículo queda ligeramente por encima de la referencia de 2,5 s de laboratorio. SEO-01 queda mejorado, no cerrado como cumplimiento de Core Web Vitals. La nota SEO 92 permanece por la directiva `Content-Signal` descrita anteriormente; ese verificador no mide todos los defectos de contenido corregidos.
+
+### Seguimiento pendiente y límites
+
+- Optimización adicional del LCP de portada, sin ocultar el banner obligatorio ni alterar las mediciones. No se presenta una puntuación alta de laboratorio como alcanzada.
+- Comprobar en Search Console las canonical seleccionadas, la indexación y los sitemaps; contrastar LCP/INP/CLS con datos de usuarios reales. No se dispone de acceso a esos datos en esta auditoría.
+- La doble redirección inicial de `http://www` depende en parte del alojamiento; las variantes HTML y de idioma comprobadas se consolidan con 301.
+- Las descripciones de las galerías se pueden enriquecer cuando exista información editorial real de cada fotografía.
 
 No se afirma que Search Console haya cambiado la indexación ni que los usuarios reales cumplan los umbrales de Core Web Vitals.
