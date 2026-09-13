@@ -256,6 +256,10 @@ ErrorDocument 503 /mantenimiento.html
     #    renombrada con el año en v4.30.9 (HTML de la home cacheado por la CDN)
     RewriteRule "^img/subvencion\.(png|avif|webp)$" /img/subvenciones/subvencion-2026.$1 [R=301,L,QSA]
 
+    # J) Fotos oficiales de los representantes movidas a
+    #    /img/representantes/foto-oficiales-representantes/ en v4.30.11
+    RewriteRule "^img/((FalleraMayorInfantil|FalleraMayor|PresidenteInfantil|Presidente)(-2026-27)?\.(jpg|avif|webp))$" /img/representantes/foto-oficiales-representantes/$1 [R=301,L,QSA]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
