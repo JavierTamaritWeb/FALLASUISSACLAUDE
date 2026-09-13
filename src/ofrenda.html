@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ofrenda Floral 2026-27 | Falla Suïssa - L'Alqueria del Favero</title>
-  <meta name="description" content="Ofrenda Floral a la Virgen de los Desamparados 2026-27 de la Falla Suïssa - L'Alqueria del Favero. Galería de imágenes y vídeo.">
+  <title data-i18n="seo.ofrenda.title">Próxima Ofrenda | Falla Suïssa - L'Alqueria del Favero</title>
+  <meta name="description" content="La próxima Ofrenda de la Falla Suïssa - L&#x27;Alqueria del Favero y el acceso al vídeo de la Ofrenda de marzo de 2026, conservado en el archivo de la comisión." data-i18n-content="seo.ofrenda.description">
   <meta name="keywords" content="ofrenda floral, virgen desamparados, fallas, suïssa, tradición valenciana">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://fallasuissa.es/ofrenda.html">
@@ -39,8 +39,8 @@
   </script>
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Ofrenda Floral 2026-27 - Falla Suïssa - L'Alqueria del Favero">
-  <meta property="og:description" content="Ofrenda Floral a la Virgen de los Desamparados 2026-27 de la Falla Suïssa.">
+  <meta property="og:title" content="Próxima Ofrenda | Falla Suïssa - L&#x27;Alqueria del Favero" data-i18n-content="seo.ofrenda.title">
+  <meta property="og:description" content="La próxima Ofrenda de la Falla Suïssa - L&#x27;Alqueria del Favero y el acceso al vídeo de la Ofrenda de marzo de 2026, conservado en el archivo de la comisión." data-i18n-content="seo.ofrenda.description">
   <meta property="og:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:image:secure_url" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:url" content="https://fallasuissa.es/ofrenda.html">
@@ -54,16 +54,13 @@
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ofrenda Floral 2026-27 - Falla Suïssa - L'Alqueria del Favero">
-  <meta name="twitter:description" content="Ofrenda Floral a la Virgen de los Desamparados 2026-27 de la Falla Suïssa.">
+  <meta name="twitter:title" content="Próxima Ofrenda | Falla Suïssa - L&#x27;Alqueria del Favero" data-i18n-content="seo.ofrenda.title">
+  <meta name="twitter:description" content="La próxima Ofrenda de la Falla Suïssa - L&#x27;Alqueria del Favero y el acceso al vídeo de la Ofrenda de marzo de 2026, conservado en el archivo de la comisión." data-i18n-content="seo.ofrenda.description">
   <meta name="twitter:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta name="twitter:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
   <meta name="twitter:image:type" content="image/png">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet">
+  <!-- Tipografías locales (licencias OFL en fonts/) -->
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
@@ -77,6 +74,7 @@
   <!-- Hojas de estilo -->
   <link rel="stylesheet" href="css/main.css">
 
+  <link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-v12-normal-latin.woff2" crossorigin>
 </head>
 <body>
   <header class="header-inner">
@@ -102,7 +100,7 @@
         </div>
         <div class="header__notificacion" id="notificacion" aria-live="polite" aria-atomic="true"></div>
         <nav class="navegacion" role="navigation" aria-label="Menú principal">
-          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html">Inicio</a>
+          <a class="navegacion__enlace" data-i18n="nav.inicio" href="./">Inicio</a>
           <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
           <a class="navegacion__enlace active" data-i18n="nav.ofrenda" href="ofrenda.html" aria-current="page">Ofrenda</a>
           <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Colaboraciones</a>
@@ -123,11 +121,11 @@
             <picture>
               <source srcset="img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
               <source srcset="img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-              <img class="header-inner__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
+              <img width="640" height="793" class="header-inner__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="eager">
             </picture>
           </a>
 
-          <h1 class="heading-inner" data-i18n="ofrenda.titulo"><span class="heading-inner__span">Ofrenda</span> </h1>
+          <h1 class="heading-inner"><span data-i18n="ofrenda.titulo">Ofrenda</span></h1>
         </div>
 
 
@@ -146,6 +144,8 @@
 
       <!-- Próxima Ofrenda (v4.19.0): foto de la Fallera Mayor con el rótulo superpuesto. Sustituye al visor de vídeo
            (.video-dron__frame + #videoOfrendaFullscreen); el vídeo de 2026 se reproduce en Historia/Archivos/Ofrendas -->
+      <p data-i18n="ofrenda.archivoIntro">El vídeo de la Ofrenda de marzo de 2026 está disponible en Historia y Archivos de nuestra Falla.</p>
+      <p><a class="boton" href="lafalla.html#ofrenda-2026-lafalla" data-i18n="ofrenda.archivo">Ver el vídeo de la Ofrenda 2026</a></p>
       <figure class="ofrenda__proxima">
         <picture>
           <source srcset="img/representantes/foto-oficiales-representantes/FalleraMayor-2026-27.avif" type="image/avif">
@@ -179,7 +179,7 @@
     <div class="footer__contenedor">
       <div class="footer__contenido">
         <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
-          <a class="footer__enlace" href="index.html" data-i18n="nav.inicio">Inicio</a>
+          <a class="footer__enlace" href="./" data-i18n="nav.inicio">Inicio</a>
           <a class="footer__enlace" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
           <a class="footer__enlace active" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrenda</a>
           <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Colaboraciones</a>
@@ -194,7 +194,7 @@
           <picture>
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-            <img class="footer__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
+            <img width="640" height="793" class="footer__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
           </picture>
         </a>
 

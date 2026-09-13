@@ -34,6 +34,8 @@ img {
 // ---------------------------------------------------------
 .header__escudo,
 .header-inner__escudo {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
   border-radius: 0 !important; // Los logos no necesitan border-radius
   width: auto !important; // Mantener dimensiones naturales o las definidas en el header
   height: auto !important;
@@ -144,6 +146,9 @@ img {
 
 .footer__escudo {
   max-width: 5rem !important;
+  // La reserva global de 300×200 para lazy distorsionaba el pie fuera de vista.
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
   opacity: 1 !important;
   background: transparent !important;
   

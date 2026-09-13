@@ -1,32 +1,38 @@
 [
-    {
-      "src": "img/representantes/representantes-2026-27/representantes-2026-27-001.avif",
-      "alt": "Imagen de los Representantes 2026-27",
-      "note": ""
-    },
-    {
-      "src": "img/representantes/representantes-2026-27/representantes-2026-27-002.avif",
-      "alt": "Imagen de los Representantes 2026-27",
-      "note": ""
-    },
-    {
-      "src": "img/representantes/representantes-2026-27/representantes-2026-27-003.avif",
-      "alt": "Imagen de los Representantes 2026-27",
-      "note": ""
-    },
-    {
-      "src": "img/representantes/representantes-2026-27/representantes-2026-27-004.avif",
-      "alt": "Fallera Mayor Infantil 2026-27",
-      "note": ""
-    },
-    {
-      "src": "img/representantes/representantes-2026-27/representantes-2026-27-005.avif",
-      "alt": "Presidente Infantil 2026-27",
-      "note": ""
-    },
-    {
-      "src": "img/representantes/representantes-2026-27/representantes-2026-27-006.avif",
-      "alt": "Representantes Infantiles 2026-27",
-      "note": ""
-    }
+  {
+    "src": "img/representantes/representantes-2026-27/representantes-2026-27-001.avif",
+    "alt": "Imagen de los Representantes 2026-27. Fotografía 1 de 6.",
+    "note": "",
+    "altKey": "galleryAlts.g8.p1"
+  },
+  {
+    "src": "img/representantes/representantes-2026-27/representantes-2026-27-002.avif",
+    "alt": "Imagen de los Representantes 2026-27. Fotografía 2 de 6.",
+    "note": "",
+    "altKey": "galleryAlts.g8.p2"
+  },
+  {
+    "src": "img/representantes/representantes-2026-27/representantes-2026-27-003.avif",
+    "alt": "Imagen de los Representantes 2026-27. Fotografía 3 de 6.",
+    "note": "",
+    "altKey": "galleryAlts.g8.p3"
+  },
+  {
+    "src": "img/representantes/representantes-2026-27/representantes-2026-27-004.avif",
+    "alt": "Fallera Mayor Infantil 2026-27. Fotografía 4 de 6.",
+    "note": "",
+    "altKey": "galleryAlts.g8.p4"
+  },
+  {
+    "src": "img/representantes/representantes-2026-27/representantes-2026-27-005.avif",
+    "alt": "Presidente Infantil 2026-27. Fotografía 5 de 6.",
+    "note": "",
+    "altKey": "galleryAlts.g8.p5"
+  },
+  {
+    "src": "img/representantes/representantes-2026-27/representantes-2026-27-006.avif",
+    "alt": "Representantes Infantiles 2026-27. Fotografía 6 de 6.",
+    "note": "",
+    "altKey": "galleryAlts.g8.p6"
+  }
 ]

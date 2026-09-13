@@ -1,0 +1,282 @@
+{
+  "h1_va_no_traducidos": [
+    {
+      "archivo": "va/blog.html",
+      "key": "blog.titulo",
+      "tag": "h1",
+      "actual": "Blog de Nuestra Falla",
+      "expected": "Blog de la nostra Falla"
+    },
+    {
+      "archivo": "va/calendario.html",
+      "key": "calendario.titulo",
+      "tag": "h1",
+      "actual": "Calendario",
+      "expected": "Calendari"
+    },
+    {
+      "archivo": "va/deportes.html",
+      "key": "deportes.titulo",
+      "tag": "h1",
+      "actual": "Deportes",
+      "expected": "Esports"
+    },
+    {
+      "archivo": "va/eventos.html",
+      "key": "eventos.titulo",
+      "tag": "h1",
+      "actual": "Eventos",
+      "expected": "Esdeveniments"
+    },
+    {
+      "archivo": "va/galeria_1.html",
+      "key": "galeria.galeria1",
+      "tag": "h1",
+      "actual": "Apuntá 2025-262025-26",
+      "expected": "Apuntà 2025-26"
+    },
+    {
+      "archivo": "va/galeria_2.html",
+      "key": "galeria.galeria2",
+      "tag": "h1",
+      "actual": "Fallera Mayor Infantil 2025-26",
+      "expected": "Fallera Major Infantil 2025-26"
+    },
+    {
+      "archivo": "va/galeria_3.html",
+      "key": "galeria.galeria3",
+      "tag": "h1",
+      "actual": "Monumento 2025-26",
+      "expected": "Monument 2025-26"
+    },
+    {
+      "archivo": "va/galeria_4.html",
+      "key": "galeria.galeria4",
+      "tag": "h1",
+      "actual": "Proclamación 2025-26",
+      "expected": "Proclamació 2025-26"
+    },
+    {
+      "archivo": "va/galeria_5.html",
+      "key": "galeria.galeria5",
+      "tag": "h1",
+      "actual": "Ofrenda de Frutos 2025-26",
+      "expected": "Ofrena de Fruits 2025-26"
+    },
+    {
+      "archivo": "va/galeria_7.html",
+      "key": "galeria.galeria7",
+      "tag": "h1",
+      "actual": "San Juan 2026",
+      "expected": "Sant Joan 2026"
+    },
+    {
+      "archivo": "va/galeria_8.html",
+      "key": "galeria.galeria8",
+      "tag": "h1",
+      "actual": "Representantes 2026-27",
+      "expected": "Representants 2026-27"
+    },
+    {
+      "archivo": "va/galeria_9.html",
+      "key": "galeria.galeria9",
+      "tag": "h1",
+      "actual": "Fallera Mayor Infantil 2026-27",
+      "expected": "Fallera Major Infantil 2026-27"
+    },
+    {
+      "archivo": "va/galerias.html",
+      "key": "galeria.titulo",
+      "tag": "h1",
+      "actual": "Galerías",
+      "expected": "Galeria"
+    },
+    {
+      "archivo": "va/meteo.html",
+      "key": "meteo.titulo",
+      "tag": "h1",
+      "actual": "Meteo",
+      "expected": "Oratge"
+    },
+    {
+      "archivo": "va/ofrenda.html",
+      "key": "ofrenda.titulo",
+      "tag": "h1",
+      "actual": "Ofrenda",
+      "expected": "Ofrena"
+    }
+  ],
+  "hope_sin_prerender": [
+    {
+      "archivo": "va/colaboraciones.html",
+      "key": "colaboraciones.hope.texto",
+      "tag": "div",
+      "actual": "El pasado 7 de marzo, nuestra comisión fallera Suïssa-L'Alqueria del Favero demostró que el espíritu faller va mucho más allá de la pólvora y la fiesta. Porque cuando una Falla se ",
+      "expected": "El passat 7 de març, la nostra comissió fallera Suïssa-L'Alqueria del Favero va demostrar que l'esperit faller va molt més enllà de la pólvora i la festa. Perquè quan una Falla s'u"
+    },
+    {
+      "archivo": "va/index.html",
+      "key": "colaboraciones.hope.texto",
+      "tag": "div",
+      "actual": "El pasado 7 de marzo, nuestra comisión fallera Suïssa-L'Alqueria del Favero demostró que el espíritu faller va mucho más allá de la pólvora y la fiesta. Porque cuando una Falla se ",
+      "expected": "El passat 7 de març, la nostra comissió fallera Suïssa-L'Alqueria del Favero va demostrar que l'esperit faller va molt més enllà de la pólvora i la festa. Perquè quan una Falla s'u"
+    }
+  ],
+  "pares_con_titulo_description_identicos": [
+    "va/autorizacion-imagen-menor.html",
+    "va/autorizacion-imagen.html",
+    "va/aviso-legal.html",
+    "va/blog-anima.html",
+    "va/blog-somni.html",
+    "va/blog.html",
+    "va/calendario.html",
+    "va/colaboraciones.html",
+    "va/cookies.html",
+    "va/deportes.html",
+    "va/eventos.html",
+    "va/galeria_1.html",
+    "va/galeria_2.html",
+    "va/galeria_3.html",
+    "va/galeria_4.html",
+    "va/galeria_5.html",
+    "va/galeria_6.html",
+    "va/galeria_7.html",
+    "va/galeria_8.html",
+    "va/galeria_9.html",
+    "va/galerias.html",
+    "va/index.html",
+    "va/lafalla.html",
+    "va/llibret_2026.html",
+    "va/mapa.html",
+    "va/meteo.html",
+    "va/nuevos-falleros.html",
+    "va/ofrenda.html",
+    "va/organigrama.html",
+    "va/privacidad.html"
+  ],
+  "legales_cuerpo_es_va_identico": [
+    {
+      "archivo": "aviso-legal.html",
+      "igual": true
+    },
+    {
+      "archivo": "cookies.html",
+      "igual": true
+    },
+    {
+      "archivo": "privacidad.html",
+      "igual": true
+    }
+  ],
+  "cuerpos_articulos_es_iniciales": [
+    {
+      "url": "https://fallasuissa.es/blog-somni.html",
+      "caracteres_bloques_contenido": 0
+    },
+    {
+      "url": "https://fallasuissa.es/blog-anima.html",
+      "caracteres_bloques_contenido": 0
+    }
+  ],
+  "renderizados": [
+    {
+      "ruta": "/blog-anima.html",
+      "idioma": "es",
+      "titulo": "El alma del barrio | Blog | Falla Suïssa - L'Alqueria del Favero",
+      "palabras_articulo": 400,
+      "alt_imagen_articulo": "",
+      "imagenes_galeria_iniciales": 0,
+      "errores_js": [],
+      "respuestas_error": [],
+      "desbordamiento_horizontal": false
+    },
+    {
+      "ruta": "/blog-somni.html",
+      "idioma": "es",
+      "titulo": "Somni | Blog | Falla Suïssa - L'Alqueria del Favero",
+      "palabras_articulo": 387,
+      "alt_imagen_articulo": null,
+      "imagenes_galeria_iniciales": 0,
+      "errores_js": [],
+      "respuestas_error": [],
+      "desbordamiento_horizontal": false
+    },
+    {
+      "ruta": "/va/blog-anima.html",
+      "idioma": "ca",
+      "titulo": "El alma del barrio | Blog | Falla Suïssa - L'Alqueria del Favero",
+      "palabras_articulo": 395,
+      "alt_imagen_articulo": "",
+      "imagenes_galeria_iniciales": 0,
+      "errores_js": [],
+      "respuestas_error": [],
+      "desbordamiento_horizontal": false
+    },
+    {
+      "ruta": "/va/colaboraciones.html",
+      "idioma": "ca",
+      "titulo": "Colaboración con HOPE-INCLIVA | Falla Suïssa - L'Alqueria del Favero",
+      "palabras_articulo": null,
+      "alt_imagen_articulo": null,
+      "imagenes_galeria_iniciales": 0,
+      "errores_js": [],
+      "respuestas_error": [],
+      "desbordamiento_horizontal": false
+    },
+    {
+      "ruta": "/va/privacidad.html",
+      "idioma": "ca",
+      "titulo": "Política de Privacidad | Falla Suïssa - L'Alqueria del Favero",
+      "palabras_articulo": null,
+      "alt_imagen_articulo": null,
+      "imagenes_galeria_iniciales": 0,
+      "errores_js": [],
+      "respuestas_error": [],
+      "desbordamiento_horizontal": false
+    },
+    {
+      "ruta": "/va/llibret_2026.html",
+      "idioma": "ca",
+      "titulo": "Llibret Falla Suïssa - L'Alqueria del Favero 2025-2026",
+      "palabras_articulo": null,
+      "alt_imagen_articulo": null,
+      "imagenes_galeria_iniciales": 0,
+      "errores_js": [],
+      "respuestas_error": [],
+      "desbordamiento_horizontal": false
+    },
+    {
+      "ruta": "/galeria_1.html",
+      "idioma": "es",
+      "titulo": "Apuntà 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+      "palabras_articulo": null,
+      "alt_imagen_articulo": null,
+      "imagenes_galeria_iniciales": 15,
+      "errores_js": [],
+      "respuestas_error": [],
+      "desbordamiento_horizontal": false
+    },
+    {
+      "ruta": "/ofrenda.html",
+      "idioma": "es",
+      "titulo": "Ofrenda Floral 2026-27 | Falla Suïssa - L'Alqueria del Favero",
+      "palabras_articulo": null,
+      "alt_imagen_articulo": null,
+      "imagenes_galeria_iniciales": 0,
+      "errores_js": [],
+      "respuestas_error": [],
+      "desbordamiento_horizontal": false
+    },
+    {
+      "ruta": "/",
+      "idioma": "es",
+      "titulo": "Falla Suïssa - L'Alqueria del Favero",
+      "palabras_articulo": null,
+      "alt_imagen_articulo": null,
+      "imagenes_galeria_iniciales": 0,
+      "errores_js": [],
+      "respuestas_error": [],
+      "desbordamiento_horizontal": false
+    }
+  ]
+}

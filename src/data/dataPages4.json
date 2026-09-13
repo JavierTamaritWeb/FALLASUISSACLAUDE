@@ -1,127 +1,152 @@
 [
-    {
-      "src": "img/proclamacion/Proclamacion_01.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_02.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_03.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_04.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_05.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_06.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_07.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_08.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_09.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_10.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_11.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_12.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_13.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_14.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_15.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_16.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_17.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_18.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_19.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_20.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_21.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_22.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_23.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_24.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/proclamacion/Proclamacion_25.avif",
-      "alt": "Imagen de la Proclamación 25-26",
-      "note": ""
-    }
+  {
+    "src": "img/proclamacion/Proclamacion_01.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 1 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p1"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_02.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 2 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p2"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_03.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 3 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p3"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_04.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 4 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p4"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_05.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 5 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p5"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_06.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 6 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p6"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_07.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 7 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p7"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_08.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 8 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p8"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_09.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 9 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p9"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_10.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 10 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p10"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_11.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 11 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p11"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_12.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 12 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p12"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_13.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 13 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p13"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_14.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 14 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p14"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_15.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 15 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p15"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_16.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 16 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p16"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_17.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 17 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p17"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_18.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 18 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p18"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_19.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 19 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p19"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_20.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 20 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p20"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_21.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 21 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p21"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_22.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 22 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p22"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_23.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 23 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p23"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_24.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 24 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p24"
+  },
+  {
+    "src": "img/proclamacion/Proclamacion_25.avif",
+    "alt": "Imagen de la Proclamación 25-26. Fotografía 25 de 25.",
+    "note": "",
+    "altKey": "galleryAlts.g4.p25"
+  }
 ]

@@ -121,6 +121,17 @@ async function waitForVisualPageReady(page, pageName) {
 }
 
 async function stabilizeRevealForScreenshot(page) {
+  // Capturar el artículo en reposo: translate3d(0,0,0) puede conservar una
+  // capa GPU y cambiar el suavizado de todos sus párrafos según el momento
+  // de carga. Las suites de reveal/transiciones comprueban la animación real.
+  await page.addStyleTag({ content: `
+    .has-scroll-reveal .blog-detail__article.reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+      will-change: auto !important;
+    }
+  ` });
   await page.evaluate(() => {
     document.documentElement.classList.add('has-scroll-reveal');
 

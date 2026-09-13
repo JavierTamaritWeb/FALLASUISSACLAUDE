@@ -19,7 +19,7 @@
 
 4. **Disponer el Archivo HTML:**
    - Descarga el archivo que Google te proporciona (ej: `googleXXXXXXXXXXXXXXXX.html`)
-   - Colócalo en la raíz del proyecto
+   - Colócalo en `src/` y ejecuta `npm run build`; se publica en la raíz del dominio
    - **Nota:** El archivo `google-site-verification.html` presente en el repositorio contiene solo instrucciones, no lo uses para verificar.
 
 5. **Verificar Acceso:**
@@ -34,14 +34,14 @@
 
 ### 🏷️ **Método 2: Meta Tag (Alternativo)**
 
-Si prefieres usar meta tag, ya está preparado en `index.html`:
+Si prefieres usar meta tag, se configura en `src/index.html`:
 
 ```html
 <!-- Descomenta y añade tu código -->
 <meta name="google-site-verification" content="TU_CODIGO_AQUI" />
 ```
 
-**Ubicación:** `index.html` línea ~21
+**Ubicación:** `<head>` de `src/index.html`
 
 ### ⚙️ **Automatización con Gulp**
 
@@ -91,7 +91,7 @@ Una vez verificado tendrás acceso a:
 
 ---
 
-## 🚨 Aviso "Duplicada: el usuario no ha indicado ninguna versión canónica" (resuelto en v4.6.22 + v4.6.23)
+## 🚨 Aviso "Duplicada: el usuario no ha indicado ninguna versión canónica" (señales corregidas desde v4.6.22; revisión v4.30.21)
 
 GSC puede reportar este aviso cuando detecta páginas con contenido similar y la señal de canonical es incoherente con `hreflang`. En este proyecto se manifestó así: `dist/index.html` (ES) y `dist/va/index.html` (VA) compartían `canonical` apuntando a la ES y `hreflang` declarando la VA como `ca`. Resultado: Google ignoraba el hreflang y consolidaba las dos URLs como duplicadas.
 
@@ -99,27 +99,27 @@ GSC puede reportar este aviso cuando detecta páginas con contenido similar y la
 
 **v4.6.22 — `gulpfile.js` como única fuente de canonical/hreflang.** En `modifyHtmlStream` el build:
 
-1. Elimina cualquier `<link rel="canonical">` y `<link rel="alternate" hreflang=...>` preexistente en el HTML del root.
+1. Elimina cualquier `<link rel="canonical">` y `<link rel="alternate" hreflang=...>` preexistente en el HTML de `src/`.
 2. Reinyecta un bloque coherente:
    - `canonical` autoreferencial (cada URL apunta a sí misma: `/X.html` o `/va/X.html`).
    - `hreflang` bidireccional (`es`, `ca`, `x-default`).
-3. Se eliminan las URLs fantasma `?lang=ca`/`?lang=es` (no son páginas crawlables).
+3. Los alternates enlazan las variantes reales. Los parámetros históricos de idioma de la portada redirigen a su URL canónica.
 
-`sitemap.xml` se reescribe con 48 entradas (24 ES + 24 VA), cada una con `<xhtml:link rel="alternate">` para los 3 idiomas.
+Desde v4.30.21, `scripts/seo-artifacts.cjs` genera el sitemap desde las páginas publicables: actualmente 60 entradas (30 ES + 30 VA), con alternates recíprocos ES/CA/x-default. El índice anuncia imágenes y añade noticias solo si hay artículos de las últimas 48 horas; los sitemaps antiguos conservan compatibilidad con el mismo inventario principal.
 
-**v4.6.23 — pre-render de valenciano en build.** El cuerpo HTML servido en `dist/va/*.html` ahora contiene texto valenciano real (no español), de modo que Google y otros crawlers ven divergencia de contenido entre ES y VA y dejan de tratarlas como duplicadas. Detalles en [`i18n-translations.md`](./i18n-translations.md).
+**Pre-render valenciano, revisado en v4.30.21.** Se traducen texto, párrafos, metadatos y atributos. La auditoría corrigió H1 con hijos, párrafos HOPE y documentos legales incompletos. Las pruebas sobre las 60 páginas acreditan el HTML servido; la canonical seleccionada y la indexación efectiva se deben comprobar en Search Console. No se garantiza una decisión del buscador. Detalles en [`i18n-translations.md`](./i18n-translations.md).
 
 ### Reglas operativas
 
-- **NO añadir** `<link rel="canonical">` ni `<link rel="alternate" hreflang=...>` a mano en los HTML del root: el build los borra. Si necesitas tocarlos, edita `modifyHtmlStream` en `gulpfile.js`.
+- **NO añadir** `<link rel="canonical">` ni `<link rel="alternate" hreflang=...>` a mano en los HTML de `src/`: el build los borra. Si necesitas tocarlos, edita `modifyHtmlStream` en `gulpfile.js`.
 - **NO usar** URLs con `?lang=ca` ni `?lang=es` como destino de hreflang: el cambio de idioma es client-side via `src/js/lang.js`.
-- **Para una página nueva**: añadir DOS entradas al sitemap (ES y VA) con sus 3 alternates.
+- **Para una página nueva**: crear `src/*.html`, añadir los metadatos ES/VA en `translations.json` y compilar. El inventario se genera automáticamente, excluyendo noindex.
 
 ### Procedimiento tras un aviso de GSC
 
 1. Reenviar `https://fallasuissa.es/sitemap-index.xml` para que Google detecte las URLs `/va/`.
 2. En el informe del aviso, pulsar **"Validar corrección"**.
-3. Reindexación típica: 1-2 semanas.
+3. Seguir el estado de rastreo e indexación; el tiempo depende de Google y no está garantizado.
 4. **Inspección manual**: GSC → Inspección de URL → `https://fallasuissa.es/va/` → "Probar URL publicada" → confirmar que el HTML renderizado contiene texto valenciano.
 
 ---
@@ -172,7 +172,7 @@ RewriteRule "^img/(representantes/foto-oficiales-representantes/)?(FalleraMayorI
 RewriteRule "^img/(representantes/foto-oficiales-representantes/)?Presidente\.(jpg|avif|webp)$" /img/representantes/foto-oficiales-representantes/Presidente-2024-27.$2 [R=301,L,QSA]
 
 # K) Ofrenda a la Virgen → /img/ofrenda-virgen-desamparados/ (v4.30.12)
-# v4.30.19: subcarpeta ofenda-2026 → ofrenda-2026 (un solo 301)
+# v4.30.21: subcarpeta ofenda-2026 → ofrenda-2026 (un solo 301)
 RewriteRule "^img/(ofrenda|ofrenda-virgen-desamparados)/ofenda-2026/(.*)$" /img/ofrenda-virgen-desamparados/ofrenda-2026/$2 [R=301,L,QSA]
 RewriteRule "^img/ofrenda/(.*)$" /img/ofrenda-virgen-desamparados/$1 [R=301,L,QSA]
 
@@ -220,4 +220,4 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.19
+Última actualización: 13 de septiembre de 2026 - v4.30.21

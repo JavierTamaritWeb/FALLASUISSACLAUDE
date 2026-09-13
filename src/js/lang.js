@@ -130,6 +130,7 @@ function updateTranslations () {
   });
 
   [
+    ['[data-i18n-content]', 'data-i18n-content', 'content'],
     ['[data-i18n-placeholder]', 'data-i18n-placeholder', 'placeholder'],
     ['[data-i18n-aria-label]',  'data-i18n-aria-label',  'aria-label'],
     ['[data-i18n-alt]',          'data-i18n-alt',          'alt'],

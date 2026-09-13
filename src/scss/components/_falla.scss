@@ -297,6 +297,12 @@
     scroll-margin-top: 8rem;
     border-bottom: 1px solid v.$gris-medio-claro;
 
+    // No renderizar fotos de paneles nunca abiertos: el recorte por altura
+    // permitía que la carga lazy descargase todo el archivo en la portada.
+    &:not(.active):not(.accordion__section--visited) > .accordion__content {
+      content-visibility: hidden;
+    }
+
     // Contenido del acordeón (oculto por defecto)
     .accordion__content {
       max-height: 0;

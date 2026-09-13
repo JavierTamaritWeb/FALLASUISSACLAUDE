@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Falla Suïssa - L'Alqueria del Favero - La Falla</title>
-  <meta name="description" content="Conoce la Falla Suïssa - L'Alqueria del Favero: el monumento, la Plana Mayor, la historia, el organigrama y los archivos de la comisión.">
+  <title data-i18n="seo.lafalla.title">Falla Suïssa - L'Alqueria del Favero - La Falla</title>
+  <meta name="description" content="Conoce la Falla Suïssa - L&#x27;Alqueria del Favero: el monumento, la Plana Mayor, la historia, el organigrama y los archivos de la comisión." data-i18n-content="seo.lafalla.description">
   <meta name="keywords" content="fallas, tradición, suïssa, eventos, noticias, galería">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://fallasuissa.es/lafalla.html">
@@ -56,8 +56,8 @@
   </script>
   
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="La Falla - Fallas Suïssa - L'Alqueria del Favero">
-  <meta property="og:description" content="Descubre eventos, noticias y la galería de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta property="og:title" content="Falla Suïssa - L&#x27;Alqueria del Favero - La Falla" data-i18n-content="seo.lafalla.title">
+  <meta property="og:description" content="Conoce la Falla Suïssa - L&#x27;Alqueria del Favero: el monumento, la Plana Mayor, la historia, el organigrama y los archivos de la comisión." data-i18n-content="seo.lafalla.description">
   <meta property="og:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:image:secure_url" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:url" content="https://fallasuissa.es/lafalla.html">
@@ -71,16 +71,13 @@
   
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="La Falla - Fallas Suïssa - L'Alqueria del Favero">
-  <meta name="twitter:description" content="Descubre eventos y noticias de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta name="twitter:title" content="Falla Suïssa - L&#x27;Alqueria del Favero - La Falla" data-i18n-content="seo.lafalla.title">
+  <meta name="twitter:description" content="Conoce la Falla Suïssa - L&#x27;Alqueria del Favero: el monumento, la Plana Mayor, la historia, el organigrama y los archivos de la comisión." data-i18n-content="seo.lafalla.description">
   <meta name="twitter:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta name="twitter:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
   <meta name="twitter:image:type" content="image/png">
   
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet">
+  <!-- Tipografías locales (licencias OFL en fonts/) -->
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
@@ -93,6 +90,7 @@
   
   <!-- Hojas de estilo -->
   <link rel="stylesheet" href="css/main.css">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-v12-normal-latin.woff2" crossorigin>
 </head>
 <body>
   <header class="header-inner">
@@ -120,7 +118,7 @@
         </div>
         <div class="header__notificacion" id="notificacion"></div>
         <nav class="navegacion" role="navigation" aria-label="Menú principal">
-          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html">Inicio</a>
+          <a class="navegacion__enlace" data-i18n="nav.inicio" href="./">Inicio</a>
           <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
           <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html">Ofrenda</a>
           <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Colaboraciones</a>
@@ -140,7 +138,7 @@
             <picture>
               <source srcset="img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
               <source srcset="img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-              <img class="header-inner__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
+              <img width="640" height="793" class="header-inner__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="eager">
             </picture>
           </a>
           
@@ -161,7 +159,7 @@
  <main class="falla">
     <div class="contenedor">
       <div class="falla__heading">
-        <a class="escudo-enlace escudo-enlace--img" href="https://fallasuissa.es/" data-i18n-aria-label="nav.escudoInicio" aria-label="Ir a la página de inicio de la Falla Suïssa"><img class="falla__escudo" width="80" height="80" src="img/logos/logo-escudo-cutty.svg" alt="Escudo de la Falla Suïssa" loading="lazy" decoding="async"></a>
+        <a class="escudo-enlace escudo-enlace--img" href="https://fallasuissa.es/" data-i18n-aria-label="nav.escudoInicio" aria-label="Ir a la página de inicio de la Falla Suïssa"><img class="falla__escudo" width="80" height="80" src="img/logos/logo-escudo-cutty.seo.webp" alt="Escudo de la Falla Suïssa" loading="lazy" decoding="async"></a>
         <h2 class="falla__title" data-i18n="falla.lafalla">La Falla</h2>
       </div>
 
@@ -977,7 +975,7 @@ Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra
                         </ul>
                         <figure class="ofrendas-video">
                           <!-- Sin id ni clases .video-dron__*: ningún script (home-deferred, ofrenda-video) debe tocarlo. preload="none" por los 30 MB del MP4 -->
-                          <video class="ofrendas-video__video" controls preload="none" playsinline width="1280" height="720" poster="img/ofrenda-virgen-desamparados/ofrenda-2026/ofrenda-2026-001.jpeg" aria-label="Vídeo de la Ofrenda de la Falla Suïssa, marzo de 2026" data-i18n-aria-label="historia.archivos.ofrendas.videoAria">
+                          <video class="ofrendas-video__video" controls preload="none" playsinline width="1280" height="720" poster="img/ofrenda-virgen-desamparados/ofrenda-2026/ofrenda-2026-001.avif" aria-label="Vídeo de la Ofrenda de la Falla Suïssa, marzo de 2026" data-i18n-aria-label="historia.archivos.ofrendas.videoAria">
                             <source src="img/ofrenda-virgen-desamparados/ofrenda-2026/video/ofrenda-2026.mp4" type="video/mp4">
                             <p data-i18n="ofrenda.fallback">Tu navegador no soporta la reproducción de vídeo.</p>
                           </video>
@@ -1026,7 +1024,7 @@ Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra
     <div class="footer__contenedor">
       <div class="footer__contenido">
         <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
-          <a class="footer__enlace" href="index.html" data-i18n="nav.inicio">Inicio</a>
+          <a class="footer__enlace" href="./" data-i18n="nav.inicio">Inicio</a>
           <a class="footer__enlace active" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
           <a class="footer__enlace" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrenda</a>
           <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Colaboraciones</a>
@@ -1041,7 +1039,7 @@ Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra
           <picture>
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-            <img class="footer__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
+            <img width="640" height="793" class="footer__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
           </picture>
         </a>
 
@@ -1070,8 +1068,8 @@ Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra
   </footer>
   
   <!-- Scripts JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/swiper.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+  <script src="js/swiper.js" defer></script>
   <script src="js/acc.js"></script>
   <script src="js/dark.js"></script>
   <script src="js/lang.js"></script>

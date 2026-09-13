@@ -77,7 +77,7 @@ function createPages(dataPages) {
     // Asigna data-i18n al caption si "note" contiene una clave. Una página
     // sin "src" (p. ej. el "Fin" de galeria_3) solo lleva el texto, sin <img>.
     const imagen = item.src
-      ? `<img src="${resolveImageUrl(item.src)}" alt="${item.alt}" loading="lazy" decoding="async" />`
+      ? `<img src="${resolveImageUrl(item.src)}" alt="${item.alt}" ${item.altKey ? `data-i18n-alt="${item.altKey}"` : ''} loading="lazy" decoding="async" />`
       : "";
     article.innerHTML = `
       ${imagen}

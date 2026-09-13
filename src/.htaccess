@@ -174,14 +174,12 @@ ErrorDocument 503 /mantenimiento.html
         Header always append Link "</.well-known/agent-skills/index.json>; rel=agent-skills"
         Header always append Link "</ai-discovery.json>; rel=describedby"
         Header always append Link "</ai-discovery.json>; rel=service-desc"
-        Header always append Link "</seo/ai-training-data.md>; rel=alternate"
         Header always append Link "</sitemap-index.xml>; rel=sitemap"
     </FilesMatch>
 
-    # Content-Type para Markdown (negociación de contenido text/markdown)
+    # Tipo del recurso Markdown explícito (sin negociación de la portada)
     <FilesMatch "\.md$">
         Header set Content-Type "text/markdown; charset=utf-8"
-        Header set Vary "Accept"
     </FilesMatch>
 </IfModule>
 
@@ -295,22 +293,22 @@ ErrorDocument 503 /mantenimiento.html
     #    el manifiesto de /img/UI/ ya lo resuelve la regla G, que va antes)
     RewriteRule "^img/UI/(.*)$" /img/elementos-UXUI/$1 [R=301,L,QSA]
 
-    # Negociación de contenido Markdown (RFC 7231)
-    # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
-    RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
-    RewriteRule ^$ /seo/ai-training-data.md [L]
+    # Formas canónicas: solo redirigir peticiones externas, nunca DirectoryIndex.
+    RewriteCond %{QUERY_STRING} ^lang=(ca|va)$ [NC]
+    RewriteRule ^(?:index\.html)?$ /va/ [R=301,L,QSD]
+    RewriteCond %{QUERY_STRING} ^lang=es$ [NC]
+    RewriteRule ^(?:va/)?(?:index\.html)?$ / [R=301,L,QSD]
 
-    # Si existe versión .md junto al .html, servirla cuando se pide markdown
-    RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME}.md -f
-    RewriteRule ^(.*)$ $1.md [L]
+    RewriteCond %{THE_REQUEST} \s/+(?:va/)?index\.html(?:[?\s]) [NC]
+    RewriteRule ^(va/)?index\.html$ /$1 [R=301,L]
 
-    # Añadir .html si no existe
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}.html -f
-    RewriteRule ^(.*)$ $1.html [L]
+    RewriteRule ^((?:va/)?[a-zA-Z0-9_-]+)$ /$1.html [R=301,L]
+
+    # Markdown se sirve únicamente en su URL explícita. La portada siempre
+    # representa la página pública, sea cual sea la cabecera Accept.
 </IfModule>
 
 # =======================================================================

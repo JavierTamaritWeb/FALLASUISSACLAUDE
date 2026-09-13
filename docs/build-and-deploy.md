@@ -21,7 +21,7 @@ El modo desarrollo ejecuta un build inicial y deja watchers activos.
 npm run dev
 ```
 
-Qué observa (watch): cambios en `src/scss/`, `src/js/`, `src/data/`, `src/pdf/`, `src/img/`, `src/favicon_io/`, `src/seo/` y ficheros públicos en `src/` (robots, sitemaps, manifest, `src/google*.html`, etc.). Desde v4.6.24 todo el source vive bajo `src/`.
+Qué observa (watch): cambios en `src/scss/`, `src/js/`, `src/data/`, `src/pdf/`, `src/img/`, `src/favicon_io/`, `src/fonts/`, `src/seo/` y ficheros públicos en `src/` (robots, plantillas sitemap, manifest, `src/google*.html`, etc.). Desde v4.6.24 todo el source vive bajo `src/`.
 
 ## 🧱 Build de producción
 
@@ -45,8 +45,9 @@ npx gulp build
 - `dist/img/`: copia de `src/img/` + generación incremental de WebP/AVIF (para PNG/JPG/JPEG)
 - `dist/js/`, `dist/data/`, `dist/pdf/`, `dist/favicon_io/` (copias de `src/js/`, `src/data/`, `src/pdf/`, `src/favicon_io/`)
 - `dist/*.html` (copias de `src/*.html`; gulp strips the `src/` prefix)
-- `dist/robots.txt`, `dist/sitemap*.xml`, `dist/manifest.json`, `dist/sw.js`, `dist/google*.html`, `dist/ai-discovery.json`, `dist/ai-info.html` (copias de los ficheros públicos en `src/`)
-- `dist/seo/` (copia de `src/seo/`)
+- `dist/robots.txt`, `dist/manifest.json`, `dist/sw.js`, `dist/google*.html`, `dist/ai-discovery.json`, `dist/ai-info.html` (copias de los ficheros públicos en `src/`)
+- `dist/fonts/`: tipografías locales, licencias y manifiesto de procedencia
+- `dist/seo/` (copia de `src/seo/`, con datos institucionales regenerados)
 
 ## 🧩 Tareas Gulp útiles
 
@@ -87,18 +88,14 @@ Tras editar `src/data/translations.json` corre `npm run build` para regenerar el
 
 ## 🗺️ Sitemaps y `lastmod`
 
-El build ejecuta `updateDistSitemapsLastmod` para actualizar `lastmod` en:
+El build ejecuta `scripts/seo-artifacts.cjs → generateSeoArtifacts` después del HTML y de las copias de raíz. Genera `sitemap.xml`, imágenes y noticias; `sitemap-google.xml` y `sitemap-ai-optimized.xml` quedan como alias de compatibilidad del inventario principal. Solo se incluyen páginas con canonical e indexables. Las fotos proceden del JSON-LD de las galerías. Las noticias se filtran por su fecha real de publicación y una ventana de 48 horas; si no hay recientes, el índice no anuncia ese sitemap.
 
-- `dist/sitemap.xml`, `dist/sitemap-google.xml` y `dist/sitemap-ai-optimized.xml` (por URL, según el mtime del HTML; los dos últimos conservan su formato fecha-hora `T00:00:00+01:00`)
-- `dist/sitemap-index.xml` (por sitemap, según el mtime del archivo)
+`src/data/seo-history.json` guarda hash y fecha por URL. Un cambio significativo de HTML (incluidas traducciones y JSON-LD) actualiza lastmod; recompilar sin cambios conserva la fecha. Los hashes de CSS/JS y el año del copyright no rejuvenecen el contenido. Este registro se versiona y está excluido del watch para que el build no se dispare a sí mismo. No se usa mtime ni una zona horaria fija inventada.
 
-La fecha se calcula usando el `mtime` real de los archivos en `dist/`.
+Los archivos sitemap de `src/` son plantillas de compatibilidad; su contenido final lo produce el generador. No mantener inventarios paralelos a mano. Si se publican noticias recientes, reconstruir y desplegar al publicar y al expirar su ventana de 48 horas; una web estática no se regenera sola por el paso del tiempo.
 
 **`rsync --checksum` (v4.26.2):** el espejo compara por contenido, no por fecha+tamaño: `gulp dest` conserva la fecha del fuente en `dist/` y el token `?v=` de los assets no cambia el tamaño del HTML, así que sin `--checksum` las páginas no editadas no se subían y seguían enlazando el CSS/JS anterior (cacheado un año). Además rsync va sin `-t` (`-rlpgoDvz`, v4.26.3): si conserva la fecha del fuente, Apache responde `304` a la revalidación de la CDN y esta sigue sirviendo el HTML antiguo. Verificación tras el deploy: el `?v=` de `main.css` en una página no tocada (con `?nc=$RANDOM`) debe coincidir con el de `dist/`.
 
-**Sitemaps fuente antes de cada commit (v4.21.4):** los `lastmod` de `dist/` se recalculan solos, pero los de `src/` deben mantenerse coherentes. Antes de cada commit se revisa que cada `src/*.html` publicable tenga sus dos `<url>` (ES + `/va/`, con los 3 `hreflang`) en `src/sitemap.xml`, que no queden URLs de páginas retiradas, y se pone `lastmod` a la fecha del día (ES y VA) en `src/sitemap.xml`, `src/sitemap-google.xml` y `src/sitemap-ai-optimized.xml` para las páginas tocadas en ese commit; si cambia algún sitemap, `src/sitemap-index.xml` pasa también a la fecha del día. Las páginas standalone (`ai-info.html`, `mantenimiento.html`, `google-site-verification.html`, `base.html`) no van en el sitemap.
-
-**JSON-LD antes de cada commit (v4.28.0):** todo cambio de contenido (nombres/cargos, fechas, imágenes, vídeos, páginas o posts nuevos) incluye revisar el `<script ld+json>` de las páginas tocadas y, si afecta a la organización, `src/seo/schema-organization.json` (fuente única que el build inyecta en todas las páginas). Comprobación: `npm run build && npm run seo:schema-report` y `npx playwright test tests/schema-jsonld.e2e.spec.js`. Guía: [`structured-data.md`](./structured-data.md).
 
 ## ⚙️ Configuración del Servidor (.htaccess)
 
@@ -267,3 +264,23 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 `npm run test:unit` comprueba estos contratos, el servidor local y el despliegue mediante simuladores sin conexión SSH. `--dry-run --maintenance on|off` solo describe la operación. Las verificaciones de mantenimiento devuelven un código de error si el estado HTTP no coincide. Las variables exportadas tienen prioridad sobre `tools/deploy.env`.
 
 Registro completo: [auditoría del 13-09-2026](auditoria-2026-09-13.md).
+
+## Derivados ligeros de imágenes (v4.30.21)
+
+`src/data/image-variants.json` declara los originales SVG, la ruta de salida y el ancho máximo. `imagesTask` produce WebP transparentes para la presentación; mantiene los originales. Los nombres `.seo.webp` evitan reutilizar las antiguas respuestas SVG inmutables. Los tamaños y el presupuesto acumulado se comprueban en `tests/seo-regressions.e2e.spec.js`. No editar los derivados de `dist/`.
+
+### Verificación SEO tras publicar (v4.30.21)
+
+Ejecutar `npm run seo:verify:production` después del despliegue. Consulta producción en modo lectura y exige que los HTML y sitemaps publicados coincidan con `dist/`; comprueba 301, 404/410 y que `Accept: text/markdown` no sustituya la portada. Puede guardar evidencia con `-- --output /tmp/seo-publicado.json`. No equivale a inspeccionar la indexación real en Search Console.
+
+Al cambiar el pipeline, reiniciar `npm run dev`: un watcher ya abierto mantiene en memoria el Gulp anterior y puede sobrescribir los nuevos artefactos. No ejecutar dos watchers del mismo checkout.
+
+Las fotos de acordeones cerrados no deben descargarse al abrir la portada. `_falla.scss` usa `content-visibility: hidden` hasta la primera apertura; `acc.js` marca `.accordion__section--visited` antes de medir la altura. Los cierres y reaperturas mantienen la animación y las imágenes ya cargadas.
+
+### Tipografías locales (v4.30.21)
+
+`src/fonts/` conserva los mismos binarios WOFF2 variables de Plus Jakarta Sans v12 y Dancing Script v29 que servía Google Fonts, con licencias OFL y manifiesto de procedencia/SHA-256. `src/fonts/fonts.css` es la única definición: Sass la incorpora a `main.css` y el Llibret autónomo la enlaza directamente. `fontsTask` copia los archivos; el pre-render reescribe el preload a `../fonts/` en VA. La variante normal latina se precarga para reducir cambios de composición del texto. No sustituir las tipografías sin revisar las capturas y las métricas.
+
+Los escudos de cabecera se cargan con `loading="eager"` y `width`/`height` reales. El banner también reserva su proporción real y usa prioridad alta. No aplicar el placeholder genérico de imágenes lazy a estos elementos visibles ni a los escudos del pie: su reserva de 200 px causaba saltos de composición.
+
+Las fuentes y los derivados de imagen tienen caché larga. Si cambia su contenido en una versión futura, cambiar también el nombre público (`file`/`output` del manifiesto) y sus referencias para no reutilizar una URL inmutable con bytes distintos.

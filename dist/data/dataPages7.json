@@ -1,87 +1,104 @@
 [
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-001.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-002.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-014.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-003.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-015.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-004.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-017.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-005.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-016.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-006.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-007.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-008.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-009.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-010.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-011.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-012.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    },
-    {
-      "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-013.avif",
-      "alt": "Imagen de San Juan 2026",
-      "note": ""
-    }
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-001.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 1 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p1"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-002.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 2 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p2"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-014.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 3 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p3"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-003.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 4 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p4"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-015.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 5 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p5"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-004.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 6 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p6"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-017.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 7 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p7"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-005.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 8 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p8"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-016.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 9 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p9"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-006.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 10 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p10"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-007.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 11 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p11"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-008.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 12 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p12"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-009.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 13 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p13"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-010.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 14 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p14"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-011.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 15 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p15"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-012.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 16 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p16"
+  },
+  {
+    "src": "img/sanjuan/sanjuan-2026/sanjuan-2026-013.avif",
+    "alt": "Imagen de San Juan 2026. Fotografía 17 de 17.",
+    "note": "",
+    "altKey": "galleryAlts.g7.p17"
+  }
 ]

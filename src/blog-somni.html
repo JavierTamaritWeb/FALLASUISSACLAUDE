@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Somni | Blog | Falla Suïssa - L'Alqueria del Favero</title>
-  <meta name="description" content="Somni: la historia de cómo ocho personas ilusionadas fundaron la Falla Suïssa - L'Alqueria del Favero, la comisión número 396, en el barrio de les Moreres, Valencia.">
+  <title data-i18n="seo.blog-somni.title">Somni | Blog | Falla Suïssa - L'Alqueria del Favero</title>
+  <meta name="description" content="Somni: la historia de cómo ocho personas ilusionadas fundaron la Falla Suïssa - L&#x27;Alqueria del Favero, la comisión número 396, en el barrio de les Moreres, Valencia." data-i18n-content="seo.blog-somni.description">
   <meta name="keywords" content="somni, blog, Falla suissa, les Moreres, Valencia, fallas, tradición, comisión fallera">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://fallasuissa.es/blog-somni.html">
@@ -62,8 +62,8 @@
   </script>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Somni | Blog | Falla Suïssa - L'Alqueria del Favero">
-  <meta property="og:description" content="La historia de cómo ocho personas ilusionadas fundaron la Falla Suïssa - L'Alqueria del Favero en el barrio de les Moreres, Valencia.">
+  <meta property="og:title" content="Somni | Blog | Falla Suïssa - L&#x27;Alqueria del Favero" data-i18n-content="seo.blog-somni.title">
+  <meta property="og:description" content="Somni: la historia de cómo ocho personas ilusionadas fundaron la Falla Suïssa - L&#x27;Alqueria del Favero, la comisión número 396, en el barrio de les Moreres, Valencia." data-i18n-content="seo.blog-somni.description">
   <meta property="og:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:image:secure_url" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:url" content="https://fallasuissa.es/blog-somni.html">
@@ -79,15 +79,12 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Somni | Blog | Falla Suïssa - L'Alqueria del Favero">
-  <meta name="twitter:description" content="La historia de cómo ocho personas ilusionadas fundaron la Falla Suïssa - L'Alqueria del Favero en el barrio de les Moreres, Valencia.">
+  <meta name="twitter:title" content="Somni | Blog | Falla Suïssa - L&#x27;Alqueria del Favero" data-i18n-content="seo.blog-somni.title">
+  <meta name="twitter:description" content="Somni: la historia de cómo ocho personas ilusionadas fundaron la Falla Suïssa - L&#x27;Alqueria del Favero, la comisión número 396, en el barrio de les Moreres, Valencia." data-i18n-content="seo.blog-somni.description">
   <meta name="twitter:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta name="twitter:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
   <meta name="twitter:image:type" content="image/png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet">
 
   <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
@@ -96,6 +93,7 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="css/main.css">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-v12-normal-latin.woff2" crossorigin>
 </head>
 <body>
   <header class="header-inner">
@@ -118,7 +116,7 @@
         </div>
         <div class="header__notificacion" id="notificacion"></div>
         <nav class="navegacion" role="navigation" aria-label="Menú principal">
-          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html">Inicio</a>
+          <a class="navegacion__enlace" data-i18n="nav.inicio" href="./">Inicio</a>
           <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
           <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html">Ofrenda</a>
           <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Colaboraciones</a>
@@ -137,7 +135,7 @@
           <picture>
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-            <img class="header-inner__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
+            <img width="640" height="793" class="header-inner__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="eager">
           </picture>
         </a>
         <h1 class="heading-inner" id="blog-detail-heading" data-i18n="blog.somni.title">"Somni"</h1>
@@ -152,12 +150,12 @@
     <div class="contenedor" id="blog-detail-container">
       <article class="blog-detail__article reveal reveal--soft" aria-labelledby="blog-detail-heading">
         <div class="blog-detail__meta">
-          <time class="blog-detail__date" datetime="2025-03" data-i18n="blog.somni.date"></time>
+          <time class="blog-detail__date" datetime="2025-03" data-i18n="blog.somni.date">Publicado en marzo de 2025</time>
           <div class="blog-detail__spacer"></div>
-          <p class="blog-detail__author" data-i18n="blog.somni.author"></p>
+          <p class="blog-detail__author" data-i18n="blog.somni.author">Autora: Paula Peiró</p>
         </div>
-        <p class="blog-detail__lead" data-i18n="blog.somni.lead"></p>
-        <div class="blog-detail__content" data-i18n="blog.somni.content" data-i18n-format="paragraphs"></div>
+        <p class="blog-detail__lead" data-i18n="blog.somni.lead">Somni</p>
+        <div class="blog-detail__content" data-i18n="blog.somni.content" data-i18n-format="paragraphs"><p>Un día tuvimos un sueño que no sabíamos que compartíamos con más gente. Viviendo en el nuevo barrio de les Moreres y hablando con los vecinos, descubrimos que era un sueño compartido. Trabajamos para que se hiciera realidad.</p><p>"Yo, de pequeña, fui fallera", "Yo llevo toda la vida siendo fallero", "Yo nunca lo he sido, pero me gustaría". Estas eran algunas de las frases que compartíamos y escuchábamos hablar entre nosotros.</p><p>"¡Venga, valientes, hay que intentarlo!" Con esa determinación, ocho personas ilusionadas —José, Marta, Paula, Rodrigo, Prados, Sara, Migue y David— comenzamos a reunirnos con un mismo objetivo: hacer realidad el sueño. Fundamos la directiva, creamos el escudo que nos identifica, redactamos los estatutos y emprendimos una lucha contra el tiempo y la burocracia.</p><p>En el mes de junio fue cuando, desde la Junta Central Fallera, nos confirmaron que el sueño se estaba convirtiendo en realidad. Ya éramos Falla, la número 396, la Falla Suïssa – L’Alqueria del Favero. Ya podíamos formar una comisión que, a día de hoy, está compuesta ni más ni menos que por 113 falleros y falleras.</p><p>¿El próximo objetivo? Plantar Falla, nuestro primer monumento. En estos meses los artistas falleros ya tienen sus contratos firmados desde abril, pero como estamos soñando se hace la magia y conseguimos que los grandes Paco y David quieran trabajar con nosotros, ayudarnos y ser amigos de esta, nuestra comisión. Siempre les estaremos agradecidos. Este año plantaremos por huevos, como dice el lema de nuestra Falla grande: "¡Sssshhhhh… silencio que se rueda!"; será la Falla de la comisión infantil, que seguro enamora a Prados y Javier.</p><p>Seguimos avanzando en este maravilloso sueño y tal vez llegue el momento de despertar y volver al presente, porque ha llegado el día de la exaltación de nuestras falleras mayores y la presentación de nuestros presidentes.</p><p>Con todo ello, nos encontramos ante un sueño que ya es realidad, una realidad que hemos creado entre todos, con el esfuerzo y el cariño por nuestra tierra, nuestro barrio y nuestra tradición. Y ahora os invitamos a vivir con nosotros esta primera gran fiesta, a disfrutar de nuestra Falla y del barrio que nos acoge, porque, como un día soñamos juntos, hoy celebramos el comienzo de un camino que nunca olvidaremos. Bienvenidos a nuestras primeras e inolvidables Fallas.</p></div>
         <a class="blog-detail__back" href="blog.html" data-i18n="blog.somni.back" data-i18n-aria-label="blog.somni.backAria">Volver al blog</a>
       </article>
     </div>
@@ -169,7 +167,7 @@
     <div class="footer__contenedor">
       <div class="footer__contenido">
         <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
-          <a class="footer__enlace" href="index.html" data-i18n="nav.inicio">Inicio</a>
+          <a class="footer__enlace" href="./" data-i18n="nav.inicio">Inicio</a>
           <a class="footer__enlace" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
           <a class="footer__enlace" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrenda</a>
           <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Colaboraciones</a>
@@ -184,7 +182,7 @@
           <picture>
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-            <img class="footer__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
+            <img width="640" height="793" class="footer__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
           </picture>
         </a>
 

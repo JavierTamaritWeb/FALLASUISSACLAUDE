@@ -2,7 +2,7 @@
 
 This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
-**Version:** 4.30.20
+**Version:** 4.30.21
 **Last Updated:** 13 de septiembre de 2026
 
 > 4.30.20 — Auditoría de 15 problemas corregidos con 25 pruebas nuevas; informe en [`docs/auditoria-2026-09-13.md`](docs/auditoria-2026-09-13.md).
@@ -91,7 +91,7 @@ Registro de errores y prevención: [`docs/auditoria-2026-09-13.md`](docs/auditor
 - **Frontend**: HTML5, SCSS (BEM), ES6+ JavaScript modules
 - **Libraries (CDN)**: Swiper.js v11 (carousels, jsDelivr), Anime.js v3.2.1 (animations, cdnjs), EmailJS v4 (contact form, jsDelivr)
 - **Libraries (npm)**: Flatpickr v4.6.13 (date picker)
-- **Testing**: 54 archivos E2E en la batería completa (538 casos), 24 archivos smoke (346 casos) y 17 pruebas Node en `tests/unit/`. Configuraciones: `playwright.config.js` y `playwright.smoke.config.js`; guía: `docs/e2e-testing.md`.
+- **Testing**: 55 archivos E2E en la batería completa (606 casos), 25 archivos smoke (414 casos) y 22 pruebas Node en `tests/unit/`. Configuraciones: `playwright.config.js` y `playwright.smoke.config.js`; guía: `docs/e2e-testing.md`.
 
 ### Directory Structure
 
@@ -104,6 +104,7 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
   - `src/img/` - Raster + vector source images (build copies + generates WebP/AVIF into `dist/img/`)
   - `src/pdf/` - PDFs with HTML wrappers for favicon/social preview
   - `src/seo/` - Sitemaps, schema, robots variants
+  - `src/fonts/` - Tipografías WOFF2 locales, licencias OFL, CSS y manifiesto SHA-256.
   - `src/favicon_io/` - Favicon assets
   - `src/*.html` - All page HTML (27 files: `index.html`, `lafalla.html`, blog pages, galerías, legal, etc.)
   - `src/manifest.json`, `src/robots*.txt`, `src/sitemap*.xml`, `src/sw.js`, `src/.htaccess`, `src/ai-discovery.json` - public-root files copied verbatim to `dist/`
@@ -118,11 +119,11 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
 
 **Dark Mode** (`src/js/dark.js`): Applies `.modo-oscuro`/`.modo-claro` classes. CSS uses `::before` pseudo-elements for gradient-to-solid transitions because CSS cannot animate between `linear-gradient` and solid color directly. Background gradient lives on `body::before` to allow opacity cross-fade to black.
 
-**Blog** (`blog.html`, `blog-somni.html`, `blog-anima.html`): Static blog system with per-article SEO. Each article is a standalone HTML page with its own `<title>`, `<meta description>`, Schema.org `BlogPosting`, Open Graph (`og:type=article`, `article:published_time`), and Twitter Card tags. Blog cards on `blog.html` and `index.html` are hardcoded static HTML (no JS rendering). Translatable text uses `data-i18n` attributes loaded from `src/data/translations.json`. SCSS in `src/scss/components/_blog.scss` with `.blog` (listing) and `.blog-detail` (article) blocks. `.blog-detail__article` uses the same `::before` gradient overlay pattern as countdown/quieres-mas. Images inside use `z-index: 2` on the figure to stay above the gradient layer. Adding a new blog post = create static HTML page + add translations + add cards to `blog.html` and `index.html` + update `sitemap.xml`.
+**Blog** (`blog.html`, `blog-somni.html`, `blog-anima.html`): Static blog system with per-article SEO. Each article is a standalone HTML page with its own `<title>`, `<meta description>`, Schema.org `BlogPosting`, Open Graph (`og:type=article`, `article:published_time`), and Twitter Card tags. Blog cards on `blog.html` and `index.html` are hardcoded static HTML (no JS rendering). Translatable text uses `data-i18n` attributes loaded from `src/data/translations.json`. SCSS in `src/scss/components/_blog.scss` with `.blog` (listing) and `.blog-detail` (article) blocks. `.blog-detail__article` uses the same `::before` gradient overlay pattern as countdown/quieres-mas. Images inside use `z-index: 2` on the figure to stay above the gradient layer. Adding a new blog post = create static HTML page + add translations + add cards to `blog.html` and `index.html` + rebuild the generated sitemaps.
 
-**Multi-Language** (`src/js/lang.js` + `src/js/initTranslations.js` + `gulpfile.js → prerenderTranslations`): Elements use `data-i18n="section.key"` attributes (plus `data-i18n-aria-label`, `data-i18n-placeholder`, `data-i18n-alt`, `data-i18n-title`, `data-i18n-format="paragraphs"`, `data-i18n-dynamic`). Loads `src/data/translations.json` on page load, persists choice to localStorage. `lang.js` fires `translationsReady` event after load and `langChanged` on switch. Dynamic components (board) must check `window.translations` first; if not ready, listen for `translationsReady` before rendering. Since v4.6.23 the build **pre-renderiza el valenciano**: `dist/va/*.html` contiene el texto VA ya horneado en el body antes de que cargue JS (mejora SEO + accesibilidad sin JS). El toggle ES/VA del header sigue funcionando en runtime porque los atributos `data-i18n*` permanecen en el HTML; al alternar, `lang.js` reescribe el DOM con el idioma elegido.
+**Multi-Language** (`src/js/lang.js` + `src/js/initTranslations.js` + `gulpfile.js → prerenderTranslations`): Elements use `data-i18n="section.key"` attributes (plus `data-i18n-aria-label`, `data-i18n-placeholder`, `data-i18n-alt`, `data-i18n-title`, `data-i18n-content`, `data-i18n-format="paragraphs"`, `data-i18n-dynamic`). Loads `src/data/translations.json` on page load, persists choice to localStorage. `lang.js` fires `translationsReady` event after load and `langChanged` on switch. Dynamic components (board) must check `window.translations` first; if not ready, listen for `translationsReady` before rendering. Since v4.6.23 the build **pre-renderiza el valenciano**: `dist/va/*.html` contiene el texto VA ya horneado en el body antes de que cargue JS (mejora SEO + accesibilidad sin JS). El toggle ES/VA del header sigue funcionando en runtime porque los atributos `data-i18n*` permanecen en el HTML; al alternar, `lang.js` reescribe el DOM con el idioma elegido.
 
-**HTML Build Pipeline** (`gulpfile.js` → `htmlTask` → `modifyHtmlStream`): During build, the HTML task is the **single source of truth** for SEO multi-idioma. For every source HTML it (1) strips any pre-existing `<link rel="canonical">` and `<link rel="alternate" hreflang="...">` so source files cannot drift, (2) re-injects a self-referential `canonical` (the URL of the file itself: `https://fallasuissa.es/<file>` for the ES build and `https://fallasuissa.es/va/<file>` for the VA build) plus a bidirectional `hreflang` block (`es`, `ca`, `x-default`), and (3) merges Schema.org `Event` JSON-LD from `src/data/board.json` into `index.html`/`eventos.html`. It also generates a `/va/` variant of every page with `lang="ca"`. Sitemap `<lastmod>` values are auto-updated based on file mtimes in `dist/`. Source HTML files in the repo root may still contain legacy `canonical`/`hreflang` lines — those are harmless because the build strips them; do NOT add new manual canonical/hreflang to source HTML or it will be silently removed at build time.
+**HTML Build Pipeline** (`gulpfile.js` → `htmlTask` → `modifyHtmlStream`): During build, the HTML task is the **single source of truth** for SEO multi-idioma. For every source HTML it (1) strips any pre-existing `<link rel="canonical">` and `<link rel="alternate" hreflang="...">` so source files cannot drift, (2) re-injects a self-referential `canonical` (the URL of the file itself: `https://fallasuissa.es/<file>` for the ES build and `https://fallasuissa.es/va/<file>` for the VA build) plus a bidirectional `hreflang` block (`es`, `ca`, `x-default`), and (3) merges Schema.org `Event` JSON-LD from `src/data/board.json` into `index.html`/`eventos.html`. It also generates a `/va/` variant of every page with `lang="ca"`. Los sitemaps se generan desde `dist/` mediante `scripts/seo-artifacts.cjs`; `lastmod` depende del hash de contenido registrado en `src/data/seo-history.json`, no del mtime. Source HTML files in the repo root may still contain legacy `canonical`/`hreflang` lines — those are harmless because the build strips them; do NOT add new manual canonical/hreflang to source HTML or it will be silently removed at build time.
 
 **Bulletin Board** (`src/js/board.js`): Fetches `src/data/board.json`, renders on `eventos.html` and `index.html` (both contain `<div class="board" id="notesBoard">`). Each nota supports an optional `imagen` field (`{ url, alt: { es, va } }`) which is rendered as `<figure class="board__figure"><img class="board__image" loading="lazy">` inside the nota — useful for embedding posters or infographics. When a nota has an `imagen` and/or `adjuntos`, it is wrapped in `<article class="board__card">` (with the inner `<div class="board__note">`); plain notas without extras render as a direct `<article class="board__note">`. Adjuntos still appear below the figure as "Ver imagen"/"Descargar" links via the existing SVG-icon system.
 
@@ -152,9 +153,12 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.30.20).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.30.21).
 
 ## Architecture Decisions & Constraints
+
+- **Auditoría SEO 4.30.21:** Reiniciar cualquier watcher al cambiar el pipeline; no ejecutar dos a la vez. El banner de subvención se inicializa justo después de su HTML y no debe esperar a Swiper. Contenido ES disponible sin JavaScript; pre-render VA completo (H1, párrafos y páginas legales); metadatos y JSON-LD localizados; `data-i18n-content` compatible en build y runtime. Sitemaps generados desde el HTML publicable por `scripts/seo-artifacts.cjs` (60 URL actuales), sin `noindex` ni noticias caducadas; `src/data/seo-history.json` conserva fechas por hash de contenido. Fuentes locales y licencias en `src/fonts/`, copiadas por `fontsTask`; `fonts.css` se incorpora por Sass y se enlaza en el Llibret autónomo. Derivados transparentes WebP en `src/data/image-variants.json`, con presupuesto de peso. `.htaccess` normaliza variantes de URL y sirve HTML independientemente de `Accept`. Registro y pruebas: [`docs/auditoria-seo-2026-09-13.md`](docs/auditoria-seo-2026-09-13.md).
+
 
 These constraints arise from past bugs. Violating them will reintroduce issues:
 
@@ -173,7 +177,7 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
   1. **No añadir** `canonical` ni `hreflang` a mano en los HTML del root: el build los borra. Si necesitas tocarlos, edita `modifyHtmlStream` en `gulpfile.js`.
   2. El `canonical` debe ser **autoreferencial** (cada URL apunta a sí misma): la ES a `https://fallasuissa.es/<file>` y la VA a `https://fallasuissa.es/va/<file>`. NUNCA hagas que `/va/X.html` declare canonical hacia `/X.html` — eso reproduce el aviso de GSC "Duplicada: el usuario no ha indicado ninguna versión canónica" (canonical y hreflang en conflicto se ignoran ambos).
   3. **No usar URLs `?lang=ca` ni `?lang=es`** como destino de hreflang: no son páginas crawlables (el cambio de idioma es client-side via `src/js/lang.js`).
-  4. `sitemap.xml` mantiene **48 entradas** (24 ES + 24 VA) con bloques `<xhtml:link rel="alternate">` por entrada. Cuando añadas una página nueva, añade SUS DOS entradas (ES y VA) con los 3 alternates.
+  4. `scripts/seo-artifacts.cjs` genera `sitemap.xml` con las páginas canónicas indexables (60 URL: 30 ES + 30 VA). No mantener listas manuales: añadir página y metadatos ES/VA, ejecutar build y revisar el inventario generado.
 
 - **Mobile menu z-index stacking (v4.0.0):** Backdrop is inserted inside `.header__barra` (not `body`). Z-index: menu 2500, backdrop 1500, menu button 2600. Moving backdrop to `body` breaks stacking context.
 
@@ -222,8 +226,8 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 ### Adding a new page
 
 1. Create HTML file in `src/` (do NOT add `<link rel="canonical">` ni `hreflang` — los inyecta el build)
-2. Add **two** entries to `src/sitemap.xml` (one for ES, one for `/va/`), each with `<xhtml:link rel="alternate">` for `es`, `ca`, `x-default`
-3. Add URL to `src/sitemap-index.xml` if needed
+2. Add localized metadata under `translations.{es,va}.seo` and complete source ES content.
+3. The build discovers the page and generates both sitemap entries and alternates automatically.
 4. Run `npm run build`
 
 ### Updating Open Graph image
@@ -237,7 +241,7 @@ These constraints arise from past bugs. Violating them will reintroduce issues:
 1. Create a static HTML page (`src/blog-{slug}.html`) based on `src/blog-somni.html` or `src/blog-anima.html` as template. Include specific SEO: `<title>`, `<meta description>`, Schema.org `BlogPosting` (with headline, datePublished, author), Open Graph (`og:type=article`, `article:published_time`), and Twitter Card tags
 2. Add all translatable text to `src/data/translations.json` under both `es` and `va` (cardTitle, title, lead, date, excerpt, author, back, backAria, ctaAria, content blocks, image alt/caption)
 3. Add static blog cards to `src/blog.html` and `src/index.html` with hrefs pointing to the new page
-4. Add URL to `src/sitemap.xml`
+4. Add ES/VA metadata under `translations.{es,va}.seo`; verify the generated sitemap after build.
 5. Run `npm run build`
 
 ### Adding a PDF with social preview

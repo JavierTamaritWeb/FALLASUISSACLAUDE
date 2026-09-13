@@ -139,6 +139,7 @@ Atributos cubiertos por el pre-render y por `lang.js`:
 - `data-i18n-placeholder` → atributo `placeholder`
 - `data-i18n-alt` → atributo `alt` (procesado en runtime desde v4.6.23)
 - `data-i18n-title` → atributo `title` (procesado en runtime desde v4.6.23)
+- `data-i18n-content` → atributo `content` de metadatos (build y runtime, v4.30.21)
 - `data-i18n-format="paragraphs"` → genera `<p>` por bloque dividido por `\n+`
 - `data-i18n-dynamic` → skipeado por completo (lo rellena el módulo dueño en runtime)
 
@@ -283,3 +284,12 @@ Guía de ejecución: [`e2e-testing.md`](./e2e-testing.md)
 ---
 
 Última actualización: 13 de septiembre de 2026 - v4.30.19
+
+## Guardias SEO de v4.30.21
+
+- `translations.{es,va}.seo.<slug>` contiene título y descripción de cada página. Los HTML fuente llevan el texto ES, `<title data-i18n>` y metas con `data-i18n-content`. JSON-LD comparte sus textos editoriales.
+- El contenido principal ES debe existir en el fuente. No dejar artículos o tarjetas vacíos esperando a JavaScript. ES sigue sin pre-render global.
+- Los H1 compuestos colocan la clave en el `span` de texto, no en el padre. Los bloques `paragraphs` se regeneran en VA aunque el fuente ya tenga párrafos ES.
+- `legalDocuments` traduce segmentos legales en `span` para preservar enlaces, énfasis e identificadores. Los datos oficiales de identificación se conservan literalmente.
+- `galleryAlts` identifica las fotos por contexto y ordinal y ofrece texto ES/VA. `altKey` en cada dato de galería conecta el HTML y el JSON-LD con la misma traducción.
+- `tests/seo-regressions.e2e.spec.js` comprueba las 60 páginas sin JavaScript, el cambio de idioma, el alt editorial y el inventario de imágenes. Al añadir un atributo nuevo, ampliar tanto el build como `lang.js`.

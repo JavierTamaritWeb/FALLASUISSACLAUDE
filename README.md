@@ -17,7 +17,7 @@ Desarrollada con tecnologías modernas y optimizada para ofrecer la mejor experi
 [![Documentation](https://img.shields.io/badge/Docs-Markdown-informational)](./docs/)
 [![AI Optimized](https://img.shields.io/badge/AI-Optimized-purple)](https://openai.com/)
 
-🆕 Última actualización: 13 de septiembre de 2026 - v4.30.20 - **Auditoría de errores corregidos y pruebas de regresión** ([registro y prevención](docs/auditoria-2026-09-13.md)). Antes, v4.30.19: **Subcarpeta `ofenda-2026` renombrada a `ofrenda-2026`** (errata; 301 de las rutas antiguas). Antes, v4.30.18: **Fix: botones de descarga de vídeo cortados en móvil** (Ofrenda y dron en Historia/Archivos; ahora el texto baja de línea dentro del panel). Antes, v4.30.17: **Carpeta `img/UI` renombrada a `img/elementos-UXUI`** (iconos, fondo del traje, cenefa, imagen OG; 301 de las rutas antiguas). Antes, v4.30.16: **Imágenes del visor del monumento renombradas** (`monumento-falla-2026-27-boceto`, `monumento-falla-2025-26-real`, `monumento-real-foto_2024-25_01`…; 301 de los nombres antiguos). Antes, v4.30.15: **Imágenes del visor del monumento en `src/img/Visor-Monumento/`** (bocetos 2026-27, fotos plantadas 2025-26 y fotos 2024-25; 301 de las rutas antiguas). Antes, v4.30.14: **Escudo oficial renombrado y movido** (`Escudo_falla.png` → `img/escudo-falla/Escudo-Oficial-Falla.png`; 782 referencias actualizadas y 301 de las rutas antiguas). Antes, v4.30.13: **Fotos oficiales de los representantes con el ejercicio en el nombre** (`FalleraMayor-2025-26`, `FalleraMayorInfantil-2025-26`, `PresidenteInfantil-2025-26`, `Presidente-2024-27`; 301 de los nombres antiguos). Antes, v4.30.12: **Carpeta `img/ofrenda` renombrada a `img/ofrenda-virgen-desamparados`** (fotos y vídeo de la Ofrenda 2026; 301 de las rutas antiguas). Antes, v4.30.11: **Fotos oficiales de los representantes en `src/img/representantes/foto-oficiales-representantes/`** (7 fotos; rutas de Nosotros, Representantes y Próxima Ofrenda actualizadas; 301 de las rutas antiguas). Antes, v4.30.10: **Franja del copyright del pie** con línea blanca superior de 2px y más padding arriba y abajo. Antes, v4.30.9: **Imagen del banner de subvención en `src/img/subvenciones/`** (`subvencion.png` → `subvencion-2026.png`; 301 de la ruta antigua). Antes, v4.30.8: **Bocetos web 2025-26 renombrados** (`falla2026.jpg`/`falla2026-Infantil.jpg` → `img/monument/bocetos/boceto-falla-2025-26-Web.jpg` / `-Infantil-Web.jpg`, miniaturas del panel Monumento 2025-26). Antes, v4.30.7: **Bocetos 2025-26 archivados** (`falla_anterior.png` y `falla_infantol_anterior.png` pasan a `src/img/monument/bocetos/boceto-falla-2025-26*.png`, sin referencias). Antes, v4.30.6: **Iconos de redes sociales en `src/img/iconos-redes-sociales/`** (8 fondos SVG del pie + variantes sin uso + `logo_falla.svg`; `_sociales.scss` actualizado; 301 de las rutas antiguas). Antes, v4.30.5: **`icono-sol.svg` e `icono-luna.svg` a `src/img/elementos-UXUI/`** (sin referencias). Antes, v4.30.4: **Favicons en `src/img/favicon/`** (6 iconos + `site.webmanifest` corregido; rutas actualizadas en las 30 páginas, wrappers PDF, `manifest.json` y `sw.js`; 301 de las rutas antiguas). Antes, v4.30.3: **301 de las rutas antiguas de `/img/` a `/img/elementos-UXUI/`** (regla F del `.htaccess`, conserva el `?v=`; vistas previas ya compartidas de `og-share.png` siguen funcionando). Antes, v4.30.2: **Imágenes de interfaz en `src/img/elementos-UXUI/`** (iconos, fondo del traje, cenefa, imagen OG, imágenes del modal de contacto; rutas actualizadas en HTML/SCSS/JS/sitemaps/tests). Antes, v4.30.1: **Fix: caja blanca bajo los iconos transparentes en modo oscuro** (el placeholder de `img[loading="lazy"]` era permanente en las páginas sin `accessibility.js`). Antes, v4.30.0: **Coral de marca en modo oscuro**: todo lo que usa `$primary-color` (#FF6F61) pasa a `#B83F35` en modo oscuro mediante la custom property `--coral-marca` (títulos, bordes, cenefa, badges, botones, foco, timeline…). Antes, v4.29.1: **Buscador: dos aspas con papeles distintos** (cerrar el buscador sin círculo en la cabecera; borrar solo dentro del campo y solo con texto, sin cerrar el panel; campo con borde fino y un único anillo de foco, también en modo oscuro; fix del aspa de borrar visible con el campo vacío). Antes, v4.29.0: **Buscador general y paleta funcional**: buscador bilingüe en todas las páginas (botón lupa + panel bajo la barra, índice estático generado por el build, resultados con sección y ejercicio, deep links a los paneles de Archivos, `npm run search:eval`) y evolución de la paleta sin tocar los degradados (tokens aditivos `$coral-texto`/`$coral-claro`/estados, coral solo decorativo o grande sobre azul, calendario/botones/tarjetas/nav/footer AA, foco de doble anillo, colores de éxito/error). Antes, v4.28.1: **Segunda auditoría severa de errores** (og:url/og:locale de /va/, textos de reserva i18n, media queries 767px, snapshots huérfanos, descripciones, npm audit). Antes, v4.28.0: **JSON-LD unificado e inyectado por el build** (Organization/WebSite desde una fuente única, breadcrumbs, galerías con ImageObject, vídeos, blog completo, /va/ localizado; nuevo test smoke y `npm run seo:schema-report`). Antes, v4.27.3: **Organigrama**: Rodrigo Sobero y Miguel Castillo entran como delegados de Festejos bajo Pablo Cortés. Antes, v4.27.1: **Corrección del apellido del Presidente** (José Santos Quilis, antes "Quiles", en HTML, i18n, Schema.org, tests y docs). Antes, v4.27.0: **Titulares de acordeón con el hover del botón** (degradado coral, brillo y flecha desplazada, sin elevación; todos los acordeones, claro y oscuro). Antes, v4.26.1: **Paginación entre galerías** (fix: fondo a todo el ancho en pantallas grandes) (anterior/siguiente, tira 1-9 y "Todas las galerías", generada en el build). Antes, v4.25.0: **Álbum a doble página en las 9 galerías** (≥1200 px) con un único `js/galeria.js`. Antes, v4.24.2: **Nombre de la galería sobre el bloc** en las 9 galerías. Antes, v4.24.1: **SEO**: `sitemap-google.xml` con las galerías 5 a 9. Antes, v4.24.0: **Nueva galería Fallera Mayor Infantil 2026-27** (`galeria_9`): 40 fotos de la proclamación en un bloc que a partir de 1200 px se abre **a doble página como un álbum**, y el vídeo vertical de la proclamación con botón de ampliar y descarga. Antes, v4.23.6: **Fix del menú desplegable**: cristal como la barra principal (degradado + blur real) en todos los tamaños y modos, y z-index del header corregido (la cenefa y el título del organigrama se pintaban encima del menú). Antes, v4.23.4: **Organigrama**: título "Organigrama 2026-27" en `organigrama.html`. Antes, v4.23.3: **Organigrama**: Marta Pastor sale de la columna de Eventos (sigue en Delegación Infantil) y Pablo Pallardó (Deportes) vuelve bajo Prados Ramos. Antes, v4.23.2: **Menú y pie en mayúsculas** y **todos los escudos de la Falla enlazan a la home** (`https://fallasuissa.es/`). Antes, v4.23.1: **Acordeones sin recorte en todas las pantallas** (el alto del panel abierto lo calcula `acc.js`; antes un tope fijo de 1000 px cortaba el panel HOPE de Colaboraciones, el Organigrama y la Plana Mayor en móvil). Antes, v4.23.0: **La Directiva rediseñada como tarjetas por cargo con iconos y chips (modo oscuro incluido)** como miniaturas ampliables (lightbox compartido con "+" y "×"); la sección Ofrenda queda solo con "Próxima Ofrenda". Antes, v4.20.0: **Fix Safari de la galería de Ofrenda** (las 3 fotos no se veían en WebKit: alto 3:4 reservado con `::before`) y **botón de descarga del vídeo** en Historia/Archivos/Ofrendas. Antes, v4.19.1: **Sección Ofrenda sin visor de vídeo**: en su lugar, la foto de la Fallera Mayor muy sombreada con el rótulo "Próxima Ofrenda" centrado en color primario; el vídeo 2026 se reproduce en Historia/Archivos/Ofrendas. Antes, v4.18.0: **Historia/Archivos/Ofrendas**: nueva subsección con el vídeo de la Ofrenda de marzo de 2026 reproducido por el `<video controls>` nativo del navegador (sin visor). Antes, v4.17.0: **Vista Aérea retirada**: el visor del vídeo del dron desaparece de la home y de La Falla (su código queda como plantilla en `docs/visor-video-plantilla.md`; el MP4 sigue descargable desde Archivos/Monumentos). **El Monumento**: el visor muestra los bocetos 2026-27 (`falla2027*`). **Nosotros/Plana Mayor**: las 4 fotos de los paneles (Fallera Mayor, Presidente, Fallera Mayor Infantil y Presidente Infantil) se amplían en el lightbox compartido. **Historia/Archivos**: las miniaturas de **Representantes** (2026-27 y 2025-26) y el nuevo panel **Monumento 2025-26** se amplían en el lightbox compartido, con botón de descarga del vídeo del dron. **Menú hamburguesa en todos los tamaños** (la barra desktop de enlaces se sustituye por el mismo desplegable que en móvil). **Ejercicio 2026-27**: nueva Plana Mayor en Nosotros (Fallera Mayor Lucía Gutiérrez Martín y Fallera Mayor Infantil Sofía Gómez Medina con texto provisional; foto nueva del Presidente Infantil Diego Gómez Medina; Presidente José Santos Quilis sin cambios), fila de representantes en el **organigrama** (`index`, `lafalla`, `organigrama`) y nueva edición **Representantes 2026-27** en el acordeón de Historia/Archivos. Los dos tablones de anuncios (`board.json` de Eventos y `sports-board.json` de Deportes) se sirven **vacíos** y muestran el empty-state; `tests/board.e2e.spec.js` es ahora data-driven y el test del calendario ya no depende del mes real. El historial detallado vive en el **Changelog de [`CLAUDE.md`](./CLAUDE.md)** (fuente canónica).
+🆕 Última actualización: 13 de septiembre de 2026 - v4.30.21 - **Auditoría SEO corregida: contenido bilingüe, rendimiento, metadatos, sitemaps y redirecciones** ([informe y prevención](docs/auditoria-seo-2026-09-13.md)). Antes, v4.30.20: **Auditoría de errores corregidos y pruebas de regresión** ([registro y prevención](docs/auditoria-2026-09-13.md)). Antes, v4.30.19: **Subcarpeta `ofenda-2026` renombrada a `ofrenda-2026`** (errata; 301 de las rutas antiguas). Antes, v4.30.18: **Fix: botones de descarga de vídeo cortados en móvil** (Ofrenda y dron en Historia/Archivos; ahora el texto baja de línea dentro del panel). Antes, v4.30.17: **Carpeta `img/UI` renombrada a `img/elementos-UXUI`** (iconos, fondo del traje, cenefa, imagen OG; 301 de las rutas antiguas). Antes, v4.30.16: **Imágenes del visor del monumento renombradas** (`monumento-falla-2026-27-boceto`, `monumento-falla-2025-26-real`, `monumento-real-foto_2024-25_01`…; 301 de los nombres antiguos). Antes, v4.30.15: **Imágenes del visor del monumento en `src/img/Visor-Monumento/`** (bocetos 2026-27, fotos plantadas 2025-26 y fotos 2024-25; 301 de las rutas antiguas). Antes, v4.30.14: **Escudo oficial renombrado y movido** (`Escudo_falla.png` → `img/escudo-falla/Escudo-Oficial-Falla.png`; 782 referencias actualizadas y 301 de las rutas antiguas). Antes, v4.30.13: **Fotos oficiales de los representantes con el ejercicio en el nombre** (`FalleraMayor-2025-26`, `FalleraMayorInfantil-2025-26`, `PresidenteInfantil-2025-26`, `Presidente-2024-27`; 301 de los nombres antiguos). Antes, v4.30.12: **Carpeta `img/ofrenda` renombrada a `img/ofrenda-virgen-desamparados`** (fotos y vídeo de la Ofrenda 2026; 301 de las rutas antiguas). Antes, v4.30.11: **Fotos oficiales de los representantes en `src/img/representantes/foto-oficiales-representantes/`** (7 fotos; rutas de Nosotros, Representantes y Próxima Ofrenda actualizadas; 301 de las rutas antiguas). Antes, v4.30.10: **Franja del copyright del pie** con línea blanca superior de 2px y más padding arriba y abajo. Antes, v4.30.9: **Imagen del banner de subvención en `src/img/subvenciones/`** (`subvencion.png` → `subvencion-2026.png`; 301 de la ruta antigua). Antes, v4.30.8: **Bocetos web 2025-26 renombrados** (`falla2026.jpg`/`falla2026-Infantil.jpg` → `img/monument/bocetos/boceto-falla-2025-26-Web.jpg` / `-Infantil-Web.jpg`, miniaturas del panel Monumento 2025-26). Antes, v4.30.7: **Bocetos 2025-26 archivados** (`falla_anterior.png` y `falla_infantol_anterior.png` pasan a `src/img/monument/bocetos/boceto-falla-2025-26*.png`, sin referencias). Antes, v4.30.6: **Iconos de redes sociales en `src/img/iconos-redes-sociales/`** (8 fondos SVG del pie + variantes sin uso + `logo_falla.svg`; `_sociales.scss` actualizado; 301 de las rutas antiguas). Antes, v4.30.5: **`icono-sol.svg` e `icono-luna.svg` a `src/img/elementos-UXUI/`** (sin referencias). Antes, v4.30.4: **Favicons en `src/img/favicon/`** (6 iconos + `site.webmanifest` corregido; rutas actualizadas en las 30 páginas, wrappers PDF, `manifest.json` y `sw.js`; 301 de las rutas antiguas). Antes, v4.30.3: **301 de las rutas antiguas de `/img/` a `/img/elementos-UXUI/`** (regla F del `.htaccess`, conserva el `?v=`; vistas previas ya compartidas de `og-share.png` siguen funcionando). Antes, v4.30.2: **Imágenes de interfaz en `src/img/elementos-UXUI/`** (iconos, fondo del traje, cenefa, imagen OG, imágenes del modal de contacto; rutas actualizadas en HTML/SCSS/JS/sitemaps/tests). Antes, v4.30.1: **Fix: caja blanca bajo los iconos transparentes en modo oscuro** (el placeholder de `img[loading="lazy"]` era permanente en las páginas sin `accessibility.js`). Antes, v4.30.0: **Coral de marca en modo oscuro**: todo lo que usa `$primary-color` (#FF6F61) pasa a `#B83F35` en modo oscuro mediante la custom property `--coral-marca` (títulos, bordes, cenefa, badges, botones, foco, timeline…). Antes, v4.29.1: **Buscador: dos aspas con papeles distintos** (cerrar el buscador sin círculo en la cabecera; borrar solo dentro del campo y solo con texto, sin cerrar el panel; campo con borde fino y un único anillo de foco, también en modo oscuro; fix del aspa de borrar visible con el campo vacío). Antes, v4.29.0: **Buscador general y paleta funcional**: buscador bilingüe en todas las páginas (botón lupa + panel bajo la barra, índice estático generado por el build, resultados con sección y ejercicio, deep links a los paneles de Archivos, `npm run search:eval`) y evolución de la paleta sin tocar los degradados (tokens aditivos `$coral-texto`/`$coral-claro`/estados, coral solo decorativo o grande sobre azul, calendario/botones/tarjetas/nav/footer AA, foco de doble anillo, colores de éxito/error). Antes, v4.28.1: **Segunda auditoría severa de errores** (og:url/og:locale de /va/, textos de reserva i18n, media queries 767px, snapshots huérfanos, descripciones, npm audit). Antes, v4.28.0: **JSON-LD unificado e inyectado por el build** (Organization/WebSite desde una fuente única, breadcrumbs, galerías con ImageObject, vídeos, blog completo, /va/ localizado; nuevo test smoke y `npm run seo:schema-report`). Antes, v4.27.3: **Organigrama**: Rodrigo Sobero y Miguel Castillo entran como delegados de Festejos bajo Pablo Cortés. Antes, v4.27.1: **Corrección del apellido del Presidente** (José Santos Quilis, antes "Quiles", en HTML, i18n, Schema.org, tests y docs). Antes, v4.27.0: **Titulares de acordeón con el hover del botón** (degradado coral, brillo y flecha desplazada, sin elevación; todos los acordeones, claro y oscuro). Antes, v4.26.1: **Paginación entre galerías** (fix: fondo a todo el ancho en pantallas grandes) (anterior/siguiente, tira 1-9 y "Todas las galerías", generada en el build). Antes, v4.25.0: **Álbum a doble página en las 9 galerías** (≥1200 px) con un único `js/galeria.js`. Antes, v4.24.2: **Nombre de la galería sobre el bloc** en las 9 galerías. Antes, v4.24.1: **SEO**: `sitemap-google.xml` con las galerías 5 a 9. Antes, v4.24.0: **Nueva galería Fallera Mayor Infantil 2026-27** (`galeria_9`): 40 fotos de la proclamación en un bloc que a partir de 1200 px se abre **a doble página como un álbum**, y el vídeo vertical de la proclamación con botón de ampliar y descarga. Antes, v4.23.6: **Fix del menú desplegable**: cristal como la barra principal (degradado + blur real) en todos los tamaños y modos, y z-index del header corregido (la cenefa y el título del organigrama se pintaban encima del menú). Antes, v4.23.4: **Organigrama**: título "Organigrama 2026-27" en `organigrama.html`. Antes, v4.23.3: **Organigrama**: Marta Pastor sale de la columna de Eventos (sigue en Delegación Infantil) y Pablo Pallardó (Deportes) vuelve bajo Prados Ramos. Antes, v4.23.2: **Menú y pie en mayúsculas** y **todos los escudos de la Falla enlazan a la home** (`https://fallasuissa.es/`). Antes, v4.23.1: **Acordeones sin recorte en todas las pantallas** (el alto del panel abierto lo calcula `acc.js`; antes un tope fijo de 1000 px cortaba el panel HOPE de Colaboraciones, el Organigrama y la Plana Mayor en móvil). Antes, v4.23.0: **La Directiva rediseñada como tarjetas por cargo con iconos y chips (modo oscuro incluido)** como miniaturas ampliables (lightbox compartido con "+" y "×"); la sección Ofrenda queda solo con "Próxima Ofrenda". Antes, v4.20.0: **Fix Safari de la galería de Ofrenda** (las 3 fotos no se veían en WebKit: alto 3:4 reservado con `::before`) y **botón de descarga del vídeo** en Historia/Archivos/Ofrendas. Antes, v4.19.1: **Sección Ofrenda sin visor de vídeo**: en su lugar, la foto de la Fallera Mayor muy sombreada con el rótulo "Próxima Ofrenda" centrado en color primario; el vídeo 2026 se reproduce en Historia/Archivos/Ofrendas. Antes, v4.18.0: **Historia/Archivos/Ofrendas**: nueva subsección con el vídeo de la Ofrenda de marzo de 2026 reproducido por el `<video controls>` nativo del navegador (sin visor). Antes, v4.17.0: **Vista Aérea retirada**: el visor del vídeo del dron desaparece de la home y de La Falla (su código queda como plantilla en `docs/visor-video-plantilla.md`; el MP4 sigue descargable desde Archivos/Monumentos). **El Monumento**: el visor muestra los bocetos 2026-27 (`falla2027*`). **Nosotros/Plana Mayor**: las 4 fotos de los paneles (Fallera Mayor, Presidente, Fallera Mayor Infantil y Presidente Infantil) se amplían en el lightbox compartido. **Historia/Archivos**: las miniaturas de **Representantes** (2026-27 y 2025-26) y el nuevo panel **Monumento 2025-26** se amplían en el lightbox compartido, con botón de descarga del vídeo del dron. **Menú hamburguesa en todos los tamaños** (la barra desktop de enlaces se sustituye por el mismo desplegable que en móvil). **Ejercicio 2026-27**: nueva Plana Mayor en Nosotros (Fallera Mayor Lucía Gutiérrez Martín y Fallera Mayor Infantil Sofía Gómez Medina con texto provisional; foto nueva del Presidente Infantil Diego Gómez Medina; Presidente José Santos Quilis sin cambios), fila de representantes en el **organigrama** (`index`, `lafalla`, `organigrama`) y nueva edición **Representantes 2026-27** en el acordeón de Historia/Archivos. Los dos tablones de anuncios (`board.json` de Eventos y `sports-board.json` de Deportes) se sirven **vacíos** y muestran el empty-state; `tests/board.e2e.spec.js` es ahora data-driven y el test del calendario ya no depende del mes real. El historial detallado vive en el **Changelog de [`CLAUDE.md`](./CLAUDE.md)** (fuente canónica).
 
 ## 🌐 Vista Previa
 
@@ -51,7 +51,7 @@ Guía técnica completa: [`docs/navigation-bar.md`](./docs/navigation-bar.md)
 
 ### ⚡ Performance y Optimización
 
-- **Imágenes modernas** - Formatos WebP y AVIF para carga ultrarrápida
+- **Imágenes modernas** - Formatos WebP y AVIF con derivados ajustados al tamaño de presentación
 - **CSS optimizado** - Minificación y autoprefixer automático
 - **Lazy loading** - Carga diferida de imágenes y recursos
 - **Critical CSS** - Priorización de estilos críticos
@@ -174,26 +174,19 @@ WEBFALLASUISSA/
 ## 📘 Guías Técnicas Clave
 
 - Índice técnico completo: [`docs/README.md`](./docs/README.md)
+- Auditoría SEO de producción (correcciones y pruebas de regresión): [`docs/auditoria-seo-2026-09-13.md`](./docs/auditoria-seo-2026-09-13.md)
 - Datos estructurados y SEO técnico: [`docs/structured-data.md`](./docs/structured-data.md)
 - Constraints que no deben romperse: [`docs/architecture-constraints.md`](./docs/architecture-constraints.md)
 - Build, pruebas y scripts utilitarios: [`docs/build-and-deploy.md`](./docs/build-and-deploy.md), [`docs/e2e-testing.md`](./docs/e2e-testing.md) y [`docs/scripts-utilities.md`](./docs/scripts-utilities.md)
 
 ## 🔎 SEO y Optimización para Buscadores
 
-### Google Search Console Ready
+### Validación técnica de SEO
 
-- ✅ **Core Web Vitals optimizados**
-  - LCP (Largest Contentful Paint): Imágenes principales optimizadas
-  - FID (First Input Delay): Elementos interactivos acelerados
-  - CLS (Cumulative Layout Shift): Layouts estables sin saltos
-- ✅ **Mobile-First Indexing**
-  - Targets táctiles mínimo 44px para móviles
-  - Viewport optimizado para todos los dispositivos
-  - Performance móvil mejorada
-- ✅ **Structured Data (Schema.org)**
-  - LocalBusiness y Organization markup
-  - Event structured data para actividades
-  - Rich snippets para resultados mejorados
+- **Contenido:** 60 URL canónicas ES/VA; artículos disponibles sin JavaScript y metadatos localizados.
+- **Rastreo:** sitemaps generados desde el contenido publicable y redirecciones verificadas con Apache y en producción.
+- **Datos estructurados:** Organization, WebSite y los tipos de página pertinentes; Event cuando hay avisos activos.
+- **Rendimiento:** imágenes y fuentes optimizadas, con mediciones de LCP/CLS reproducibles en el [informe de auditoría](docs/auditoria-seo-2026-09-13.md). No se han validado los Core Web Vitals de usuarios reales ni la indexación efectiva en Search Console.
 
 ### Archivos SEO Especializados
 
@@ -201,11 +194,11 @@ WEBFALLASUISSA/
 ├── 📄 robots.txt              # Optimizado para Googlebot
 ├── 📄 robots-ai-optimized.txt # Variante avanzada (bots IA + directivas extra)
 ├── 📄 sitemap.xml             # Sitemap principal corregido
-├── 📄 sitemap-google.xml      # Sitemap especializado para Google
+├── 📄 sitemap-google.xml      # Alias del inventario canónico principal
 ├── 📄 sitemap-images.xml      # Mapa de imágenes
 ├── 📄 sitemap-index.xml       # Índice principal de sitemaps
 ├── 📄 schema-organization.json # Fuente única del JSON-LD Organization/WebSite (la inyecta el build)
-└── 📄 ai-crawl.html          # Página especializada para IA crawlers
+└── 📄 ai-crawl.html          # Guía técnica no indexable para agentes
 ```
 
 ### Optimizaciones CSS para SEO
@@ -233,15 +226,15 @@ WEBFALLASUISSA/
 
 ### Prerequisitos
 
-- Node.js 18+
+- Node.js 20.9+ (validado con 22.13)
 - npm 9+
 - Git
 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/JavierTamaritWeb/WEBFALLASUISSA.git
-cd WEBFALLASUISSA
+git clone https://github.com/JavierTamaritWeb/FALLASUISSACLAUDE.git
+cd FALLASUISSACLAUDE
 ```
 
 ### 2. Instalar dependencias
@@ -405,16 +398,16 @@ const tasks = {
 - ✅ **Open Graph** - Integración con redes sociales
 - ✅ **Twitter Cards** - Previsualizaciones enriquecidas
 - ✅ **JSON-LD Schema.org** - Datos estructurados para buscadores
-- ✅ **Canonical URLs** - Evitar contenido duplicado
+- ✅ **Canonical URLs** - Señales de consolidación de URL
 - ✅ **Robots.txt** - Configuración para crawlers
-- ✅ **Sitemaps XML** - Indexación completa del sitio
+- ✅ **Sitemaps XML** - Inventario de URL propuestas para indexación
 
 ### ⚡ Performance Optimizado
 
 - ✅ **Core Web Vitals** - Métricas de experiencia del usuario
 - ✅ **Critical CSS** - Estilos críticos inline
 - ✅ **Image optimization** - Formatos modernos y compresión
-- ✅ **Font optimization** - Google Fonts con preload
+- ✅ **Font optimization** - Fuentes locales con precarga y licencias OFL
 - ✅ **Lazy loading** - Carga diferida de recursos
 - ✅ **Minificación** - CSS y assets optimizados
 
@@ -424,9 +417,9 @@ const tasks = {
 <!-- Estructura de sitemaps implementada -->
 sitemap-index.xml     → Hub principal de sitemaps
 ├── sitemap.xml       → Páginas principales
-├── sitemap-images.xml → Todas las imágenes
-├── sitemap-google.xml → Variantes/optimización Google
-└── sitemap-ai-optimized.xml → Variante para IA
+└── sitemap-images.xml → Fotografías de galerías y artículos
+# Si hay artículos publicados hace menos de 48 h: sitemap-news.xml
+# Compatibilidad: sitemap-google.xml y sitemap-ai-optimized.xml replican sitemap.xml
 ```
 
 ## 🌍 Sistema Multiidioma Avanzado
@@ -566,6 +559,8 @@ Este proyecto está bajo la **Licencia MIT**. Ver el archivo `LICENSE` para más
 - **Sara Medina** - Delegada de Infantil
 
 ## 📝 Changelog y Actualizaciones
+
+Este apartado conserva notas históricas. No acredita métricas ni sistemas de monitorización actuales. El historial reciente está en [CLAUDE.md](CLAUDE.md) y las comprobaciones de 2026 en [la auditoría SEO](docs/auditoria-seo-2026-09-13.md).
 
 ### 🆕 [v4.0.0] - 26 de enero de 2026 - Corrección crítica menú móvil + documentación completa
 
@@ -873,12 +868,10 @@ Nueva estructura organizada:
 
 ### 📊 Datos del Proyecto
 
-- **Líneas de código:** ~15,000+ líneas
-- **Archivos JavaScript:** 16 módulos especializados
-- **Traducciones:** 846 líneas en 2 idiomas
-- **Páginas:** 11 páginas optimizadas
-- **Performance Score:** 95+ en PageSpeed Insights
-- **SEO Score:** 100/100 en herramientas de análisis
+- **Versión:** 4.30.21.
+- **Páginas indexables propuestas:** 60 URL (30 ES + 30 VA).
+- **Pruebas:** 606 casos E2E y 22 pruebas de Node; el smoke reúne 414 casos.
+- **Rendimiento y SEO:** resultados medidos y condiciones en el [informe de auditoría](docs/auditoria-seo-2026-09-13.md). No se atribuyen puntuaciones sin una medición fechada.
 
 ### 🎯 Alcance y Impacto
 

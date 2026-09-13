@@ -13,7 +13,7 @@
       "description": "Metadata de descubrimiento (idiomas, branding, social, ubicación, categorías) de la Falla Suïssa.",
       "url": "https://fallasuissa.es/ai-discovery.json",
       "contentType": "application/json",
-      "sha256": "f13821fbdf99e50bf352912a06af3f86051801be152bef3e713fa637c7568124"
+      "sha256": "dcf6f9081d63af7d6268c2579ec11a4881b41591348e38f05d383b8679dad224"
     },
     {
       "name": "ai-context",
@@ -21,7 +21,7 @@
       "description": "Guía de contexto en Markdown para asistentes de IA sobre la Falla, las Fallas y el sitio web.",
       "url": "https://fallasuissa.es/seo/ai-training-data.md",
       "contentType": "text/markdown",
-      "sha256": "eabc524cd2e54cd4cf2f3ba283bbfe1e7a8d1585593e61351673df90f5dd8a8f"
+      "sha256": "318f474afe80381e9244513c3bcba4bc72c864c34cb8e236a677dd8fa47fd828"
     },
     {
       "name": "events-board",
@@ -61,7 +61,7 @@
       "description": "Grafo Schema.org enriquecido de la organización, eventos y contenido cultural.",
       "url": "https://fallasuissa.es/seo/ai-enhanced-schema.json",
       "contentType": "application/ld+json",
-      "sha256": "fa5d0323ae5179046373dc0e61e4cb5cf3e31ab66edd947ddb240cb68fc51965"
+      "sha256": "904d62a726d4ac50e29db2b44cff0b2b74dd92a33113df61db0a057a96395115"
     }
   ]
 }

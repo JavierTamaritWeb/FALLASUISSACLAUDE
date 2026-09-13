@@ -17,7 +17,9 @@ test('gulp watch regenera traducciones VA, hashes de assets y esquema SEO', { ti
   const read = file => fs.readFileSync(path.join(dir, file), 'utf8');
   fs.copyFileSync(path.join(repo, 'gulpfile.js'), path.join(dir, 'gulpfile.js'));
   fs.symlinkSync(path.join(repo, 'node_modules'), path.join(dir, 'node_modules'));
-  for (const folder of ['pdf', 'img', 'favicon_io', '.well-known']) fs.mkdirSync(path.join(dir, 'src', folder), { recursive: true });
+  write('scripts/seo-artifacts.cjs', fs.readFileSync(path.join(repo, 'scripts/seo-artifacts.cjs')));
+  write('src/data/image-variants.json', '[]');
+  for (const folder of ['pdf', 'img', 'fonts', 'favicon_io', '.well-known']) fs.mkdirSync(path.join(dir, 'src', folder), { recursive: true });
   write('src/scss/main.scss', '.ejemplo { color: #123456; }');
   write('src/js/ejemplo.js', 'window.ejemplo = 1;');
   const html = '<html lang="es"><head><title>Inicio</title><link href="css/main.css" rel="stylesheet"></head><body><p data-i18n="nav.inicio">Inicio</p><script src="js/ejemplo.js"></script></body></html>';

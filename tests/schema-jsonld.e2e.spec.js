@@ -138,12 +138,13 @@ test.describe('JSON-LD — nodos propios', () => {
         const graph = JSON.parse(leer(`${lang}${f}`).scripts[0])['@graph'];
         const gal = graph.find((node) => hasType(node, 'ImageGallery'));
         expect(gal, `${f}: ImageGallery`).toBeTruthy();
-        expect(gal.name).toBe(translations.es.galeria[`galeria${n}`]);
+        expect(gal.name).toBe(tabla.galeria[`galeria${n}`]);
         expect(gal.associatedMedia).toHaveLength(fotos.length);
         gal.associatedMedia.forEach((img, i) => {
           expect(img['@type']).toBe('ImageObject');
           expect(img.contentUrl).toMatch(new RegExp(`^${ORIGIN}/img/`));
-          expect(img.name).toBe(fotos[i].alt);
+          const expectedAlt = fotos[i].altKey?.split('.').reduce((value, key) => value?.[key], tabla) || fotos[i].alt;
+          expect(img.name).toBe(expectedAlt);
         });
         expect(gal.primaryImageOfPage).toEqual({ '@id': `${pref}${f}#img-001` });
       }
@@ -204,7 +205,7 @@ test.describe('JSON-LD — nodos propios', () => {
     expect(ai.url).toBe(org.url);
     expect(ai.sameAs).toEqual(org.sameAs);
     expect(ai.address).toEqual(org.address);
-    expect(ai.geo).toEqual(org.location.geo);
+    expect(ai.location.geo).toEqual(org.location.geo);
     expect(fs.existsSync(path.join(DIST, 'seo', 'ld-json-enhanced.json'))).toBeFalsy();
     expect(fs.existsSync(path.join(DIST, 'seo', 'advanced-schema-graph.json'))).toBeFalsy();
   });

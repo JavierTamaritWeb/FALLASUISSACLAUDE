@@ -31,6 +31,8 @@ function initAccordion() {
   function abrirPanel(section) {
     const content = getContent(section);
     if (!content) return;
+    // Tras la primera apertura se conserva el renderizado para animar el cierre.
+    section.classList.add('accordion__section--visited');
     limpiarPendientes(content);
     content.style.maxHeight = content.scrollHeight + 'px';
 

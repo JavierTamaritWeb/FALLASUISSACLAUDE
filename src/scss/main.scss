@@ -3,6 +3,7 @@
 // 1. Abstracts
 @use 'abstracts/variables' as v;
 @use 'abstracts/mixins' as m;
+@use '../fonts/fonts.css';
 @use 'abstracts/normalize';
 @use 'abstracts/globales';
 @use 'abstracts/accessibility';

@@ -1,0 +1,77 @@
+[
+  {
+    "source": "img/elementos-UXUI/cenefa_sin_fondo.svg",
+    "output": "img/elementos-UXUI/cenefa_sin_fondo.seo.webp",
+    "width": 512
+  },
+  {
+    "source": "img/logos/logo-ask.svg",
+    "output": "img/logos/logo-ask.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/logos/logo-colaborar.svg",
+    "output": "img/logos/logo-colaborar.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/logos/logo-camara.svg",
+    "output": "img/logos/logo-camara.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/logos/logo-nuevos-falleros.svg",
+    "output": "img/logos/logo-nuevos-falleros.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/logos/logo-eventos.svg",
+    "output": "img/logos/logo-eventos.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/logos/logo-pluma.svg",
+    "output": "img/logos/logo-pluma.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/logos/logo-virgen.svg",
+    "output": "img/logos/logo-virgen.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/logos/logo-run.svg",
+    "output": "img/logos/logo-run.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/logos/logo-termo.svg",
+    "output": "img/logos/logo-termo.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/logos/logo-escudo-cutty.svg",
+    "output": "img/logos/logo-escudo-cutty.seo.webp",
+    "width": 256
+  },
+  {
+    "source": "img/decoracion/falleretPro.svg",
+    "output": "img/decoracion/falleretPro.seo.webp",
+    "width": 512
+  },
+  {
+    "source": "img/decoracion/falleretaN.svg",
+    "output": "img/decoracion/falleretaN.seo.webp",
+    "width": 512
+  },
+  {
+    "source": "img/decoracion/falleretaD.svg",
+    "output": "img/decoracion/falleretaD.seo.webp",
+    "width": 512
+  },
+  {
+    "source": "img/colaboracion/hope/hope.svg",
+    "output": "img/colaboracion/hope/hope.seo.webp",
+    "width": 512
+  }
+]

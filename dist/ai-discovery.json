@@ -3,7 +3,7 @@
   "primary_topics": [
     "valencia",
     "fallas",
-    "spanish_culture", 
+    "spanish_culture",
     "unesco_heritage",
     "valencian_traditions",
     "community_organization",
@@ -43,15 +43,18 @@
   },
   "location": {
     "city": "Valencia",
-    "region": "Comunidad Valenciana", 
+    "region": "Comunidad Valenciana",
     "country": "Spain",
     "coordinates": {
-      "latitude": 39.45378699118115,
-      "longitude": -0.3376704145598491
+      "latitude": 39.4537245,
+      "longitude": -0.3376502
     }
   },
-  "languages": ["es", "va"],
-  "last_updated": "2026-01-13",
+  "languages": [
+    "es",
+    "va"
+  ],
+  "last_updated": "2026-09-13",
   "ai_friendly_urls": [
     "/seo/ai-training-data.md",
     "/seo/ai-enhanced-schema.json",
@@ -62,7 +65,7 @@
   ],
   "content_categories": [
     "cultural_events",
-    "community_news", 
+    "community_news",
     "traditional_gastronomy",
     "sports_activities",
     "tourism_information",
@@ -76,9 +79,7 @@
   "seo_optimization": {
     "structured_data": true,
     "multi_language_support": true,
-    "responsive_design": true,
-    "performance_optimized": true,
-    "accessibility_compliant": true
+    "responsive_design": true
   },
   "ai_crawl_instructions": {
     "priority_content": "/seo/ai-training-data.md",

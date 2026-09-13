@@ -1,0 +1,90 @@
+[
+  {
+    "family": "Dancing Script",
+    "style": "normal",
+    "subset": "vietnamese",
+    "file": "dancing-script-v29-normal-vietnamese.woff2",
+    "source": "https://fonts.gstatic.com/s/dancingscript/v29/If2RXTr6YS-zF4S-kcSWSVi_szLviuEHiC4Wl-8.woff2",
+    "sha256": "11a88b30f1441581bb8ef629548a827c540e9559a7bf68a50c61067c200cf03d"
+  },
+  {
+    "family": "Dancing Script",
+    "style": "normal",
+    "subset": "latin-ext",
+    "file": "dancing-script-v29-normal-latin-ext.woff2",
+    "source": "https://fonts.gstatic.com/s/dancingscript/v29/If2RXTr6YS-zF4S-kcSWSVi_szLuiuEHiC4Wl-8.woff2",
+    "sha256": "0be22fbaae6716f7b55ce24268c86381589d31fc8f5f43a9295b740a1c54a457"
+  },
+  {
+    "family": "Dancing Script",
+    "style": "normal",
+    "subset": "latin",
+    "file": "dancing-script-v29-normal-latin.woff2",
+    "source": "https://fonts.gstatic.com/s/dancingscript/v29/If2RXTr6YS-zF4S-kcSWSVi_szLgiuEHiC4W.woff2",
+    "sha256": "5e08eb55c88b8658453e2ba916023964e0f67b98cd7abfa436eb8150968ee19e"
+  },
+  {
+    "family": "Plus Jakarta Sans",
+    "style": "italic",
+    "subset": "cyrillic-ext",
+    "file": "plus-jakarta-sans-v12-italic-cyrillic-ext.woff2",
+    "source": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIuaomQNQcsA88c7O9yZ4KMCoOg4Koz4yOqhNnZR-AHYA.woff2",
+    "sha256": "cc79c219f6d0ba881f471300c96d5e5ff9359b25c0128173a71c79bf208e4bc6"
+  },
+  {
+    "family": "Plus Jakarta Sans",
+    "style": "italic",
+    "subset": "vietnamese",
+    "file": "plus-jakarta-sans-v12-italic-vietnamese.woff2",
+    "source": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIuaomQNQcsA88c7O9yZ4KMCoOg4Koz4yGqhNnZR-AHYA.woff2",
+    "sha256": "d0e436354c1d942a46d4e40fa6a1005b35889f38a32ed613a42e3f4f854f308f"
+  },
+  {
+    "family": "Plus Jakarta Sans",
+    "style": "italic",
+    "subset": "latin-ext",
+    "file": "plus-jakarta-sans-v12-italic-latin-ext.woff2",
+    "source": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIuaomQNQcsA88c7O9yZ4KMCoOg4Koz4yCqhNnZR-AHYA.woff2",
+    "sha256": "00b9920a831136ed75903abbc3011a69071dca7397493e944576fa70da89b0e9"
+  },
+  {
+    "family": "Plus Jakarta Sans",
+    "style": "italic",
+    "subset": "latin",
+    "file": "plus-jakarta-sans-v12-italic-latin.woff2",
+    "source": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIuaomQNQcsA88c7O9yZ4KMCoOg4Koz4y6qhNnZR-A.woff2",
+    "sha256": "f7f3c763fa6749357a187418d736aab5b2acdd1d0a83a408631382bcfd80d141"
+  },
+  {
+    "family": "Plus Jakarta Sans",
+    "style": "normal",
+    "subset": "cyrillic-ext",
+    "file": "plus-jakarta-sans-v12-normal-cyrillic-ext.woff2",
+    "source": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko70yygg_vbd-E.woff2",
+    "sha256": "a16f29d7d2a21a4f9b3249a82eb2725ed5bdb91500dfb5c4758977de27477f20"
+  },
+  {
+    "family": "Plus Jakarta Sans",
+    "style": "normal",
+    "subset": "vietnamese",
+    "file": "plus-jakarta-sans-v12-normal-vietnamese.woff2",
+    "source": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko50yygg_vbd-E.woff2",
+    "sha256": "5c913fc1b1f86f4b475e5df45a796aa480d1f7f0891ed6f1a5991d6d1be887c3"
+  },
+  {
+    "family": "Plus Jakarta Sans",
+    "style": "normal",
+    "subset": "latin-ext",
+    "file": "plus-jakarta-sans-v12-normal-latin-ext.woff2",
+    "source": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko40yygg_vbd-E.woff2",
+    "sha256": "0303e02b53b0298fb26a0193941a2e8754f0f9a9fce50d90b178d8da3424873f"
+  },
+  {
+    "family": "Plus Jakarta Sans",
+    "style": "normal",
+    "subset": "latin",
+    "file": "plus-jakarta-sans-v12-normal-latin.woff2",
+    "source": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2",
+    "sha256": "cd8db90cd950e26bc8761f65d323588bd5cd112d326d6d322bc7c8ea86771215"
+  }
+]

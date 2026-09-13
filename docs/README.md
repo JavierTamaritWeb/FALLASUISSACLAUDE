@@ -7,6 +7,7 @@
 | Documento | Descripción | Actualización |
 | ----------- | ------------- | --------------- |
 | [`auditoria-2026-09-13.md`](./auditoria-2026-09-13.md) | Errores reproducidos, correcciones, pruebas y límites de la auditoría | 13/09/2026 |
+| [`auditoria-seo-2026-09-13.md`](./auditoria-seo-2026-09-13.md) | Auditoría SEO de producción: 13 grupos corregidos, evidencias de rastreo y mediciones móviles | 13/09/2026 |
 | [`build-and-deploy.md`](./build-and-deploy.md) | Build con errores propagados, watch completo, pre-render VA, despliegue y simulación segura | 13/09/2026 |
 | [`e2e-testing.md`](./e2e-testing.md) | Pruebas Node y Playwright, guardias de auditoría, resultados y cobertura por navegador | 13/09/2026 |
 | [`scrollbar-theme.md`](./scrollbar-theme.md) | Scrollbar general del sitio, caso especial de `llibret_2026.html` y estrategia WebKit/Firefox | 20/03/2026 |
@@ -37,7 +38,7 @@
 - [`google-search-console.md`](./google-search-console.md): verificación y alta en Search Console.
 - [`robots-configuration.md`](./robots-configuration.md): robots, variantes y relación con sitemaps.
 - [`well-known-agent-readiness.md`](./well-known-agent-readiness.md): `.well-known/`, `api-catalog` (RFC 9727) y skills agent-ready (Agent Skills v0.2) para asistentes IA.
-- Índice SEO/IA de la carpeta `src/seo/`: [`../seo/README.md`](../seo/README.md).
+- Índice SEO/IA de la carpeta `src/seo/`: [`../seo/README.md`](../src/seo/README.md).
 
 ### 🧪 Build, tests y utilidades
 
@@ -63,7 +64,7 @@
 
 ## 📝 Notas de Mantenimiento
 
-- La versión funcional documentada del proyecto es `v4.30.19` y `package.json`/`package-lock.json` están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.30.21` y `package.json`/`package-lock.json` están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta
@@ -88,4 +89,4 @@ Actualiza estas guías cuando cambies:
 ---
 
 *Documentación técnica de Falla Suïssa - L'Alqueria del Favero*
-*Última actualización: 13 de septiembre de 2026 - v4.30.19*
+*Última actualización: 13 de septiembre de 2026 - v4.30.21*

@@ -150,7 +150,9 @@
       "muteAria": "Silenciar vídeo",
       "unmuteAria": "Activar sonido del vídeo",
       "volumeAria": "Volumen del vídeo",
-      "progressAria": "Progreso del vídeo"
+      "progressAria": "Progreso del vídeo",
+      "archivo": "Ver el vídeo de la Ofrenda 2026",
+      "archivoIntro": "El vídeo de la Ofrenda de marzo de 2026 está disponible en Historia y Archivos de nuestra Falla."
     },
     "eventos": {
       "titulo": "Eventos",
@@ -630,6 +632,437 @@
       "sinAnterior": "No hay galería anterior",
       "sinSiguiente": "No hay galería siguiente",
       "todas": "Todas las galerías"
+    },
+    "seo": {
+      "index": {
+        "title": "Falla Suïssa - L'Alqueria del Favero",
+        "description": "Comisión fallera Suïssa - L'Alqueria del Favero, en Valencia: tradición desde 2024, eventos culturales y colaboración solidaria con HOPE-INCLIVA."
+      },
+      "lafalla": {
+        "title": "Falla Suïssa - L'Alqueria del Favero - La Falla",
+        "description": "Conoce la Falla Suïssa - L'Alqueria del Favero: el monumento, la Plana Mayor, la historia, el organigrama y los archivos de la comisión.",
+        "videoName": "Ofrenda 2026 de la Falla Suïssa - L'Alqueria del Favero",
+        "videoDescription": "Vídeo de la Ofrenda Floral a la Virgen de los Desamparados de marzo de 2026, en el panel Historia/Archivos/Ofrendas."
+      },
+      "llibret_2026": {
+        "title": "Llibret Falla Suïssa - L'Alqueria del Favero 2025-2026",
+        "description": "Llibret digital multilingüe de la Falla Suïssa - L'Alqueria del Favero amb editorial, memòria del barri, textos institucionals, entrevistes i programa d'actes de les Falles 2026."
+      },
+      "colaboraciones": {
+        "title": "Colaboración con HOPE-INCLIVA | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Colaboración solidaria de Falla Suïssa - L'Alqueria del Favero con HOPE-INCLIVA en Valencia para apoyar la investigación del Linfoma No Hodgkin Pediátrico."
+      },
+      "organigrama": {
+        "title": "Falla Suïssa - L'Alqueria del Favero - Organigrama",
+        "description": "Representantes, junta directiva y delegaciones de la Falla Suïssa - L'Alqueria del Favero para el ejercicio 2026-27."
+      },
+      "eventos": {
+        "title": "Falla Suïssa - L'Alqueria del Favero - Eventos",
+        "description": "Eventos y tablón de anuncios de la Falla Suïssa - L'Alqueria del Favero: próximos actos, avisos y convocatorias de la comisión."
+      },
+      "deportes": {
+        "title": "Falla Suïssa - L'Alqueria del Favero - Deportes",
+        "description": "Actividades deportivas de la Falla Suïssa - L'Alqueria del Favero: torneos, encuentros, equipos y calendarios actualizados por los delegados de Deportes."
+      },
+      "nuevos-falleros": {
+        "title": "Nuevos Falleros | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Información para nuevos falleros y falleras de la Falla Suïssa - L'Alqueria del Favero: documentación y formularios de autorización de derechos de imagen."
+      },
+      "meteo": {
+        "title": "Falla Suïssa - L'Alqueria del Favero - Meteo",
+        "description": "El tiempo en Valencia para la Falla Suïssa - L'Alqueria del Favero: clima actual y previsión a cinco días."
+      },
+      "blog": {
+        "title": "Falla Suïssa - L'Alqueria del Favero - Blog",
+        "description": "Blog de la Falla Suïssa - L'Alqueria del Favero: historias, crónicas y noticias de la comisión fallera."
+      },
+      "blog-somni": {
+        "title": "Somni | Blog | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Somni: la historia de cómo ocho personas ilusionadas fundaron la Falla Suïssa - L'Alqueria del Favero, la comisión número 396, en el barrio de les Moreres, Valencia."
+      },
+      "blog-anima": {
+        "title": "El alma del barrio | Blog | Falla Suïssa - L'Alqueria del Favero",
+        "description": "El alma del barrio: la historia del Jardín del Turia, Federico Trénor i Trénor y la Falla Suïssa en les Moreres, Valencia. De una autovía a un pulmón verde."
+      },
+      "galerias": {
+        "title": "Falla Suïssa - L'Alqueria del Favero - Galería",
+        "description": "Galerías de imágenes de la Falla Suïssa - L'Alqueria del Favero: Apuntà, nombramientos, monumento, proclamación, Ofrenda, Cremà y más."
+      },
+      "ofrenda": {
+        "title": "Próxima Ofrenda | Falla Suïssa - L'Alqueria del Favero",
+        "description": "La próxima Ofrenda de la Falla Suïssa - L'Alqueria del Favero y el acceso al vídeo de la Ofrenda de marzo de 2026, conservado en el archivo de la comisión."
+      },
+      "aviso-legal": {
+        "title": "Aviso Legal | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Aviso legal e identificación del titular del sitio web de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "privacidad": {
+        "title": "Política de Privacidad | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Política de privacidad y protección de datos personales de la Falla Suïssa - L'Alqueria del Favero conforme al RGPD."
+      },
+      "cookies": {
+        "title": "Política de Cookies | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Política de cookies del sitio web de la Falla Suïssa - L'Alqueria del Favero. Información sobre las cookies utilizadas."
+      },
+      "autorizacion-imagen": {
+        "title": "Autorización de derechos de imagen | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Formulario imprimible de autorización para el tratamiento del nombre y la imagen de los falleros y falleras de la Falla Suïssa, conforme al RGPD y la LOPDGDD."
+      },
+      "autorizacion-imagen-menor": {
+        "title": "Autorización de derechos de imagen — Menores | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Formulario imprimible de autorización parental para el tratamiento del nombre y la imagen de menores falleros de la Falla Suïssa, conforme al RGPD, la LOPDGDD y la LO 1/1996."
+      },
+      "calendario": {
+        "title": "Falla Suïssa - L'Alqueria del Favero - Calendario",
+        "description": "Calendario de la Falla Suïssa - L'Alqueria del Favero: consulta por mes, día o categoría todos los actos falleros y añádelos a tu agenda."
+      },
+      "mapa": {
+        "title": "Falla Suïssa - L'Alqueria del Favero - Mapa",
+        "description": "Mapa de la Falla Suïssa - L'Alqueria del Favero: ubicación del casal y puntos de interés de la comisión en Valencia."
+      },
+      "galeria_1": {
+        "title": "Apuntà 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de fotos de la Apuntà 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_2": {
+        "title": "Fallera Mayor Infantil 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de fotos del nombramiento de la Fallera Mayor Infantil 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_3": {
+        "title": "Monumento 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de fotos de la firma del monumento 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_4": {
+        "title": "Proclamación 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de fotos de la proclamación 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_5": {
+        "title": "Ofrenda de Frutos 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de imágenes de la Ofrenda de Frutos 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_6": {
+        "title": "Cremà 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de imágenes de la Cremà 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_7": {
+        "title": "San Juan 2026 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de imágenes de San Juan 2026 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_8": {
+        "title": "Representantes 2026-27 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de imágenes de los Representantes 2026-27 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_9": {
+        "title": "Fallera Mayor Infantil 2026-27 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de la proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa - L'Alqueria del Favero: 40 fotos y vídeo del acto.",
+        "videoName": "Vídeo de la proclamación",
+        "videoDescription": "Proclamación de Sofía Gómez Medina, Fallera Mayor Infantil 2026-27"
+      }
+    },
+    "legalDocuments": {
+      "text0": "Última actualización: 23 de marzo de 2026",
+      "text1": "1. Identificación del titular",
+      "text2": "En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa:",
+      "text3": "Denominación:",
+      "text7": "Domicilio social:",
+      "text9": "Correo electrónico:",
+      "text11": "Sitio web:",
+      "text13": "2. Objeto y ámbito de aplicación",
+      "text14": "El presente Aviso Legal regula el acceso y uso del sitio web",
+      "text16": ", propiedad de la Asociación Cultural Falla Suïssa - L'Alqueria del Favero, entidad sin ánimo de lucro dedicada a la promoción y difusión de la cultura fallera valenciana.",
+      "text17": "3. Propiedad intelectual e industrial",
+      "text18": "Todos los contenidos del sitio web, incluyendo textos, fotografías, vídeos, diseños gráficos, logotipos, iconos y código fuente, son propiedad de la Asociación Cultural Falla Suïssa - L'Alqueria del Favero o de sus legítimos titulares, y están protegidos por las leyes de propiedad intelectual e industrial vigentes.",
+      "text19": "Queda prohibida la reproducción, distribución, comunicación pública o transformación de dichos contenidos sin autorización expresa, salvo para uso personal y privado.",
+      "text20": "4. Condiciones de uso",
+      "text21": "El usuario se compromete a utilizar el sitio web de conformidad con la ley, el presente Aviso Legal, la moral y las buenas costumbres. En particular, se compromete a no:",
+      "text22": "Utilizar los contenidos con fines ilícitos o contrarios a lo establecido en este Aviso Legal.",
+      "text23": "Reproducir, copiar, distribuir o modificar los contenidos sin autorización.",
+      "text24": "Suprimir, eludir o manipular los derechos de propiedad intelectual.",
+      "text25": "5. Exclusión de responsabilidad",
+      "text26": "La Asociación no se hace responsable de:",
+      "text27": "La falta de disponibilidad, continuidad o calidad del sitio web.",
+      "text28": "Los daños que pudieran derivarse del uso del sitio web.",
+      "text29": "Los contenidos y servicios de sitios web de terceros enlazados desde esta web.",
+      "text30": "La presencia de virus o elementos dañinos que pudieran causar alteraciones en el sistema informático del usuario.",
+      "text31": "6. Enlaces a terceros",
+      "text32": "Este sitio web puede contener enlaces a páginas de terceros (redes sociales, entidades colaboradoras, etc.). La Asociación no asume responsabilidad alguna sobre el contenido, políticas de privacidad o prácticas de dichos sitios externos.",
+      "text33": "7. Legislación aplicable y jurisdicción",
+      "text34": "Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, las partes se someten a los Juzgados y Tribunales de la ciudad de València.",
+      "text35": "Última actualización: 15 de mayo de 2026",
+      "text36": "1. Responsable del tratamiento",
+      "text37": "Domicilio:",
+      "text39": "Email:",
+      "text40": "2. Datos personales que recogemos",
+      "text41": "A través del formulario de contacto de este sitio web, recogemos los siguientes datos personales facilitados voluntariamente por el usuario:",
+      "text42": "Nombre y apellidos",
+      "text43": "Dirección de correo electrónico",
+      "text44": "Número de teléfono",
+      "text45": "Mensaje o consulta",
+      "text46": "3. Finalidad del tratamiento",
+      "text47": "Los datos personales recogidos se utilizan exclusivamente para:",
+      "text48": "Atender las consultas e intereses de personas que desean obtener información sobre nuestra comisión fallera.",
+      "text49": "Gestionar las solicitudes de contacto recibidas a través del formulario web.",
+      "text50": "4. Base legal",
+      "text51": "El tratamiento de los datos se basa en el",
+      "text52": "consentimiento del interesado",
+      "text53": "(artículo 6.1.a del Reglamento General de Protección de Datos - RGPD), otorgado al enviar voluntariamente el formulario de contacto.",
+      "text54": "5. Destinatarios de los datos",
+      "text55": "Los datos del formulario de contacto son enviados a través del servicio",
+      "text57": ", que actúa como encargado del tratamiento para la transmisión del mensaje al correo electrónico de la Asociación. No se ceden datos a terceros salvo obligación legal.",
+      "text58": "6. Plazo de conservación",
+      "text59": "Los datos personales se conservarán durante el tiempo necesario para atender la consulta del usuario y, en todo caso, durante los plazos legalmente establecidos. Una vez cumplida la finalidad, los datos serán eliminados.",
+      "text60": "7. Derechos del usuario",
+      "text61": "De conformidad con el RGPD y la Ley Orgánica 3/2018 de Protección de Datos (LOPDGDD), el usuario puede ejercer los siguientes derechos:",
+      "text62": "Acceso:",
+      "text63": "conocer qué datos personales tratamos.",
+      "text64": "Rectificación:",
+      "text65": "solicitar la corrección de datos inexactos.",
+      "text66": "Supresión:",
+      "text67": "solicitar la eliminación de sus datos (derecho al olvido).",
+      "text68": "Oposición:",
+      "text69": "oponerse al tratamiento de sus datos.",
+      "text70": "Limitación:",
+      "text71": "solicitar la limitación del tratamiento.",
+      "text72": "Portabilidad:",
+      "text73": "recibir sus datos en formato estructurado.",
+      "text74": "Para ejercer estos derechos, puede enviar un correo electrónico a",
+      "text75": "indicando su solicitud y acompañando copia de su documento de identidad.",
+      "text76": "8. Derecho a reclamar",
+      "text77": "Si considera que el tratamiento de sus datos no se ajusta a la normativa, tiene derecho a presentar una reclamación ante la",
+      "text78": "Agencia Española de Protección de Datos",
+      "text79": "(AEPD), con sede en C/ Jorge Juan, 6 - 28001 Madrid, o a través de su sitio web:",
+      "text81": "9. Seguridad de los datos",
+      "text82": "La Asociación ha adoptado las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales y evitar su alteración, pérdida, tratamiento o acceso no autorizado.",
+      "text83": "10. Derechos de imagen de los falleros y falleras",
+      "text84": "Como parte de la actividad cultural y festiva de la comisión, la Asociación trata el",
+      "text85": "nombre",
+      "text86": "y la",
+      "text87": "imagen",
+      "text88": "(fotografías y vídeos) de las personas falleras para su difusión en la web",
+      "text89": ", en las redes sociales oficiales de la Falla (Instagram, Facebook, YouTube, TikTok), en el llibret anual, en listados institucionales del organigrama y en vídeos institucionales (incluido el vídeo aéreo del monumento captado con drone).",
+      "text90": "Base legal:",
+      "text91": "el tratamiento se realiza sobre la base del",
+      "text92": "consentimiento expreso del interesado",
+      "text93": "(artículo 6.1.a del RGPD), recogido por escrito mediante los formularios de autorización que la junta directiva facilita a cada fallero o fallera al inicio del ejercicio.",
+      "text94": "Menores de edad:",
+      "text95": "en cumplimiento del artículo 8 del RGPD, el artículo 7 de la LOPDGDD y la Ley Orgánica 1/1996, de 15 de enero, de Protección Jurídica del Menor, la autorización para el tratamiento de la imagen y nombre de los menores de la comisión se solicita siempre al titular o titulares de la",
+      "text96": "patria potestad o tutela legal",
+      "text97": "mediante un formulario específico, distinto del formulario para personas mayores de edad.",
+      "text98": "Plazo de conservación:",
+      "text99": "los materiales se conservarán durante el tiempo que el interesado mantenga la condición de fallero/a, más un plazo razonable de archivo histórico documental tras la baja, salvo revocación previa expresa. Pasado ese plazo, los materiales se eliminan o se anonimizan, salvo aquellos con valor histórico documental para la propia comisión.",
+      "text100": "Limitaciones:",
+      "text101": "la autorización recogida en estos formularios",
+      "text103": "incluye la cesión de imágenes a terceros (Junta Central Fallera, prensa u otras instituciones) salvo obligación legal o autorización adicional específica, ni el uso comercial o publicitario por entidades externas a la asociación. En actos públicos pueden estar presentes medios de comunicación bajo su propia base jurídica de interés público informativo.",
+      "text104": "Derechos:",
+      "text105": "el interesado (o sus representantes legales, en el caso de los menores) puede ejercer en cualquier momento los derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad, así como",
+      "text106": "revocar el consentimiento",
+      "text107": ", dirigiendo un correo a",
+      "text108": "con copia del DNI.",
+      "text109": "Formularios descargables:",
+      "text110": "Autorización de derechos de imagen — Falleros/as mayores de edad",
+      "text111": "Autorización de derechos de imagen — Menores de edad (a firmar por padre, madre o tutor/a legal)",
+      "text112": "Cada formulario incluye un botón",
+      "text113": "«Imprimir / Guardar como PDF»",
+      "text114": "para facilitar su entrega en papel a la junta directiva.",
+      "text115": "1. ¿Qué son las cookies?",
+      "text116": "Las cookies son pequeños archivos de texto que los sitios web almacenan en el navegador del usuario. Permiten recordar preferencias, mejorar la experiencia de navegación y recopilar información estadística.",
+      "text117": "2. Almacenamiento local (localStorage)",
+      "text118": "Este sitio web utiliza",
+      "text120": "del navegador (tecnología similar a las cookies) para almacenar las siguientes preferencias de forma local en su dispositivo:",
+      "text121": "Idioma preferido",
+      "text123": "): recuerda si ha seleccionado español o valenciano.",
+      "text124": "Tema visual",
+      "text125": ": recuerda si ha activado el modo oscuro o claro.",
+      "text126": "Consentimiento de cookies",
+      "text128": "): almacena su elección sobre las cookies.",
+      "text129": "Estos datos se almacenan exclusivamente en su dispositivo y no son enviados a ningún servidor.",
+      "text130": "3. Cookies de terceros",
+      "text131": "Este sitio web utiliza servicios de terceros que pueden establecer cookies o recopilar información técnica:",
+      "text133": "Se utilizan fuentes tipográficas servidas desde los servidores de Google (",
+      "text135": "y",
+      "text137": "). Al cargar estas fuentes, Google puede registrar la dirección IP del usuario y datos técnicos del navegador. Para más información, consulte la",
+      "text138": "Política de Privacidad de Google",
+      "text139": "CDN de librerías",
+      "text140": "Se utilizan redes de distribución de contenido (CDN) para servir librerías JavaScript:",
+      "text143": "): Swiper.js y EmailJS.",
+      "text147": "Estas CDN pueden registrar información técnica de la conexión (dirección IP, navegador). No establecen cookies de seguimiento o publicitarias.",
+      "text148": "El formulario de contacto utiliza el servicio EmailJS para enviar mensajes. EmailJS procesa los datos del formulario (nombre, email, teléfono, mensaje) únicamente para transmitirlos al correo de la Asociación.",
+      "text149": "4. Service Worker y caché",
+      "text150": "Este sitio web utiliza un",
+      "text152": "para mejorar el rendimiento y permitir el acceso offline. El Service Worker almacena recursos del sitio (CSS, JavaScript, imágenes) en la caché local del navegador. No recopila ni transmite datos personales.",
+      "text153": "5. Cookies analíticas o publicitarias",
+      "text154": "Este sitio web",
+      "text155": "NO utiliza",
+      "text156": "cookies de análisis (Google Analytics, etc.) ni cookies publicitarias o de seguimiento.",
+      "text157": "6. Gestión de cookies",
+      "text158": "Puede gestionar o eliminar las cookies y el almacenamiento local desde la configuración de su navegador:",
+      "text160": "Configuración > Privacidad y seguridad > Cookies y otros datos de sitios",
+      "text162": "Ajustes > Privacidad & Seguridad > Cookies y datos del sitio",
+      "text164": "Preferencias > Privacidad > Gestionar datos de sitios web",
+      "text166": "Configuración > Cookies y permisos del sitio",
+      "text167": "Tenga en cuenta que deshabilitar las cookies o el almacenamiento local puede afectar al funcionamiento del sitio web (por ejemplo, no se recordará su idioma preferido o el tema visual seleccionado).",
+      "text168": "7. Actualización de esta política",
+      "text169": "Esta Política de Cookies puede actualizarse periódicamente. Recomendamos revisarla de forma regular. La fecha de la última actualización se indica al inicio del documento.",
+      "avisolegalTitle": "Aviso Legal",
+      "privacidadTitle": "Política de Privacidad",
+      "cookiesTitle": "Política de Cookies",
+      "localFonts": "Las tipografías Plus Jakarta Sans y Dancing Script se sirven desde este sitio web bajo licencia SIL Open Font License. Su carga no requiere conexiones a los servidores de Google."
+    },
+    "galleryAlts": {
+      "g1": {
+        "p1": "Imagen de la Apunta 25-26. Fotografía 1 de 15.",
+        "p2": "Imagen de la Apunta 25-26. Fotografía 2 de 15.",
+        "p3": "Imagen de la Apunta 25-26. Fotografía 3 de 15.",
+        "p4": "Imagen de la Apunta 25-26. Fotografía 4 de 15.",
+        "p5": "Imagen de la Apunta 25-26. Fotografía 5 de 15.",
+        "p6": "Imagen de la Apunta 25-26. Fotografía 6 de 15.",
+        "p7": "Imagen de la Apunta 25-26. Fotografía 7 de 15.",
+        "p8": "Imagen de la Apunta 25-26. Fotografía 8 de 15.",
+        "p9": "Imagen de la Apunta 25-26. Fotografía 9 de 15.",
+        "p10": "Imagen de la Apunta 25-26. Fotografía 10 de 15.",
+        "p11": "Imagen de la Apunta 25-26. Fotografía 11 de 15.",
+        "p12": "Imagen de la Apunta 25-26. Fotografía 12 de 15.",
+        "p13": "Imagen de la Apunta 25-26. Fotografía 13 de 15.",
+        "p14": "Imagen de la Apunta 25-26. Fotografía 14 de 15.",
+        "p15": "Imagen de la Apunta 25-26. Fotografía 15 de 15."
+      },
+      "g2": {
+        "p1": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 1 de 12.",
+        "p2": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 2 de 12.",
+        "p3": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 3 de 12.",
+        "p4": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 4 de 12.",
+        "p5": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 5 de 12.",
+        "p6": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 6 de 12.",
+        "p7": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 7 de 12.",
+        "p8": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 8 de 12.",
+        "p9": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 9 de 12.",
+        "p10": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 10 de 12.",
+        "p11": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 11 de 12.",
+        "p12": "Nombramiento de las Fallera Mayor Infantil 2025-26. Fotografía 12 de 12."
+      },
+      "g3": {
+        "p1": "Firma Monumento 2025-26. Fotografía 1 de 1."
+      },
+      "g4": {
+        "p1": "Imagen de la Proclamación 25-26. Fotografía 1 de 25.",
+        "p2": "Imagen de la Proclamación 25-26. Fotografía 2 de 25.",
+        "p3": "Imagen de la Proclamación 25-26. Fotografía 3 de 25.",
+        "p4": "Imagen de la Proclamación 25-26. Fotografía 4 de 25.",
+        "p5": "Imagen de la Proclamación 25-26. Fotografía 5 de 25.",
+        "p6": "Imagen de la Proclamación 25-26. Fotografía 6 de 25.",
+        "p7": "Imagen de la Proclamación 25-26. Fotografía 7 de 25.",
+        "p8": "Imagen de la Proclamación 25-26. Fotografía 8 de 25.",
+        "p9": "Imagen de la Proclamación 25-26. Fotografía 9 de 25.",
+        "p10": "Imagen de la Proclamación 25-26. Fotografía 10 de 25.",
+        "p11": "Imagen de la Proclamación 25-26. Fotografía 11 de 25.",
+        "p12": "Imagen de la Proclamación 25-26. Fotografía 12 de 25.",
+        "p13": "Imagen de la Proclamación 25-26. Fotografía 13 de 25.",
+        "p14": "Imagen de la Proclamación 25-26. Fotografía 14 de 25.",
+        "p15": "Imagen de la Proclamación 25-26. Fotografía 15 de 25.",
+        "p16": "Imagen de la Proclamación 25-26. Fotografía 16 de 25.",
+        "p17": "Imagen de la Proclamación 25-26. Fotografía 17 de 25.",
+        "p18": "Imagen de la Proclamación 25-26. Fotografía 18 de 25.",
+        "p19": "Imagen de la Proclamación 25-26. Fotografía 19 de 25.",
+        "p20": "Imagen de la Proclamación 25-26. Fotografía 20 de 25.",
+        "p21": "Imagen de la Proclamación 25-26. Fotografía 21 de 25.",
+        "p22": "Imagen de la Proclamación 25-26. Fotografía 22 de 25.",
+        "p23": "Imagen de la Proclamación 25-26. Fotografía 23 de 25.",
+        "p24": "Imagen de la Proclamación 25-26. Fotografía 24 de 25.",
+        "p25": "Imagen de la Proclamación 25-26. Fotografía 25 de 25."
+      },
+      "g5": {
+        "p1": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 1 de 9.",
+        "p2": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 2 de 9.",
+        "p3": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 3 de 9.",
+        "p4": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 4 de 9.",
+        "p5": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 5 de 9.",
+        "p6": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 6 de 9.",
+        "p7": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 7 de 9.",
+        "p8": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 8 de 9.",
+        "p9": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 9 de 9."
+      },
+      "g6": {
+        "p1": "Imagen de la Cremà 2025-26. Fotografía 1 de 11.",
+        "p2": "Imagen de la Cremà 2025-26. Fotografía 2 de 11.",
+        "p3": "Imagen de la Cremà 2025-26. Fotografía 3 de 11.",
+        "p4": "Imagen de la Cremà 2025-26. Fotografía 4 de 11.",
+        "p5": "Imagen de la Cremà 2025-26. Fotografía 5 de 11.",
+        "p6": "Imagen de la Cremà 2025-26. Fotografía 6 de 11.",
+        "p7": "Imagen de la Cremà 2025-26. Fotografía 7 de 11.",
+        "p8": "Imagen de la Cremà 2025-26. Fotografía 8 de 11.",
+        "p9": "Imagen de la Cremà 2025-26. Fotografía 9 de 11.",
+        "p10": "Imagen de la Cremà 2025-26. Fotografía 10 de 11.",
+        "p11": "Imagen de la Cremà 2025-26. Fotografía 11 de 11."
+      },
+      "g7": {
+        "p1": "Imagen de San Juan 2026. Fotografía 1 de 17.",
+        "p2": "Imagen de San Juan 2026. Fotografía 2 de 17.",
+        "p3": "Imagen de San Juan 2026. Fotografía 3 de 17.",
+        "p4": "Imagen de San Juan 2026. Fotografía 4 de 17.",
+        "p5": "Imagen de San Juan 2026. Fotografía 5 de 17.",
+        "p6": "Imagen de San Juan 2026. Fotografía 6 de 17.",
+        "p7": "Imagen de San Juan 2026. Fotografía 7 de 17.",
+        "p8": "Imagen de San Juan 2026. Fotografía 8 de 17.",
+        "p9": "Imagen de San Juan 2026. Fotografía 9 de 17.",
+        "p10": "Imagen de San Juan 2026. Fotografía 10 de 17.",
+        "p11": "Imagen de San Juan 2026. Fotografía 11 de 17.",
+        "p12": "Imagen de San Juan 2026. Fotografía 12 de 17.",
+        "p13": "Imagen de San Juan 2026. Fotografía 13 de 17.",
+        "p14": "Imagen de San Juan 2026. Fotografía 14 de 17.",
+        "p15": "Imagen de San Juan 2026. Fotografía 15 de 17.",
+        "p16": "Imagen de San Juan 2026. Fotografía 16 de 17.",
+        "p17": "Imagen de San Juan 2026. Fotografía 17 de 17."
+      },
+      "g8": {
+        "p1": "Imagen de los Representantes 2026-27. Fotografía 1 de 6.",
+        "p2": "Imagen de los Representantes 2026-27. Fotografía 2 de 6.",
+        "p3": "Imagen de los Representantes 2026-27. Fotografía 3 de 6.",
+        "p4": "Fallera Mayor Infantil 2026-27. Fotografía 4 de 6.",
+        "p5": "Presidente Infantil 2026-27. Fotografía 5 de 6.",
+        "p6": "Representantes Infantiles 2026-27. Fotografía 6 de 6."
+      },
+      "g9": {
+        "p1": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 1)",
+        "p2": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 2)",
+        "p3": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 3)",
+        "p4": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 4)",
+        "p5": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 5)",
+        "p6": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 6)",
+        "p7": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 7)",
+        "p8": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 8)",
+        "p9": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 9)",
+        "p10": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 10)",
+        "p11": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 11)",
+        "p12": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 12)",
+        "p13": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 13)",
+        "p14": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 14)",
+        "p15": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 15)",
+        "p16": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 16)",
+        "p17": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 17)",
+        "p18": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 18)",
+        "p19": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 19)",
+        "p20": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 20)",
+        "p21": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 21)",
+        "p22": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 22)",
+        "p23": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 23)",
+        "p24": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 24)",
+        "p25": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 25)",
+        "p26": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 26)",
+        "p27": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 27)",
+        "p28": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 28)",
+        "p29": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 29)",
+        "p30": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 30)",
+        "p31": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 31)",
+        "p32": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 32)",
+        "p33": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 33)",
+        "p34": "Proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa (foto 34)",
+        "p35": "Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, con la familia y la comisión tras la proclamación (foto 35)",
+        "p36": "Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, con la familia y la comisión tras la proclamación (foto 36)",
+        "p37": "Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, con la familia y la comisión tras la proclamación (foto 37)",
+        "p38": "Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, con la familia y la comisión tras la proclamación (foto 38)",
+        "p39": "Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, con la familia y la comisión tras la proclamación (foto 39)",
+        "p40": "Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, con la familia y la comisión tras la proclamación (foto 40)"
+      }
     }
   },
   "va": {
@@ -783,7 +1216,9 @@
       "muteAria": "Silenciar vídeo",
       "unmuteAria": "Activar so del vídeo",
       "volumeAria": "Volum del vídeo",
-      "progressAria": "Progrés del vídeo"
+      "progressAria": "Progrés del vídeo",
+      "archivo": "Veure el vídeo de l'Ofrena 2026",
+      "archivoIntro": "El vídeo de l'Ofrena de març de 2026 està disponible en Història i Arxius de la nostra Falla."
     },
     "eventos": {
       "titulo": "Esdeveniments",
@@ -1263,6 +1698,437 @@
       "sinAnterior": "No hi ha galeria anterior",
       "sinSiguiente": "No hi ha galeria següent",
       "todas": "Totes les galeries"
+    },
+    "seo": {
+      "index": {
+        "title": "Falla Suïssa - L'Alqueria del Favero",
+        "description": "Comissió fallera Suïssa - L'Alqueria del Favero, a València: tradició des de 2024, actes culturals i col·laboració solidària amb HOPE-INCLIVA."
+      },
+      "lafalla": {
+        "title": "La Falla | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Coneix la Falla Suïssa - L'Alqueria del Favero: el monument, la Plana Major, la història, l'organigrama i els arxius de la comissió.",
+        "videoName": "Ofrena 2026 de la Falla Suïssa - L'Alqueria del Favero",
+        "videoDescription": "Vídeo de l’Ofrena Floral a la Mare de Déu dels Desemparats de març de 2026, en el panell Història/Arxius/Ofrenes."
+      },
+      "llibret_2026": {
+        "title": "Llibret Falla Suïssa 2025-2026",
+        "description": "Llibret digital multilingüe de la Falla Suïssa - L'Alqueria del Favero: editorial, memòria del barri, entrevistes i programa d'actes de les Falles 2026."
+      },
+      "colaboraciones": {
+        "title": "Col·laboració amb HOPE-INCLIVA | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Col·laboració solidària de la Falla Suïssa - L'Alqueria del Favero amb HOPE-INCLIVA a València per a donar suport a la investigació del Limfoma No Hodgkin Pediàtric."
+      },
+      "organigrama": {
+        "title": "Organigrama 2026-27 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Representants, junta directiva i delegacions de la Falla Suïssa - L'Alqueria del Favero per a l'exercici 2026-27."
+      },
+      "eventos": {
+        "title": "Esdeveniments i tauler | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Esdeveniments i tauler d'anuncis de la Falla Suïssa - L'Alqueria del Favero: pròxims actes, avisos i convocatòries de la comissió."
+      },
+      "deportes": {
+        "title": "Esports | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Activitats esportives de la Falla Suïssa - L'Alqueria del Favero: tornejos, trobades, equips i calendaris actualitzats pels delegats d'Esports."
+      },
+      "nuevos-falleros": {
+        "title": "Nous Fallers | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Informació per a nous fallers i falleres de la Falla Suïssa - L'Alqueria del Favero: documentació i formularis d'autorització dels drets d'imatge."
+      },
+      "meteo": {
+        "title": "Oratge | Falla Suïssa - L'Alqueria del Favero",
+        "description": "L'oratge a València per a la Falla Suïssa - L'Alqueria del Favero: condicions actuals i previsió per als pròxims cinc dies."
+      },
+      "blog": {
+        "title": "Blog de la nostra Falla | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Blog de la Falla Suïssa - L'Alqueria del Favero: històries, cròniques i notícies de la comissió fallera."
+      },
+      "blog-somni": {
+        "title": "Somni | Blog | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Somni: la història de com huit persones il·lusionades fundaren la Falla Suïssa - L'Alqueria del Favero, la comissió número 396, al barri de les Moreres, València."
+      },
+      "blog-anima": {
+        "title": "L'ànima del barri | Blog | Falla Suïssa - L'Alqueria del Favero",
+        "description": "L'ànima del barri: la història del Jardí del Túria, Federico Trénor i Trénor i la Falla Suïssa en les Moreres, València. D'una autovia a un pulmó verd."
+      },
+      "galerias": {
+        "title": "Galeries | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeries d'imatges de la Falla Suïssa - L'Alqueria del Favero: Apuntà, nomenaments, monument, proclamació, Ofrena, Cremà i més."
+      },
+      "ofrenda": {
+        "title": "Pròxima Ofrena | Falla Suïssa - L'Alqueria del Favero",
+        "description": "La pròxima Ofrena de la Falla Suïssa - L'Alqueria del Favero i l'accés al vídeo de l'Ofrena de març de 2026, conservat en l'arxiu de la comissió."
+      },
+      "aviso-legal": {
+        "title": "Avís legal | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Avís legal i identificació del titular del lloc web de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "privacidad": {
+        "title": "Política de privacitat | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Política de privacitat i protecció de dades personals de la Falla Suïssa - L'Alqueria del Favero d'acord amb el RGPD."
+      },
+      "cookies": {
+        "title": "Política de galetes | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Política de galetes del lloc web de la Falla Suïssa - L'Alqueria del Favero. Informació sobre les galetes utilitzades."
+      },
+      "autorizacion-imagen": {
+        "title": "Autorització dels drets d'imatge | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Formulari imprimible d'autorització per al tractament del nom i la imatge dels fallers i falleres de la Falla Suïssa, d'acord amb el RGPD i la LOPDGDD."
+      },
+      "autorizacion-imagen-menor": {
+        "title": "Autorització dels drets d'imatge de menors | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Formulari imprimible d'autorització parental per al tractament del nom i la imatge de menors fallers de la Falla Suïssa, d'acord amb el RGPD, la LOPDGDD i la LO 1/1996."
+      },
+      "calendario": {
+        "title": "Calendari | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Calendari de la Falla Suïssa - L'Alqueria del Favero: consulta per mes, dia o categoria tots els actes fallers i afig-los a la teua agenda."
+      },
+      "mapa": {
+        "title": "Mapa i ubicació | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Mapa de la Falla Suïssa - L'Alqueria del Favero: ubicació del casal i punts d'interés de la comissió a València."
+      },
+      "galeria_1": {
+        "title": "Apuntà 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeria de fotografies de Apuntà 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_2": {
+        "title": "Fallera Major Infantil 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeria de fotografies de Fallera Major Infantil 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_3": {
+        "title": "Monument 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeria de fotografies de Monument 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_4": {
+        "title": "Proclamació 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeria de fotografies de Proclamació 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_5": {
+        "title": "Ofrena de Fruits 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeria de fotografies de Ofrena de Fruits 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_6": {
+        "title": "Cremà 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeria de fotografies de Cremà 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_7": {
+        "title": "Sant Joan 2026 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeria de fotografies de Sant Joan 2026 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_8": {
+        "title": "Representants 2026-27 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeria de fotografies de Representants 2026-27 de la Falla Suïssa - L'Alqueria del Favero."
+      },
+      "galeria_9": {
+        "title": "Fallera Major Infantil 2026-27 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galeria de fotografies de Fallera Major Infantil 2026-27 de la Falla Suïssa - L'Alqueria del Favero.",
+        "videoName": "Vídeo de la proclamació",
+        "videoDescription": "Proclamació de Sofía Gómez Medina, Fallera Major Infantil 2026-27"
+      }
+    },
+    "legalDocuments": {
+      "text0": "Última actualització: 23 de març de 2026",
+      "text1": "1. Identificació del titular",
+      "text2": "En compliment de l’article 10 de la Llei 34/2002, d’11 de juliol, de Serveis de la Societat de la Informació i de Comerç Electrònic (LSSI-CE), s’informa:",
+      "text3": "Denominació:",
+      "text7": "Domicili social:",
+      "text9": "Correu electrònic:",
+      "text11": "Lloc web:",
+      "text13": "2. Objecte i àmbit d’aplicació",
+      "text14": "El present Avís Legal regula l’accés i l’ús del lloc web",
+      "text16": ", propietat de l’Asociación Cultural Falla Suïssa - L’Alqueria del Favero, entitat sense ànim de lucre dedicada a la promoció i difusió de la cultura fallera valenciana.",
+      "text17": "3. Propietat intel·lectual i industrial",
+      "text18": "Tots els continguts del lloc web, incloent-hi textos, fotografies, vídeos, dissenys gràfics, logotips, icones i codi font, són propietat de l’Asociación Cultural Falla Suïssa - L’Alqueria del Favero o dels seus legítims titulars, i estan protegits per les lleis de propietat intel·lectual i industrial vigents.",
+      "text19": "Queda prohibida la reproducció, distribució, comunicació pública o transformació d’estos continguts sense autorització expressa, excepte per a ús personal i privat.",
+      "text20": "4. Condicions d’ús",
+      "text21": "L’usuari es compromet a utilitzar el lloc web de conformitat amb la llei, el present Avís Legal, la moral i els bons costums. En particular, es compromet a no:",
+      "text22": "Utilitzar els continguts amb finalitats il·lícites o contràries al que s’establix en este Avís Legal.",
+      "text23": "Reproduir, copiar, distribuir o modificar els continguts sense autorització.",
+      "text24": "Suprimir, eludir o manipular els drets de propietat intel·lectual.",
+      "text25": "5. Exclusió de responsabilitat",
+      "text26": "L’Associació no es fa responsable de:",
+      "text27": "La falta de disponibilitat, continuïtat o qualitat del lloc web.",
+      "text28": "Els danys que pogueren derivar-se de l’ús del lloc web.",
+      "text29": "Els continguts i servicis de llocs web de tercers enllaçats des d’esta web.",
+      "text30": "La presència de virus o elements perjudicials que pogueren causar alteracions en el sistema informàtic de l’usuari.",
+      "text31": "6. Enllaços a tercers",
+      "text32": "Este lloc web pot contindre enllaços a pàgines de tercers (xarxes socials, entitats col·laboradores, etc.). L’Associació no assumix cap responsabilitat sobre el contingut, les polítiques de privacitat o les pràctiques d’estos llocs externs.",
+      "text33": "7. Legislació aplicable i jurisdicció",
+      "text34": "Les presents condicions es regixen per la legislació espanyola. Per a la resolució de qualsevol controvèrsia que poguera derivar-se de l’accés o l’ús d’este lloc web, les parts se sotmeten als Jutjats i Tribunals de la ciutat de València.",
+      "text35": "Última actualització: 15 de maig de 2026",
+      "text36": "1. Responsable del tractament",
+      "text37": "Domicili:",
+      "text39": "Correu electrònic:",
+      "text40": "2. Dades personals que arrepleguem",
+      "text41": "A través del formulari de contacte d’este lloc web, arrepleguem les dades personals següents facilitades voluntàriament per l’usuari:",
+      "text42": "Nom i cognoms",
+      "text43": "Adreça de correu electrònic",
+      "text44": "Número de telèfon",
+      "text45": "Missatge o consulta",
+      "text46": "3. Finalitat del tractament",
+      "text47": "Les dades personals arreplegades s’utilitzen exclusivament per a:",
+      "text48": "Atendre les consultes i els interessos de persones que desitgen obtindre informació sobre la nostra comissió fallera.",
+      "text49": "Gestionar les sol·licituds de contacte rebudes a través del formulari web.",
+      "text50": "4. Base legal",
+      "text51": "El tractament de les dades es basa en el",
+      "text52": "consentiment de l’interessat",
+      "text53": "(article 6.1.a del Reglament General de Protecció de Dades - RGPD), atorgat en enviar voluntàriament el formulari de contacte.",
+      "text54": "5. Destinataris de les dades",
+      "text55": "Les dades del formulari de contacte s’envien a través del servici",
+      "text57": ", que actua com a encarregat del tractament per a la transmissió del missatge al correu electrònic de l’Associació. No se cedixen dades a tercers excepte per obligació legal.",
+      "text58": "6. Termini de conservació",
+      "text59": "Les dades personals es conservaran durant el temps necessari per a atendre la consulta de l’usuari i, en tot cas, durant els terminis legalment establits. Una vegada complida la finalitat, les dades s’eliminaran.",
+      "text60": "7. Drets de l’usuari",
+      "text61": "De conformitat amb el RGPD i la Llei Orgànica 3/2018 de Protecció de Dades (LOPDGDD), l’usuari pot exercir els drets següents:",
+      "text62": "Accés:",
+      "text63": "conéixer quines dades personals tractem.",
+      "text64": "Rectificació:",
+      "text65": "sol·licitar la correcció de dades inexactes.",
+      "text66": "Supressió:",
+      "text67": "sol·licitar l’eliminació de les seues dades (dret a l’oblit).",
+      "text68": "Oposició:",
+      "text69": "oposar-se al tractament de les seues dades.",
+      "text70": "Limitació:",
+      "text71": "sol·licitar la limitació del tractament.",
+      "text72": "Portabilitat:",
+      "text73": "rebre les seues dades en format estructurat.",
+      "text74": "Per a exercir estos drets, pot enviar un correu electrònic a",
+      "text75": "indicant la seua sol·licitud i adjuntant una còpia del seu document d’identitat.",
+      "text76": "8. Dret a reclamar",
+      "text77": "Si considera que el tractament de les seues dades no s’ajusta a la normativa, té dret a presentar una reclamació davant de l’",
+      "text78": "Agència Espanyola de Protecció de Dades",
+      "text79": "(AEPD), amb seu al C/ Jorge Juan, 6 - 28001 Madrid, o a través del seu lloc web:",
+      "text81": "9. Seguretat de les dades",
+      "text82": "L’Associació ha adoptat les mesures tècniques i organitzatives necessàries per a garantir la seguretat de les dades personals i evitar-ne l’alteració, pèrdua, tractament o accés no autoritzat.",
+      "text83": "10. Drets d’imatge dels fallers i falleres",
+      "text84": "Com a part de l’activitat cultural i festiva de la comissió, l’Associació tracta el",
+      "text85": "nom",
+      "text86": "i la",
+      "text87": "imatge",
+      "text88": "(fotografies i vídeos) de les persones falleres per a la seua difusió en la web",
+      "text89": ", en les xarxes socials oficials de la Falla (Instagram, Facebook, YouTube, TikTok), en el llibret anual, en llistats institucionals de l’organigrama i en vídeos institucionals (inclòs el vídeo aeri del monument captat amb dron).",
+      "text90": "Base legal:",
+      "text91": "el tractament es realitza sobre la base del",
+      "text92": "consentiment exprés de l’interessat",
+      "text93": "(article 6.1.a del RGPD), arreplegat per escrit mitjançant els formularis d’autorització que la junta directiva facilita a cada faller o fallera a l’inici de l’exercici.",
+      "text94": "Menors d’edat:",
+      "text95": "en compliment de l’article 8 del RGPD, l’article 7 de la LOPDGDD i la Llei Orgànica 1/1996, de 15 de gener, de Protecció Jurídica del Menor, l’autorització per al tractament de la imatge i el nom dels menors de la comissió se sol·licita sempre al titular o titulars de la",
+      "text96": "pàtria potestat o tutela legal",
+      "text97": "mitjançant un formulari específic, diferent del formulari per a persones majors d’edat.",
+      "text98": "Termini de conservació:",
+      "text99": "els materials es conservaran durant el temps que l’interessat mantinga la condició de faller/a, més un termini raonable d’arxiu històric documental després de la baixa, excepte revocació prèvia expressa. Passat eixe termini, els materials s’eliminen o s’anonimitzen, excepte aquells amb valor històric documental per a la mateixa comissió.",
+      "text100": "Limitacions:",
+      "text101": "l’autorització arreplegada en estos formularis",
+      "text103": "inclou la cessió d’imatges a tercers (Junta Central Fallera, premsa o altres institucions) excepte per obligació legal o autorització addicional específica, ni l’ús comercial o publicitari per entitats externes a l’associació. En actes públics poden estar presents mitjans de comunicació sota la seua pròpia base jurídica d’interés públic informatiu.",
+      "text104": "Drets:",
+      "text105": "l’interessat (o els seus representants legals, en el cas dels menors) pot exercir en qualsevol moment els drets d’accés, rectificació, supressió, oposició, limitació i portabilitat, així com",
+      "text106": "revocar el consentiment",
+      "text107": ", dirigint un correu a",
+      "text108": "amb còpia del DNI.",
+      "text109": "Formularis descarregables:",
+      "text110": "Autorització dels drets d’imatge — Fallers/es majors d’edat",
+      "text111": "Autorització dels drets d’imatge — Menors d’edat (a signar pel pare, la mare o el tutor/a legal)",
+      "text112": "Cada formulari inclou un botó",
+      "text113": "«Imprimir / Guardar com a PDF»",
+      "text114": "per a facilitar-ne el lliurament en paper a la junta directiva.",
+      "text115": "1. Què són les galetes?",
+      "text116": "Les galetes són xicotets arxius de text que els llocs web emmagatzemen en el navegador de l’usuari. Permeten recordar preferències, millorar l’experiència de navegació i recopilar informació estadística.",
+      "text117": "2. Emmagatzematge local (localStorage)",
+      "text118": "Este lloc web utilitza",
+      "text120": "del navegador (tecnologia similar a les galetes) per a emmagatzemar les preferències següents de manera local en el seu dispositiu:",
+      "text121": "Idioma preferit",
+      "text123": "): recorda si ha seleccionat espanyol o valencià.",
+      "text124": "Tema visual",
+      "text125": ": recorda si ha activat el mode fosc o clar.",
+      "text126": "Consentiment de galetes",
+      "text128": "): emmagatzema la seua elecció sobre les galetes.",
+      "text129": "Estes dades s’emmagatzemen exclusivament en el seu dispositiu i no s’envien a cap servidor.",
+      "text130": "3. Galetes de tercers",
+      "text131": "Este lloc web utilitza servicis de tercers que poden establir galetes o recopilar informació tècnica:",
+      "text133": "S’utilitzen fonts tipogràfiques servides des dels servidors de Google (",
+      "text135": "i",
+      "text137": "). En carregar estes fonts, Google pot registrar l’adreça IP de l’usuari i dades tècniques del navegador. Per a més informació, consulte la",
+      "text138": "Política de privacitat de Google",
+      "text139": "CDN de biblioteques",
+      "text140": "S’utilitzen xarxes de distribució de contingut (CDN) per a servir biblioteques JavaScript:",
+      "text143": "): Swiper.js i EmailJS.",
+      "text147": "Estes CDN poden registrar informació tècnica de la connexió (adreça IP, navegador). No establixen galetes de seguiment o publicitàries.",
+      "text148": "El formulari de contacte utilitza el servici EmailJS per a enviar missatges. EmailJS processa les dades del formulari (nom, correu electrònic, telèfon, missatge) únicament per a transmetre-les al correu de l’Associació.",
+      "text149": "4. Service Worker i memòria cau",
+      "text150": "Este lloc web utilitza un",
+      "text152": "per a millorar el rendiment i permetre l’accés sense connexió. El Service Worker emmagatzema recursos del lloc (CSS, JavaScript, imatges) en la memòria cau local del navegador. No recopila ni transmet dades personals.",
+      "text153": "5. Galetes analítiques o publicitàries",
+      "text154": "Este lloc web",
+      "text155": "NO utilitza",
+      "text156": "galetes d’anàlisi (Google Analytics, etc.) ni galetes publicitàries o de seguiment.",
+      "text157": "6. Gestió de galetes",
+      "text158": "Pot gestionar o eliminar les galetes i l’emmagatzematge local des de la configuració del seu navegador:",
+      "text160": "Configuració > Privacitat i seguretat > Galetes i altres dades de llocs",
+      "text162": "Ajustos > Privacitat i seguretat > Galetes i dades del lloc",
+      "text164": "Preferències > Privacitat > Gestionar dades de llocs web",
+      "text166": "Configuració > Galetes i permisos del lloc",
+      "text167": "Tinga en compte que deshabilitar les galetes o l’emmagatzematge local pot afectar el funcionament del lloc web (per exemple, no es recordarà el seu idioma preferit o el tema visual seleccionat).",
+      "text168": "7. Actualització d’esta política",
+      "text169": "Esta Política de Galetes pot actualitzar-se periòdicament. Recomanem revisar-la de manera regular. La data de l’última actualització s’indica a l’inici del document.",
+      "avisolegalTitle": "Avís Legal",
+      "privacidadTitle": "Política de Privacitat",
+      "cookiesTitle": "Política de Galetes",
+      "localFonts": "Les tipografies Plus Jakarta Sans i Dancing Script se servixen des d’este lloc web sota llicència SIL Open Font License. La seua càrrega no requerix connexions als servidors de Google."
+    },
+    "galleryAlts": {
+      "g1": {
+        "p1": "Apuntà 2025-26. Fotografia 1 de 15.",
+        "p2": "Apuntà 2025-26. Fotografia 2 de 15.",
+        "p3": "Apuntà 2025-26. Fotografia 3 de 15.",
+        "p4": "Apuntà 2025-26. Fotografia 4 de 15.",
+        "p5": "Apuntà 2025-26. Fotografia 5 de 15.",
+        "p6": "Apuntà 2025-26. Fotografia 6 de 15.",
+        "p7": "Apuntà 2025-26. Fotografia 7 de 15.",
+        "p8": "Apuntà 2025-26. Fotografia 8 de 15.",
+        "p9": "Apuntà 2025-26. Fotografia 9 de 15.",
+        "p10": "Apuntà 2025-26. Fotografia 10 de 15.",
+        "p11": "Apuntà 2025-26. Fotografia 11 de 15.",
+        "p12": "Apuntà 2025-26. Fotografia 12 de 15.",
+        "p13": "Apuntà 2025-26. Fotografia 13 de 15.",
+        "p14": "Apuntà 2025-26. Fotografia 14 de 15.",
+        "p15": "Apuntà 2025-26. Fotografia 15 de 15."
+      },
+      "g2": {
+        "p1": "Fallera Major Infantil 2025-26. Fotografia 1 de 12.",
+        "p2": "Fallera Major Infantil 2025-26. Fotografia 2 de 12.",
+        "p3": "Fallera Major Infantil 2025-26. Fotografia 3 de 12.",
+        "p4": "Fallera Major Infantil 2025-26. Fotografia 4 de 12.",
+        "p5": "Fallera Major Infantil 2025-26. Fotografia 5 de 12.",
+        "p6": "Fallera Major Infantil 2025-26. Fotografia 6 de 12.",
+        "p7": "Fallera Major Infantil 2025-26. Fotografia 7 de 12.",
+        "p8": "Fallera Major Infantil 2025-26. Fotografia 8 de 12.",
+        "p9": "Fallera Major Infantil 2025-26. Fotografia 9 de 12.",
+        "p10": "Fallera Major Infantil 2025-26. Fotografia 10 de 12.",
+        "p11": "Fallera Major Infantil 2025-26. Fotografia 11 de 12.",
+        "p12": "Fallera Major Infantil 2025-26. Fotografia 12 de 12."
+      },
+      "g3": {
+        "p1": "Monument 2025-26. Fotografia 1 de 1."
+      },
+      "g4": {
+        "p1": "Proclamació 2025-26. Fotografia 1 de 25.",
+        "p2": "Proclamació 2025-26. Fotografia 2 de 25.",
+        "p3": "Proclamació 2025-26. Fotografia 3 de 25.",
+        "p4": "Proclamació 2025-26. Fotografia 4 de 25.",
+        "p5": "Proclamació 2025-26. Fotografia 5 de 25.",
+        "p6": "Proclamació 2025-26. Fotografia 6 de 25.",
+        "p7": "Proclamació 2025-26. Fotografia 7 de 25.",
+        "p8": "Proclamació 2025-26. Fotografia 8 de 25.",
+        "p9": "Proclamació 2025-26. Fotografia 9 de 25.",
+        "p10": "Proclamació 2025-26. Fotografia 10 de 25.",
+        "p11": "Proclamació 2025-26. Fotografia 11 de 25.",
+        "p12": "Proclamació 2025-26. Fotografia 12 de 25.",
+        "p13": "Proclamació 2025-26. Fotografia 13 de 25.",
+        "p14": "Proclamació 2025-26. Fotografia 14 de 25.",
+        "p15": "Proclamació 2025-26. Fotografia 15 de 25.",
+        "p16": "Proclamació 2025-26. Fotografia 16 de 25.",
+        "p17": "Proclamació 2025-26. Fotografia 17 de 25.",
+        "p18": "Proclamació 2025-26. Fotografia 18 de 25.",
+        "p19": "Proclamació 2025-26. Fotografia 19 de 25.",
+        "p20": "Proclamació 2025-26. Fotografia 20 de 25.",
+        "p21": "Proclamació 2025-26. Fotografia 21 de 25.",
+        "p22": "Proclamació 2025-26. Fotografia 22 de 25.",
+        "p23": "Proclamació 2025-26. Fotografia 23 de 25.",
+        "p24": "Proclamació 2025-26. Fotografia 24 de 25.",
+        "p25": "Proclamació 2025-26. Fotografia 25 de 25."
+      },
+      "g5": {
+        "p1": "Ofrena de Fruits 2025-26. Fotografia 1 de 9.",
+        "p2": "Ofrena de Fruits 2025-26. Fotografia 2 de 9.",
+        "p3": "Ofrena de Fruits 2025-26. Fotografia 3 de 9.",
+        "p4": "Ofrena de Fruits 2025-26. Fotografia 4 de 9.",
+        "p5": "Ofrena de Fruits 2025-26. Fotografia 5 de 9.",
+        "p6": "Ofrena de Fruits 2025-26. Fotografia 6 de 9.",
+        "p7": "Ofrena de Fruits 2025-26. Fotografia 7 de 9.",
+        "p8": "Ofrena de Fruits 2025-26. Fotografia 8 de 9.",
+        "p9": "Ofrena de Fruits 2025-26. Fotografia 9 de 9."
+      },
+      "g6": {
+        "p1": "Cremà 2025-26. Fotografia 1 de 11.",
+        "p2": "Cremà 2025-26. Fotografia 2 de 11.",
+        "p3": "Cremà 2025-26. Fotografia 3 de 11.",
+        "p4": "Cremà 2025-26. Fotografia 4 de 11.",
+        "p5": "Cremà 2025-26. Fotografia 5 de 11.",
+        "p6": "Cremà 2025-26. Fotografia 6 de 11.",
+        "p7": "Cremà 2025-26. Fotografia 7 de 11.",
+        "p8": "Cremà 2025-26. Fotografia 8 de 11.",
+        "p9": "Cremà 2025-26. Fotografia 9 de 11.",
+        "p10": "Cremà 2025-26. Fotografia 10 de 11.",
+        "p11": "Cremà 2025-26. Fotografia 11 de 11."
+      },
+      "g7": {
+        "p1": "Sant Joan 2026. Fotografia 1 de 17.",
+        "p2": "Sant Joan 2026. Fotografia 2 de 17.",
+        "p3": "Sant Joan 2026. Fotografia 3 de 17.",
+        "p4": "Sant Joan 2026. Fotografia 4 de 17.",
+        "p5": "Sant Joan 2026. Fotografia 5 de 17.",
+        "p6": "Sant Joan 2026. Fotografia 6 de 17.",
+        "p7": "Sant Joan 2026. Fotografia 7 de 17.",
+        "p8": "Sant Joan 2026. Fotografia 8 de 17.",
+        "p9": "Sant Joan 2026. Fotografia 9 de 17.",
+        "p10": "Sant Joan 2026. Fotografia 10 de 17.",
+        "p11": "Sant Joan 2026. Fotografia 11 de 17.",
+        "p12": "Sant Joan 2026. Fotografia 12 de 17.",
+        "p13": "Sant Joan 2026. Fotografia 13 de 17.",
+        "p14": "Sant Joan 2026. Fotografia 14 de 17.",
+        "p15": "Sant Joan 2026. Fotografia 15 de 17.",
+        "p16": "Sant Joan 2026. Fotografia 16 de 17.",
+        "p17": "Sant Joan 2026. Fotografia 17 de 17."
+      },
+      "g8": {
+        "p1": "Representants 2026-27. Fotografia 1 de 6.",
+        "p2": "Representants 2026-27. Fotografia 2 de 6.",
+        "p3": "Representants 2026-27. Fotografia 3 de 6.",
+        "p4": "Representants 2026-27. Fotografia 4 de 6.",
+        "p5": "Representants 2026-27. Fotografia 5 de 6.",
+        "p6": "Representants 2026-27. Fotografia 6 de 6."
+      },
+      "g9": {
+        "p1": "Fallera Major Infantil 2026-27. Fotografia 1 de 40.",
+        "p2": "Fallera Major Infantil 2026-27. Fotografia 2 de 40.",
+        "p3": "Fallera Major Infantil 2026-27. Fotografia 3 de 40.",
+        "p4": "Fallera Major Infantil 2026-27. Fotografia 4 de 40.",
+        "p5": "Fallera Major Infantil 2026-27. Fotografia 5 de 40.",
+        "p6": "Fallera Major Infantil 2026-27. Fotografia 6 de 40.",
+        "p7": "Fallera Major Infantil 2026-27. Fotografia 7 de 40.",
+        "p8": "Fallera Major Infantil 2026-27. Fotografia 8 de 40.",
+        "p9": "Fallera Major Infantil 2026-27. Fotografia 9 de 40.",
+        "p10": "Fallera Major Infantil 2026-27. Fotografia 10 de 40.",
+        "p11": "Fallera Major Infantil 2026-27. Fotografia 11 de 40.",
+        "p12": "Fallera Major Infantil 2026-27. Fotografia 12 de 40.",
+        "p13": "Fallera Major Infantil 2026-27. Fotografia 13 de 40.",
+        "p14": "Fallera Major Infantil 2026-27. Fotografia 14 de 40.",
+        "p15": "Fallera Major Infantil 2026-27. Fotografia 15 de 40.",
+        "p16": "Fallera Major Infantil 2026-27. Fotografia 16 de 40.",
+        "p17": "Fallera Major Infantil 2026-27. Fotografia 17 de 40.",
+        "p18": "Fallera Major Infantil 2026-27. Fotografia 18 de 40.",
+        "p19": "Fallera Major Infantil 2026-27. Fotografia 19 de 40.",
+        "p20": "Fallera Major Infantil 2026-27. Fotografia 20 de 40.",
+        "p21": "Fallera Major Infantil 2026-27. Fotografia 21 de 40.",
+        "p22": "Fallera Major Infantil 2026-27. Fotografia 22 de 40.",
+        "p23": "Fallera Major Infantil 2026-27. Fotografia 23 de 40.",
+        "p24": "Fallera Major Infantil 2026-27. Fotografia 24 de 40.",
+        "p25": "Fallera Major Infantil 2026-27. Fotografia 25 de 40.",
+        "p26": "Fallera Major Infantil 2026-27. Fotografia 26 de 40.",
+        "p27": "Fallera Major Infantil 2026-27. Fotografia 27 de 40.",
+        "p28": "Fallera Major Infantil 2026-27. Fotografia 28 de 40.",
+        "p29": "Fallera Major Infantil 2026-27. Fotografia 29 de 40.",
+        "p30": "Fallera Major Infantil 2026-27. Fotografia 30 de 40.",
+        "p31": "Fallera Major Infantil 2026-27. Fotografia 31 de 40.",
+        "p32": "Fallera Major Infantil 2026-27. Fotografia 32 de 40.",
+        "p33": "Fallera Major Infantil 2026-27. Fotografia 33 de 40.",
+        "p34": "Fallera Major Infantil 2026-27. Fotografia 34 de 40.",
+        "p35": "Fallera Major Infantil 2026-27. Fotografia 35 de 40.",
+        "p36": "Fallera Major Infantil 2026-27. Fotografia 36 de 40.",
+        "p37": "Fallera Major Infantil 2026-27. Fotografia 37 de 40.",
+        "p38": "Fallera Major Infantil 2026-27. Fotografia 38 de 40.",
+        "p39": "Fallera Major Infantil 2026-27. Fotografia 39 de 40.",
+        "p40": "Fallera Major Infantil 2026-27. Fotografia 40 de 40."
+      }
     }
   },
   "en": {

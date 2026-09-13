@@ -1,5 +1,5 @@
 // Banner de subvención - tarjeta flotante mostrada en cada carga de la home
-// Se ejecuta directamente (sin DOMContentLoaded) porque el script se carga al final del body
+// Se ejecuta directamente (sin DOMContentLoaded) porque el script se carga justo después del HTML del banner
 (function() {
   const banner = document.getElementById('banner-subvencion');
   const legacySessionCookie = 'bannerSubvencionSesion';

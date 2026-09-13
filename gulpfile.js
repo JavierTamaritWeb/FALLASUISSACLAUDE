@@ -14,6 +14,7 @@ const fs = require('fs').promises;
 const crypto = require('crypto');
 const terser = require('gulp-terser');
 const { pipeline } = require('stream/promises');
+const { generateSeoArtifacts } = require('./scripts/seo-artifacts.cjs');
 
 const EVENT_BASE_URL = 'https://fallasuissa.es/eventos.html';
 const EVENT_IMAGE_URL = 'https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png';
@@ -144,7 +145,7 @@ function optimizeHtmlAssetTags(html) {
   return html;
 }
 
-const VA_ASSET_PREFIXES = /^(?:css|js|img|data|pdf)\//;
+const VA_ASSET_PREFIXES = /^(?:css|js|img|data|pdf|fonts)\//;
 
 // La variante /va/ vive en un subdirectorio pero comparte los assets de la
 // raíz (dist/va/ solo contiene HTML): las URLs de assets se reescriben con
@@ -154,7 +155,7 @@ const VA_ASSET_PREFIXES = /^(?:css|js|img|data|pdf)\//;
 // Los enlaces entre páginas (lafalla.html, etc.) se mantienen relativos para
 // que la navegación permanezca dentro de /va/.
 function rewriteAssetUrlsToRoot(html) {
-  html = html.replace(/\b(src|href|poster|data-board-source)="((?:css|js|img|data|pdf)\/[^"]*)"/g, '$1="../$2"');
+  html = html.replace(/\b(src|href|poster|data-board-source)="((?:css|js|img|data|pdf|fonts)\/[^"]*)"/g, '$1="../$2"');
   html = html.replace(/\b(href)="(manifest\.json[^"]*)"/g, '$1="../$2"');
 
   html = html.replace(/\bsrcset="([^"]+)"/g, (match, value) => {
@@ -264,7 +265,7 @@ async function loadGalleryImages() {
       for (const ext of ['.jpg', '.jpeg', '.png']) {
         try { await fs.access(path.join(__dirname, 'src', `${sinExt}${ext}`)); contentPath = `${sinExt}${ext}`; break; } catch (_) { /* siguiente */ }
       }
-      withRaster.push({ src: contentPath, alt: typeof p.alt === 'string' ? p.alt : '' });
+      withRaster.push({ src: contentPath, alt: typeof p.alt === 'string' ? p.alt : '', altKey: p.altKey });
     }
     map.set(Number(m[1]), withRaster);
   }
@@ -273,15 +274,19 @@ async function loadGalleryImages() {
 
 function decodeHtmlEntities(text) {
   return String(text)
+    .replace(/&#(x[0-9a-f]+|\d+);/gi, (match, value) => {
+      const code = value[0].toLowerCase() === 'x' ? parseInt(value.slice(1), 16) : Number(value);
+      return code <= 0x10ffff ? String.fromCodePoint(code) : match;
+    })
     .replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&apos;/g, "'")
     .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ');
 }
 
 function readHeadMeta(html) {
-  const title = (html.match(/<title>([^<]*)<\/title>/i) || [, ''])[1].trim();
-  const description = (html.match(/<meta\s+name="description"\s+content="([^"]*)"/i) || [, ''])[1].trim();
+  const title = (html.match(/<title\b[^>]*>([^<]*)<\/title>/i) || [, ''])[1].trim();
+  const description = (html.match(/<meta\b(?=[^>]*\sname="description")(?=[^>]*\scontent="([^"]*)")[^>]*>/i) || [, ''])[1].trim();
   // og:image se conserva con su ?v= (regla: og-share.png siempre con cache-buster por WhatsApp)
-  const ogImage = (html.match(/<meta\s+property="og:image"\s+content="([^"]*)"/i) || [, ''])[1].trim();
+  const ogImage = (html.match(/<meta\b(?=[^>]*\sproperty="og:image")(?=[^>]*\scontent="([^"]*)")[^>]*>/i) || [, ''])[1].trim();
   return { title: decodeHtmlEntities(title), description: decodeHtmlEntities(description), ogImage };
 }
 
@@ -396,7 +401,7 @@ function buildBreadcrumb(fileName, mainUrl, page, table, lang) {
   };
 }
 
-function fillImageGallery(nodes, fileName, mainUrl, galleryImages) {
+function fillImageGallery(nodes, fileName, mainUrl, galleryImages, table) {
   const m = fileName.match(/^galeria_(\d+)\.html$/);
   if (!m) return;
   const gallery = nodes.find((node) => hasType(node, 'ImageGallery'));
@@ -405,13 +410,14 @@ function fillImageGallery(nodes, fileName, mainUrl, galleryImages) {
     console.warn(`[schema] ${fileName}: sin nodo ImageGallery en el bloque inline`);
     return;
   }
+  gallery.name = table?.galeria?.[`galeria${m[1]}`] || gallery.name;
   gallery.associatedMedia = fotos.map((foto, i) => ({
     '@type': 'ImageObject',
     '@id': `${mainUrl}#img-${String(i + 1).padStart(3, '0')}`,
     contentUrl: `${SITE_ORIGIN}/${foto.src}`,
     url: `${SITE_ORIGIN}/${foto.src}`,
-    name: foto.alt,
-    caption: foto.alt,
+    name: (foto.altKey && getNestedKey(table, foto.altKey)) || foto.alt,
+    caption: (foto.altKey && getNestedKey(table, foto.altKey)) || foto.alt,
     representativeOfPage: i === 0,
     creditText: "Falla Suïssa - L'Alqueria del Favero",
     copyrightHolder: { '@id': ORG_ID }
@@ -504,12 +510,32 @@ function processJsonLd(html, ctx) {
   const { found, nodes: rawNodes } = extractFirstJsonLd(html, fileName);
   let nodes = normalizeGraph(rawNodes, fileName);
   const page = ensurePageNode(nodes, { ...meta, mainUrl });
+  // Los nombres y descripciones editoriales comparten la traducción del head.
+  page.name = meta.title;
+  page.description = meta.description;
+  for (const node of nodes) {
+    if (hasType(node, 'VideoObject')) {
+      const video = table?.seo?.[fileName.replace(/\.html$/, '')];
+      if (video?.videoName) node.name = video.videoName;
+      if (video?.videoDescription) node.description = video.videoDescription;
+    }
+    if (hasType(node, 'BlogPosting')) {
+      const post = table && table.blog && table.blog[fileName.replace(/^blog-/, '').replace(/\.html$/, '')];
+      if (post) node.headline = post.cardTitle || post.title;
+      node.description = meta.description;
+      if (lang === 'ca') node.articleSection = fileName === 'blog-somni.html' ? 'Història de la Falla' : 'El barri';
+    }
+    if (hasType(node, 'Blog')) {
+      node.name = meta.title;
+      node.description = meta.description;
+    }
+  }
   if (fileName !== 'index.html') {
     const breadcrumb = buildBreadcrumb(fileName, mainUrl, page, table, lang);
     page.breadcrumb = { '@id': breadcrumb['@id'] };
     nodes.push(breadcrumb);
   }
-  fillImageGallery(nodes, fileName, mainUrl, galleryImages);
+  fillImageGallery(nodes, fileName, mainUrl, galleryImages, table);
   if (fileName === 'galerias.html') fillGaleriasList(nodes, mainUrl, galerias, table, esTable);
   if (fileName === 'index.html' || fileName === 'eventos.html') {
     nodes = mergeEventNodes(nodes, schemaEvents, fileName === 'index.html' ? isManagedBoardEventNode : null);
@@ -550,7 +576,7 @@ function isVersionableLocalAssetUrl(url) {
   }
 
   const pathname = url.split('#')[0].split('?')[0];
-  return /(?:^|\/)(?:css|js)\/.+\.(?:css|js)$/i.test(pathname);
+  return /(?:^|\/)(?:css|js|fonts)\/.+\.(?:css|js)$/i.test(pathname);
 }
 
 function appendAssetVersionToUrl(url, assetVersion) {
@@ -790,8 +816,11 @@ function prerenderTranslations(html, langTable, fileName, missingKeyTracker) {
   html = html.replace(contentRegex, (match, tag, attrs, key, content) => {
     // Skip elementos dinámicos (los rellena JS en runtime)
     if (/\bdata-i18n-dynamic\b/.test(attrs)) return match;
-    // Skip si el contenido tiene tags hijos (no es hoja) — preserva estructura compleja
-    if (/<[a-zA-Z]/.test(content)) return match;
+    // Los bloques de párrafos se regeneran igual que en runtime, aunque el
+    // fuente ya contenga los párrafos españoles. Los demás nodos compuestos
+    // conservan su estructura: la clave debe estar en su hoja de texto.
+    const isParagraphBlock = /\bdata-i18n-format="paragraphs"/.test(attrs);
+    if (/<[a-zA-Z]/.test(content) && !isParagraphBlock) return match;
 
     const translation = getNestedKey(langTable, key);
     if (typeof translation !== 'string') {
@@ -818,6 +847,7 @@ function prerenderTranslations(html, langTable, fileName, missingKeyTracker) {
 
   // 2-5. Pasadas de atributos: aria-label, placeholder, alt, title
   const attrMappings = [
+    ['data-i18n-content', 'content'],
     ['data-i18n-aria-label', 'aria-label'],
     ['data-i18n-placeholder', 'placeholder'],
     ['data-i18n-alt', 'alt'],
@@ -1341,13 +1371,20 @@ function rootFilesTask() {
 }
 
 // SEO folder - Copia carpeta seo/
-function seoTask() {
-  return pipeline(src(paths.seo.src, { encoding: false, allowEmpty: true }), dest(paths.seo.dest));
+async function seoTask() {
+  await pipeline(src(paths.seo.src, { encoding: false, allowEmpty: true }), dest(paths.seo.dest));
+  // El endpoint histórico para agentes comparte los mismos datos institucionales.
+  const base = await loadBaseSchema();
+  await fs.writeFile('dist/seo/ai-enhanced-schema.json', JSON.stringify({ '@context': 'https://schema.org', ...base.organization }, null, 2) + '\n');
 }
 
 // Favicon - Copia
 function faviconTask() {
   return pipeline(src(paths.favicon.src, { encoding: false, allowEmpty: true }), dest(paths.favicon.dest));
+}
+
+function fontsTask() {
+  return pipeline(src('src/fonts/**/*', { encoding: false, allowEmpty: true }), dest('dist/fonts'));
 }
 
 // =======================================================================
@@ -1463,6 +1500,18 @@ async function imagesTask() {
   // 1) Copiar todos los assets de img/ (incluye svg, gif, ico, webmanifest, webp/avif existentes, etc.)
   await pipeline(src(paths.imgAll, { encoding: false, allowEmpty: true }), dest(paths.imgDest));
 
+  // Los SVG con raster incrustado pesan megabytes: derivados al tamaño de
+  // presentación, sin alterar los originales ni la transparencia del diseño.
+  const variants = JSON.parse(await fs.readFile('src/data/image-variants.json', 'utf8'));
+  for (const variant of variants) {
+    const output = path.join('dist', variant.output);
+    await ensureDirForFile(output);
+    await sharp(path.join('src', variant.source))
+      .resize({ width: variant.width, withoutEnlargement: true })
+      .webp({ quality: 88, alphaQuality: 100 })
+      .toFile(output);
+  }
+
   // 2) Convertir solo raster elegible (sin GIF)
   const rasterFiles = await glob(paths.imgRasterForConvert, { nodir: true });
 
@@ -1494,138 +1543,14 @@ function formatLocalISODate(date) {
   return `${year}-${month}-${day}`;
 }
 
-async function getFileLastmodISODate(filePath, fallbackDate = new Date()) {
-  try {
-    const stats = await fs.stat(filePath);
-    return formatLocalISODate(stats.mtime);
-  } catch (err) {
-    if (err && err.code === 'ENOENT') {
-      return formatLocalISODate(fallbackDate);
-    }
-    throw err;
-  }
-}
-
-function updateLastmodInBlock(block, lastmod) {
-  if (/<lastmod>[^<]*<\/lastmod>/.test(block)) {
-    return block.replace(/<lastmod>[^<]*<\/lastmod>/, `<lastmod>${lastmod}</lastmod>`);
-  }
-  // Insertar <lastmod> justo después de <loc>...</loc>
-  return block.replace(/(<loc>[^<]*<\/loc>)/, `$1\n    <lastmod>${lastmod}</lastmod>`);
-}
-
-async function updateDistSitemapsLastmod() {
-  const fallbackDate = new Date();
-  const distIndexPath = path.join('dist', 'sitemap-index.xml');
-
-  // 1) Actualizar los sitemaps de URLs (sitemap.xml, sitemap-google.xml y
-  //    sitemap-ai-optimized.xml): lastmod por URL según el mtime del HTML en
-  //    dist/. Se conserva el formato de fecha de cada archivo (solo fecha o
-  //    fecha-hora con zona).
-  for (const sitemapFile of ['sitemap.xml', 'sitemap-google.xml', 'sitemap-ai-optimized.xml']) {
-    const distSitemapPath = path.join('dist', sitemapFile);
-  try {
-    const sitemapXml = await fs.readFile(distSitemapPath, 'utf8');
-    const usesDateTime = /<lastmod>\d{4}-\d{2}-\d{2}T/.test(sitemapXml);
-    const urlBlocks = [];
-    let match;
-    const urlRegex = /<url>([\s\S]*?)<\/url>/g;
-
-    while ((match = urlRegex.exec(sitemapXml)) !== null) {
-      urlBlocks.push({ full: match[0], inner: match[1] });
-    }
-
-    let updatedSitemap = sitemapXml;
-    for (const { full } of urlBlocks) {
-      const locMatch = full.match(/<loc>([^<]+)<\/loc>/);
-      if (!locMatch) continue;
-
-      const loc = locMatch[1].trim();
-      let distTargetPath;
-      try {
-        const url = new URL(loc);
-        const pathname = url.pathname || '/';
-
-        if (pathname === '/' || pathname === '') {
-          distTargetPath = path.join('dist', 'index.html');
-        } else if (pathname.endsWith('/')) {
-          distTargetPath = path.join('dist', pathname.slice(1), 'index.html');
-        } else {
-          distTargetPath = path.join('dist', pathname.slice(1));
-        }
-      } catch {
-        continue;
-      }
-
-      const lastmodDate = await getFileLastmodISODate(distTargetPath, fallbackDate);
-      const lastmod = usesDateTime ? `${lastmodDate}T00:00:00+01:00` : lastmodDate;
-      const newBlock = updateLastmodInBlock(full, lastmod);
-      if (newBlock !== full) {
-        updatedSitemap = updatedSitemap.replace(full, newBlock);
-      }
-    }
-
-    if (updatedSitemap !== sitemapXml) {
-      await fs.writeFile(distSitemapPath, updatedSitemap, 'utf8');
-    }
-  } catch (err) {
-    if (!(err && err.code === 'ENOENT')) {
-      throw err;
-    }
-  }
-  }
-
-  // 2) Actualizar dist/sitemap-index.xml: lastmod por sitemap basado en mtime del archivo sitemap en dist/
-  try {
-    const indexXml = await fs.readFile(distIndexPath, 'utf8');
-    const sitemapRegex = /<sitemap>([\s\S]*?)<\/sitemap>/g;
-    const sitemapBlocks = [];
-    let match;
-
-    while ((match = sitemapRegex.exec(indexXml)) !== null) {
-      sitemapBlocks.push({ full: match[0] });
-    }
-
-    let updatedIndex = indexXml;
-    for (const { full } of sitemapBlocks) {
-      const locMatch = full.match(/<loc>([^<]+)<\/loc>/);
-      if (!locMatch) continue;
-
-      const loc = locMatch[1].trim();
-      let distTargetPath;
-      try {
-        const url = new URL(loc);
-        const pathname = url.pathname || '';
-        if (!pathname) continue;
-        distTargetPath = path.join('dist', pathname.replace(/^\//, ''));
-      } catch {
-        continue;
-      }
-
-      const lastmod = await getFileLastmodISODate(distTargetPath, fallbackDate);
-      const newBlock = updateLastmodInBlock(full, lastmod);
-      if (newBlock !== full) {
-        updatedIndex = updatedIndex.replace(full, newBlock);
-      }
-    }
-
-    if (updatedIndex !== indexXml) {
-      await fs.writeFile(distIndexPath, updatedIndex, 'utf8');
-    }
-  } catch (err) {
-    if (!(err && err.code === 'ENOENT')) {
-      throw err;
-    }
-  }
-}
-
 // Dev - Watch
 function devTask(done) {
   // Una sola cola evita builds solapados y regenera los derivados: HTML VA,
   // JSON-LD, índice de búsqueda, hashes CSS/JS y catálogo de recursos.
   watch([
     paths.scssAll, paths.js.src, paths.data.src, paths.pdf.src, paths.imgAll,
-    paths.favicon.src, 'src/*.html', ...paths.root.src, paths.seo.src, paths.wellKnown.src
+    paths.favicon.src, 'src/*.html', ...paths.root.src, paths.seo.src, paths.wellKnown.src,
+    'src/fonts/**/*', '!src/data/seo-history.json'
   ], build);
   done();
 }
@@ -1638,11 +1563,12 @@ const build = series(
   pdfTask,
   imagesTask,
   faviconTask,
+  fontsTask,
   htmlTask,
   rootFilesTask,
   seoTask,
+  generateSeoArtifacts,
   wellKnownTask,
-  updateDistSitemapsLastmod
 );
 
 // ===================================
@@ -1654,13 +1580,15 @@ exports.data = dataTask;
 exports.pdf = pdfTask;
 exports.images = imagesTask;
 exports.favicon = faviconTask;
+exports.fonts = fontsTask;
 exports.html = htmlTask;
 exports.searchIndex = async () => { const tr = JSON.parse(await fs.readFile(path.join(__dirname, 'src', 'data', 'translations.json'), 'utf8')); return buildSearchIndex({ translations: tr, galerias: await listGalerias() }); };
 exports.rootFiles = rootFilesTask;
 exports.seo = seoTask;
 exports.seoDist = seoTask;
 exports.wellKnown = wellKnownTask;
-exports.updateDistSitemapsLastmod = updateDistSitemapsLastmod;
+// Alias histórico: ahora mantiene fechas por contenido y genera todos los sitemaps.
+exports.updateDistSitemapsLastmod = generateSeoArtifacts;
 exports.dev = devTask;
 exports.build = build;
 exports.default = series(build, devTask);

@@ -1,82 +1,92 @@
-
-
 [
-    {
-      "src": "img/apunta/Apunta25_26_01.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_02.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_03.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_04.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_05.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_06.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_07.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_08.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    }
-    ,
-    {
-      "src": "img/apunta/Apunta25_26_09.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_10.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_11.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_12.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    }
-    ,
-    {
-      "src": "img/apunta/Apunta25_26_13.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_14.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    },
-    {
-      "src": "img/apunta/Apunta25_26_15.avif",
-      "alt": "Imagen de la Apunta 25-26",
-      "note": ""
-    }
+  {
+    "src": "img/apunta/Apunta25_26_01.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 1 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p1"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_02.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 2 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p2"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_03.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 3 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p3"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_04.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 4 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p4"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_05.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 5 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p5"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_06.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 6 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p6"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_07.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 7 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p7"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_08.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 8 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p8"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_09.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 9 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p9"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_10.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 10 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p10"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_11.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 11 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p11"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_12.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 12 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p12"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_13.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 13 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p13"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_14.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 14 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p14"
+  },
+  {
+    "src": "img/apunta/Apunta25_26_15.avif",
+    "alt": "Imagen de la Apunta 25-26. Fotografía 15 de 15.",
+    "note": "",
+    "altKey": "galleryAlts.g1.p15"
+  }
 ]
-  

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Falla Suïssa - L'Alqueria del Favero - Blog</title>
-  <meta name="description" content="Blog de la Falla Suïssa - L'Alqueria del Favero: historias, crónicas y noticias de la comisión fallera.">
+  <title data-i18n="seo.blog.title">Falla Suïssa - L'Alqueria del Favero - Blog</title>
+  <meta name="description" content="Blog de la Falla Suïssa - L&#x27;Alqueria del Favero: historias, crónicas y noticias de la comisión fallera." data-i18n-content="seo.blog.description">
   <meta name="keywords" content="fallas, tradición, suïssa, eventos, noticias, galería">
   <meta name="robots" content="index, follow">
 <!-- Compatibilidad para IE -->
@@ -278,7 +278,7 @@
         "@type": "Blog",
         "@id": "https://fallasuissa.es/blog.html#blog",
         "url": "https://fallasuissa.es/blog.html",
-        "name": "Blog de la Falla Suïssa - L'Alqueria del Favero",
+        "name": "Falla Suïssa - L'Alqueria del Favero - Blog",
         "inLanguage": "es-ES",
         "publisher": {
           "@id": "https://fallasuissa.es/#organization"
@@ -306,7 +306,8 @@
               "name": "Javier Tamarit"
             }
           }
-        ]
+        ],
+        "description": "Blog de la Falla Suïssa - L'Alqueria del Favero: historias, crónicas y noticias de la comisión fallera."
       },
       {
         "@type": "BreadcrumbList",
@@ -331,8 +332,8 @@
   </script>
   
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Blog - Falla Suïssa - L'Alqueria del Favero">
-  <meta property="og:description" content="Descubre eventos, noticias y la galería de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta property="og:title" content="Falla Suïssa - L&#x27;Alqueria del Favero - Blog" data-i18n-content="seo.blog.title">
+  <meta property="og:description" content="Blog de la Falla Suïssa - L&#x27;Alqueria del Favero: historias, crónicas y noticias de la comisión fallera." data-i18n-content="seo.blog.description">
   <meta property="og:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:image:secure_url" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:url" content="https://fallasuissa.es/blog.html">
@@ -346,16 +347,13 @@
   
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Blog - Falla Suïssa - L'Alqueria del Favero">
-  <meta name="twitter:description" content="Descubre eventos y noticias de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta name="twitter:title" content="Falla Suïssa - L&#x27;Alqueria del Favero - Blog" data-i18n-content="seo.blog.title">
+  <meta name="twitter:description" content="Blog de la Falla Suïssa - L&#x27;Alqueria del Favero: historias, crónicas y noticias de la comisión fallera." data-i18n-content="seo.blog.description">
   <meta name="twitter:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta name="twitter:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
   <meta name="twitter:image:type" content="image/png">
   
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet">
+  <!-- Tipografías locales (licencias OFL en fonts/) -->
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
@@ -365,14 +363,15 @@
   
   <!-- Swiper CSS -->
 <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=0187c7b02ac8">
+  <link rel="stylesheet" href="css/main.css?v=7d4407a3a034">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-v12-normal-latin.woff2" crossorigin>
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
   <link rel="canonical" href="https://fallasuissa.es/blog.html">
   <link rel="alternate" hreflang="es" href="https://fallasuissa.es/blog.html">
   <link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/blog.html">
   <link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/blog.html">
-  <meta name="search-index" content="data/search-index.json?v=195ef2e33443">
+  <meta name="search-index" content="data/search-index.json?v=0eec13be7db8">
 </head>
 <body>
   <header class="header-inner">
@@ -399,7 +398,7 @@
         </div>
         <div class="header__notificacion" id="notificacion"></div>
         <nav class="navegacion" role="navigation" aria-label="Menú principal">
-          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html">Inicio</a>
+          <a class="navegacion__enlace" data-i18n="nav.inicio" href="./">Inicio</a>
           <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
           <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html">Ofrenda</a>
           <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Colaboraciones</a>
@@ -419,10 +418,10 @@
             <picture>
               <source srcset="img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
               <source srcset="img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-              <img class="header-inner__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
+              <img width="640" height="793" class="header-inner__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="eager">
             </picture>
           </a>
-          <h1 class="heading-inner" data-i18n="blog.titulo"><span class="heading-inner__span">Blog de Nuestra </span>Falla </h1>
+          <h1 class="heading-inner"><span data-i18n="blog.titulo">Blog de nuestra Falla</span></h1>
         </div>
        
         
@@ -445,9 +444,9 @@
       <h2 class="sr-only" data-i18n="nav.blog">Blog</h2>
       <div class="blog__posts">
         <article class="blog__post blog__post--featured reveal reveal--soft">
-          <h3 class="blog__post-title" data-i18n="blog.somni.cardTitle"></h3>
-          <time class="blog__date" datetime="2025-03" data-i18n="blog.somni.date"></time>
-          <p class="blog__post-content" data-i18n="blog.somni.excerpt"></p>
+          <h3 class="blog__post-title" data-i18n="blog.somni.cardTitle">Somni</h3>
+          <time class="blog__date" datetime="2025-03" data-i18n="blog.somni.date">Publicado en marzo de 2025</time>
+          <p class="blog__post-content" data-i18n="blog.somni.excerpt">"Un día tuvimos un sueño que no sabíamos que compartíamos con más gente. Viviendo en el nuevo barrio de les Moreres y hablando con los vecinos, descubrimos que era un sueño compartido.</p>
           <div class="flex_button">
             <div class="boton-blog">
               <a class="boton" data-i18n="blog.leermas" data-i18n-aria-label="blog.somni.ctaAria" href="blog-somni.html">Ver más</a>
@@ -455,9 +454,9 @@
           </div>
         </article>
         <article class="blog__post reveal reveal--soft">
-          <h3 class="blog__post-title" data-i18n="blog.anima.cardTitle"></h3>
-          <time class="blog__date" datetime="2026-03" data-i18n="blog.anima.date"></time>
-          <p class="blog__post-content" data-i18n="blog.anima.excerpt"></p>
+          <h3 class="blog__post-title" data-i18n="blog.anima.cardTitle">El alma del barrio</h3>
+          <time class="blog__date" datetime="2026-03" data-i18n="blog.anima.date">Publicado en marzo de 2026</time>
+          <p class="blog__post-content" data-i18n="blog.anima.excerpt">Después de la riada del 57, el Turia se quedó sin río. La ciudad dijo basta: "El lecho del Turia es nuestro y lo queremos verde". De ahí nace el Jardín del Turia, y en les Moreres, la Falla Suïssa.</p>
           <div class="flex_button">
             <div class="boton-blog">
               <a class="boton" data-i18n="blog.leermas" data-i18n-aria-label="blog.anima.ctaAria" href="blog-anima.html">Ver más</a>
@@ -476,7 +475,7 @@
     <div class="footer__contenedor">
       <div class="footer__contenido">
         <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
-          <a class="footer__enlace" href="index.html" data-i18n="nav.inicio">Inicio</a>
+          <a class="footer__enlace" href="./" data-i18n="nav.inicio">Inicio</a>
           <a class="footer__enlace" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
           <a class="footer__enlace" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrenda</a>
           <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Colaboraciones</a>
@@ -491,7 +490,7 @@
           <picture>
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
             <source srcset="img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-            <img class="footer__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
+            <img width="640" height="793" class="footer__escudo" src="img/escudo-falla/Escudo-Oficial-Falla.png" alt="Escudo de la Falla" loading="lazy">
           </picture>
         </a>
 
@@ -518,12 +517,12 @@
       <a href="cookies.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.cookies">Cookies</a>
     </nav>
   </footer>
-  <script src="js/dark.js?v=0187c7b02ac8"></script>
-  <script src="js/lang.js?v=0187c7b02ac8"></script>
-  <script src="js/nav-menu.js?v=0187c7b02ac8"></script>
-  <script src="js/buscador.js?v=0187c7b02ac8" defer></script>
-  <script src="js/scroll-reveal.js?v=0187c7b02ac8" defer></script>
+  <script src="js/dark.js?v=7d4407a3a034"></script>
+  <script src="js/lang.js?v=7d4407a3a034"></script>
+  <script src="js/nav-menu.js?v=7d4407a3a034"></script>
+  <script src="js/buscador.js?v=7d4407a3a034" defer></script>
+  <script src="js/scroll-reveal.js?v=7d4407a3a034" defer></script>
 
-  <script src="js/cookie-banner.js?v=0187c7b02ac8" defer></script>
+  <script src="js/cookie-banner.js?v=7d4407a3a034" defer></script>
 </body>
 </html>

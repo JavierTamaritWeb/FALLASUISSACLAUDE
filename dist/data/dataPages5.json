@@ -1,47 +1,56 @@
 [
-    {
-      "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-001.avif",
-      "alt": "Imagen de la Ofrenda de Frutos 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-002.avif",
-      "alt": "Imagen de la Ofrenda de Frutos 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-003.avif",
-      "alt": "Imagen de la Ofrenda de Frutos 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-004.avif",
-      "alt": "Imagen de la Ofrenda de Frutos 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-005.avif",
-      "alt": "Imagen de la Ofrenda de Frutos 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-006.avif",
-      "alt": "Imagen de la Ofrenda de Frutos 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-007.avif",
-      "alt": "Imagen de la Ofrenda de Frutos 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-008.avif",
-      "alt": "Imagen de la Ofrenda de Frutos 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-009.avif",
-      "alt": "Imagen de la Ofrenda de Frutos 2025-26",
-      "note": ""
-    }
+  {
+    "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-001.avif",
+    "alt": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 1 de 9.",
+    "note": "",
+    "altKey": "galleryAlts.g5.p1"
+  },
+  {
+    "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-002.avif",
+    "alt": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 2 de 9.",
+    "note": "",
+    "altKey": "galleryAlts.g5.p2"
+  },
+  {
+    "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-003.avif",
+    "alt": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 3 de 9.",
+    "note": "",
+    "altKey": "galleryAlts.g5.p3"
+  },
+  {
+    "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-004.avif",
+    "alt": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 4 de 9.",
+    "note": "",
+    "altKey": "galleryAlts.g5.p4"
+  },
+  {
+    "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-005.avif",
+    "alt": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 5 de 9.",
+    "note": "",
+    "altKey": "galleryAlts.g5.p5"
+  },
+  {
+    "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-006.avif",
+    "alt": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 6 de 9.",
+    "note": "",
+    "altKey": "galleryAlts.g5.p6"
+  },
+  {
+    "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-007.avif",
+    "alt": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 7 de 9.",
+    "note": "",
+    "altKey": "galleryAlts.g5.p7"
+  },
+  {
+    "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-008.avif",
+    "alt": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 8 de 9.",
+    "note": "",
+    "altKey": "galleryAlts.g5.p8"
+  },
+  {
+    "src": "img/ofrenda-frutos/ofrenda-frutos-2026/ofrenda-frutos-2026-009.avif",
+    "alt": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 9 de 9.",
+    "note": "",
+    "altKey": "galleryAlts.g5.p9"
+  }
 ]

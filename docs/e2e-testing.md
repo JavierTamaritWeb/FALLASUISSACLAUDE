@@ -1,6 +1,6 @@
 # 🧪 Tests E2E (Playwright)
 
-**Smoke por defecto: 24 specs / 346 casos** (`playwright.smoke.config.js`) | **Suite completa: 54 ficheros / 538 casos** | **Node: 17 pruebas** (`tests/unit/`)
+**Smoke por defecto: 25 specs / 414 casos** (`playwright.smoke.config.js`) | **Suite completa: 55 ficheros / 606 casos** | **Node: 22 pruebas** (`tests/unit/`)
 
 Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto, qué validan y qué cobertura mínima se espera cuando cambias SEO técnico, scrollbars, navegación o componentes sensibles.
 
@@ -10,7 +10,7 @@ Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto, qu�
 
 `tests/audit-regressions.e2e.spec.js` protege el idioma guardado y su atributo `lang`, los textos de reserva, el tema sin almacenamiento, el reintento de EmailJS, el foco del visor y la CSP de documentos incrustados. Está incluido tanto en smoke como en full.
 
-`npm run audit:project` reúne build, pruebas Node, batería completa con cuatro workers y `npm audit --audit-level=high`. Resultado registrado el 13-09-2026: 17/17 Node, 344 smoke superadas con 2 omitidas y 535 E2E completas superadas con 3 omitidas. Las omisiones y los límites están explicados en el [informe de auditoría](auditoria-2026-09-13.md).
+`npm run audit:project` reúne build, pruebas Node, batería completa con cuatro workers y `npm audit --audit-level=high`. Resultado histórico de la auditoría general v4.30.20: 17/17 Node, 344 smoke superadas con 2 omitidas y 535 E2E completas superadas con 3 omitidas. Las omisiones y los límites están explicados en el [informe de auditoría](auditoria-2026-09-13.md).
 
 ## 🌐 Cobertura mínima por motor
 
@@ -639,3 +639,13 @@ Guía técnica:
 ---
 
 Última actualización: 13 de septiembre de 2026 - v4.30.19
+
+## Regresiones SEO v4.30.21
+
+La suite `tests/seo-regressions.e2e.spec.js` añade 68 casos al smoke y a la batería completa. Comprueba HTML ES/VA sin JavaScript, metadatos, artículos, imágenes, sitemaps, presupuesto de derivados y cambios de idioma. Las cuatro pruebas de `seo-artifacts.test.cjs` congelan el reloj para verificar noticias y lastmod. `seo-http.test.cjs` comprueba las reglas reales con Apache y HTTPS locales en macOS; se omite si no están disponibles los módulos de Apache. La publicación debe verificar también las respuestas del alojamiento real.
+
+Los presupuestos de bytes son guardias deterministas. Lighthouse y las métricas de campo se registran por separado; no convertir una puntuación variable de red en una prueba unitaria.
+
+Las capturas de `.blog-detail__article` fijan la entrada en reposo (`transform: none`) para evitar diferencias de suavizado del texto debidas a la capa GPU. Es una preparación de la prueba estática; las suites de reveal/transiciones verifican la animación real. No aumentar el umbral de píxeles para ocultar esta variación.
+
+Validación SEO v4.30.21: 22/22 Node, 412 smoke superadas (2 omitidas), 603 casos E2E verificados (3 omitidos) y 73/73 visuales después de estabilizar el artículo. El [informe SEO](auditoria-seo-2026-09-13.md) detalla la ejecución completa y la comprobación posterior de la captura corregida.

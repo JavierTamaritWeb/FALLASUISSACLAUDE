@@ -58,7 +58,10 @@ for (const pagina of PAGINAS) {
         await expect(video).toBeVisible();
         await expect(video).toHaveAttribute('controls', '');
         await expect(video).toHaveAttribute('preload', 'none');
-        await expect(video).toHaveAttribute('poster', /ofrenda-2026-001\.jpeg$/);
+        await expect(video).toHaveAttribute('poster', /ofrenda-2026-001\.avif$/);
+        const poster = await request.head(new URL(await video.getAttribute('poster'), page.url()).href);
+        expect(poster.status()).toBe(200);
+        expect(poster.headers()['content-type']).toContain('image/avif');
         await expect(video).toHaveAttribute('aria-label', 'Vídeo de la Ofrenda de la Falla Suïssa, marzo de 2026');
         await expect(figura.locator('.ofrendas-video__pie'))
           .toHaveText('Ofrenda a la Mare de Déu dels Desamparats, marzo de 2026');

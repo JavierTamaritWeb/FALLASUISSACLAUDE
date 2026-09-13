@@ -1,0 +1,1514 @@
+{
+  "fecha": "2026-09-13",
+  "peticiones_get": [
+    {
+      "etiqueta": "sitemap-index",
+      "url": "https://fallasuissa.es/sitemap-index.xml",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/sitemap-index.xml",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "application/xml"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/sitemap-index.xml",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap",
+      "url": "https://fallasuissa.es/sitemap.xml",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/sitemap.xml",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "application/xml"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/sitemap.xml",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap",
+      "url": "https://fallasuissa.es/sitemap-images.xml",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/sitemap-images.xml",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "application/xml"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/sitemap-images.xml",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap",
+      "url": "https://fallasuissa.es/sitemap-google.xml",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/sitemap-google.xml",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "application/xml"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/sitemap-google.xml",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap",
+      "url": "https://fallasuissa.es/sitemap-ai-optimized.xml",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/sitemap-ai-optimized.xml",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "application/xml"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/sitemap-ai-optimized.xml",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap",
+      "url": "https://fallasuissa.es/sitemap-news.xml",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/sitemap-news.xml",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "application/xml"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/sitemap-news.xml",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "robots",
+      "url": "https://fallasuissa.es/robots.txt",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/robots.txt",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "text/plain",
+        "vary": "Accept-Encoding"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/robots.txt",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/lafalla.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/lafalla.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/lafalla.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/lafalla.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/lafalla.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/lafalla.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/llibret_2026.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/llibret_2026.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/llibret_2026.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/colaboraciones.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/colaboraciones.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/colaboraciones.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/colaboraciones.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/colaboraciones.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/colaboraciones.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/organigrama.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/organigrama.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/organigrama.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/organigrama.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/organigrama.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/organigrama.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/llibret_2026.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/llibret_2026.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/llibret_2026.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/eventos.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/eventos.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/eventos.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/eventos.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/eventos.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/eventos.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/deportes.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/deportes.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/deportes.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/deportes.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/deportes.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/deportes.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/nuevos-falleros.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/nuevos-falleros.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/nuevos-falleros.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/nuevos-falleros.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/nuevos-falleros.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/nuevos-falleros.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/meteo.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/meteo.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/meteo.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/meteo.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/meteo.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/meteo.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/blog.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/blog.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/blog.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/blog-somni.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/blog-somni.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/blog-somni.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/blog.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/blog.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/blog.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/blog-somni.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/blog-somni.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/blog-somni.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/blog-anima.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/blog-anima.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/blog-anima.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/blog-anima.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/blog-anima.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/blog-anima.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galerias.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galerias.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galerias.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galerias.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galerias.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galerias.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galeria_1.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galeria_1.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galeria_1.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galeria_1.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galeria_1.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galeria_1.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galeria_2.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galeria_2.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galeria_2.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galeria_2.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galeria_2.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galeria_2.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galeria_3.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galeria_3.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galeria_3.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galeria_3.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galeria_3.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galeria_3.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galeria_4.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galeria_4.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galeria_4.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galeria_4.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galeria_4.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galeria_4.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galeria_5.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galeria_5.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galeria_5.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galeria_5.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galeria_5.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galeria_5.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galeria_6.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galeria_6.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galeria_6.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galeria_6.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galeria_6.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galeria_6.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galeria_7.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galeria_7.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galeria_7.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galeria_7.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galeria_7.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galeria_7.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galeria_8.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galeria_8.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galeria_8.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galeria_8.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galeria_8.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galeria_8.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/galeria_9.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/galeria_9.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/galeria_9.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/galeria_9.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/galeria_9.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/galeria_9.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/ofrenda.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/ofrenda.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/ofrenda.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/ofrenda.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/ofrenda.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/ofrenda.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/aviso-legal.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/aviso-legal.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/aviso-legal.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/aviso-legal.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/aviso-legal.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/aviso-legal.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/privacidad.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/privacidad.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/privacidad.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/privacidad.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/privacidad.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/privacidad.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/cookies.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/cookies.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/cookies.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/cookies.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/cookies.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/cookies.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/autorizacion-imagen.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/autorizacion-imagen.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/autorizacion-imagen.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/autorizacion-imagen.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/autorizacion-imagen.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/autorizacion-imagen.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/autorizacion-imagen-menor.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/autorizacion-imagen-menor.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/autorizacion-imagen-menor.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/calendario.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/calendario.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/calendario.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/calendario.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/calendario.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/calendario.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/autorizacion-imagen-menor.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/autorizacion-imagen-menor.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/autorizacion-imagen-menor.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/mapa.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/mapa.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/mapa.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/seo/ai-crawl.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/seo/ai-crawl.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/seo/ai-crawl.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sitemap-page",
+      "url": "https://fallasuissa.es/va/mapa.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/mapa.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/mapa.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "http",
+      "url": "http://fallasuissa.es/",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "http://fallasuissa.es/",
+          "status": 301
+        },
+        {
+          "url": "https://fallasuissa.es/",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "http-www",
+      "url": "http://www.fallasuissa.es/",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "http://www.fallasuissa.es/",
+          "status": 301
+        },
+        {
+          "url": "https://www.fallasuissa.es/",
+          "status": 301
+        },
+        {
+          "url": "https://fallasuissa.es/",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "https-www",
+      "url": "https://www.fallasuissa.es/",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://www.fallasuissa.es/",
+          "status": 301
+        },
+        {
+          "url": "https://fallasuissa.es/",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "index",
+      "url": "https://fallasuissa.es/index.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/index.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/index.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "va-sin-barra",
+      "url": "https://fallasuissa.es/va",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va",
+          "status": 301
+        },
+        {
+          "url": "https://fallasuissa.es/va/",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "va-index",
+      "url": "https://fallasuissa.es/va/index.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/va/index.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/index.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "sin-extension",
+      "url": "https://fallasuissa.es/blog",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/blog",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/blog",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "404",
+      "url": "https://fallasuissa.es/no-existe-auditoria-seo-20260913.html",
+      "status": 404,
+      "url_final": "https://fallasuissa.es/no-existe-auditoria-seo-20260913.html",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/no-existe-auditoria-seo-20260913.html",
+          "status": 404
+        }
+      ]
+    },
+    {
+      "etiqueta": "404-va",
+      "url": "https://fallasuissa.es/va/no-existe-auditoria-seo-20260913.html",
+      "status": 404,
+      "url_final": "https://fallasuissa.es/va/no-existe-auditoria-seo-20260913.html",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/no-existe-auditoria-seo-20260913.html",
+          "status": 404
+        }
+      ]
+    },
+    {
+      "etiqueta": "410",
+      "url": "https://fallasuissa.es/base.html",
+      "status": 410,
+      "url_final": "https://fallasuissa.es/base.html",
+      "cabeceras": {
+        "cache-control": "private, no-cache, no-store, must-revalidate, max-age=0",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/base.html",
+          "status": 410
+        }
+      ]
+    },
+    {
+      "etiqueta": "410-va",
+      "url": "https://fallasuissa.es/va/base.html",
+      "status": 410,
+      "url_final": "https://fallasuissa.es/va/base.html",
+      "cabeceras": {
+        "cache-control": "private, no-cache, no-store, must-revalidate, max-age=0",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/va/base.html",
+          "status": 410
+        }
+      ]
+    },
+    {
+      "etiqueta": "query-lang",
+      "url": "https://fallasuissa.es/?lang=ca",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/?lang=ca",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/?lang=ca",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "ai-info",
+      "url": "https://fallasuissa.es/ai-info.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/ai-info.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/ai-info.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "ai-markdown",
+      "url": "https://fallasuissa.es/seo/ai-training-data.md",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/seo/ai-training-data.md",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "text/markdown; charset=utf-8"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/seo/ai-training-data.md",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "mantenimiento",
+      "url": "https://fallasuissa.es/mantenimiento.html",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/mantenimiento.html",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/mantenimiento.html",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "markdown-negotiation",
+      "url": "https://fallasuissa.es/",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/",
+      "cabeceras": {
+        "content-encoding": "br",
+        "content-type": "text/markdown; charset=utf-8"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "etiqueta": "googlebot",
+      "url": "https://fallasuissa.es/",
+      "status": 200,
+      "url_final": "https://fallasuissa.es/",
+      "cabeceras": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "br",
+        "content-type": "text/html"
+      },
+      "cadena": [
+        {
+          "url": "https://fallasuissa.es/",
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "recursos_head": [
+    {
+      "url": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png",
+      "status": 200,
+      "finalUrl": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png",
+      "type": "image/png"
+    },
+    {
+      "url": "https://fallasuissa.es/img/elementos-UXUI/pluma.png",
+      "status": 200,
+      "finalUrl": "https://fallasuissa.es/img/elementos-UXUI/pluma.png",
+      "type": "image/png"
+    },
+    {
+      "url": "https://fallasuissa.es/img/elementos-UXUI/Eventos.PNG",
+      "status": 200,
+      "finalUrl": "https://fallasuissa.es/img/elementos-UXUI/Eventos.PNG",
+      "type": "image/png"
+    },
+    {
+      "url": "https://fallasuissa.es/img/elementos-UXUI/termometro.png",
+      "status": 200,
+      "finalUrl": "https://fallasuissa.es/img/elementos-UXUI/termometro.png",
+      "type": "image/png"
+    },
+    {
+      "url": "https://fallasuissa.es/img/blog/federico-trenor.jpg",
+      "status": 200,
+      "finalUrl": "https://fallasuissa.es/img/blog/federico-trenor.jpg",
+      "type": "image/jpeg"
+    },
+    {
+      "url": "https://fallasuissa.es/img/elementos-UXUI/camara.png",
+      "status": 200,
+      "finalUrl": "https://fallasuissa.es/img/elementos-UXUI/camara.png",
+      "type": "image/png"
+    },
+    {
+      "url": "https://fallasuissa.es/pdf/Llibrets/Llibret_2025-26.html",
+      "status": 200,
+      "finalUrl": "https://fallasuissa.es/pdf/Llibrets/Llibret_2025-26.html",
+      "type": "text/html"
+    },
+    {
+      "url": "https://fallasuissa.es/pdf/Llibrets/Llibret_2024-25.html",
+      "status": 200,
+      "finalUrl": "https://fallasuissa.es/pdf/Llibrets/Llibret_2024-25.html",
+      "type": "text/html"
+    },
+    {
+      "url": "https://fallasuissa.es/pdf/Presentaciones/Presentacion_Fallera_2026.html",
+      "status": 200,
+      "finalUrl": "https://fallasuissa.es/pdf/Presentaciones/Presentacion_Fallera_2026.html",
+      "type": "text/html"
+    }
+  ]
+}

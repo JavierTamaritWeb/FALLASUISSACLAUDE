@@ -1,15 +1,15 @@
-# 🔎 SEO / AI (carpeta `seo/`)
+# 🔎 SEO / AI (carpeta `src/seo/`)
 
 Esta carpeta agrupa documentación y artefactos relacionados con SEO técnico, datos estructurados y contenido orientado a descubrimiento por buscadores y sistemas de IA.
 
 ## ✅ Importante (fuente vs. build)
 
-- **Fuente de verdad:** `seo/` (esta carpeta)
+- **Fuente de verdad:** `src/seo/` (esta carpeta)
 - **Artefacto compilado:** `dist/seo/`
 
-El build copia `seo/**/*` a `dist/seo/`.
+El build copia `src/seo/**/*` a `dist/seo/`.
 
-- Edita **siempre** `seo/`.
+- Edita **siempre** `src/seo/`.
 - No edites `dist/seo/` (se sobrescribe en cada build).
 
 Build recomendado:
@@ -44,7 +44,7 @@ Build recomendado:
 - `schema-organization.json`
   - FUENTE ÚNICA del JSON-LD Organization + WebSite: el build (`gulpfile.js → processJsonLd`) lo inyecta en todas las páginas. Al relevar cargos se edita aquí (`member`). Ver `docs/structured-data.md`.
 - `ai-enhanced-schema.json`
-  - Copia en inglés para agentes de IA (enlazada por `ai-info.html` y `/.well-known/`); debe coincidir con la fuente en nombre, URL, redes, dirección y geo.
+  - Endpoint de compatibilidad para agentes; el build lo genera desde `schema-organization.json`. No mantener otra lista de cargos o datos institucionales.
 - (`ld-json-enhanced.json` y `advanced-schema-graph.json` se eliminaron en v4.28.0: contenían datos inventados.)
 
 - `ai-crawl.html`
@@ -66,4 +66,4 @@ Build recomendado:
 
 ---
 
-Última actualización: 19 de marzo de 2026 - v4.5.0
+Última actualización: 13 de septiembre de 2026 - v4.30.21

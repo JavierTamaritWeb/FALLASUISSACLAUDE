@@ -1,57 +1,68 @@
 [
-    {
-      "src": "img/crema/crema-2026/crema-2026-001.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-002.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-003.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-004.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-005.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-006.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-007.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-008.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-009.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-010.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    },
-    {
-      "src": "img/crema/crema-2026/crema-2026-011.avif",
-      "alt": "Imagen de la Cremà 2025-26",
-      "note": ""
-    }
+  {
+    "src": "img/crema/crema-2026/crema-2026-001.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 1 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p1"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-002.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 2 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p2"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-003.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 3 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p3"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-004.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 4 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p4"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-005.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 5 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p5"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-006.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 6 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p6"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-007.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 7 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p7"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-008.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 8 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p8"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-009.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 9 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p9"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-010.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 10 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p10"
+  },
+  {
+    "src": "img/crema/crema-2026/crema-2026-011.avif",
+    "alt": "Imagen de la Cremà 2025-26. Fotografía 11 de 11.",
+    "note": "",
+    "altKey": "galleryAlts.g6.p11"
+  }
 ]

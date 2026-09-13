@@ -1,0 +1,910 @@
+[
+  {
+    "archivo_original": "lighthouse-home.report.json",
+    "url": "https://fallasuissa.es/",
+    "fecha": "2026-09-13T20:04:29.163Z",
+    "lighthouse": "12.8.2",
+    "entorno": {
+      "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "benchmarkIndex": 4197,
+      "credits": {
+        "axe-core": "4.11.0"
+      }
+    },
+    "condiciones": {
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      }
+    },
+    "puntuaciones": {
+      "performance": 61,
+      "seo": 92
+    },
+    "metricas": {
+      "first-contentful-paint": {
+        "valor": 2977.2456,
+        "unidad": "millisecond",
+        "texto": "3.0 s"
+      },
+      "largest-contentful-paint": {
+        "valor": 23058.9544,
+        "unidad": "millisecond",
+        "texto": "23.1 s"
+      },
+      "total-blocking-time": {
+        "valor": 1,
+        "unidad": "millisecond",
+        "texto": "0 ms"
+      },
+      "cumulative-layout-shift": {
+        "valor": 0,
+        "unidad": "unitless",
+        "texto": "0"
+      },
+      "total-byte-weight": {
+        "valor": 8703734,
+        "unidad": "byte",
+        "texto": "Total size was 8,500 KiB"
+      }
+    },
+    "elemento_lcp": {
+      "type": "list",
+      "items": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": "Element"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-3-IMG",
+                "path": "1,HTML,1,BODY,1,DIV,0,DIV,1,PICTURE,2,IMG",
+                "selector": "div#banner-subvencion > div.banner-subvencion__contenido > picture > img.banner-subvencion__imagen",
+                "boundingRect": {
+                  "top": 543,
+                  "bottom": 806,
+                  "left": 19,
+                  "right": 394,
+                  "width": 375,
+                  "height": 263
+                },
+                "snippet": "<img class=\"banner-subvencion__imagen\" width=\"200\" height=\"100\" src=\"https://fallasuissa.es/img/subvenciones/subvencion-2026.avif\" alt=\"Información de subvención\">",
+                "nodeLabel": "Información de subvención"
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "phase",
+              "valueType": "text",
+              "label": "Phase"
+            },
+            {
+              "key": "percent",
+              "valueType": "text",
+              "label": "% of LCP"
+            },
+            {
+              "key": "timing",
+              "valueType": "ms",
+              "label": "Timing"
+            }
+          ],
+          "items": [
+            {
+              "phase": "TTFB",
+              "timing": 619.0725,
+              "percent": "3%"
+            },
+            {
+              "phase": "Load Delay",
+              "timing": 1332.7790524288835,
+              "percent": "6%"
+            },
+            {
+              "phase": "Load Time",
+              "timing": 1247.596057694581,
+              "percent": "5%"
+            },
+            {
+              "phase": "Render Delay",
+              "timing": 19859.506789876534,
+              "percent": "86%"
+            }
+          ]
+        }
+      ]
+    },
+    "recursos_mas_pesados": [
+      {
+        "url": "https://fallasuissa.es/img/logos/logo-virgen.svg",
+        "transferSize": 1263417,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/elementos-UXUI/cenefa_sin_fondo.svg",
+        "transferSize": 1191066,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/logos/logo-escudo-cutty.svg",
+        "transferSize": 1007760,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/decoracion/falleretaN.svg",
+        "transferSize": 771530,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/decoracion/falleretaD.svg",
+        "transferSize": 712537,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/Visor-Monumento/monumento-falla-2025-26-real.avif",
+        "transferSize": 460544,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/elementos-UXUI/fondo_traje.avif",
+        "transferSize": 363211,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/logos/logo-colaborar.svg",
+        "transferSize": 267551,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/representantes/foto-oficiales-representantes/Presidente-2024-27.avif",
+        "transferSize": 267496,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/Visor-Monumento/monumento-falla-2025-26-infantil-real.avif",
+        "transferSize": 266239,
+        "resourceType": "Image"
+      }
+    ],
+    "seo_fallos": [
+      {
+        "id": "robots-txt",
+        "title": "robots.txt is not valid",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "index",
+              "valueType": "text",
+              "label": "Line #"
+            },
+            {
+              "key": "line",
+              "valueType": "code",
+              "label": "Content"
+            },
+            {
+              "key": "message",
+              "valueType": "code",
+              "label": "Error"
+            }
+          ],
+          "items": [
+            {
+              "index": "3",
+              "line": "Content-Signal: search=yes, ai-train=yes, ai-input=yes",
+              "message": "Unknown directive"
+            }
+          ]
+        }
+      }
+    ],
+    "avisos": []
+  },
+  {
+    "archivo_original": "lighthouse-home-repeat.json",
+    "url": "https://fallasuissa.es/",
+    "fecha": "2026-09-13T20:05:39.387Z",
+    "lighthouse": "12.8.2",
+    "entorno": {
+      "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "benchmarkIndex": 4188,
+      "credits": {
+        "axe-core": "4.11.0"
+      }
+    },
+    "condiciones": {
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      }
+    },
+    "puntuaciones": {
+      "performance": 61,
+      "seo": 92
+    },
+    "metricas": {
+      "first-contentful-paint": {
+        "valor": 2964.6321,
+        "unidad": "millisecond",
+        "texto": "3.0 s"
+      },
+      "largest-contentful-paint": {
+        "valor": 23040.132650000007,
+        "unidad": "millisecond",
+        "texto": "23.0 s"
+      },
+      "total-blocking-time": {
+        "valor": 1.5,
+        "unidad": "millisecond",
+        "texto": "0 ms"
+      },
+      "cumulative-layout-shift": {
+        "valor": 0,
+        "unidad": "unitless",
+        "texto": "0"
+      },
+      "total-byte-weight": {
+        "valor": 8703831,
+        "unidad": "byte",
+        "texto": "Total size was 8,500 KiB"
+      }
+    },
+    "elemento_lcp": {
+      "type": "list",
+      "items": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": "Element"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-3-IMG",
+                "path": "1,HTML,1,BODY,1,DIV,0,DIV,1,PICTURE,2,IMG",
+                "selector": "div#banner-subvencion > div.banner-subvencion__contenido > picture > img.banner-subvencion__imagen",
+                "boundingRect": {
+                  "top": 543,
+                  "bottom": 806,
+                  "left": 19,
+                  "right": 394,
+                  "width": 375,
+                  "height": 263
+                },
+                "snippet": "<img class=\"banner-subvencion__imagen\" width=\"200\" height=\"100\" src=\"https://fallasuissa.es/img/subvenciones/subvencion-2026.avif\" alt=\"Información de subvención\">",
+                "nodeLabel": "Información de subvención"
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "phase",
+              "valueType": "text",
+              "label": "Phase"
+            },
+            {
+              "key": "percent",
+              "valueType": "text",
+              "label": "% of LCP"
+            },
+            {
+              "key": "timing",
+              "valueType": "ms",
+              "label": "Timing"
+            }
+          ],
+          "items": [
+            {
+              "phase": "TTFB",
+              "timing": 602.931,
+              "percent": "3%"
+            },
+            {
+              "phase": "Load Delay",
+              "timing": 2257.136437965381,
+              "percent": "10%"
+            },
+            {
+              "phase": "Load Time",
+              "timing": 1678.598075504693,
+              "percent": "7%"
+            },
+            {
+              "phase": "Render Delay",
+              "timing": 18501.467136529933,
+              "percent": "80%"
+            }
+          ]
+        }
+      ]
+    },
+    "recursos_mas_pesados": [
+      {
+        "url": "https://fallasuissa.es/img/logos/logo-virgen.svg",
+        "transferSize": 1263417,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/elementos-UXUI/cenefa_sin_fondo.svg",
+        "transferSize": 1191066,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/logos/logo-escudo-cutty.svg",
+        "transferSize": 1007759,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/decoracion/falleretaN.svg",
+        "transferSize": 771529,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/decoracion/falleretaD.svg",
+        "transferSize": 712536,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/Visor-Monumento/monumento-falla-2025-26-real.avif",
+        "transferSize": 460544,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/elementos-UXUI/fondo_traje.avif",
+        "transferSize": 363211,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/logos/logo-colaborar.svg",
+        "transferSize": 267551,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/representantes/foto-oficiales-representantes/Presidente-2024-27.avif",
+        "transferSize": 267495,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/Visor-Monumento/monumento-falla-2025-26-infantil-real.avif",
+        "transferSize": 266240,
+        "resourceType": "Image"
+      }
+    ],
+    "seo_fallos": [
+      {
+        "id": "robots-txt",
+        "title": "robots.txt is not valid",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "index",
+              "valueType": "text",
+              "label": "Line #"
+            },
+            {
+              "key": "line",
+              "valueType": "code",
+              "label": "Content"
+            },
+            {
+              "key": "message",
+              "valueType": "code",
+              "label": "Error"
+            }
+          ],
+          "items": [
+            {
+              "index": "3",
+              "line": "Content-Signal: search=yes, ai-train=yes, ai-input=yes",
+              "message": "Unknown directive"
+            }
+          ]
+        }
+      }
+    ],
+    "avisos": []
+  },
+  {
+    "archivo_original": "lighthouse-blog.report.json",
+    "url": "https://fallasuissa.es/blog-anima.html",
+    "fecha": "2026-09-13T20:06:05.225Z",
+    "lighthouse": "12.8.2",
+    "entorno": {
+      "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "benchmarkIndex": 4221.5,
+      "credits": {
+        "axe-core": "4.11.0"
+      }
+    },
+    "condiciones": {
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      }
+    },
+    "puntuaciones": {
+      "performance": 55,
+      "seo": 92
+    },
+    "metricas": {
+      "first-contentful-paint": {
+        "valor": 2799.4139999999998,
+        "unidad": "millisecond",
+        "texto": "2.8 s"
+      },
+      "largest-contentful-paint": {
+        "valor": 9263.932,
+        "unidad": "millisecond",
+        "texto": "9.3 s"
+      },
+      "total-blocking-time": {
+        "valor": 8,
+        "unidad": "millisecond",
+        "texto": "10 ms"
+      },
+      "cumulative-layout-shift": {
+        "valor": 0.2112782036040566,
+        "unidad": "unitless",
+        "texto": "0.211"
+      },
+      "total-byte-weight": {
+        "valor": 1495662,
+        "unidad": "byte",
+        "texto": "Total size was 1,461 KiB"
+      }
+    },
+    "elemento_lcp": {
+      "type": "list",
+      "items": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": "Element"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-2-P",
+                "path": "1,HTML,1,BODY,3,MAIN,0,DIV,0,ARTICLE,2,DIV,0,P",
+                "selector": "div#blog-detail-container > article.blog-detail__article > div.blog-detail__content > p",
+                "boundingRect": {
+                  "top": 419,
+                  "bottom": 764,
+                  "left": 26,
+                  "right": 386,
+                  "width": 360,
+                  "height": 346
+                },
+                "snippet": "<p>",
+                "nodeLabel": "Después de la riada del 57, el Turia se quedó sin río: una herida larga en medi…"
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "phase",
+              "valueType": "text",
+              "label": "Phase"
+            },
+            {
+              "key": "percent",
+              "valueType": "text",
+              "label": "% of LCP"
+            },
+            {
+              "key": "timing",
+              "valueType": "ms",
+              "label": "Timing"
+            }
+          ],
+          "items": [
+            {
+              "phase": "TTFB",
+              "timing": 622.323,
+              "percent": "7%"
+            },
+            {
+              "phase": "Load Delay",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Load Time",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Render Delay",
+              "timing": 8641.609,
+              "percent": "93%"
+            }
+          ]
+        }
+      ]
+    },
+    "recursos_mas_pesados": [
+      {
+        "url": "https://fallasuissa.es/img/elementos-UXUI/cenefa_sin_fondo.svg",
+        "transferSize": 1191067,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/blog/federico-trenor.avif",
+        "transferSize": 117299,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.avif",
+        "transferSize": 31505,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/css/main.css?v=0187c7b02ac8",
+        "transferSize": 30962,
+        "resourceType": "Stylesheet"
+      },
+      {
+        "url": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIuaomQNQcsA88c7O9yZ4KMCoOg4Koz4y6qhNnZR-A.woff2",
+        "transferSize": 29553,
+        "resourceType": "Font"
+      },
+      {
+        "url": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2",
+        "transferSize": 27301,
+        "resourceType": "Font"
+      },
+      {
+        "url": "https://fallasuissa.es/data/translations.json",
+        "transferSize": 26284,
+        "resourceType": "Fetch"
+      },
+      {
+        "url": "https://fallasuissa.es/img/favicon/apple-touch-icon.png",
+        "transferSize": 7009,
+        "resourceType": "Other"
+      },
+      {
+        "url": "https://fallasuissa.es/blog-anima.html",
+        "transferSize": 5469,
+        "resourceType": "Document"
+      },
+      {
+        "url": "https://fallasuissa.es/js/buscador.js?v=0187c7b02ac8",
+        "transferSize": 5394,
+        "resourceType": "Script"
+      }
+    ],
+    "seo_fallos": [
+      {
+        "id": "robots-txt",
+        "title": "robots.txt is not valid",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "index",
+              "valueType": "text",
+              "label": "Line #"
+            },
+            {
+              "key": "line",
+              "valueType": "code",
+              "label": "Content"
+            },
+            {
+              "key": "message",
+              "valueType": "code",
+              "label": "Error"
+            }
+          ],
+          "items": [
+            {
+              "index": "3",
+              "line": "Content-Signal: search=yes, ai-train=yes, ai-input=yes",
+              "message": "Unknown directive"
+            }
+          ]
+        }
+      }
+    ],
+    "avisos": []
+  },
+  {
+    "archivo_original": "lighthouse-blog-repeat.json",
+    "url": "https://fallasuissa.es/blog-anima.html",
+    "fecha": "2026-09-13T20:08:39.020Z",
+    "lighthouse": "12.8.2",
+    "entorno": {
+      "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "benchmarkIndex": 4039.5,
+      "credits": {
+        "axe-core": "4.11.0"
+      }
+    },
+    "condiciones": {
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      }
+    },
+    "puntuaciones": {
+      "performance": 55,
+      "seo": 92
+    },
+    "metricas": {
+      "first-contentful-paint": {
+        "valor": 2807.0984999999996,
+        "unidad": "millisecond",
+        "texto": "2.8 s"
+      },
+      "largest-contentful-paint": {
+        "valor": 9354.261999999999,
+        "unidad": "millisecond",
+        "texto": "9.4 s"
+      },
+      "total-blocking-time": {
+        "valor": 2,
+        "unidad": "millisecond",
+        "texto": "0 ms"
+      },
+      "cumulative-layout-shift": {
+        "valor": 0.2112782036040566,
+        "unidad": "unitless",
+        "texto": "0.211"
+      },
+      "total-byte-weight": {
+        "valor": 1497886,
+        "unidad": "byte",
+        "texto": "Total size was 1,463 KiB"
+      }
+    },
+    "elemento_lcp": {
+      "type": "list",
+      "items": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": "Element"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-2-P",
+                "path": "1,HTML,1,BODY,3,MAIN,0,DIV,0,ARTICLE,2,DIV,0,P",
+                "selector": "div#blog-detail-container > article.blog-detail__article > div.blog-detail__content > p",
+                "boundingRect": {
+                  "top": 419,
+                  "bottom": 764,
+                  "left": 26,
+                  "right": 386,
+                  "width": 360,
+                  "height": 346
+                },
+                "snippet": "<p>",
+                "nodeLabel": "Después de la riada del 57, el Turia se quedó sin río: una herida larga en medi…"
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "phase",
+              "valueType": "text",
+              "label": "Phase"
+            },
+            {
+              "key": "percent",
+              "valueType": "text",
+              "label": "% of LCP"
+            },
+            {
+              "key": "timing",
+              "valueType": "ms",
+              "label": "Timing"
+            }
+          ],
+          "items": [
+            {
+              "phase": "TTFB",
+              "timing": 616.0719999999999,
+              "percent": "7%"
+            },
+            {
+              "phase": "Load Delay",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Load Time",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Render Delay",
+              "timing": 8738.189999999999,
+              "percent": "93%"
+            }
+          ]
+        }
+      ]
+    },
+    "recursos_mas_pesados": [
+      {
+        "url": "https://fallasuissa.es/img/elementos-UXUI/cenefa_sin_fondo.svg",
+        "transferSize": 1193287,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/blog/federico-trenor.avif",
+        "transferSize": 117299,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.avif",
+        "transferSize": 31504,
+        "resourceType": "Image"
+      },
+      {
+        "url": "https://fallasuissa.es/css/main.css?v=0187c7b02ac8",
+        "transferSize": 30963,
+        "resourceType": "Stylesheet"
+      },
+      {
+        "url": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIuaomQNQcsA88c7O9yZ4KMCoOg4Koz4y6qhNnZR-A.woff2",
+        "transferSize": 29553,
+        "resourceType": "Font"
+      },
+      {
+        "url": "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2",
+        "transferSize": 27301,
+        "resourceType": "Font"
+      },
+      {
+        "url": "https://fallasuissa.es/data/translations.json",
+        "transferSize": 26284,
+        "resourceType": "Fetch"
+      },
+      {
+        "url": "https://fallasuissa.es/img/favicon/apple-touch-icon.png",
+        "transferSize": 7010,
+        "resourceType": "Other"
+      },
+      {
+        "url": "https://fallasuissa.es/blog-anima.html",
+        "transferSize": 5469,
+        "resourceType": "Document"
+      },
+      {
+        "url": "https://fallasuissa.es/js/buscador.js?v=0187c7b02ac8",
+        "transferSize": 5396,
+        "resourceType": "Script"
+      }
+    ],
+    "seo_fallos": [
+      {
+        "id": "robots-txt",
+        "title": "robots.txt is not valid",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "index",
+              "valueType": "text",
+              "label": "Line #"
+            },
+            {
+              "key": "line",
+              "valueType": "code",
+              "label": "Content"
+            },
+            {
+              "key": "message",
+              "valueType": "code",
+              "label": "Error"
+            }
+          ],
+          "items": [
+            {
+              "index": "3",
+              "line": "Content-Signal: search=yes, ai-train=yes, ai-input=yes",
+              "message": "Unknown directive"
+            }
+          ]
+        }
+      }
+    ],
+    "avisos": []
+  }
+]

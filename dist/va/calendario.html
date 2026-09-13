@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Falla Suïssa - L'Alqueria del Favero - Calendario</title>
-  <meta name="description" content="Calendario de la Falla Suïssa - L'Alqueria del Favero: consulta por mes, día o categoría todos los actos falleros y añádelos a tu agenda.">
+  <title data-i18n="seo.calendario.title">Calendari | Falla Suïssa - L'Alqueria del Favero</title>
+  <meta name="description" data-i18n-content="seo.calendario.description" content="Calendari de la Falla Suïssa - L'Alqueria del Favero: consulta per mes, dia o categoria tots els actes fallers i afig-los a la teua agenda.">
   <meta name="keywords" content="fallas, tradición, suïssa, eventos, noticias, galería">
   <meta name="robots" content="index, follow">
 <!-- Compatibilidad para IE -->
@@ -259,8 +259,8 @@
         "about": {
           "@id": "https://fallasuissa.es/#organization"
         },
-        "name": "Falla Suïssa - L'Alqueria del Favero - Calendario",
-        "description": "Calendario de la Falla Suïssa - L'Alqueria del Favero: consulta por mes, día o categoría todos los actos falleros y añádelos a tu agenda.",
+        "name": "Calendari | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Calendari de la Falla Suïssa - L'Alqueria del Favero: consulta per mes, dia o categoria tots els actes fallers i afig-los a la teua agenda.",
         "isPartOf": {
           "@id": "https://fallasuissa.es/#website"
         },
@@ -285,7 +285,7 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Calendario",
+            "name": "Calendari",
             "item": "https://fallasuissa.es/va/calendario.html"
           }
         ]
@@ -295,8 +295,8 @@
   </script>
   
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Calendario - Falla Suïssa - L'Alqueria del Favero">
-  <meta property="og:description" content="Descubre eventos, noticias y la galería de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta property="og:title" data-i18n-content="seo.calendario.title" content="Calendari | Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:description" data-i18n-content="seo.calendario.description" content="Calendari de la Falla Suïssa - L'Alqueria del Favero: consulta per mes, dia o categoria tots els actes fallers i afig-los a la teua agenda.">
   <meta property="og:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:image:secure_url" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta property="og:url" content="https://fallasuissa.es/va/calendario.html">
@@ -310,16 +310,13 @@
   
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Calendario - Falla Suïssa - L'Alqueria del Favero">
-  <meta name="twitter:description" content="Descubre eventos y noticias de Fallas Suïssa - L'Alqueria del Favero.">
+  <meta name="twitter:title" data-i18n-content="seo.calendario.title" content="Calendari | Falla Suïssa - L'Alqueria del Favero">
+  <meta name="twitter:description" data-i18n-content="seo.calendario.description" content="Calendari de la Falla Suïssa - L'Alqueria del Favero: consulta per mes, dia o categoria tots els actes fallers i afig-los a la teua agenda.">
   <meta name="twitter:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
   <meta name="twitter:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
   <meta name="twitter:image:type" content="image/png">
   
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet">
+  <!-- Tipografías locales (licencias OFL en fonts/) -->
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
@@ -330,14 +327,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" crossorigin="anonymous">
   <!-- Swiper CSS -->
 <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="../css/main.css?v=0187c7b02ac8">
+  <link rel="stylesheet" href="../css/main.css?v=7d4407a3a034">
+  <link rel="preload" as="font" type="font/woff2" href="../fonts/plus-jakarta-sans-v12-normal-latin.woff2" crossorigin>
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
   <link rel="canonical" href="https://fallasuissa.es/va/calendario.html">
   <link rel="alternate" hreflang="es" href="https://fallasuissa.es/calendario.html">
   <link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/calendario.html">
   <link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/calendario.html">
-  <meta name="search-index" content="data/search-index.json?v=195ef2e33443">
+  <meta name="search-index" content="data/search-index.json?v=0eec13be7db8">
 </head>
 <body>
   <header class="header-inner">
@@ -364,7 +362,7 @@
         </div>
         <div class="header__notificacion" id="notificacion" aria-live="polite" aria-atomic="true"></div>
         <nav class="navegacion" role="navigation" aria-label="Navegación principal">
-          <a class="navegacion__enlace" data-i18n="nav.inicio" href="index.html">Inici</a>
+          <a class="navegacion__enlace" data-i18n="nav.inicio" href="./">Inici</a>
           <a class="navegacion__enlace" data-i18n="nav.lafalla" href="lafalla.html">La Falla</a>
           <a class="navegacion__enlace" data-i18n="nav.ofrenda" href="ofrenda.html">Ofrena</a>
           <a class="navegacion__enlace" data-i18n="nav.colaboraciones" href="colaboraciones.html">Col·laboracions</a>
@@ -384,11 +382,11 @@
             <picture>
               <source srcset="../img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
               <source srcset="../img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-              <img class="header-inner__escudo" src="../img/escudo-falla/Escudo-Oficial-Falla.png" alt="Logo de la Falla Suïssa - L'Alqueria del Favero" loading="eager" decoding="sync" fetchpriority="high">
+              <img width="640" height="793" class="header-inner__escudo" src="../img/escudo-falla/Escudo-Oficial-Falla.png" alt="Logo de la Falla Suïssa - L'Alqueria del Favero" loading="eager" decoding="sync" fetchpriority="high">
             </picture>
           </a>
           
-          <h1 class="heading-inner" data-i18n="calendario.titulo"><span class="heading-inner__span">Calendario</span> </h1>
+          <h1 class="heading-inner"><span data-i18n="calendario.titulo">Calendari</span></h1>
         </div> 
     </div>
     
@@ -506,7 +504,7 @@
     <div class="footer__contenedor">
       <div class="footer__contenido">
         <nav class="footer__nav" role="navigation" aria-label="Menú de navegación">
-          <a class="footer__enlace" href="index.html" data-i18n="nav.inicio">Inici</a>
+          <a class="footer__enlace" href="./" data-i18n="nav.inicio">Inici</a>
           <a class="footer__enlace" href="lafalla.html" data-i18n="nav.lafalla">La Falla</a>
           <a class="footer__enlace" href="ofrenda.html" data-i18n="nav.ofrenda">Ofrena</a>
           <a class="footer__enlace" href="colaboraciones.html" data-i18n="nav.colaboraciones">Col·laboracions</a>
@@ -521,7 +519,7 @@
           <picture>
             <source srcset="../img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif">
             <source srcset="../img/escudo-falla/Escudo-Oficial-Falla.webp" type="image/webp">
-            <img class="footer__escudo" src="../img/escudo-falla/Escudo-Oficial-Falla.png" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <img width="640" height="793" class="footer__escudo" src="../img/escudo-falla/Escudo-Oficial-Falla.png" alt="" loading="lazy" decoding="async" aria-hidden="true">
           </picture>
         </a>
 
@@ -549,15 +547,15 @@
     </nav>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="../js/dark.js?v=0187c7b02ac8"></script>
-  <script src="../js/lang.js?v=0187c7b02ac8"></script>
-  <script src="../js/nav-menu.js?v=0187c7b02ac8"></script>
-  <script src="../js/buscador.js?v=0187c7b02ac8" defer></script>
-  <script src="../js/scroll-reveal.js?v=0187c7b02ac8" defer></script>
-  <script src="../js/calendario.js?v=0187c7b02ac8"></script>
-  <script src="../js/accessibility.js?v=0187c7b02ac8" defer></script>
+  <script src="../js/dark.js?v=7d4407a3a034"></script>
+  <script src="../js/lang.js?v=7d4407a3a034"></script>
+  <script src="../js/nav-menu.js?v=7d4407a3a034"></script>
+  <script src="../js/buscador.js?v=7d4407a3a034" defer></script>
+  <script src="../js/scroll-reveal.js?v=7d4407a3a034" defer></script>
+  <script src="../js/calendario.js?v=7d4407a3a034"></script>
+  <script src="../js/accessibility.js?v=7d4407a3a034" defer></script>
  
   
-  <script src="../js/cookie-banner.js?v=0187c7b02ac8" defer></script>
+  <script src="../js/cookie-banner.js?v=7d4407a3a034" defer></script>
 </body>
 </html>

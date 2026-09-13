@@ -1,15 +1,13 @@
-
-
 [
-    {
-      "src": "img/monument/firma/2025_26/Firma_monumento_25_26.avif",
-      "alt": "Firma Monumento 2025-26",
-      "note": "galeria.galeria3-note1"
-    },
-    {
-      "src": "",
-      "alt": "",
-      "note": "galeria.galeria3-note2"
-    }
+  {
+    "src": "img/monument/firma/2025_26/Firma_monumento_25_26.avif",
+    "alt": "Firma Monumento 2025-26. Fotografía 1 de 1.",
+    "note": "galeria.galeria3-note1",
+    "altKey": "galleryAlts.g3.p1"
+  },
+  {
+    "src": "",
+    "alt": "",
+    "note": "galeria.galeria3-note2"
+  }
 ]
-  

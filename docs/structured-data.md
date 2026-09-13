@@ -92,3 +92,9 @@ Validación externa opcional: pegar el `<script ld+json>` de `dist/<página>.htm
 ---
 
 Última actualización: 13 de septiembre de 2026 - v4.30.19
+
+## Actualización SEO v4.30.21
+
+`readHeadMeta` admite atributos en `<title>`. Los nombres y descripciones de página y blog proceden del head traducido; los artículos localizan headline y sección, y las galerías utilizan `galleryAlts` en sus ImageObject. El endpoint histórico `seo/ai-enhanced-schema.json` se genera desde `schema-organization.json`, sin cargos duplicados ni premios institucionales no acreditados.
+
+Los sitemaps se generan desde este inventario de páginas. Ver [`build-and-deploy.md`](./build-and-deploy.md) para noticias y seguimiento de lastmod por contenido. Pasar `seo:schema-report` acredita las reglas internas, no garantiza un resultado enriquecido ni la indexación en Google.
