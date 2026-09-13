@@ -16,8 +16,8 @@
     "logo": {
       "@type": "ImageObject",
       "@id": "https://fallasuissa.es/#logo",
-      "url": "https://fallasuissa.es/img/Escudo_falla.png",
-      "contentUrl": "https://fallasuissa.es/img/Escudo_falla.png",
+      "url": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png",
+      "contentUrl": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png",
       "width": 640,
       "height": 793,
       "caption": "Escudo de la Falla Suïssa - L'Alqueria del Favero"

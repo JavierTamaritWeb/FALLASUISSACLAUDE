@@ -15,27 +15,27 @@
   "founded": "2024",
   "branding": {
     "logo": {
-      "url": "/img/Escudo_falla.avif",
-      "absolute_url": "https://fallasuissa.es/img/Escudo_falla.avif",
+      "url": "/img/escudo-falla/Escudo-Oficial-Falla.avif",
+      "absolute_url": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.avif",
       "alt": "Escudo de la Falla Suïssa - L'Alqueria del Favero",
       "content_type": "image/avif",
       "variants": [
         {
           "format": "avif",
-          "url": "/img/Escudo_falla.avif",
-          "absolute_url": "https://fallasuissa.es/img/Escudo_falla.avif",
+          "url": "/img/escudo-falla/Escudo-Oficial-Falla.avif",
+          "absolute_url": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.avif",
           "content_type": "image/avif"
         },
         {
           "format": "webp",
-          "url": "/img/Escudo_falla.webp",
-          "absolute_url": "https://fallasuissa.es/img/Escudo_falla.webp",
+          "url": "/img/escudo-falla/Escudo-Oficial-Falla.webp",
+          "absolute_url": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.webp",
           "content_type": "image/webp"
         },
         {
           "format": "png",
-          "url": "/img/Escudo_falla.png",
-          "absolute_url": "https://fallasuissa.es/img/Escudo_falla.png",
+          "url": "/img/escudo-falla/Escudo-Oficial-Falla.png",
+          "absolute_url": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png",
           "content_type": "image/png"
         }
       ]

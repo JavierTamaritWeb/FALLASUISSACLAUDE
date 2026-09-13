@@ -269,6 +269,11 @@ ErrorDocument 503 /mantenimiento.html
     #    (/img/ofrenda/ -> /img/ofrenda-virgen-desamparados/; /img/ofrenda-frutos/ no cambia)
     RewriteRule "^img/ofrenda/(.*)$" /img/ofrenda-virgen-desamparados/$1 [R=301,L,QSA]
 
+    # L) Escudo oficial renombrado en v4.30.14 (Escudo_falla -> Escudo-Oficial-Falla)
+    #    y movido a /img/escudo-falla/; lo enlazan vistas previas ya compartidas, el
+    #    schema y el HTML cacheado por la CDN. Un solo 301 desde ambos nombres antiguos.
+    RewriteRule "^img/(Escudo_falla|Escudo-Oficial-Falla)\.(png|avif|webp)$" /img/escudo-falla/Escudo-Oficial-Falla.$2 [R=301,L,QSA]
+
     # Negociación de contenido Markdown (RFC 7231)
     # Si un agente solicita Accept: text/markdown sobre /, servir resumen .md
     RewriteCond %{HTTP_ACCEPT} text/markdown [NC]

@@ -15,7 +15,7 @@ const crypto = require('crypto');
 const terser = require('gulp-terser');
 
 const EVENT_BASE_URL = 'https://fallasuissa.es/eventos.html';
-const EVENT_IMAGE_URL = 'https://fallasuissa.es/img/Escudo_falla.png';
+const EVENT_IMAGE_URL = 'https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png';
 
 // ===================================
 // PATHS

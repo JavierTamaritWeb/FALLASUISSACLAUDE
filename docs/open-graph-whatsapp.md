@@ -12,7 +12,7 @@ WhatsApp suele fallar o no actualizar la imagen de previsualización por:
 ## 🖼️ Imagen OG del proyecto
 
 - Archivo fuente de salida: `src/img/UI/og-share.png`
-- Fuente de generación: `src/img/Escudo_falla.avif`
+- Fuente de generación: `src/img/escudo-falla/Escudo-Oficial-Falla.avif`
 - Estándar recomendado:
   - Tamaño: **1200×630**
   - Formato: **PNG**
@@ -105,4 +105,4 @@ npm run test:e2e:full
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.13
+Última actualización: 13 de septiembre de 2026 - v4.30.14

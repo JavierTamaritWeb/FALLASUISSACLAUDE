@@ -16,7 +16,7 @@ Regenera `src/img/UI/og-share.png` con el formato que usa el sitio para Open Gra
 
 ### `generate-og-image.mjs`: entrada y salida
 
-- entrada: `src/img/Escudo_falla.avif`
+- entrada: `src/img/escudo-falla/Escudo-Oficial-Falla.avif`
 - salida: `src/img/UI/og-share.png`
 
 ### `generate-og-image.mjs`: qué hace
@@ -128,4 +128,4 @@ npx playwright test tests/scss-guardrails.e2e.spec.js
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.13
+Última actualización: 13 de septiembre de 2026 - v4.30.14

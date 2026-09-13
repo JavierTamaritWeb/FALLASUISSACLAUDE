@@ -1,5 +1,5 @@
 // tests/escudo-enlace.e2e.spec.js
-// Guardia de v4.23.2: todo escudo de la Falla (Escudo_falla.* y
+// Guardia de v4.23.2: todo escudo de la Falla (Escudo-Oficial-Falla.* y
 // logo-escudo-cutty.svg) enlaza a la home https://fallasuissa.es/ con un
 // nombre accesible, en ES y en /va/ (pre-renderizado en valenciano).
 const { test, expect } = require('@playwright/test');
@@ -8,7 +8,7 @@ const path = require('path');
 
 const DIST = path.join(__dirname, '..', 'dist');
 const HOME = 'https://fallasuissa.es/';
-const RE_ESCUDO = /<img\b[^>]*(?:Escudo_falla|logo-escudo-cutty)[^>]*>/g;
+const RE_ESCUDO = /<img\b[^>]*(?:Escudo-Oficial-Falla|logo-escudo-cutty)[^>]*>/g;
 
 function paginas() {
   const es = fs.readdirSync(DIST).filter((f) => f.endsWith('.html') && f !== 'mantenimiento.html');

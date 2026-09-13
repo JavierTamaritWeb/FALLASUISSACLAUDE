@@ -55,7 +55,7 @@ for (const { url, titulo } of URLS) {
       // el navegador lo repita en cada página al imprimir)
       const escudo = thead.locator('img.autorizacion-imagen__cabecera-escudo');
       await expect(escudo).toHaveCount(1);
-      await expect(escudo).toHaveAttribute('src', /Escudo_falla\.png$/);
+      await expect(escudo).toHaveAttribute('src', /Escudo-Oficial-Falla\.png$/);
     });
 
     test('en @media print el thead se renderiza como table-header-group', async ({ page }) => {
