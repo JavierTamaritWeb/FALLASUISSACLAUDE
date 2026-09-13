@@ -258,7 +258,12 @@ ErrorDocument 503 /mantenimiento.html
 
     # J) Fotos oficiales de los representantes movidas a
     #    /img/representantes/foto-oficiales-representantes/ en v4.30.11
-    RewriteRule "^img/((FalleraMayorInfantil|FalleraMayor|PresidenteInfantil|Presidente)(-2026-27)?\.(jpg|avif|webp))$" /img/representantes/foto-oficiales-representantes/$1 [R=301,L,QSA]
+    #    y en v4.30.13 renombradas con el ejercicio (FalleraMayor -> FalleraMayor-2025-26,
+    #    FalleraMayorInfantil/PresidenteInfantil -> -2025-26, Presidente -> Presidente-2024-27);
+    #    las rutas antiguas (raíz de /img/ o nombre sin año) van directas al nombre nuevo
+    RewriteRule "^img/((FalleraMayorInfantil|FalleraMayor|PresidenteInfantil|Presidente)-2026-27\.(jpg|avif|webp))$" /img/representantes/foto-oficiales-representantes/$1 [R=301,L,QSA]
+    RewriteRule "^img/(representantes/foto-oficiales-representantes/)?(FalleraMayorInfantil|FalleraMayor|PresidenteInfantil)\.(jpg|avif|webp)$" /img/representantes/foto-oficiales-representantes/$2-2025-26.$3 [R=301,L,QSA]
+    RewriteRule "^img/(representantes/foto-oficiales-representantes/)?Presidente\.(jpg|avif|webp)$" /img/representantes/foto-oficiales-representantes/Presidente-2024-27.$2 [R=301,L,QSA]
 
     # K) Carpeta de la Ofrenda a la Virgen renombrada en v4.30.12
     #    (/img/ofrenda/ -> /img/ofrenda-virgen-desamparados/; /img/ofrenda-frutos/ no cambia)

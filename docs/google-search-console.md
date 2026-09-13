@@ -162,11 +162,14 @@ RewriteRule "^img/(icono_(facebook|instagram|tiktok|youtube)[0-9a-z-]*\.svg|logo
 # G) Favicons movidos a /img/favicon/ (v4.30.4)
 RewriteRule "^img/(favicon\.ico|favicon-16x16\.png|favicon-32x32\.png|apple-touch-icon\.png|android-chrome-…)$" /img/favicon/$1 [R=301,L,QSA]
 
-# I) Imagen del banner de subvención → /img/subvenciones/subvencion-2026.* (v4.30.12)
+# I) Imagen del banner de subvención → /img/subvenciones/subvencion-2026.* (v4.30.9)
 RewriteRule "^img/subvencion\.(png|avif|webp)$" /img/subvenciones/subvencion-2026.$1 [R=301,L,QSA]
 
-# J) Fotos oficiales de los representantes → /img/representantes/foto-oficiales-representantes/ (v4.30.12)
-RewriteRule "^img/((FalleraMayorInfantil|FalleraMayor|PresidenteInfantil|Presidente)(-2026-27)?\.(jpg|avif|webp))$" /img/representantes/foto-oficiales-representantes/$1 [R=301,L,QSA]
+# J) Fotos oficiales de los representantes → /img/representantes/foto-oficiales-representantes/ (v4.30.11),
+#    renombradas con el ejercicio en v4.30.13 (un solo 301 al nombre nuevo)
+RewriteRule "^img/((FalleraMayorInfantil|FalleraMayor|PresidenteInfantil|Presidente)-2026-27\.(jpg|avif|webp))$" /img/representantes/foto-oficiales-representantes/$1 [R=301,L,QSA]
+RewriteRule "^img/(representantes/foto-oficiales-representantes/)?(FalleraMayorInfantil|FalleraMayor|PresidenteInfantil)\.(jpg|avif|webp)$" /img/representantes/foto-oficiales-representantes/$2-2025-26.$3 [R=301,L,QSA]
+RewriteRule "^img/(representantes/foto-oficiales-representantes/)?Presidente\.(jpg|avif|webp)$" /img/representantes/foto-oficiales-representantes/Presidente-2024-27.$2 [R=301,L,QSA]
 
 # K) Ofrenda a la Virgen → /img/ofrenda-virgen-desamparados/ (v4.30.12)
 RewriteRule "^img/ofrenda/(.*)$" /img/ofrenda-virgen-desamparados/$1 [R=301,L,QSA]
@@ -204,4 +207,4 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.12
+Última actualización: 13 de septiembre de 2026 - v4.30.13
