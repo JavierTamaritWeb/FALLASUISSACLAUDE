@@ -268,6 +268,9 @@ ErrorDocument 503 /mantenimiento.html
 
     # K) Carpeta de la Ofrenda a la Virgen renombrada en v4.30.12
     #    (/img/ofrenda/ -> /img/ofrenda-virgen-desamparados/; /img/ofrenda-frutos/ no cambia)
+    #    En v4.30.19 la subcarpeta ofenda-2026 (errata) pasa a ofrenda-2026: un solo
+    #    301 desde la carpeta vieja y desde la subcarpeta con errata.
+    RewriteRule "^img/(ofrenda|ofrenda-virgen-desamparados)/ofenda-2026/(.*)$" /img/ofrenda-virgen-desamparados/ofrenda-2026/$2 [R=301,L,QSA]
     RewriteRule "^img/ofrenda/(.*)$" /img/ofrenda-virgen-desamparados/$1 [R=301,L,QSA]
 
     # L) Escudo oficial renombrado en v4.30.14 (Escudo_falla -> Escudo-Oficial-Falla)

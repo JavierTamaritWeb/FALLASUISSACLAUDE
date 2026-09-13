@@ -172,6 +172,8 @@ RewriteRule "^img/(representantes/foto-oficiales-representantes/)?(FalleraMayorI
 RewriteRule "^img/(representantes/foto-oficiales-representantes/)?Presidente\.(jpg|avif|webp)$" /img/representantes/foto-oficiales-representantes/Presidente-2024-27.$2 [R=301,L,QSA]
 
 # K) Ofrenda a la Virgen → /img/ofrenda-virgen-desamparados/ (v4.30.12)
+# v4.30.19: subcarpeta ofenda-2026 → ofrenda-2026 (un solo 301)
+RewriteRule "^img/(ofrenda|ofrenda-virgen-desamparados)/ofenda-2026/(.*)$" /img/ofrenda-virgen-desamparados/ofrenda-2026/$2 [R=301,L,QSA]
 RewriteRule "^img/ofrenda/(.*)$" /img/ofrenda-virgen-desamparados/$1 [R=301,L,QSA]
 
 # L) Escudo oficial renombrado y movido (v4.30.14): Escudo_falla / Escudo-Oficial-Falla → escudo-falla/Escudo-Oficial-Falla
@@ -218,4 +220,4 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.18
+Última actualización: 13 de septiembre de 2026 - v4.30.19
