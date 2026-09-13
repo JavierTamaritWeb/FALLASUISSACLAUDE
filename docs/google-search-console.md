@@ -137,7 +137,7 @@ GSC reportó 24 URLs 404 (pico de 36 en abril, descendiendo solo a 24 en mayo). 
 
 ### Cómo lo resuelve el repo
 
-`src/.htaccess` declara 13 reglas (A-M; E = 410 de base.html) dentro del bloque `<IfModule mod_rewrite.c>`, **después** de la redirección `www → no-www` y **antes** de la negociación de Markdown:
+`src/.htaccess` declara 14 reglas (A-N; E = 410 de base.html) dentro del bloque `<IfModule mod_rewrite.c>`, **después** de la redirección `www → no-www` y **antes** de la negociación de Markdown:
 
 ```apache
 # A) /va/pdf/* → /pdf/*
@@ -153,8 +153,8 @@ RewriteRule "^pdf/2024_LLIBRET_FALLA._MORERES_DIGITAL\.pdf$" \
 # D) Bases JCF antiguas → /deportes.html
 RewriteRule "^pdf/C6[0-9]+.*\.pdf$" /deportes.html [R=301,L]
 
-# F) Imágenes de interfaz movidas a /img/UI/ (v4.30.2); QSA conserva el ?v=
-RewriteRule "^img/((og-share|fondo_traje|calendario|…)\.(png|jpg|jpeg|avif|webp)|cenefa_sin_fondo\.svg|…)$" /img/UI/$1 [R=301,L,QSA]
+# F) Imágenes de interfaz movidas a /img/UI/ (v4.30.2), carpeta renombrada a /img/elementos-UXUI/ (v4.30.17); QSA conserva el ?v=
+RewriteRule "^img/((og-share|fondo_traje|calendario|…)\.(png|jpg|jpeg|avif|webp)|cenefa_sin_fondo\.svg|…)$" /img/elementos-UXUI/$1 [R=301,L,QSA]
 
 # H) Iconos de redes sociales → /img/iconos-redes-sociales/ (v4.30.6)
 RewriteRule "^img/(icono_(facebook|instagram|tiktok|youtube)[0-9a-z-]*\.svg|logo_falla\.svg)$" /img/iconos-redes-sociales/$1 [R=301,L,QSA]
@@ -181,6 +181,9 @@ RewriteRule "^img/(Escudo_falla|Escudo-Oficial-Falla)\.(png|avif|webp)$" /img/es
 #    un solo 301 desde la raíz de /img/ y desde el nombre antiguo dentro de la carpeta (6 reglas)
 RewriteRule "^img/(Visor-Monumento/)?falla2027\.(jpg|jpeg|avif|webp)$" /img/Visor-Monumento/monumento-falla-2026-27-boceto.$2 [R=301,L,QSA]
 # … ídem para falla2027-Infantil, falla2026-real, falla2026-infantil-real, foto_2425_01 y foto_2425_02
+
+# N) Carpeta de interfaz renombrada (v4.30.17): /img/UI/ → /img/elementos-UXUI/
+RewriteRule "^img/UI/(.*)$" /img/elementos-UXUI/$1 [R=301,L,QSA]
 ```
 
 ### Reglas operativas
@@ -215,4 +218,4 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.16
+Última actualización: 13 de septiembre de 2026 - v4.30.17
