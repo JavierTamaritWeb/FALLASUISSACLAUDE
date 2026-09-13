@@ -166,9 +166,13 @@
 
 
 
+// Franja coral del pie (copyright + enlaces legales): línea blanca de 2px
+// arriba y más aire arriba (aquí) y abajo (en .footer__legal)
 .derechos {
   font-size: 1.3rem;
   margin: 0;
+  padding: 1.2rem 1rem 0.4rem;
+  border-top: 2px solid v.$blanco;
   background-color: var(--coral-marca);
 }
 
@@ -177,7 +181,7 @@
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  padding: 0.3rem 0;
+  padding: 0.3rem 0 1.2rem;
   background-color: var(--coral-marca);
   font-size: 0.8rem;
   line-height: 1;

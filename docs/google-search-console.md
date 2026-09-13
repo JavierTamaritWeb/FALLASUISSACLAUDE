@@ -162,7 +162,7 @@ RewriteRule "^img/(icono_(facebook|instagram|tiktok|youtube)[0-9a-z-]*\.svg|logo
 # G) Favicons movidos a /img/favicon/ (v4.30.4)
 RewriteRule "^img/(favicon\.ico|favicon-16x16\.png|favicon-32x32\.png|apple-touch-icon\.png|android-chrome-…)$" /img/favicon/$1 [R=301,L,QSA]
 
-# I) Imagen del banner de subvención → /img/subvenciones/subvencion-2026.* (v4.30.9)
+# I) Imagen del banner de subvención → /img/subvenciones/subvencion-2026.* (v4.30.10)
 RewriteRule "^img/subvencion\.(png|avif|webp)$" /img/subvenciones/subvencion-2026.$1 [R=301,L,QSA]
 ```
 
@@ -198,4 +198,4 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.9
+Última actualización: 13 de septiembre de 2026 - v4.30.10

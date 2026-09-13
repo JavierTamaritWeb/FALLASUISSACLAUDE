@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.9 · **Última actualización:** 13 de septiembre de 2026
+**Versión:** 4.30.10 · **Última actualización:** 13 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -143,7 +143,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 **Navegación Timeline** (`src/js/timeline.js` + `src/scss/components/_timeline.scss`): indicador de progreso lateral con un punto por cada sección `[data-index]` (salta el hero en el índice 0). Solo desktop (≥768px), oculto cuando el hero es visible. Construye un `<nav class="timeline">` con puntos clicables + líneas conectoras; el punto activo se rastrea vía IntersectionObserver.
 
-**Páginas legales** (`aviso-legal.html`, `privacidad.html`, `cookies.html` + `src/scss/components/_contenido-legal.scss`): páginas RGPD/LSSI/ePrivacy usando el patrón `header-inner` y el componente `.contenido-legal` (tarjeta blanca sobre gris, soporte modo oscuro). El footer de cada página incluye `<nav class="footer__legal">` enlazando las 3 páginas legales.
+**Páginas legales** (`aviso-legal.html`, `privacidad.html`, `cookies.html` + `src/scss/components/_contenido-legal.scss`): páginas RGPD/LSSI/ePrivacy usando el patrón `header-inner` y el componente `.contenido-legal` (tarjeta blanca sobre gris, soporte modo oscuro). El footer de cada página incluye `<nav class="footer__legal">` enlazando las 3 páginas legales; junto al `<p class="derechos">` forma la franja coral del pie (`layout/_footer.scss`), con línea blanca superior de 2px en `.derechos` y padding 1,2 rem arriba (`.derechos`) y abajo (`.footer__legal`) desde v4.30.10.
 
 **Banner de cookies** (`src/js/cookie-banner.js` + `src/scss/components/_cookie-banner.scss`): banner de consentimiento RGPD; aparece en la primera visita si `localStorage.cookieConsent` no está definido. **Bilingüe desde v4.29.0**: textos en `cookieBanner.*` (`translations.json`, ES/VA) aplicados al crearlo según `window.currentLanguage` (o el `lang` de la página) y re-aplicados en `translationsReady`/`langChanged`; el fallback del HTML generado es el valor ES. Botones "Aceptar todas" / "Solo necesarias", barra inferior fija con backdrop-filter. Tests: `tests/cookie-banner.e2e.spec.js`. Ver restricción *Banner cookies Safari*.
 
@@ -153,7 +153,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.9).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.10).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -376,6 +376,7 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.30.10** — Franja coral del pie (copyright `.derechos` + enlaces legales `.footer__legal`, `layout/_footer.scss`) en las 30 páginas: línea blanca de 2px en la parte superior (`border-top` de `.derechos`) y más aire vertical (padding superior 0,3 → 1,2 rem en el copyright, inferior 0,3 → 1,2 rem en los enlaces). Mismo aspecto en modo oscuro (fondo `--coral-marca` = `#B83F35`). 67 baselines visuales regenerados (el pie cambia de alto en todas las páginas).
 - **4.30.9** — Imagen del banner de subvención archivada por año: `src/img/subvencion.png` → `src/img/subvenciones/subvencion-2026.png` (carpeta nueva); las 3 rutas del `<picture>` del banner en `index.html` (AVIF/WebP/PNG) y el ejemplo de `docs/global-styles.md` apuntan a la ruta nueva, y la regla I del `.htaccess` redirige con 301 la ruta antigua. Sin cambios visuales.
 - **4.30.8** — Bocetos web del ejercicio 2025-26 renombrados y archivados: `src/img/falla2026.jpg` → `src/img/monument/bocetos/boceto-falla-2025-26-Web.jpg` y `src/img/falla2026-Infantil.jpg` → `…/boceto-falla-2025-26-Infantil-Web.jpg`; son las dos primeras miniaturas del panel *Monumento 2025-26* de Archivos (`index.html`, `lafalla.html`, 6 rutas por página en `<picture>` AVIF/WebP/JPG) y `tests/historia-monumentos.e2e.spec.js` comprueba el nombre nuevo. Sin cambios visuales.
 - **4.30.7** — Bocetos del ejercicio 2025-26 archivados: `src/img/falla_anterior.png` → `src/img/monument/bocetos/boceto-falla-2025-26.png` y `src/img/falla_infantol_anterior.png` → `…/boceto-falla-2025-26-infantil.png` (sin ninguna referencia en HTML/CSS/JS; el build sigue generando sus AVIF/WebP en `dist/`). Sin cambios en el sitio servido.
