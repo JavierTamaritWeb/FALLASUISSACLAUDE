@@ -533,6 +533,22 @@ p {
   color: v.$blanco-hueso;
 }
 
+
+// Titulares del acordeón de «Nosotros» (Plana Mayor) en turquesa, solo en modo
+// claro y fuera de hover/foco (ahí manda el degradado coral de .accordion__titular).
+// $turquesa (3,5:1) vale para el texto grande de escritorio y tableta; en móvil
+// el titular mide 14px y se usa $turquesa-texto (4,6:1) — v4.30.26.
+body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion .accordion__titular:not(:hover):not(:focus-visible) {
+  .accordion__header,
+  .accordion__icon {
+    color: v.$turquesa;
+
+    @media (max-width: 767px) {
+      color: v.$turquesa-texto;
+    }
+  }
+}
+
 .historia {
   padding: 0 ;
   padding-top: 5rem;

@@ -6,7 +6,8 @@
 const { test, expect } = require('@playwright/test');
 
 const NEGRO_CASI = 'rgb(17, 17, 17)';
-const CORAL = 'rgb(255, 111, 97)';
+// Titulares de «Nosotros» en reposo (modo claro, ≥768 px): $turquesa desde v4.30.26
+const TURQUESA = 'rgb(0, 144, 158)';
 
 async function preparar(page, ruta) {
   await page.addInitScript(() => {
@@ -49,7 +50,7 @@ function estilos(titular) {
 }
 
 test.describe('Hover de los titulares de acordeón (como .boton)', () => {
-  test('Nosotros: reposo coral sin degradado, hover con degradado y texto oscuro sin mover la fila', async ({ page }) => {
+  test('Nosotros: reposo turquesa sin degradado, hover con degradado y texto oscuro sin mover la fila', async ({ page }) => {
     await preparar(page, '/index.html');
     const titular = page.locator('.accordion').first().locator('.accordion__titular').nth(1);
     await titular.scrollIntoViewIfNeeded();
@@ -58,7 +59,8 @@ test.describe('Hover de los titulares de acordeón (como .boton)', () => {
 
     const antes = await estilos(titular);
     expect(antes.bg).toBe('none');
-    expect(antes.header).toBe(CORAL);
+    expect(antes.header).toBe(TURQUESA);
+    expect(antes.icono).toBe(TURQUESA);
     expect(antes.brilloOpacidad).toBe('0');
 
     await pasarRaton(page, titular);
