@@ -35,7 +35,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: v.$gradiente-institucional;
+      // Degradado celeste de 5 tonos (v4.30.47; antes el institucional azul)
+      background: v.$gradiente-celeste;
       border-radius: inherit;
       opacity: 1;
       transition: opacity 2.4s ease-in-out;
@@ -163,6 +164,12 @@
       display: none;
     }
   }
+}
+
+// Título de la cuenta atrás sobre el celeste (v4.30.47): azul de sección
+// (7,5:1+); en oscuro lo fija _modo-oscuro.scss.
+body:not(.modo-oscuro) .countdown__message {
+  color: v.$azul-titulo-seccion;
 }
 
 .cuenta-atras-fondo{

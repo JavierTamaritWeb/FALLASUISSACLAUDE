@@ -92,8 +92,8 @@ A petición del usuario, los títulos de sección con icono redondo y los títul
 
 | Dónde | Valor | Modo oscuro |
 | --- | --- | --- |
-| `body::before`, `.header-inner::before`, `.quieres-mas::before`, `.countdown__contenedor::before`, `.blog-detail__article::before` | `$gradiente-institucional` en `::before` con `opacity` | `opacity: 0` sobre color sólido (`docs/global-styles.md`) |
-| `.colaboraciones::before` (v4.30.40), `.deportes--teaser` (v4.30.41, fondo directo con velo `::before`), `.header::before` del hero de la home (v4.30.45; título `$coral-texto` + `$azul-titulo-seccion` y olas en `$azul-cobalto` #0047AB al 35/55/75/100 %) | `$gradiente-celeste`: brillo radial + `linear-gradient(160deg, #E3F2FB, #BFE3F7, #93CFF0, #66B4E6, #4A9AD6)` en `::before` con `opacity` | `opacity: 0` sobre `$secondary-color` |
+| `body::before`, `.header-inner::before`, `.quieres-mas::before`, `.blog-detail__article::before` | `$gradiente-institucional` en `::before` con `opacity` | `opacity: 0` sobre color sólido (`docs/global-styles.md`) |
+| `.colaboraciones::before` (v4.30.40), `.deportes--teaser` (v4.30.41, fondo directo con velo `::before`), `.header::before` del hero de la home (v4.30.45; título `$coral-texto` + `$azul-titulo-seccion` y olas en `$azul-cobalto` #0047AB al 35/55/75/100 %), `.countdown__contenedor::before` (v4.30.47; título en `$azul-titulo-seccion`) | `$gradiente-celeste`: brillo radial + `linear-gradient(160deg, #E3F2FB, #BFE3F7, #93CFF0, #66B4E6, #4A9AD6)` en `::before` con `opacity` | `opacity: 0` sobre `$secondary-color` |
 | `.accordion__content`, `.historia__prologo`, `.deportes` | `$gradiente-institucional` en el fondo | `$negro` / velo `::before` |
 | `--header-bar-bg`, `.header__barra::before` (`.25`/`.30`), `.navegacion` y `.buscador` (`.7`) | mismos tonos con alfa + `backdrop-filter` | `rgba(51,51,51,.7-.8)` |
 | `.video-dron__frame::before` | `160deg` (plantilla) | `opacity: 0` |
@@ -116,4 +116,4 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.30.46
+Última actualización: 14 de septiembre de 2026 - v4.30.47

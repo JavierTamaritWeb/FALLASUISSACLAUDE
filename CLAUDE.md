@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.46 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.30.47 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.46).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.47).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -303,7 +303,7 @@ Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problem
 
 - **Stacking z-index del menú (v4.0.0, global desde v4.14.0):** el backdrop se inserta dentro de `.header__barra` (no en `body`). Z-index: menú 2500, backdrop 1500, botón de menú 2600. Mover el backdrop a `body` rompe el contexto de apilamiento. Dos detalles que hacen funcionar el backdrop dentro de la barra: (1) el backdrop usa `inset: -100vh -100vw`: se introdujo cuando la barra llevaba `backdrop-filter` en el propio elemento (bloque contenedor de su descendiente `position: fixed`, con `inset: 0` solo cubría la barra); desde v4.23.6 el blur vive solo en el `::before` (ver *Desplegable de cristal*) y el backdrop se posiciona respecto al viewport, donde los insets negativos siguen cubriéndolo — consérvalos (la barra NO debe tener `overflow: hidden`); (2) la regla `> *:not(.navegacion):not(.nav-backdrop)` de la barra (que pone `position: relative; z-index: 1` a sus hijos para quedar sobre el `::before`) DEBE seguir excluyendo al backdrop, o vuelve al flujo flex con tamaño 0, deja de captar clics y desplaza el botón hamburguesa al centro.
 
-- **Transiciones de gradiente (v4.1.0):** `.quieres-mas` y `.countdown__contenedor` usan `::before` para el overlay de gradiente; el modo oscuro desvanece la opacidad a 0. Tests: `quieres-mas-transition.e2e.spec.js`, `countdown-transition.e2e.spec.js`. (`.countdown__contenedor` lleva además un `border: 2px solid v.$primary-color` base en ambos modos, añadido en v4.7.6.)
+- **Transiciones de gradiente (v4.1.0):** `.quieres-mas` y `.countdown__contenedor` usan `::before` para el overlay de gradiente; el modo oscuro desvanece la opacidad a 0. Tests: `quieres-mas-transition.e2e.spec.js`, `countdown-transition.e2e.spec.js`. (`.countdown__contenedor` lleva además un `border: 2px solid v.$primary-color` base en ambos modos, añadido en v4.7.6; desde v4.30.47 su `::before` en claro es `$gradiente-celeste`.)
 
 - **Z-index de navegación desktop (v4.1.1, obsoleta desde v4.14.0):** la regla `.navegacion { position: relative; z-index: 5 }` para desktop se eliminó al pasar la nav a desplegable global; ahora `.navegacion` es `position: absolute; z-index: 2500` en todos los tamaños. NO reintroduzcas un bloque `@media (min-width: 768px) { .navegacion { display: flex; position: relative } }` — anularía el `display: none` del desplegable y la nav volvería a mostrarse en línea.
 
@@ -382,6 +382,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.30.47** — El contenedor de la cuenta atrás (`.countdown__contenedor::before`, `index.html`) cambia en modo claro el degradado institucional por `$gradiente-celeste`, y su título «Cuenta atrás para las Fallas» pasa de blanco a `$azul-titulo-seccion`. El mecanismo `::before` + `opacity` y el modo oscuro no cambian. Baselines visuales de `index` regenerados.
 
 - **4.30.46** — La franja `.cuenta-atras-fondo` que envuelve la cuenta atrás de `index.html` pasa en modo claro del blanco a `$azul-cobalto` #0047AB (continuidad con las olas del hero); el contenedor de la cuenta atrás y el modo oscuro no cambian. Baselines visuales de `index` regenerados.
 
