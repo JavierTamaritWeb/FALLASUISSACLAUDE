@@ -129,14 +129,18 @@ for (const pagina of PAGINAS) {
         const enlace = page.locator('.ofrendas-video__descarga a.boton[download]').first();
         await enlace.scrollIntoViewIfNeeded();
         await expect(enlace).toBeVisible();
-        const geo = await enlace.evaluate((el) => {
-          const b = el.getBoundingClientRect();
-          const p = el.closest('.accordion__content').getBoundingClientRect();
-          return { bl: b.left, br: b.right, pl: p.left, pr: p.right, scroll: el.scrollWidth, client: el.clientWidth };
-        });
-        expect(geo.bl).toBeGreaterThanOrEqual(geo.pl - 0.5);
-        expect(geo.br).toBeLessThanOrEqual(geo.pr + 0.5);
-        expect(geo.scroll).toBeLessThanOrEqual(geo.client + 1);
+        // Se reintenta mientras terminan la apertura del acordeón y la animación
+        // reveal (bajo carga la primera medida puede caer a mitad de transición)
+        await expect(async () => {
+          const geo = await enlace.evaluate((el) => {
+            const b = el.getBoundingClientRect();
+            const p = el.closest('.accordion__content').getBoundingClientRect();
+            return { bl: b.left, br: b.right, pl: p.left, pr: p.right, scroll: el.scrollWidth, client: el.clientWidth };
+          });
+          expect(geo.bl).toBeGreaterThanOrEqual(geo.pl - 0.5);
+          expect(geo.br).toBeLessThanOrEqual(geo.pr + 0.5);
+          expect(geo.scroll).toBeLessThanOrEqual(geo.client + 1);
+        }).toPass({ timeout: 5000 });
       });
     }
 

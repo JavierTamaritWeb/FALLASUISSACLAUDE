@@ -25,7 +25,7 @@
   }
   &__title {
     font-size: v.$font-size-large;
-    color: var(--coral-marca);
+    color: var(--titulo-seccion);
     margin-bottom: 2rem;
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;

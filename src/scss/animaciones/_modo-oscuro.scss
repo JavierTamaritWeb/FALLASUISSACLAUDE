@@ -903,7 +903,7 @@ body.modo-oscuro .galeria {
 }
 
 body.modo-oscuro .galeria__title {
-  color: var(--coral-marca);
+  color: var(--titulo-seccion); // = $coral-texto en oscuro (v4.30.22)
 }
 
 body.modo-oscuro .galeria__texto {

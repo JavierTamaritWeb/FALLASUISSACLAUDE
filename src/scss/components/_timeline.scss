@@ -32,79 +32,113 @@
   }
 }
 
-// Dot individual
+// Dot individual (v4.30.22): el <button> es un área de clic de 24 px
+// (mínimo WCAG 2.2 AA) sin borde ni fondo, y el punto visible lo dibuja el
+// ::before con 8 px. Hay que fijar min-width/min-height porque la regla
+// global de _accessibility.scss da 44 px a todo <button> y los círculos se
+// veían enormes (44 px con borde de 2 px) en escritorio.
 .timeline__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 2px solid rgba(v.$blanco, 0.3);
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  position: relative;
+  width: 2.4rem;
+  height: 2.4rem;
+  min-width: 2.4rem;
+  min-height: 2.4rem;
   padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
 
-  &:hover {
-    border-color: rgba(v.$blanco, 0.6);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(v.$blanco, 0.25);
+    background: transparent;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  &:hover::before {
+    border-color: rgba(v.$blanco, 0.55);
+  }
+
+  // Anula la elevación y la sombra que _accessibility.scss pone a todo <button>
+  &:hover,
+  &:focus,
+  &:active {
+    transform: none;
+    box-shadow: none;
   }
 
   &:focus-visible {
     outline: 2px solid var(--coral-marca);
-    outline-offset: 3px;
+    outline-offset: 0;
   }
 
-  // Estado activo
-  &.is-active {
+  // Estado activo: punto relleno algo mayor, sin halo
+  &.is-active::before {
+    width: 10px;
+    height: 10px;
     border-color: var(--coral-marca);
     background: var(--coral-marca);
-    box-shadow: 0 0 8px rgba(var(--coral-marca-rgb), 0.6);
   }
 }
 
 // Línea conectora entre dots
 .timeline__line {
   width: 1px;
-  height: 16px;
-  background: rgba(v.$blanco, 0.15);
+  height: 6px;
+  background: rgba(v.$blanco, 0.12);
 }
 
 // Modo oscuro - sin cambios necesarios ya que usa rgba(v.$blanco)
 // Modo claro - ajustar colores para contraste
 .modo-claro .timeline__dot {
-  border-color: rgba(v.$negro, 0.2);
+  &::before {
+    border-color: rgba(v.$negro, 0.18);
+  }
 
-  &:hover {
+  &:hover::before {
     border-color: rgba(v.$negro, 0.4);
   }
 
-  &.is-active {
+  &.is-active::before {
     border-color: var(--coral-marca);
     background: var(--coral-marca);
-    box-shadow: 0 0 8px rgba(var(--coral-marca-rgb), 0.4);
   }
 }
 
 .modo-claro .timeline__line {
-  background: rgba(v.$negro, 0.1);
+  background: rgba(v.$negro, 0.08);
 }
 
-// Tablet: dots más pequeños (768px–1024px)
-@media (min-width: 768px) and (max-width: 1024px) {
+// Pantallas grandes (>1200 px): círculos visibles de 25 px (petición del
+// usuario, v4.30.22); el botón mide lo mismo que el círculo y el activo solo
+// cambia de color, no de tamaño
+@media (min-width: 1201px) {
   .timeline__dot {
-    width: 7px;
-    height: 7px;
-    min-width: 7px;
-    min-height: 7px;
-    border-width: 1.5px;
-    appearance: none;
-    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    min-height: 25px;
 
-    &.is-active {
-      box-shadow: 0 0 6px rgba(var(--coral-marca-rgb), 0.6);
+    &::before,
+    &.is-active::before {
+      width: 25px;
+      height: 25px;
     }
   }
 
   .timeline__line {
-    height: 12px;
+    height: 8px;
   }
 }
 
@@ -114,7 +148,7 @@
     transition: none;
   }
 
-  .timeline__dot {
+  .timeline__dot::before {
     transition: none;
   }
 }

@@ -76,6 +76,15 @@ Mecanismo, sin duplicar reglas:
 
 Declaradas en `src/scss/abstracts/_globales.scss`. En los SCSS: `v.$primary-color` → `var(--coral-marca)`; `rgba(v.$primary-color, a)` → `rgba(var(--coral-marca-rgb), a)`; `color.adjust(v.$primary-color, $lightness: …)` → la derivada correspondiente. `$primary-color` sigue en `_variables.scss` como fuente de los valores (tests y Sass). No cambian los literales de JS/HTML (sol de `dark.js`, iconos SVG, color «Festivo» de `calendario.js`). Guardia: `tests/color-tokens.e2e.spec.js` (en oscuro ningún elemento computa `rgb(255, 111, 97)`).
 
+## Títulos de sección en azul (v4.30.22)
+
+A petición del usuario, los títulos de sección con icono redondo y los títulos de las tarjetas de galería pasan del coral al azul institucional `$azul-titulo-seccion` (`#02427A`) en modo claro:
+
+- `.falla__title` (La Falla; también el título de `colaboraciones.html`), `.ofrenda__titulo`, `.eventos__heading-texto` (Eventos), `.eventos__title` (Calendario), `.forecast__title` (Meteo), `.blog__title`, `.galerias__title` (Galería) y `.galeria__title` (títulos de las 9 tarjetas de galería, que antes heredaban el coral de `.galerias__grid`).
+- Mecanismo: custom property `--titulo-seccion` en `abstracts/_globales.scss` (`#02427A` en `:root`; `$coral-texto` `#B83F35` en `html/body.modo-oscuro`, porque el azul sobre negro daría ≈2:1).
+- Contraste en claro: 9,3:1 sobre `#F5F5F5` y 9,2:1 sobre `$naranja-suave` (AAA).
+- Siguen en coral: Colaboraciones/Deportes/Nuevos Falleros con `__heading-texto` propio, «¿Quieres más?», el título del monumento y los botones.
+
 ## Inventario de degradados (sin cambios)
 
 | Dónde | Valor | Modo oscuro |
@@ -103,4 +112,4 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.19
+Última actualización: 14 de septiembre de 2026 - v4.30.22

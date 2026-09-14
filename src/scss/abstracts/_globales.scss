@@ -14,6 +14,10 @@
   --coral-marca-claro10: #{color.adjust(v.$primary-color, $lightness: 10%)};
   --coral-marca-oscuro8: #{color.adjust(v.$primary-color, $lightness: -8%)};
   --coral-marca-oscuro10: #{color.adjust(v.$primary-color, $lightness: -10%)};
+  // Títulos de sección con icono (La Falla, Galería, Ofrenda, Blog, Eventos,
+  // Calendario, Meteo) y títulos de las tarjetas de galería (v4.30.22):
+  // azul institucional en claro
+  --titulo-seccion: #{v.$azul-titulo-seccion};
 }
 
 html.modo-oscuro,
@@ -23,6 +27,8 @@ body.modo-oscuro {
   --coral-marca-claro10: #{color.adjust(v.$coral-texto, $lightness: 10%)};
   --coral-marca-oscuro8: #{color.adjust(v.$coral-texto, $lightness: -8%)};
   --coral-marca-oscuro10: #{color.adjust(v.$coral-texto, $lightness: -10%)};
+  // En oscuro el azul sería ilegible sobre negro (≈2:1): conservan el coral
+  --titulo-seccion: #{v.$coral-texto};
 }
 
 *,

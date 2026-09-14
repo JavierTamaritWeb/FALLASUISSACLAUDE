@@ -69,7 +69,7 @@
   }
   &__title {
     font-size: v.$font-size-large;
-    color: var(--coral-marca);
+    color: var(--titulo-seccion);
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;
     }
@@ -147,6 +147,9 @@
   }
   &__title {
     font-size: v.$font-size-small;
+    // Título de cada tarjeta de galería: azul institucional en claro (antes
+    // heredaba el coral de .galerias__grid); en oscuro lo fija _modo-oscuro.scss
+    color: var(--titulo-seccion);
   }
   @media (min-width: 768px) {
     &__title {
