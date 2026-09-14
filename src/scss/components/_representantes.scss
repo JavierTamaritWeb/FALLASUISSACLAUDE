@@ -273,6 +273,36 @@ body.modo-oscuro .accordion--representantes {
 }
 
 .accordion--monumentos {
+  // Paneles con 2 miniaturas (Monumento 2026-27 y 2024-25, v4.32.0): dos
+  // columnas centradas en ≥768px en vez de las 4 del grid base, para no dejar
+  // media fila vacía
+  .monumentos-grid--dos {
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 60rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  // Fotos apaisadas (Monumento 2024-25: monumento plantado y comisión, 4:3):
+  // se muestran completas en 4/3 en lugar de recortarlas al 3/4 de los retratos
+  .monumentos-grid--apaisado {
+    @media (min-width: 768px) {
+      max-width: 88rem;
+    }
+
+    .monumentos-grid__trigger,
+    .monumentos-grid__trigger .representantes-grid__imagen {
+      max-width: 40rem;
+      aspect-ratio: 4 / 3;
+    }
+
+    .monumentos-grid__trigger {
+      aspect-ratio: auto;
+    }
+  }
+
   .monumentos-grid__descarga {
     display: flex;
     justify-content: center;

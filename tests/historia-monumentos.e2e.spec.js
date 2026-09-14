@@ -1,6 +1,8 @@
 // Subsección Historia/Archivos/Monumentos (v4.15.0): panel "Monumento 2025-26"
 // con 4 miniaturas del monumento que se amplían en el lightbox compartido de
 // Colaboraciones (sin visor propio) y botón de descarga del vídeo del dron.
+// Desde v4.32.0 le acompañan "Monumento 2026-27" (2 bocetos, antes) y
+// "Monumento 2024-25" (2 fotos apaisadas, después).
 
 const { test, expect } = require('@playwright/test');
 
@@ -21,13 +23,14 @@ async function cambiarAValenciano(page) {
   return true;
 }
 
-async function abrirPanel(page) {
-  const titular = page.locator('.accordion--monumentos .accordion__titular').first();
+// Abre el panel "Monumento 2025-26" (el segundo desde v4.32.0)
+async function abrirPanel(page, edicion = '2025-26') {
+  const titular = page.locator(`.accordion--monumentos .accordion__titular[aria-controls^="monumento-${edicion}-"]`);
   await titular.scrollIntoViewIfNeeded();
   await expect(titular).toHaveAttribute('aria-expanded', 'false');
   await titular.click();
   await expect(titular).toHaveAttribute('aria-expanded', 'true');
-  const grid = page.locator('.accordion--monumentos .monumentos-grid');
+  const grid = page.locator(`.accordion--monumentos [id^="monumento-${edicion}-"] .monumentos-grid`);
   await expect(grid).toBeVisible();
   return { titular, grid };
 }
@@ -42,8 +45,9 @@ for (const pagina of PAGINAS) {
         const subtitulo = page.locator('h5.historia__archivos-subtitulo', { hasText: 'Monumentos' });
         await expect(subtitulo).toHaveCount(1);
 
-        const titular = page.locator('.accordion--monumentos .accordion__titular').first();
-        await expect(titular).toContainText('Monumento 2025-26');
+        const titulares = page.locator('.accordion--monumentos .accordion__titular');
+        await expect(titulares).toContainText(['Monumento 2026-27', 'Monumento 2025-26', 'Monumento 2024-25']);
+        const titular = titulares.nth(1);
         const panel = page.locator('#monumento-2025-26-' + pagina.replace('.html', ''));
         await expect(panel).toHaveAttribute('role', 'region');
         // Cerrado: el panel colapsa a max-height 0 con overflow hidden (acordeón base)
@@ -149,8 +153,8 @@ for (const pagina of PAGINAS) {
     test('variante /va/: pre-render en valenciano y href del vídeo con ../', async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 800 });
       await page.goto(`/va/${pagina}`);
-      const titular = page.locator('.accordion--monumentos .accordion__titular').first();
-      await expect(titular).toContainText('Monument 2025-26');
+      await expect(page.locator('.accordion--monumentos .accordion__titular'))
+        .toContainText(['Monument 2026-27', 'Monument 2025-26', 'Monument 2024-25']);
       const enlace = page.locator('.accordion--monumentos a.boton[download]');
       await expect(enlace).toHaveAttribute('href', '../img/dron/dron-001-2026.mp4');
       expect(await enlace.evaluate((a) => a.href)).toMatch(/\/img\/dron\/dron-001-2026\.mp4$/);
@@ -162,10 +166,40 @@ for (const pagina of PAGINAS) {
       await abrirPanel(page);
       test.skip(!(await cambiarAValenciano(page)), 'selector de idioma no disponible');
 
-      await expect(page.locator('.accordion--monumentos .accordion__header').first()).toHaveText('Monument 2025-26');
+      await expect(page.locator('.accordion--monumentos .accordion__header').nth(1)).toHaveText('Monument 2025-26');
       await expect(page.locator('.accordion--monumentos a.boton[download]')).toHaveText('Descarregar vídeo del dron');
       await expect(page.locator('.accordion--monumentos .representantes-grid__cargo').first()).toHaveText('Monument principal (esbós)');
       await expect(page.locator('.accordion--monumentos img.representantes-grid__imagen').first()).toHaveAttribute('alt', /esbós/);
     });
+
+    // v4.32.0: paneles 2026-27 (2 bocetos) y 2024-25 (2 fotos apaisadas)
+    for (const ed of [
+      { edicion: '2026-27', src: /monumento-falla-2026-27-boceto\.(avif|webp|jpg)$/, pie: 'Monumento principal (boceto)', ratio: 0.75, descarga: 0 },
+      { edicion: '2024-25', src: /monumento-real-foto_2024-25_01\.(avif|webp|jpg)$/, pie: 'Monumento plantado', ratio: 4 / 3, descarga: 0 }
+    ]) {
+      test(`Monumento ${ed.edicion}: 2 miniaturas en 2 columnas que abren el lightbox`, async ({ page }) => {
+        await page.setViewportSize({ width: 1280, height: 800 });
+        await page.goto(`/${pagina}`);
+        const { grid } = await abrirPanel(page, ed.edicion);
+        const triggers = grid.locator('button.colaboraciones-mosaic__trigger');
+        await expect(triggers).toHaveCount(2);
+        expect(await grid.evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(' ').length)).toBe(2);
+        await expect(grid.locator('..').locator('a.boton[download]')).toHaveCount(ed.descarga);
+
+        const img = triggers.first().locator('img.representantes-grid__imagen');
+        await img.scrollIntoViewIfNeeded();
+        await expect.poll(() => img.evaluate((el) => el.complete && el.naturalWidth > 0)).toBe(true);
+        const caja = await img.boundingBox();
+        expect(caja.width / caja.height).toBeCloseTo(ed.ratio, 1);
+        await expect(grid.locator('.representantes-grid__cargo').first()).toHaveText(ed.pie);
+
+        await triggers.first().click();
+        const lightbox = page.locator('#colaboracionesLightbox');
+        await expect(lightbox).toHaveClass(/open/);
+        await expect(lightbox.locator('.colaboraciones-lightbox__image')).toHaveAttribute('src', ed.src);
+        await page.keyboard.press('Escape');
+        await expect(lightbox).not.toHaveClass(/open/);
+      });
+    }
   });
 }
