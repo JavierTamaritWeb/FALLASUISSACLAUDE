@@ -659,6 +659,21 @@ body:not(.modo-oscuro) .historia {
   }
 }
 
+// Paneles de la Plana Mayor (los cuatro con foto) en claro: fondo
+// $turquesa-claro en lugar del degradado azul (v4.30.39). Por debajo de
+// 1201 px el texto va directamente sobre el panel y pasa a $negro-casi; en
+// pantallas mayores sigue en hueso dentro de su caja turquesa oscura.
+// Directiva y Organigrama conservan el azul.
+body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion .accordion__content:has(.accordion__leyenda-foto) {
+  background: v.$turquesa-claro;
+
+  @media (max-width: 1200px) {
+    .accordion__texto {
+      color: v.$negro-casi;
+    }
+  }
+}
+
 body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion,
 body:not(.modo-oscuro) .historia__archivos .accordion {
   background-color: v.$rosa-acordeon;
