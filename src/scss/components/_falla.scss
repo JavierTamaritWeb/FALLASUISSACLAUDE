@@ -630,6 +630,25 @@ body:not(.modo-oscuro) .historia {
   &__archivos .accordion {
     border: 1px solid v.$turquesa;
   }
+  // Panel de Representantes (v4.30.37): fondo $turquesa-claro en lugar del
+  // degradado azul; los textos pasan a oscuros (nombre $coral-texto 4,1:1 para
+  // 20px en negrita, cargo/placeholder $negro-casi). Monumentos y Ofrendas
+  // conservan el azul.
+  &__archivos .accordion--representantes:not(.accordion--monumentos):not(.accordion--ofrendas) {
+    .accordion__content {
+      background: v.$turquesa-claro;
+    }
+    .representantes-grid__nombre {
+      color: v.$coral-texto;
+    }
+    .representantes-grid__cargo,
+    .representantes-grid__placeholder {
+      color: v.$negro-casi;
+    }
+    .representantes-grid__imagen {
+      box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
+    }
+  }
   // Rejillas de Presentaciones y Llibrets en turquesa claro (v4.30.36;
   // en 4.30.34-35 fue $turquesa-texto, demasiado oscuro para el usuario).
   &__grid {
