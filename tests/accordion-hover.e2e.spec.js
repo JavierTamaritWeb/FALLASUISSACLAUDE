@@ -122,7 +122,10 @@ test.describe('Hover de los titulares de acordeón (como .boton)', () => {
     const antes = await estilos(titular);
     await pasarRaton(page, titular);
     const s = await estilos(titular);
-    expect(s.bg).toContain('linear-gradient(135deg, rgba(255, 111, 97, 0.98)');
+    // Archivos comparte la paleta de «Nosotros» desde v4.30.32: hover rosa sólido
+    expect(s.bg).toBe('none');
+    expect(s.bgColor).toBe(ROSA_HOVER);
+    expect(s.header).toBe(NEGRO_CASI);
     expect(s.transform).toBe('none');
     expect(s.top).toBe(antes.top);
 
@@ -148,7 +151,7 @@ test.describe('Hover de los titulares de acordeón (como .boton)', () => {
     await page.waitForTimeout(400);
     await expect(titular).toBeFocused();
     const s = await estilos(titular);
-    expect(s.bg).toContain('linear-gradient');
+    expect(s.bgColor).toBe(ROSA_HOVER);
     expect(s.outline).toBe('none');
     expect(s.outlineColor).not.toBe('rgb(0, 123, 255)');
     const sombra = await titular.evaluate((el) => getComputedStyle(el).boxShadow);

@@ -586,7 +586,47 @@ p {
 //   con el texto en $negro-casi (6,4:1). Sobre el rosa, el turquesa de marca daba
 //   3,5:1 (insuficiente para 14px), así que los titulares usan $turquesa-sobre-rosa
 //   (#007A86, 4,6:1 en todos los tamaños).
-body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion {
+// Desde v4.30.32 la subsección «Historia» comparte esta paleta: contenedor
+// turquesa suave con borde azul, caja de Archivos en rosa con borde turquesa,
+// títulos en turquesa y sus acordeones (Representantes, Monumentos, Ofrendas)
+// con las mismas filas rosa y hover. El modo oscuro no cambia.
+body:not(.modo-oscuro) .historia {
+  &__prologo {
+    background: v.$turquesa-suave;
+    border-color: v.$azul-titulo-seccion;
+  }
+  &__archivos {
+    background-color: v.$rosa-acordeon;
+    border: 1px solid v.$turquesa;
+    color: v.$turquesa-sobre-rosa;
+  }
+  &__archivos-titulo,
+  &__archivos-subtitulo,
+  &__card-cluster-label,
+  &__card-title {
+    color: v.$turquesa-sobre-rosa;
+  }
+  &__card-cluster-label {
+    background-color: rgba(v.$turquesa, 0.12);
+  }
+  &__card-cluster {
+    border-color: rgba(v.$turquesa, 0.28);
+    background: linear-gradient(135deg, rgba(v.$turquesa, 0.12), rgba(255, 255, 255, 0.84));
+    &:hover,
+    &:focus-within {
+      border-color: rgba(v.$turquesa, 0.62);
+    }
+  }
+  &__card--digital .historia__card-title {
+    color: v.$color-azul-falla;
+  }
+  &__archivos .accordion {
+    border: 1px solid v.$turquesa;
+  }
+}
+
+body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion,
+body:not(.modo-oscuro) .historia__archivos .accordion {
   background-color: v.$rosa-acordeon;
 
   .accordion__titular {
@@ -613,7 +653,8 @@ body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion {
 
   &__titulo {
     text-transform: none;
-    color: var(--coral-marca);
+    // «Historia»: azul institucional en claro, coral en oscuro (v4.30.32)
+    color: var(--titulo-seccion);
   }
   @media (max-width: 480px) {
     padding: 0rem !important;
