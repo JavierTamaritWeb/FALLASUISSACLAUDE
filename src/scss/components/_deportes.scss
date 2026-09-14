@@ -26,6 +26,20 @@
     z-index: 1;
   }
 
+  // Teaser de la home en claro (v4.30.41): degradado celeste de 5 tonos como
+  // Colaboraciones; título azul de sección e intro en $negro-casi (sobre el
+  // celeste el blanco y el coral no dan contraste). deportes.html no cambia.
+  body:not(.modo-oscuro) &--teaser {
+    background: v.$gradiente-celeste;
+
+    .deportes__heading-texto {
+      color: var(--titulo-seccion);
+    }
+    .deportes__intro {
+      color: v.$negro-casi;
+    }
+  }
+
   &__heading {
     display: flex;
     align-items: center;
