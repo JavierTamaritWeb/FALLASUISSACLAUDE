@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.42 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.30.43 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.42).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.43).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -383,7 +383,9 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
-- **4.30.42** — El acordeón HOPE de la sección Colaboraciones de `index.html` recibe el modificador `.falleros__nosotros--plana-mayor`, así que en modo claro comparte la paleta de «Nosotros»: contenedor `$turquesa-suave` con borde azul de 2 px, acordeón con borde `$turquesa`, fila `$rosa-acordeon` con hover `#FF5A8E` y titular/▼ en turquesa. El panel HOPE abierto sigue en azul y el modo oscuro en coral; `colaboraciones.html` no cambia. Sin CSS nuevo.
+- **4.30.43** — El panel HOPE abierto de la home (`index.html`) pasa en modo claro del degradado azul a `$turquesa-claro` #BFE6E9, con el texto en `$negro-casi` (el blanco no se leía). El mosaico de fotos no cambia; `colaboraciones.html` y el modo oscuro tampoco.
+
+- **4.30.42** — El acordeón HOPE de la sección Colaboraciones de `index.html` recibe el modificador `.falleros__nosotros--plana-mayor`, así que en modo claro comparte la paleta de «Nosotros»: contenedor `$turquesa-suave` con borde azul de 2 px, acordeón con borde `$turquesa`, fila `$rosa-acordeon` con hover `#FF5A8E` y titular/▼ en turquesa. El modo oscuro sigue en coral y `colaboraciones.html` no cambia. Sin CSS nuevo. Desde v4.30.43 el panel HOPE abierto de la home va en `$turquesa-claro` con el texto en `$negro-casi` (regla en `_colaboraciones.scss`, solo claro).
 
 - **4.30.41** — El teaser «Deportes» de `index.html` (`.deportes--teaser`) adopta en modo claro el `$gradiente-celeste` de Colaboraciones, con el título en `var(--titulo-seccion)` y la intro en `$negro-casi`; el velo `::before` del modo oscuro sigue igual y `deportes.html` no cambia. Baselines visuales de `index` regenerados.
 

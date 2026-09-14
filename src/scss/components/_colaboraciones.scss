@@ -139,6 +139,17 @@
   }
 }
 
+// Panel HOPE de la home en claro (v4.30.43): fondo $turquesa-claro en lugar
+// del degradado azul y texto oscuro (el blanco no se lee sobre el celeste).
+// colaboraciones.html y el modo oscuro no cambian.
+body:not(.modo-oscuro) .colaboraciones__accordion .falleros__nosotros--plana-mayor .accordion__content {
+  background: v.$turquesa-claro;
+
+  .colaboraciones-page__texto {
+    color: v.$negro-casi !important;
+  }
+}
+
 .colaboraciones-page__texto {
   color: v.$blanco !important;
   font-size: clamp(1.5rem, 1.6vw, 1.8rem);
