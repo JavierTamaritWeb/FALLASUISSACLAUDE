@@ -1115,7 +1115,7 @@ body.modo-oscuro .header-inner__barra--scrolled {
 // Cristal oscuro como la barra en modo oscuro (v4.23.6): mismo gris
 // translúcido que .header__barra--scrolled, con blur real de la página.
 body.modo-oscuro .navegacion {
-  background: rgba(51, 51, 51, 0.8);
+  background: v.$cristal-menu-oscuro;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border-color: rgba(255, 255, 255, 0.08);
@@ -1164,4 +1164,45 @@ body.modo-oscuro .banner-subvencion__imagen {
 body.modo-oscuro .historia__leyenda {
     background: v.$secondary-color;
   
+}
+
+/* ----------------------------------------------
+   MODO OSCURO BUSCADOR (v4.29.0; aquí desde v4.35.0)
+------------------------------------------------ */
+// Mismo gris translúcido que el menú desplegable
+body.modo-oscuro .buscador {
+  background: v.$cristal-menu-oscuro;
+}
+
+// Foco del buscador en oscuro: un solo anillo (ámbar del tema oscuro sobre el gris
+// del panel; casi negro dentro del campo blanco), sin el anillo interior blanco
+// global, que sobre el campo blanco no se ve y sumaba contornos
+body.modo-oscuro .buscador__input:focus-visible {
+  outline: 3px solid v.$amarillo-anaranjado;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+body.modo-oscuro .buscador__cerrar:focus-visible,
+body.modo-oscuro .buscador__resultado:focus-visible,
+body.modo-oscuro .buscador__resultado.is-activo,
+body.modo-oscuro .buscador__ejemplo:focus-visible,
+body.modo-oscuro .buscador__mas:focus-visible,
+body.modo-oscuro .buscador__reintentar:focus-visible {
+  outline: 3px solid v.$amarillo-anaranjado;
+  box-shadow: none;
+}
+
+body.modo-oscuro .buscador__borrar:focus-visible {
+  outline: 2px solid v.$negro-casi;
+  box-shadow: none;
+}
+
+body.modo-oscuro .buscador__mark {
+  background: rgba(v.$amarillo-anaranjado, 0.35);
+}
+
+body.modo-oscuro .header__search-toggle {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(70, 70, 70, 0.95);
 }

@@ -24,6 +24,20 @@
 // (sin círculo, poco peso visual); la del campo solo borra lo escrito y solo
 // existe cuando hay texto. Ambas se dibujan con dos barras (no con el glifo
 // «×», que no queda centrado en la caja de línea; ver v4.15.1).
+// Contenido presente para lectores de pantalla pero invisible (equivale a .sr-only,
+// utilizable dentro de media queries, donde @extend no está permitido) — v4.35.0
+@mixin visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @mixin aspa {
   position: relative;
   padding: 0;

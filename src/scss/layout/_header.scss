@@ -856,7 +856,7 @@ body.modo-oscuro {
     // blur real de la página (posible porque la barra ya no lleva
     // backdrop-filter en el propio elemento). Al 70 % (la barra usa .25-.30)
     // para que el texto blanco siga legible sobre tarjetas blancas difuminadas.
-    background: linear-gradient(135deg, rgba(10, 75, 141, 0.7) 0%, rgba(2, 66, 122, 0.7) 60%, rgba(0, 51, 102, 0.7) 100%);
+    background: v.$gradiente-cristal-menu;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.18);

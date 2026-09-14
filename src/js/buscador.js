@@ -269,21 +269,31 @@
   if (typeof document === 'undefined') return;
 
   // ---------- Interfaz ----------
+  // v4.35.0: resaltado de coincidencias, patrón combobox/listbox con
+  // aria-activedescendant, Enter abre el resultado activo, «Mostrar más» sin
+  // perder el foco, anuncios completos en aria-live, altura por visualViewport
+  // en móvil, espera tras un error de red y validación del esquema de las URL.
   window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/, '').replace(/(^|\/)va\/$/, '$1');
 
-  // Textos de reserva (= valor ES de translations.json → buscador.*)
+  // Textos de reserva (= valor ES de translations.json → buscador.*) y los
+  // visibles del botón/panel en VA para el primer pintado en /va/ (evita el
+  // parpadeo en castellano antes de que carguen las traducciones)
   var FALLBACK = {
     abrir: 'Buscar', cerrar: 'Cerrar buscador', etiqueta: 'Buscar en la web', placeholder: 'Escribe qué buscas…',
     borrar: 'Borrar la búsqueda', ayuda: 'Para filtrar los actos por día o categoría usa el', ayudaEnlace: 'calendario',
-    ejemplosTitulo: 'Prueba con:', ejemplos: ['Ofrenda 2026', 'autorización menores', 'galería Cremà', 'calendario'],
+    ejemplosTitulo: 'Prueba con:', ejemplos: ['Ofrenda 2026', 'autorización menores', 'galería Cremá', 'calendario'],
     minimo: 'Escribe al menos 2 letras.', cargando: 'Cargando el índice…', resultados: '{n} resultados', resultado: '1 resultado',
+    resultadosPara: '{n} resultados para «{q}»', resultadoPara: '1 resultado para «{q}»', corregido: 'Mostrando resultados para «{q}»',
+    listaAria: 'Resultados de la búsqueda',
     sinResultados: 'Sin coincidencias para «{q}».', sinResultadosAyuda: 'Revisa la ortografía o prueba con una de estas búsquedas:',
     error: 'No se ha podido cargar el buscador.', reintentar: 'Reintentar', verGalerias: 'Ver todas las galerías',
     mostrarMas: 'Mostrar más resultados', pasado: 'Pasado',
-    tipo: { pagina: 'Página', seccion: 'Sección', galeria: 'Galería', post: 'Blog', evento: 'Evento', anuncio: 'Anuncio', documento: 'Documento', formulario: 'Formulario', legal: 'Legal' }
+    tipo: { pagina: 'Página', seccion: 'Sección', galeria: 'Galería', post: 'Blog', evento: 'Evento', anuncio: 'Anuncio', documento: 'Documento', formulario: 'Formulario', legal: 'Legal', persona: 'Persona' }
   };
+  var FALLBACK_VA = { abrir: 'Cercar', cerrar: 'Tancar cercador', etiqueta: 'Cercar en la web', placeholder: 'Escriu què busques…', borrar: 'Esborrar la cerca' };
   var POR_PAGINA = 10;
   var MIN_LETRAS = 2;
+  var ESPERA_TRAS_ERROR = 3000;
 
   function idioma() {
     if (window.currentLanguage === 'va' || window.currentLanguage === 'es') return window.currentLanguage;
@@ -298,6 +308,7 @@
     var tabla = window.translations && window.translations[idioma()];
     var v = tabla ? leer(tabla, 'buscador.' + clave) : undefined;
     if (v === undefined && window.translations && window.translations.es) v = leer(window.translations.es, 'buscador.' + clave);
+    if (v === undefined && !window.translations && idioma() === 'va') v = FALLBACK_VA[clave];
     if (v === undefined) v = leer(FALLBACK, clave);
     return v;
   }
@@ -315,17 +326,54 @@
     try { return sessionStorage.getItem('buscadorQuery') || ''; } catch (e) { return ''; }
   }
 
-  // URL de destino: páginas con variante /va/; wrappers PDF y llibret solo en raíz
+  // URL de destino: páginas con variante /va/; los PDF reales solo en raíz. Se
+  // rechaza cualquier esquema (javascript:, http:…): el índice solo trae rutas relativas.
   function resolverUrl(url) {
+    var u = String(url || '');
+    if (/^[a-z][a-z0-9+.-]*:/i.test(u) || u.indexOf('//') === 0) return '#';
     var raiz = window.SITE_ROOT;
-    if (/^pdf\//.test(url) || /^llibret_/.test(url)) return raiz + url;
-    return raiz + (idioma() === 'va' ? 'va/' : '') + url;
+    if (/^pdf\//.test(u)) return raiz + u;
+    return raiz + (idioma() === 'va' ? 'va/' : '') + u;
   }
 
   function escapar(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
+  }
+
+  // ---- Resaltado: <mark> sobre las palabras que casan (raíces y sinónimos incluidos) ----
+  // Devuelve HTML escapado; `formas` son las raíces normalizadas de la consulta.
+  function resaltar(texto, formas) {
+    var partes = String(texto || '').split(/(\s+)/);
+    return partes.map(function (parte) {
+      if (!parte || /^\s+$/.test(parte)) return escapar(parte);
+      var norm = normalizar(parte);
+      var propias = variantes(norm);
+      var casa = formas.some(function (f) {
+        return f.length >= 2 && (propias.indexOf(f) !== -1 || (f.length >= 3 && norm.indexOf(f) === 0));
+      });
+      return casa ? '<mark class="buscador__mark">' + escapar(parte) + '</mark>' : escapar(parte);
+    }).join('');
+  }
+
+  // Ventana de la descripción alrededor de la primera coincidencia (≈140 caracteres)
+  function ventana(desc, formas) {
+    var texto = String(desc || '');
+    var MAX = 140;
+    if (texto.length <= MAX) return texto;
+    var palabras = texto.split(' ');
+    var idx = -1;
+    for (var i = 0; i < palabras.length && idx === -1; i++) {
+      var n = normalizar(palabras[i]); var vs = variantes(n);
+      if (formas.some(function (f) { return vs.indexOf(f) !== -1 || (f.length >= 3 && n.indexOf(f) === 0); })) idx = i;
+    }
+    if (idx === -1) return texto.slice(0, MAX - 1).replace(/\s+\S*$/, '') + '…';
+    // Empezar unas palabras antes de la coincidencia
+    var ini = Math.max(0, idx - 4);
+    var out = palabras.slice(ini).join(' ');
+    if (out.length > MAX) out = out.slice(0, MAX - 1).replace(/\s+\S*$/, '') + '…';
+    return (ini > 0 ? '…' : '') + out;
   }
 
   function init() {
@@ -338,11 +386,15 @@
     var indiceUrl = window.SITE_ROOT + meta.getAttribute('content');
     var registros = null;
     var cargando = null;
+    var ultimoError = 0;
     var mostrados = POR_PAGINA;
     var ultimaConsulta = '';
+    var ultimosResultados = [];
     var debounce = null;
+    var activo = -1; // índice del resultado activo (aria-activedescendant)
 
-    // Botón lupa + «Buscar»
+    // Botón lupa + «Buscar»: el nombre accesible es su texto visible (WCAG 2.5.3);
+    // el estado lo da aria-expanded, sin cambiar el nombre a «Cerrar»
     var toggle = document.createElement('button');
     toggle.type = 'button';
     toggle.className = 'header__search-toggle';
@@ -367,7 +419,8 @@
       '  <button type="button" class="buscador__cerrar" aria-label=""><span aria-hidden="true">&times;</span></button>' +
       '</div>' +
       '<div class="buscador__campo">' +
-      '  <input id="siteSearchInput" class="buscador__input" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">' +
+      '  <input id="siteSearchInput" class="buscador__input" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search"' +
+      '    role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="siteSearchLista" aria-haspopup="listbox">' +
       '  <button type="button" class="buscador__borrar" aria-label="" hidden><span aria-hidden="true">&times;</span></button>' +
       '</div>' +
       '<p class="buscador__ayuda"><span class="buscador__ayuda-texto"></span> <a class="buscador__ayuda-enlace" href="#"></a>.</p>' +
@@ -383,7 +436,6 @@
 
     function pintarTextos() {
       toggle.querySelector('.header__search-toggle-texto').textContent = t('abrir');
-      toggle.setAttribute('aria-label', t(abierto() ? 'cerrar' : 'abrir'));
       panel.querySelector('.buscador__etiqueta').textContent = t('etiqueta');
       input.placeholder = t('placeholder');
       borrar.setAttribute('aria-label', t('borrar'));
@@ -398,11 +450,19 @@
 
     function setEstado(nombre) {
       cuerpo.setAttribute('data-estado', nombre);
+      if (nombre !== 'resultados') setActivo(-1);
+      input.setAttribute('aria-expanded', nombre === 'resultados' ? 'true' : 'false');
     }
 
     function anunciar(texto) {
       estado.textContent = '';
       window.setTimeout(function () { estado.textContent = texto; }, 30);
+    }
+
+    function plantilla(clave, valores) {
+      var s = String(t(clave) || '');
+      Object.keys(valores).forEach(function (k) { s = s.split('{' + k + '}').join(valores[k]); });
+      return s;
     }
 
     function ejemplosHtml() {
@@ -421,11 +481,13 @@
     function pintarMinimo() {
       setEstado('minimo');
       cuerpo.innerHTML = '<p class="buscador__mensaje">' + escapar(t('minimo')) + '</p>';
+      anunciar(t('minimo'));
     }
 
     function pintarCargando() {
       setEstado('cargando');
       cuerpo.innerHTML = '<p class="buscador__mensaje">' + escapar(t('cargando')) + '</p>';
+      anunciar(t('cargando'));
     }
 
     function pintarError() {
@@ -438,40 +500,94 @@
 
     function pintarVacio(q) {
       setEstado('vacio');
-      cuerpo.innerHTML = '<p class="buscador__mensaje">' + escapar(t('sinResultados').replace('{q}', q)) + '</p>' +
+      cuerpo.innerHTML = '<p class="buscador__mensaje">' + escapar(plantilla('sinResultados', { q: q })) + '</p>' +
         '<p class="buscador__mensaje-secundario">' + escapar(t('sinResultadosAyuda')) + '</p>' + ejemplosHtml() +
         '<p class="buscador__acciones"><a class="buscador__enlace-secundario" href="' + escapar(resolverUrl('galerias.html')) + '">' + escapar(t('verGalerias')) + '</a></p>';
-      anunciar(t('sinResultados').replace('{q}', q));
+      anunciar(plantilla('sinResultados', { q: q }));
+    }
+
+    // Formas de la consulta (raíces + sinónimos + correcciones) para el resaltado
+    function formasDe(consulta) {
+      var out = [];
+      Object.keys(consulta.formas || {}).forEach(function (tok) { out = out.concat(consulta.formas[tok]); });
+      return out;
+    }
+
+    function itemHtml(res, i, formas) {
+      var r = res.registro;
+      var lang = idioma();
+      var titulo = r.titulo[lang] || r.titulo.es;
+      var desc = r.desc[lang] || r.desc.es || '';
+      var chips = '<span class="buscador__chip buscador__chip--tipo">' + escapar(t('tipo.' + r.tipo) || r.tipo) + '</span>';
+      var sec = nombreSeccion(r.seccion);
+      // Sin chip de sección si repite el tipo ("Galería · Galería")
+      if (sec && sec.toLowerCase() !== String(t('tipo.' + r.tipo) || '').toLowerCase()) chips += '<span class="buscador__chip">' + escapar(sec) + '</span>';
+      if (r.ejercicio) chips += '<span class="buscador__chip">' + escapar(r.ejercicio) + '</span>';
+      else if (r.fecha) chips += '<span class="buscador__chip">' + escapar(r.fecha) + '</span>';
+      if (res.pasado) chips += '<span class="buscador__chip buscador__chip--pasado">' + escapar(t('pasado')) + '</span>';
+      return '<li class="buscador__item" role="none">' +
+        '<a class="buscador__resultado" role="option" id="siteSearchOpcion' + (i + 1) + '" aria-selected="false" href="' + escapar(resolverUrl(r.url)) + '" data-id="' + escapar(r.id) + '" data-pos="' + (i + 1) + '">' +
+        '<span class="buscador__titulo">' + resaltar(titulo, formas) + '</span>' +
+        (desc ? '<span class="buscador__desc">' + resaltar(ventana(desc, formas), formas) + '</span>' : '') +
+        '<span class="buscador__chips">' + chips + '</span>' +
+        '</a></li>';
+    }
+
+    function masHtml(resultados) {
+      if (resultados.length <= mostrados) return '';
+      return '<p class="buscador__acciones"><button type="button" class="buscador__mas">' + escapar(t('mostrarMas')) + ' (' + (resultados.length - mostrados) + ')</button></p>';
+    }
+
+    function consultaCorregida(q, consulta) {
+      var corr = consulta && consulta.corr ? consulta.corr : {};
+      if (!Object.keys(corr).length) return '';
+      return q.split(/\s+/).map(function (palabra) {
+        var n = normalizar(palabra);
+        return corr[n] || palabra;
+      }).join(' ');
     }
 
     function pintarResultados(resultados, q) {
       setEstado('resultados');
-      var lang = idioma();
+      var formas = formasDe(resultados.consulta || {});
       var visibles = resultados.slice(0, mostrados);
-      var html = '<ol class="buscador__lista">' + visibles.map(function (res, i) {
-        var r = res.registro;
-        var titulo = r.titulo[lang] || r.titulo.es;
-        var desc = r.desc[lang] || r.desc.es || '';
-        var chips = '<span class="buscador__chip buscador__chip--tipo">' + escapar(t('tipo.' + r.tipo) || r.tipo) + '</span>';
-        var sec = nombreSeccion(r.seccion);
-        // Sin chip de sección si repite el tipo ("Galería · Galería")
-        if (sec && sec.toLowerCase() !== String(t('tipo.' + r.tipo) || '').toLowerCase()) chips += '<span class="buscador__chip">' + escapar(sec) + '</span>';
-        if (r.ejercicio) chips += '<span class="buscador__chip">' + escapar(r.ejercicio) + '</span>';
-        else if (r.fecha) chips += '<span class="buscador__chip">' + escapar(r.fecha) + '</span>';
-        if (res.pasado) chips += '<span class="buscador__chip buscador__chip--pasado">' + escapar(t('pasado')) + '</span>';
-        return '<li class="buscador__item">' +
-          '<a class="buscador__resultado" href="' + escapar(resolverUrl(r.url)) + '" data-id="' + escapar(r.id) + '" data-pos="' + (i + 1) + '">' +
-          '<span class="buscador__titulo">' + escapar(titulo) + '</span>' +
-          (desc ? '<span class="buscador__desc">' + escapar(desc.length > 140 ? desc.slice(0, 137) + '…' : desc) + '</span>' : '') +
-          '<span class="buscador__chips">' + chips + '</span>' +
-          '</a></li>';
-      }).join('') + '</ol>';
-      if (resultados.length > mostrados) {
-        html += '<p class="buscador__acciones"><button type="button" class="buscador__mas">' + escapar(t('mostrarMas')) + ' (' + (resultados.length - mostrados) + ')</button></p>';
-      }
+      var corregida = consultaCorregida(q, resultados.consulta);
+      var html = '';
+      if (corregida) html += '<p class="buscador__corregido">' + escapar(plantilla('corregido', { q: corregida })) + '</p>';
+      html += '<ol class="buscador__lista" id="siteSearchLista" role="listbox" aria-label="' + escapar(t('listaAria')) + '">' +
+        visibles.map(function (res, i) { return itemHtml(res, i, formas); }).join('') + '</ol>' + masHtml(resultados);
       cuerpo.innerHTML = html;
-      anunciar(resultados.length === 1 ? t('resultado') : String(t('resultados')).replace('{n}', resultados.length));
-      void q;
+      setActivo(-1);
+      var n = resultados.length;
+      anunciar(n === 1 ? plantilla('resultadoPara', { q: corregida || q }) : plantilla('resultadosPara', { n: n, q: corregida || q }));
+    }
+
+    // «Mostrar más»: añade los siguientes sin repintar la lista y enfoca el primero nuevo
+    function mostrarMas() {
+      var lista = cuerpo.querySelector('.buscador__lista');
+      if (!lista || !ultimosResultados.length) return;
+      var desde = mostrados;
+      mostrados += POR_PAGINA;
+      var formas = formasDe(ultimosResultados.consulta || {});
+      lista.insertAdjacentHTML('beforeend', ultimosResultados.slice(desde, mostrados).map(function (res, i) { return itemHtml(res, desde + i, formas); }).join(''));
+      var mas = cuerpo.querySelector('.buscador__acciones');
+      if (mas) mas.remove();
+      cuerpo.insertAdjacentHTML('beforeend', masHtml(ultimosResultados));
+      var nuevo = lista.querySelector('#siteSearchOpcion' + (desde + 1));
+      if (nuevo) nuevo.focus();
+    }
+
+    // Opción activa del listbox (↑/↓ desde el campo, sin mover el foco)
+    function opciones() { return Array.prototype.slice.call(cuerpo.querySelectorAll('.buscador__resultado')); }
+    function setActivo(i) {
+      var ops = opciones();
+      ops.forEach(function (op) { op.setAttribute('aria-selected', 'false'); op.classList.remove('is-activo'); });
+      activo = i;
+      if (i < 0 || !ops[i]) { input.removeAttribute('aria-activedescendant'); return; }
+      ops[i].setAttribute('aria-selected', 'true');
+      ops[i].classList.add('is-activo');
+      input.setAttribute('aria-activedescendant', ops[i].id);
+      if (typeof ops[i].scrollIntoView === 'function') ops[i].scrollIntoView({ block: 'nearest' });
     }
 
     function cargarIndice() {
@@ -483,11 +599,13 @@
           return res.json();
         })
         .then(function (data) {
-          registros = Array.isArray(data.registros) ? data.registros : [];
+          if (!data || !Array.isArray(data.registros) || !data.registros.length) throw new Error('índice vacío');
+          registros = data.registros;
           return registros;
         })
         .catch(function (err) {
           cargando = null;
+          ultimoError = Date.now();
           throw err;
         });
       return cargando;
@@ -501,15 +619,30 @@
       guardarConsulta(q);
       if (!q) { pintarInicial(); return; }
       if (q.length < MIN_LETRAS) { pintarMinimo(); return; }
-      if (!registros) pintarCargando();
+      if (!registros) {
+        // Tras un fallo de red, no se reintenta con cada pulsación (sí con «Reintentar»)
+        if (Date.now() - ultimoError < ESPERA_TRAS_ERROR) { pintarError(); return; }
+        pintarCargando();
+      }
       cargarIndice().then(function (regs) {
         if (q !== ultimaConsulta) return;
         var resultados = buscar(regs, q);
+        ultimosResultados = resultados;
         if (!resultados.length) pintarVacio(q);
         else pintarResultados(resultados, q);
       }).catch(function () {
         if (q === ultimaConsulta) pintarError();
       });
+    }
+
+    // Altura del panel en móvil con el teclado desplegado (visualViewport)
+    function ajustarAltura() {
+      if (!abierto()) return;
+      var vv = window.visualViewport;
+      if (!vv) { panel.style.maxHeight = ''; return; }
+      var top = panel.getBoundingClientRect().top;
+      var disponible = vv.height + vv.offsetTop - top - 12;
+      panel.style.maxHeight = disponible > 160 ? disponible + 'px' : '';
     }
 
     function abrir() {
@@ -519,11 +652,11 @@
       panel.inert = false;
       panel.classList.add('is-open');
       toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', t('cerrar'));
       var previa = leerConsulta();
       if (previa && !input.value) input.value = previa;
       ejecutar(input.value);
       input.focus({ preventScroll: true });
+      ajustarAltura();
       cargarIndice().catch(function () { /* se pinta al buscar */ });
     }
 
@@ -532,9 +665,23 @@
       panel.classList.remove('is-open');
       panel.hidden = true;
       panel.inert = true;
+      panel.style.maxHeight = '';
       toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', t('abrir'));
+      setActivo(-1);
       if (devolverFoco) toggle.focus({ preventScroll: true });
+    }
+
+    // Ir a un resultado: si es un ancla de esta misma página con el hash ya
+    // puesto, hashchange no se dispara; se fuerza para que acc.js reabra el panel
+    function irA(enlace) {
+      cerrarPanel(false);
+      try {
+        var destino = new URL(enlace.href, window.location.href);
+        var mismaPagina = destino.pathname === window.location.pathname && destino.search === window.location.search;
+        if (mismaPagina && destino.hash && destino.hash === window.location.hash) {
+          window.setTimeout(function () { window.dispatchEvent(new HashChangeEvent('hashchange')); }, 0);
+        }
+      } catch (e) { /* URL inválida: el enlace navega igual */ }
     }
 
     // Eventos
@@ -556,10 +703,30 @@
       debounce = window.setTimeout(function () { ejecutar(input.value); }, 150);
     });
     input.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') { e.preventDefault(); window.clearTimeout(debounce); ejecutar(input.value); }
-      if (e.key === 'ArrowDown') {
-        var primero = cuerpo.querySelector('.buscador__resultado, .buscador__ejemplo');
-        if (primero) { e.preventDefault(); primero.focus(); }
+      var ops;
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        ops = opciones();
+        var destino = activo >= 0 ? ops[activo] : ops[0];
+        if (destino && cuerpo.getAttribute('data-estado') === 'resultados' && input.value.trim() === ultimaConsulta) {
+          irA(destino);
+          destino.click();
+          return;
+        }
+        window.clearTimeout(debounce);
+        ejecutar(input.value);
+        return;
+      }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        ops = opciones();
+        if (ops.length) {
+          e.preventDefault();
+          var n = ops.length;
+          setActivo(e.key === 'ArrowDown' ? (activo + 1) % n : (activo - 1 + n) % n);
+          return;
+        }
+        var primero = cuerpo.querySelector('.buscador__ejemplo');
+        if (primero && e.key === 'ArrowDown') { e.preventDefault(); primero.focus(); }
       }
     });
     cuerpo.addEventListener('click', function (e) {
@@ -567,10 +734,12 @@
       if (!target) return;
       var ejemplo = target.closest('.buscador__ejemplo');
       if (ejemplo) { input.value = ejemplo.getAttribute('data-consulta') || ''; ejecutar(input.value); input.focus(); return; }
-      if (target.closest('.buscador__mas')) { mostrados += POR_PAGINA; ejecutar(ultimaConsulta, false); return; }
-      if (target.closest('.buscador__reintentar')) { registros = null; cargando = null; ejecutar(ultimaConsulta); return; }
-      if (target.closest('.buscador__resultado')) cerrarPanel(false);
+      if (target.closest('.buscador__mas')) { mostrarMas(); return; }
+      if (target.closest('.buscador__reintentar')) { registros = null; cargando = null; ultimoError = 0; ejecutar(ultimaConsulta); input.focus(); return; }
+      var resultado = target.closest('.buscador__resultado');
+      if (resultado) irA(resultado);
     });
+    // Con el foco en un resultado (Tab), ↑/↓ recorren los focalizables del cuerpo
     cuerpo.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
       var focusables = Array.prototype.slice.call(cuerpo.querySelectorAll('.buscador__resultado, .buscador__ejemplo, .buscador__mas'));
@@ -588,9 +757,8 @@
       if (e.key === 'Escape' && abierto()) cerrarPanel(true);
     });
     // Se comprueba la ruta del evento, no e.target: el handler de `cuerpo` ya se
-    // ha ejecutado y ha repintado los resultados, así que el botón pulsado
-    // (ejemplo, «Mostrar más», reintentar) ya no está en el DOM y
-    // panel.contains(target) cerraba el panel indebidamente.
+    // ha ejecutado y puede haber repintado los resultados, así que el botón pulsado
+    // (ejemplo, reintentar) ya no está en el DOM y panel.contains(target) cerraba el panel.
     function clicDentro(e) {
       var ruta = typeof e.composedPath === 'function' ? e.composedPath() : [];
       if (ruta.indexOf(panel) !== -1 || ruta.indexOf(toggle) !== -1) return true;
@@ -607,10 +775,14 @@
     // de alto de la ventana disparan resize y cerraban el panel nada más enfocar.
     var anchoPrevio = window.innerWidth;
     window.addEventListener('resize', function () {
-      if (window.innerWidth === anchoPrevio) return;
+      if (window.innerWidth === anchoPrevio) { ajustarAltura(); return; }
       anchoPrevio = window.innerWidth;
       if (abierto()) cerrarPanel(false);
     });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', ajustarAltura);
+      window.visualViewport.addEventListener('scroll', ajustarAltura);
+    }
     document.addEventListener('translationsReady', function () { pintarTextos(); if (abierto()) ejecutar(ultimaConsulta, false); else pintarInicial(); });
     document.addEventListener('langChanged', function () { pintarTextos(); if (abierto()) ejecutar(ultimaConsulta, false); else pintarInicial(); });
 

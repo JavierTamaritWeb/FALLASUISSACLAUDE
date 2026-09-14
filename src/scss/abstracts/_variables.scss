@@ -131,6 +131,9 @@ $falleret-size-large: 50%;    // Pantallas grandes (>1200px)
 
 // Degradado institucional: única fuente (antes 11 copias literales)
 $gradiente-institucional: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+// Cristal del menú desplegable y del buscador (v4.35.0): el institucional al 70 % sobre blur
+$gradiente-cristal-menu: linear-gradient(135deg, rgba(10, 75, 141, 0.7) 0%, rgba(2, 66, 122, 0.7) 60%, rgba(0, 51, 102, 0.7) 100%);
+$cristal-menu-oscuro: rgba(51, 51, 51, 0.8);
 // Degradado celeste de 5 tonos con profundidad (v4.30.40): sección Colaboraciones
 // en claro. Claro arriba-izquierda → celeste medio abajo-derecha, más un brillo
 // radial suave en la esquina superior. Título azul #02427A encima: 8,9:1 en el

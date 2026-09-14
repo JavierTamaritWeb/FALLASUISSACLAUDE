@@ -288,6 +288,82 @@ test.describe('buscador — panel en el navegador', () => {
     await expect(page.locator('#lista-anuncios')).not.toContainText('Crida de La Punta');
   });
 
+  test('v4.35.0: resaltado, combobox con ↑/↓ sin mover el foco, Enter abre el activo, anuncio con la consulta', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
+    await page.goto('/index.html');
+    await page.click('.header__search-toggle');
+    const input = page.locator('#siteSearchInput');
+    await expect(input).toHaveAttribute('role', 'combobox');
+    await expect(input).toHaveAttribute('aria-expanded', 'false');
+    // El botón conserva su nombre visible («Buscar») también abierto (WCAG 2.5.3)
+    await expect(page.locator('.header__search-toggle')).not.toHaveAttribute('aria-label', /.+/);
+    await page.fill('#siteSearchInput', 'representantes 2025');
+    await expect(page.locator('.buscador__cuerpo')).toHaveAttribute('data-estado', 'resultados');
+    await expect(input).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#siteSearchLista')).toHaveAttribute('role', 'listbox');
+    const primero = page.locator('.buscador__resultado').first();
+    await expect(primero).toHaveAttribute('role', 'option');
+    // Resaltado de las palabras que casan (con raíz: «Representantes» y «2025-26»)
+    expect(await primero.locator('.buscador__titulo mark').count()).toBeGreaterThanOrEqual(2);
+    await expect(primero.locator('.buscador__titulo mark').first()).toHaveText(/Representantes/);
+    // Anuncio con recuento y consulta
+    await expect(page.locator('.buscador__estado')).toContainText(/resultados para «representantes 2025»/);
+    // ↓ activa la primera opción sin sacar el foco del campo
+    await page.keyboard.press('ArrowDown');
+    await expect(input).toBeFocused();
+    await expect(input).toHaveAttribute('aria-activedescendant', 'siteSearchOpcion1');
+    await expect(primero).toHaveAttribute('aria-selected', 'true');
+    await page.keyboard.press('ArrowDown');
+    await expect(input).toHaveAttribute('aria-activedescendant', 'siteSearchOpcion2');
+    await page.keyboard.press('ArrowUp');
+    await expect(input).toHaveAttribute('aria-activedescendant', 'siteSearchOpcion1');
+    // Enter abre la opción activa
+    const href = await primero.getAttribute('href');
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#siteSearch')).toBeHidden();
+    expect(page.url()).toContain(href.split('#')[0]);
+  });
+
+  test('v4.35.0: «Mostrar más» conserva el foco en el primer resultado nuevo; errata corregida visible', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
+    await page.goto('/index.html');
+    await page.click('.header__search-toggle');
+    await page.fill('#siteSearchInput', 'falla');
+    const mas = page.locator('.buscador__mas');
+    await expect(mas).toBeVisible();
+    await mas.focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#siteSearchOpcion11')).toBeFocused();
+    expect(await page.locator('.buscador__resultado').count()).toBeGreaterThan(10);
+    // Errata: «calendrio» → aviso de consulta corregida y resultado
+    await page.fill('#siteSearchInput', 'calendrio');
+    await expect(page.locator('.buscador__corregido')).toContainText('calendario');
+    await expect(page.locator('.buscador__resultado').first().locator('.buscador__titulo')).toHaveText('Calendario');
+  });
+
+  test('v4.35.0: un hash malformado no rompe los acordeones de lafalla.html', async ({ page }) => {
+    const errores = [];
+    page.on('pageerror', (e) => errores.push(String(e)));
+    await page.goto('/lafalla.html#%');
+    const titular = page.locator('.accordion--representantes .accordion__titular').first();
+    await titular.scrollIntoViewIfNeeded();
+    await titular.click();
+    await expect(titular).toHaveAttribute('aria-expanded', 'true');
+    expect(errores.filter((e) => /URIError/.test(e))).toEqual([]);
+  });
+
+  test('v4.35.0: móvil, el panel limita su alto al viewport visual y encadena el scroll', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 700 });
+    await page.goto('/index.html');
+    await page.click('.header__search-toggle');
+    const panel = page.locator('#siteSearch');
+    const estilos = await panel.evaluate((el) => ({ overscroll: getComputedStyle(el).overscrollBehaviorY, maxH: parseFloat(getComputedStyle(el).maxHeight), rect: el.getBoundingClientRect().top }));
+    expect(estilos.overscroll).toBe('contain');
+    expect(estilos.maxH).toBeLessThanOrEqual(700 - estilos.rect);
+  });
+
   test('la consulta se conserva al reabrir el panel en la misma pestaña', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/index.html');

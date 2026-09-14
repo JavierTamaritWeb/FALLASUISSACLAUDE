@@ -57,12 +57,7 @@
     padding: 0.45rem;
 
     .header__search-toggle-texto {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      white-space: nowrap;
+      @include m.visualmente-oculto;
     }
   }
 }
@@ -74,11 +69,15 @@
   top: calc(100% + 0.5rem);
   left: 0;
   right: 0;
+  // dvh: con el teclado de iOS desplegado 100vh no cambia y la lista quedaba
+  // debajo; buscador.js ajusta además max-height con visualViewport (v4.35.0)
   max-height: calc(100vh - 9rem);
+  max-height: calc(100dvh - 9rem);
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 1.2rem;
   color: v.$blanco;
-  background: linear-gradient(135deg, rgba(10, 75, 141, 0.7) 0%, rgba(2, 66, 122, 0.7) 60%, rgba(0, 51, 102, 0.7) 100%);
+  background: v.$gradiente-cristal-menu;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -262,6 +261,30 @@
     &:hover {
       background: rgba(255, 255, 255, 0.22);
     }
+
+    &:focus-visible {
+      outline: 3px solid var(--coral-marca);
+      outline-offset: 2px;
+      box-shadow: none;
+    }
+  }
+
+  // Consulta corregida («Mostrando resultados para «ofrenda»»)
+  &__corregido {
+    margin: 0 0 0.8rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: v.$blanco-hueso;
+  }
+
+  // Coincidencias resaltadas en título y descripción
+  &__mark {
+    background: rgba(var(--coral-marca-rgb), 0.35);
+    color: inherit;
+    border-radius: 0.2em;
+    padding: 0 0.08em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
   &__lista {
@@ -284,9 +307,16 @@
     transition: background-color 150ms ease, border-color 150ms ease;
 
     &:hover,
-    &:focus-visible {
+    &:focus-visible,
+    &.is-activo {
       background: rgba(255, 255, 255, 0.16);
       border-color: rgba(var(--coral-marca-rgb), 0.7);
+    }
+
+    // Opción activa por teclado (aria-activedescendant, el foco sigue en el campo)
+    &.is-activo {
+      outline: 3px solid var(--coral-marca);
+      outline-offset: 1px;
     }
 
     &:focus-visible {
@@ -345,34 +375,7 @@
   }
 }
 
-// Modo oscuro: mismo gris translúcido que el menú desplegable
-body.modo-oscuro .buscador {
-  background: rgba(51, 51, 51, 0.8);
-}
-
-// Foco del buscador en oscuro: un solo anillo (ámbar del tema oscuro sobre el gris
-// del panel; casi negro dentro del campo blanco), sin el anillo interior blanco
-// global, que sobre el campo blanco no se ve y sumaba contornos
-body.modo-oscuro .buscador__input:focus-visible {
-  outline: 3px solid v.$amarillo-anaranjado;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.6);
-}
-
-body.modo-oscuro .buscador__cerrar:focus-visible {
-  outline: 2px solid v.$amarillo-anaranjado;
-  box-shadow: none;
-}
-
-body.modo-oscuro .buscador__borrar:focus-visible {
-  outline: 2px solid v.$negro-casi;
-  box-shadow: none;
-}
-
-body.modo-oscuro .header__search-toggle {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(70, 70, 70, 0.95);
-}
+// El modo oscuro del buscador vive en animaciones/_modo-oscuro.scss (v4.35.0)
 
 @media (prefers-reduced-motion: reduce) {
   .buscador,

@@ -135,7 +135,12 @@ function initAccordion() {
 // paneles de Archivos por su id (el del .accordion__content, destino del
 // aria-controls). Si la URL trae ese hash, se abre el panel y se desplaza.
 function abrirPorHash() {
-  const id = decodeURIComponent((window.location.hash || '').slice(1));
+  let id = '';
+  try {
+    id = decodeURIComponent((window.location.hash || '').slice(1));
+  } catch (e) {
+    return; // hash malformado (#%): no romper el resto de la inicialización
+  }
   if (!id) return;
   const destino = document.getElementById(id);
   if (!destino) return;
@@ -147,9 +152,10 @@ function abrirPorHash() {
     titular.click();
   }
   // Tras la transición de max-height (0,5 s) el panel ya tiene su alto real
+  const reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.setTimeout(function () {
-    (section || destino).scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 650);
+    (section || destino).scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' });
+  }, reducido ? 50 : 650);
 }
 
 function initAccordionConHash() {
