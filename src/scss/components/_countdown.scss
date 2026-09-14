@@ -167,6 +167,12 @@
 
 .cuenta-atras-fondo{
   background-color: #fff;
+
+  // Franja de la cuenta atrás en azul cobalto en claro (v4.30.46); el modo
+  // oscuro no cambia.
+  body:not(.modo-oscuro) & {
+    background-color: v.$azul-cobalto;
+  }
 }
 
 

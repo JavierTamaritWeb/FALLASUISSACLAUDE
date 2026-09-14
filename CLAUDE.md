@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.45 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.30.46 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.45).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.46).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -382,6 +382,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.30.46** — La franja `.cuenta-atras-fondo` que envuelve la cuenta atrás de `index.html` pasa en modo claro del blanco a `$azul-cobalto` #0047AB (continuidad con las olas del hero); el contenedor de la cuenta atrás y el modo oscuro no cambian. Baselines visuales de `index` regenerados.
 
 - **4.30.45** — Hero de `index.html` en modo claro: el `::before` de `.header` pasa del degradado institucional al `$gradiente-celeste` (5 tonos), el título «Falla Suïssa - L'Alqueria del Favero» va en `$coral-texto` con los tramos antes blancos en `$azul-titulo-seccion`, y las 4 olas del SVG cambian el blanco por tonos de **azul cobalto** (`$azul-cobalto` #0047AB al 35/55/75/100 %). Modo oscuro y `.header-inner` de las demás páginas sin cambios. Baselines visuales de `index`/header regenerados.
 
