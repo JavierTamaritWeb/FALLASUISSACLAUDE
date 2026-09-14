@@ -29,7 +29,7 @@ function ratio(a, b) {
 
 test.describe('color-tokens — paleta funcional', () => {
   test('los tokens aditivos existen y el degradado institucional es único', () => {
-    for (const v of ['gradiente-institucional', 'gradiente-celeste', 'celeste-1', 'celeste-5', 'coral-texto', 'coral-claro', 'azul-enlace-oscuro', 'texto-secundario-oscuro', 'superficie-elevada-oscuro', 'estado-error', 'estado-exito', 'estado-aviso', 'estado-error-oscuro', 'estado-exito-oscuro', 'estado-aviso-oscuro']) {
+    for (const v of ['gradiente-institucional', 'gradiente-celeste', 'celeste-1', 'celeste-5', 'azul-cobalto', 'coral-texto', 'coral-claro', 'azul-enlace-oscuro', 'texto-secundario-oscuro', 'superficie-elevada-oscuro', 'estado-error', 'estado-exito', 'estado-aviso', 'estado-error-oscuro', 'estado-exito-oscuro', 'estado-aviso-oscuro']) {
       expect(VARS, `$${v}`).toMatch(new RegExp(`^\\$${v}\\s*:`, 'm'));
     }
     // Los de marca no cambian

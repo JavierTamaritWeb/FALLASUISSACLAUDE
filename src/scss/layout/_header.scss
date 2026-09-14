@@ -23,12 +23,13 @@
   // 500: por encima del contenido, por debajo de modales/banners (≥1000).
   z-index: 500;
   
-  // Pseudo-elemento para el fondo gradiente azul (modo claro)
+  // Pseudo-elemento para el fondo del hero (modo claro): degradado celeste de
+  // 5 tonos (v4.30.45; antes el institucional azul)
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: v.$gradiente-institucional;
+    background: v.$gradiente-celeste;
     z-index: -1;
     transition: opacity var(--theme-transition);
     opacity: 1; // Visible por defecto (modo claro)
@@ -37,6 +38,25 @@
 
   @media (min-width: 768px) {
     height: 57rem;
+  }
+
+  // Sobre el celeste (v4.30.45): título en coral de texto y los tramos que
+  // iban en blanco en azul de sección (4,1:1 y 6:1 en el stop más claro
+  // donde cae el título); olas en tonos de azul cobalto (antes blancas). El
+  // modo oscuro conserva coral/blanco y las olas grises.
+  body:not(.modo-oscuro) & {
+    .header__title {
+      color: v.$coral-texto;
+      span {
+        color: v.$azul-titulo-seccion;
+      }
+    }
+    .header__waves .waves use {
+      &:nth-of-type(1) { fill: rgba(v.$azul-cobalto, 0.35); }
+      &:nth-of-type(2) { fill: rgba(v.$azul-cobalto, 0.55); }
+      &:nth-of-type(3) { fill: rgba(v.$azul-cobalto, 0.75); }
+      &:nth-of-type(4) { fill: v.$azul-cobalto; }
+    }
   }
   @media (min-width: 1024px) {
     height: 62rem;

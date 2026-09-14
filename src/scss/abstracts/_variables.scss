@@ -140,6 +140,7 @@ $celeste-2: #BFE3F7;
 $celeste-3: #93CFF0;
 $celeste-4: #66B4E6;
 $celeste-5: #4A9AD6;
+$azul-cobalto: #0047AB;        // Olas del hero de la home en claro, en 4 tonos con alfa (v4.30.45)
 $gradiente-celeste:
   radial-gradient(ellipse 70% 60% at 18% 0%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 65%),
   linear-gradient(160deg, $celeste-1 0%, $celeste-2 28%, $celeste-3 52%, $celeste-4 76%, $celeste-5 100%);
