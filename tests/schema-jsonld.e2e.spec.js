@@ -143,6 +143,11 @@ test.describe('JSON-LD — nodos propios', () => {
         gal.associatedMedia.forEach((img, i) => {
           expect(img['@type']).toBe('ImageObject');
           expect(img.contentUrl).toMatch(new RegExp(`^${ORIGIN}/img/`));
+          // Metadatos de licencia de imagen (Search Console, v4.31.1)
+          expect(img.creator?.name).toBeTruthy();
+          expect(img.copyrightNotice).toMatch(/^© \d{4} /);
+          expect(img.license).toBe(`${pref}aviso-legal.html#propiedad-intelectual`);
+          expect(img.acquireLicensePage).toBe(img.license);
           const expectedAlt = fotos[i].altKey?.split('.').reduce((value, key) => value?.[key], tabla) || fotos[i].alt;
           expect(img.name).toBe(expectedAlt);
         });

@@ -24,7 +24,11 @@ function collect(value, ids, refs, imgs) {
     if (keys.length === 1) refs.push(value['@id']);
     else ids.add(value['@id']);
   }
-  if (hasType(value, 'ImageObject')) imgs.count++;
+  if (hasType(value, 'ImageObject')) {
+    imgs.count++;
+    // Metadatos de licencia que pide Search Console (v4.31.1)
+    if (!value.creator || !value.copyrightNotice || !value.license || !value.acquireLicensePage) imgs.sinLicencia++;
+  }
   keys.forEach((k) => collect(value[k], ids, refs, imgs));
 }
 
@@ -54,7 +58,7 @@ for (const rel of listPages()) {
   } catch (e) {
     problemas.push(`JSON inválido: ${e.message}`);
   }
-  const ids = new Set(); const refs = []; const imgs = { count: 0 };
+  const ids = new Set(); const refs = []; const imgs = { count: 0, sinLicencia: 0 };
   collect(graph, ids, refs, imgs);
   const sinResolver = [...new Set(refs.filter((r) => !ids.has(r) && !r.startsWith('https://hope-incliva.com')))];
   if (sinResolver.length) problemas.push(`refs sin resolver: ${sinResolver.join(', ')}`);
@@ -72,6 +76,7 @@ for (const rel of listPages()) {
   for (const p of PROHIBIDOS) if (texto.includes(p) || (p.includes('fallasuïssal') && html.includes(p))) problemas.push(`contiene "${p}"`);
   if (/"(?:contentUrl|url|item)":\s*"[^"]*\.\.\//.test(texto)) problemas.push('URL relativa (../) en el JSON-LD');
   if (/"contentUrl":\s*"[^"]*\?v=/.test(texto)) problemas.push('contentUrl con ?v=');
+  if (imgs.sinLicencia) problemas.push(`${imgs.sinLicencia} ImageObject sin creator/copyrightNotice/license/acquireLicensePage`);
   if (problemas.length) errores++;
   filas.push({ rel, scripts: scripts.length, types: [...new Set(graph.map((n) => Array.isArray(n['@type']) ? n['@type'].join('+') : n['@type']))].join(','), page: pageNode ? pageNode['@id'] : '-', lang: pageNode ? String(pageNode.inLanguage) : '-', imgs: imgs.count, problemas });
 }

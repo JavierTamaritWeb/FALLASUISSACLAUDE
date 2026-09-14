@@ -211,6 +211,7 @@ function isManagedBoardEventNode(node) {
 // Kill switch: DISABLE_SCHEMA_INJECT=1 deja los bloques inline tal cual.
 // Ver docs/structured-data.md.
 const SITE_ORIGIN = 'https://fallasuissa.es';
+const SITE_NAME = "Falla Suïssa - L'Alqueria del Favero"; // creator/creditText de los ImageObject (v4.31.1)
 const ORG_ID = `${SITE_ORIGIN}/#organization`;
 const SITE_ID = `${SITE_ORIGIN}/#website`;
 const GLOBAL_IDS = new Set([ORG_ID, SITE_ID, `${SITE_ORIGIN}/#place`, `${SITE_ORIGIN}/#logo`]);
@@ -453,6 +454,28 @@ function mergeEventNodes(nodes, schemaEvents, managedEventFilter) {
 // Variante /va/: URL de página a /va/ e inLanguage ca-ES. Los @id globales
 // (#organization, #website, #place, #logo), los assets y los nodos externos
 // (hope-incliva.com) no cambian: son la misma entidad en ambos idiomas.
+// Metadatos de licencia de imagen (Search Console, v4.31.1): todo ImageObject
+// del @graph (logo de la Organization, primaryImageOfPage, fotos de galería,
+// posts…) lleva creator, creditText, copyrightNotice, license y
+// acquireLicensePage si el HTML no los define. La licencia apunta al apartado
+// de propiedad intelectual del aviso legal (localizado en /va/).
+const IMAGE_LICENSE_PAGE = 'aviso-legal.html#propiedad-intelectual';
+function completeImageObjects(value, lang, seen = new Set()) {
+  if (Array.isArray(value)) return value.forEach((v) => completeImageObjects(v, lang, seen));
+  if (!value || typeof value !== 'object' || seen.has(value)) return;
+  seen.add(value);
+  const types = [].concat(value['@type'] || []);
+  if (types.includes('ImageObject')) {
+    const licencia = `${SITE_ORIGIN}/${lang === 'ca' ? 'va/' : ''}${IMAGE_LICENSE_PAGE}`;
+    if (!value.creator) value.creator = { '@type': 'Organization', name: SITE_NAME, url: `${SITE_ORIGIN}/` };
+    if (!value.creditText) value.creditText = SITE_NAME;
+    if (!value.copyrightNotice) value.copyrightNotice = `© ${new Date().getFullYear()} ${SITE_NAME}`;
+    if (!value.license) value.license = licencia;
+    if (!value.acquireLicensePage) value.acquireLicensePage = licencia;
+  }
+  for (const k of Object.keys(value)) if (k !== 'creator') completeImageObjects(value[k], lang, seen);
+}
+
 function localizeGraph(nodes, lang) {
   if (lang !== 'ca') return nodes;
   const rewriteUrl = (value) => {
@@ -542,6 +565,7 @@ function processJsonLd(html, ctx) {
   }
   nodes = localizeGraph(nodes, lang);
   const graph = [structuredClone(base.organization), structuredClone(base.website), ...nodes];
+  completeImageObjects(graph, lang);
   assertUniqueIds(graph, fileName);
   const script = toJsonLdScript(graph);
   if (found) return { html: html.replace(SCHEMA_SCRIPT_RE, () => script), script: null };
