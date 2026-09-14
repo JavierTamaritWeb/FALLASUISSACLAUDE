@@ -15,7 +15,7 @@ Evolución **gradual y aditiva** de la paleta: azul y coral siguen siendo la ide
 | `$estado-error/-exito/-aviso/-info` | `#B3261E` / `#1B6E3A` / `#8A5A00` / `#004BCF` | Estados en claro, siempre con texto o icono | 6,5 / 6,3 / 5,9 / 7,2 sobre blanco |
 | `$estado-*-oscuro` | `#FF8A80` / `#7BD389` / `#FFC857` / `#8FB8FF` | Estados en oscuro (texto `$negro-casi`) | 6,9 / 8,7 / 10,3 / 7,9 sobre `#172334` |
 
-Los tokens de marca (`$primary-color #FF6F61`, `$color-azul-falla #004BCF`, `$dorado`, `$blanco-hueso #F5F5F5`, `$naranja-suave #fdf2e9`, `$rojo-salmon #FF8C7A`) **no cambian**. `#F7F4EF` y `#182433` de la propuesta inicial se descartaron: no mejoran los ratios de `$naranja-suave`/`$blanco-hueso` y `$secondary-color`.
+**Desde v4.31.0 el color primario es `#B83F35`** (`$primary-color` = `$coral-texto`, en claro y oscuro; `--coral-marca-rgb` = `184, 63, 53`; también los literales de `dark.js`, `calendario.js` y los SVG inline). Ojo: `$negro-casi` sobre el primario da 3,4:1 (los hover de `.boton`/titulares con texto oscuro solo llegan a AA en su tramo salmón). Hasta v4.30.47 los tokens de marca (`$primary-color #FF6F61`, `$color-azul-falla #004BCF`, `$dorado`, `$blanco-hueso #F5F5F5`, `$naranja-suave #fdf2e9`, `$rojo-salmon #FF8C7A`) **no cambian**. `#F7F4EF` y `#182433` de la propuesta inicial se descartaron: no mejoran los ratios de `$naranja-suave`/`$blanco-hueso` y `$secondary-color`.
 
 ## Regla del coral
 
@@ -116,4 +116,4 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.30.47
+Última actualización: 14 de septiembre de 2026 - v4.31.0

@@ -150,7 +150,7 @@ function actualizarThemeColor() {
 
 /**
  * Icono del Sol
- * Relleno #FF6F61 y borde/rayos blancos
+ * Relleno #B83F35 y borde/rayos blancos
  */
 function getSunIcon() {
   return `
@@ -165,7 +165,7 @@ function getSunIcon() {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <circle cx="16" cy="16" r="8" fill="#FF6F61" />
+      <circle cx="16" cy="16" r="8" fill="#B83F35" />
       <line x1="16" y1="2"  x2="16" y2="6"  />
       <line x1="16" y1="26" x2="16" y2="30" />
       <line x1="2"  y1="16" x2="6"  y2="16" />
@@ -180,7 +180,7 @@ function getSunIcon() {
 
 /**
  * Ícono de la Luna (nueva versión)
- * - Relleno: #FF6F61
+ * - Relleno: #B83F35
  * - Borde: 2px en #fff
  * - Forma de media luna estilizada
  */
@@ -196,7 +196,7 @@ function getMoonIcon() {
           </mask>
         </defs>
         <circle cx="18" cy="20" r="11"
-                fill="#FF6F61" stroke="#fff" stroke-width="2"
+                fill="#B83F35" stroke="#fff" stroke-width="2"
                 mask="url(#crescentMask)"/>
       </g>  
     </svg>

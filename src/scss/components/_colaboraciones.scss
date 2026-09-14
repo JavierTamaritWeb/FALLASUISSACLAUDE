@@ -104,7 +104,7 @@
     @include m.transition(color 200ms);
     display: inline-block;
     cursor: pointer;
-    text-shadow: 1px 1px 0px rgba(255, 111, 97, 1);
+    text-shadow: 1px 1px 0 rgba(var(--coral-marca-rgb), 1);
     text-decoration: none;
 
     &:hover {

@@ -155,7 +155,7 @@ test.describe('Hover de los titulares de acordeón (como .boton)', () => {
     expect(s.outline).toBe('none');
     expect(s.outlineColor).not.toBe('rgb(0, 123, 255)');
     const sombra = await titular.evaluate((el) => getComputedStyle(el).boxShadow);
-    expect(sombra).toContain('rgba(255, 111, 97, 0.16)');
+    expect(sombra).toContain('rgba(184, 63, 53, 0.16)');
   });
 
   test('HOPE en colaboraciones.html comparte el hover', async ({ page }) => {
@@ -163,7 +163,7 @@ test.describe('Hover de los titulares de acordeón (como .boton)', () => {
     const titular = page.locator('.accordion__titular').first();
     await pasarRaton(page, titular);
     const s = await estilos(titular);
-    expect(s.bg).toContain('linear-gradient(135deg, rgba(255, 111, 97, 0.98)');
+    expect(s.bg).toContain('linear-gradient(135deg, rgba(184, 63, 53, 0.98)');
     expect(s.header).toBe(NEGRO_CASI);
   });
 

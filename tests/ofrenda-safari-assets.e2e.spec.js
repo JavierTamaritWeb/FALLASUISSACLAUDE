@@ -50,7 +50,7 @@ for (const pagePath of ['/index.html', '/ofrenda.html']) {
       const cs = getComputedStyle(el);
       return { color: cs.color, alignItems: cs.alignItems, inset: cs.bottom };
     });
-    expect(estilo.color).toBe('rgb(255, 111, 97)');
+    expect(estilo.color).toBe('rgb(184, 63, 53)');
     expect(estilo.alignItems).toBe('center');
     expect(estilo.inset).toBe('0px');
     const velo = await figura.evaluate((el) => getComputedStyle(el, '::after').backgroundImage);

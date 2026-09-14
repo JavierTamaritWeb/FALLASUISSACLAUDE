@@ -33,7 +33,7 @@ test.describe('color-tokens — paleta funcional', () => {
       expect(VARS, `$${v}`).toMatch(new RegExp(`^\\$${v}\\s*:`, 'm'));
     }
     // Los de marca no cambian
-    expect(hex('primary-color')).toBe('ff6f61');
+    expect(hex('primary-color')).toBe('b83f35'); // v4.31.0: el primario es el coral oscuro
     expect(hex('color-azul-falla')).toBe('004bcf');
     expect(VARS).toContain('linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%)');
     // Ninguna copia literal del degradado fuera de _variables.scss
@@ -56,7 +56,7 @@ test.describe('color-tokens — paleta funcional', () => {
       ['color-azul-falla', 'blanco'], ['color-azul-falla', 'naranja-suave'],
       ['azul-enlace-oscuro', 'negro-casi'], ['azul-enlace-oscuro', 'superficie-elevada-oscuro'],
       ['texto-secundario-oscuro', 'negro-casi'], ['texto-secundario-oscuro', 'superficie-elevada-oscuro'],
-      ['negro-casi', 'primary-color'], ['negro-casi', 'rojo-salmon'],
+      ['blanco', 'primary-color'], ['negro-casi', 'rojo-salmon'],
       ['blanco', 'estado-error'], ['blanco', 'estado-exito'], ['blanco', 'estado-aviso'],
       ['estado-error-oscuro', 'superficie-elevada-oscuro'], ['estado-exito-oscuro', 'superficie-elevada-oscuro'], ['estado-aviso-oscuro', 'superficie-elevada-oscuro'],
       ['blanco', 'coral-texto'], ['secondary-color', 'blanco'], ['blanco-hueso', 'negro-casi']
@@ -70,10 +70,10 @@ test.describe('color-tokens — paleta funcional', () => {
     }
   });
 
-  test('el coral de marca solo vale como texto grande sobre el azul (≥ 3:1)', () => {
-    expect(ratio(hex('primary-color'), '0a4b8d')).toBeGreaterThanOrEqual(3);
-    // y NO como texto normal sobre claro: documenta por qué existe $coral-texto
-    expect(ratio(hex('primary-color'), hex('blanco'))).toBeLessThan(4.5);
+  test('el color primario (v4.31.0) coincide con $coral-texto y es AA sobre claro', () => {
+    expect(hex('primary-color')).toBe(hex('coral-texto'));
+    expect(ratio(hex('primary-color'), hex('blanco'))).toBeGreaterThanOrEqual(4.5);
+    expect(ratio(hex('primary-color'), hex('blanco-hueso'))).toBeGreaterThanOrEqual(4.5);
   });
 
   test('modo oscuro (v4.30.0): todo el coral de marca pasa a $coral-texto vía --coral-marca', async ({ page }) => {
@@ -85,9 +85,9 @@ test.describe('color-tokens — paleta funcional', () => {
       borde: getComputedStyle(document.querySelector('.countdown__contenedor')).borderTopColor,
     }));
     const claro = await leer();
-    expect(claro.coral).toBe('#ff6f61');
-    expect(claro.rgb.replace(/\s/g, '')).toBe('255,111,97');
-    expect(claro.borde).toBe('rgb(255, 111, 97)');
+    expect(claro.coral).toBe('#b83f35');
+    expect(claro.rgb.replace(/\s/g, '')).toBe('184,63,53');
+    expect(claro.borde).toBe('rgb(184, 63, 53)');
 
     await page.click('.header__modo-boton');
     await expect.poll(async () => (await leer()).coral).toBe('#b83f35');

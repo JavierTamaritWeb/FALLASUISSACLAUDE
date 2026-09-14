@@ -92,7 +92,7 @@ test.describe('galeria-pager — navegación en el navegador', () => {
     await page.goto('/galeria_1.html');
     const actual = page.locator('.galeria-pager__numero[aria-current="page"]');
     await expect(actual).toHaveText('1');
-    expect(await actual.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 111, 97)');
+    expect(await actual.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(184, 63, 53)');
     await expect(page.locator('.galeria-pager__vecina--anterior')).toHaveAttribute('aria-disabled', 'true');
     await Promise.all([
       page.waitForURL(/\/galeria_2\.html$/),

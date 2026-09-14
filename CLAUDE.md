@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.47 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.31.0 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -66,7 +66,7 @@ npx gulp searchIndex     # Regenera solo el índice del buscador
 - NUNCA cambies fondos de gradiente a colores sólidos directamente — usa el patrón de opacidad con `::before` (ver `docs/global-styles.md`)
 - Al añadir traducciones: actualiza `src/data/translations.json` para AMBOS `es` y `va`
 - Los comentarios en el código se escriben en español
-- NUNCA uses `$primary-color` (#FF6F61) como color de **texto normal**: sobre claro `$coral-texto`, sobre azul/oscuro `$coral-claro` (regla del 11-sep-2026, v4.29.0; el coral de marca solo vale como decoración o texto grande sobre azul). Nunca copies el degradado institucional literal: `v.$gradiente-institucional`. **En propiedades CSS no escribas `v.$primary-color`: usa `var(--coral-marca)` (o `rgba(var(--coral-marca-rgb), a)`)**, que en modo oscuro vale `#B83F35` (regla del 11-sep-2026, v4.30.0). Ver patrón *Paleta funcional* y `docs/paleta-y-degradados.md`
+- **Desde v4.31.0 `$primary-color` es `#B83F35`** (= `$coral-texto`, en claro y oscuro; decisión del usuario del 14-sep-2026). Sigue vigente el mecanismo `var(--coral-marca)`; la regla anterior queda por si vuelve un coral claro: NUNCA uses un coral claro como color de **texto normal**: sobre claro `$coral-texto`, sobre azul/oscuro `$coral-claro` (regla del 11-sep-2026, v4.29.0; el coral de marca solo vale como decoración o texto grande sobre azul). Nunca copies el degradado institucional literal: `v.$gradiente-institucional`. **En propiedades CSS no escribas `v.$primary-color`: usa `var(--coral-marca)` (o `rgba(var(--coral-marca-rgb), a)`)**, que en modo oscuro vale `#B83F35` (regla del 11-sep-2026, v4.30.0). Ver patrón *Paleta funcional* y `docs/paleta-y-degradados.md`
 - El buscador se alimenta solo del build: una página, galería o post nuevos entran en el índice sin tocar nada; si una consulta natural no la cubre el título, añade la entrada en `src/data/search-keywords.json` y comprueba con `npm run search:eval`
 
 ## Arquitectura
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.47).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.31.0).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -377,11 +377,13 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 - El CSS sigue BEM (Block__Element--Modifier)
 - Los commits de Git usan Conventional Commits (feat:, fix:, docs:, style:, refactor:)
 - Breakpoints: móvil `max-width: 767px`, desktop `min-width: 768px`
-- Variables SCSS clave en `src/scss/abstracts/_variables.scss` (primario: `$primary-color` #FF6F61, azul institucional: `$color-azul-falla` #004BCF)
+- Variables SCSS clave en `src/scss/abstracts/_variables.scss` (primario: `$primary-color` #B83F35 desde v4.31.0, azul institucional: `$color-azul-falla` #004BCF)
 
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.31.0** — **Color primario `#B83F35`**: `$primary-color` pasa de `#FF6F61` a `#B83F35` (= `$coral-texto`) a petición del usuario, así `--coral-marca` y sus derivadas valen lo mismo en claro y en oscuro (`--coral-marca-rgb` = `184, 63, 53`); también los literales `#FF6F61` de `dark.js` (sol/luna), `calendario.js` (categoría Festivo) y los dos SVG inline de `index.html`/`lafalla.html`. `mantenimiento.html` y `llibret_2026.html` (standalone/histórico) no cambian. Tests actualizados (`color-tokens`, `accordion-hover`, `scrollbar-theme`, `nosotros-directiva`, `ofrenda-safari-assets`, `galeria-pager`) y todos los baselines visuales regenerados. Nota de contraste: `$negro-casi` sobre el primario da 3,4:1.
 
 - **4.30.47** — El contenedor de la cuenta atrás (`.countdown__contenedor::before`, `index.html`) cambia en modo claro el degradado institucional por `$gradiente-celeste`, y su título «Cuenta atrás para las Fallas» pasa de blanco a `$azul-titulo-seccion`. El mecanismo `::before` + `opacity` y el modo oscuro no cambian. Baselines visuales de `index` regenerados.
 

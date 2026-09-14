@@ -11,9 +11,9 @@ test.describe('Scrollbar (Safari/WebKit): thumb fijo y track #111 en oscuro', ()
   test('dist/css/main.css contiene reglas para html en modo oscuro', async () => {
     const css = readDistCss();
 
-    // Thumb en coral de marca vía custom property (v4.30.0: #ff6f61 en claro, #b83f35 en oscuro)
+    // Thumb en coral de marca vía custom property (v4.30.0; desde v4.31.0 #b83f35 en ambos modos)
     expect(css).toMatch(/::-webkit-scrollbar-thumb\{[^}]*background-color:var\(--coral-marca\)/i);
-    expect(css).toMatch(/:root\{[^}]*--coral-marca:#ff6f61/i);
+    expect(css).toMatch(/:root\{[^}]*--coral-marca:#b83f35/i); // v4.31.0: primario = coral oscuro
     expect(css).toMatch(/modo-oscuro[^{]*\{[^}]*--coral-marca:#b83f35/i);
 
     // Track claro (gris) para WebKit

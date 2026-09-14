@@ -44,7 +44,7 @@ for (const url of PAGES) {
       const lista = directiva.locator('.directiva__nombres').first();
       await expect(lista).toHaveCSS('list-style-type', 'none');
       const chipPresidente = directiva.locator('.directiva__card--presidente .directiva__nombre');
-      await expect(chipPresidente).toHaveCSS('background-color', 'rgb(255, 111, 97)');
+      await expect(chipPresidente).toHaveCSS('background-color', 'rgb(184, 63, 53)');
       await expect(chipPresidente).toHaveCSS('color', 'rgb(255, 255, 255)');
     });
 

@@ -50,7 +50,7 @@ function renderizarLista(eventosFiltrados) {
     "Urgente": "#C13584",
     "Recordatorio": "#000080",
     "Informacion": "#FFD700",
-    "Festivo": "#FF6F61",
+    "Festivo": "#B83F35",
     "Falla": "#00909E",
     "Evento": "#4A4A4A"
   };
@@ -139,7 +139,7 @@ function getPriorityColorForEvents(eventsArray) {
     "Urgente": "#C13584",
     "Recordatorio": "#000080",
     "Informacion": "#FFD700",
-    "Festivo": "#FF6F61",
+    "Festivo": "#B83F35",
     "Falla": "#00909E",
     "Evento": "#4A4A4A"
   };

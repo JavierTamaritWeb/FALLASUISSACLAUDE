@@ -10,7 +10,7 @@
 // propiedades: se usa var(--coral-marca) / rgba(var(--coral-marca-rgb), a).
 :root {
   --coral-marca: #{v.$primary-color};
-  --coral-marca-rgb: 255, 111, 97;
+  --coral-marca-rgb: 184, 63, 53;
   --coral-marca-claro10: #{color.adjust(v.$primary-color, $lightness: 10%)};
   --coral-marca-oscuro8: #{color.adjust(v.$primary-color, $lightness: -8%)};
   --coral-marca-oscuro10: #{color.adjust(v.$primary-color, $lightness: -10%)};
