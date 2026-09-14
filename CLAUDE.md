@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.32.7 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.32.8 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.32.7).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.32.8).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -382,6 +382,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.32.8** — Las 9 tarjetas de galería (`.galeria`, teaser de `index.html` y `galerias.html`) pasan en modo claro del fondo cálido `$naranja-suave` #FDF2E9 al rosa muy claro `$rosa-acordeon` #FDF0F3, como Eventos, Blog y Nuevos Falleros. Modo oscuro sin cambios.
 
 - **4.32.7** — Las secciones «Blog de nuestra Falla» (`.blog`, `index.html`/`blog.html`) y «Nuevos Falleros» (`.nuevos-falleros`, teaser de la home y `nuevos-falleros.html`) pasan en modo claro al rosa muy claro `$rosa-acordeon` #FDF0F3, como Eventos en 4.32.5. Modo oscuro sin cambios. (La 4.32.6 se publicó sin este cambio por un fallo del script de edición: solo subió la versión.)
 
