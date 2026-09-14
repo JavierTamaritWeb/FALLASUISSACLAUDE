@@ -536,11 +536,11 @@ p {
 
 // Acordeón de «Nosotros» (Plana Mayor) en modo claro:
 // - v4.30.26: titulares y ▼ en turquesa.
-// - v4.30.27: filas en rosa $rosa-acordeon (#FFD1DC) en lugar de $naranja-suave
+// - v4.30.27: filas en rosa $rosa-acordeon (#FDF0F3 desde v4.30.28) en lugar de $naranja-suave
 //   y hover/foco en $rosa-acordeon-hover (#FF5A8E, sustituye al degradado coral)
 //   con el texto en $negro-casi (6,4:1). Sobre el rosa, el turquesa de marca daba
-//   2,8:1 (insuficiente), así que los titulares usan $turquesa-sobre-rosa (#00666F,
-//   4,9:1 en todos los tamaños).
+//   3,5:1 (insuficiente para 14px), así que los titulares usan $turquesa-sobre-rosa
+//   (#007A86, 4,6:1 en todos los tamaños).
 body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion {
   background-color: v.$rosa-acordeon;
 

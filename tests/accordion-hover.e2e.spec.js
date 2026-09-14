@@ -8,8 +8,8 @@ const { test, expect } = require('@playwright/test');
 const NEGRO_CASI = 'rgb(17, 17, 17)';
 // Acordeón de «Nosotros» en claro (v4.30.27): filas $rosa-acordeon, titulares
 // $turquesa-sobre-rosa y hover/foco sólido $rosa-acordeon-hover con texto oscuro
-const TURQUESA = 'rgb(0, 102, 111)';
-const ROSA = 'rgb(255, 209, 220)';
+const TURQUESA = 'rgb(0, 122, 134)';
+const ROSA = 'rgb(253, 240, 243)';
 const ROSA_HOVER = 'rgb(255, 90, 142)';
 
 async function preparar(page, ruta) {
