@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.22 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.30.23 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.22).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.23).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -382,6 +382,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.30.23** — El rótulo de la galería 6 salía en valenciano también en castellano («Cremà 2025-26»): la versión ES pasa a **«Cremá 2025-26»**, como ya se hacía con «Apuntá» (VA mantiene «Cremà»/«Apuntà»). Corregidos los textos ES de `translations.json` (título, texto de la tarjeta, SEO de `galeria_6`, los 11 `alt` de sus fotos, ejemplo del buscador y descripción de `galerias.html`), los textos de reserva de `index.html`, `galerias.html` y `galeria_6.html` (incluido su JSON-LD), `dataPages6.json`, y el `<title>`/metas de `galeria_1.html`, que decían «Apuntà» en ES. El Llibret (documento histórico multilingüe) y la FAQ para IA, que explica el término valenciano, no cambian.
 
 - **4.30.22** — Dos cambios visuales. **(1) Títulos de sección en azul `#02427A`** (modo claro): La Falla, Ofrenda, Eventos, Calendario, Meteo, Blog de nuestra Falla y Galería (títulos con icono redondo de `index.html`, `lafalla.html`, `eventos.html` y el de `colaboraciones.html`, que comparte `.falla__title`) y los títulos de las 9 tarjetas de galería (`index.html`, `galerias.html`). Nuevo token `$azul-titulo-seccion` y custom property `--titulo-seccion` en `_globales.scss` (azul en claro, `$coral-texto` en oscuro para no quedar ilegible sobre negro); 8 reglas pasan de `var(--coral-marca)` a `var(--titulo-seccion)`. **(2) Línea de tiempo lateral más discreta**: los 13 círculos medían 44 px con borde de 2 px porque la regla global de `_accessibility.scss` (tamaño mínimo de toque) se imponía a los 10 px de `_timeline.scss`; ahora cada punto es un botón de 24 px con un punto dibujado de 8 px (10 px el activo, sin halo), bordes más tenues y líneas de 6 px (columna de 764 a 384 px de alto), y en pantallas de más de 1200 px círculos de 25 px con líneas de 8 px (421 px de alto). Además, los tests de guardia de los botones de descarga (v4.30.18) reintentan la medición con `toPass` porque bajo carga podían medir a mitad de la apertura del acordeón. Ver patrón *Paleta funcional*.
 

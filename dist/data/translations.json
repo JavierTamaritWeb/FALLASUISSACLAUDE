@@ -25,7 +25,7 @@
       "ejemplos": [
         "Ofrenda 2026",
         "autorización menores",
-        "galería Cremà",
+        "galería Cremá",
         "calendario"
       ],
       "minimo": "Escribe al menos 2 letras.",
@@ -285,8 +285,8 @@
       "galeria4-texto": "Galería de imágenes de la Proclamación 2025-26",
       "galeria5": "Ofrenda de Frutos 2025-26",
       "galeria5-texto": "Galería de imágenes de la Ofrenda de Frutos 2025-26",
-      "galeria6": "Cremà 2025-26",
-      "galeria6-texto": "Galería de imágenes de la Cremà 2025-26",
+      "galeria6": "Cremá 2025-26",
+      "galeria6-texto": "Galería de imágenes de la Cremá 2025-26",
       "galeria7": "San Juan 2026",
       "galeria7-texto": "Galería de imágenes de San Juan 2026",
       "galeria8": "Representantes 2026-27",
@@ -686,7 +686,7 @@
       },
       "galerias": {
         "title": "Falla Suïssa - L'Alqueria del Favero - Galería",
-        "description": "Galerías de imágenes de la Falla Suïssa - L'Alqueria del Favero: Apuntà, nombramientos, monumento, proclamación, Ofrenda, Cremà y más."
+        "description": "Galerías de imágenes de la Falla Suïssa - L'Alqueria del Favero: Apuntá, nombramientos, monumento, proclamación, Ofrenda, Cremá y más."
       },
       "ofrenda": {
         "title": "Próxima Ofrenda | Falla Suïssa - L'Alqueria del Favero",
@@ -721,8 +721,8 @@
         "description": "Mapa de la Falla Suïssa - L'Alqueria del Favero: ubicación del casal y puntos de interés de la comisión en Valencia."
       },
       "galeria_1": {
-        "title": "Apuntà 2025-26 | Falla Suïssa - L'Alqueria del Favero",
-        "description": "Galería de fotos de la Apuntà 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+        "title": "Apuntá 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de fotos de la Apuntá 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
       },
       "galeria_2": {
         "title": "Fallera Mayor Infantil 2025-26 | Falla Suïssa - L'Alqueria del Favero",
@@ -741,8 +741,8 @@
         "description": "Galería de imágenes de la Ofrenda de Frutos 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
       },
       "galeria_6": {
-        "title": "Cremà 2025-26 | Falla Suïssa - L'Alqueria del Favero",
-        "description": "Galería de imágenes de la Cremà 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
+        "title": "Cremá 2025-26 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Galería de imágenes de la Cremá 2025-26 de la Falla Suïssa - L'Alqueria del Favero."
       },
       "galeria_7": {
         "title": "San Juan 2026 | Falla Suïssa - L'Alqueria del Favero",
@@ -982,17 +982,17 @@
         "p9": "Imagen de la Ofrenda de Frutos 2025-26. Fotografía 9 de 9."
       },
       "g6": {
-        "p1": "Imagen de la Cremà 2025-26. Fotografía 1 de 11.",
-        "p2": "Imagen de la Cremà 2025-26. Fotografía 2 de 11.",
-        "p3": "Imagen de la Cremà 2025-26. Fotografía 3 de 11.",
-        "p4": "Imagen de la Cremà 2025-26. Fotografía 4 de 11.",
-        "p5": "Imagen de la Cremà 2025-26. Fotografía 5 de 11.",
-        "p6": "Imagen de la Cremà 2025-26. Fotografía 6 de 11.",
-        "p7": "Imagen de la Cremà 2025-26. Fotografía 7 de 11.",
-        "p8": "Imagen de la Cremà 2025-26. Fotografía 8 de 11.",
-        "p9": "Imagen de la Cremà 2025-26. Fotografía 9 de 11.",
-        "p10": "Imagen de la Cremà 2025-26. Fotografía 10 de 11.",
-        "p11": "Imagen de la Cremà 2025-26. Fotografía 11 de 11."
+        "p1": "Imagen de la Cremá 2025-26. Fotografía 1 de 11.",
+        "p2": "Imagen de la Cremá 2025-26. Fotografía 2 de 11.",
+        "p3": "Imagen de la Cremá 2025-26. Fotografía 3 de 11.",
+        "p4": "Imagen de la Cremá 2025-26. Fotografía 4 de 11.",
+        "p5": "Imagen de la Cremá 2025-26. Fotografía 5 de 11.",
+        "p6": "Imagen de la Cremá 2025-26. Fotografía 6 de 11.",
+        "p7": "Imagen de la Cremá 2025-26. Fotografía 7 de 11.",
+        "p8": "Imagen de la Cremá 2025-26. Fotografía 8 de 11.",
+        "p9": "Imagen de la Cremá 2025-26. Fotografía 9 de 11.",
+        "p10": "Imagen de la Cremá 2025-26. Fotografía 10 de 11.",
+        "p11": "Imagen de la Cremá 2025-26. Fotografía 11 de 11."
       },
       "g7": {
         "p1": "Imagen de San Juan 2026. Fotografía 1 de 17.",
