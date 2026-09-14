@@ -616,14 +616,12 @@ body:not(.modo-oscuro) .historia {
   &__card-cluster-label {
     background-color: rgba(v.$turquesa, 0.12);
   }
-  // Sobre la rejilla turquesa (v4.30.34-35) los grupos de edición van en
-  // claro sólido para que la etiqueta «Edición» en turquesa siga legible.
   &__card-cluster {
-    border-color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(v.$turquesa, 0.28);
+    background: linear-gradient(135deg, rgba(v.$turquesa, 0.12), rgba(255, 255, 255, 0.84));
     &:hover,
     &:focus-within {
-      border-color: v.$blanco;
+      border-color: rgba(v.$turquesa, 0.62);
     }
   }
   &__card--digital .historia__card-title {
@@ -632,10 +630,10 @@ body:not(.modo-oscuro) .historia {
   &__archivos .accordion {
     border: 1px solid v.$turquesa;
   }
-  // Rejillas de Presentaciones y Llibrets en turquesa (v4.30.34), como la
-  // caja de texto de la Plana Mayor; las tarjetas siguen claras encima.
+  // Rejillas de Presentaciones y Llibrets en turquesa claro (v4.30.36;
+  // en 4.30.34-35 fue $turquesa-texto, demasiado oscuro para el usuario).
   &__grid {
-    background-color: v.$turquesa-texto;
+    background-color: v.$turquesa-claro;
     border: 1px solid v.$turquesa;
     box-shadow: none;
     backdrop-filter: none;
