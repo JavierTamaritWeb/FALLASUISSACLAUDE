@@ -139,10 +139,11 @@
   }
 }
 
-// Panel HOPE de la home en claro (v4.30.43): fondo $turquesa-claro en lugar
-// del degradado azul y texto oscuro (el blanco no se lee sobre el celeste).
-// colaboraciones.html y el modo oscuro no cambian.
-body:not(.modo-oscuro) .colaboraciones__accordion .falleros__nosotros--plana-mayor .accordion__content {
+// Panel HOPE en claro (v4.30.43; desde v4.37.0 también en colaboraciones.html,
+// cuyo contenedor lleva ya el modificador --plana-mayor): fondo $turquesa-claro
+// en lugar del degradado azul y texto oscuro (el blanco no se lee sobre el
+// celeste). El modo oscuro no cambia.
+body:not(.modo-oscuro) .falleros__nosotros--plana-mayor .accordion__content {
   background: v.$turquesa-claro;
 
   // También los <p> generados por data-i18n-format="paragraphs": la regla

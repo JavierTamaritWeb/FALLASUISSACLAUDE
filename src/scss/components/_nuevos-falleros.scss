@@ -22,7 +22,7 @@
 
   &__heading-texto {
     font-weight: bold;
-    color: var(--coral-marca);
+    color: var(--titulo-seccion); // azul de sección en claro, coral en oscuro (v4.37.0)
 
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;
@@ -63,7 +63,7 @@
 
   &__subtitulo {
     text-align: center;
-    color: var(--coral-marca);
+    color: var(--titulo-seccion); // v4.37.0
     margin: 4rem auto 2rem;
     font-size: v.$font-size-medium;
     font-weight: bold;

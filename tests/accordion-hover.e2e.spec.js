@@ -163,7 +163,9 @@ test.describe('Hover de los titulares de acordeón (como .boton)', () => {
     const titular = page.locator('.accordion__titular').first();
     await pasarRaton(page, titular);
     const s = await estilos(titular);
-    expect(s.bg).toContain('linear-gradient(135deg, rgba(184, 63, 53, 0.98)');
+    // Desde v4.37.0 el contenedor HOPE lleva la paleta de «Nosotros»: hover rosa sólido
+    expect(s.bg).toBe('none');
+    expect(s.bgColor).toBe(ROSA_HOVER);
     expect(s.header).toBe(NEGRO_CASI);
   });
 

@@ -26,17 +26,30 @@
     z-index: 1;
   }
 
-  // Teaser de la home en claro (v4.30.41): degradado celeste de 5 tonos como
-  // Colaboraciones; título azul de sección e intro en $negro-casi (sobre el
-  // celeste el blanco y el coral no dan contraste). deportes.html no cambia.
-  body:not(.modo-oscuro) &--teaser {
+  // Modo claro (v4.30.41 en el teaser de la home; desde v4.37.0 también en
+  // deportes.html): degradado celeste de 5 tonos como Colaboraciones; título
+  // azul de sección e intro en $negro-casi (sobre el celeste el blanco y el
+  // coral no dan contraste). El bloque de delegados pasa a tarjeta hueso con
+  // borde turquesa y el título del tablón al azul de sección.
+  body:not(.modo-oscuro) & {
     background: v.$gradiente-celeste;
 
-    .deportes__heading-texto {
+    .deportes__heading-texto,
+    .deportes__delegados-titulo,
+    .deportes__tablon-titulo {
       color: var(--titulo-seccion);
     }
-    .deportes__intro {
+    .deportes__intro,
+    .deportes__delegado {
       color: v.$negro-casi;
+    }
+    .deportes__delegado:not(:last-child)::after {
+      color: v.$turquesa;
+    }
+    .deportes__delegados {
+      background-color: v.$blanco-hueso;
+      border: 1px solid v.$turquesa;
+      backdrop-filter: none;
     }
   }
 

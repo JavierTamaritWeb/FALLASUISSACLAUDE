@@ -77,7 +77,7 @@
   }
   &__monumento-title {
     text-align: center;
-    color: var(--coral-marca);
+    color: var(--titulo-seccion); // azul de sección en claro, coral en oscuro (v4.37.0)
     font-size: v.$font-size-regular;
     padding: 1rem;
     text-transform: none;

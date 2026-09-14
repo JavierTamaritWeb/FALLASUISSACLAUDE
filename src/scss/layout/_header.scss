@@ -350,6 +350,22 @@
     pointer-events: none;
   }
 
+  // Modo claro (v4.37.0): el hero interior comparte el celeste de la home
+  // (v4.30.45): título en coral de texto (4,1:1 sobre el stop más claro) y el
+  // tramo secundario en azul de sección (6:1). Sin olas (solo la home las
+  // lleva). El modo oscuro conserva el institucional con coral/blanco.
+  body:not(.modo-oscuro) & {
+    &::before {
+      background: v.$gradiente-celeste;
+    }
+    .heading-inner {
+      color: v.$coral-texto;
+    }
+    .heading-inner__span {
+      color: v.$azul-titulo-seccion;
+    }
+  }
+
   &__escudo {
     height: auto;
     width: 5rem;

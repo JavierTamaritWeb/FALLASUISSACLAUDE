@@ -76,10 +76,12 @@
   
 }
 .eventos-nota-calendario{
-  color: coral;
-  background-color: white;
+  // v4.37.0: enlace en coral de texto sobre blanco (5,5:1) y borde turquesa
+  // (antes `coral` literal y borde negro)
+  color: v.$coral-texto;
+  background-color: v.$blanco;
   font-size: 2rem;
-  border: 1px solid black;
+  border: 1px solid v.$turquesa;
   border-radius: 1rem;
   padding: 2rem;
   margin: 2rem 6rem;
@@ -108,7 +110,7 @@
 
 .tablon-titulo {
   font-size: 3rem;
-  color: var(--coral-marca);
+  color: var(--titulo-seccion); // azul de sección en claro, coral en oscuro (v4.37.0)
   padding: 4rem 6rem;
   display: flex;
   align-items: center;
