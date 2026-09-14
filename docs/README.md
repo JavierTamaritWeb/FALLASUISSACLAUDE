@@ -64,7 +64,7 @@
 
 ## 📝 Notas de Mantenimiento
 
-- La versión funcional documentada del proyecto es `v4.30.41` y `package.json`/`package-lock.json` están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.30.42` y `package.json`/`package-lock.json` están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta

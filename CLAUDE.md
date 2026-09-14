@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.41 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.30.42 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.41).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.42).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -383,6 +383,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
 
+- **4.30.42** — El acordeón HOPE de la sección Colaboraciones de `index.html` recibe el modificador `.falleros__nosotros--plana-mayor`, así que en modo claro comparte la paleta de «Nosotros»: contenedor `$turquesa-suave` con borde azul de 2 px, acordeón con borde `$turquesa`, fila `$rosa-acordeon` con hover `#FF5A8E` y titular/▼ en turquesa. El panel HOPE abierto sigue en azul y el modo oscuro en coral; `colaboraciones.html` no cambia. Sin CSS nuevo.
+
 - **4.30.41** — El teaser «Deportes» de `index.html` (`.deportes--teaser`) adopta en modo claro el `$gradiente-celeste` de Colaboraciones, con el título en `var(--titulo-seccion)` y la intro en `$negro-casi`; el velo `::before` del modo oscuro sigue igual y `deportes.html` no cambia. Baselines visuales de `index` regenerados.
 
 - **4.30.40** — La sección «Colaboraciones» de `index.html` cambia en modo claro el degradado institucional azul por `$gradiente-celeste`: 5 tonos celeste (`$celeste-1…5`, #E3F2FB → #BFE3F7 → #93CFF0 → #66B4E6 → #4A9AD6) a 160° más un brillo radial en la esquina superior izquierda para dar profundidad; sigue en el `::before` con `opacity`, así el modo oscuro no cambia. El título «Colaboraciones» pasa a `var(--titulo-seccion)` (el coral daba 2,0-2,4:1 sobre el celeste). `$gradiente-institucional` y el resto de secciones no cambian. Baselines visuales de `index` regenerados.
@@ -417,7 +419,7 @@ Los detalles del estado actual están en **Arquitectura** y **Restricciones**; e
 
 - **4.30.25** — El conjunto de acordeones de «Nosotros» (`.falleros__nosotros--plana-mayor > .accordion`, `index.html`/`lafalla.html`) lleva un borde `$turquesa` (`#00909E`) de 1 px en modo claro; en oscuro, sin borde como antes. El resto de acordeones del sitio no cambia.
 
-- **4.30.24** — Bloque «Nosotros» (`index.html`/`lafalla.html`, ES y VA) en modo claro: **(1)** el título (`.falleros__titulo`) pasa al azul `#02427A` con `var(--titulo-seccion)`; **(2)** su contenedor deja el relleno coral por **fondo hueso (`$blanco-hueso`) con borde azul `#02427A` de 2 px** mediante el modificador nuevo `.falleros__nosotros--plana-mayor` (el contenedor HOPE de Colaboraciones comparte `.falleros__nosotros` y sigue en coral; en modo oscuro `_modo-oscuro.scss` repone el coral). **(3) Fix de contraste en móvil**: por debajo de 768 px los titulares de todos los acordeones (Nosotros, Representantes, Monumentos, Ofrendas, HOPE) usaban `$coral-claro` (#FFB4AA) desde v4.29.0 pensando que iban sobre el azul, pero van sobre la fila clara `$naranja-suave` (1,6:1, ilegible); ahora `$coral-texto` (5,0:1). «Historia» (`.historia__titulo`) no cambia. Tests: los de los botones de descarga apartan el ratón antes de medir (el puntero quedaba sobre el botón tras el scroll y el brillo `::before` del hover inflaba `scrollWidth`: esa era la causa de su intermitencia) y se regeneran los 12 baselines visuales de `index`/`lafalla`.
+- **4.30.24** — Bloque «Nosotros» (`index.html`/`lafalla.html`, ES y VA) en modo claro: **(1)** el título (`.falleros__titulo`) pasa al azul `#02427A` con `var(--titulo-seccion)`; **(2)** su contenedor deja el relleno coral por **fondo hueso (`$blanco-hueso`) con borde azul `#02427A` de 2 px** mediante el modificador nuevo `.falleros__nosotros--plana-mayor` (desde v4.30.42 el contenedor HOPE de la home, `index.html`, lleva también el modificador y comparte toda la paleta; el de `colaboraciones.html` sigue en coral; en modo oscuro `_modo-oscuro.scss` repone el coral). **(3) Fix de contraste en móvil**: por debajo de 768 px los titulares de todos los acordeones (Nosotros, Representantes, Monumentos, Ofrendas, HOPE) usaban `$coral-claro` (#FFB4AA) desde v4.29.0 pensando que iban sobre el azul, pero van sobre la fila clara `$naranja-suave` (1,6:1, ilegible); ahora `$coral-texto` (5,0:1). «Historia» (`.historia__titulo`) no cambia. Tests: los de los botones de descarga apartan el ratón antes de medir (el puntero quedaba sobre el botón tras el scroll y el brillo `::before` del hover inflaba `scrollWidth`: esa era la causa de su intermitencia) y se regeneran los 12 baselines visuales de `index`/`lafalla`.
 
 - **4.30.23** — El rótulo de la galería 6 salía en valenciano también en castellano («Cremà 2025-26»): la versión ES pasa a **«Cremá 2025-26»**, como ya se hacía con «Apuntá» (VA mantiene «Cremà»/«Apuntà»). Corregidos los textos ES de `translations.json` (título, texto de la tarjeta, SEO de `galeria_6`, los 11 `alt` de sus fotos, ejemplo del buscador y descripción de `galerias.html`), los textos de reserva de `index.html`, `galerias.html` y `galeria_6.html` (incluido su JSON-LD), `dataPages6.json`, y el `<title>`/metas de `galeria_1.html`, que decían «Apuntà» en ES. El Llibret (documento histórico multilingüe) y la FAQ para IA, que explica el término valenciano, no cambian.
 
