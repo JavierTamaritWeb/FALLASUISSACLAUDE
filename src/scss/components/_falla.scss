@@ -630,11 +630,11 @@ body:not(.modo-oscuro) .historia {
   &__archivos .accordion {
     border: 1px solid v.$turquesa;
   }
-  // Panel de Representantes (v4.30.37): fondo $turquesa-claro en lugar del
-  // degradado azul; los textos pasan a oscuros (nombre $coral-texto 4,1:1 para
-  // 20px en negrita, cargo/placeholder $negro-casi). Monumentos y Ofrendas
-  // conservan el azul.
-  &__archivos .accordion--representantes:not(.accordion--monumentos):not(.accordion--ofrendas) {
+  // Paneles de Archivos (Representantes v4.30.37; Monumentos y Ofrendas
+  // v4.30.38): fondo $turquesa-claro en lugar del degradado azul; los textos
+  // pasan a oscuros (nombre $coral-texto 4,1:1 para 20px en negrita; cargo,
+  // pies de foto/vídeo y placeholder $negro-casi).
+  &__archivos .accordion--representantes {
     .accordion__content {
       background: v.$turquesa-claro;
     }
