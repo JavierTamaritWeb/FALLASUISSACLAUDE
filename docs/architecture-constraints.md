@@ -517,4 +517,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.31.2
+Última actualización: 14 de septiembre de 2026 - v4.31.3
