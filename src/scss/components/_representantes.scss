@@ -288,6 +288,12 @@ body.modo-oscuro .accordion--representantes {
   // Fotos apaisadas (Monumento 2024-25: monumento plantado y comisión, 4:3):
   // se muestran completas en 4/3 en lugar de recortarlas al 3/4 de los retratos
   .monumentos-grid--apaisado {
+    // En móvil, a dos columnas las fotos 4:3 quedaban diminutas y el badge "+"
+    // tapaba casi toda la miniatura: una sola columna (v4.32.3)
+    @media (max-width: 767px) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
     @media (min-width: 768px) {
       max-width: 88rem;
     }

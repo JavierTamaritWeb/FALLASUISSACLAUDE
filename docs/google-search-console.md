@@ -218,7 +218,7 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 5. Tras desplegar, validar con `curl -sI` que cada patrón devuelve el código esperado.
 6. En GSC, pulsar **"Validar corrección"** en el informe. Google re-rastreará en 2-3 semanas.
 
-## Datos estructurados de metadatos de imagen (14-sep-2026, v4.32.2)
+## Datos estructurados de metadatos de imagen (14-sep-2026, v4.32.3)
 
 Aviso «Falta el campo creator / copyrightNotice / acquireLicensePage / license» (no crítico). Resuelto en el build: `completeImageObjects` añade esos campos a todo `ImageObject` (ver `docs/structured-data.md`). Tras el deploy, en Search Console → Mejoras → *Metadatos de imagen* → **Validar corrección**; la revalidación tarda días.
 
