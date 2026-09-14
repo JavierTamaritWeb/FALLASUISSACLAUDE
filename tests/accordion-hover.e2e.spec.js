@@ -6,8 +6,11 @@
 const { test, expect } = require('@playwright/test');
 
 const NEGRO_CASI = 'rgb(17, 17, 17)';
-// Titulares de «Nosotros» en reposo (modo claro, ≥768 px): $turquesa desde v4.30.26
-const TURQUESA = 'rgb(0, 144, 158)';
+// Acordeón de «Nosotros» en claro (v4.30.27): filas $rosa-acordeon, titulares
+// $turquesa-sobre-rosa y hover/foco sólido $rosa-acordeon-hover con texto oscuro
+const TURQUESA = 'rgb(0, 102, 111)';
+const ROSA = 'rgb(255, 209, 220)';
+const ROSA_HOVER = 'rgb(255, 90, 142)';
 
 async function preparar(page, ruta) {
   await page.addInitScript(() => {
@@ -35,6 +38,7 @@ function estilos(titular) {
     const b = getComputedStyle(el, '::before');
     return {
       bg: c.backgroundImage,
+      bgColor: c.backgroundColor,
       transform: c.transform,
       outline: c.outlineStyle,
       outlineColor: c.outlineColor,
@@ -50,7 +54,7 @@ function estilos(titular) {
 }
 
 test.describe('Hover de los titulares de acordeón (como .boton)', () => {
-  test('Nosotros: reposo turquesa sin degradado, hover con degradado y texto oscuro sin mover la fila', async ({ page }) => {
+  test('Nosotros: reposo rosa con titular turquesa, hover rosa intenso y texto oscuro sin mover la fila', async ({ page }) => {
     await preparar(page, '/index.html');
     const titular = page.locator('.accordion').first().locator('.accordion__titular').nth(1);
     await titular.scrollIntoViewIfNeeded();
@@ -59,13 +63,15 @@ test.describe('Hover de los titulares de acordeón (como .boton)', () => {
 
     const antes = await estilos(titular);
     expect(antes.bg).toBe('none');
+    expect(antes.bgColor).toBe(ROSA);
     expect(antes.header).toBe(TURQUESA);
     expect(antes.icono).toBe(TURQUESA);
     expect(antes.brilloOpacidad).toBe('0');
 
     await pasarRaton(page, titular);
     const durante = await estilos(titular);
-    expect(durante.bg).toContain('linear-gradient(135deg, rgba(255, 111, 97, 0.98)');
+    expect(durante.bg).toBe('none');
+    expect(durante.bgColor).toBe(ROSA_HOVER);
     expect(durante.header).toBe(NEGRO_CASI);
     expect(durante.icono).toBe(NEGRO_CASI);
     expect(durante.transform).toBe('none');
@@ -86,7 +92,7 @@ test.describe('Hover de los titulares de acordeón (como .boton)', () => {
     await page.waitForTimeout(900);
     await pasarRaton(page, titular);
     const s = await estilos(titular);
-    expect(s.bg).toContain('linear-gradient');
+    expect(s.bgColor).toBe(ROSA_HOVER);
     // rotate(180deg) translateY(-.25rem) → matriz con a = -1
     expect(s.iconoTransform).toMatch(/^matrix\(-1, /);
   });

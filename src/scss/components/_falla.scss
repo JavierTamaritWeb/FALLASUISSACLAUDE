@@ -534,17 +534,29 @@ p {
 }
 
 
-// Titulares del acordeón de «Nosotros» (Plana Mayor) en turquesa, solo en modo
-// claro y fuera de hover/foco (ahí manda el degradado coral de .accordion__titular).
-// $turquesa (3,5:1) vale para el texto grande de escritorio y tableta; en móvil
-// el titular mide 14px y se usa $turquesa-texto (4,6:1) — v4.30.26.
-body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion .accordion__titular:not(:hover):not(:focus-visible) {
-  .accordion__header,
-  .accordion__icon {
-    color: v.$turquesa;
+// Acordeón de «Nosotros» (Plana Mayor) en modo claro:
+// - v4.30.26: titulares y ▼ en turquesa.
+// - v4.30.27: filas en rosa $rosa-acordeon (#FFD1DC) en lugar de $naranja-suave
+//   y hover/foco en $rosa-acordeon-hover (#FF5A8E, sustituye al degradado coral)
+//   con el texto en $negro-casi (6,4:1). Sobre el rosa, el turquesa de marca daba
+//   2,8:1 (insuficiente), así que los titulares usan $turquesa-sobre-rosa (#00666F,
+//   4,9:1 en todos los tamaños).
+body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion {
+  background-color: v.$rosa-acordeon;
 
-    @media (max-width: 767px) {
-      color: v.$turquesa-texto;
+  .accordion__titular {
+    background-color: v.$rosa-acordeon;
+
+    &:hover,
+    &:focus-visible {
+      background: v.$rosa-acordeon-hover;
+    }
+
+    &:not(:hover):not(:focus-visible) {
+      .accordion__header,
+      .accordion__icon {
+        color: v.$turquesa-sobre-rosa;
+      }
     }
   }
 }

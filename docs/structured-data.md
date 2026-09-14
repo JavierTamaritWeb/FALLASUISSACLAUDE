@@ -91,7 +91,7 @@ Validación externa opcional: pegar el `<script ld+json>` de `dist/<página>.htm
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.30.26
+Última actualización: 14 de septiembre de 2026 - v4.30.27
 
 ## Actualización SEO v4.30.21
 
