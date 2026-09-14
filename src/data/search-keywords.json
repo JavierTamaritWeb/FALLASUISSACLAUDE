@@ -1,5 +1,5 @@
 {
-  "$comment": "Palabras clave editoriales del buscador (v4.29.0). Clave = id de registro del índice (ver gulpfile.js → buildSearchIndex). Solo para consultas que el título/descripción no cubren; máximo ~20 entradas. Se fusionan en el índice en el build (dist/data/search-index.json); NO es un catálogo de contenidos.",
+  "$comment": "Palabras clave editoriales del buscador (v4.29.0; ampliado en v4.33.0). Clave = id de registro del índice (ver gulpfile.js → buildSearchIndex). Solo para consultas que el título/descripción no cubren; máximo ~45 entradas. Se fusionan en el índice en el build (dist/data/search-index.json); NO es un catálogo de contenidos. Las personas (per:*) ya llevan su cargo ES/VA como palabra clave desde schema-organization.json.",
   "page:nuevos-falleros": {
     "es": [
       "apuntarme",
@@ -63,13 +63,17 @@
       "casal",
       "dónde estamos",
       "ubicación",
-      "cómo llegar"
+      "cómo llegar",
+      "dirección",
+      "localización"
     ],
     "va": [
       "casal",
       "on estem",
       "ubicació",
-      "com arribar"
+      "com arribar",
+      "adreça",
+      "localització"
     ]
   },
   "page:meteo": {
@@ -90,16 +94,18 @@
     "es": [
       "directiva",
       "cargos",
-      "presidente",
       "vicepresidentes",
-      "delegados"
+      "delegados",
+      "delegaciones",
+      "junta"
     ],
     "va": [
       "directiva",
       "càrrecs",
-      "president",
       "vicepresidents",
-      "delegats"
+      "delegats",
+      "delegacions",
+      "junta"
     ]
   },
   "page:eventos": {
@@ -118,12 +124,20 @@
     "es": [
       "torneos",
       "equipos",
-      "jcf deportes"
+      "jcf deportes",
+      "fútbol",
+      "pádel",
+      "vóley",
+      "campeonato"
     ],
     "va": [
       "tornejos",
       "equips",
-      "esports jcf"
+      "esports jcf",
+      "futbol",
+      "pàdel",
+      "vòlei",
+      "campionat"
     ]
   },
   "page:colaboraciones": {
@@ -138,38 +152,20 @@
       "solidaritat"
     ]
   },
-  "sec:llibrets-2025-26": {
-    "es": [
-      "llibret",
-      "llibrets",
-      "libro de la falla"
-    ],
-    "va": [
-      "llibret",
-      "llibrets",
-      "llibre de la falla"
-    ]
-  },
-  "sec:llibrets-2024-25": {
-    "es": [
-      "llibret",
-      "llibrets"
-    ],
-    "va": [
-      "llibret",
-      "llibrets"
-    ]
-  },
   "doc:llibret-2025-26-digital": {
     "es": [
       "llibret",
       "llibrets",
-      "llibret digital"
+      "llibret digital",
+      "libro de la falla",
+      "pdf"
     ],
     "va": [
       "llibret",
       "llibrets",
-      "llibret digital"
+      "llibret digital",
+      "llibre de la falla",
+      "pdf"
     ]
   },
   "sec:ofrenda-2026": {
@@ -208,12 +204,14 @@
     "es": [
       "hoguera",
       "paella",
-      "sant joan"
+      "san juan",
+      "noche de san juan"
     ],
     "va": [
       "foguera",
       "paella",
-      "san juan"
+      "sant joan",
+      "nit de sant joan"
     ]
   },
   "post:somni": {
@@ -298,6 +296,338 @@
       "notícies",
       "cròniques",
       "articles"
+    ]
+  },
+  "doc:llibret-2024-25": {
+    "es": [
+      "llibret",
+      "llibrets",
+      "libro de la falla"
+    ],
+    "va": [
+      "llibret",
+      "llibrets",
+      "llibre de la falla"
+    ]
+  },
+  "doc:presentacion-fallera-2026": {
+    "es": [
+      "presentación",
+      "presentación fallera mayor",
+      "acto de presentación"
+    ],
+    "va": [
+      "presentació",
+      "presentació fallera major",
+      "acte de presentació"
+    ]
+  },
+  "sec:monumento-2025-26": {
+    "es": [
+      "vídeo dron",
+      "dron",
+      "vista aérea",
+      "monumento plantado"
+    ],
+    "va": [
+      "vídeo dron",
+      "dron",
+      "vista aèria",
+      "monument plantat"
+    ]
+  },
+  "sec:monumento-2026-27": {
+    "es": [
+      "boceto",
+      "bocetos",
+      "falla 2027"
+    ],
+    "va": [
+      "esbós",
+      "esbossos",
+      "falla 2027"
+    ]
+  },
+  "sec:monumento-2024-25": {
+    "es": [
+      "monumento plantado",
+      "comisión"
+    ],
+    "va": [
+      "monument plantat",
+      "comissió"
+    ]
+  },
+  "sec:representantes-2026-27": {
+    "es": [
+      "fallera mayor 2026",
+      "presidente infantil 2026",
+      "representantes"
+    ],
+    "va": [
+      "fallera major 2026",
+      "president infantil 2026",
+      "representants"
+    ]
+  },
+  "sec:representantes-2025-26": {
+    "es": [
+      "fallera mayor 2025",
+      "presidente infantil 2025",
+      "representantes"
+    ],
+    "va": [
+      "fallera major 2025",
+      "president infantil 2025",
+      "representants"
+    ]
+  },
+  "sec:representantes-2024-25": {
+    "es": [
+      "fallera mayor 2024",
+      "presidente infantil 2024",
+      "representantes"
+    ],
+    "va": [
+      "fallera major 2024",
+      "president infantil 2024",
+      "representants"
+    ]
+  },
+  "sec:nosotros-fallera-mayor": {
+    "es": [
+      "fallera mayor",
+      "fm",
+      "representante"
+    ],
+    "va": [
+      "fallera major",
+      "fm",
+      "representant"
+    ]
+  },
+  "sec:nosotros-fallera-mayor-infantil": {
+    "es": [
+      "fallera mayor infantil",
+      "fmi",
+      "niña"
+    ],
+    "va": [
+      "fallera major infantil",
+      "fmi",
+      "xiqueta"
+    ]
+  },
+  "sec:nosotros-presidente": {
+    "es": [
+      "presidente",
+      "president"
+    ],
+    "va": [
+      "president"
+    ]
+  },
+  "sec:nosotros-presidente-infantil": {
+    "es": [
+      "presidente infantil",
+      "niño"
+    ],
+    "va": [
+      "president infantil",
+      "xiquet"
+    ]
+  },
+  "sec:nosotros-directiva": {
+    "es": [
+      "directiva",
+      "junta directiva",
+      "vicepresidentes",
+      "secretaría",
+      "área económica",
+      "tesorería",
+      "cargos"
+    ],
+    "va": [
+      "directiva",
+      "junta directiva",
+      "vicepresidents",
+      "secretaria",
+      "àrea econòmica",
+      "tresoreria",
+      "càrrecs"
+    ]
+  },
+  "sec:contacto": {
+    "es": [
+      "contacto",
+      "contactar",
+      "email",
+      "correo",
+      "e-mail",
+      "teléfono",
+      "escribir",
+      "mensaje",
+      "formulario de contacto",
+      "hablar"
+    ],
+    "va": [
+      "contacte",
+      "contactar",
+      "email",
+      "correu",
+      "telèfon",
+      "escriure",
+      "missatge",
+      "formulari de contacte",
+      "parlar"
+    ]
+  },
+  "sec:redes": {
+    "es": [
+      "redes sociales",
+      "instagram",
+      "facebook",
+      "tiktok",
+      "youtube",
+      "seguir"
+    ],
+    "va": [
+      "xarxes socials",
+      "instagram",
+      "facebook",
+      "tiktok",
+      "youtube",
+      "seguir"
+    ]
+  },
+  "sec:subvencion": {
+    "es": [
+      "subvención",
+      "ayuntamiento",
+      "ajuntament",
+      "ayuda"
+    ],
+    "va": [
+      "subvenció",
+      "ajuntament",
+      "ajuda"
+    ]
+  },
+  "sec:hope": {
+    "es": [
+      "hope",
+      "incliva",
+      "solidaridad",
+      "perolà",
+      "fesols i naps",
+      "cáncer"
+    ],
+    "va": [
+      "hope",
+      "incliva",
+      "solidaritat",
+      "perolà",
+      "fesols i naps",
+      "càncer"
+    ]
+  },
+  "gal:2": {
+    "es": [
+      "fallera mayor infantil",
+      "fmi 2025"
+    ],
+    "va": [
+      "fallera major infantil",
+      "fmi 2025"
+    ]
+  },
+  "gal:3": {
+    "es": [
+      "presentación",
+      "presentación 2025"
+    ],
+    "va": [
+      "presentació",
+      "presentació 2025"
+    ]
+  },
+  "gal:4": {
+    "es": [
+      "proclamación",
+      "proclamación 2025"
+    ],
+    "va": [
+      "proclamació",
+      "proclamació 2025"
+    ]
+  },
+  "gal:5": {
+    "es": [
+      "ofrenda de frutos",
+      "frutos"
+    ],
+    "va": [
+      "ofrena de fruits",
+      "fruits"
+    ]
+  },
+  "gal:6": {
+    "es": [
+      "cremà",
+      "cremá",
+      "quema",
+      "fuego"
+    ],
+    "va": [
+      "cremà",
+      "crema",
+      "foc"
+    ]
+  },
+  "gal:8": {
+    "es": [
+      "representantes 2026",
+      "fotos representantes"
+    ],
+    "va": [
+      "representants 2026",
+      "fotos representants"
+    ]
+  },
+  "gal:9": {
+    "es": [
+      "fallera mayor infantil 2026",
+      "proclamación fmi",
+      "vídeo proclamación"
+    ],
+    "va": [
+      "fallera major infantil 2026",
+      "proclamació fmi",
+      "vídeo proclamació"
+    ]
+  },
+  "doc:normas-campeonato-padel-jcf": {
+    "es": [
+      "pádel",
+      "padel",
+      "normas"
+    ],
+    "va": [
+      "pàdel",
+      "padel",
+      "normes"
+    ]
+  },
+  "doc:bases-concurso-fotografia-2026": {
+    "es": [
+      "fotografía",
+      "concurso",
+      "fotos"
+    ],
+    "va": [
+      "fotografia",
+      "concurs",
+      "fotos"
     ]
   }
 }

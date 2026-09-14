@@ -7,3 +7,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+// Destinos de deep link (buscador, v4.33.0): cualquier #id al que se navegue
+// deja hueco para la barra fija de la cabecera (el acordeón ya lo tenía en
+// .accordion__section; esto cubre #quieres-mas, #redes-sociales,
+// #banner-subvencion, #notesBoard, #sportsBoard, #nuevos-falleros-documento…).
+:target {
+  scroll-margin-top: 8rem;
+}

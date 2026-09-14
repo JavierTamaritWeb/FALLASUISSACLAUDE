@@ -13,9 +13,20 @@ const INDEX = JSON.parse(fs.readFileSync(path.join(DIST, 'data', 'search-index.j
 test.describe('buscador — índice y meta generados por el build', () => {
   test('el índice tiene registros de todos los tipos y sin contenido de prueba', () => {
     const tipos = new Set(INDEX.registros.map((r) => r.tipo));
-    for (const t of ['pagina', 'seccion', 'galeria', 'post', 'evento', 'documento', 'formulario', 'legal']) {
+    for (const t of ['pagina', 'seccion', 'galeria', 'post', 'documento', 'formulario', 'legal', 'persona']) {
       expect(tipos.has(t), `tipo ${t}`).toBe(true);
     }
+    // Eventos (v4.33.0): solo futuros, sin duplicados y con enlace al día; el tipo
+    // aparece únicamente si eventos.json tiene actos futuros que no sean festivos
+    const eventosJson = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'eventos.json'), 'utf8')).eventos;
+    const futuros = eventosJson.filter((e) => e.category !== 'Festivo' && e.date >= INDEX.generado);
+    const eventos = INDEX.registros.filter((r) => r.tipo === 'evento');
+    expect(eventos.length > 0).toBe(futuros.length > 0);
+    for (const e of eventos) {
+      expect(e.fecha >= INDEX.generado, e.id).toBe(true);
+      expect(e.url, e.id).toBe(`calendario.html?dia=${e.fecha}`);
+    }
+    expect(new Set(eventos.map((e) => `${e.titulo.es}|${e.fecha}`)).size).toBe(eventos.length);
     const ids = INDEX.registros.map((r) => r.id);
     expect(new Set(ids).size).toBe(ids.length);
     for (const excluido of ['evt:23', 'evt:24', 'evt:25', 'evt:48', 'evt:49', 'page:ai-info', 'page:base', 'page:mantenimiento', 'page:llibret_2026']) {
@@ -29,6 +40,37 @@ test.describe('buscador — índice y meta generados por el build', () => {
     expect(cal.titulo.va).toBe('Calendari');
     // Tamaño acotado
     expect(fs.statSync(path.join(DIST, 'data', 'search-index.json')).size).toBeLessThan(120 * 1024);
+  });
+
+  test('calidad del índice (v4.33.0): descripciones, VA real, personas, keywords', () => {
+    const regs = INDEX.registros;
+    // Ninguna descripción ES vacía
+    for (const r of regs) expect(r.desc.es, `${r.id} sin descripción`).not.toBe('');
+    // Título VA distinto del ES salvo personas, eventos (solo ES), documentos
+    // (nombres propios de PDF) y títulos idénticos en ambas lenguas
+    const iguales = new Set(['HOPE', 'Somni', 'Blog', 'La Falla', 'Organigrama de la Falla']);
+    for (const r of regs) {
+      if (['persona', 'evento', 'documento'].includes(r.tipo) || iguales.has(r.titulo.es)) continue;
+      expect(r.titulo.va, `${r.id} sin título VA`).not.toBe(r.titulo.es);
+    }
+    // Sin títulos duplicados dentro del mismo tipo
+    const claves = regs.map((r) => `${r.tipo}|${r.titulo.es}`);
+    expect(new Set(claves).size).toBe(claves.length);
+    // Personas desde schema-organization.json, con destino a Nosotros/Directiva/Organigrama
+    const personas = regs.filter((r) => r.tipo === 'persona');
+    expect(personas.length).toBeGreaterThanOrEqual(20);
+    const lucia = personas.find((r) => r.id === 'per:lucia-gutierrez-martin');
+    expect(lucia.titulo.es).toBe('Lucía Gutiérrez Martín');
+    expect(lucia.url).toBe('lafalla.html#nosotros-fallera-mayor-lafalla');
+    expect(lucia.desc.va).toBe('Fallera Major');
+    for (const p of personas) expect(p.url, p.id).toMatch(/^(lafalla\.html#nosotros-|organigrama\.html$)/);
+    // Todo id de search-keywords.json existe en el índice
+    const kws = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'search-keywords.json'), 'utf8'));
+    const ids = new Set(regs.map((r) => r.id));
+    for (const id of Object.keys(kws)) if (!id.startsWith('$')) expect(ids.has(id), `keyword huérfana ${id}`).toBe(true);
+    // Un solo registro por llibret y ejercicio
+    expect(regs.filter((r) => /^llibret/i.test(r.titulo.es) && r.ejercicio === '2025-26').map((r) => r.id)).toEqual(['doc:llibret-2025-26-digital']);
+    expect(ids.has('sec:llibrets-2025-26') || ids.has('doc:llibret-2025-26')).toBe(false);
   });
 
   test('todas las páginas ES y /va/ llevan la meta search-index con hash y el script', () => {
@@ -46,7 +88,7 @@ test.describe('buscador — índice y meta generados por el build', () => {
   test('los destinos con ancla existen en dist/', () => {
     for (const r of INDEX.registros) {
       const [file, hash] = r.url.split('#');
-      const f = path.join(DIST, file || 'index.html');
+      const f = path.join(DIST, file.replace(/\?.*$/, '') || 'index.html');
       expect(fs.existsSync(f), r.url).toBe(true);
       if (hash) expect(fs.readFileSync(f, 'utf8'), r.url).toContain(`id="${hash}"`);
     }
@@ -236,6 +278,14 @@ test.describe('buscador — panel en el navegador', () => {
     const content = page.locator('#ofrenda-2026-lafalla');
     await expect.poll(async () => content.evaluate((el) => el.closest('.accordion__section').classList.contains('active')), { timeout: 5000 }).toBe(true);
     await expect.poll(async () => content.evaluate((el) => el.getBoundingClientRect().height), { timeout: 5000 }).toBeGreaterThan(50);
+  });
+
+  test('calendario.html?dia=AAAA-MM-DD (destino de los eventos) filtra ese día', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/calendario.html?dia=2026-02-22');
+    await expect(page.locator('#filtro-fecha')).toHaveValue('2026-02-22');
+    await expect(page.locator('#lista-anuncios')).toContainText('Crida de Valencia');
+    await expect(page.locator('#lista-anuncios')).not.toContainText('Crida de La Punta');
   });
 
   test('la consulta se conserva al reabrir el panel en la misma pestaña', async ({ page }) => {

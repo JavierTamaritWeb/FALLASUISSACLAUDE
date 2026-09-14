@@ -628,7 +628,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function iniciar() {
   asignarEventos();
+  // Enlace al día desde el buscador (v4.33.0): calendario.html?dia=AAAA-MM-DD
+  // rellena el filtro de fecha puntual y desplaza hasta la lista de eventos.
+  const diaParam = new URLSearchParams(window.location.search).get('dia');
+  const filtroFecha = document.getElementById('filtro-fecha');
+  const diaValido = diaParam && /^\d{4}-\d{2}-\d{2}$/.test(diaParam) && filtroFecha;
+  if (diaValido) filtroFecha.value = diaParam;
   actualizarVista();
+  if (diaValido) {
+    const lista = document.getElementById('lista-anuncios');
+    if (lista) lista.scrollIntoView({ behavior: 'auto', block: 'start' });
+  }
   if (typeof actualizarIcono === "function") {
     actualizarIcono();
   }

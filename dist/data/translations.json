@@ -48,7 +48,13 @@
         "anuncio": "Anuncio",
         "documento": "Documento",
         "formulario": "Formulario",
-        "legal": "Legal"
+        "legal": "Legal",
+        "persona": "Persona"
+      },
+      "registros": {
+        "contacto": { "titulo": "Contacto", "desc": "Escríbenos desde el formulario «¿Quieres saber más sobre nuestra Falla?» de la portada: nombre, correo electrónico, teléfono y mensaje." },
+        "redes": { "titulo": "Redes sociales", "desc": "Síguenos en Facebook, Instagram, TikTok y YouTube: los enlaces están en el pie de todas las páginas." },
+        "subvencion": { "titulo": "Subvención del Ajuntament de València", "desc": "Aviso de la subvención concedida por el Ajuntament de València a la comisión, en la portada." }
       }
     },
     "cookieBanner": {
@@ -1132,7 +1138,13 @@
         "anuncio": "Anunci",
         "documento": "Document",
         "formulario": "Formulari",
-        "legal": "Legal"
+        "legal": "Legal",
+        "persona": "Persona"
+      },
+      "registros": {
+        "contacto": { "titulo": "Contacte", "desc": "Escriu-nos des del formulari «Vols saber més sobre la nostra Falla?» de la portada: nom, correu electrònic, telèfon i missatge." },
+        "redes": { "titulo": "Xarxes socials", "desc": "Segueix-nos a Facebook, Instagram, TikTok i YouTube: els enllaços són al peu de totes les pàgines." },
+        "subvencion": { "titulo": "Subvenció de l'Ajuntament de València", "desc": "Avís de la subvenció concedida per l'Ajuntament de València a la comissió, a la portada." }
       }
     },
     "cookieBanner": {

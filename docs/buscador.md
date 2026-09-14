@@ -1,4 +1,4 @@
-# 🔎 Buscador general (v4.29.0)
+# 🔎 Buscador general (v4.29.0; cobertura ampliada en v4.33.0)
 
 Buscador bilingüe (ES/VA) para el sitio estático: **panel** desplegable bajo la barra, **índice JSON generado por el build** y **matcher propio** sin dependencias. Solo se descarga el índice al abrir el panel (o al pasar el ratón / enfocar el botón).
 
@@ -9,28 +9,29 @@ Buscador bilingüe (ES/VA) para el sitio estático: **panel** desplegable bajo l
 | `gulpfile.js → buildSearchIndex` | Genera `dist/data/search-index.json` dentro de `htmlTask` y devuelve su hash; `modifyHtmlStream` inyecta `<meta name="search-index" content="data/search-index.json?v=<hash>">` en cada página (ES y `/va/`). Tarea suelta `npx gulp searchIndex`. Kill-switch `DISABLE_SEARCH_INDEX=1`. |
 | `src/js/buscador.js` | Crea el botón lupa en `.header__botones` y el panel `#siteSearch` en la barra; carga el índice; normaliza, puntúa y pinta. Expone `window.FallaBuscador` (`normalizar`, `tokenizar`, `buscar`) y funciona en Node (`require`) para el evaluador. Cargado con `<script src="js/buscador.js" defer>` en las 30 páginas. |
 | `src/scss/components/_buscador.scss` | Botón (mismo relieve que el toggle del menú) y panel (mismo cristal que `.navegacion`); modo oscuro y `prefers-reduced-motion`. |
-| `src/data/search-keywords.json` | Palabras clave editoriales por id de registro (≤ ~25 entradas). Se fusionan en el índice en el build. |
+| `src/data/search-keywords.json` | Palabras clave editoriales por id de registro (≈45 entradas desde v4.33.0). Se fusionan en el índice en el build (se **suman** a las que ya traiga el registro, como el cargo de las personas). |
 | `src/data/translations.json → buscador.*` | Textos ES/VA del botón, panel, estados, chips de tipo y ejemplos. |
 | `src/js/acc.js → abrirPorHash` | Abre el panel de acordeón cuyo `.accordion__content` tiene el id del hash (`lafalla.html#ofrenda-2026-lafalla`) y desplaza hasta él. |
 | `src/js/nav-menu.js` | Emite `nav:open` y escucha `buscador:open`: menú y buscador son excluyentes. |
-| `scripts/search-eval.mjs` | `npm run search:eval`: ejecuta las 16 consultas de aceptación contra `dist/` y comprueba que todos los `url#id` del índice existen. Sale con 1 si < 80 % o hay destinos rotos. |
+| `scripts/search-eval.mjs` | `npm run search:eval`: ejecuta las 30 consultas de aceptación contra `dist/` y comprueba que todos los `url#id` / `url?dia=` del índice existen. Sale con 1 si < 80 % o hay destinos rotos. |
 | `tests/buscador.e2e.spec.js` | Guardia (smoke). |
 
 ## Qué entra en el índice
 
 | Tipo (`tipo`) | Fuente | id | URL |
 | --- | --- | --- | --- |
-| `pagina`, `formulario`, `legal` | `src/*.html` publicables (`<title>`, `meta description`; título VA de `nav.*`, `calendario.titulo`, `organigrama.titulo`, `nuevosFalleros.form*.titulo`) | `page:<slug>` | `<slug>.html` |
+| `pagina`, `formulario`, `legal` | `src/*.html` publicables (`<title>`, `meta description` en ES; en VA `nav.*`, `calendario.titulo`, `organigrama.titulo`, `nuevosFalleros.form*.titulo` o, para el resto, `seo.<slug>.{title,description}` desde v4.33.0: ninguna página sale en castellano en `/va/`) | `page:<slug>` | `<slug>.html` |
+| `persona` (v4.33.0) | `member` de `src/seo/schema-organization.json` (fuente única de cargos): nombre como título, cargo ES/VA como descripción y palabra clave | `per:<nombre-slug>` | Plana Mayor → `lafalla.html#nosotros-<cargo>-lafalla`; directiva (Presidente, vicepresidencias, secretaría, área económica, delegación infantil) → `lafalla.html#nosotros-directiva-lafalla`; resto de delegados → `organigrama.html` |
 | `galeria` | `galeria.galeriaN` / `galeriaN-texto` (ES/VA) | `gal:N` | `galeria_N.html` |
 | `post` | `blog.<slug>.cardTitle`, `article:published_time` | `post:<slug>` | `blog-<slug>.html` |
-| `seccion` | `SEARCH_SECTIONS` del gulpfile: paneles de Archivos (Representantes, Monumento, Ofrenda, Llibrets) y HOPE, con título `Padre · Edición` ES/VA | `sec:*` | `lafalla.html#<id del .accordion__content>` / `colaboraciones.html#hope-colaboracion` |
-| `documento` | wrappers `src/pdf/**/*.html`, `llibret_2026.html`, documento Drive de Nuevos Falleros | `doc:*` | `pdf/…html` (solo raíz), `llibret_2026.html`, `nuevos-falleros.html#nuevos-falleros-documento` |
-| `evento` | `eventos.json` **sin** categoría `Festivo` ni ids `EVENTOS_EXCLUIDOS_DEL_INDICE` (23, 24, 25, 48, 49: marcadores de prueba). Solo castellano (el VA repite el ES). | `evt:<id>` | `calendario.html` |
+| `seccion` | `SEARCH_SECTIONS` del gulpfile: paneles de Archivos (Representantes, Monumento, Ofrenda), HOPE, Nosotros (los 4 de la Plana Mayor, con el nombre del titular como descripción, y La Directiva con sus nombres; v4.33.0) y tres bloques de la home (Contacto `#quieres-mas`, Redes sociales `#redes-sociales`, Subvención `#banner-subvencion`; textos en `buscador.registros.*`), con título `Padre · Nombre` ES/VA y descripción de `descKeys` (pies de foto, `alt`, texto HOPE…). Ninguna sección va sin descripción. Los llibrets ya no son sección. | `sec:*` | `lafalla.html#<id del .accordion__content>` / `colaboraciones.html#hope-colaboracion` / `#<id>` de la home |
+| `documento` | wrappers `src/pdf/**/*.html` (salvo `WRAPPERS_EXCLUIDOS`: el llibret 2025-26 entra una sola vez como `llibret_2026.html`), `llibret_2026.html`, documento Drive de Nuevos Falleros y, desde v4.33.0, los PDFs **sin wrapper** declarados en `SEARCH_PDFS` (6 bases JCF 2026-27, organigrama y editorial en PDF, con título/descripción ES/VA en el gulpfile; un PDF nuevo bajo `src/pdf/` que no esté ni en `SEARCH_PDFS` ni en `PDFS_CON_WRAPPER` produce un aviso en el build) | `doc:*` | `pdf/…html` / `pdf/….pdf` (solo raíz), `llibret_2026.html`, `nuevos-falleros.html#nuevos-falleros-documento` |
+| `evento` | `eventos.json` **sin** categoría `Festivo` ni ids `EVENTOS_EXCLUIDOS_DEL_INDICE` (23, 24, 25, 48, 49: marcadores de prueba). Desde v4.33.0 **solo los futuros** (fecha ≥ día del build) y **sin duplicados** de título+fecha (decisión del usuario del 14-sep-2026); si no hay actos futuros el tipo no aparece. Solo castellano (el VA repite el ES). | `evt:<id>` | `calendario.html?dia=AAAA-MM-DD` (`calendario.js` rellena el filtro de fecha y desplaza a la lista) |
 | `anuncio` | `board.json` / `sports-board.json` con `activo !== false` | `nota:<id>` | `eventos.html#notesBoard` / `deportes.html#sportsBoard` |
 
-Excluidas: `ai-info`, `base`, `mantenimiento`, `google*`; `llibret_2026.html` como página (entra como documento); PDFs sin wrapper; el contenido interno de PDF/Drive.
+Excluidas: `ai-info`, `base`, `mantenimiento`, `google*`; `llibret_2026.html` como página (entra como documento); el contenido interno de PDF/Drive.
 
-Cada registro: `id`, `tipo`, `prio` (1 páginas/formularios · 2 galerías/posts/documentos · 3 secciones/legales · 4 eventos/anuncios), `titulo{es,va}`, `desc{es,va}`, `seccion` (clave `nav.*`), `url` (relativa; el cliente antepone `SITE_ROOT` y `va/` si procede; `pdf/` y `llibret_` solo en raíz), `fecha`, `ejercicio` (`AAAA-AA`; de septiembre a agosto), `hasta`, `kw`. Un registro por página lógica (ES y VA en el mismo).
+Cada registro: `id`, `tipo`, `prio` (desde v4.33.0: 1 páginas/personas · 2 secciones/formularios · 3 galerías/posts/documentos · 4 legales/eventos/anuncios; así «fallera mayor» devuelve primero el panel de la Fallera Mayor y no las galerías de la Infantil), `titulo{es,va}`, `desc{es,va}`, `seccion` (clave `nav.*`), `url` (relativa; el cliente antepone `SITE_ROOT` y `va/` si procede; `pdf/` y `llibret_` solo en raíz), `fecha`, `ejercicio` (`AAAA-AA`; de septiembre a agosto), `hasta`, `kw`. Un registro por página lógica (ES y VA en el mismo).
 
 ## Relevancia (explicable)
 
@@ -56,10 +57,12 @@ No hay nada que mantener a mano: una galería, un post o una página nuevos entr
 
 ## Casos de aceptación
 
-`npm run search:eval` cubre: «autorización menores», «apuntarme», «llibrets», «ofrenda 2026», «calendari» (UI ES), «cremà», «sant joan», «fallera mayor infantil», «proclamació 2025», «representantes 2024-25», «suissa», «organigrama», «tiempo valencia», «cookies», y sin coincidencias «paella» y «xyz123». Resultado el 11-sep-2026: 14/14 en el top 3 (objetivo ≥ 80 %).
+`npm run search:eval` cubre: «autorización menores», «apuntarme», «llibrets», «ofrenda 2026», «calendari» (UI ES), «cremà», «sant joan», «fallera mayor infantil», «proclamació 2025», «representantes 2024-25», «suissa», «organigrama», «tiempo valencia», «cookies», «paella» (→ San Juan) y, desde v4.33.0, «lucía», «lucia gutierrez», «presidente», «fallera mayor», «pablo cortés», «directiva», «contacto», «email», «instagram», «subvención», «vídeo dron», «fútbol», «pádel», «avís legal»; sin coincidencias «xyz123». Resultado el 14-sep-2026: 29/29 en el top 3 (objetivo ≥ 80 %).
 
-Pendientes editoriales: traducir al valenciano título y descripción de los eventos de `eventos.json`; no existe una página de inscripción («apuntarme» lleva a Nuevos Falleros; el formulario «¿Quieres formar parte?» es un modal de la home).
+Pendientes editoriales: traducir al valenciano título y descripción de los eventos de `eventos.json`; **`eventos.json` no tiene actos posteriores al 14-sep-2026**, así que hoy el índice no lleva ningún evento (aparecerán solos al añadirlos); no existe una página de inscripción («apuntarme» lleva a Nuevos Falleros; el formulario «¿Quieres formar parte?» es un modal de la home).
+
+Relevo anual: al cambiar `member` en `schema-organization.json` las personas y las descripciones de los paneles de Nosotros se regeneran solas en el build.
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.32.8
+Última actualización: 14 de septiembre de 2026 - v4.33.0

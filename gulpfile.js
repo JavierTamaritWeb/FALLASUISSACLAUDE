@@ -1018,35 +1018,95 @@ const SEARCH_PAGE_TITLE_KEY = {
 };
 const SEARCH_PAGE_DESC_KEY = {
   'autorizacion-imagen.html': 'nuevosFalleros.formMayores.desc',
-  'autorizacion-imagen-menor.html': 'nuevosFalleros.formMenores.desc',
-  'nuevos-falleros.html': 'nuevosFalleros.intro'
+  'autorizacion-imagen-menor.html': 'nuevosFalleros.formMenores.desc'
 };
+// Título/descripción VA de las demás páginas: translations.va.seo.<slug>.{title,description} (v4.33.0)
 const SEARCH_PAGE_TYPE = {
   'autorizacion-imagen.html': 'formulario', 'autorizacion-imagen-menor.html': 'formulario',
   'aviso-legal.html': 'legal', 'privacidad.html': 'legal', 'cookies.html': 'legal'
 };
 // Secciones de Archivos (paneles de acordeón): un registro cada una, apuntando a
 // lafalla.html (la home tiene copia). El id es el del .accordion__content.
+// `descKeys`: claves i18n cuyos valores, unidos con « · », forman la descripción ES/VA
+// (ninguna sección va sin descripción desde v4.33.0). Los llibrets ya no son
+// sección: cada ejercicio entra una sola vez como documento (doc:llibret-*).
 const SEARCH_SECTIONS = [
-  { id: 'sec:representantes-2026-27', url: 'lafalla.html#representantes-2026-27-lafalla', padre: 'historia.archivos.representantes.titulo', key: 'historia.archivos.representantes.edicion202627', ejercicio: '2026-27' },
-  { id: 'sec:representantes-2025-26', url: 'lafalla.html#representantes-2025-26-lafalla', padre: 'historia.archivos.representantes.titulo', key: 'historia.archivos.representantes.edicion202526', ejercicio: '2025-26' },
-  { id: 'sec:representantes-2024-25', url: 'lafalla.html#representantes-2024-25-lafalla', padre: 'historia.archivos.representantes.titulo', key: 'historia.archivos.representantes.edicion202425', ejercicio: '2024-25' },
-  { id: 'sec:monumento-2026-27', url: 'lafalla.html#monumento-2026-27-lafalla', padre: 'historia.archivos.monumentos.titulo', key: 'historia.archivos.monumentos.edicion202627', ejercicio: '2026-27' },
-  { id: 'sec:monumento-2025-26', url: 'lafalla.html#monumento-2025-26-lafalla', padre: 'historia.archivos.monumentos.titulo', key: 'historia.archivos.monumentos.edicion202526', ejercicio: '2025-26' },
-  { id: 'sec:monumento-2024-25', url: 'lafalla.html#monumento-2024-25-lafalla', padre: 'historia.archivos.monumentos.titulo', key: 'historia.archivos.monumentos.edicion202425', ejercicio: '2024-25' },
-  { id: 'sec:ofrenda-2026', url: 'lafalla.html#ofrenda-2026-lafalla', padre: 'historia.archivos.ofrendas.titulo', key: 'historia.archivos.ofrendas.edicion2026', ejercicio: '2025-26' },
-  { id: 'sec:llibrets-2024-25', url: 'lafalla.html#historia-llibrets-edicion-202425-lafalla', padre: 'historia.archivos.titulo', key: 'historia.archivos.edicion202425', ejercicio: '2024-25', extra: 'Llibret' },
-  { id: 'sec:llibrets-2025-26', url: 'lafalla.html#historia-llibrets-edicion-lafalla', padre: 'historia.archivos.titulo', key: 'historia.archivos.edicion202526', ejercicio: '2025-26', extra: 'Llibret' },
-  { id: 'sec:hope', url: 'colaboraciones.html#hope-colaboracion', padre: 'colaboraciones.titulo', key: 'colaboraciones.hope.titulo', ejercicio: '' }
+  { id: 'sec:representantes-2026-27', url: 'lafalla.html#representantes-2026-27-lafalla', padre: 'historia.archivos.representantes.titulo', key: 'historia.archivos.representantes.edicion202627', ejercicio: '2026-27',
+    descKeys: ['historia.archivos.representantes.alt.e202627.falleraMayor', 'historia.archivos.representantes.alt.e202627.presidente', 'historia.archivos.representantes.alt.e202627.falleraMayorInfantil', 'historia.archivos.representantes.alt.e202627.presidenteInfantil'] },
+  { id: 'sec:representantes-2025-26', url: 'lafalla.html#representantes-2025-26-lafalla', padre: 'historia.archivos.representantes.titulo', key: 'historia.archivos.representantes.edicion202526', ejercicio: '2025-26',
+    descKeys: ['historia.archivos.representantes.alt.e202526.falleraMayor', 'historia.archivos.representantes.alt.e202526.presidente', 'historia.archivos.representantes.alt.e202526.falleraMayorInfantil', 'historia.archivos.representantes.alt.e202526.presidenteInfantil'] },
+  { id: 'sec:representantes-2024-25', url: 'lafalla.html#representantes-2024-25-lafalla', padre: 'historia.archivos.representantes.titulo', key: 'historia.archivos.representantes.edicion202425', ejercicio: '2024-25',
+    descKeys: ['historia.archivos.representantes.alt.e202425.falleraMayor', 'historia.archivos.representantes.alt.e202425.presidente', 'historia.archivos.representantes.alt.e202425.falleraMayorInfantil', 'historia.archivos.representantes.alt.e202425.presidenteInfantil'] },
+  { id: 'sec:monumento-2026-27', url: 'lafalla.html#monumento-2026-27-lafalla', padre: 'historia.archivos.monumentos.titulo', key: 'historia.archivos.monumentos.edicion202627', ejercicio: '2026-27',
+    descKeys: ['historia.archivos.monumentos.pies.principal', 'historia.archivos.monumentos.pies.infantil'] },
+  { id: 'sec:monumento-2025-26', url: 'lafalla.html#monumento-2025-26-lafalla', padre: 'historia.archivos.monumentos.titulo', key: 'historia.archivos.monumentos.edicion202526', ejercicio: '2025-26',
+    descKeys: ['historia.archivos.monumentos.pies.principalReal', 'historia.archivos.monumentos.pies.infantilReal', 'historia.archivos.monumentos.descargarVideo'] },
+  { id: 'sec:monumento-2024-25', url: 'lafalla.html#monumento-2024-25-lafalla', padre: 'historia.archivos.monumentos.titulo', key: 'historia.archivos.monumentos.edicion202425', ejercicio: '2024-25',
+    descKeys: ['historia.archivos.monumentos.pies.plantado', 'historia.archivos.monumentos.pies.comision'] },
+  { id: 'sec:ofrenda-2026', url: 'lafalla.html#ofrenda-2026-lafalla', padre: 'historia.archivos.ofrendas.titulo', key: 'historia.archivos.ofrendas.edicion2026', ejercicio: '2025-26',
+    descKeys: ['historia.archivos.ofrendas.pies.video2026', 'historia.archivos.ofrendas.descargarVideo'] },
+  { id: 'sec:hope', url: 'colaboraciones.html#hope-colaboracion', padre: 'colaboraciones.titulo', key: 'colaboraciones.hope.titulo', ejercicio: '', descKeys: ['colaboraciones.hope.texto'] },
+  // Nosotros (Plana Mayor y Directiva): la descripción (nombres) la completa buildSearchIndex desde schema-organization.json
+  { id: 'sec:nosotros-fallera-mayor', url: 'lafalla.html#nosotros-fallera-mayor-lafalla', padre: 'falla.nosotros.titulo', key: 'falla.nosotros.falleraM', ejercicio: '2026-27', cargo: 'Fallera Mayor' },
+  { id: 'sec:nosotros-presidente', url: 'lafalla.html#nosotros-presidente-lafalla', padre: 'falla.nosotros.titulo', key: 'falla.nosotros.presidente', ejercicio: '2026-27', cargo: 'Presidente' },
+  { id: 'sec:nosotros-fallera-mayor-infantil', url: 'lafalla.html#nosotros-fallera-mayor-infantil-lafalla', padre: 'falla.nosotros.titulo', key: 'falla.nosotros.falleraMI', ejercicio: '2026-27', cargo: 'Fallera Mayor Infantil' },
+  { id: 'sec:nosotros-presidente-infantil', url: 'lafalla.html#nosotros-presidente-infantil-lafalla', padre: 'falla.nosotros.titulo', key: 'falla.nosotros.presidenteI', ejercicio: '2026-27', cargo: 'Presidente Infantil' },
+  { id: 'sec:nosotros-directiva', url: 'lafalla.html#nosotros-directiva-lafalla', padre: 'falla.nosotros.titulo', key: 'falla.nosotros.directiva', ejercicio: '2026-27', directiva: true },
+  // Home: contacto, redes sociales y subvención (textos en buscador.registros.*)
+  { id: 'sec:contacto', url: '#quieres-mas', seccion: '', key: 'buscador.registros.contacto.titulo', ejercicio: '', descKeys: ['buscador.registros.contacto.desc'] },
+  { id: 'sec:redes', url: '#redes-sociales', seccion: '', key: 'buscador.registros.redes.titulo', ejercicio: '', descKeys: ['buscador.registros.redes.desc'] },
+  { id: 'sec:subvencion', url: '#banner-subvencion', seccion: '', key: 'buscador.registros.subvencion.titulo', ejercicio: '', descKeys: ['buscador.registros.subvencion.desc'] }
 ];
-const SEARCH_PRIO = { pagina: 1, formulario: 1, galeria: 2, post: 2, documento: 2, seccion: 3, legal: 3, evento: 4, anuncio: 4 };
+// PDFs sin wrapper HTML que entran como documento (v4.33.0). Los que tienen
+// wrapper (Llibrets/*.html, Presentaciones/*.html) entran por el wrapper.
+const SEARCH_PDFS = [
+  { file: 'pdf/JCF-2026-27/bases-concurso-fotografia-2026.pdf', seccion: 'deportes', ejercicio: '2026-27', es: ['Bases del concurso de fotografía 2026 (JCF)', 'Bases del concurso de fotografía de la Junta Central Fallera para el ejercicio 2026-27.'], va: ['Bases del concurs de fotografia 2026 (JCF)', 'Bases del concurs de fotografia de la Junta Central Fallera per a l\'exercici 2026-27.'] },
+  { file: 'pdf/JCF-2026-27/bases-i-campeonato-futbol-femenino-2026-27.pdf', seccion: 'deportes', ejercicio: '2026-27', es: ['Bases del I Campeonato de Fútbol Femenino 2026-27 (JCF)', 'Bases del campeonato de fútbol femenino de la Junta Central Fallera.'], va: ['Bases del I Campionat de Futbol Femení 2026-27 (JCF)', 'Bases del campionat de futbol femení de la Junta Central Fallera.'] },
+  { file: 'pdf/JCF-2026-27/bases-i-campeonato-futbol-infantil-2026-27.pdf', seccion: 'deportes', ejercicio: '2026-27', es: ['Bases del I Campeonato de Fútbol Infantil 2026-27 (JCF)', 'Bases del campeonato de fútbol infantil de la Junta Central Fallera.'], va: ['Bases del I Campionat de Futbol Infantil 2026-27 (JCF)', 'Bases del campionat de futbol infantil de la Junta Central Fallera.'] },
+  { file: 'pdf/JCF-2026-27/bases-ii-campeonato-futbol-playa-2026-27.pdf', seccion: 'deportes', ejercicio: '2026-27', es: ['Bases del II Campeonato de Fútbol Playa 2026-27 (JCF)', 'Bases del campeonato de fútbol playa de la Junta Central Fallera.'], va: ['Bases del II Campionat de Futbol Platja 2026-27 (JCF)', 'Bases del campionat de futbol platja de la Junta Central Fallera.'] },
+  { file: 'pdf/JCF-2026-27/bases-ii-campeonato-voley-playa-2026-27.pdf', seccion: 'deportes', ejercicio: '2026-27', es: ['Bases del II Campeonato de Vóley Playa 2026-27 (JCF)', 'Bases del campeonato de vóley playa de la Junta Central Fallera.'], va: ['Bases del II Campionat de Vòlei Platja 2026-27 (JCF)', 'Bases del campionat de vòlei platja de la Junta Central Fallera.'] },
+  { file: 'pdf/JCF-2026-27/normas-campeonato-padel-jcf.pdf', seccion: 'deportes', ejercicio: '2026-27', es: ['Normas del Campeonato de Pádel (JCF)', 'Normas del campeonato de pádel de la Junta Central Fallera.'], va: ['Normes del Campionat de Pàdel (JCF)', 'Normes del campionat de pàdel de la Junta Central Fallera.'] },
+  { file: 'pdf/Organigrama_2026.pdf', seccion: 'lafalla', ejercicio: '2026-27', es: ['Organigrama 2026-27 (PDF)', 'Organigrama de la comisión en PDF: representantes, junta directiva y delegaciones.'], va: ['Organigrama 2026-27 (PDF)', 'Organigrama de la comissió en PDF: representants, junta directiva i delegacions.'] },
+  { file: 'pdf/Editorial_Llibret.pdf', seccion: 'lafalla', ejercicio: '2025-26', es: ['Editorial del Llibret (PDF)', 'Editorial del Llibret de la Falla Suïssa - L\'Alqueria del Favero.'], va: ['Editorial del Llibret (PDF)', 'Editorial del Llibret de la Falla Suïssa - L\'Alqueria del Favero.'] }
+];
+// PDFs cubiertos por un wrapper HTML (no se indexan dos veces)
+const PDFS_CON_WRAPPER = new Set(['pdf/Llibrets/2024_LLIBRET_FALLA _MORERES_DIGITAL.pdf', 'pdf/Llibrets/Llibret_2025-26.pdf', 'pdf/Presentaciones/Prensentacion_Fallera_2026.pdf']);
+// Wrappers que no entran: el llibret 2025-26 se indexa una sola vez como llibret_2026.html (digital)
+const WRAPPERS_EXCLUIDOS = new Set(['pdf/Llibrets/Llibret_2025-26.html']);
+// Cargos de schema-organization.json → destino: Plana Mayor (panel propio), Directiva (panel) o el organigrama
+const PLANA_MAYOR_ANCLA = { 'Fallera Mayor': 'nosotros-fallera-mayor', 'Presidente': 'nosotros-presidente', 'Fallera Mayor Infantil': 'nosotros-fallera-mayor-infantil', 'Presidente Infantil': 'nosotros-presidente-infantil' };
+const CARGO_DIRECTIVA_RE = /^(Presidente$|Vicepresident|Secretari|Área Económica|Delegad[oa] de Infantil)/;
+// Cargo en valenciano (orden: primero las formas largas)
+const CARGO_VA = [
+  ['Fallera Mayor Infantil', 'Fallera Major Infantil'], ['Fallera Mayor', 'Fallera Major'], ['Presidente Infantil', 'President Infantil'],
+  ['Vicepresidenta', 'Vicepresidenta'], ['Vicepresidente', 'Vicepresident'], ['Presidente', 'President'], ['Secretaria', 'Secretària'],
+  ['Área Económica', 'Àrea Econòmica'], ['Delegada de Infantil', 'Delegada d\'Infantil'], ['Delegado de Infantil', 'Delegat d\'Infantil'],
+  ['Delegada de Eventos', 'Delegada d\'Esdeveniments'], ['Delegado de Eventos', 'Delegat d\'Esdeveniments'],
+  ['Delegado Deportes', 'Delegat d\'Esports'], ['Delegada Deportes', 'Delegada d\'Esports'], ['Delegado Festejos', 'Delegat de Festejos'], ['Delegada Festejos', 'Delegada de Festejos'],
+  ['Delegado Web', 'Delegat Web'], ['Delegada Web', 'Delegada Web'], ['Delegado', 'Delegat'], ['Delegada', 'Delegada']
+];
+function cargoVa(cargo) {
+  for (const [es, va] of CARGO_VA) if (cargo === es) return va;
+  return cargo;
+}
+function slugPersona(nombre) {
+  return String(nombre).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+const SEARCH_PRIO = { pagina: 1, persona: 1, seccion: 2, formulario: 2, galeria: 3, post: 3, documento: 3, legal: 4, evento: 4, anuncio: 4 };
 
 function tituloSinMarca(title) {
   return String(title || '')
     .replace(/^Falla Su[iï]ssa\s*-\s*L'Alqueria del Favero\s*[-|]\s*/i, '')
     .replace(/\s*[|—-]\s*Falla Su[iï]ssa[^|]*$/i, '')
     .replace(/\s*\|\s*Blog\s*$/i, '')
-    .trim();
+    .replace(/\s*Falla Su[iï]ssa\s*-\s*L'Alqueria del Favero\s*/i, ' ') // marca incrustada («Llibret Falla Suïssa - … 2025-2026»)
+    .replace(/\s+/g, ' ')
+    .trim() || String(title || '').trim();
+}
+// Primer párrafo de un texto largo (intro de Nuevos Falleros, HOPE), acotado
+function primerParrafo(texto, max = 200) {
+  const p = String(texto || '').split(/\n+/).map((s) => s.trim()).filter(Boolean)[0] || '';
+  return p.length > max ? `${p.slice(0, max - 1).replace(/\s+\S*$/, '')}…` : p;
 }
 
 // Ejercicio fallero AAAA-AA a partir de un texto ("2026-27", "2025-2026", "San Juan 2026")
@@ -1088,8 +1148,9 @@ async function buildSearchIndex({ translations, galerias }) {
     titulo: { es: r.tituloEs, va: r.tituloVa || r.tituloEs },
     desc: { es: r.descEs || '', va: r.descVa || r.descEs || '' },
     seccion: r.seccion || '', url: r.url, fecha: r.fecha || '', ejercicio: r.ejercicio || '',
-    hasta: r.hasta || '', kw: []
+    hasta: r.hasta || '', kw: r.kw || []
   });
+  const hoy = new Date().toISOString().slice(0, 10);
 
   // 1. Páginas, posts y galerías desde src/*.html
   // glob() no aplica las exclusiones '!…' del array de gulp: se filtran a mano
@@ -1123,27 +1184,54 @@ async function buildSearchIndex({ translations, galerias }) {
     const parentKey = Object.keys(BREADCRUMB_PARENT).find((prefix) => fileName.startsWith(prefix));
     add({ id: `page:${slug}`, tipo: SEARCH_PAGE_TYPE[fileName] || 'pagina', url: fileName === 'index.html' ? '' : fileName,
       seccion: parentKey ? BREADCRUMB_PARENT[parentKey].nav : (BREADCRUMB_NAV_KEY[fileName] || ''),
-      tituloEs: (titleKey && t(es, titleKey)) || tituloSinMarca(meta.title), tituloVa: titleKey ? t(va, titleKey) : '',
-      descEs: (descKey && t(es, descKey)) || meta.description, descVa: descKey ? t(va, descKey) : '',
+      tituloEs: (titleKey && t(es, titleKey)) || tituloSinMarca(meta.title),
+      tituloVa: (titleKey && t(va, titleKey)) || tituloSinMarca(t(va, `seo.${slug}.title`)),
+      descEs: (descKey && t(es, descKey)) || meta.description,
+      descVa: (descKey && t(va, descKey)) || t(va, `seo.${slug}.description`),
       ejercicio: ejercicioDeTexto(meta.title) });
   }
 
-  // 2. Secciones de Archivos y HOPE (paneles de acordeón)
+  // 2. Personas (fuente única: member de schema-organization.json) y secciones
+  let miembros = [];
+  try {
+    const org = JSON.parse(await fs.readFile(path.join(__dirname, 'src', 'seo', 'schema-organization.json'), 'utf8'));
+    miembros = ((org.organization && org.organization.member) || []).filter((m) => m && m.name && m.jobTitle);
+  } catch (err) {
+    console.warn('[buscador] schema-organization.json no disponible:', err.message);
+  }
+  const ejercicioActual = ejercicioDeTexto(t(es, 'seo.organigrama.title')) || ejercicioDeFecha(hoy);
+  const nombresPorCargo = (pred) => miembros.filter((m) => pred(m.jobTitle)).map((m) => m.name).join(' · ');
+  for (const m of miembros) {
+    const ancla = PLANA_MAYOR_ANCLA[m.jobTitle];
+    const url = ancla ? `lafalla.html#${ancla}-lafalla` : (CARGO_DIRECTIVA_RE.test(m.jobTitle) ? 'lafalla.html#nosotros-directiva-lafalla' : 'organigrama.html');
+    const cargoEs = m.jobTitle; const cargoVaTxt = cargoVa(m.jobTitle);
+    add({ id: `per:${slugPersona(m.name)}`, tipo: 'persona', url, seccion: 'lafalla', tituloEs: m.name, tituloVa: m.name,
+      descEs: cargoEs, descVa: cargoVaTxt, ejercicio: ejercicioActual, kw: [...new Set([cargoEs, cargoVaTxt])] });
+  }
+
+  // Secciones: paneles de Archivos, HOPE, Nosotros (Plana Mayor y Directiva) y bloques de la home
   for (const sec of SEARCH_SECTIONS) {
     const compon = (table) => {
-      const padre = t(table, sec.padre); const nombre = t(table, sec.key);
+      const padre = sec.padre ? t(table, sec.padre) : ''; const nombre = t(table, sec.key);
       return [padre, sec.extra, nombre].filter(Boolean).join(' · ');
     };
-    add({ id: sec.id, tipo: 'seccion', url: sec.url, seccion: sec.url.startsWith('colaboraciones') ? 'colaboraciones' : 'lafalla',
-      tituloEs: compon(es), tituloVa: compon(va), descEs: '', ejercicio: sec.ejercicio });
+    const descDe = (table) => (sec.descKeys || []).map((k) => primerParrafo(t(table, k))).filter(Boolean).join(' · ');
+    let descEs = descDe(es); let descVa = descDe(va);
+    if (sec.cargo) { descEs = descVa = nombresPorCargo((c) => c === sec.cargo); }
+    if (sec.directiva) { descEs = descVa = nombresPorCargo((c) => CARGO_DIRECTIVA_RE.test(c)); }
+    if (!descEs) console.warn(`[buscador] sección sin descripción: ${sec.id}`);
+    add({ id: sec.id, tipo: 'seccion', url: sec.url,
+      seccion: sec.seccion !== undefined ? sec.seccion : (sec.url.startsWith('colaboraciones') ? 'colaboraciones' : 'lafalla'),
+      tituloEs: compon(es), tituloVa: compon(va), descEs, descVa, ejercicio: sec.ejercicio });
   }
 
   // 3. Documentos: wrappers HTML de src/pdf/**, llibret digital y documento Drive
   const wrappers = (await glob('src/pdf/**/*.html')).sort();
   for (const w of wrappers) {
+    const rel = path.relative(path.join(__dirname, 'src'), w).split(path.sep).join('/');
+    if (WRAPPERS_EXCLUIDOS.has(rel)) continue;
     const html = await fs.readFile(w, 'utf8');
     const meta = readHeadMeta(html);
-    const rel = path.relative(path.join(__dirname, 'src'), w).split(path.sep).join('/');
     const base = path.basename(w, '.html').toLowerCase().replace(/_/g, '-');
     add({ id: `doc:${base}`, tipo: 'documento', url: rel, seccion: 'lafalla',
       tituloEs: tituloSinMarca(meta.title), descEs: meta.description, ejercicio: ejercicioDeTexto(meta.title) });
@@ -1157,14 +1245,31 @@ async function buildSearchIndex({ translations, galerias }) {
   add({ id: 'doc:nuevos-falleros-drive', tipo: 'documento', url: 'nuevos-falleros.html#nuevos-falleros-documento', seccion: 'nuevosFalleros',
     tituloEs: `${t(es, 'nuevosFalleros.docInteresTitulo')} · ${t(es, 'nuevosFalleros.iframeTitle')}`,
     tituloVa: `${t(va, 'nuevosFalleros.docInteresTitulo')} · ${t(va, 'nuevosFalleros.iframeTitle')}`,
-    descEs: t(es, 'nuevosFalleros.intro'), descVa: t(va, 'nuevosFalleros.intro'), ejercicio: '2026-27' });
+    descEs: primerParrafo(t(es, 'nuevosFalleros.intro')), descVa: primerParrafo(t(va, 'nuevosFalleros.intro')), ejercicio: '2026-27' });
+  // PDFs sin wrapper (bases JCF, organigrama, editorial): metadatos en SEARCH_PDFS
+  for (const p of SEARCH_PDFS) {
+    try { await fs.access(path.join(__dirname, 'src', p.file)); } catch (e) { console.warn(`[buscador] PDF inexistente: ${p.file}`); continue; }
+    const base = path.basename(p.file, '.pdf').toLowerCase().replace(/_/g, '-');
+    add({ id: `doc:${base}`, tipo: 'documento', url: p.file, seccion: p.seccion, tituloEs: p.es[0], tituloVa: p.va[0], descEs: p.es[1], descVa: p.va[1], ejercicio: p.ejercicio });
+  }
+  for (const f of (await glob('src/pdf/**/*.pdf')).sort()) {
+    const rel = path.relative(path.join(__dirname, 'src'), f).split(path.sep).join('/');
+    if (!PDFS_CON_WRAPPER.has(rel) && !SEARCH_PDFS.some((p) => p.file === rel)) console.warn(`[buscador] PDF sin indexar (añádelo a SEARCH_PDFS o a PDFS_CON_WRAPPER): ${rel}`);
+  }
 
-  // 4. Eventos (eventos.json, solo castellano; sin festivos genéricos ni marcadores)
+  // 4. Eventos (eventos.json, solo castellano; sin festivos genéricos ni marcadores).
+  // Desde v4.33.0 solo los futuros (fecha ≥ día del build), sin duplicados de
+  // título+fecha, y cada uno enlaza a su día: calendario.html?dia=AAAA-MM-DD
   try {
     const ev = JSON.parse(await fs.readFile(path.join(__dirname, 'src', 'data', 'eventos.json'), 'utf8'));
+    const vistos = new Set();
     for (const e of (ev.eventos || [])) {
       if (EVENTOS_EXCLUIDOS_DEL_INDICE.has(Number(e.id)) || CATEGORIAS_EVENTOS_EXCLUIDAS.has(e.category)) continue;
-      add({ id: `evt:${e.id}`, tipo: 'evento', url: 'calendario.html', seccion: 'eventos',
+      if (!e.date || e.date < hoy) continue;
+      const clave = `${String(e.title || '').trim().toLowerCase()}|${e.date}`;
+      if (vistos.has(clave)) continue;
+      vistos.add(clave);
+      add({ id: `evt:${e.id}`, tipo: 'evento', url: `calendario.html?dia=${e.date}`, seccion: 'eventos',
         tituloEs: e.title, descEs: e.description, fecha: e.date, hasta: e.date, ejercicio: ejercicioDeFecha(e.date) });
     }
   } catch (err) {
@@ -1196,7 +1301,7 @@ async function buildSearchIndex({ translations, galerias }) {
       if (id.startsWith('$')) continue;
       const r = porId.get(id);
       if (!r) { console.warn(`[buscador] search-keywords.json: id desconocido "${id}"`); continue; }
-      r.kw = [...new Set([...(val.es || []), ...(val.va || [])])];
+      r.kw = [...new Set([...r.kw, ...(val.es || []), ...(val.va || [])])];
     }
   } catch (err) {
     console.warn('[buscador] search-keywords.json no disponible:', err.message);

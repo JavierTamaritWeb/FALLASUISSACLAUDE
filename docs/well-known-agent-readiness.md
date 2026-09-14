@@ -241,4 +241,4 @@ Resultado esperado:
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.32.8
+Última actualización: 14 de septiembre de 2026 - v4.33.0

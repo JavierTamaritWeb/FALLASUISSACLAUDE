@@ -30,7 +30,22 @@ const CASOS = [
   ['organigrama', 'es', 'page:organigrama'],
   ['tiempo valencia', 'es', 'page:meteo'],
   ['cookies', 'va', 'page:cookies'],
-  ['paella', 'es', null],
+  ['paella', 'es', 'gal:7'],
+  // v4.33.0: personas, contacto, redes, documentos JCF, VA de páginas
+  ['lucía', 'es', 'per:lucia-gutierrez-martin'],
+  ['lucia gutierrez', 'es', 'per:lucia-gutierrez-martin'],
+  ['presidente', 'es', /^(sec:nosotros-presidente|per:jose-santos-quilis)$/],
+  ['fallera mayor', 'es', 'sec:nosotros-fallera-mayor'],
+  ['pablo cortés', 'es', 'per:pablo-cortes'],
+  ['directiva', 'es', 'sec:nosotros-directiva'],
+  ['contacto', 'es', 'sec:contacto'],
+  ['email', 'es', 'sec:contacto'],
+  ['instagram', 'es', 'sec:redes'],
+  ['subvención', 'es', 'sec:subvencion'],
+  ['vídeo dron', 'es', 'sec:monumento-2025-26'],
+  ['fútbol', 'es', /^doc:bases-.*futbol/],
+  ['pádel', 'es', 'doc:normas-campeonato-padel-jcf'],
+  ['avís legal', 'va', 'page:aviso-legal'],
   ['xyz123', 'es', null]
 ];
 
@@ -40,7 +55,7 @@ for (const [q, lang, esperado] of CASOS) {
   const top = res.slice(0, 3).map((r) => r.registro.id);
   if (esperado === null) {
     vacios++;
-    const bien = res.length === 0 || (q === 'paella');
+    const bien = res.length === 0;
     if (bien) vaciosOk++;
     console.log(`${bien ? '✓' : '✗'} [${lang}] «${q}» → ${res.length ? top.join(', ') : 'sin coincidencias'}`);
     continue;
@@ -56,7 +71,7 @@ for (const [q, lang, esperado] of CASOS) {
 let rotos = 0;
 for (const r of idx.registros) {
   const [file, hash] = r.url.split('#');
-  const f = path.join(DIST, file || 'index.html');
+  const f = path.join(DIST, file.replace(/\?.*$/, '') || 'index.html');
   if (!fs.existsSync(f)) { console.log(`✗ destino inexistente: ${r.id} → ${r.url}`); rotos++; continue; }
   if (hash && !fs.readFileSync(f, 'utf8').includes(`id="${hash}"`)) { console.log(`✗ ancla inexistente: ${r.id} → ${r.url}`); rotos++; }
 }
