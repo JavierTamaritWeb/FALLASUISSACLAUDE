@@ -630,6 +630,14 @@ body:not(.modo-oscuro) .historia {
   &__archivos .accordion {
     border: 1px solid v.$turquesa;
   }
+  // Rejillas de Presentaciones y Llibrets en turquesa (v4.30.34), como la
+  // caja de texto de la Plana Mayor; las tarjetas siguen claras encima.
+  &__grid {
+    background-color: v.$turquesa-texto;
+    border: 1px solid v.$turquesa;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
 }
 
 body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion,
