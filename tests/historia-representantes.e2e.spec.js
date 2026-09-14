@@ -1,14 +1,15 @@
-// Miniaturas ampliables de Historia/Archivos/Representantes (v4.15.2): las 8
-// fotos de los paneles 2026-27 y 2025-26 van dentro de un trigger del lightbox
-// compartido de Colaboraciones (sin visor propio), con badge "+" y oscurecido
-// en hover. El panel 2024-25 sigue siendo un placeholder sin imágenes.
+// Miniaturas ampliables de Historia/Archivos/Representantes (v4.15.2): las 12
+// fotos de los paneles 2026-27, 2025-26 y 2024-25 (este último poblado en
+// v4.31.2) van dentro de un trigger del lightbox compartido de Colaboraciones
+// (sin visor propio), con badge "+" y oscurecido en hover.
 
 const { test, expect } = require('@playwright/test');
 
 const PAGINAS = ['index.html', 'lafalla.html'];
 const EDICIONES = [
   { id: 'representantes-2026-27', titulo: 'Representantes 2026-27', tituloVa: 'Representants 2026-27' },
-  { id: 'representantes-2025-26', titulo: 'Representantes 2025-26', tituloVa: 'Representants 2025-26' }
+  { id: 'representantes-2025-26', titulo: 'Representantes 2025-26', tituloVa: 'Representants 2025-26' },
+  { id: 'representantes-2024-25', titulo: 'Representantes 2024-25', tituloVa: 'Representants 2024-25' }
 ];
 
 async function cambiarAValenciano(page) {
