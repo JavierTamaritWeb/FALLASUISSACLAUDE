@@ -89,13 +89,13 @@ npx playwright test tests/schema-jsonld.e2e.spec.js tests/hope-seo.e2e.spec.js t
 
 Validación externa opcional: pegar el `<script ld+json>` de `dist/<página>.html` en el validador de Schema.org o en la prueba de resultados enriquecidos de Google.
 
-## Metadatos de licencia de imagen (Search Console, v4.32.1)
+## Metadatos de licencia de imagen (Search Console, v4.32.2)
 
 Search Console avisaba de que los `ImageObject` no llevaban `creator`, `copyrightNotice`, `license` ni `acquireLicensePage`. El build (`gulpfile.js → completeImageObjects`) recorre el `@graph` completo de cada página y completa esos campos (más `creditText`) en todo `ImageObject` que no los defina: logo de la Organization, `primaryImageOfPage`, las fotos de las 9 galerías y las imágenes de los posts. Valores: `creator` = Organization con el nombre de la Falla, `copyrightNotice` = `© <año del build> Falla Suïssa - L'Alqueria del Favero`, `license` y `acquireLicensePage` = `aviso-legal.html#propiedad-intelectual` (en `/va/`, la versión valenciana). Si una imagen tiene otro autor o licencia, escribe esos campos en el HTML y el build los respeta. `npm run seo:schema-report` marca como problema cualquier `ImageObject` incompleto y `tests/schema-jsonld.e2e.spec.js` lo comprueba en las galerías.
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.32.1
+Última actualización: 14 de septiembre de 2026 - v4.32.2
 
 ## Actualización SEO v4.30.21
 

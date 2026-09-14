@@ -100,10 +100,11 @@
 
 .weather-current {
   padding: 1.5rem;
-  background-color: v.$melocotin-claro;
+  // Turquesa claro desde v4.32.2 (antes $melocotin-claro), a petición del usuario
+  background-color: v.$turquesa-claro;
   box-shadow: v.$box-shadow;
-  // Texto oscuro sobre melocotón: con $blanco-hueso la descripción, la
-  // sensación térmica y mín/máx eran ilegibles (contraste 1,3:1)
+  // Texto oscuro sobre turquesa claro ($gris-oscuro 7,3:1): con $blanco-hueso
+  // la descripción, la sensación térmica y mín/máx eran ilegibles (1,3:1)
   color: v.$gris-oscuro;
   border-radius: 1rem;
   margin-top: 2.5rem;
@@ -199,6 +200,9 @@
         font-size: 2rem;
         text-transform: none;
         margin: 0.5rem 0;
+        // El `p { color: $blanco-hueso }` global de _falla.scss la dejaba en
+        // blanco (1,3:1); en oscuro la repone `body.modo-oscuro .weather-current`
+        color: v.$gris-oscuro;
       }
     }
 

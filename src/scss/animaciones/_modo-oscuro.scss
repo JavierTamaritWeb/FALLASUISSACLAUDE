@@ -470,7 +470,8 @@ body.modo-oscuro .actual-temp {
   color: var(--coral-marca);
 }
 
-body.modo-oscuro .actual-desc {
+body.modo-oscuro .actual-desc,
+body.modo-oscuro .weather-current .current-wrapper .current-info__portada-desc {
   color: v.$blanco;
 }
 

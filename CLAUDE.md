@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.32.1 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.32.2 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.32.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.32.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -382,6 +382,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.32.2** — La tarjeta meteo «En Valencia» (`.weather-current`, `index.html`/`meteo.html`) pasa en modo claro del melocotón `$melocotin-claro` a `$turquesa-claro` #BFE6E9 (texto `$gris-oscuro` 7,3:1, título y temperatura en coral 4,1:1). De paso, la descripción del tiempo (`.current-info__portada-desc`) quedaba en blanco por el `p` global de `_falla.scss`; ahora `$gris-oscuro`. Modo oscuro sin cambios.
 
 - **4.32.1** — Nombre completo de la Fallera Mayor 2024-25 en Historia/Archivos/Representantes: **Marta Soriano Dolz** (nombre y `alt` ES/VA en `index.html`/`lafalla.html`).
 
