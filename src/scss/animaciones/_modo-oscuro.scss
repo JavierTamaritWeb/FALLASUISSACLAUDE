@@ -318,6 +318,15 @@ body.modo-oscuro .countdown__time-box {
 }
 
 /* ----------------------------------------------
+   MODO OSCURO NOSOTROS (v4.30.24): el contenedor de la Plana Mayor
+   vuelve al coral de marca (en claro es hueso con borde azul)
+------------------------------------------------ */
+body.modo-oscuro .falleros__nosotros--plana-mayor {
+  background-color: var(--coral-marca);
+  border-color: var(--coral-marca);
+}
+
+/* ----------------------------------------------
    MODO OSCURO FOOTER
 ------------------------------------------------ */
 body.modo-oscuro .footer {

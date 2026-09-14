@@ -128,9 +128,18 @@
       padding: 0 1rem;
     }
   }
+  // Contenedor de «Nosotros» (Plana Mayor, index/lafalla; v4.30.24): en modo
+  // claro fondo hueso con borde azul institucional de 2px en lugar del coral.
+  // El contenedor HOPE de Colaboraciones comparte .falleros__nosotros y sigue
+  // en coral; el modo oscuro repone el coral en _modo-oscuro.scss.
+  &__nosotros--plana-mayor {
+    background-color: v.$blanco-hueso;
+    border: 2px solid v.$azul-titulo-seccion;
+  }
   &__titulo {
     text-transform: none;
-    color: var(--coral-marca);
+    // «Nosotros»: azul institucional en claro, coral en oscuro (v4.30.24)
+    color: var(--titulo-seccion);
   }
   @media (max-width: 480px) {
     padding: 1rem;
@@ -263,9 +272,10 @@
     @media (max-width: 767px) {
       font-size: 1.4rem; // Más pequeño para móviles
       padding: 0.8rem 1rem;
-      // A 14px el coral de marca sobre el azul da 3,2:1 (solo válido para texto
-      // grande); el coral claro da 5,1:1 (v4.29.0). En hover manda .accordion__titular.
-      color: v.$coral-claro;
+      // A 14px el titular va sobre la fila clara ($naranja-suave), no sobre el
+      // azul: el coral claro de v4.29.0 daba 1,6:1 (ilegible). $coral-texto da
+      // 5,0:1 (v4.30.24). En oscuro manda _modo-oscuro.scss; en hover, .accordion__titular.
+      color: v.$coral-texto;
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {

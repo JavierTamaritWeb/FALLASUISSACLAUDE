@@ -129,6 +129,10 @@ for (const pagina of PAGINAS) {
         const enlace = page.locator('.ofrendas-video__descarga a.boton[download]').first();
         await enlace.scrollIntoViewIfNeeded();
         await expect(enlace).toBeVisible();
+        // El puntero queda donde se pulsó el titular y, tras el scroll, puede caer
+        // sobre el botón: en hover el brillo ::before del .boton se desliza fuera
+        // de la caja y hace crecer scrollWidth. Se aparta el ratón antes de medir.
+        await page.mouse.move(0, 0);
         // Se reintenta mientras terminan la apertura del acordeón y la animación
         // reveal (bajo carga la primera medida puede caer a mitad de transición)
         await expect(async () => {
