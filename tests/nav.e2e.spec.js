@@ -156,9 +156,9 @@ test.describe('Navbar responsive + idioma', () => {
     expect(navState.visibleLinkCount).toBeGreaterThan(0);
     expect(navState.activeLinks).toBe(1);
     // El enlace activo se distingue con texto en coral claro (#FFB4AA, 5,1:1 sobre el azul; v4.29.0)
-    // + subrayado permanente coral, sin pastilla de fondo blanca.
+    // + subrayado permanente en el coral de marca (#B83F35 desde v4.31.0), sin pastilla de fondo blanca.
     expect(navState.activeColor).toMatch(/rgb\(255,\s*180,\s*170\)/);
-    expect(navState.activeUnderlineBackground).toMatch(/rgb\(255,\s*111,\s*97\)/);
+    expect(navState.activeUnderlineBackground).toMatch(/rgb\(184,\s*63,\s*53\)/);
     expect(parseFloat(navState.activeUnderlineOpacity)).toBe(1);
   });
 
