@@ -673,13 +673,23 @@ body:not(.modo-oscuro) .historia {
 // $turquesa-claro en lugar del degradado azul (v4.30.39). Por debajo de
 // 1201 px el texto va directamente sobre el panel y pasa a $negro-casi; en
 // pantallas mayores sigue en hueso dentro de su caja turquesa oscura.
-// Directiva y Organigrama conservan el azul.
-body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion .accordion__content:has(.accordion__leyenda-foto) {
+// Desde v4.36.1 también La Directiva y el Organigrama (sus tarjetas ya son
+// claras, solo cambia el fondo del panel); antes conservaban el azul.
+body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion .accordion__content {
   background: v.$turquesa-claro;
 
-  @media (max-width: 1200px) {
-    .accordion__texto {
-      color: v.$negro-casi;
+  // Texto directamente sobre el turquesa claro (leyenda del organigrama y, por
+  // debajo de 1201 px, el texto de la Plana Mayor): $negro-casi
+  .accordion__texto {
+    color: v.$negro-casi;
+  }
+
+  // La caja turquesa oscura de la Plana Mayor (≥ 1201 px) conserva el texto hueso
+  &:has(.accordion__leyenda-foto) {
+    @media (min-width: 1201px) {
+      .accordion__texto {
+        color: v.$blanco-hueso;
+      }
     }
   }
 }
