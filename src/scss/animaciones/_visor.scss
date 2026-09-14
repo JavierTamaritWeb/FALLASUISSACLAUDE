@@ -11,7 +11,7 @@
     font-family: v.$font-family-secondary;
     font-weight: 400;
     font-style: normal;
-    background: v.$blanco-hueso;
+    background: v.$rosa-acordeon; // v4.37.1: rosa muy claro de la home (antes $blanco-hueso); oscuro en _modo-oscuro.scss
     display: flex;
     flex-direction: column; // título + bloc (v4.24.2)
     justify-content: center;
@@ -28,7 +28,7 @@
       font-family: v.$font-family-secondary;
       font-size: clamp(2.4rem, 4.5vw, 3.6rem);
       font-weight: 700;
-      color: var(--coral-marca);
+      color: var(--titulo-seccion); // azul de sección en claro (v4.37.1); coral en oscuro (_modo-oscuro.scss)
       text-transform: none;
     }
   }

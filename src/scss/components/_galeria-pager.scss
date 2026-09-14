@@ -6,7 +6,7 @@
 @use '../abstracts/mixins' as m;
 
 .galeria-pager {
-  background: v.$blanco-hueso; // continúa el fondo de .visor
+  background: v.$rosa-acordeon; // continúa el fondo de .visor (rosa muy claro desde v4.37.1)
   padding: 0 1.5rem 4rem;
   display: flex;
   flex-direction: column;

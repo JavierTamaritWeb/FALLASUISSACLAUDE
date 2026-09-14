@@ -6,7 +6,9 @@
 
 .cal{
   padding: 5rem 2rem;
-  
+  // v4.37.1: la página lleva el rosa muy claro de la home (antes se veía el
+  // degradado azul de body::before); en oscuro $gris-muy-oscuro (_modo-oscuro.scss)
+  background-color: v.$rosa-acordeon;
 }
 
 .calendario-eventos {
@@ -15,6 +17,13 @@
     padding: 2rem 2rem !important;
     background-color: v.$naranja-suave;
     border: 1px solid #fdfdfd;
+    // v4.37.1: en claro, contenedor turquesa suave con borde azul como
+    // «Nosotros» en la home (antes $naranja-suave con borde casi blanco); el
+    // oscuro conserva su regla de _modo-oscuro.scss
+    body:not(.modo-oscuro) & {
+      background-color: v.$turquesa-suave;
+      border: 2px solid v.$azul-titulo-seccion;
+    }
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -59,7 +68,7 @@
 
         &-titulo {
         font-size: 2.5rem;
-        color: v.$coral-texto;
+        color: var(--titulo-seccion); // azul de sección en claro (v4.37.1), coral en oscuro
         margin: 0;
         }
     }

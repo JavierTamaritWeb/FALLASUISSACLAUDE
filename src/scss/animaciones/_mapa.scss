@@ -4,6 +4,13 @@
 @use '../abstracts/mixins' as m;
 
 
+// mapa.html (v4.37.1): en claro la página lleva el rosa muy claro de la home
+// alrededor del mapa (antes, el degradado azul de body::before)
+body:not(.modo-oscuro) .mapas {
+    background-color: v.$rosa-acordeon;
+    padding: 3rem 1rem;
+}
+
 #map {
     width: 100%;
     height: 100vh;

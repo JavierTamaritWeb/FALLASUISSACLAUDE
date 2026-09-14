@@ -105,9 +105,33 @@
 
 .blog-detail {
   padding: 5rem 0;
-  background-color: v.$naranja-suave;
+  background-color: v.$rosa-acordeon; // v4.37.1: rosa muy claro como el listado del blog (antes $naranja-suave)
   border-top: 1px solid var(--coral-marca);
   transition: background-color var(--theme-transition);
+
+  // Modo claro (v4.37.1, decisión del usuario): el artículo pasa de tarjeta azul
+  // con texto blanco a tarjeta $turquesa-claro con borde turquesa y texto
+  // $negro-casi (≈14:1); la entradilla en $coral-texto (4,3:1, texto grande).
+  // El degradado azul del ::before queda a opacidad 0 (mecanismo intacto para
+  // el oscuro, que no cambia).
+  body:not(.modo-oscuro) &__article {
+    background-color: v.$turquesa-claro;
+    border-color: v.$turquesa;
+    color: v.$negro-casi;
+
+    &::before {
+      opacity: 0;
+    }
+  }
+  body:not(.modo-oscuro) &__date,
+  body:not(.modo-oscuro) &__author,
+  body:not(.modo-oscuro) &__caption,
+  body:not(.modo-oscuro) &__content p {
+    color: v.$negro-casi;
+  }
+  body:not(.modo-oscuro) &__lead {
+    color: v.$coral-texto;
+  }
 
   &__article {
     max-width: 82rem;

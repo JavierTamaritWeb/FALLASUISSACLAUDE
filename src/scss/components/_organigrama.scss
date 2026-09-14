@@ -26,8 +26,23 @@
       --accent-secretaria: #FFEBEE;
       --accent-economica: #E8F5E9;
       --accent-infantil: #FFF3E0;
-      --accent-hover: rgba(255,111,97,0.1);
+      --accent-hover: rgba(var(--coral-marca-rgb), 0.1);
     }
+
+// Envoltorio de organigrama.html (v4.37.1): en claro, banda $turquesa-claro
+// como el panel «Organigrama» de la home (antes se veía el degradado azul de
+// body::before). Las tarjetas hueso/pastel del organigrama no cambian; en
+// oscuro no lleva fondo (se ve el negro de la página).
+body:not(.modo-oscuro) .organigrama-contenedor {
+  background-color: v.$turquesa-claro;
+  padding: 3rem 1rem;
+
+  // La leyenda (un .accordion__texto) iba en hueso sobre el turquesa claro
+  .accordion__texto,
+  .organigrana-leyenda {
+    color: v.$negro-casi;
+  }
+}
 
 .organigrama-container {
       width: 100%;

@@ -154,7 +154,7 @@ test.describe('galeria-pager — navegación en el navegador', () => {
     expect(m.left).toBe(0);
     expect(Math.abs(m.width - m.inner)).toBeLessThanOrEqual(1);
     expect(Math.abs(m.centro - m.inner / 2)).toBeLessThan(2);
-    expect(m.bg).toBe('rgb(245, 245, 245)');
+    expect(m.bg).toBe('rgb(253, 240, 243)'); // $rosa-acordeon desde v4.37.1
   });
 
   test('el selector de idioma traduce la paginación en runtime (ES → VA)', async ({ page }) => {

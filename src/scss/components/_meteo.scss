@@ -254,7 +254,7 @@
 ------------------------------------------------ */
 .clima-actual {
   font-size: v.$font-size-medium;
-  color: var(--coral-marca);
+  color: var(--titulo-seccion); // azul de sección en claro (v4.37.1), coral en oscuro
   @media  (max-width: 767px) {
     font-size: v.$font-size-regular;
     
@@ -264,7 +264,7 @@
 
 .pronostico {
   font-size: v.$font-size-medium;
-  color: var(--coral-marca);
+  color: var(--titulo-seccion); // v4.37.1
   text-transform: none;
 }
 
@@ -287,8 +287,10 @@
   }
 
   .forecast-day {
-    background-color: #f7f7f7;
-    border: 1px solid v.$gris-muy-claro;
+    // v4.37.1: tarjeta rosa muy claro con borde turquesa (antes #f7f7f7 gris);
+    // en oscuro la repinta _modo-oscuro.scss
+    background-color: v.$rosa-acordeon;
+    border: 1px solid v.$turquesa;
     border-radius: 8px;
     padding: 1rem;
     text-align: center;
@@ -396,6 +398,10 @@
 
 .valor-pronostico {
   color: #fff;
+  // v4.37.1: sobre la tarjeta turquesa claro el blanco no se leía (1,3:1)
+  body:not(.modo-oscuro) & {
+    color: v.$gris-oscuro;
+  }
 }
 
 .prevision-diaria{
@@ -440,13 +446,13 @@
   /* Títulos */
   .pronostico {
     font-size: v.$font-size-medium;
-    color: var(--coral-marca) !important;
+    color: var(--titulo-seccion) !important; // v4.37.1 (azul en claro, coral en oscuro)
     margin: 3rem;
     text-transform: none;
   }
   .clima-actual {
     font-size: v.$font-size-medium;
-    color: var(--coral-marca);
+    color: var(--titulo-seccion); // v4.37.1
     margin: 3rem;
     text-transform: none;
   }
