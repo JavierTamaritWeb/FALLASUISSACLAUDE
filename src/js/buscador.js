@@ -12,7 +12,28 @@
   'use strict';
 
   // ---------- Normalización y relevancia (sin DOM) ----------
+  // v4.34.0: puntuación aditiva, raíces ES/VA, sinónimos, año dentro del
+  // ejercicio, tolerancia a erratas y bigramas; los registros pasados nunca
+  // desaparecen (el −4 es penalización, no filtro).
   var STOP = ['de', 'del', 'la', 'el', 'los', 'las', 'les', 'els', 'i', 'y', 'en', 'a', 'per', 'para', 'un', 'una', 'the'];
+
+  // Sinónimos mínimos ES↔VA que no resuelven las raíces (formas ya normalizadas;
+  // se aplican en ambos sentidos). Lo que comparte raíz (galería/galeries,
+  // presidente/president, contacto/contacte, calendario/calendari) no hace falta.
+  var SINONIMOS_BASE = [
+    ['foto', 'imagen', 'imatge', 'fotografia'], ['video', 'vídeo'], ['mayor', 'major'], ['monumento', 'monument'],
+    ['ofrenda', 'ofrena'], ['tiempo', 'temps', 'oratge', 'meteo'], ['evento', 'esdeveniment', 'acto', 'acte'],
+    ['deporte', 'esport'], ['nino', 'xiquet'], ['nina', 'xiqueta'], ['ayuntamiento', 'ajuntament'],
+    ['inscripcion', 'inscripcio'], ['autorizacion', 'autoritzacio'], ['boceto', 'esbos'], ['hoguera', 'foguera'],
+    ['noche', 'nit'], ['ano', 'any'], ['sorteo', 'sorteig'], ['direccion', 'adreca'], ['mapa', 'ubicacion', 'ubicacio']
+  ];
+  var SINONIMOS = {};
+  SINONIMOS_BASE.forEach(function (grupo) {
+    grupo.forEach(function (a) {
+      var na = normalizar(a);
+      SINONIMOS[na] = grupo.map(normalizar).filter(function (b) { return b !== na; });
+    });
+  });
 
   function normalizar(texto) {
     return String(texto || '')
@@ -31,22 +52,57 @@
     });
   }
 
-  // Variantes de un token: singular simple ("llibrets" → "llibret")
+  function unicos(lista) {
+    return lista.filter(function (x, i) { return x && lista.indexOf(x) === i; });
+  }
+
+  // Raíces de un token (se aplican a la consulta Y a las palabras del índice, así
+  // singular/plural y género puntúan como palabra entera): plural -s/-es
+  // (llibrets → llibret, representantes → representant) y vocal final de género
+  // en palabras largas (fallera/fallero → faller, presidenta/presidente → president).
   function variantes(tok) {
     var v = [tok];
-    if (tok.length > 4 && /s$/.test(tok) && !/ss$/.test(tok)) v.push(tok.slice(0, -1));
+    var b = tok;
+    if (b.length > 4 && /[^s]s$/.test(b)) { b = b.slice(0, -1); v.push(b); }
     if (tok.length > 5 && /es$/.test(tok)) v.push(tok.slice(0, -2));
-    return v;
+    if (b.length > 6 && /[aeo]$/.test(b)) v.push(b.slice(0, -1));
+    return unicos(v);
+  }
+
+  // Formas con las que un token de la consulta puede casar: sus raíces y las de sus sinónimos
+  function formas(tok) {
+    var out = variantes(tok);
+    (SINONIMOS[tok] || []).forEach(function (s) { out = out.concat(variantes(s)); });
+    return unicos(out);
   }
 
   function prepararRegistro(r) {
     if (r._prep) return r;
     r._t = [normalizar(r.titulo.es), normalizar(r.titulo.va)];
-    r._tw = r._t.map(function (t) { return t.split(' '); });
+    r._tw = r._t.map(function (t) { return t.split(' ').filter(Boolean); });
+    // Raíces de cada palabra del título (para casar plural/género como palabra entera)
+    r._tv = r._tw.map(function (ws) { return unicos([].concat.apply([], ws.map(variantes))); });
     r._d = [normalizar(r.desc.es), normalizar(r.desc.va)];
+    r._dv = r._d.map(function (d) { return unicos([].concat.apply([], d.split(' ').filter(Boolean).map(variantes))); });
     r._kw = (r.kw || []).map(normalizar);
+    r._kwv = unicos([].concat.apply([], r._kw.map(function (k) { return [].concat.apply([], k.split(' ').map(variantes)); })));
+    r._anios = aniosDe(r.ejercicio, r.fecha);
     r._prep = true;
     return r;
+  }
+
+  // Años que cubre un registro: los dos del ejercicio («2024-25» → 2024 y 2025) o el de la fecha
+  function aniosDe(ejercicio, fecha) {
+    var out = [];
+    var m = String(ejercicio || '').match(/^(20\d{2})-(\d{2})$/);
+    if (m) { out.push(m[1]); out.push(m[1].slice(0, 2) + m[2]); }
+    var f = String(fecha || '').match(/^(20\d{2})/);
+    if (f) out.push(f[1]);
+    return unicos(out);
+  }
+
+  function enEjercicio(anio, ejercicio, fecha) {
+    return Boolean(anio) && aniosDe(ejercicio, fecha).indexOf(anio) !== -1;
   }
 
   function esPasado(r, hoy) {
@@ -54,65 +110,160 @@
     return Boolean(limite) && limite < hoy;
   }
 
-  // Puntuación explicable: frase exacta en título 10 · token en título 5 ·
-  // palabra clave 4 · prefijo en título 3 · token en descripción 1 · todos los
-  // tokens +3 · año/ejercicio de la consulta +6 · pasado −4 (salvo año explícito).
+  // Vocabulario del índice (palabras de títulos y palabras clave) para corregir erratas
+  function vocabulario(registros) {
+    if (registros._vocab) return registros._vocab;
+    var set = {};
+    registros.forEach(function (r) {
+      prepararRegistro(r);
+      r._tw.forEach(function (ws) { ws.forEach(function (w) { set[w] = true; }); });
+      r._kw.forEach(function (k) { k.split(' ').forEach(function (w) { if (w) set[w] = true; }); });
+    });
+    var lista = Object.keys(set).filter(function (w) { return w.length >= 4; });
+    try { Object.defineProperty(registros, '_vocab', { value: lista, enumerable: false }); } catch (e) { /* array congelado */ }
+    return lista;
+  }
+
+  // Distancia de Damerau-Levenshtein (transposiciones adyacentes) acotada
+  function distancia(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    var prev2 = null; var prev = []; var i; var j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      var cur = [i];
+      var mejor = i;
+      for (j = 1; j <= b.length; j++) {
+        var coste = a[i - 1] === b[j - 1] ? 0 : 1;
+        var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + coste);
+        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, prev2[j - 2] + 1);
+        cur[j] = v;
+        if (v < mejor) mejor = v;
+      }
+      if (mejor > max) return max + 1;
+      prev2 = prev; prev = cur;
+    }
+    return prev[b.length];
+  }
+
+  // Corrección de un token que no casa con nada: la palabra del vocabulario más
+  // cercana (≤ 1 error; ≤ 2 a partir de 8 letras), sin cambiar la primera letra
+  function corregir(tok, vocab) {
+    if (tok.length < 5) return '';
+    var max = tok.length >= 8 ? 2 : 1;
+    var mejor = ''; var mejorD = max + 1;
+    for (var i = 0; i < vocab.length; i++) {
+      var w = vocab[i];
+      if (w === tok || w[0] !== tok[0]) continue;
+      var d = distancia(tok, w, max);
+      if (d < mejorD || (d === mejorD && mejor && w.length < mejor.length)) { mejorD = d; mejor = w; }
+    }
+    return mejorD <= max ? mejor : '';
+  }
+
+  function contieneAlguna(lista, vs) {
+    for (var i = 0; i < vs.length; i++) if (lista.indexOf(vs[i]) !== -1) return true;
+    return false;
+  }
+
+  // Puntos de un token en un registro (aditivos, techo 9): palabra del título 5 ·
+  // palabra clave 4 · prefijo en título (≥ 3 letras) 3 · palabra clave parcial
+  // (≥ 4 letras) 2 · palabra de la descripción 1 · año del ejercicio/fecha 2
+  function puntuarToken(r, tok, vs) {
+    var p = 0;
+    if (r._tv.some(function (ws) { return contieneAlguna(ws, vs); })) p += 5;
+    if (contieneAlguna(r._kwv, vs)) p += 4;
+    else if (tok.length >= 4 && r._kw.some(function (k) { return k.indexOf(tok) !== -1; })) p += 2;
+    if (tok.length >= 3 && r._tw.some(function (ws) { return ws.some(function (w) { return vs.some(function (v) { return v.length >= 3 && w.indexOf(v) === 0 && w !== v; }); }); })) p += 3;
+    if (r._dv.some(function (ws) { return contieneAlguna(ws, vs); })) p += 1;
+    if (/^20\d{2}$/.test(tok) && r._anios.indexOf(tok) !== -1) p += 2;
+    return Math.min(p, 9);
+  }
+
+  // Puntuación explicable: frase exacta en título 10 · puntos por token (ver
+  // puntuarToken) · bigrama en el título +2 · todos los tokens +3 · año/ejercicio
+  // de la consulta +6 · pasado −4 (salvo año explícito). Con errata, el token
+  // corregido puntúa 2 puntos menos.
   function puntuar(r, q, hoy) {
     prepararRegistro(r);
     var score = 0;
     var hits = 0;
+    var corregido = false;
     if (q.norm.length >= 3 && (r._t[0].indexOf(q.norm) !== -1 || r._t[1].indexOf(q.norm) !== -1)) score += 10;
+    var usados = [];
     q.tokens.forEach(function (tok) {
-      var hit = false;
-      var vs = variantes(tok);
-      var esAnio = /^20\d{2}$/.test(tok);
-      if (r._tw.some(function (ws) { return vs.some(function (v) { return ws.indexOf(v) !== -1; }); })) { score += 5; hit = true; }
-      else if (r._kw.some(function (k) { return vs.some(function (v) { return k === v || k.split(' ').indexOf(v) !== -1; }); })) { score += 4; hit = true; }
-      else if (tok.length >= 3 && r._tw.some(function (ws) { return ws.some(function (w) { return vs.some(function (v) { return w.indexOf(v) === 0; }); }); })) { score += 3; hit = true; }
-      else if (tok.length >= 4 && r._kw.some(function (k) { return k.indexOf(tok) !== -1; })) { score += 2; hit = true; }
-      else if (r._d.some(function (d) { return vs.some(function (v) { return (' ' + d + ' ').indexOf(' ' + v) !== -1; }); })) { score += 1; hit = true; }
-      else if (esAnio && (r.ejercicio.indexOf(tok) !== -1 || String(r.fecha || '').indexOf(tok) === 0)) { score += 2; hit = true; }
-      // Palabra clave editorial: refuerzo adicional aunque el título ya coincida
-      if (hit && r._kw.length && r._kw.some(function (k) { return vs.some(function (v) { return k === v; }); })) score += 2;
-      if (hit) hits += 1;
+      var p = puntuarToken(r, tok, q.formas[tok]);
+      var efectivo = tok;
+      if (!p && q.corr[tok]) {
+        p = Math.max(0, puntuarToken(r, q.corr[tok], q.formas[q.corr[tok]]) - 2);
+        if (p) { corregido = true; efectivo = q.corr[tok]; }
+      }
+      if (p) { hits += 1; score += p; }
+      usados.push(p ? efectivo : '');
     });
-    if (!hits) return 0;
+    if (!hits) return null;
+    // Bigrama: dos tokens seguidos de la consulta que van seguidos en el título (nombres, «san juan»)
+    for (var i = 1; i < usados.length; i++) {
+      if (!usados[i - 1] || !usados[i]) continue;
+      var a = variantes(usados[i - 1]); var b = variantes(usados[i]);
+      var hay = r._tw.some(function (ws) {
+        for (var k = 1; k < ws.length; k++) {
+          if (contieneAlguna(variantes(ws[k - 1]), a) && contieneAlguna(variantes(ws[k]), b)) return true;
+        }
+        return false;
+      });
+      if (hay) { score += 2; break; }
+    }
     if (q.tokens.length > 1 && hits === q.tokens.length) score += 3;
-    if (q.anio && (r.ejercicio.indexOf(q.anio) !== -1 || String(r.fecha || '').indexOf(q.anio) === 0)) score += 6;
+    if (q.anio && r._anios.indexOf(q.anio) !== -1) score += 6;
     if (!q.anio && esPasado(r, hoy)) score -= 4;
-    return score;
+    return { score: score, hits: hits, corregido: corregido };
   }
 
-  function prepararConsulta(texto) {
+  function prepararConsulta(texto, vocab, opts) {
     var norm = normalizar(texto);
     var tokens = tokenizar(texto);
     var anio = '';
-    var m = norm.match(/\b(20\d{2})(?:-(\d{2}))?\b/);
+    var m = norm.match(/\b(20\d{2})\b/);
     if (m) anio = m[1];
-    return { norm: norm, tokens: tokens, anio: anio };
+    var q = { norm: norm, tokens: tokens, anio: anio, formas: {}, corr: {} };
+    var conocidas = {};
+    (vocab || []).forEach(function (w) { conocidas[w] = true; });
+    tokens.forEach(function (tok) {
+      q.formas[tok] = formas(tok);
+      if (opts && opts.sinErratas) return;
+      if (!vocab || tok.length < 5 || /^\d+$/.test(tok)) return;
+      var yaConocida = q.formas[tok].some(function (f) { return conocidas[f]; });
+      if (yaConocida) return;
+      var c = corregir(tok, vocab);
+      if (c) { q.corr[tok] = c; q.formas[c] = formas(c); }
+    });
+    return q;
   }
 
-  // Devuelve [{ registro, score }] ordenado de forma estable: score, prio, título ES
+  // Devuelve [{ registro, score, pasado, corregido }] ordenado de forma estable:
+  // score, prio, ejercicio reciente, título ES. La lista lleva además
+  // `.consulta` ({ tokens, anio, corr }) para que la interfaz muestre las erratas corregidas.
   function buscar(registros, texto, opciones) {
     var opts = opciones || {};
     var hoy = opts.hoy || new Date().toISOString().slice(0, 10);
-    var q = prepararConsulta(texto);
-    if (!q.tokens.length) return [];
+    var vocab = opts.sinErratas ? null : vocabulario(registros);
+    var q = prepararConsulta(texto, vocab, opts);
     var out = [];
+    if (!q.tokens.length) { out.consulta = q; return out; }
     registros.forEach(function (r) {
-      var s = puntuar(r, q, hoy);
-      if (s > 0) out.push({ registro: r, score: s, pasado: esPasado(r, hoy) });
+      var res = puntuar(r, q, hoy);
+      if (res) out.push({ registro: r, score: res.score, pasado: esPasado(r, hoy), corregido: res.corregido });
     });
     out.sort(function (a, b) {
-      // Desempate: prioridad por tipo, ejercicio más reciente primero, título ES
       return b.score - a.score || a.registro.prio - b.registro.prio
         || String(b.registro.ejercicio).localeCompare(String(a.registro.ejercicio))
         || a.registro.titulo.es.localeCompare(b.registro.titulo.es, 'es');
     });
+    out.consulta = q;
     return out;
   }
 
-  var API = { normalizar: normalizar, tokenizar: tokenizar, buscar: buscar, esPasado: esPasado };
+  var API = { normalizar: normalizar, tokenizar: tokenizar, variantes: variantes, enEjercicio: enEjercicio, distancia: distancia, corregir: corregir, vocabulario: vocabulario, buscar: buscar, esPasado: esPasado };
   if (typeof window !== 'undefined') window.FallaBuscador = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
   if (typeof document === 'undefined') return;

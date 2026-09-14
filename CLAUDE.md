@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.33.0 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.33.1 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.33.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.33.1).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -382,6 +382,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.33.1** — Las tarjetas PDF de Historia/Archivos (Presentaciones y Llibrets, `index.html`/`lafalla.html`) adoptan el hover de los titulares de acordeón: en claro rosa sólido `$rosa-acordeon-hover`, en oscuro degradado salmón→amarillo, con el brillo que recorre la tarjeta (`::before` por debajo del contenido, igual que `.accordion__titular`), el título en `$negro-casi` (también la variante digital) y anillo coral en `:focus-visible` en lugar del contorno azul. Conserva su elevación y el giro del icono; con `prefers-reduced-motion` el brillo queda estático y sin transformaciones. Solo SCSS (`_falla.scss`).
 
 - **4.33.0** — **Buscador v2 (1/4): cobertura del índice** (`gulpfile.js → buildSearchIndex`; plan aprobado el 14-sep-2026 tras la auditoría del buscador). Pasa de 61 a 82 registros: **personas** (`per:*`, tipo nuevo `persona`, los 25 `member` de `src/seo/schema-organization.json` con cargo ES/VA como descripción y palabra clave; destino al panel de la Plana Mayor, a La Directiva o al organigrama), paneles de **Nosotros** (`sec:nosotros-*`, con `id` nuevo en los 5 `.accordion__content` de `index.html`/`lafalla.html`: `nosotros-{fallera-mayor,presidente,fallera-mayor-infantil,presidente-infantil,directiva}-{index,lafalla}`), **Contacto/Redes sociales/Subvención** de la home (`#quieres-mas`, `#redes-sociales` nuevos; textos en `buscador.registros.*`), los **8 PDFs sin wrapper** (`SEARCH_PDFS`: bases JCF, organigrama, editorial), **título y descripción VA reales** en todas las páginas (`seo.<slug>.*`; antes 29/61 salían en castellano), descripción en todas las secciones (`descKeys`), un solo registro por llibret y ejercicio, marca incrustada retirada de los títulos, **eventos solo futuros, sin duplicados y con enlace al día** (`calendario.html?dia=AAAA-MM-DD`, que `calendario.js` aplica al filtro de fecha; hoy `eventos.json` no tiene actos futuros y el tipo no aparece), `SEARCH_PRIO` reordenado (personas y secciones antes que galerías), `search-keywords.json` de 23 a 45 entradas (acumulables), `:target { scroll-margin-top: 8rem }` global para los deep links, wrapper de la Presentación con tildes. `search:eval` pasa a 30 consultas (29/29) y `tests/buscador` gana guardias de calidad del índice y del `?dia=`. Ver patrón *Buscador general*.
 

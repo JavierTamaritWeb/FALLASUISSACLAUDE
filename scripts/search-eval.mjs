@@ -46,6 +46,14 @@ const CASOS = [
   ['fútbol', 'es', /^doc:bases-.*futbol/],
   ['pádel', 'es', 'doc:normas-campeonato-padel-jcf'],
   ['avís legal', 'va', 'page:aviso-legal'],
+  // v4.34.0: erratas, plural/género, sinónimos, año dentro del ejercicio
+  ['calendrio', 'es', 'page:calendario'],
+  ['ofrena', 'va', /^(page:ofrenda|sec:ofrenda-2026)$/],
+  ['presidenta', 'es', 'sec:nosotros-presidente'],
+  ['representantes 2025', 'es', 'sec:representantes-2025-26'],
+  ['fallas 2027', 'es', 'sec:monumento-2026-27'],
+  ['fotos', 'es', 'page:galerias'],
+  ['nuevos fallers', 'va', 'page:nuevos-falleros'],
   ['xyz123', 'es', null]
 ];
 
