@@ -11,8 +11,8 @@ const NEGRO_CASI = 'rgb(17, 17, 17)';
 const TURQUESA = 'rgb(0, 122, 134)';
 const ROSA = 'rgb(253, 240, 243)';
 const ROSA_HOVER = 'rgb(255, 90, 142)';
-// Contenedor de «Nosotros» en claro: $turquesa-suave (v4.30.29)
-const TURQUESA_SUAVE = 'rgb(239, 248, 249)';
+// Contenedor de «Nosotros» en claro: $turquesa-suave (v4.30.30)
+const TURQUESA_SUAVE = 'rgb(224, 242, 243)';
 
 async function preparar(page, ruta) {
   await page.addInitScript(() => {
