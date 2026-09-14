@@ -21,7 +21,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: v.$gradiente-institucional;
+    // Degradado celeste de 5 tonos (v4.30.40; antes el institucional azul)
+    background: v.$gradiente-celeste;
     opacity: 1;
     transition: opacity 2.4s ease-in-out;
     z-index: 0;
@@ -45,7 +46,8 @@
 
   &__heading-texto {
     font-weight: bold;
-    color: var(--coral-marca);
+    // Azul de sección sobre el celeste (v4.30.40); coral en oscuro
+    color: var(--titulo-seccion);
     font-size: clamp(2.8rem, 4vw, 4.2rem);
     @media (max-width: 767px) {
       font-size: v.$font-size-medium;

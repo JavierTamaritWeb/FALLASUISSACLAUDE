@@ -131,6 +131,18 @@ $falleret-size-large: 50%;    // Pantallas grandes (>1200px)
 
 // Degradado institucional: única fuente (antes 11 copias literales)
 $gradiente-institucional: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
+// Degradado celeste de 5 tonos con profundidad (v4.30.40): sección Colaboraciones
+// en claro. Claro arriba-izquierda → celeste medio abajo-derecha, más un brillo
+// radial suave en la esquina superior. Título azul #02427A encima: 8,9:1 en el
+// stop más claro y 3,3:1 en el más oscuro (ahí solo llega texto grande).
+$celeste-1: #E3F2FB;
+$celeste-2: #BFE3F7;
+$celeste-3: #93CFF0;
+$celeste-4: #66B4E6;
+$celeste-5: #4A9AD6;
+$gradiente-celeste:
+  radial-gradient(ellipse 70% 60% at 18% 0%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 65%),
+  linear-gradient(160deg, $celeste-1 0%, $celeste-2 28%, $celeste-3 52%, $celeste-4 76%, $celeste-5 100%);
 
 $coral-texto: #B83F35;              // Coral oscuro para texto sobre fondos claros (5,5:1 blanco / 5,0:1 marfil)
 $coral-claro: #FFB4AA;              // Coral claro para texto pequeño sobre azul o gris oscuro (5,1:1 sobre #0a4b8d)

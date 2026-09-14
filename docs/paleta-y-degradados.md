@@ -84,13 +84,15 @@ A petición del usuario, los títulos de sección con icono redondo y los títul
 - Titulares de acordeón en móvil (v4.30.24): `$coral-texto` (5,0:1 sobre `$naranja-suave`); el `$coral-claro` de v4.29.0 daba 1,6:1 porque la fila del titular es clara, no azul.
 - Mecanismo: custom property `--titulo-seccion` en `abstracts/_globales.scss` (`#02427A` en `:root`; `$coral-texto` `#B83F35` en `html/body.modo-oscuro`, porque el azul sobre negro daría ≈2:1).
 - Contraste en claro: 9,3:1 sobre `#F5F5F5` y 9,2:1 sobre `$naranja-suave` (AAA).
-- Siguen en coral: Colaboraciones/Deportes/Nuevos Falleros con `__heading-texto` propio, «¿Quieres más?», el título del monumento y los botones.
+- Desde v4.30.40 también «Colaboraciones» (`.colaboraciones__heading-texto`), porque su sección va sobre `$gradiente-celeste` (coral 2,0-2,4:1 allí; azul 7,5-8,9:1).
+- Siguen en coral: Deportes/Nuevos Falleros con `__heading-texto` propio, «¿Quieres más?», el título del monumento y los botones.
 
 ## Inventario de degradados (sin cambios)
 
 | Dónde | Valor | Modo oscuro |
 | --- | --- | --- |
-| `body::before`, `.header::before`, `.header-inner::before`, `.quieres-mas::before`, `.countdown__contenedor::before`, `.blog-detail__article::before`, `.colaboraciones::before` | `$gradiente-institucional` en `::before` con `opacity` | `opacity: 0` sobre color sólido (`docs/global-styles.md`) |
+| `body::before`, `.header::before`, `.header-inner::before`, `.quieres-mas::before`, `.countdown__contenedor::before`, `.blog-detail__article::before` | `$gradiente-institucional` en `::before` con `opacity` | `opacity: 0` sobre color sólido (`docs/global-styles.md`) |
+| `.colaboraciones::before` (v4.30.40) | `$gradiente-celeste`: brillo radial + `linear-gradient(160deg, #E3F2FB, #BFE3F7, #93CFF0, #66B4E6, #4A9AD6)` en `::before` con `opacity` | `opacity: 0` sobre `$secondary-color` |
 | `.accordion__content`, `.historia__prologo`, `.deportes` | `$gradiente-institucional` en el fondo | `$negro` / velo `::before` |
 | `--header-bar-bg`, `.header__barra::before` (`.25`/`.30`), `.navegacion` y `.buscador` (`.7`) | mismos tonos con alfa + `backdrop-filter` | `rgba(51,51,51,.7-.8)` |
 | `.video-dron__frame::before` | `160deg` (plantilla) | `opacity: 0` |
@@ -113,4 +115,4 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.30.39
+Última actualización: 14 de septiembre de 2026 - v4.30.40
