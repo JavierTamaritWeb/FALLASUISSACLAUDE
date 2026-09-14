@@ -486,6 +486,50 @@
           padding: 1rem;
           white-space: pre-line;
         }
+
+        // Paneles de la Plana Mayor en pantallas de más de 1200 px (v4.30.31,
+        // croquis del usuario): foto a la izquierda y, a su derecha, el nombre
+        // arriba y el texto en una caja debajo. Sin tocar el HTML: el
+        // contenedor `.accordion__leyenda-foto` pasa a `display: contents`
+        // para que la foto y el nombre sean celdas de la rejilla del panel.
+        &:has(> .accordion__leyenda-foto) {
+          @media (min-width: 1201px) {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+              "foto nombre"
+              "foto texto";
+            column-gap: 5rem;
+            row-gap: 2rem;
+            align-items: start;
+            max-width: 120rem;
+            margin-inline: auto;
+            padding: 5rem 4rem;
+
+            .accordion__leyenda-foto {
+              display: contents;
+            }
+            .accordion__planamayor-trigger {
+              grid-area: foto;
+              margin: 0;
+            }
+            .accordion__nombre-plana-mayor {
+              grid-area: nombre;
+              justify-self: start;
+              margin: 0;
+            }
+            .accordion__texto {
+              grid-area: texto;
+              align-self: stretch;
+              align-content: center; // texto centrado en la caja (bloque)
+              padding: 2.4rem 3rem;
+              border: 1px solid rgba(255, 255, 255, 0.35);
+              border-radius: 1rem;
+              background-color: rgba(255, 255, 255, 0.06);
+            }
+          }
+        }
       }
     }
     
