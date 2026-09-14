@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.32.4 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.32.5 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.32.4).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.32.5).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -382,6 +382,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.32.5** — La sección «Eventos» (`.eventos`, `index.html` y `eventos.html`) pasa en modo claro del fondo cálido `$naranja-suave` #FDF2E9 al rosa muy claro `$rosa-acordeon` #FDF0F3 (mismo tono que las filas de acordeón de Nosotros/Historia; los textos coral y azul conservan su contraste). Modo oscuro sin cambios.
 
 - **4.32.4** — La tarjeta meteo «En Valencia» (`.weather-current`) lleva en modo claro un borde de 1 px `$turquesa` #00909E; en oscuro el borde toma el color del fondo.
 
