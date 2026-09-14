@@ -129,11 +129,12 @@
     }
   }
   // Contenedor de «Nosotros» (Plana Mayor, index/lafalla; v4.30.24): en modo
-  // claro fondo hueso con borde azul institucional de 2px en lugar del coral.
+  // claro fondo turquesa muy suave (v4.30.29; antes hueso) con borde azul
+  // institucional de 2px en lugar del coral.
   // El contenedor HOPE de Colaboraciones comparte .falleros__nosotros y sigue
   // en coral; el modo oscuro repone el coral en _modo-oscuro.scss.
   &__nosotros--plana-mayor {
-    background-color: v.$blanco-hueso;
+    background-color: v.$turquesa-suave;
     border: 2px solid v.$azul-titulo-seccion;
 
     // Conjunto de acordeones de la Plana Mayor: borde turquesa de 1px (v4.30.25)

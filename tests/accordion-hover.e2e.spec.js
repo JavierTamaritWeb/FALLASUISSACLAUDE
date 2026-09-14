@@ -11,6 +11,8 @@ const NEGRO_CASI = 'rgb(17, 17, 17)';
 const TURQUESA = 'rgb(0, 122, 134)';
 const ROSA = 'rgb(253, 240, 243)';
 const ROSA_HOVER = 'rgb(255, 90, 142)';
+// Contenedor de «Nosotros» en claro: $turquesa-suave (v4.30.29)
+const TURQUESA_SUAVE = 'rgb(239, 248, 249)';
 
 async function preparar(page, ruta) {
   await page.addInitScript(() => {
@@ -67,6 +69,9 @@ test.describe('Hover de los titulares de acordeón (como .boton)', () => {
     expect(antes.header).toBe(TURQUESA);
     expect(antes.icono).toBe(TURQUESA);
     expect(antes.brilloOpacidad).toBe('0');
+    const fondoContenedor = await page.locator('.falleros__nosotros--plana-mayor').first()
+      .evaluate((el) => getComputedStyle(el).backgroundColor);
+    expect(fondoContenedor).toBe(TURQUESA_SUAVE);
 
     await pasarRaton(page, titular);
     const durante = await estilos(titular);

@@ -80,7 +80,7 @@ Declaradas en `src/scss/abstracts/_globales.scss`. En los SCSS: `v.$primary-colo
 
 A petición del usuario, los títulos de sección con icono redondo y los títulos de las tarjetas de galería pasan del coral al azul institucional `$azul-titulo-seccion` (`#02427A`) en modo claro:
 
-- `.falla__title` (La Falla; también el título de `colaboraciones.html`), `.ofrenda__titulo`, `.eventos__heading-texto` (Eventos), `.eventos__title` (Calendario), `.forecast__title` (Meteo), `.blog__title`, `.galerias__title` (Galería) y `.galeria__title` (títulos de las 9 tarjetas de galería, que antes heredaban el coral de `.galerias__grid`), y desde v4.30.24 `.falleros__titulo` («Nosotros»), cuyo contenedor (`.falleros__nosotros--plana-mayor`) pasa del coral a fondo `$blanco-hueso` con borde azul de 2 px (en oscuro sigue en coral); su acordeón lleva borde `$turquesa` de 1 px en claro (v4.30.25) y, desde v4.30.27, filas `$rosa-acordeon` (#FDF0F3 desde v4.30.28), hover/foco `$rosa-acordeon-hover` #FF5A8E con texto `$negro-casi` (6,4:1) y titulares/▼ en `$turquesa-sobre-rosa` #007A86 (4,6:1; el turquesa de marca sobre ese rosa da 3,5:1, insuficiente para el texto de 14 px de móvil).
+- `.falla__title` (La Falla; también el título de `colaboraciones.html`), `.ofrenda__titulo`, `.eventos__heading-texto` (Eventos), `.eventos__title` (Calendario), `.forecast__title` (Meteo), `.blog__title`, `.galerias__title` (Galería) y `.galeria__title` (títulos de las 9 tarjetas de galería, que antes heredaban el coral de `.galerias__grid`), y desde v4.30.24 `.falleros__titulo` («Nosotros»), cuyo contenedor (`.falleros__nosotros--plana-mayor`) pasa del coral a fondo `$blanco-hueso` (desde v4.30.29 `$turquesa-suave` #EFF8F9, turquesa muy suave; el azul del título da 9,4:1) con borde azul de 2 px (en oscuro sigue en coral); su acordeón lleva borde `$turquesa` de 1 px en claro (v4.30.25) y, desde v4.30.27, filas `$rosa-acordeon` (#FDF0F3 desde v4.30.28), hover/foco `$rosa-acordeon-hover` #FF5A8E con texto `$negro-casi` (6,4:1) y titulares/▼ en `$turquesa-sobre-rosa` #007A86 (4,6:1; el turquesa de marca sobre ese rosa da 3,5:1, insuficiente para el texto de 14 px de móvil).
 - Titulares de acordeón en móvil (v4.30.24): `$coral-texto` (5,0:1 sobre `$naranja-suave`); el `$coral-claro` de v4.29.0 daba 1,6:1 porque la fila del titular es clara, no azul.
 - Mecanismo: custom property `--titulo-seccion` en `abstracts/_globales.scss` (`#02427A` en `:root`; `$coral-texto` `#B83F35` en `html/body.modo-oscuro`, porque el azul sobre negro daría ≈2:1).
 - Contraste en claro: 9,3:1 sobre `#F5F5F5` y 9,2:1 sobre `$naranja-suave` (AAA).
@@ -113,4 +113,4 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.30.28
+Última actualización: 14 de septiembre de 2026 - v4.30.29
