@@ -7,7 +7,7 @@
 .blog {
   
   padding: 5rem 0;
-  background-color: v.$naranja-suave;
+  background-color: v.$rosa-acordeon; // rosa muy claro desde v4.32.7 (antes $naranja-suave); en oscuro $negro (_modo-oscuro.scss)
   border-top: 1px solid var(--coral-marca);
 
   &__titulo {
