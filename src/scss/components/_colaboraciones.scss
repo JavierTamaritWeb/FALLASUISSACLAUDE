@@ -259,7 +259,7 @@ body:not(.modo-oscuro) .falleros__nosotros--plana-mayor .accordion__content {
     // Solo background-color: un `background` completo borraria las barras
     &:hover::after,
     &:focus-visible::after {
-      background-color: rgba(255, 111, 97, 0.78);
+      background-color: rgba(var(--coral-marca-rgb), 0.78); // v4.37.2: antes coral antiguo literal
       transform: scale(1.06);
     }
 
@@ -382,7 +382,7 @@ body.lightbox-open {
 
     &:hover,
     &:focus-visible {
-      background: rgba(255, 111, 97, 0.92);
+      background: rgba(var(--coral-marca-rgb), 0.92); // v4.37.2
       transform: scale(1.04);
     }
 

@@ -26,7 +26,14 @@ const PAGES = [
   { name: 'galerias', path: '/galerias.html' },
   { name: 'calendario', path: '/calendario.html' },
   { name: 'mapa', path: '/mapa.html' },
-  { name: 'organigrama', path: '/organigrama.html' }
+  { name: 'organigrama', path: '/organigrama.html' },
+  // v4.37.2: páginas que hasta ahora no tenían baseline
+  { name: 'ofrenda', path: '/ofrenda.html' },
+  { name: 'colaboraciones', path: '/colaboraciones.html' },
+  { name: 'deportes', path: '/deportes.html' },
+  { name: 'nuevos-falleros', path: '/nuevos-falleros.html' },
+  { name: 'galeria_1', path: '/galeria_1.html' },
+  { name: 'aviso-legal', path: '/aviso-legal.html' }
 ];
 
 const VIEWPORTS = [

@@ -1,8 +1,12 @@
 // Componente: Contenido Legal
 // Descripción: Estilos para páginas legales (aviso-legal.html, privacidad.html, cookies.html)
+// v4.37.2: paleta de la home en claro (página rosa muy claro, títulos azules,
+// cajas destacadas turquesa); el modo oscuro vive en _modo-oscuro.scss.
+
+@use '../abstracts/variables' as v;
 
 .contenido-legal {
-    background-color: #f5f5f5;
+    background-color: v.$rosa-acordeon; // antes #f5f5f5 literal
     min-height: 100vh;
     padding: 2rem 0 5rem;
     text-align: left;
@@ -24,7 +28,7 @@
     }
 
     h1 {
-        color: var(--coral-marca);
+        color: var(--titulo-seccion); // azul de sección en claro, coral en oscuro
         font-size: 2.5rem;
         margin-bottom: 1.5rem;
         text-align: left;
@@ -36,10 +40,10 @@
     }
 
     h2 {
-        color: var(--coral-marca);
+        color: var(--titulo-seccion);
         font-size: 1.8rem;
         margin: 2rem 0 1rem;
-        border-bottom: 2px solid var(--coral-marca);
+        border-bottom: 2px solid v.$turquesa;
         padding-bottom: 0.5rem;
 
         @media (max-width: 767px) {
@@ -96,21 +100,21 @@
     }
 
     a {
-        color: var(--coral-marca);
+        color: v.$coral-texto; // 5,0:1 sobre blanco (el coral de marca daba 2,7:1)
         text-decoration: none;
         font-weight: 500;
         transition: color 0.3s ease;
 
         &:hover {
-            color: #e55a4d;
+            color: v.$turquesa-texto;
             text-decoration: underline;
         }
     }
 
     // Fecha de actualización destacada
     p:first-of-type {
-        background-color: #fdf2e9;
-        border-left: 4px solid var(--coral-marca);
+        background-color: v.$turquesa-suave; // antes #fdf2e9 ($naranja-suave literal)
+        border-left: 4px solid v.$turquesa;
         border-radius: 4px;
         padding: 1rem 1.5rem;
         margin-bottom: 2rem;
@@ -245,7 +249,7 @@
         }
 
         th {
-            background-color: #fdf2e9;
+            background-color: v.$turquesa-claro; // antes #fdf2e9; en impresión pasa a blanco
             color: #333;
             font-weight: 600;
         }

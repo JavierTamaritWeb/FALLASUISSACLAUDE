@@ -1257,7 +1257,7 @@ body.modo-oscuro .historia__card:focus-visible .historia__card-title {
     gap: 0.8rem;
     margin: 0 0 1rem;
     padding-bottom: 0.8rem;
-    border-bottom: 1px solid rgba(255, 111, 97, 0.35);
+    border-bottom: 1px solid rgba(var(--coral-marca-rgb), 0.35); // v4.37.2: antes coral antiguo literal
     font-family: v.$font-family;
     font-size: 1.5rem;
     font-weight: 700;

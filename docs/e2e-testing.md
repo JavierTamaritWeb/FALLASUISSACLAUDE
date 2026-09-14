@@ -228,7 +228,7 @@ Cobertura concreta:
 
 Archivo de test:
 
-- `tests/visual-regression.e2e.spec.js`
+- `tests/visual-regression.e2e.spec.js` — desde v4.37.2 cubre 17 páginas (index, lafalla, eventos, meteo, blog, blog-somni, blog-anima, galerias, calendario, mapa, organigrama, ofrenda, colaboraciones, deportes, nuevos-falleros, galeria_1, aviso-legal) × 3 anchos × claro/oscuro, más los componentes (header, footer, menú, countdown, calendario)
 
 Snapshots:
 
@@ -531,7 +531,7 @@ Smoke suite por defecto:
 - `tests/nosotros-plana-mayor.e2e.spec.js` (v4.15.3: las 4 fotos de Nosotros/Plana Mayor son triggers del lightbox compartido — badge `+` dibujado, oscurecido en hover, pie del lightbox = `alt`, cierre con Escape/botón, `/va/` pre-renderizado y toggle ES→VA)
 - `tests/historia-representantes.e2e.spec.js` (v4.15.2: miniaturas ampliables de los paneles 2026-27 y 2025-26 — 4 triggers por edición, badge `+` dibujado con dos barras, oscurecido en hover, lightbox con el `alt` como pie y cierre con Escape/botón, `/va/` pre-renderizado y toggle ES→VA)
 - `tests/scss-guardrails.e2e.spec.js`
-- `tests/buscador.e2e.spec.js` (v4.29.0, en la smoke; ampliado en v4.33.0-v4.37.1 con guardias de calidad del índice —descripciones, VA real, personas, keywords huérfanas, eventos futuros con `?dia=`, un llibret por ejercicio—, el hash real de la meta, resaltado, combobox/`aria-activedescendant`, Enter, foco tras «Mostrar más», errata corregida, hash malformado y altura en móvil; 17 tests): índice `dist/data/search-index.json` con todos los tipos, sin ids de prueba (`evt:23-25/48/49`), sin festivos ni páginas standalone, títulos VA; `<meta name="search-index" content="data/search-index.json?v=<hash>">` y `<script src="js/buscador.js">` en las 29 páginas ES y `/va/`; destinos `url#id` existentes en `dist/`; en navegador: botón lupa visible con panel cerrado, apertura con foco en el campo, estado inicial con ejemplos, «calendari» con interfaz ES → «Calendario» (un solo resultado por página lógica) y anuncio `aria-live`, Escape devuelve el foco, menú y buscador excluyentes, estados `minimo`/`vacio` a 375 px, `/va/` con textos VA y destino `/va/galeria_6.html`, deep link `lafalla.html#ofrenda-2026-lafalla` que abre el panel (`acc.js`), consulta conservada al reabrir (`sessionStorage`), sugerencias y «Mostrar más» que repintan el cuerpo sin cerrar el panel (y un resultado sí lo cierra y navega), y las dos aspas (v4.29.1): «Cerrar buscador» sin círculo, borrar oculta con el campo vacío (`display: none`), dentro del campo con texto y sin invadirlo, borrar mantiene el panel y el foco, y el campo tiene un único anillo de foco.
+- `tests/buscador.e2e.spec.js` (v4.29.0, en la smoke; ampliado en v4.33.0-v4.37.2 con guardias de calidad del índice —descripciones, VA real, personas, keywords huérfanas, eventos futuros con `?dia=`, un llibret por ejercicio—, el hash real de la meta, resaltado, combobox/`aria-activedescendant`, Enter, foco tras «Mostrar más», errata corregida, hash malformado y altura en móvil; 17 tests): índice `dist/data/search-index.json` con todos los tipos, sin ids de prueba (`evt:23-25/48/49`), sin festivos ni páginas standalone, títulos VA; `<meta name="search-index" content="data/search-index.json?v=<hash>">` y `<script src="js/buscador.js">` en las 29 páginas ES y `/va/`; destinos `url#id` existentes en `dist/`; en navegador: botón lupa visible con panel cerrado, apertura con foco en el campo, estado inicial con ejemplos, «calendari» con interfaz ES → «Calendario» (un solo resultado por página lógica) y anuncio `aria-live`, Escape devuelve el foco, menú y buscador excluyentes, estados `minimo`/`vacio` a 375 px, `/va/` con textos VA y destino `/va/galeria_6.html`, deep link `lafalla.html#ofrenda-2026-lafalla` que abre el panel (`acc.js`), consulta conservada al reabrir (`sessionStorage`), sugerencias y «Mostrar más» que repintan el cuerpo sin cerrar el panel (y un resultado sí lo cierra y navega), y las dos aspas (v4.29.1): «Cerrar buscador» sin círculo, borrar oculta con el campo vacío (`display: none`), dentro del campo con texto y sin invadirlo, borrar mantiene el panel y el foco, y el campo tiene un único anillo de foco.
 - `tests/color-tokens.e2e.spec.js` (v4.29.0, en la smoke; desde v4.30.0 con un test de navegador que activa el modo oscuro y comprueba `--coral-marca` = `#b83f35`, el borde del countdown en `rgb(184, 63, 53)` y que ningún elemento computa `rgb(255, 111, 97)`, esperando a las transiciones de tema de 2,4 s): los tokens aditivos de `_variables.scss` existen, el degradado institucional solo vive en `$gradiente-institucional` (ninguna copia literal en `src/scss`), 22 pares de texto normal ≥ 4,5:1 y 5 colores sobre el stop más claro del degradado (`#0a4b8d`) ≥ 4,5:1, y el coral de marca solo válido como texto grande sobre azul (≥ 3:1) y no como texto normal sobre blanco.
 
 Suite completa:
@@ -638,7 +638,7 @@ Guía técnica:
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.37.1
+Última actualización: 14 de septiembre de 2026 - v4.37.2
 
 ## Regresiones SEO v4.30.21
 

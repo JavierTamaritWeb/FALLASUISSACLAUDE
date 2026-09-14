@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.37.1 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.37.2 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -148,7 +148,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 **Navegación Timeline** (`src/js/timeline.js` + `src/scss/components/_timeline.scss`): indicador de progreso lateral con un punto por cada sección `[data-index]` (salta el hero en el índice 0). Solo desktop (≥768px), oculto cuando el hero es visible. Construye un `<nav class="timeline">` con puntos clicables + líneas conectoras; el punto activo se rastrea vía IntersectionObserver. **Puntos discretos (v4.30.22)**: cada `.timeline__dot` es un `<button>` de 24 px sin borde (área de clic, mínimo WCAG 2.2 AA) y el punto visible lo dibuja su `::before` con 8 px (10 px relleno de coral el activo, sin halo); líneas conectoras de 6 px. En pantallas de más de 1200 px (`min-width: 1201px`) los círculos miden 25 px (botón y círculo; el activo solo cambia de color) con líneas de 8 px, a petición del usuario. Debe fijar `min-width`/`min-height` y anular `transform`/`box-shadow` en hover/focus, porque la regla global de `_accessibility.scss` da 44 px y elevación a todo `<button>` (por eso los círculos se veían de 44 px).
 
-**Páginas legales** (`aviso-legal.html`, `privacidad.html`, `cookies.html` + `src/scss/components/_contenido-legal.scss`): páginas RGPD/LSSI/ePrivacy usando el patrón `header-inner` y el componente `.contenido-legal` (tarjeta blanca sobre gris, soporte modo oscuro). El footer de cada página incluye `<nav class="footer__legal">` enlazando las 3 páginas legales; junto al `<p class="derechos">` forma la franja coral del pie (`layout/_footer.scss`), con línea blanca superior de 2px en `.derechos` y padding 1,2 rem arriba (`.derechos`) y abajo (`.footer__legal`) desde v4.30.10.
+**Páginas legales** (`aviso-legal.html`, `privacidad.html`, `cookies.html` + `src/scss/components/_contenido-legal.scss`): páginas RGPD/LSSI/ePrivacy usando el patrón `header-inner` y el componente `.contenido-legal` (tarjeta blanca sobre `$rosa-acordeon` desde v4.37.2, títulos en `var(--titulo-seccion)`, cajas destacadas turquesa; soporte modo oscuro). El footer de cada página incluye `<nav class="footer__legal">` enlazando las 3 páginas legales; junto al `<p class="derechos">` forma la franja coral del pie (`layout/_footer.scss`), con línea blanca superior de 2px en `.derechos` y padding 1,2 rem arriba (`.derechos`) y abajo (`.footer__legal`) desde v4.30.10.
 
 **Banner de cookies** (`src/js/cookie-banner.js` + `src/scss/components/_cookie-banner.scss`): banner de consentimiento RGPD; aparece en la primera visita si `localStorage.cookieConsent` no está definido. **Bilingüe desde v4.29.0**: textos en `cookieBanner.*` (`translations.json`, ES/VA) aplicados al crearlo según `window.currentLanguage` (o el `lang` de la página) y re-aplicados en `translationsReady`/`langChanged`; el fallback del HTML generado es el valor ES. Botones "Aceptar todas" / "Solo necesarias", barra inferior fija con backdrop-filter. Tests: `tests/cookie-banner.e2e.spec.js`. Ver restricción *Banner cookies Safari*.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.37.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.37.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -382,6 +382,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.37.2** — **Paleta de la home en las páginas interiores (3/3)** (modo claro; el oscuro no cambia). **Legales y formularios** (`_contenido-legal.scss`, ahora con `@use variables`): página en `$rosa-acordeon` (antes `#f5f5f5` literal), `h1`/`h2` en `var(--titulo-seccion)` con borde inferior `$turquesa`, enlaces `$coral-texto` (hover `$turquesa-texto`), caja de «Última actualización» en `$turquesa-suave` con borde `$turquesa` (antes `#fdf2e9`) y `th` de las autorizaciones en `$turquesa-claro`; las reglas `@media print` no cambian (`tests/autorizacion-print-header` en verde). **Literales del coral antiguo** `rgba(255,111,97,…)` de `.directiva__cargo` y del lightbox de Colaboraciones → `rgba(var(--coral-marca-rgb), …)` (ya no queda ninguno en `main.css`). **Cobertura visual**: `tests/visual-regression` incorpora `ofrenda`, `colaboraciones`, `deportes`, `nuevos-falleros`, `galeria_1` y `aviso-legal` (17 páginas × 3 anchos × claro/oscuro = 102 baselines + componentes). Cierra el plan «paleta de la home en todas las páginas» del 14-sep-2026 (4.37.0 → 4.37.2).
 
 - **4.37.1** — **Paleta de la home en las páginas interiores (2/3)** (modo claro; el oscuro no cambia). **Calendario**: `.cal` en `$rosa-acordeon` (antes se veía el degradado azul de `body::before`), `.calendario-eventos` en `$turquesa-suave` con borde 2 px `$azul-titulo-seccion` (regla acotada a claro) y título de cabecera en `var(--titulo-seccion)`. **Meteo**: `.clima-actual` y `.pronostico` (también su override ≥ 768 px con `!important`) en `var(--titulo-seccion)`, `.forecast-day` en `$rosa-acordeon` con borde `$turquesa` (antes `#f7f7f7`) y fix del `.valor-pronostico` blanco sobre turquesa claro (→ `$gris-oscuro` en claro). **Artículos del blog** (`blog-somni`, `blog-anima`): página `$rosa-acordeon` y, por decisión del usuario, el artículo pasa de tarjeta azul con texto blanco a `$turquesa-claro` con borde `$turquesa`, texto `$negro-casi` y entradilla `$coral-texto` (el `::before` azul queda a opacidad 0 en claro; mecanismo intacto para el oscuro). **Galerías 1-9**: `.visor` y `.galeria-pager` en `$rosa-acordeon` (antes hueso) y `.visor__titulo` en `var(--titulo-seccion)`; el papel del bloc no cambia. **Organigrama**: `.organigrama-contenedor` (sin regla hasta ahora) en `$turquesa-claro` con la leyenda en `$negro-casi`; `--accent-hover` deja el literal `rgba(255,111,97,.1)` por `rgba(var(--coral-marca-rgb), .1)`. **Mapa**: `.mapas` (sin regla) en `$rosa-acordeon`. `tests/galeria-pager` espera el rosa; baselines claros de calendario, meteo, blog-somni/anima, organigrama y mapa regenerados, oscuros intactos.
 
