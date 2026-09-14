@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.30.43 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.30.44 · **Última actualización:** 14 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.43).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.30.44).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -382,6 +382,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.30.44** — Fix de 4.30.43: los `<p>` del texto HOPE (generados por `data-i18n-format="paragraphs"`) seguían en blanco por la regla global `p { color: $blanco-hueso }` de `_falla.scss`; la regla del panel cubre ahora también `.colaboraciones-page__texto p`.
 
 - **4.30.43** — El panel HOPE abierto de la home (`index.html`) pasa en modo claro del degradado azul a `$turquesa-claro` #BFE6E9, con el texto en `$negro-casi` (el blanco no se leía). El mosaico de fotos no cambia; `colaboraciones.html` y el modo oscuro tampoco.
 

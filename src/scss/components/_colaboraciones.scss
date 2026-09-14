@@ -145,7 +145,10 @@
 body:not(.modo-oscuro) .colaboraciones__accordion .falleros__nosotros--plana-mayor .accordion__content {
   background: v.$turquesa-claro;
 
-  .colaboraciones-page__texto {
+  // También los <p> generados por data-i18n-format="paragraphs": la regla
+  // global `p { color: $blanco-hueso }` de _falla.scss los dejaba en blanco.
+  .colaboraciones-page__texto,
+  .colaboraciones-page__texto p {
     color: v.$negro-casi !important;
   }
 }

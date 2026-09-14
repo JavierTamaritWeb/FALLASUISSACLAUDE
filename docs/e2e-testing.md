@@ -638,7 +638,7 @@ Guía técnica:
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.30.43
+Última actualización: 14 de septiembre de 2026 - v4.30.44
 
 ## Regresiones SEO v4.30.21
 
