@@ -7,8 +7,12 @@ const { test, expect } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
 
+const crypto = require('crypto');
+
 const DIST = path.join(__dirname, '..', 'dist');
-const INDEX = JSON.parse(fs.readFileSync(path.join(DIST, 'data', 'search-index.json'), 'utf8'));
+const INDEX_RAW = fs.readFileSync(path.join(DIST, 'data', 'search-index.json'), 'utf8');
+const INDEX = JSON.parse(INDEX_RAW);
+const INDEX_HASH = crypto.createHash('sha1').update(INDEX_RAW).digest('hex').slice(0, 12);
 
 test.describe('buscador — índice y meta generados por el build', () => {
   test('el índice tiene registros de todos los tipos y sin contenido de prueba', () => {
@@ -79,7 +83,8 @@ test.describe('buscador — índice y meta generados por el build', () => {
     for (const f of paginas) {
       for (const rel of [f, path.join('va', f)]) {
         const html = fs.readFileSync(path.join(DIST, rel), 'utf8');
-        expect(html, rel).toMatch(/<meta name="search-index" content="data\/search-index\.json\?v=[0-9a-f]{12}">/);
+        // El hash de la meta es el sha1 real del JSON servido (cache-busting por contenido)
+        expect(html, rel).toContain(`<meta name="search-index" content="data/search-index.json?v=${INDEX_HASH}">`);
         expect(html, rel).toMatch(/<script src="(?:\.\.\/)?js\/buscador\.js\?v=[0-9a-f]+" defer><\/script>/);
       }
     }

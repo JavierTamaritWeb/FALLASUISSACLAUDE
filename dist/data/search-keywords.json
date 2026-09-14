@@ -92,6 +92,7 @@
   },
   "page:organigrama": {
     "es": [
+      "organigrama",
       "directiva",
       "cargos",
       "vicepresidentes",
@@ -100,6 +101,7 @@
       "junta"
     ],
     "va": [
+      "organigrama",
       "directiva",
       "càrrecs",
       "vicepresidents",
