@@ -326,6 +326,10 @@ body.modo-oscuro .falleros__nosotros--plana-mayor {
   border-color: var(--coral-marca);
 }
 
+body.modo-oscuro .falleros__nosotros--plana-mayor > .accordion {
+  border: 0; // el borde turquesa es solo del modo claro (v4.30.25)
+}
+
 /* ----------------------------------------------
    MODO OSCURO FOOTER
 ------------------------------------------------ */

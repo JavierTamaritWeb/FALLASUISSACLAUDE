@@ -135,6 +135,11 @@
   &__nosotros--plana-mayor {
     background-color: v.$blanco-hueso;
     border: 2px solid v.$azul-titulo-seccion;
+
+    // Conjunto de acordeones de la Plana Mayor: borde turquesa de 1px (v4.30.25)
+    > .accordion {
+      border: 1px solid v.$turquesa;
+    }
   }
   &__titulo {
     text-transform: none;
