@@ -16,7 +16,7 @@
 | [`scripts-utilities.md`](./scripts-utilities.md) | Scripts utilitarios del repo: OG image, servidor local de `dist/` y migración SCSS | 20/03/2026 |
 | [`open-graph-whatsapp.md`](./open-graph-whatsapp.md) | Open Graph para WhatsApp/Facebook/Twitter, `og-share.png` y cache-buster `?v=...` | 20/03/2026 |
 | [`navigation-bar.md`](./navigation-bar.md) | Barra de navegación fija, overlay móvil, cierre por Escape/backdrop y layout responsivo | 20/03/2026 |
-| [`global-styles.md`](./global-styles.md) | Estilos globales, gradiente base, reveal on scroll, fondos especiales y notas técnicas del banner | 20/03/2026 |
+| [`global-styles.md`](./global-styles.md) | Estilos globales, gradiente base, Hero tipográfico, reveal on scroll, fondos especiales y notas técnicas del banner | 15/09/2026 |
 | [`i18n-translations.md`](./i18n-translations.md) | Sistema i18n con `data-i18n`, `translations.json`, pre-render VA en build, nodos dinámicos y renderizado por párrafos | 07/05/2026 |
 | [`gestion-tablon.md`](./gestion-tablon.md) | Guía canónica del tablón dinámico (`src/data/board.json`, adjuntos, filtrado de inválidos, validación y troubleshooting) | 04/05/2026 |
 | [`meteo-ui.md`](./meteo-ui.md) | Meteo: estructura del widget, animaciones, sincronización con i18n y estabilidad visual | 20/03/2026 |

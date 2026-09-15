@@ -2,7 +2,7 @@
 
 This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
-**Version:** 4.30.21
+**Version:** 4.37.3
 **Last Updated:** 13 de septiembre de 2026
 
 > 4.30.20 — Auditoría de 15 problemas corregidos con 25 pruebas nuevas; informe en [`docs/auditoria-2026-09-13.md`](docs/auditoria-2026-09-13.md).
@@ -153,7 +153,7 @@ All source lives under `src/`. The repo root contains only tooling/configs/docs 
 
 ### Version Note
 
-`package.json` and `package-lock.json` are synchronized with the current release version (4.30.21).
+`package.json` and `package-lock.json` are synchronized with the current release version (4.37.3).
 
 ## Architecture Decisions & Constraints
 

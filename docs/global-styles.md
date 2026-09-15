@@ -8,6 +8,20 @@ Esta guía documenta el sistema de estilos globales del proyecto, incluyendo el 
 - `src/scss/animaciones/_reveal.scss`
 - `src/js/scroll-reveal.js`
 
+## 🏛️ Hero de la portada
+
+El Hero de `src/index.html` usa una jerarquía tipográfica en dos líneas para que
+el nombre de la comisión sea lo primero que se lea:
+
+- `.header__title-main`: «Falla Suïssa», Georgia de peso medio y cursiva coral en «Suïssa».
+- `.header__title-secondary`: «L’Alqueria del Favero», Plus Jakarta Sans a escala secundaria.
+- `.header__title::after`: separador coral de 2 px, centrado y responsive.
+
+En móvil, `.header__grid` añade espacio superior para separar el texto de la
+corona de la Fallereta. En modo oscuro el título pasa a blanco hueso y el acento
+usa coral claro. El encabezado mantiene un único `h1`, conserva el texto
+completo para SEO y no depende de JavaScript.
+
 ## 🔄 Reset CSS
 
 El proyecto usa un reset universal que normaliza todos los elementos:

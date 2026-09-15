@@ -40,17 +40,9 @@
     height: 57rem;
   }
 
-  // Sobre el celeste (v4.30.45): título en coral de texto y los tramos que
-  // iban en blanco en azul de sección (4,1:1 y 6:1 en el stop más claro
-  // donde cae el título); olas en tonos de azul cobalto (antes blancas). El
-  // modo oscuro conserva coral/blanco y las olas grises.
+  // Sobre el celeste las olas usan cuatro tonos de azul cobalto.
+  // El título concentra el acento coral en el nombre Suïssa.
   body:not(.modo-oscuro) & {
-    .header__title {
-      color: v.$coral-texto;
-      span {
-        color: v.$azul-titulo-seccion;
-      }
-    }
     .header__waves .waves use {
       &:nth-of-type(1) { fill: rgba(v.$azul-cobalto, 0.35); }
       &:nth-of-type(2) { fill: rgba(v.$azul-cobalto, 0.55); }
@@ -88,6 +80,10 @@
     padding-top: 7rem;
     justify-items: center;
     text-align: center;
+
+    @media (max-width: 767px) {
+      padding-top: 4.4rem; // Separar la segunda línea de la corona de la Fallereta.
+    }
     
     picture {
       display: block;
@@ -97,22 +93,63 @@
   }
 
   &__title {
+    --hero-title-accent: #{v.$coral-texto};
+    position: relative;
+    z-index: 2; // Mantener el texto por encima de la Fallereta decorativa.
+    max-width: 100%;
     margin: 2rem 0;
-    font-size: v.$font-size-medium;
-    font-weight: 900;
-    color: var(--coral-marca);
+    padding: 0 1rem;
+    font-weight: 500;
+    color: v.$azul-titulo-seccion;
     text-transform: none;
-    font-size: 3rem;
+    transition: color var(--theme-transition);
 
-    span {
-      color: v.$blanco;
+    &::after {
+      content: '';
+      display: block;
+      width: 5.8rem;
+      height: 2px;
+      margin: clamp(1.6rem, 2vw, 2.6rem) auto 0;
+      background-color: var(--hero-title-accent);
+      transition: background-color var(--theme-transition);
     }
-    
-    @media screen and (min-width: 768px) {
-      font-size: 4em;
+
+    &-main {
+      display: block;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(4.4rem, 9vw, 10.8rem);
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+      text-shadow: 0 2px 10px rgba(v.$blanco, 0.35);
+      transition: text-shadow var(--theme-transition);
     }
-    @media screen and (min-width: 1024px) {
-      font-size: 7rem;
+
+    &-name {
+      color: var(--hero-title-accent);
+      font-style: italic;
+      transition: color var(--theme-transition);
+    }
+
+    &-secondary {
+      display: block;
+      margin-top: clamp(1rem, 1.5vw, 2rem);
+      font-family: v.$font-family;
+      font-size: clamp(1.8rem, 2.4vw, 3rem);
+      font-weight: 500;
+      line-height: 1.45;
+      letter-spacing: 0.035em;
+      text-wrap: balance;
+    }
+
+    body.modo-oscuro & {
+      --hero-title-accent: #{v.$coral-claro};
+      color: v.$blanco-hueso;
+
+      .header__title-main {
+        text-shadow: 0 2px 10px rgba(v.$negro, 0.16);
+      }
     }
   }
 

@@ -1,0 +1,114 @@
+<section id="suissa-hero-proposal" aria-label="Propuesta de tipografía para el Hero de Falla Suïssa">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap');
+
+    #suissa-hero-proposal {
+      container-type: inline-size;
+      width: 100%;
+      --suissa-ink: light-dark(#02427a, #f4f7fc);
+      --suissa-accent: light-dark(#b83f35, #ff9b8e);
+      --suissa-sky-top: light-dark(#d8effb, #18354e);
+      --suissa-sky-bottom: light-dark(#92cfee, #0b1725);
+      --suissa-sheen: light-dark(rgba(255,255,255,.32), rgba(255,255,255,.025));
+      --suissa-title-font: Georgia, 'Times New Roman', serif;
+      --suissa-title-weight: 500;
+      --suissa-title-style: italic;
+      --suissa-title-size: 12cqi;
+      --suissa-shadow: light-dark(rgba(255,255,255,.35), rgba(0,0,0,.16));
+    }
+    #suissa-hero-proposal .suissa-scene {
+      box-sizing: border-box;
+      display: grid;
+      place-items: center;
+      padding: clamp(52px, 10cqi, 84px) 20px;
+      min-height: 280px;
+      background: radial-gradient(ellipse at 15% 5%, var(--suissa-sheen), transparent 70%),
+        linear-gradient(115deg, var(--suissa-sky-top), var(--suissa-sky-bottom));
+      color: var(--suissa-ink);
+      text-align: center;
+    }
+    #suissa-hero-proposal .suissa-title {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      color: var(--suissa-ink);
+      text-transform: none;
+      font-weight: 500;
+    }
+    #suissa-hero-proposal .suissa-primary {
+      display: block;
+      font-family: var(--suissa-title-font);
+      font-size: clamp(38px, var(--suissa-title-size), 108px);
+      font-weight: var(--suissa-title-weight);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+      text-shadow: 0 2px 10px var(--suissa-shadow);
+      text-wrap: balance;
+    }
+    #suissa-hero-proposal .suissa-name {
+      color: var(--suissa-accent);
+      font-style: var(--suissa-title-style);
+    }
+    #suissa-hero-proposal .suissa-secondary {
+      display: block;
+      margin-top: 20px;
+      font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+      font-size: clamp(17px, 3.5cqi, 30px);
+      font-weight: 500;
+      line-height: 1.45;
+      letter-spacing: .035em;
+      text-wrap: balance;
+    }
+    #suissa-hero-proposal .suissa-rule {
+      width: 58px;
+      height: 2px;
+      margin: 30px auto 0;
+      background-color: var(--suissa-accent);
+    }
+    #suissa-hero-proposal .suissa-rule[hidden] { display: none; }
+  </style>
+  <div class="suissa-scene">
+    <div>
+      <h1 class="suissa-title">
+        <span class="suissa-primary">Falla <span class="suissa-name">Suïssa</span></span>
+        <span class="suissa-secondary">L’Alqueria del Favero</span>
+      </h1>
+      <div class="suissa-rule" aria-hidden="true"></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const root = document.getElementById('suissa-hero-proposal');
+      const state = { style: 'editorial', theme: 'auto', rule: true };
+      function render() {
+        const editorial = state.style === 'editorial';
+        root.style.setProperty('--suissa-title-font', editorial ? "Georgia, 'Times New Roman', serif" : "'Plus Jakarta Sans', Arial, sans-serif");
+        root.style.setProperty('--suissa-title-weight', editorial ? '500' : '700');
+        root.style.setProperty('--suissa-title-style', editorial ? 'italic' : 'normal');
+        root.style.setProperty('--suissa-title-size', editorial ? '12cqi' : '10.6cqi');
+        root.style.colorScheme = state.theme === 'auto' ? 'inherit' : state.theme;
+        root.querySelector('.suissa-rule').hidden = !state.rule;
+      }
+      render();
+      if (globalThis.Tweak) {
+        const tweak = new Tweak({ container: root, onChange: render });
+        tweak.addSelect(state, 'style', {
+          label: 'Tipografía',
+          options: [
+            { label: 'Editorial · recomendada', value: 'editorial' },
+            { label: 'Actual refinada · Plus Jakarta Sans', value: 'modern' }
+          ]
+        });
+        tweak.addSelect(state, 'theme', {
+          label: 'Apariencia',
+          options: [
+            { label: 'Automática', value: 'auto' },
+            { label: 'Clara', value: 'light' },
+            { label: 'Oscura', value: 'dark' }
+          ]
+        });
+        tweak.addToggle(state, 'rule', { label: 'Línea decorativa' });
+      }
+    })();
+  </script>
+</section>
