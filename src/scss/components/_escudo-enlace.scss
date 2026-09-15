@@ -30,7 +30,7 @@
 
   &:hover img,
   &:focus-visible img {
-    filter: drop-shadow(0 0 0.6rem rgba(255, 111, 97, 0.65));
+    filter: drop-shadow(0 0 0.6rem rgba(var(--coral-marca-rgb), 0.65));
   }
 
   &:focus {

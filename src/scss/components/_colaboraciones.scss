@@ -269,7 +269,7 @@ body:not(.modo-oscuro) .falleros__nosotros--plana-mayor .accordion__content {
     }
 
     &:focus-visible {
-      outline: 3px solid rgba(255, 215, 0, 0.95);
+      outline: 3px solid rgba(v.$dorado, 0.95);
       outline-offset: -0.4rem;
     }
 
@@ -387,7 +387,7 @@ body.lightbox-open {
     }
 
     &:focus-visible {
-      outline: 3px solid rgba(255, 215, 0, 0.95);
+      outline: 3px solid rgba(v.$dorado, 0.95);
       outline-offset: 0.2rem;
     }
   }
@@ -402,7 +402,7 @@ body.lightbox-open {
   }
 
   &__caption {
-    color: rgba(245, 245, 245, 0.92);
+    color: rgba(v.$blanco-hueso, 0.92);
     font-size: 1.4rem;
     line-height: 1.5;
     margin: 0 auto;

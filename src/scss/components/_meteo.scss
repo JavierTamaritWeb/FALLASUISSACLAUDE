@@ -72,7 +72,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(245, 245, 245, 0.85); // Modo claro
+    background-color: rgba(v.$blanco-hueso, 0.85); // Modo claro
     transition: background-color var(--theme-transition, 2.4s ease-in-out);
     z-index: 0;
   }
@@ -224,14 +224,14 @@
     text-align: center;
 
     div {
-      background-color: rgba(#000, 0.2);
+      background-color: rgba(v.$negro, 0.2);
       padding: 0.5rem;
       border-radius: 8px;
       transition: transform 0.3s, background-color 0.3s;
 
       &:hover {
         transform: scale(1.05);
-        background-color: rgba(#000, 0.3);
+        background-color: rgba(v.$negro, 0.3);
       }
 
       strong {
@@ -346,7 +346,7 @@
     }
 
     .forecast-info {
-      color: #333 !important; // Para que contraste con #f7f7f7
+      color: v.$secondary-color !important; // Para que contraste con #f7f7f7
       p {
         margin: 0.25rem 0;
       }
@@ -397,7 +397,7 @@
 }
 
 .valor-pronostico {
-  color: #fff;
+  color: v.$blanco;
   // v4.37.1: sobre la tarjeta turquesa claro el blanco no se leía (1,3:1)
   body:not(.modo-oscuro) & {
     color: v.$gris-oscuro;
@@ -427,7 +427,7 @@
     font-size: 1.3rem;
 
     p {
-      color: #333; // Contraste con el fondo
+      color: v.$secondary-color; // Contraste con el fondo
     }
   }
 }
@@ -467,7 +467,7 @@
   .forecast-info {
     font-size: 1.3rem;
     p {
-      color: #333;
+      color: v.$secondary-color;
     }
   }
 
@@ -538,7 +538,7 @@
   .forecast-info {
     font-size: 1.3rem;
     p {
-      color: #333;
+      color: v.$secondary-color;
     }
   }
 }
@@ -589,7 +589,7 @@
   .forecast-info {
     font-size: 1.3rem;
     p {
-      color: #333;
+      color: v.$secondary-color;
     }
   }
 }

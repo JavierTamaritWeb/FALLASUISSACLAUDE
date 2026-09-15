@@ -10,7 +10,7 @@
 // propiedades: se usa var(--coral-marca) / rgba(var(--coral-marca-rgb), a).
 :root {
   --coral-marca: #{v.$primary-color};
-  --coral-marca-rgb: 184, 63, 53;
+  --coral-marca-rgb: #{color.channel(v.$primary-color, 'red', $space: rgb)}, #{color.channel(v.$primary-color, 'green', $space: rgb)}, #{color.channel(v.$primary-color, 'blue', $space: rgb)};
   --coral-marca-claro10: #{color.adjust(v.$primary-color, $lightness: 10%)};
   --coral-marca-oscuro8: #{color.adjust(v.$primary-color, $lightness: -8%)};
   --coral-marca-oscuro10: #{color.adjust(v.$primary-color, $lightness: -10%)};
@@ -23,7 +23,7 @@
 html.modo-oscuro,
 body.modo-oscuro {
   --coral-marca: #{v.$coral-texto};
-  --coral-marca-rgb: 184, 63, 53;
+  --coral-marca-rgb: #{color.channel(v.$coral-texto, 'red', $space: rgb)}, #{color.channel(v.$coral-texto, 'green', $space: rgb)}, #{color.channel(v.$coral-texto, 'blue', $space: rgb)};
   --coral-marca-claro10: #{color.adjust(v.$coral-texto, $lightness: 10%)};
   --coral-marca-oscuro8: #{color.adjust(v.$coral-texto, $lightness: -8%)};
   --coral-marca-oscuro10: #{color.adjust(v.$coral-texto, $lightness: -10%)};
@@ -45,7 +45,7 @@ html {
 }
 body {
   min-height: 100%;
-  background-color: #0a4b8d; // Color de respaldo
+  background-color: #0a4b8d; // Color de respaldo: primer stop de v.$gradiente-institucional
   position: relative;
   
   // Gradiente suave en pseudo-elemento para transición dark mode

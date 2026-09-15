@@ -15,7 +15,7 @@
         margin: 0 auto;
         max-width: 900px;
         padding: 0 2rem;
-        background-color: #fff;
+        background-color: v.$blanco;
         border-radius: 1rem;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         margin-top: 2rem;
@@ -52,7 +52,7 @@
     }
 
     h3 {
-        color: #333;
+        color: v.$secondary-color;
         font-size: 1.4rem;
         margin: 1.5rem 0 1rem;
         font-weight: 600;
@@ -63,14 +63,14 @@
     }
 
     p {
-        color: #555;
+        color: v.$gris-medio-oscuro;
         font-size: 1.1rem;
         line-height: 1.6;
         margin-bottom: 1rem;
         text-align: left;
 
         strong {
-            color: #333;
+            color: v.$secondary-color;
             font-weight: 600;
         }
     }
@@ -79,13 +79,13 @@
         margin: 1rem 0 1.5rem 2rem;
         
         li {
-            color: #555;
+            color: v.$gris-medio-oscuro;
             font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 0.5rem;
 
             strong {
-                color: #333;
+                color: v.$secondary-color;
                 font-weight: 600;
             }
         }
@@ -156,14 +156,14 @@
     &__subtitulo {
         font-size: 1.15rem;
         font-style: italic;
-        color: #555;
+        color: v.$gris-medio-oscuro;
         margin-bottom: 1.5rem;
     }
 
     &__nota-final {
         margin-top: 2rem;
         font-style: italic;
-        color: #555;
+        color: v.$gris-medio-oscuro;
     }
 
     &__acciones {
@@ -194,14 +194,14 @@
     &__label {
         font-size: 0.9rem;
         font-weight: 600;
-        color: #333;
+        color: v.$secondary-color;
         margin-bottom: 0.25rem;
 
         &--firma {
             margin-top: 0.4rem;
             text-align: center;
             font-weight: 500;
-            color: #555;
+            color: v.$gris-medio-oscuro;
         }
     }
 
@@ -209,14 +209,14 @@
         display: block;
         width: 100%;
         min-height: 1.8rem;
-        border-bottom: 1px solid #333;
+        border-bottom: 1px solid v.$secondary-color;
     }
 
     &__casilla {
         display: inline-block;
         width: 1.1rem;
         height: 1.1rem;
-        border: 1.5px solid #333;
+        border: 1.5px solid v.$secondary-color;
         border-radius: 2px;
         vertical-align: middle;
         margin-right: 0.4rem;
@@ -250,7 +250,7 @@
 
         th {
             background-color: v.$turquesa-claro; // antes #fdf2e9; en impresión pasa a blanco
-            color: #333;
+            color: v.$secondary-color;
             font-weight: 600;
         }
     }
@@ -279,9 +279,9 @@
         display: block;
         width: 100%;
         min-height: 4rem;
-        border: 1px solid #333;
+        border: 1px solid v.$secondary-color;
         border-radius: 4px;
-        background-color: #fff;
+        background-color: v.$blanco;
     }
 
     &__boton-imprimir {

@@ -255,7 +255,7 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.37.2
+Última actualización: 15 de septiembre de 2026 - v4.38.0
 
 ## Guardias de compilación y despliegue (13-09-2026)
 

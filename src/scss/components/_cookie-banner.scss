@@ -82,7 +82,7 @@
 
   &--accept {
     background: var(--coral-marca);
-    color: #fff;
+    color: v.$blanco;
     border-color: var(--coral-marca);
 
     &:hover {
@@ -103,6 +103,6 @@
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.95);
+    box-shadow: 0 0 0 3px rgba(v.$dorado, 0.95);
   }
 }

@@ -81,7 +81,7 @@
         height: 100%;
         pointer-events: none;
         z-index: -1;
-        background: repeating-linear-gradient(#fdf2e9 0px, #fdf2e9 24px, rgba(0, 0, 0, 0.1) 25px, rgba(0, 0, 0, 0.1) 26px);
+        background: repeating-linear-gradient(v.$naranja-suave 0px, v.$naranja-suave 24px, rgba(0, 0, 0, 0.1) 25px, rgba(0, 0, 0, 0.1) 26px);
       }
   
       &--active {

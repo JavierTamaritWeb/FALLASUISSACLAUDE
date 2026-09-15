@@ -999,7 +999,7 @@ body.modo-oscuro {
     inset 0 1px 0 rgba(255, 255, 255, 0.35),
     inset 0 -1px 0 rgba(0, 0, 0, 0.12);
   border-radius: 0.5rem;
-  color: #fff;
+  color: v.$blanco;
   font-size: 1.2rem;
   padding: 0.5rem 1rem;
   line-height: 1;
@@ -1031,7 +1031,7 @@ body.modo-oscuro {
   &:hover,
   &:focus-visible {
     // background-color: rgba(255, 255, 255, 0.2);
-    background-color: rgba(255, 111, 97, 0.7);
+    background-color: rgba(var(--coral-marca-rgb), 0.7);
   }
 
   &:active {
@@ -1068,7 +1068,7 @@ body.modo-oscuro {
   text-align: left;
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  color: #333;
+  color: v.$secondary-color;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
   text-transform: none;

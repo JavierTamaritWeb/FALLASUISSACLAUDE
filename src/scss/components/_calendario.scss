@@ -41,7 +41,7 @@
         transition: background-color v.$transicion, color v.$transicion;
 
         &:hover {
-        background-color: #444;
+        background-color: v.$gris-muy-oscuro;
         }
     }
     &__modo-boton {
@@ -57,7 +57,7 @@
         transition: background-color v.$transicion, color v.$transicion;
 
         &:hover {
-        background-color: #444;
+        background-color: v.$gris-muy-oscuro;
         }
     }
 
@@ -91,7 +91,7 @@
         transition: background-color v.$transicion, color v.$transicion;
 
         &:hover {
-            background-color: #444;
+            background-color: v.$gris-muy-oscuro;
             color: v.$blanco;
         }
         }
@@ -250,7 +250,7 @@
         color: v.$coral-texto;
       }
       p {
-        color: #000;
+        color: v.$negro;
       }
   
       ul {
@@ -372,12 +372,12 @@
       &-contenido {
         font-size: 1rem;
         margin-bottom: 1rem;
-        color: #333;
+        color: v.$secondary-color;
       }
   
       &-meta {
         font-size: 0.9rem;
-        color: #333;
+        color: v.$secondary-color;
         display: flex;
         justify-content: space-between;
       }
@@ -474,7 +474,7 @@
       }
       &--informacion {
         border-left: 6px solid v.$dorado;
-        color: #000;
+        color: v.$negro;
   
         .calendario-eventos__item-meta {
           span {
@@ -540,13 +540,13 @@
 
         &-busqueda{
             &::-webkit-input-placeholder {
-                color: #333;
+                color: v.$secondary-color;
             }
             &:-ms-input-placeholder {
-                color: #333;
+                color: v.$secondary-color;
             }
             &::placeholder {
-                color: #333;
+                color: v.$secondary-color;
                 transition: color v.$transicion;
             }
             &:hover::placeholder {
@@ -555,13 +555,13 @@
         }
         &-texto{
             &::-webkit-input-placeholder {
-                color: #333;
+                color: v.$secondary-color;
             }
             &:-ms-input-placeholder {
-                color: #333;
+                color: v.$secondary-color;
             }
             &::placeholder {
-                color: #333;
+                color: v.$secondary-color;
                 transition: color v.$transicion;
             }
             &:hover::placeholder {
@@ -571,13 +571,13 @@
         }
         &-fecha{
             &::-webkit-input-placeholder {
-                color: #333;
+                color: v.$secondary-color;
             }
             &:-ms-input-placeholder {
-                color: #333;
+                color: v.$secondary-color;
             }
             &::placeholder {
-                color: #333;
+                color: v.$secondary-color;
                 transition: color var(--transicion);
             }
             &:hover::placeholder {
@@ -652,7 +652,7 @@
         cursor: pointer;
 
         &:hover {
-        color: #444;
+        color: v.$gris-muy-oscuro;
         }
     }
 
@@ -677,7 +677,7 @@
         padding: 0.5rem;
         border: none;
         border-radius: 5px;
-        background-color: #333;
+        background-color: v.$secondary-color;
         color: v.$blanco;
         font-size: 1rem;
         transition: background-color var(--transicion), color var(--transicion);
@@ -706,7 +706,7 @@
         text-align: center;
 
         &:hover {
-        background-color: #444;
+        background-color: v.$gris-muy-oscuro;
         }
     }
 }

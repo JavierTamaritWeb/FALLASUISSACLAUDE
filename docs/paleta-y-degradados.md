@@ -1,19 +1,36 @@
-# 🎨 Paleta funcional y degradados (v4.29.0)
+# 🎨 Paleta funcional y degradados (v4.29.0; tokens por importancia desde v4.38.0)
 
 Evolución **gradual y aditiva** de la paleta: azul y coral siguen siendo la identidad, los degradados no cambian y se corrigen los textos que no cumplían WCAG 2.2 AA (4,5:1 texto normal; 3:1 texto grande de ≥ 24 px o ≥ 19 px negrita y componentes de interfaz). Guardia: `tests/color-tokens.e2e.spec.js`.
 
-## Tokens (`src/scss/abstracts/_variables.scss`)
+## Jerarquía de tokens (v4.38.0)
+
+`src/scss/abstracts/_variables.scss` está ordenado **por importancia**, de lo que define la identidad del sitio a lo accesorio. Dentro de cada bloque, el token más usado va primero y cada color de texto lleva su ratio en el comentario.
+
+| Bloque | Tokens | Papel |
+| --- | --- | --- |
+| 1. Marca | `$primary-color` #B83F35, `$color-azul-falla` #004BCF, `$azul-titulo-seccion` #02427A, `$turquesa` #00909E, `$dorado` #FFD700 | Los cinco colores que identifican el sitio |
+| 2. Degradados y celestes | `$gradiente-institucional`, `$gradiente-cristal-menu`, `$cristal-menu-oscuro`, `$celeste-1…5`, `$gradiente-celeste`, `$azul-cobalto` | Fondos de marca (institucional, cristal del menú, celeste de la home) |
+| 3. Neutros | `$blanco`, `$blanco-hueso`, `$secondary-color`, `$negro-casi`, `$negro`, grises oscuros y claros (de claro a oscuro) | Texto y fondos base en ambos modos |
+| 4. Superficies de sección en claro | `$rosa-acordeon`, `$rosa-acordeon-hover`, `$turquesa-suave`, `$turquesa-claro`, `$turquesa-texto`, `$naranja-suave` | La paleta de la home (v4.30.22-4.37.2) |
+| 5. Texto de contraste | `$coral-claro`, `$azul-enlace-oscuro` | Texto pequeño sobre azul/oscuro |
+| 6. Acentos de interacción | `$rojo-salmon`, `$amarillo-anaranjado`, `$naranja-quemado` | Hover de botones y titulares |
+| 7. Estados | `$estado-error/-exito/-aviso/-info` y `-oscuro` | Siempre con texto o icono |
+| 8. Usos puntuales | `$color-urgente`, `$azul-marino` (calendario), `$azul-verdoso` (contacto) | Un solo componente cada uno; candidatos a revisar |
+| 9. Sin color | tipografía, espaciado, sombra, transición, cenefa, falleret | — |
+| 10. Alias heredados | `$coral-texto` = `$primary-color`, `$turquesa-sobre-rosa` = `$turquesa-texto` | Mismo valor desde v4.31.0 / v4.30.28; **no usar en código nuevo** |
+
+Retiradas en v4.38.0 por no tener ningún uso: `$naranja-coral`, `$rosa-pastel`, `$purpura`, `$color-tiktok`, `$color-facebook`, `$color-youtube`, `$texto-secundario-oscuro`, `$superficie-elevada-oscuro`, `$img-path` y `$melocotin-claro`. En la misma versión se sustituyeron ~90 literales que ya tenían token (`#333`, `#fff`, `#000`, `#111`, `#444`, `#555`, `#f5f5f5`, `#fdf2e9`, `rgba(255,215,0,…)`, `rgba(245,245,245,…)`) por su variable, y los `rgba(255,111,97,…)` del coral antiguo por `rgba(var(--coral-marca-rgb), a)` (único cambio visible: los glows y halos que seguían en #FF6F61 pasan al primario). `--coral-marca-rgb` se deriva ahora del token con `color.channel()`. Dos guardias nuevas en `tests/scss-guardrails.e2e.spec.js`: ninguna variable de `_variables.scss` sin uso y ningún literal con token fuera de `@media print`.
+
+## Tokens de la paleta funcional (v4.29.0)
 
 | Token | Valor | Función | Ratio de referencia |
 | --- | --- | --- | --- |
 | `$gradiente-institucional` | `linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%)` | Única fuente del degradado (antes 11 copias literales) | — |
 | `$coral-texto` | `#B83F35` | Coral como **texto** sobre fondos claros | 5,5 blanco · 5,1 `$blanco-hueso` · 5,0 `$naranja-suave` · 4,7 `#fae9e8` |
 | `$coral-claro` | `#FFB4AA` | Coral como texto **pequeño** sobre azul o gris oscuro | 5,1 `#0a4b8d` · 6,0 `#02427a` · 11 `#111` · 5,7 `#444` |
-| `$azul-enlace-oscuro` | `#8FB8FF` | Enlaces y acción principal en oscuro (`#004BCF` da 2,6 sobre `#111`) | 9,4 `#111` · 7,9 `#172334` |
-| `$texto-secundario-oscuro` | `#B9C4D0` | Texto secundario en oscuro | 10,7 `#111` |
-| `$superficie-elevada-oscuro` | `#172334` | Tarjeta elevada en oscuro (opcional; hoy no se usa) | — |
+| `$azul-enlace-oscuro` | `#8FB8FF` | Enlaces y acción principal en oscuro (`#004BCF` da 2,6 sobre `#111`) | 9,4 `#111` |
 | `$estado-error/-exito/-aviso/-info` | `#B3261E` / `#1B6E3A` / `#8A5A00` / `#004BCF` | Estados en claro, siempre con texto o icono | 6,5 / 6,3 / 5,9 / 7,2 sobre blanco |
-| `$estado-*-oscuro` | `#FF8A80` / `#7BD389` / `#FFC857` / `#8FB8FF` | Estados en oscuro (texto `$negro-casi`) | 6,9 / 8,7 / 10,3 / 7,9 sobre `#172334` |
+| `$estado-*-oscuro` | `#FF8A80` / `#7BD389` / `#FFC857` / `#8FB8FF` | Estados en oscuro (texto `$negro-casi`) | 6,9 / 8,7 / 10,3 / 9,4 sobre `#111` |
 
 **Desde v4.31.0 el color primario es `#B83F35`** (`$primary-color` = `$coral-texto`, en claro y oscuro; `--coral-marca-rgb` = `184, 63, 53`; también los literales de `dark.js`, `calendario.js` y los SVG inline). Ojo: `$negro-casi` sobre el primario da 3,4:1 (los hover de `.boton`/titulares con texto oscuro solo llegan a AA en su tramo salmón). Hasta v4.30.47 los tokens de marca (`$primary-color #FF6F61`, `$color-azul-falla #004BCF`, `$dorado`, `$blanco-hueso #F5F5F5`, `$naranja-suave #fdf2e9`, `$rojo-salmon #FF8C7A`) **no cambian**. `#F7F4EF` y `#182433` de la propuesta inicial se descartaron: no mejoran los ratios de `$naranja-suave`/`$blanco-hueso` y `$secondary-color`.
 
@@ -33,7 +50,7 @@ Evolución **gradual y aditiva** de la paleta: azul y coral siguen siendo la ide
 | Fondo de página | `$gradiente-institucional` (`body::before`) | `$negro` |
 | Superficie de lectura | `$naranja-suave`, `$blanco-hueso` | `$negro-casi`, `$gris-muy-oscuro` |
 | Tarjeta | `$blanco` | `$gris-muy-oscuro` / `$negro-casi` |
-| Texto principal / secundario | `$secondary-color` / `$gris-oscuro` | `$blanco-hueso` / `$texto-secundario-oscuro` |
+| Texto principal / secundario | `$secondary-color` / `$gris-oscuro` | `$blanco-hueso` / `$gris-muy-claro` |
 | Enlace en contenido | `$color-azul-falla` | `$azul-enlace-oscuro` |
 | Acción principal (`.boton`) | fondo blanco 0,94, texto `$coral-texto`, borde coral; hover degradado coral→salmón con texto `$negro-casi` | fondo negro 0,88, texto coral; hover salmón→ámbar |
 | Acción secundaria (`.boton-modal`, `.cookie-banner__btn--rechazar`) | blanco, texto `$coral-texto`, borde coral | transparente, texto claro |
@@ -104,16 +121,16 @@ Solo una media query altera un degradado (`.header__barra--scrolled::before` en 
 
 ## Pendientes (comprobación manual)
 
-Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, desplegable y buscador `.7` sobre tarjetas blancas, velo `.85` sobre `fondo_traje`, «Próxima Ofrenda» sobre foto. Se miden en producción con el inspector (3 páginas × 2 modos × 2 anchos). `$superficie-elevada-oscuro` queda disponible para una segunda fase de tarjetas en oscuro.
+Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, desplegable y buscador `.7` sobre tarjetas blancas, velo `.85` sobre `fondo_traje`, «Próxima Ofrenda» sobre foto. Se miden en producción con el inspector (3 páginas × 2 modos × 2 anchos).
 
 ## Reglas
 
 1. Nunca uses `#FF6F61` como color de texto normal: `$coral-texto` (claro) o `$coral-claro` (oscuro/azul).
 2. Nunca copies el degradado literal: `v.$gradiente-institucional` (el test lo comprueba).
-3. Los tokens son aditivos: no renombres ni borres variables (`scss-guardrails`); cada color nuevo entra como variable con su ratio en comentario.
+3. No renombres variables con uso ni borres ninguna sin pasar `scss-guardrails` (que desde v4.38.0 también rechaza variables sin uso y literales con token); cada color nuevo entra en su bloque de `_variables.scss` con su papel y su ratio en comentario.
 4. Todo cambio de color de un componente incluye su bloque en `_modo-oscuro.scss` (los fondos cambian de claro a `#111`/`#444`, y un coral oscuro se vuelve ilegible).
 5. `.accordion__titular` copia el hover de `.boton`: cambiar uno exige revisar el otro.
 
 ---
 
-Última actualización: 14 de septiembre de 2026 - v4.37.2
+Última actualización: 15 de septiembre de 2026 - v4.38.0

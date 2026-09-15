@@ -179,10 +179,10 @@ body.modo-oscuro .accordion--representantes {
     &__imagen {
       background-color: v.$negro-casi;
       border-color: var(--coral-marca);
-      box-shadow: 0 0.3rem 0.8rem rgba(255, 111, 97, 0.18);
+      box-shadow: 0 0.3rem 0.8rem rgba(var(--coral-marca-rgb), 0.18);
 
       &:hover {
-        box-shadow: 0 0.6rem 1.4rem rgba(255, 111, 97, 0.32);
+        box-shadow: 0 0.6rem 1.4rem rgba(var(--coral-marca-rgb), 0.32);
       }
     }
 
@@ -394,7 +394,7 @@ body.modo-oscuro .accordion--representantes {
 
 body.modo-oscuro .accordion--ofrendas {
   .ofrendas-video__video {
-    box-shadow: 0 0.3rem 0.8rem rgba(255, 111, 97, 0.18);
+    box-shadow: 0 0.3rem 0.8rem rgba(var(--coral-marca-rgb), 0.18);
   }
 
   .ofrendas-video__pie {

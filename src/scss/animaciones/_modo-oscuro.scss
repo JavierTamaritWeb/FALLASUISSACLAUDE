@@ -713,16 +713,16 @@ body.modo-oscuro .directiva {
   .directiva__card {
     background-color: v.$negro-casi;
     border-color: var(--coral-marca);
-    box-shadow: 0 0.3rem 0.8rem rgba(255, 111, 97, 0.18);
+    box-shadow: 0 0.3rem 0.8rem rgba(var(--coral-marca-rgb), 0.18);
 
     &:hover {
-      box-shadow: 0 0.6rem 1.4rem rgba(255, 111, 97, 0.32);
+      box-shadow: 0 0.6rem 1.4rem rgba(var(--coral-marca-rgb), 0.32);
     }
   }
 
   .directiva__cargo {
     color: var(--coral-marca);
-    border-bottom-color: rgba(255, 111, 97, 0.45);
+    border-bottom-color: rgba(var(--coral-marca-rgb), 0.45);
   }
 
   .directiva__nombre {
@@ -1013,7 +1013,7 @@ body.modo-oscuro .galeria-video {
     background-color: v.$secondary-color;
 }
 body.modo-oscuro .galeria-video__video {
-    box-shadow: 0 0.3rem 0.8rem rgba(255, 111, 97, 0.18);
+    box-shadow: 0 0.3rem 0.8rem rgba(var(--coral-marca-rgb), 0.18);
 }
 body.modo-oscuro .galeria-video__pie {
     color: v.$gris-muy-claro;

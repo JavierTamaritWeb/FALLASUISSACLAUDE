@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.37.2 · **Última actualización:** 14 de septiembre de 2026
+**Versión:** 4.38.0 · **Última actualización:** 15 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -61,7 +61,7 @@ npx gulp searchIndex     # Regenera solo el índice del buscador
 - SIEMPRE ejecuta `npm run test:e2e` tras cambios en CSS/JS
 - Ejecuta `npm run test:e2e:full` al tocar navegación, modo oscuro, transiciones de gradiente, metadatos OG, UI de meteo, Swiper o snapshots visuales
 - NUNCA edites archivos en `dist/` directamente (son generados)
-- NUNCA elimines variables SCSS sin revisar `tests/scss-guardrails.e2e.spec.js`
+- NUNCA elimines ni renombres variables SCSS sin pasar `tests/scss-guardrails.e2e.spec.js` y `tests/color-tokens.e2e.spec.js`; desde v4.38.0 la guardia también rechaza variables sin uso y literales de color que ya tengan token (`#333`, `#fff`, `#000`, `#111`, `#444`, `#555`, `#f5f5f5`, `#fdf2e9`, `rgba(255,111,97|255,215,0|245,245,245,…)`) fuera de `@media print`: usa `v.$token` / `rgba(v.$token, a)` / `rgba(var(--coral-marca-rgb), a)`
 - NUNCA referencies `og-share.png` sin el cache-buster `?v=YYYYMMDD` (caché de WhatsApp)
 - NUNCA cambies fondos de gradiente a colores sólidos directamente — usa el patrón de opacidad con `::before` (ver `docs/global-styles.md`)
 - Al añadir traducciones: actualiza `src/data/translations.json` para AMBOS `es` y `va`
@@ -158,7 +158,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.37.2).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.38.0).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -377,11 +377,15 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 - El CSS sigue BEM (Block__Element--Modifier)
 - Los commits de Git usan Conventional Commits (feat:, fix:, docs:, style:, refactor:)
 - Breakpoints: móvil `max-width: 767px`, desktop `min-width: 768px`
-- Variables SCSS clave en `src/scss/abstracts/_variables.scss` (primario: `$primary-color` #B83F35 desde v4.31.0, azul institucional: `$color-azul-falla` #004BCF)
+- Variables SCSS en `src/scss/abstracts/_variables.scss`, **ordenadas por importancia desde v4.38.0** (1 marca: `$primary-color` #B83F35, `$color-azul-falla` #004BCF, `$azul-titulo-seccion`, `$turquesa`, `$dorado` · 2 degradados · 3 neutros · 4 superficies de sección en claro · 5 texto de contraste · 6 acentos de interacción · 7 estados · 8 usos puntuales · 9 sin color · 10 alias heredados `$coral-texto`/`$turquesa-sobre-rosa`, no usar en código nuevo). Jerarquía completa en `docs/paleta-y-degradados.md`
 
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.38.0** — **SCSS (1/3): `_variables.scss` ordenado por importancia y barrido de literales** (plan «reordenar el SCSS» aprobado el 15-sep-2026; sin cambios visuales salvo lo indicado). El fichero de tokens pasa de bloques por acumulación a **10 bloques por importancia**: 1 marca (`$primary-color`, `$color-azul-falla`, `$azul-titulo-seccion`, `$turquesa`, `$dorado`) · 2 degradados y celestes · 3 neutros de claro a oscuro · 4 superficies de sección en claro (`$rosa-acordeon*`, `$turquesa-*`, `$naranja-suave`) · 5 texto de contraste · 6 acentos de interacción · 7 estados · 8 usos puntuales · 9 sin color · 10 **alias heredados** (`$coral-texto: $primary-color`, `$turquesa-sobre-rosa: $turquesa-texto`; no usar en código nuevo), con cabecera de reglas y ratio en cada token de texto. **Retiradas 10 variables sin uso** (`$naranja-coral`, `$rosa-pastel`, `$purpura`, `$color-tiktok/-facebook/-youtube`, `$texto-secundario-oscuro`, `$superficie-elevada-oscuro`, `$img-path`, `$melocotin-claro`). **89 literales con token** sustituidos en 25 parciales (`#333`→`$secondary-color`, `#fff`, `#000`, `#111`, `#444`, `#555`, `#fdf2e9`, `#f5f5f5`, `rgba(255,215,0,…)`→`rgba($dorado,…)`, `rgba(245,245,245,…)`→`rgba($blanco-hueso,…)`; `_seo.scss` y `_theme-compatibility.scss` importan ahora `variables as v`; los bloques `@media print` no se tocan) y `--coral-marca-rgb` se deriva del token con `color.channel()`. Único cambio de CSS real (16 reglas): los `rgba(255,111,97,…)` del coral antiguo #FF6F61 que quedaban en glows y halos (Representantes, Ofrendas, Directiva, vídeo de galería y del dron, foco del organigrama, hover del escudo y del selector de idioma) pasan a `rgba(var(--coral-marca-rgb), a)` = #B83F35, verificado en Chrome. **Guardias**: `scss-guardrails` gana «ninguna variable sin uso» y «ningún literal con token»; `color-tokens` resuelve alias y deja de exigir los dos tokens retirados. Docs: `docs/paleta-y-degradados.md` (sección *Jerarquía de tokens*), `docs/e2e-testing.md`. Siguientes: 4.38.1 (carpeta `themes/`, parciales de `animaciones/` a `components/`) y 4.38.2 (trocear `_falla.scss` y `_header.scss`).
+
+- **4.37.3** — *(otra sesión de trabajo, commit `bb7dff42`, sin bump de CLAUDE.md ni `sw.js`; se publica junto con 4.38.0)* **Hero editorial** de la portada: «Falla Suïssa» en una primera línea tipográfica con más presencia, «L'Alqueria del Favero» en una segunda más ligera y separador coral adaptable (`src/index.html`, `layout/_header.scss`; guía en `docs/global-styles.md`, propuesta en `docs/propuestas/hero-tipografia.html`).
 
 - **4.37.2** — **Paleta de la home en las páginas interiores (3/3)** (modo claro; el oscuro no cambia). **Legales y formularios** (`_contenido-legal.scss`, ahora con `@use variables`): página en `$rosa-acordeon` (antes `#f5f5f5` literal), `h1`/`h2` en `var(--titulo-seccion)` con borde inferior `$turquesa`, enlaces `$coral-texto` (hover `$turquesa-texto`), caja de «Última actualización» en `$turquesa-suave` con borde `$turquesa` (antes `#fdf2e9`) y `th` de las autorizaciones en `$turquesa-claro`; las reglas `@media print` no cambian (`tests/autorizacion-print-header` en verde). **Literales del coral antiguo** `rgba(255,111,97,…)` de `.directiva__cargo` y del lightbox de Colaboraciones → `rgba(var(--coral-marca-rgb), …)` (ya no queda ninguno en `main.css`). **Cobertura visual**: `tests/visual-regression` incorpora `ofrenda`, `colaboraciones`, `deportes`, `nuevos-falleros`, `galeria_1` y `aviso-legal` (17 páginas × 3 anchos × claro/oscuro = 102 baselines + componentes). Cierra el plan «paleta de la home en todas las páginas» del 14-sep-2026 (4.37.0 → 4.37.2).
 

@@ -12,6 +12,9 @@ const SCSS = path.join(__dirname, '..', 'src', 'scss');
 const VARS = fs.readFileSync(path.join(SCSS, 'abstracts', '_variables.scss'), 'utf8');
 
 function hex(nombre) {
+  // Resuelve un nivel de alias (`$x: $y;`, bloque «Alias heredados» desde v4.38.0)
+  const alias = VARS.match(new RegExp(`^\\$${nombre}\\s*:\\s*\\$([A-Za-z0-9_-]+)\\s*;`, 'm'));
+  if (alias) return hex(alias[1]);
   const m = VARS.match(new RegExp(`^\\$${nombre}\\s*:\\s*(#[0-9a-fA-F]{3,6})`, 'm'));
   if (!m) throw new Error(`variable $${nombre} no encontrada`);
   let h = m[1].slice(1);
@@ -29,7 +32,7 @@ function ratio(a, b) {
 
 test.describe('color-tokens — paleta funcional', () => {
   test('los tokens aditivos existen y el degradado institucional es único', () => {
-    for (const v of ['gradiente-institucional', 'gradiente-celeste', 'celeste-1', 'celeste-5', 'azul-cobalto', 'coral-texto', 'coral-claro', 'azul-enlace-oscuro', 'texto-secundario-oscuro', 'superficie-elevada-oscuro', 'estado-error', 'estado-exito', 'estado-aviso', 'estado-error-oscuro', 'estado-exito-oscuro', 'estado-aviso-oscuro']) {
+    for (const v of ['gradiente-institucional', 'gradiente-celeste', 'celeste-1', 'celeste-5', 'azul-cobalto', 'coral-texto', 'coral-claro', 'azul-enlace-oscuro', 'estado-error', 'estado-exito', 'estado-aviso', 'estado-error-oscuro', 'estado-exito-oscuro', 'estado-aviso-oscuro']) {
       expect(VARS, `$${v}`).toMatch(new RegExp(`^\\$${v}\\s*:`, 'm'));
     }
     // Los de marca no cambian
@@ -54,11 +57,10 @@ test.describe('color-tokens — paleta funcional', () => {
       ['coral-texto', 'blanco'], ['coral-texto', 'blanco-hueso'], ['coral-texto', 'naranja-suave'],
       ['coral-claro', 'negro-casi'], ['coral-claro', 'gris-muy-oscuro'],
       ['color-azul-falla', 'blanco'], ['color-azul-falla', 'naranja-suave'],
-      ['azul-enlace-oscuro', 'negro-casi'], ['azul-enlace-oscuro', 'superficie-elevada-oscuro'],
-      ['texto-secundario-oscuro', 'negro-casi'], ['texto-secundario-oscuro', 'superficie-elevada-oscuro'],
+      ['azul-enlace-oscuro', 'negro-casi'],
       ['blanco', 'primary-color'], ['negro-casi', 'rojo-salmon'],
       ['blanco', 'estado-error'], ['blanco', 'estado-exito'], ['blanco', 'estado-aviso'],
-      ['estado-error-oscuro', 'superficie-elevada-oscuro'], ['estado-exito-oscuro', 'superficie-elevada-oscuro'], ['estado-aviso-oscuro', 'superficie-elevada-oscuro'],
+      ['estado-error-oscuro', 'negro-casi'], ['estado-exito-oscuro', 'negro-casi'], ['estado-aviso-oscuro', 'negro-casi'],
       ['blanco', 'coral-texto'], ['secondary-color', 'blanco'], ['blanco-hueso', 'negro-casi']
     ];
     for (const [a, b] of pares) {

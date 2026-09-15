@@ -1,10 +1,12 @@
 // scss/components/_theme-compatibility.scss
 // Mejoras de compatibilidad para theme-color en diferentes navegadores iOS
 
+@use '../abstracts/variables' as v;
+
 // Forzar color de barra de estado en modo claro
 :root {
-  --theme-color-light: #0a4b8d;
-  --theme-color-dark: #000000;
+  --theme-color-light: #0a4b8d; // primer stop de v.$gradiente-institucional (sin token propio)
+  --theme-color-dark: #{v.$negro};
 }
 
 // Asegurar que el color del tema se propague correctamente

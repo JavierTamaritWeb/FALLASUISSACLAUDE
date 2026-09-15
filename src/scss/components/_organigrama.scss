@@ -6,9 +6,9 @@
 
 :root {
       --primary-color: var(--coral-marca);
-      --secondary-color: #333333;
+      --secondary-color: #{v.$secondary-color};
       --background-color: #F4F4F9;
-      --white: #FFFFFF;
+      --white: #{v.$blanco};
 
       --spacing-xs: 0.25rem;
       --spacing-sm: 0.5rem;
@@ -238,7 +238,7 @@ body:not(.modo-oscuro) .organigrama-contenedor {
     }
     &__subnode:focus {
       outline: none;
-      box-shadow: 0 0 0 3px rgba(255,111,97,0.4);
+      box-shadow: 0 0 0 3px rgba(var(--coral-marca-rgb), 0.4);
     }
     &__subnode p {
       line-height: 1.5;     /* Incrementa la distancia entre líneas */
@@ -437,8 +437,8 @@ body:not(.modo-oscuro) .organigrama-contenedor {
   .email-popup .tooltip {
     visibility: hidden;
     opacity: 0;
-    background-color: #333;
-    color: #fff;
+    background-color: v.$secondary-color;
+    color: v.$blanco;
     text-align: center;
     padding: 4px 8px;
     border-radius: 4px;

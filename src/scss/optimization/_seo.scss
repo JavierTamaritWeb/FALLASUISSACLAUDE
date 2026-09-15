@@ -1,3 +1,5 @@
+@use '../abstracts/variables' as v;
+
 /* ==========================================================================
    SEO & PERFORMANCE OPTIMIZATIONS CONSOLIDADO
    Unificación de _google-seo.scss y _seo-google.scss
@@ -37,7 +39,7 @@ img, video {
 }
 
 .image-placeholder {
-  background-color: #f5f5f5;
+  background-color: v.$blanco-hueso;
   min-height: 200px;
   display: flex;
   align-items: center;

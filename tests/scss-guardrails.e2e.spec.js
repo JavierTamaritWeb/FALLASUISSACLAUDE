@@ -92,6 +92,62 @@ test.describe('SCSS guardrails (namespaces, mixins, variables)', () => {
     expect(offenders, `@mixin encontrado fuera de _mixins.scss en:\n${offenders.join('\n')}`).toEqual([]);
   });
 
+  test('Toda variable de `_variables.scss` se usa al menos una vez (v4.38.0)', () => {
+    // Evita que vuelvan a acumularse tokens muertos (en 4.38.0 se retiraron 9).
+    const variablesPath = path.join(repoRoot, 'src/scss/abstracts/_variables.scss');
+    const defs = findVariableDefinitions(readUtf8(variablesPath));
+    const corpus = scssFiles.map((f) => stripScssComments(readUtf8(f))).join('\n');
+    const sinUso = defs.filter((name) => {
+      const re = new RegExp(`\\$${name}(?![A-Za-z0-9_-])`, 'g');
+      const total = (corpus.match(re) || []).length;
+      return total <= 1; // solo su propia declaración
+    });
+    expect(sinUso, `Variables sin ningún uso: ${sinUso.join(', ')}`).toEqual([]);
+  });
+
+  test('Ningún literal de color que ya tenga token (v4.38.0)', () => {
+    // Coincidencias exactas con tokens de _variables.scss. Se ignoran los bloques
+    // @media print (impresión en blanco/negro literal) y los dos ficheros de tokens.
+    const prohibidos = [
+      [/#333(?:333)?(?![0-9a-f])/gi, '$secondary-color'],
+      [/#f{3}(?:f{3})?(?![0-9a-f])/gi, '$blanco'],
+      [/#0{3}(?:0{3})?(?![0-9a-f])/gi, '$negro'],
+      [/#1{3}(?:1{3})?(?![0-9a-f])/gi, '$negro-casi'],
+      [/#444(?:444)?(?![0-9a-f])/gi, '$gris-muy-oscuro'],
+      [/#555(?:555)?(?![0-9a-f])/gi, '$gris-medio-oscuro'],
+      [/#f5f5f5(?![0-9a-f])/gi, '$blanco-hueso'],
+      [/#fdf2e9(?![0-9a-f])/gi, '$naranja-suave'],
+      [/rgba\(\s*255\s*,\s*111\s*,\s*97/g, 'rgba(var(--coral-marca-rgb), a) (coral antiguo #FF6F61)'],
+      [/rgba\(\s*255\s*,\s*215\s*,\s*0\b/g, 'rgba($dorado, a)'],
+      [/rgba\(\s*245\s*,\s*245\s*,\s*245/g, 'rgba($blanco-hueso, a)'],
+    ];
+    const sinPrint = (css) => {
+      // Elimina cada bloque `@media print { ... }` contando llaves
+      let out = css;
+      let idx;
+      while ((idx = out.search(/@media\s+print\s*\{/)) !== -1) {
+        let depth = 0; let i = out.indexOf('{', idx);
+        for (; i < out.length; i++) {
+          if (out[i] === '{') depth++;
+          else if (out[i] === '}' && --depth === 0) break;
+        }
+        out = out.slice(0, idx) + out.slice(i + 1);
+      }
+      return out;
+    };
+    const offenders = [];
+    for (const file of scssFiles) {
+      const rel = path.relative(repoRoot, file);
+      if (/abstracts\/_(variables|globales)\.scss$/.test(rel)) continue;
+      const content = sinPrint(stripScssComments(readUtf8(file)));
+      for (const [re, token] of prohibidos) {
+        const hits = content.match(re);
+        if (hits) offenders.push(`${rel}: ${hits[0]} ×${hits.length} → usa ${token}`);
+      }
+    }
+    expect(offenders, `Literales con token existente:\n${offenders.join('\n')}`).toEqual([]);
+  });
+
   test('`src/scss/abstracts/_mixins.scss` contiene mixins esperados', () => {
     const mixinsFile = path.join(repoRoot, 'src/scss/abstracts/_mixins.scss');
     const content = stripScssComments(readUtf8(mixinsFile));

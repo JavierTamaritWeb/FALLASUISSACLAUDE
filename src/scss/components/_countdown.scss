@@ -173,7 +173,7 @@ body:not(.modo-oscuro) .countdown__message {
 }
 
 .cuenta-atras-fondo{
-  background-color: #fff;
+  background-color: v.$blanco;
 
   // Franja de la cuenta atrás en azul cobalto en claro (v4.30.46); el modo
   // oscuro no cambia.
