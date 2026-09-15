@@ -8,7 +8,7 @@ Buscador bilingüe (ES/VA) para el sitio estático: **panel** desplegable bajo l
 | --- | --- |
 | `gulpfile.js → buildSearchIndex` | Genera `dist/data/search-index.json` dentro de `htmlTask` y devuelve su hash; `modifyHtmlStream` inyecta `<meta name="search-index" content="data/search-index.json?v=<hash>">` en cada página (ES y `/va/`). Tarea suelta `npx gulp searchIndex`. Kill-switch `DISABLE_SEARCH_INDEX=1`. |
 | `src/js/buscador.js` | Crea el botón lupa en `.header__botones` y el panel `#siteSearch` en la barra; carga el índice; normaliza, puntúa y pinta. Expone `window.FallaBuscador` (`normalizar`, `tokenizar`, `buscar`) y funciona en Node (`require`) para el evaluador. Cargado con `<script src="js/buscador.js" defer>` en las 30 páginas. |
-| `src/scss/components/_buscador.scss` | Botón (mismo relieve que el toggle del menú) y panel (mismo cristal que `.navegacion`, token `$gradiente-cristal-menu`); `prefers-reduced-motion`. El modo oscuro vive en `animaciones/_modo-oscuro.scss` (desde v4.37.2, como el resto de componentes). |
+| `src/scss/components/_buscador.scss` | Botón (mismo relieve que el toggle del menú) y panel (mismo cristal que `.navegacion`, token `$gradiente-cristal-menu`); `prefers-reduced-motion`. El modo oscuro vive en `themes/_modo-oscuro.scss` (desde v4.37.2, como el resto de componentes). |
 | `src/data/search-keywords.json` | Palabras clave editoriales por id de registro (≈45 entradas desde v4.33.0). Se fusionan en el índice en el build (se **suman** a las que ya traiga el registro, como el cargo de las personas). |
 | `src/data/translations.json → buscador.*` | Textos ES/VA del botón, panel, estados, chips de tipo y ejemplos. |
 | `src/js/acc.js → abrirPorHash` | Abre el panel de acordeón cuyo `.accordion__content` tiene el id del hash (`lafalla.html#ofrenda-2026-lafalla`) y desplaza hasta él. |
@@ -71,4 +71,4 @@ Relevo anual: al cambiar `member` en `schema-organization.json` las personas y l
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.38.1
+Última actualización: 15 de septiembre de 2026 - v4.38.2

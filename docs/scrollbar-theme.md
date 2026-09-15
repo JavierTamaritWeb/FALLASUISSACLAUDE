@@ -30,7 +30,7 @@ Por eso el tema oscuro se sincroniza en `html` y `body`, y la CSS global contemp
 
 Archivo principal:
 
-- `src/scss/animaciones/_modo-oscuro.scss`
+- `src/scss/themes/_modo-oscuro.scss`
 
 Claves:
 
@@ -139,4 +139,4 @@ Con la opción del sistema “Mostrar barras de desplazamiento: Automáticamente
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.38.1
+Última actualización: 15 de septiembre de 2026 - v4.38.2

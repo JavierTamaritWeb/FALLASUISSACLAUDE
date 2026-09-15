@@ -296,7 +296,7 @@ Archivos implicados:
 
 - `index.html`
 - `lafalla.html`
-- `src/scss/animaciones/_swiper.scss`
+- `src/scss/components/_swiper.scss`
 - `tests/monumento-swiper.e2e.spec.js`
 - [`swiper-monumento.md`](./swiper-monumento.md)
 - [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md)
@@ -337,7 +337,7 @@ Archivos implicados:
 
 - `blog-somni.html`, `blog-anima.html` (páginas estáticas)
 - `src/scss/components/_blog.scss`
-- `src/scss/animaciones/_modo-oscuro.scss`
+- `src/scss/themes/_modo-oscuro.scss`
 - `src/scss/components/_image-optimization.scss`
 - `src/js/accessibility.js`
 
@@ -438,7 +438,7 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 
 **Solución:**
 - `src/scss/layout/_header.scss`: la barra pierde el `backdrop-filter` del elemento (su `::before` ya difumina con `blur(15px)`; el aspecto de la barra no cambia, snapshots *Header* intactos). `.navegacion` pasa al mismo cristal que la barra: degradado azul `rgba(…, 0.7)` + `backdrop-filter: blur(15px)` + borde `rgba(255,255,255,.18)`. `.header`/`.header-inner` → `z-index: 500` (sobre el contenido; por debajo de modales y banners, que van de 1000 en adelante).
-- `src/scss/animaciones/_modo-oscuro.scss`: `body.modo-oscuro .navegacion` sin media query, `rgba(51,51,51,.8)` + blur (igual que la barra oscura).
+- `src/scss/themes/_modo-oscuro.scss`: `body.modo-oscuro .navegacion` sin media query, `rgba(51,51,51,.8)` + blur (igual que la barra oscura).
 - `src/js/nav-menu.js`: el foco solo pasa al primer enlace al abrir con teclado (`e.detail === 0`); con ratón dejaba un anillo de foco sobre "Inicio".
 
 **Reglas:**
@@ -517,4 +517,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.38.1
+Última actualización: 15 de septiembre de 2026 - v4.38.2

@@ -303,7 +303,7 @@ Ejecuta además `npm run test:e2e:full` si el cambio del tablón se mezcla con l
 
 ### El botón "Ver imagen / Descargar" se ve raro en modo oscuro
 
-`src/scss/animaciones/_modo-oscuro.scss` define overrides específicos para `.board__file-link` (fondo `$gris-muy-oscuro`, borde sutil) y deja el `.board__file-name` con fondo transparente para que no aparezca una caja gris embebida en una tarjeta blanca. Si tocas estos estilos, mantén la coherencia.
+`src/scss/themes/_modo-oscuro.scss` define overrides específicos para `.board__file-link` (fondo `$gris-muy-oscuro`, borde sutil) y deja el `.board__file-name` con fondo transparente para que no aparezca una caja gris embebida en una tarjeta blanca. Si tocas estos estilos, mantén la coherencia.
 
 ## 🏆 Tablón JCF de Deportes (`#sportsBoard`)
 
@@ -376,4 +376,4 @@ Desde v4.7.2 ya no hace falta tocar `board.js`. Pasos:
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.38.1
+Última actualización: 15 de septiembre de 2026 - v4.38.2

@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 15 de septiembre de 2026 - v4.38.1 - **Mantenimiento**: `_variables.scss` sin comentarios por token (ratios en `docs/paleta-y-degradados.md`), carpeta de escudos barrocos `-ceremonial/` (errata corregida) y variante `escudo-falla-sello/`. Sin cambios visuales.
+🆕 Última actualización: 15 de septiembre de 2026 - v4.38.2 - **SCSS (2/3): carpetas y cascada**: nueva `src/scss/themes/` (modo oscuro y compatibilidad theme-color, cargados los últimos), botones/visor/Swiper/mapa/notificaciones en `components/`, `abstracts/_index.scss` eliminado. Sin cambios visuales (estilos computados idénticos).
 
 ## 🌐 Vista Previa
 
@@ -125,8 +125,9 @@ WEBFALLASUISSA/
 │   ├── base/                  # Reset, tipografía, base
 │   ├── layout/                # Header, footer, grid
 │   ├── components/            # Componentes reutilizables
-│   ├── animaciones/           # Efectos y transiciones
-│   └── sociales/              # Estilos para redes sociales
+│   ├── animaciones/           # Efectos y transiciones (waves, reveal)
+│   ├── sociales/              # Estilos para redes sociales
+│   └── themes/                # Compatibilidad theme-color/iOS y modo oscuro (últimos de la cascada)
 ├── 📂 js/                     # Módulos JavaScript
 │   ├── acc.js                 # Acordeones interactivos
 │   ├── calendario.js          # Sistema de calendario

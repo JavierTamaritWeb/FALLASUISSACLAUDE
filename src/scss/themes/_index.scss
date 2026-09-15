@@ -1,0 +1,5 @@
+// scss/themes/_index.scss
+// Temas: se cargan los últimos para que sus reglas ganen a las de los componentes.
+
+@forward 'theme-compatibility';
+@forward 'modo-oscuro';

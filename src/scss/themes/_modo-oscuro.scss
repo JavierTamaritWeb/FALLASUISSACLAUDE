@@ -1,4 +1,4 @@
-// components/_modo-oscuro.scss
+// scss/themes/_modo-oscuro.scss
 
 @use '../abstracts/variables' as v;
 @use '../abstracts/mixins' as m;
@@ -29,8 +29,9 @@ html.transicion-a-claro {
   --theme-transition-delay: 0ms;
 }
 
-// Transiciones suaves entre modos
-// Header, footer y countdown
+// Transiciones suaves entre modos.
+// Grupo A (layout, base, botón, visor): estas reglas siempre han ganado a las de
+// sus ficheros por orden de cascada; se mantienen con su especificidad.
 body,
 .header,
 .header-inner,
@@ -40,95 +41,91 @@ body,
 .header__lang-switcher,
 .header__menu-toggle,
 .footer,
-.countdown,
-.countdown__contenedor,
-.countdown__contenedor::before,
-.countdown__time-box,
-.countdown__message,
-// Sección Falla
-.falla,
-.accordion__section,
-.accordion__content,
-.accordion__content-inner,
-.accordion__titular,
-.accordion__header,
-.accordion__icon,
-.directiva__card,
-.directiva__nombre,
-// Sección Eventos
-.eventos,
-.eventos-nota-calendario,
-.marco-tablon,
-.board,
-.board__note,
-// Sección Blog
-.blog,
-.blog__post,
-.blog__post-title,
-.blog__post-content,
-// Sección Galerías
-.galerias,
-.galeria,
-.galeria__title,
-.galeria__texto,
 .boton,
 .visor,
-// Sección Meteo
-.eltiempo,
-.header-meteo,
-.meteo,
-.weather-current,
-.forecast-day,
-.forecast-info,
-.forecast-temp,
-.forecast-desc,
-// Calendario
-.cal,
-.calendario-eventos,
-.calendario-eventos__mini-encabezado,
-.calendario-eventos__mini-dia,
-.calendario-eventos__detalles-mes,
-// Video Dron
-.video-dron__frame,
-.video-dron__frame::before,
-.video-dron__btn,
-.video-dron__progress,
-.video-dron__volume-wrapper,
-.video-dron__volume,
-// Ofrenda
-.ofrenda,
-.ofrenda::before,
-// Colaboraciones
-.colaboraciones,
-.colaboraciones::before,
-// Quieres más
-.quieres-mas,
-.quieres-mas::before,
-// Historia y Organigrama
-.historia__prologo,
-.historia__archivos,
-.historia__grid,
-.historia__leyenda,
-.organigrama,
-.organigrama__title,
-.organigrama__section,
-// Modales
-.ics-modal__contenido,
-#modal-quieres,
-#modal-quieres-content,
-.modal-title,
-.close-modal,
-#quieres-form label,
-#quieres-nombre,
-#quieres-telefono,
-#quieres-email,
-#quieres-mensaje,
-// Banner subvención
-.banner-subvencion__contenido,
-.banner-subvencion__cerrar,
-.banner-subvencion__imagen,
-// Galerías (notepad)
 .notepad__page {
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease,
+    background-color var(--theme-transition);
+}
+
+// Grupo B (componentes): hasta v4.38.2 este fichero cargaba ANTES de components/ y
+// estas transiciones perdían frente a las que declara cada componente. Al cargar
+// themes/ el último, :where() (especificidad 0) reproduce esa misma cascada: la
+// transición de tema solo se aplica donde el componente no define la suya.
+:where(.countdown),
+:where(.countdown__contenedor),
+:where(.countdown__contenedor)::before,
+:where(.countdown__time-box),
+:where(.countdown__message),
+:where(.falla),
+:where(.accordion__section),
+:where(.accordion__content),
+:where(.accordion__content-inner),
+:where(.accordion__titular),
+:where(.accordion__header),
+:where(.accordion__icon),
+:where(.directiva__card),
+:where(.directiva__nombre),
+:where(.eventos),
+:where(.eventos-nota-calendario),
+:where(.marco-tablon),
+:where(.board),
+:where(.board__note),
+:where(.blog),
+:where(.blog__post),
+:where(.blog__post-title),
+:where(.blog__post-content),
+:where(.galerias),
+:where(.galeria),
+:where(.galeria__title),
+:where(.galeria__texto),
+:where(.eltiempo),
+:where(.header-meteo),
+:where(.meteo),
+:where(.weather-current),
+:where(.forecast-day),
+:where(.forecast-info),
+:where(.forecast-temp),
+:where(.forecast-desc),
+:where(.cal),
+:where(.calendario-eventos),
+:where(.calendario-eventos__mini-encabezado),
+:where(.calendario-eventos__mini-dia),
+:where(.calendario-eventos__detalles-mes),
+:where(.video-dron__frame),
+:where(.video-dron__frame)::before,
+:where(.video-dron__btn),
+:where(.video-dron__progress),
+:where(.video-dron__volume-wrapper),
+:where(.video-dron__volume),
+:where(.ofrenda),
+:where(.ofrenda)::before,
+:where(.colaboraciones),
+:where(.colaboraciones)::before,
+:where(.quieres-mas),
+:where(.quieres-mas)::before,
+:where(.historia__prologo),
+:where(.historia__archivos),
+:where(.historia__grid),
+:where(.historia__leyenda),
+:where(.organigrama),
+:where(.organigrama__title),
+:where(.organigrama__section),
+:where(.ics-modal__contenido),
+:where(#modal-quieres),
+:where(#modal-quieres-content),
+:where(.modal-title),
+:where(.close-modal),
+:where(#quieres-form label),
+:where(#quieres-nombre),
+:where(#quieres-telefono),
+:where(#quieres-email),
+:where(#quieres-mensaje),
+:where(.banner-subvencion__contenido),
+:where(.banner-subvencion__cerrar),
+:where(.banner-subvencion__imagen) {
   transition:
     transform 0.5s ease,
     opacity 0.5s ease,
@@ -758,13 +755,11 @@ body.modo-oscuro .historia__archivos{
   color: v.$blanco-hueso;
   background: v.$negro;
 }
+// Fondo y borde oscuros de la rejilla: en components/_falla.scss (`body.modo-oscuro &`).
+// Aquí solo el color del texto; antes de v4.38.2 este bloque perdía por orden de
+// cascada y al cargar themes/ el último habría pisado ese diseño.
 body.modo-oscuro .historia__grid {
   color: v.$blanco-hueso;
-  
-}
-body.modo-oscuro .historia__grid {
-  background: v.$negro;
-  border: 1px solid v.$gris-plateado;
 }
 body.modo-oscuro .blog-detail {
   background: v.$negro;
@@ -809,7 +804,8 @@ body.modo-oscuro .board {
     background-color: v.$secondary-color;
     border: 1px solid v.$blanco-hueso;
 }
-body.modo-oscuro .board__note {
+// El empty-state (.board__empty) conserva su fondo $negro-casi de components/_board.scss.
+body.modo-oscuro .board__note:not(.board__empty) {
     background: v.$gris-plateado;
 }
 

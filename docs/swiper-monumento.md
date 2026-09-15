@@ -12,7 +12,7 @@ Esta guía documenta el visor del monumento tal y como está implementado en mar
 ## Archivos implicados
 
 - JS de inicialización: `src/js/swiper.js`
-- SCSS del componente: `src/scss/animaciones/_swiper.scss`
+- SCSS del componente: `src/scss/components/_swiper.scss`
 - HTML principal: `index.html`
 - HTML duplicado en interna: `lafalla.html`
 - Test E2E dedicado: `tests/monumento-swiper.e2e.spec.js`
@@ -89,7 +89,7 @@ La solución base del repositorio es:
 
 - `object-fit: contain` para evitar recorte
 - `swiper--autoheight` para adaptar la altura al slide activo
-- contención de ancho en `src/scss/animaciones/_swiper.scss`
+- contención de ancho en `src/scss/components/_swiper.scss`
 - padding lateral por slide en tablet y desktop para reservar hueco a los botones
 
 ## Regla general de layout en tablet y desktop
@@ -258,4 +258,4 @@ npm run test:e2e:full
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.38.1
+Última actualización: 15 de septiembre de 2026 - v4.38.2

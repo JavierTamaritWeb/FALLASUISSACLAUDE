@@ -1,5 +1,10 @@
 // scss/components/_index.scss
 
+@forward 'buttons';
+@forward 'notificaciones';
+@forward 'visor';
+@forward 'swiper';
+@forward 'mapa';
 @forward 'meteo';
 @forward 'calendario';
 @forward 'countdown';
@@ -20,7 +25,6 @@
 @forward 'image-optimization';
 @forward 'escudo-enlace';
 @forward 'base';
-@forward 'theme-compatibility';
 @forward 'contenido-legal';
 @forward 'banner-subvencion';
 @forward 'colaboraciones';

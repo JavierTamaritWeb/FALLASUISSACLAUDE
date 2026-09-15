@@ -13,8 +13,8 @@ Esta guía documenta **exactamente** cómo funciona la barra de navegación (nav
 - **Estilos (SCSS):** `src/scss/layout/_header.scss`
 - **Menú móvil + scroll state (JS):** `src/js/nav-menu.js`
 - **Modo oscuro/claro (JS) + compat iOS:** `src/js/dark.js`
-- **Compatibilidad theme/iOS (SCSS):** `src/scss/components/_theme-compatibility.scss`
-- **Modo oscuro (SCSS):** `src/scss/animaciones/_modo-oscuro.scss`
+- **Compatibilidad theme/iOS (SCSS):** `src/scss/themes/_theme-compatibility.scss`
+- **Modo oscuro (SCSS):** `src/scss/themes/_modo-oscuro.scss`
 - **Artefacto compilado:** `dist/css/main.css` y `dist/*.html`
 
 ---
@@ -192,7 +192,7 @@ Para lograr una transición suave entre el modo claro (gradiente azul) y el modo
     *   El elemento anima su `background` de transparent → gris
     *   Ambas transiciones duran 2.4s = transición suave
 
-Esta lógica se aplica en `src/scss/layout/_header.scss` y `src/scss/animaciones/_modo-oscuro.scss`.
+Esta lógica se aplica en `src/scss/layout/_header.scss` y `src/scss/themes/_modo-oscuro.scss`.
 
 ### 🔔 Notificación de cambio de tema (Toast)
 
@@ -389,7 +389,7 @@ Esto vive en `src/scss/layout/_header.scss`.
 
 El proyecto tiene estilos globales tipo toast para `#notificacion` (centrado abajo, `position: fixed`) en:
 
-- `src/scss/base/_notificaciones.scss`
+- `src/scss/components/_notificaciones.scss`
 
 Para el header móvil, se sobreescribe esa presentación para que `#notificacion` sea **inline** dentro de la barra (con elipsis, altura consistente y sin transformaciones de toast).
 
@@ -409,7 +409,7 @@ En Safari/iOS (WebKit), si un ancestro (o el propio `body`) tiene `transform`, p
 
 Esto se refuerza en:
 
-- `src/scss/components/_theme-compatibility.scss`:
+- `src/scss/themes/_theme-compatibility.scss`:
   - `body.modo-oscuro, body.modo-claro { transform: none; -webkit-transform: none; }`
 - `src/js/dark.js`:
   - cuando necesita "empujón" en iOS, fuerza reflow con `void document.body.offsetHeight;` en lugar de transforms.
@@ -553,4 +553,4 @@ npm run build
 - Hover/focus y activo usan ambos `v.$primary-color` tanto en el texto como en la línea del `::after`.
 - Test `tests/nav.e2e.spec.js` actualizado: ya no espera fondo blanco en el enlace activo móvil; ahora valida `color === rgb(255, 111, 97)` y que el `::after` tiene `opacity: 1` + `background-color` en coral.
 
-Última actualización: 15 de septiembre de 2026 - v4.38.1
+Última actualización: 15 de septiembre de 2026 - v4.38.2

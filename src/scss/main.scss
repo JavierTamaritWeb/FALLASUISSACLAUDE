@@ -18,16 +18,19 @@
 @use 'layout';
 
 
-// 5. Animaciones
+// 5. Animaciones (waves, reveal)
 @use 'animaciones';
 
 
-// 6. Components
+// 6. Components (buttons, notificaciones, visor, swiper, mapa y el resto)
 @use 'components';
 
 
 // 7. Sociales
 @use 'sociales';
+
+// 8. Temas (compatibilidad theme-color/iOS y modo oscuro): los últimos de la cascada
+@use 'themes';
 
 /* Utilidades Globales */
 .contenedor {

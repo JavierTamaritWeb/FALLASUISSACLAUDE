@@ -79,7 +79,7 @@ body {
 
 ### Comportamiento en Modo Oscuro
 
-En `src/scss/animaciones/_modo-oscuro.scss`:
+En `src/scss/themes/_modo-oscuro.scss`:
 
 1. El `body` cambia su color de fondo a negro (`v.$negro`).
 2. El pseudo-elemento `::before` (gradiente) cambia a `opacity: 0`.
@@ -125,13 +125,13 @@ El archivo `_globales.scss` se importa en `main.scss` después de `normalize`:
 @use 'abstracts/accessibility';
 ```
 
-**Importante:** No definir `background-image` en otros archivos para evitar conflictos. El modo oscuro define `background-image: none` en `src/scss/animaciones/_modo-oscuro.scss` para anular el gradiente.
+**Importante:** No definir `background-image` en otros archivos para evitar conflictos. El modo oscuro define `background-image: none` en `src/scss/themes/_modo-oscuro.scss` para anular el gradiente.
 
 ## ⚠️ Consideraciones
 
 ### Orden de cascada
 
-El archivo `_globales.scss` se carga temprano. El archivo `_modo-oscuro.scss` se carga después y sobrescribe el fondo cuando se activa `.modo-oscuro`.
+El archivo `_globales.scss` se carga temprano. El archivo `themes/_modo-oscuro.scss` se carga el último de la cascada (desde v4.38.2, vía `@use 'themes'` al final de `main.scss`) y sobrescribe el fondo cuando se activa `.modo-oscuro`.
 
 ### Altura del contenido
 
@@ -227,7 +227,7 @@ body.modo-oscuro .falla::before {
 | Archivo | Contenido |
 | --- | --- |
 | `src/scss/components/_falla.scss` | Estilos modo claro |
-| `src/scss/animaciones/_modo-oscuro.scss` | Estilos modo oscuro |
+| `src/scss/themes/_modo-oscuro.scss` | Estilos modo oscuro |
 | `src/img/elementos-UXUI/fondo_traje.png` | Imagen de fondo (traje regional) |
 
 ## 🔄 Transición de Gradiente a Color Sólido
@@ -357,7 +357,7 @@ Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de
 | Archivo | Contenido |
 | --- | --- |
 | `src/scss/components/_banner-subvencion.scss` | Estilos base + transición filter |
-| `src/scss/animaciones/_modo-oscuro.scss` | Regla `filter: invert(1) hue-rotate(180deg)` |
+| `src/scss/themes/_modo-oscuro.scss` | Regla `filter: invert(1) hue-rotate(180deg)` |
 | `index.html` | Markup accesible del banner con cierre y `<picture>` AVIF/WebP/PNG |
 | `src/js/banner-subvencion.js` | Apertura en cada carga de la home, cierre accesible y helpers de depuración |
 
@@ -413,7 +413,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.38.1
+Última actualización: 15 de septiembre de 2026 - v4.38.2
 
 ## 🏛️ Componente Frieze (Cenefa)
 
