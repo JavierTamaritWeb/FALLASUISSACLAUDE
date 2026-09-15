@@ -183,7 +183,7 @@
   gap: 1.5rem;
   padding: 0.3rem 0 1.2rem;
   background-color: var(--coral-marca);
-  font-size: 0.8rem;
+  font-size: 1.2rem; // antes 0.8rem = 8 px (auditoría SCSS 1.9, v4.39.1)
   line-height: 1;
 
   a {

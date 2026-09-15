@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 15 de septiembre de 2026 - v4.39.0 - **Auditoría SCSS (1/4): tooling y guardias** (stylelint con presupuesto, browserslist, 8 guardias con baseline y registro en `docs/auditoria-scss-2026-09.md`). Sin cambios visuales.
+🆕 Última actualización: 15 de septiembre de 2026 - v4.39.1 - **Auditoría SCSS (2/4): errores visibles y accesibilidad** (previsión meteo legible en oscuro, cambio de tema con movimiento reducido, mini-días del calendario por teclado, pie legal a 12 px, colores forzados, `dvh`).
 
 ## 🌐 Vista Previa
 

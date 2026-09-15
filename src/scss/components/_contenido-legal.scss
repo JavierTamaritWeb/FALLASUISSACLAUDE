@@ -8,6 +8,7 @@
 .contenido-legal {
     background-color: v.$rosa-acordeon; // antes #f5f5f5 literal
     min-height: 100vh;
+    min-height: 100dvh; // barra de Safari móvil (auditoría SCSS 1.5)
     padding: 2rem 0 5rem;
     text-align: left;
 
@@ -457,8 +458,7 @@
     // Las URLs entre paréntesis (que añade un @media print global tras
     // cada enlace) no tienen sentido en un formulario imprimible y rompen
     // el layout. Las suprimimos en todo el documento de autorización.
-    .autorizacion-imagen a[href]::after,
-    .autorizacion-imagen a[href]:after {
+    .autorizacion-imagen a[href]::after {
         content: "" !important;
         display: none !important;
     }

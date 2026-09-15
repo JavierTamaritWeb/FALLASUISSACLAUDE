@@ -82,7 +82,6 @@ body,
 :where(.galeria__title),
 :where(.galeria__texto),
 :where(.eltiempo),
-:where(.header-meteo),
 :where(.meteo),
 :where(.weather-current),
 :where(.forecast-day),
@@ -109,7 +108,6 @@ body,
 :where(.historia__prologo),
 :where(.historia__archivos),
 :where(.historia__grid),
-:where(.historia__leyenda),
 :where(.organigrama),
 :where(.organigrama__title),
 :where(.organigrama__section),
@@ -158,6 +156,10 @@ body,
   transition: fill var(--theme-transition);
 }
 
+// Transiciones de oscuro a claro (2,4 s, con !important para imponerse a las de los
+// componentes durante el cambio). Auditoría SCSS 1.2 (v4.39.1): solo si el usuario
+// no pide movimiento reducido; si lo pide, gobierna abstracts/_accessibility.scss.
+@media (prefers-reduced-motion: no-preference) {
 // Transición de oscuro a claro para header y barra de navegación
 // Valores explícitos (no CSS variables) para máxima compatibilidad con Safari
 body.transicion-a-claro .header__barra,
@@ -230,10 +232,10 @@ body.transicion-a-claro .quieres-mas::before {
 body.transicion-a-claro .countdown__contenedor::before {
   transition: opacity 2.4s ease-in-out !important;
 }
+}
 
 body.modo-oscuro {
   background-color: v.$negro;
-  --header-bar-bg: linear-gradient(135deg, rgba(51, 51, 51, 0.85), rgba(68, 68, 68, 0.8) 60%, rgba(85, 85, 85, 0.8) 100%);
 
   // Desvanecer el gradiente del body
   &::before {
@@ -387,7 +389,6 @@ body.modo-oscuro .calendario-eventos__detalles-mes p {
 // 1,7:1; el coral claro da 5,7:1. Los números de día eran #333 sobre #444 (invisibles).
 body.modo-oscuro .calendario-eventos__control,
 body.modo-oscuro .calendario-eventos__leyenda,
-body.modo-oscuro .calendario-eventos__cabecera-titulo,
 body.modo-oscuro .calendario-eventos__detalles-mes h2,
 body.modo-oscuro .ics-modal__cerrar {
   color: v.$coral-claro;
@@ -431,10 +432,6 @@ body.modo-oscuro .eltiempo {
   }
 }
 
-body.modo-oscuro .header-meteo {
-  background: v.$negro;
-}
-
 body.modo-oscuro .meteo {
    // Solo cambiamos el color del overlay en el pseudo-elemento para mantener la imagen de fondo
    &::before {
@@ -452,7 +449,8 @@ body.modo-oscuro .forecast-day {
   background: v.$gris-oscuro;
 }
 
-body.modo-oscuro .forecast-info {
+body.modo-oscuro .forecast-info,
+body.modo-oscuro .forecast-info p {
   color: v.$blanco;
 }
 
@@ -1156,11 +1154,6 @@ body.modo-oscuro .banner-subvencion__imagen {
   filter: invert(1) hue-rotate(180deg);
 }
 
-// HISTORIA
-body.modo-oscuro .historia__leyenda {
-    background: v.$secondary-color;
-  
-}
 
 /* ----------------------------------------------
    MODO OSCURO BUSCADOR (v4.29.0; aquí desde v4.35.0)

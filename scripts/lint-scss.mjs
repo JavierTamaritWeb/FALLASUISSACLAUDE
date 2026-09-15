@@ -15,6 +15,7 @@ const result = await stylelint.lint({ files: 'src/scss/**/*.scss', cwd: root, fo
 const porRegla = {};
 let errores = 0;
 for (const r of result.results) {
+  for (const w of r.invalidOptionWarnings || []) { console.error(`Opción inválida en .stylelintrc.json: ${w.text}`); errores++; }
   for (const w of r.warnings) {
     if (w.severity === 'error') errores++;
     porRegla[w.rule] = (porRegla[w.rule] || 0) + 1;

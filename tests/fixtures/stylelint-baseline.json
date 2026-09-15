@@ -1,15 +1,14 @@
 {
-  "declaration-no-important": 254,
+  "declaration-no-important": 253,
   "selector-max-id": 87,
   "no-duplicate-selectors": 27,
   "length-zero-no-unit": 14,
   "property-no-deprecated": 8,
-  "declaration-block-no-duplicate-properties": 7,
   "declaration-property-value-disallowed-list": 3,
   "font-family-no-duplicate-names": 2,
+  "declaration-block-no-duplicate-properties": 2,
   "declaration-block-no-shorthand-property-overrides": 2,
   "scss/at-extend-no-missing-placeholder": 2,
-  "scss/dollar-variable-no-missing-interpolation": 1,
   "selector-class-pattern": 1,
   "declaration-property-value-keyword-no-deprecated": 1,
   "property-no-unknown": 1

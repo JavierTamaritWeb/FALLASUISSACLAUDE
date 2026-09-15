@@ -383,6 +383,7 @@
 .video-dron__fullscreen-wrapper {
   width: 96vw;
   max-height: calc(100vh - 8rem);
+  max-height: calc(100dvh - 8rem);
   aspect-ratio: 16 / 9;
   border-radius: 0.75rem;
   overflow: hidden;

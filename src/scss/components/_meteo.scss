@@ -296,7 +296,6 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
 
     &:hover {
@@ -346,7 +345,6 @@
     }
 
     .forecast-info {
-      color: v.$secondary-color !important; // Para que contraste con #f7f7f7
       p {
         margin: 0.25rem 0;
       }
@@ -425,10 +423,6 @@
 @media (max-width: 480px) {
   .forecast-info {
     font-size: 1.3rem;
-
-    p {
-      color: v.$secondary-color; // Contraste con el fondo
-    }
   }
 }
 
@@ -466,9 +460,6 @@
   /* forecast-info en pantallas >=768px */
   .forecast-info {
     font-size: 1.3rem;
-    p {
-      color: v.$secondary-color;
-    }
   }
 
   /* Ajustes de .actual-* */
@@ -537,9 +528,6 @@
 @media (min-width: 1024px) {
   .forecast-info {
     font-size: 1.3rem;
-    p {
-      color: v.$secondary-color;
-    }
   }
 }
 .actual-temp {
@@ -588,12 +576,18 @@
   }
   .forecast-info {
     font-size: 1.3rem;
-    p {
-      color: v.$secondary-color;
-    }
   }
 }
 
 
 
 
+
+// Texto de la previsión (auditoría SCSS 1.1, v4.39.1): antes se fijaba $secondary-color
+// en cinco sitios (uno con !important) y en oscuro quedaba #333 sobre gris oscuro.
+// Una sola regla clara; themes/_modo-oscuro.scss pone el blanco.
+// Incluye los <p>: la regla global `p { color: $blanco-hueso }` de _falla.scss gana a la herencia.
+body:not(.modo-oscuro) .forecast-info,
+body:not(.modo-oscuro) .forecast-info p {
+  color: v.$secondary-color;
+}

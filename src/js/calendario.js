@@ -226,6 +226,14 @@ function crearCeldaDia(d, mes, anio, eventosDelDia) {
   const celda = document.createElement('div');
   celda.className = 'calendario-eventos__mini-dia';
   celda.textContent = d;
+  // Es un control (filtra el día): semántica y teclado (auditoría SCSS 1.7, v4.39.1).
+  celda.setAttribute('role', 'button');
+  celda.setAttribute('tabindex', '0');
+  celda.addEventListener('keydown', (event) => {
+    if (event.defaultPrevented || (event.key !== 'Enter' && event.key !== ' ')) return;
+    event.preventDefault(); // accessibility.js comprueba defaultPrevented: sin doble click
+    celda.click();
+  });
   const dayOfWeek = new Date(anio, mes, d).getDay();
   if (dayOfWeek === 6) {
     celda.classList.add('sabado');

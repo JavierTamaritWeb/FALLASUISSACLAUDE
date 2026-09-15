@@ -514,10 +514,6 @@
 // ---------------------------------------------------------
 // Barras de Navegación Fijas para .header y .header-inner
 // ---------------------------------------------------------
-:root {
-  --header-bar-bg: v.$gradiente-institucional;
-}
-
 .header__barra,
 .header-inner__barra {
   position: fixed;        // Barra fija en la parte superior

@@ -63,7 +63,6 @@
     text-transform: none;
     @include m.transition(color 200ms);
     display: inline-block;
-    cursor: pointer;
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.35);
   
     &:hover {

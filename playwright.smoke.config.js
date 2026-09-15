@@ -29,6 +29,7 @@ module.exports = defineConfig({
     '**/schema-jsonld.e2e.spec.js',
     '**/scss-guardrails.e2e.spec.js',
     '**/buscador.e2e.spec.js',
-    '**/color-tokens.e2e.spec.js'
+    '**/color-tokens.e2e.spec.js',
+    '**/auditoria-scss.e2e.spec.js'
   ]
 });

@@ -127,7 +127,7 @@ function clasesMuertas(distCss, permitidos) {
 function importantPorFichero(files) {
   const out = {};
   for (const f of files) {
-    const txt = sinBloquesMedia(sinComentarios(leer(f)), /print|prefers-reduced-motion/);
+    const txt = sinBloquesMedia(sinComentarios(leer(f)), /print|prefers-reduced-motion:\s*reduce/);
     const n = (txt.match(/!\s*important/g) || []).length;
     if (n) out[relativo(f)] = n;
   }

@@ -36,6 +36,31 @@
   }
 }
 
+// Colores forzados (Windows «Contraste alto», auditoría SCSS 1.10, v4.39.1): los
+// fondos desaparecen, así que controles y foco se delimitan con colores del sistema.
+@media (forced-colors: active) {
+  .boton,
+  .boton-modal,
+  .header__modo-boton,
+  .header__lang-switcher,
+  .header__menu-toggle,
+  .header__search-toggle,
+  .navegacion__enlace,
+  .accordion__titular {
+    border: 2px solid ButtonText;
+  }
+
+  :focus-visible {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .escudo-enlace img,
+  .colaboraciones-mosaic__trigger img {
+    forced-color-adjust: none;
+  }
+}
+
 // Respeto a la preferencia de movimiento reducido
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -275,7 +300,7 @@ img[loading="lazy"]:not(.eventos__calendario):not(.forecast__termo):not(.blog__p
   }
   
   // Mostrar URLs de enlaces
-  a[href]:after {
+  a[href]::after {
     content: " (" attr(href) ")";
     font-size: 0.875rem;
     color: #666;
