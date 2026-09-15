@@ -105,4 +105,4 @@ npm run test:e2e:full
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.38.0
+Última actualización: 15 de septiembre de 2026 - v4.38.1

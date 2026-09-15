@@ -1,44 +1,33 @@
-// abstracts/_variables.scss
-// Tokens de diseño de Falla Suïssa, ordenados por importancia (v4.38.0).
-//
-// Cómo leer este fichero: los bloques van de lo que define la identidad del
-// sitio (1-2) a lo accesorio (8-10). Dentro de cada bloque, el token más usado
-// va primero. Cada color de texto lleva su ratio WCAG en el comentario.
-//
-// Reglas de uso (ver docs/paleta-y-degradados.md):
+// Tokens de diseño, ordenados por importancia.
+// Reglas de uso (docs/paleta-y-degradados.md):
 // - En propiedades CSS NO escribas $primary-color: usa var(--coral-marca) o
-//   rgba(var(--coral-marca-rgb), a), declaradas en _globales.scss (v4.30.0).
+//   rgba(var(--coral-marca-rgb), a), declaradas en _globales.scss.
 // - El coral nunca va como texto normal: $coral-texto sobre claro, $coral-claro
-//   sobre azul o gris oscuro (v4.29.0).
-// - El degradado institucional solo se escribe desde $gradiente-institucional
-//   (tests/color-tokens lo vigila).
+//   sobre azul o gris oscuro.
+// - El degradado institucional solo se escribe desde $gradiente-institucional.
 // - No añadas literales que ya tengan token ni variables sin uso
-//   (tests/scss-guardrails lo vigila). Un token nuevo va en su bloque, con el
-//   papel que cumple y su ratio.
+//   (tests/scss-guardrails lo vigila).
 
 // =============================================================================
 // 1. MARCA — los cinco colores que identifican el sitio
 // =============================================================================
 
-$primary-color: #B83F35;       // Coral oscuro de marca (v4.31.0; #FF6F61 hasta v4.30.47). Bordes, badges, brillos, botones; 5,5:1 sobre blanco
-$color-azul-falla: #004BCF;    // Azul institucional: enlaces y títulos de tarjeta (5,4:1 sobre blanco)
-$azul-titulo-seccion: #02427A; // Títulos de sección en claro vía var(--titulo-seccion); coincide con el stop medio del degradado (9,3:1 sobre #F5F5F5) — v4.30.22
-$turquesa: #00909E;            // Turquesa de marca: bordes de contenedores y tarjetas (3,5:1 sobre claro, solo texto grande)
-$dorado: #FFD700;              // Dorado: anillos de foco y acentos sobre azul (8,9:1 sobre #0a4b8d)
+$primary-color: #B83F35;
+$color-azul-falla: #004BCF;
+$azul-titulo-seccion: #02427A;
+$turquesa: #00909E;
+$dorado: #FFD700;
 
 // =============================================================================
 // 2. DEGRADADOS Y CELESTES DE MARCA
 // =============================================================================
 
-// Degradado institucional: única fuente (antes 11 copias literales). Fondo de
-// body::before, hero en oscuro, footer y paneles azules.
+// Degradado institucional: fuente única para fondos azules.
 $gradiente-institucional: linear-gradient(135deg, #0a4b8d 0%, #02427a 60%, #003366 100%);
-// Cristal del menú desplegable y del buscador (v4.35.0): el institucional al 70 % sobre blur
 $gradiente-cristal-menu: linear-gradient(135deg, rgba(10, 75, 141, 0.7) 0%, rgba(2, 66, 122, 0.7) 60%, rgba(0, 51, 102, 0.7) 100%);
 $cristal-menu-oscuro: rgba(51, 51, 51, 0.8);
-// Degradado celeste de 5 tonos con profundidad (v4.30.40): hero, Colaboraciones,
-// Deportes y cuenta atrás en claro. Título azul #02427A encima: 8,9:1 en el
-// stop más claro y 3,3:1 en el más oscuro (ahí solo llega texto grande).
+// Hero, Colaboraciones, Deportes y cuenta atrás en claro. El título azul solo
+// alcanza el stop más oscuro como texto grande.
 $celeste-1: #E3F2FB;
 $celeste-2: #BFE3F7;
 $celeste-3: #93CFF0;
@@ -47,80 +36,78 @@ $celeste-5: #4A9AD6;
 $gradiente-celeste:
   radial-gradient(ellipse 70% 60% at 18% 0%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 65%),
   linear-gradient(160deg, $celeste-1 0%, $celeste-2 28%, $celeste-3 52%, $celeste-4 76%, $celeste-5 100%);
-$azul-cobalto: #0047AB;        // Olas del hero de la home en claro y franja de la cuenta atrás (v4.30.45)
+$azul-cobalto: #0047AB;
 
 // =============================================================================
 // 3. NEUTROS — texto y fondos base, de claro a oscuro
 // =============================================================================
 
 $blanco: #FFFFFF;
-$blanco-hueso: #F5F5F5;        // Fondo claro por defecto y texto sobre azul/negro
-$secondary-color: #333;        // Gris oscuro: texto principal sobre claro (12,6:1 sobre blanco)
-$negro-casi: #111111;          // Texto sobre superficies claras de sección y fondo base del modo oscuro
+$blanco-hueso: #F5F5F5;
+$secondary-color: #333;
+$negro-casi: #111111;
 $negro: #000;
 
-// Grises oscuros (superficies y texto del modo oscuro)
-$gris-muy-oscuro: #444;        // Superficie oscura secundaria (cenefa, filas)
-$gris-oscuro: #4A4A4A;         // Texto secundario sobre claro (8,6:1 sobre blanco)
-$gris-medio-oscuro: #555;      // Texto terciario sobre claro (7,5:1 sobre blanco)
-$gris-oscuro-medio: #616060;   // Solo modo oscuro
-$gris-oscuro-frio: #525456;    // Solo tablón (pinzas)
-$gris-medio-azulado: #6e7072;  // Pinzas del tablón y modo oscuro
+$gris-muy-oscuro: #444;
+$gris-oscuro: #4A4A4A;
+$gris-medio-oscuro: #555;
+$gris-oscuro-medio: #616060;
+$gris-oscuro-frio: #525456;
+$gris-medio-azulado: #6e7072;
 
-// Grises claros (bordes, placeholders, texto sobre oscuro)
-$gris: #888;                   // Placeholders (solo decorativo: 3,5:1 sobre blanco)
-$gris-plateado: #c0c0c0;       // Tablón y bordes en oscuro
-$gris-medio-claro: #ccc;       // Bordes y separadores
-$gris-muy-claro: #ddd;         // Texto sobre negro (12,6:1) y bordes claros
+$gris: #888;
+$gris-plateado: #c0c0c0;
+$gris-medio-claro: #ccc;
+$gris-muy-claro: #ddd;
 $gris-muy-claro-neutro: #e0e0e0;
-$gris-claro: #e3e2e2;          // Bordes de inputs
+$gris-claro: #e3e2e2;
 
 // =============================================================================
-// 4. SUPERFICIES DE SECCIÓN EN CLARO — la paleta de la home (v4.30.22-4.37.2)
+// 4. SUPERFICIES DE SECCIÓN EN CLARO
 // =============================================================================
 
-$rosa-acordeon: #FDF0F3;       // Rosa muy claro: filas de acordeón y fondo de Eventos, Blog, Galerías, Calendario, legales… (v4.30.28)
-$rosa-acordeon-hover: #FF5A8E; // Hover/foco de esas filas; $negro-casi encima 6,4:1 (v4.30.27)
-$turquesa-suave: #E0F2F3;      // Contenedores de Nosotros, Historia, Calendario; #02427A encima 8,8:1 (v4.30.30)
-$turquesa-claro: #BFE6E9;      // Paneles abiertos, rejillas de Archivos, artículos del blog, meteo; $negro-casi encima 14:1 (v4.30.36)
-$turquesa-texto: #007A86;      // Turquesa oscuro para texto pequeño sobre rosa/claro: 4,6:1 (v4.30.26); también caja de texto de la Plana Mayor
-$naranja-suave: #fdf2e9;       // Fondo cálido heredado: acordeón base, marco del tablón y papel del bloc (antes marfil)
+$rosa-acordeon: #FDF0F3;
+$rosa-acordeon-hover: #FF5A8E;
+$turquesa-suave: #E0F2F3;
+$turquesa-claro: #BFE6E9;
+$turquesa-texto: #007A86;
+$naranja-suave: #fdf2e9;
 
 // =============================================================================
 // 5. TEXTO DE CONTRASTE
 // =============================================================================
 
-$coral-claro: #FFB4AA;         // Coral claro para texto pequeño sobre azul o gris oscuro (5,1:1 sobre #0a4b8d, 5,7:1 sobre #444)
-$azul-enlace-oscuro: #8FB8FF;  // Enlaces y estado informativo en modo oscuro (9,4:1 sobre #111)
+$coral-claro: #FFB4AA;
+$azul-enlace-oscuro: #8FB8FF;
 
 // =============================================================================
-// 6. ACENTOS DE INTERACCIÓN — hover de botones y titulares
+// 6. ACENTOS DE INTERACCIÓN
 // =============================================================================
 
-$rojo-salmon: #FF8C7A;         // Segundo stop del hover coral→salmón de .boton; $negro-casi encima 8,5:1
-$amarillo-anaranjado: #FFA947; // Hover salmón→amarillo en oscuro y anillo de foco oscuro (8,3:1 sobre #0a4b8d)
-$naranja-quemado: #dd6502;     // Hover de enlaces en modo oscuro
+$rojo-salmon: #FF8C7A;
+$amarillo-anaranjado: #FFA947;
+$naranja-quemado: #dd6502;
 
 // =============================================================================
 // 7. ESTADOS (siempre acompañados de texto o icono)
 // =============================================================================
 
-$estado-error: #B3261E;        // 6,5:1 sobre blanco
-$estado-exito: #1B6E3A;        // 6,3:1 sobre blanco
-$estado-aviso: #8A5A00;        // 5,9:1 sobre blanco
+$estado-error: #B3261E;
+$estado-exito: #1B6E3A;
+$estado-aviso: #8A5A00;
 $estado-info: $color-azul-falla;
-$estado-error-oscuro: #FF8A80; // 6,9:1 sobre #111
-$estado-exito-oscuro: #7BD389; // 8,7:1 sobre #111
-$estado-aviso-oscuro: #FFC857; // 10,3:1 sobre #111
+$estado-error-oscuro: #FF8A80;
+$estado-exito-oscuro: #7BD389;
+$estado-aviso-oscuro: #FFC857;
 $estado-info-oscuro: $azul-enlace-oscuro;
 
 // =============================================================================
-// 8. USOS PUNTUALES — un solo componente cada uno (candidatos a revisar)
+// 8. USOS PUNTUALES
 // =============================================================================
 
-$color-urgente: #C13584;       // Calendario: categoría urgente
-$azul-marino: #000080;         // Calendario: domingos
-$azul-verdoso: #7FCFC9;        // Formulario de contacto: hover de inputs
+$color-urgente: #C13584;
+$azul-marino: #000080;
+$azul-verdoso: #7FCFC9;
 
 // =============================================================================
 // 9. TIPOGRAFÍA, ESPACIADO, CENEFA Y FALLERET (sin color)
@@ -143,19 +130,14 @@ $frieze-bg: $blanco-hueso;
 $frieze-bg-dark: $gris-muy-oscuro;
 $frieze-size: clamp(30px, 8vw, 50px);
 
-$falleret-size-mobile: 55%;    // Ocupa un buen espacio en móvil
-$falleret-size-tablet: 30%;    // Proporcional en tablet
-$falleret-size-desktop: 25%;   // Proporcional en escritorio
-$falleret-size-large: 50%;     // Pantallas grandes (>1200px)
+$falleret-size-mobile: 55%;
+$falleret-size-tablet: 30%;
+$falleret-size-desktop: 25%;
+$falleret-size-large: 50%;
 
 // =============================================================================
-// 10. ALIAS HEREDADOS — no usar en código nuevo (v4.38.0)
+// 10. ALIAS HEREDADOS — no usar en código nuevo
 // =============================================================================
 
-$coral-texto: $primary-color;        // Desde v4.31.0 el primario ya es el coral de texto; 38 usos heredados
-$turquesa-sobre-rosa: $turquesa-texto; // Mismo valor desde v4.30.28; 4 usos heredados en _falla.scss
-
-// Retiradas en v4.38.0 por no tener ningún uso: $naranja-coral, $rosa-pastel,
-// $purpura, $color-tiktok, $color-facebook, $color-youtube,
-// $texto-secundario-oscuro, $superficie-elevada-oscuro, $img-path, $melocotin-claro
-// (#ffccbc, sin uso desde v4.32.2).
+$coral-texto: $primary-color;
+$turquesa-sobre-rosa: $turquesa-texto;

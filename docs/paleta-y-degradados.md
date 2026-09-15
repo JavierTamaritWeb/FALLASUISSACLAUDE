@@ -4,7 +4,7 @@ Evolución **gradual y aditiva** de la paleta: azul y coral siguen siendo la ide
 
 ## Jerarquía de tokens (v4.38.0)
 
-`src/scss/abstracts/_variables.scss` está ordenado **por importancia**, de lo que define la identidad del sitio a lo accesorio. Dentro de cada bloque, el token más usado va primero y cada color de texto lleva su ratio en el comentario.
+`src/scss/abstracts/_variables.scss` está ordenado **por importancia**, de lo que define la identidad del sitio a lo accesorio. Dentro de cada bloque, el token más usado va primero. Desde v4.38.1 el fichero lleva solo los tokens y las cabeceras de bloque: los ratios de referencia se documentan en *Ratios de referencia por token*, más abajo.
 
 | Bloque | Tokens | Papel |
 | --- | --- | --- |
@@ -20,6 +20,18 @@ Evolución **gradual y aditiva** de la paleta: azul y coral siguen siendo la ide
 | 10. Alias heredados | `$coral-texto` = `$primary-color`, `$turquesa-sobre-rosa` = `$turquesa-texto` | Mismo valor desde v4.31.0 / v4.30.28; **no usar en código nuevo** |
 
 Retiradas en v4.38.0 por no tener ningún uso: `$naranja-coral`, `$rosa-pastel`, `$purpura`, `$color-tiktok`, `$color-facebook`, `$color-youtube`, `$texto-secundario-oscuro`, `$superficie-elevada-oscuro`, `$img-path` y `$melocotin-claro`. En la misma versión se sustituyeron ~90 literales que ya tenían token (`#333`, `#fff`, `#000`, `#111`, `#444`, `#555`, `#f5f5f5`, `#fdf2e9`, `rgba(255,215,0,…)`, `rgba(245,245,245,…)`) por su variable, y los `rgba(255,111,97,…)` del coral antiguo por `rgba(var(--coral-marca-rgb), a)` (único cambio visible: los glows y halos que seguían en #FF6F61 pasan al primario). `--coral-marca-rgb` se deriva ahora del token con `color.channel()`. Dos guardias nuevas en `tests/scss-guardrails.e2e.spec.js`: ninguna variable de `_variables.scss` sin uso y ningún literal con token fuera de `@media print`.
+
+### Ratios de referencia por token (v4.38.1)
+
+Desde v4.38.1 `_variables.scss` va sin comentarios por token; los ratios WCAG que antes acompañaban a cada color viven aquí:
+
+- **Marca**: `$primary-color` 5,5:1 sobre blanco (bordes, badges, brillos y botones; texto solo como `$coral-texto`); `$color-azul-falla` 5,4:1 sobre blanco; `$azul-titulo-seccion` 9,3:1 sobre `$blanco-hueso` (vía `var(--titulo-seccion)`; coincide con el stop medio del degradado); `$turquesa` 3,5:1 sobre claro (solo bordes y texto grande); `$dorado` 8,9:1 sobre `#0a4b8d` (anillos de foco sobre azul).
+- **Celestes**: `$azul-titulo-seccion` sobre `$gradiente-celeste` da 8,9:1 en el stop más claro y 3,3:1 en el más oscuro (ahí solo texto grande). `$azul-cobalto`: olas del hero y franja de la cuenta atrás.
+- **Neutros**: `$secondary-color` 12,6:1 sobre blanco (texto principal); `$gris-oscuro` 8,6:1 y `$gris-medio-oscuro` 7,5:1 (texto secundario/terciario sobre claro); `$gris` 3,5:1 (solo placeholders); `$gris-muy-claro` 12,6:1 sobre negro (texto sobre oscuro); `$gris-muy-oscuro` superficie oscura secundaria; `$gris-oscuro-medio` solo modo oscuro; `$gris-oscuro-frio` y `$gris-medio-azulado` pinzas del tablón; `$gris-plateado`, `$gris-medio-claro`, `$gris-claro` bordes y separadores.
+- **Superficies de sección**: `$rosa-acordeon-hover` con `$negro-casi` encima 6,4:1; `$turquesa-suave` con `$azul-titulo-seccion` encima 8,8:1; `$turquesa-claro` con `$negro-casi` encima 14:1; `$turquesa-texto` 4,6:1 sobre rosa/claro (texto pequeño) y caja de texto de la Plana Mayor; `$naranja-suave` fondo cálido heredado (acordeón base, marco del tablón, papel del bloc).
+- **Acentos**: `$rojo-salmon` con `$negro-casi` encima 8,5:1 (segundo stop del hover de `.boton`); `$amarillo-anaranjado` 8,3:1 sobre `#0a4b8d` (hover en oscuro y anillo de foco oscuro); `$naranja-quemado` hover de enlaces en oscuro.
+- **Estados**: `$estado-error` 6,5:1, `$estado-exito` 6,3:1 y `$estado-aviso` 5,9:1 sobre blanco; `$estado-error-oscuro` 6,9:1, `$estado-exito-oscuro` 8,7:1 y `$estado-aviso-oscuro` 10,3:1 sobre `#111`.
+- **Usos puntuales**: `$color-urgente` categoría urgente y `$azul-marino` domingos del calendario; `$azul-verdoso` hover de los inputs del formulario de contacto.
 
 ## Tokens de la paleta funcional (v4.29.0)
 
@@ -133,4 +145,4 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.38.0
+Última actualización: 15 de septiembre de 2026 - v4.38.1
