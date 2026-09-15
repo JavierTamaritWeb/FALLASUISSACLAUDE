@@ -437,7 +437,7 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 2. **Contexto de apilamiento del header.** `.header`/`.header-inner` tenían `position: relative; z-index: 10`. La barra fija (`z-index: 2000`) y el menú (`2500`) viven dentro de ese contexto, así que frente al resto de la página valen 10. La cenefa (`.frieze`, 10), el título sticky del organigrama (`.organigrama__title`, 10), el timeline (100) y los tooltips (100) van después en el DOM y se pintaban por encima del menú abierto.
 
 **Solución:**
-- `src/scss/layout/_header.scss`: la barra pierde el `backdrop-filter` del elemento (su `::before` ya difumina con `blur(15px)`; el aspecto de la barra no cambia, snapshots *Header* intactos). `.navegacion` pasa al mismo cristal que la barra: degradado azul `rgba(…, 0.7)` + `backdrop-filter: blur(15px)` + borde `rgba(255,255,255,.18)`. `.header`/`.header-inner` → `z-index: 500` (sobre el contenido; por debajo de modales y banners, que van de 1000 en adelante).
+- `src/scss/layout/_header-barra.scss`: la barra pierde el `backdrop-filter` del elemento (su `::before` ya difumina con `blur(15px)`; el aspecto de la barra no cambia, snapshots *Header* intactos). `.navegacion` pasa al mismo cristal que la barra: degradado azul `rgba(…, 0.7)` + `backdrop-filter: blur(15px)` + borde `rgba(255,255,255,.18)`. `.header`/`.header-inner` → `z-index: 500` (sobre el contenido; por debajo de modales y banners, que van de 1000 en adelante).
 - `src/scss/themes/_modo-oscuro.scss`: `body.modo-oscuro .navegacion` sin media query, `rgba(51,51,51,.8)` + blur (igual que la barra oscura).
 - `src/js/nav-menu.js`: el foco solo pasa al primer enlace al abrir con teclado (`e.detail === 0`); con ratón dejaba un anillo de foco sobre "Inicio".
 
@@ -517,4 +517,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.39.1
+Última actualización: 15 de septiembre de 2026 - v4.39.2

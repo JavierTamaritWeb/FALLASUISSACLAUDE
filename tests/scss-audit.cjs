@@ -77,18 +77,43 @@ function selectoresRaiz(scss) {
   return res.filter((r) => !r.selector.startsWith('@'));
 }
 
-// 1. Selectores de nivel raíz abiertos más de una vez (mismo fichero o entre ficheros).
+// 1. Reglas de nivel raíz abiertas más de una vez con la MISMA lista de selectores (mismo
+// fichero o entre ficheros), como `no-duplicate-selectors` de stylelint. Se ignoran: las
+// excepciones de tema, los selectores de solo etiqueta (capas base: normalize, reset,
+// typography, globales, accessibility) y las listas sin ámbito de themes/ (transiciones).
 const EXCEPCIONES_DUPLICADOS = new Set([':root', 'body.modo-oscuro', 'html.modo-oscuro', 'body.modo-claro', 'html.modo-claro']);
+function listasRaiz(scss) {
+  const limpio = sinComentarios(scss);
+  const res = [];
+  let depth = 0; let inicio = 0;
+  for (let i = 0; i < limpio.length; i++) {
+    const c = limpio[i];
+    if (c === '{') {
+      const cabecera = limpio.slice(inicio, i).trim();
+      if (depth === 0 && cabecera && !cabecera.startsWith('@')) {
+        const linea = limpio.slice(0, i).split('\n').length;
+        const lista = cabecera.split(',').map((x) => x.replace(/\s+/g, ' ').trim()).filter(Boolean).sort().join(', ');
+        res.push({ lista, linea });
+      }
+      depth++; inicio = i + 1;
+    } else if (c === '}') { depth--; inicio = i + 1; }
+    else if (c === ';' && depth === 0) inicio = i + 1;
+  }
+  return res;
+}
 function duplicados(files) {
   const mapa = new Map();
   for (const f of files) {
-    for (const { selector, linea } of selectoresRaiz(leer(f))) {
-      if (EXCEPCIONES_DUPLICADOS.has(selector)) continue;
-      if (!mapa.has(selector)) mapa.set(selector, []);
-      mapa.get(selector).push(`${relativo(f)}:${linea}`);
+    const rel = relativo(f);
+    for (const { lista, linea } of listasRaiz(leer(f))) {
+      if (EXCEPCIONES_DUPLICADOS.has(lista)) continue;
+      if (!/[.#[]/.test(lista)) continue; // solo etiquetas: capas base
+      if (rel.includes('/themes/') && !/^(body|html)\.(modo|transicion)/.test(lista)) continue;
+      if (!mapa.has(lista)) mapa.set(lista, []);
+      mapa.get(lista).push(`${rel}:${linea}`);
     }
   }
-  return [...mapa.entries()].filter(([, sitios]) => sitios.length > 1).map(([selector, sitios]) => `${selector} → ${[...sitios].sort().join(', ')}`).sort();
+  return [...mapa.entries()].filter(([, sitios]) => sitios.length > 1).map(([lista, sitios]) => `${lista} → ${[...sitios].sort().join(', ')}`).sort();
 }
 
 // 2. Clases presentes en dist/css/main.css sin uso en HTML/JS/JSON/gulpfile.

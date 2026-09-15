@@ -1,0 +1,403 @@
+// scss/layout/_nav.scss
+// Menú desplegable (.navegacion, enlaces, botón hamburguesa, backdrop) y selector de idioma.
+@use '../abstracts/variables' as v;
+
+.navegacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+
+  @media screen and (max-width: 767px) {
+    gap: 0.2rem; // Gap más pequeño en móviles
+  }
+
+  @media screen and (min-width: 768px) {
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  &__enlace {
+    color: v.$blanco;
+    text-decoration: none;
+    text-transform: none;
+    padding: 0.1rem 0.3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 0.3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    width: auto;
+    transition: background-color 200ms ease, color 200ms ease;
+    
+    @media (max-width: 767px) {
+      font-size: 1rem;        // Texto más pequeño en móviles
+      padding: 0.1rem 0.2rem; // Padding más compacto
+      min-height: 38px;       // Altura mínima reducida
+    }
+  
+   
+    &:hover {
+      color: var(--coral-marca);
+    }
+    
+    @media (min-width: 768px) {
+      padding: 0.1rem 0.3rem;
+    }
+  }
+  
+  &__enlace.active,
+  &__enlace[aria-current="page"] {
+    color: var(--coral-marca);
+    
+    /* Otros estilos opcionales */
+  }
+  
+
+  // Fusionado desde el bloque «desplegable» (auditoría SCSS 2.1, v4.39.2); la «segunda
+  // versión» (display flex, gap .3rem, align-items center) repetía este bloque y se retiró.
+  & {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+      padding: 0.6rem;
+      // Cristal como la barra principal (v4.23.6): mismo degradado azul con
+      // blur real de la página (posible porque la barra ya no lleva
+      // backdrop-filter en el propio elemento). Al 70 % (la barra usa .25-.30)
+      // para que el texto blanco siga legible sobre tarjetas blancas difuminadas.
+      background: v.$gradiente-cristal-menu;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 1.2rem;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+      z-index: 2500;
+      // Transición sincronizada con el tema (2.4s)
+      transition: background 2.4s ease-in-out;
+  }
+}
+
+// ---------------------------------------------------------
+// Olas del Header Principal (.waves)
+// ---------------------------------------------------------
+// Valores efectivos tras fusionar el bloque de animaciones/_waves.scss (v4.39.2):
+// ese fichero cargaba después y ganaba en width/height; aquí queda el resultado.
+
+.header__menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2600; // Por encima del menú (2500) y del backdrop (1500)
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(3, 49, 95, 0.95);
+  color: v.$blanco;
+  cursor: pointer;
+  padding: 0.45rem;
+  border-radius: 0.8rem;
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, background-color var(--theme-transition), box-shadow var(--theme-transition), border-color var(--theme-transition);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+
+  svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  &:focus {
+    outline: 2px solid var(--coral-marca);
+  }
+
+  &:active {
+    transform: scale(0.96);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.navegacion__enlace {
+  position: relative;
+  color: v.$blanco;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700; // Más grueso para mejor legibilidad
+  // Menú en mayúsculas (v4.23.2): se aplica con CSS, así el texto fuente
+  // (translations.json y fallbacks HTML) sigue en minúsculas para lectores de
+  // pantalla y buscadores. NUNCA `capitalize` (ver CLAUDE.md).
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  width: auto;
+  transition: color 200ms ease, text-shadow 200ms ease, background-color 200ms ease;
+  // Sombra más definida para legibilidad sobre fondo translúcido azul
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
+  // Subrayado animado (desvanecimiento): crece de 0 → 100% con fade-in
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0.35rem;
+    left: 0.3rem;
+    width: 0;
+    height: 2px;
+    background-color: var(--coral-marca);
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  // Coral claro (v4.29.0): a 12px el coral de marca sobre el azul daba 3,2:1;
+  // $coral-claro da 5,1:1. El subrayado ::after conserva el coral de marca.
+  &:hover,
+  &:focus-visible {
+    color: v.$coral-claro;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    width: calc(100% - 0.6rem);
+    opacity: 1;
+  }
+
+  // Enlace activo: subrayado permanente + texto en color primario (sin fondo)
+  &.active,
+  &[aria-current="page"] {
+    color: v.$coral-claro;
+  }
+
+  &.active::after,
+  &[aria-current="page"]::after {
+    width: calc(100% - 0.6rem);
+    opacity: 1;
+  }
+
+  // Fusionado desde el bloque del desplegable (auditoría SCSS 2.1, v4.39.2)
+  & {
+
+      width: 100%;
+      justify-content: flex-start;
+      padding: 0.65rem 0.85rem;
+      border-radius: 0.9rem;
+
+      // Ajusta el subrayado al padding mayor del dropdown móvil
+      &::after {
+        bottom: 0.4rem;
+        left: 0.85rem;
+      }
+
+      &:hover::after,
+      &:focus-visible::after,
+      &.active::after,
+      &[aria-current="page"]::after {
+        width: calc(100% - 1.7rem);
+      }
+
+      // Foco de teclado coral por dentro del panel (evita el anillo azul del navegador)
+      &:focus-visible {
+        outline: 3px solid var(--coral-marca);
+        outline-offset: -3px;
+        border-radius: 0.9rem;
+      }
+  }
+}
+
+// ---------------------------------------------------------
+// Navegación desplegable (todos los tamaños desde v4.14.0)
+// El menú es siempre un dropdown bajo la barra, abierto con el botón
+// hamburguesa. Antes (<v4.14.0) solo lo era en <768px y en desktop la
+// nav se mostraba en línea.
+// ---------------------------------------------------------
+.nav-backdrop {
+  display: none;
+  position: fixed;
+  // La barra (ancestro) lleva backdrop-filter, lo que la convierte en bloque
+  // contenedor de este fixed: con inset:0 solo cubriría la barra. Los insets
+  // negativos lo extienden más allá de ella hasta cubrir todo el viewport
+  // (la barra no tiene overflow:hidden). NO mover el backdrop a body (ver
+  // restricción *Stacking z-index del menú*).
+  inset: -100vh -100vw;
+  // Backdrop invisible visualmente pero funcional para clicks
+  background: transparent;
+  backdrop-filter: none;
+  z-index: 1500; // Capa intermedia
+}
+
+.nav-backdrop.is-active {
+  display: block;
+}
+
+// Dropdown overlay bajo la barra (móvil y desktop)
+
+  .navegacion.is-open {
+    display: flex;
+  }
+
+
+@media (max-width: 767px) {
+  // Solo en móvil bloqueamos el scroll del documento con el menú abierto
+  body.nav-open {
+    overflow: hidden;
+    touch-action: none;
+  }
+}
+
+@media (min-width: 768px) {
+  // Desktop: el desplegable se ancla bajo el botón hamburguesa (derecha)
+  // en vez de ocupar todo el ancho de la barra
+  .navegacion {
+    left: auto;
+    right: 0.75rem;
+    min-width: 26rem;
+    max-width: 32rem;
+    z-index: 2500;
+  }
+}
+
+
+
+
+// Contenedor del selector de idioma
+.header__lang {
+  position: relative;
+  margin-right: 1rem; // Espacio respecto al botón de modo oscuro
+  
+  @media (max-width: 767px) {
+    margin-right: 0.5rem; // Margen más pequeño en móviles
+  }
+}
+
+// Botón principal del selector
+.header__lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(3, 49, 95, 0.95);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 0.5rem;
+  color: v.$blanco;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  line-height: 1;
+  min-height: 44px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+  // Icono (globo) generado por CSS para no tocar el HTML
+  &::before {
+    content: "";
+    width: 1.15rem;
+    height: 1.15rem;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 2a10 10 0 100 20 10 10 0 000-20zm7.93 9h-3.18a15.9 15.9 0 00-1.36-6.05A8.02 8.02 0 0119.93 11zM12 4c1.2 1.64 2.05 4.08 2.3 7H9.7c.25-2.92 1.1-5.36 2.3-7zM4.07 13h3.18c.22 2.12.72 4.18 1.36 6.05A8.02 8.02 0 014.07 13zm3.18-2H4.07a8.02 8.02 0 014.72-6.05A15.9 15.9 0 007.25 11zM12 20c-1.2-1.64-2.05-4.08-2.3-7h4.6c-.25 2.92-1.1 5.36-2.3 7zm3.39-.95c.64-1.87 1.14-3.93 1.36-6.05h3.18a8.02 8.02 0 01-4.54 6.05z'/%3E%3C/svg%3E");
+  }
+  
+  @media (max-width: 767px) {
+    // Solo icono en móvil (el texto queda accesible vía aria-label)
+    font-size: 0;
+    padding: 0.45rem;
+    width: 2.6rem;
+    justify-content: center;
+  }
+  
+  &:hover,
+  &:focus-visible {
+    // background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(var(--coral-marca-rgb), 0.7);
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+  }
+}
+
+// Opciones desplegables
+.header__lang-options {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  z-index: 1000;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &.active {
+    display: block;
+  }
+
+  // Estados aria (antes en abstracts/_accessibility.scss, v4.39.2)
+  &[aria-expanded="false"] {
+    display: none;
+  }
+
+  &[aria-expanded="true"] {
+    display: block;
+    animation: dropdownOpen 0.2s ease-out;
+  }
+}
+
+// Opciones individuales
+.header__lang-option {
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: v.$secondary-color;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-transform: none;
+  
+  &:hover {
+    // background-color: #f0f0f0;
+    background-color: var(--coral-marca);
+    color: v.$blanco-hueso;
+    font-weight: bold;
+  }
+}
+
+
+
+
+// Fondo por defecto para la barra de navegación (modo claro)
+// Usa patrón overlay (::before) para transiciones suaves entre gradiente y color sólido
+
+// Fondo cuando se hace scroll (modo claro)
+// Ligeramente más opaco al hacer scroll

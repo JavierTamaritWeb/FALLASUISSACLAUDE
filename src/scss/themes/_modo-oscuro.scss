@@ -11,6 +11,13 @@ body {
   --theme-transition-delay: 0ms;
   color: v.$gris-muy-oscuro;
   transition: background-color var(--theme-transition), color var(--theme-transition);
+
+  // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
+  & {
+
+    scrollbar-color: var(--coral-marca) v.$gris-claro;
+    scrollbar-width: thin;
+  }
 }
 
 body.modo-claro {
@@ -112,15 +119,12 @@ body,
 :where(.organigrama__title),
 :where(.organigrama__section),
 :where(.ics-modal__contenido),
-:where(#modal-quieres),
-:where(#modal-quieres-content),
+:where(.modal-quieres),
+:where(.modal-quieres__content),
 :where(.modal-title),
 :where(.close-modal),
-:where(#quieres-form label),
-:where(#quieres-nombre),
-:where(#quieres-telefono),
-:where(#quieres-email),
-:where(#quieres-mensaje),
+:where(.quieres-form label),
+:where(.quieres-form__campo),
 :where(.banner-subvencion__contenido),
 :where(.banner-subvencion__cerrar),
 :where(.banner-subvencion__imagen) {
@@ -203,15 +207,12 @@ body.transicion-a-claro .banner-subvencion__imagen {
 
 // Transición de oscuro a claro para el modal "quieres"
 // Usamos valores explícitos (no CSS variables) para máxima compatibilidad con Safari
-body.transicion-a-claro #modal-quieres-content,
-body.transicion-a-claro #modal-quieres .modal-content,
-body.transicion-a-claro #modal-quieres .modal-title,
-body.transicion-a-claro #modal-quieres .close-modal,
-body.transicion-a-claro #quieres-form label,
-body.transicion-a-claro #quieres-nombre,
-body.transicion-a-claro #quieres-telefono,
-body.transicion-a-claro #quieres-email,
-body.transicion-a-claro #quieres-mensaje {
+body.transicion-a-claro .modal-quieres__content,
+body.transicion-a-claro .modal-quieres .modal-content,
+body.transicion-a-claro .modal-quieres .modal-title,
+body.transicion-a-claro .modal-quieres .close-modal,
+body.transicion-a-claro .quieres-form label,
+body.transicion-a-claro .quieres-form__campo {
   transition:
     background-color 2.4s ease-in-out,
     color 2.4s ease-in-out,
@@ -358,6 +359,12 @@ body.modo-oscuro .calendario-eventos__mini-encabezado {
 
 body.modo-oscuro .calendario-eventos__mini-dia {
   background-color: v.$gris-muy-oscuro;
+
+  // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
+  & {
+
+    color: v.$blanco-hueso;
+  }
 }
 
 body.modo-oscuro .calendario-eventos__detalles-mes {
@@ -394,9 +401,6 @@ body.modo-oscuro .ics-modal__cerrar {
   color: v.$coral-claro;
 }
 
-body.modo-oscuro .calendario-eventos__mini-dia {
-  color: v.$blanco-hueso;
-}
 
 /* ----------------------------------------------
    MODO OSCURO MODAL ICS
@@ -543,10 +547,6 @@ body.modo-oscuro::-webkit-scrollbar-track {
   background-color: v.$negro-casi;
 }
 
-body {
-  scrollbar-color: var(--coral-marca) v.$gris-claro;
-  scrollbar-width: thin;
-}
 
 html {
   scrollbar-color: var(--coral-marca) v.$gris-claro;
@@ -682,7 +682,7 @@ body.modo-oscuro .accordion__icon--active {
 }
 body.modo-oscuro {
   // Modal QUIERES (puedes ajustar el selector según tu estructura)
-  #modal-quieres {
+  .modal-quieres {
     .modal-content {
       background-color: v.$secondary-color;  // Color oscuro de fondo
       color: v.$blanco;                      // Color del texto para buena visibilidad
@@ -1117,19 +1117,16 @@ body.modo-oscuro .navegacion {
 
 //  MODAL QUIERES
 
-body.modo-oscuro #modal-quieres-content {
+body.modo-oscuro .modal-quieres__content {
   background-color: v.$secondary-color;
 }
 
 // Estilos del formulario en modo oscuro
-body.modo-oscuro #quieres-form label {
+body.modo-oscuro .quieres-form label {
   color: v.$blanco-hueso;
 }
 
-body.modo-oscuro #quieres-nombre,
-body.modo-oscuro #quieres-telefono,
-body.modo-oscuro #quieres-email,
-body.modo-oscuro #quieres-mensaje {
+body.modo-oscuro .quieres-form__campo {
   background-color: v.$gris-muy-oscuro;
   color: v.$blanco;
   border-color: v.$gris-medio-oscuro;

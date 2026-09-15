@@ -255,7 +255,7 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.39.1
+Última actualización: 15 de septiembre de 2026 - v4.39.2
 
 ## Guardias de compilación y despliegue (13-09-2026)
 
@@ -275,7 +275,7 @@ Ejecutar `npm run seo:verify:production` después del despliegue. Consulta produ
 
 Al cambiar el pipeline, reiniciar `npm run dev`: un watcher ya abierto mantiene en memoria el Gulp anterior y puede sobrescribir los nuevos artefactos. No ejecutar dos watchers del mismo checkout.
 
-Las fotos de acordeones cerrados no deben descargarse al abrir la portada. `_falla.scss` usa `content-visibility: hidden` hasta la primera apertura; `acc.js` marca `.accordion__section--visited` antes de medir la altura. Los cierres y reaperturas mantienen la animación y las imágenes ya cargadas.
+Las fotos de acordeones cerrados no deben descargarse al abrir la portada. `_accordion.scss` (antes `_falla.scss`) usa `content-visibility: hidden` hasta la primera apertura; `acc.js` marca `.accordion__section--visited` antes de medir la altura. Los cierres y reaperturas mantienen la animación y las imágenes ya cargadas.
 
 ### Tipografías locales (v4.30.21)
 

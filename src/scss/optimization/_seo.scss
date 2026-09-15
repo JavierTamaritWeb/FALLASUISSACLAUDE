@@ -85,11 +85,8 @@ img, video {
 // Sin fondo sólido: solo accessibility.js marca `.loaded` y 30 páginas no lo
 // cargan, así que el #f5f5f5 se quedaba para siempre bajo los PNG/SVG
 // transparentes (caja blanca del icono del calendario en modo oscuro, v4.30.1).
-// El placeholder de carga vive en abstracts/_accessibility.scss.
-img[loading="lazy"] {
-  content-visibility: auto;
-  contain-intrinsic-size: 300px 200px;
-}
+// El placeholder de carga vive en abstracts/_accessibility.scss y content-visibility en
+// components/_image-optimization.scss (v4.39.2).
 
 /* 5. STRUCTURED DATA SUPPORT */
 
@@ -132,18 +129,7 @@ img[loading="lazy"] {
 
 /* 7. ACCESSIBILITY FOR BETTER SEO */
 
-/* Screen reader optimization */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
+/* Screen reader optimization: .sr-only vive en abstracts/_accessibility.scss (v4.39.2) */
 
 /* Focus indicators for keyboard navigation */
 a:focus, button:focus, input:focus {

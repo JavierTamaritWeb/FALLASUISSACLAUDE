@@ -1,28 +1,8 @@
 // scss/animaciones/_waves.scss
 
-// Asegúrate de importar las variables si las necesitas
-@use '../abstracts/variables' as v;
+// Solo la animación de las olas; la caja .waves y .header__wave viven en layout/_header.scss (v4.39.2).
 
-.header {
 
-  &__wave{
-    position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  }
-  
-}
-
-.waves {
-  display: block;
-  width: 100%;
-  height: 15vh;      // Ajusta la altura según el diseño
-  min-height: 100px; // Altura mínima
-  max-height: 150px; // Altura máxima
-}
 
 /* Animación de las olas: cada <use> se mueve a diferentes velocidades */
 .parallax > use {

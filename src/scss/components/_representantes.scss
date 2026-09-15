@@ -56,6 +56,68 @@
       padding: 1.5rem;
     }
   }
+
+  // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
+  & {
+
+    .representantes-grid__trigger,
+    .monumentos-grid__trigger,
+    .ofrendas-grid__trigger {
+      display: block;
+      width: 100%;
+      height: auto;
+      padding: 0;
+      // Mismo ancho maximo que la miniatura para que el badge "+" (anclado al
+      // borde derecho del trigger) quede siempre sobre la imagen
+      max-width: 24rem;
+      margin: 0 auto;
+      border: 0;
+      border-radius: 0.8rem;
+      background: none;
+      cursor: zoom-in;
+
+      // El trigger base tiene `overflow: hidden`: aquí NO, para que el
+      // translateY del hover de la miniatura y el "+" no se recorten.
+      overflow: visible;
+
+      picture {
+        display: block;
+      }
+
+      // Recupera el aspecto de Representantes: el trigger base fuerza
+      // `object-fit: contain` y tamaño 100% en sus img.
+      .representantes-grid__imagen {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-width: 24rem;
+        margin: 0 auto;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        filter: none;
+        transition: transform 0.35s ease, filter 0.35s ease,
+          box-shadow 0.3s ease;
+      }
+
+      // Mismo hover que Representantes (el trigger base aplica scale(1.03))
+      // mas el oscurecido de las miniaturas ampliables (v4.15.1)
+      &:hover .representantes-grid__imagen,
+      &:focus-visible .representantes-grid__imagen {
+        filter: brightness(0.72);
+        transform: translateY(-0.4rem);
+      }
+
+      &:hover,
+      &:focus-visible {
+        background: none;
+      }
+
+      &:focus-visible {
+        outline: 3px solid var(--coral-marca);
+        outline-offset: 0.3rem;
+      }
+    }
+  }
 }
 
 .representantes-grid {
@@ -211,66 +273,6 @@ body.modo-oscuro .accordion--representantes {
 // del trigger base de _colaboraciones.scss para que la miniatura conserve el
 // aspecto de Representantes; el badge "+" y el oscurecido del hover se
 // heredan del trigger base.
-.accordion--representantes {
-  .representantes-grid__trigger,
-  .monumentos-grid__trigger,
-  .ofrendas-grid__trigger {
-    display: block;
-    width: 100%;
-    height: auto;
-    padding: 0;
-    // Mismo ancho maximo que la miniatura para que el badge "+" (anclado al
-    // borde derecho del trigger) quede siempre sobre la imagen
-    max-width: 24rem;
-    margin: 0 auto;
-    border: 0;
-    border-radius: 0.8rem;
-    background: none;
-    cursor: zoom-in;
-
-    // El trigger base tiene `overflow: hidden`: aquí NO, para que el
-    // translateY del hover de la miniatura y el "+" no se recorten.
-    overflow: visible;
-
-    picture {
-      display: block;
-    }
-
-    // Recupera el aspecto de Representantes: el trigger base fuerza
-    // `object-fit: contain` y tamaño 100% en sus img.
-    .representantes-grid__imagen {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-width: 24rem;
-      margin: 0 auto;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      filter: none;
-      transition: transform 0.35s ease, filter 0.35s ease,
-        box-shadow 0.3s ease;
-    }
-
-    // Mismo hover que Representantes (el trigger base aplica scale(1.03))
-    // mas el oscurecido de las miniaturas ampliables (v4.15.1)
-    &:hover .representantes-grid__imagen,
-    &:focus-visible .representantes-grid__imagen {
-      filter: brightness(0.72);
-      transform: translateY(-0.4rem);
-    }
-
-    &:hover,
-    &:focus-visible {
-      background: none;
-    }
-
-    &:focus-visible {
-      outline: 3px solid var(--coral-marca);
-      outline-offset: 0.3rem;
-    }
-  }
-
-}
 
 .accordion--monumentos {
   // Paneles con 2 miniaturas (Monumento 2026-27 y 2024-25, v4.32.0): dos

@@ -1630,27 +1630,27 @@ Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra
   </section>
 
   <!-- Modal "quieres-mas" -->
-  <div id="modal-quieres" class="modal">
-    <div class="modal-content" id="modal-quieres-content">
+  <div id="modal-quieres" class="modal modal-quieres">
+    <div class="modal-content modal-quieres__content" id="modal-quieres-content">
       <span class="close-modal" id="close-quieres-modal">&times;</span>
       <h2 class="modal-title" data-i18n="quieres.pregunta">¿Quieres formar parte de nuestra Falla?</h2>
-      <form id="quieres-form">
+      <form id="quieres-form" class="quieres-form">
         <div class="form-group">
           <label for="quieres-nombre" data-i18n="quieres.nombre">Nombre</label>
-          <input type="text" id="quieres-nombre" name="nombre" required placeholder="Nombre y apellidos" data-i18n-placeholder="quieres.nombrePlaceholder">
+          <input type="text" id="quieres-nombre" class="quieres-form__campo" name="nombre" required placeholder="Nombre y apellidos" data-i18n-placeholder="quieres.nombrePlaceholder">
         </div>
         <div class="form-group">
           <label for="quieres-email">Email</label>
-          <input type="email" id="quieres-email" name="email" required placeholder="e-mail">
+          <input type="email" id="quieres-email" class="quieres-form__campo" name="email" required placeholder="e-mail">
         </div>
         <div class="form-group">
           <label for="quieres-telefono" data-i18n="quieres.telefono">Teléfono</label>
           <!-- Se usa el tipo "tel" y un patrón para exigir "+34" seguido de 9 dígitos -->
-          <input type="tel" id="quieres-telefono" name="telefono" placeholder="+34555443322" pattern="^\+34\d{9}$" required>
+          <input type="tel" id="quieres-telefono" class="quieres-form__campo" name="telefono" placeholder="+34555443322" pattern="^\+34\d{9}$" required>
         </div>
         <div class="form-group">
           <label for="quieres-mensaje" data-i18n="quieres.mensaje">Mensaje</label>
-          <textarea id="quieres-mensaje" name="mensaje" maxlength="300" required placeholder="Introduce un mensaje" data-i18n-placeholder="quieres.mensajePlaceholder"></textarea>
+          <textarea id="quieres-mensaje" class="quieres-form__campo" name="mensaje" maxlength="300" required placeholder="Introduce un mensaje" data-i18n-placeholder="quieres.mensajePlaceholder"></textarea>
         </div>
         <div class="form-group form-group--consentimiento">
           <input type="checkbox" id="quieres-privacidad" name="privacidad" required>

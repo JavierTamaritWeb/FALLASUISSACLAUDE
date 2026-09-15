@@ -1,0 +1,551 @@
+// scss/components/_accordion.scss
+// Acordeón base (.accordion, .accordion__titular con el hover de .boton), .visually-hidden
+// y las reglas de modo claro de Nosotros/Historia (body:not(.modo-oscuro) …).
+@use '../abstracts/variables' as v;
+
+.accordion {
+  width: 100%;
+  max-width: 100rem;
+  background-color: v.$naranja-suave;
+  color: var(--coral-marca);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+  // Titular del acordeón. Desde v4.27.0 replica el hover de `.boton`
+  // (_buttons.scss): degradado coral→salmón, texto en $negro-casi, brillo que
+  // recorre la fila y el icono ▼ que se desplaza. NO se copia la elevación
+  // (`translateY(-3px)`): en filas apiladas pisaría la fila anterior y el
+  // `overflow: hidden` del .accordion la recortaría. Por el mismo motivo se
+  // anula aquí el `translateY(-1px)` + sombra que _accessibility.scss aplica a
+  // todo `button:hover` (los titulares de Archivos son <button>).
+  &__titular {
+    background-color: v.$naranja-suave;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    isolation: isolate;
+    overflow: hidden;
+    padding-right: 3rem;
+    position: relative;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease,
+      filter 0.3s ease;
+    padding: 1rem;
+
+    @media (max-width: 767px) {
+      padding: 0.5rem 1rem; // Padding más compacto en móviles
+      padding-right: 2rem;
+    }
+
+    // Brillo que recorre la fila (copiado de .boton::before). Queda DEBAJO del
+    // texto (z-index 0 dentro del contexto aislado; título e icono llevan
+    // z-index 1) para no velar un <h3> de 2,4rem.
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.08) 22%,
+        rgba(255, 255, 255, 0.45) 50%,
+        transparent 78%
+      );
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-135%);
+      transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: linear-gradient(
+        135deg,
+        rgba(var(--coral-marca-rgb), 0.98) 0%,
+        rgba(v.$rojo-salmon, 0.95) 100%
+      );
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+      color: v.$negro-casi;
+      filter: saturate(1.05) brightness(1.02);
+      transform: none; // anula el button:hover global de _accessibility.scss
+
+      &::before {
+        opacity: 1;
+        transform: translateX(135%);
+      }
+
+      .accordion__header,
+      .accordion__icon {
+        color: v.$negro-casi;
+      }
+
+      .accordion__icon {
+        transform: translateY(0.25rem);
+      }
+
+      .accordion__icon--active {
+        transform: rotate(180deg) translateY(-0.25rem);
+      }
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow:
+        0 0 0 0.35rem rgba(var(--coral-marca-rgb), 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    }
+
+    // Foco por ratón en los titulares <button>: sin el contorno azul de _seo.scss
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+  }
+  &__header {
+    padding: 1rem 2rem;
+    font-size: 2.4rem;
+    text-transform: none;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+
+    @media (max-width: 767px) {
+      font-size: 1.4rem; // Más pequeño para móviles
+      padding: 0.8rem 1rem;
+      // A 14px el titular va sobre la fila clara ($naranja-suave), no sobre el
+      // azul: el coral claro de v4.29.0 daba 1,6:1 (ilegible). $coral-texto da
+      // 5,0:1 (v4.30.24). En oscuro manda _modo-oscuro.scss; en hover, .accordion__titular.
+      color: v.$coral-texto;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      font-size: 1.8rem;
+      padding: 1rem 1.5rem;
+    }
+  }
+  &__icon {
+    color: var(--coral-marca);
+    font-size: 1.5rem;
+    padding-right: 1rem;
+    position: relative;
+    z-index: 1;
+    transform: rotate(0deg);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+
+    @media (max-width: 767px) {
+      font-size: 1.2rem; // Icono más pequeño para móviles
+      padding-right: 0.5rem;
+    }
+  }
+  &__icon--active {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+  }
+  &__section {
+    // Deep links del buscador (v4.29.0): al desplazar hasta el panel abierto,
+    // deja hueco para la barra fija de la cabecera.
+    scroll-margin-top: 8rem;
+    border-bottom: 1px solid v.$gris-medio-claro;
+
+    // No renderizar fotos de paneles nunca abiertos: el recorte por altura
+    // permitía que la carga lazy descargase todo el archivo en la portada.
+    &:not(.active):not(.accordion__section--visited) > .accordion__content {
+      content-visibility: hidden;
+    }
+
+    // Contenido del acordeón (oculto por defecto)
+    .accordion__content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      background: v.$gradiente-institucional;
+      
+      .accordion__content-inner {
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: justify;
+        
+        // Imagen centrada en la parte superior
+        .accordion__escudo {
+          display: block;
+          margin: 3rem auto 1rem;
+          width: 7rem !important;  // Más pequeño por defecto para pantallas grandes
+          height: auto;
+          border-radius: 1rem;
+          background: transparent !important;
+          
+          @media (max-width: 767px) {
+            width: 8rem !important;  // Tamaño intermedio para tablets
+          }
+          
+          @media (max-width: 480px) {
+            width: 6rem !important;  // Más pequeño en móviles
+          }
+        }
+        .accordion__leyenda-foto {
+          width: 100%;
+          color: v.$blanco-hueso;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-evenly;
+          padding: 5rem 3rem;
+          border-radius: 1rem;
+          
+          @media (max-width: 480px) {
+            flex-direction: column;
+            padding: 0 0.5rem;
+          }
+          @media (max-width: 767px) {
+            padding: 0 1rem;
+          }
+        }
+        .accordion__planamayor {
+          display: block;
+          margin: 3rem auto 1rem;
+          width: 12rem !important;  // Tamaño más pequeño por defecto
+          height: auto;
+          border-radius: 1rem;
+          border: 2px solid var(--coral-marca);
+          box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+          opacity: 1 !important; // Asegurar que las imágenes del acordeón no se vean difuminadas
+          
+          @media (max-width: 767px) {
+            width: 14rem !important;  // Tamaño intermedio para tablets
+          }
+          
+          @media (max-width: 480px) {
+            width: 10rem !important;  // Más pequeña en móviles
+          }
+          @media (min-width: 768px) {
+            width: 30rem !important;  // Tamaño más pequeño por defecto
+            
+          }
+        }
+        // Miniaturas ampliables de la Plana Mayor (v4.15.3): el <picture> va
+        // dentro de un `.colaboraciones-mosaic__trigger` para reutilizar el
+        // lightbox compartido de Colaboraciones, de modo que el badge "+" y el
+        // oscurecido del hover se heredan del trigger base. Aqui solo se
+        // neutraliza ese trigger para que la foto conserve su aspecto original.
+        .accordion__planamayor-trigger {
+          display: block;
+          width: fit-content;
+          max-width: 100%;
+          height: auto;
+          // El margen vertical pasa del <img> al boton: si se queda en la
+          // imagen, el badge "+" (anclado al borde del trigger) flota sobre el
+          // hueco superior en vez de sobre la foto.
+          margin: 3rem auto 1rem;
+          padding: 0;
+          background: none;
+          border: 0;
+          border-radius: 1rem;
+          cursor: zoom-in;
+          // El trigger base recorta con `overflow: hidden`: aqui no, para que
+          // no se corten el "+" ni la sombra de la foto.
+          overflow: visible;
+
+          picture {
+            display: block;
+          }
+
+          // El badge "+" base mide 3,2rem: sobre la foto de 10rem de movil
+          // tapaba la cara, asi que aqui se reduce.
+          @media (max-width: 480px) {
+            &::after {
+              width: 2.4rem;
+              height: 2.4rem;
+              top: 0.5rem;
+              right: 0.5rem;
+              background-size: 1rem 0.18rem, 0.18rem 1rem;
+            }
+          }
+
+          // El trigger base fuerza `object-fit: contain`, `height: 100%` y un
+          // drop-shadow en sus img.
+          .accordion__planamayor {
+            margin: 0;
+            height: auto;
+            object-fit: cover;
+            filter: none;
+            transition: transform 0.35s ease, filter 0.35s ease,
+              box-shadow 0.3s ease;
+          }
+
+          &:hover .accordion__planamayor,
+          &:focus-visible .accordion__planamayor {
+            filter: brightness(0.72);
+            transform: scale(1.03);
+          }
+
+          &:hover,
+          &:focus-visible {
+            background: none;
+          }
+
+          &:focus-visible {
+            outline: 3px solid var(--coral-marca);
+            outline-offset: 0.3rem;
+          }
+        }
+        .accordion__nombre-plana-mayor {
+          color: v.$coral-texto; // 5,0:1 sobre $naranja-suave (v4.29.0)
+          background-color: v.$naranja-suave;
+          padding: 1rem 1.5rem;
+          margin: 1rem 0;
+          border-left: 4px solid var(--coral-marca);
+          border-radius: 4px;
+          text-transform: none;
+          @media (max-width: 480px) {
+            font-size: 1.5rem;
+          }
+          @media (max-width: 767px) {
+            font-size: 1.8rem;
+          }
+          @media (min-width: 768px) {
+            font-size: 2rem;
+          }
+          @media (min-width: 1200px) {
+            white-space: nowrap;
+          }
+        }
+        .accordion__texto {
+          text-indent: 3rem;
+          font-size: 1.6rem;
+          line-height: 1.5;
+          color: v.$blanco-hueso;
+          margin: 0;
+          padding: 1rem;
+          white-space: pre-line;
+        }
+
+        // Paneles de la Plana Mayor en pantallas de más de 1200 px (v4.30.31,
+        // croquis del usuario): foto a la izquierda y, a su derecha, el nombre
+        // arriba y el texto en una caja debajo. Sin tocar el HTML: el
+        // contenedor `.accordion__leyenda-foto` pasa a `display: contents`
+        // para que la foto y el nombre sean celdas de la rejilla del panel.
+        &:has(> .accordion__leyenda-foto) {
+          @media (min-width: 1201px) {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+              "foto nombre"
+              "foto texto";
+            column-gap: 5rem;
+            row-gap: 2rem;
+            align-items: start;
+            max-width: 120rem;
+            margin-inline: auto;
+            padding: 5rem 4rem;
+
+            .accordion__leyenda-foto {
+              display: contents;
+            }
+            .accordion__planamayor-trigger {
+              grid-area: foto;
+              margin: 0;
+            }
+            .accordion__nombre-plana-mayor {
+              grid-area: nombre;
+              justify-self: start;
+              margin: 0;
+            }
+            .accordion__texto {
+              grid-area: texto;
+              align-self: stretch;
+              align-content: center; // texto centrado en la caja (bloque)
+              padding: 2.4rem 3rem;
+              border: 1px solid rgba(255, 255, 255, 0.35);
+              border-radius: 1rem;
+              background-color: rgba(255, 255, 255, 0.06);
+
+              // En claro, caja turquesa (v4.30.33): $turquesa-texto da 4,7:1
+              // con el texto $blanco-hueso ($turquesa de marca solo 3,5:1).
+              body:not(.modo-oscuro) & {
+                background-color: v.$turquesa-texto;
+                border-color: v.$turquesa;
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // Estado activo: rota el icono. El alto del panel abierto NO se fija aquí:
+    // lo calcula js/acc.js (scrollHeight y después `max-height: none`), porque
+    // cualquier tope fijo (antes 100rem) recortaba los paneles más altos
+    // (HOPE en colaboraciones.html, Organigrama y Plana Mayor en móvil).
+    &.active {
+      .accordion__header .accordion__icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    margin: 1rem;
+    border-radius: 0.5rem;
+    
+    &__header {
+      padding: 0.8rem 1rem;
+      font-size: 1.2rem; // Aún más pequeño para pantallas muy pequeñas
+    }
+  }
+  @media (min-width: 481px) and (max-width: 767px) {
+    margin: 1rem;
+    border-radius: 0.5rem;
+    
+    &__header {
+      padding: 0.8rem 1rem;
+      font-size: 1.4rem; // Tamaño para pantallas medianas
+    }
+  }
+}
+
+/* ARIA live region (oculto visualmente) */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+
+// Acordeón de «Nosotros» (Plana Mayor) en modo claro:
+// - v4.30.26: titulares y ▼ en turquesa.
+// - v4.30.27: filas en rosa $rosa-acordeon (#FDF0F3 desde v4.30.28) en lugar de $naranja-suave
+//   y hover/foco en $rosa-acordeon-hover (#FF5A8E, sustituye al degradado coral)
+//   con el texto en $negro-casi (6,4:1). Sobre el rosa, el turquesa de marca daba
+//   3,5:1 (insuficiente para 14px), así que los titulares usan $turquesa-sobre-rosa
+//   (#007A86, 4,6:1 en todos los tamaños).
+// Desde v4.30.32 la subsección «Historia» comparte esta paleta: contenedor
+// turquesa suave con borde azul, caja de Archivos en rosa con borde turquesa,
+// títulos en turquesa y sus acordeones (Representantes, Monumentos, Ofrendas)
+// con las mismas filas rosa y hover. El modo oscuro no cambia.
+body:not(.modo-oscuro) .historia {
+  &__prologo {
+    background: v.$turquesa-suave;
+    border-color: v.$azul-titulo-seccion;
+  }
+  &__archivos {
+    background-color: v.$rosa-acordeon;
+    border: 1px solid v.$turquesa;
+    color: v.$turquesa-sobre-rosa;
+  }
+  &__archivos-titulo,
+  &__archivos-subtitulo,
+  &__card-cluster-label,
+  &__card-title {
+    color: v.$turquesa-sobre-rosa;
+  }
+  &__card-cluster-label {
+    background-color: rgba(v.$turquesa, 0.12);
+  }
+  &__card-cluster {
+    border-color: rgba(v.$turquesa, 0.28);
+    background: linear-gradient(135deg, rgba(v.$turquesa, 0.12), rgba(255, 255, 255, 0.84));
+    &:hover,
+    &:focus-within {
+      border-color: rgba(v.$turquesa, 0.62);
+    }
+  }
+  &__card--digital .historia__card-title {
+    color: v.$color-azul-falla;
+  }
+  &__archivos .accordion {
+    border: 1px solid v.$turquesa;
+  }
+  // Paneles de Archivos (Representantes v4.30.37; Monumentos y Ofrendas
+  // v4.30.38): fondo $turquesa-claro en lugar del degradado azul; los textos
+  // pasan a oscuros (nombre $coral-texto 4,1:1 para 20px en negrita; cargo,
+  // pies de foto/vídeo y placeholder $negro-casi).
+  &__archivos .accordion--representantes {
+    .accordion__content {
+      background: v.$turquesa-claro;
+    }
+    .representantes-grid__nombre {
+      color: v.$coral-texto;
+    }
+    .representantes-grid__cargo,
+    .representantes-grid__placeholder {
+      color: v.$negro-casi;
+    }
+    .representantes-grid__imagen {
+      box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
+    }
+  }
+  // Rejillas de Presentaciones y Llibrets en turquesa claro (v4.30.36;
+  // en 4.30.34-35 fue $turquesa-texto, demasiado oscuro para el usuario).
+  &__grid {
+    background-color: v.$turquesa-claro;
+    border: 1px solid v.$turquesa;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  // Las tarjetas PDF replican el hover de los titulares de estos acordeones:
+  // en claro, rosa sólido (no el degradado coral) con el texto en oscuro.
+  &__card:hover,
+  &__card:focus-visible {
+    background: v.$rosa-acordeon-hover;
+
+    .historia__card-title {
+      color: v.$negro-casi;
+    }
+  }
+}
+
+// Paneles de la Plana Mayor (los cuatro con foto) en claro: fondo
+// $turquesa-claro en lugar del degradado azul (v4.30.39). Por debajo de
+// 1201 px el texto va directamente sobre el panel y pasa a $negro-casi; en
+// pantallas mayores sigue en hueso dentro de su caja turquesa oscura.
+// Desde v4.36.1 también La Directiva y el Organigrama (sus tarjetas ya son
+// claras, solo cambia el fondo del panel); antes conservaban el azul.
+body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion .accordion__content {
+  background: v.$turquesa-claro;
+
+  // Texto directamente sobre el turquesa claro (leyenda del organigrama y, por
+  // debajo de 1201 px, el texto de la Plana Mayor): $negro-casi
+  .accordion__texto {
+    color: v.$negro-casi;
+  }
+
+  // La caja turquesa oscura de la Plana Mayor (≥ 1201 px) conserva el texto hueso
+  &:has(.accordion__leyenda-foto) {
+    @media (min-width: 1201px) {
+      .accordion__texto {
+        color: v.$blanco-hueso;
+      }
+    }
+  }
+}
+
+body:not(.modo-oscuro) .falleros__nosotros--plana-mayor > .accordion,
+body:not(.modo-oscuro) .historia__archivos .accordion {
+  background-color: v.$rosa-acordeon;
+
+  .accordion__titular {
+    background-color: v.$rosa-acordeon;
+
+    &:hover,
+    &:focus-visible {
+      background: v.$rosa-acordeon-hover;
+    }
+
+    &:not(:hover):not(:focus-visible) {
+      .accordion__header,
+      .accordion__icon {
+        color: v.$turquesa-sobre-rosa;
+      }
+    }
+  }
+}

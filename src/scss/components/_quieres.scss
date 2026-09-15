@@ -74,7 +74,7 @@
 }
 
 /* Modal "quieres-mas" (usando el mismo estilo que el modal de día) */
-#modal-quieres {
+.modal-quieres {
   position: fixed;
   top: 0;
   left: 0;
@@ -96,7 +96,7 @@
   }
 }
 
-#modal-quieres .modal-content {
+.modal-quieres .modal-content {
   background-color: v.$blanco;
   position: relative;
   padding: 1.6rem;
@@ -115,10 +115,7 @@
 }
 
 // Inputs del formulario con transición de tema (valores explícitos)
-#quieres-nombre,
-#quieres-telefono,
-#quieres-email,
-#quieres-mensaje {
+.quieres-form__campo {
   background-color: v.$gris-medio-oscuro;
   color: v.$blanco;
   transition:
@@ -139,7 +136,7 @@
   to   { transform: scale(1); opacity: 1; }
 }
 
-#modal-quieres .close-modal {
+.modal-quieres .close-modal {
   position: absolute;
   top: 1rem;
   right: 1.8rem;
@@ -149,7 +146,7 @@
   transition: color 2.4s ease-in-out;
 }
 
-#modal-quieres .modal-title {
+.modal-quieres .modal-title {
   font-size: v.$font-size-medium;
   color: var(--coral-marca);
   margin-bottom: 1rem;
@@ -159,7 +156,7 @@
 /* Modal de resultado (lo inyecta envia.js tras enviar el formulario).
    El modal vive dentro de .quieres-mas (texto claro sobre fondo azul):
    sin colores explícitos, el texto heredado es ilegible sobre el modal blanco. */
-#modal-quieres .modal-header {
+.modal-quieres .modal-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -172,8 +169,8 @@
 
 // Cabecera del modal de resultado por estado (v4.29.0): antes envia.js usaba
 // las clases Bootstrap bg-success/bg-danger, sin CSS propio. Color + icono.
-#modal-quieres .modal-header--exito,
-#modal-quieres .modal-header--error {
+.modal-quieres .modal-header--exito,
+.modal-quieres .modal-header--error {
   color: v.$blanco;
   padding: 1rem 1.4rem;
   border-radius: v.$border-radius v.$border-radius 0 0;
@@ -189,7 +186,7 @@
   }
 }
 
-#modal-quieres .modal-header--exito {
+.modal-quieres .modal-header--exito {
   background-color: v.$estado-exito;
 
   .modal-title::before {
@@ -197,7 +194,7 @@
   }
 }
 
-#modal-quieres .modal-header--error {
+.modal-quieres .modal-header--error {
   background-color: v.$estado-error;
 
   .modal-title::before {
@@ -205,7 +202,7 @@
   }
 }
 
-#modal-quieres .btn-close {
+.modal-quieres .btn-close {
   background: none;
   border: none;
   font-size: 3rem;
@@ -216,7 +213,7 @@
   transition: color 2.4s ease-in-out;
 }
 
-#modal-quieres .modal-body {
+.modal-quieres .modal-body {
   text-align: center;
   padding-top: 1.6rem;
 
@@ -233,25 +230,25 @@
   }
 }
 
-body.modo-oscuro #modal-quieres .modal-body .lead {
+body.modo-oscuro .modal-quieres .modal-body .lead {
   color: v.$blanco-hueso; // el modal-content pasa a fondo oscuro en modo oscuro
 }
 
 
 /* Formulario */
-#quieres-form {
+.quieres-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-#quieres-form .form-group {
+.quieres-form .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-#quieres-form label {
+.quieres-form label {
   font-size: v.$font-size-small;
   color: var(--coral-marca);
   text-align: left; // Alinea el texto a la izquierda
@@ -259,32 +256,32 @@ body.modo-oscuro #modal-quieres .modal-body .lead {
   transition: color 2.4s ease-in-out;
 }
 
-#quieres-form input,
-#quieres-form textarea {
+.quieres-form input,
+.quieres-form textarea {
   font-size: v.$font-size-small;
   padding: 0.5rem;
   border: 1px solid v.$gris-claro;
   border-radius: v.$border-radius;
 }
 
-#quieres-form input:focus,
-#quieres-form textarea:focus {
+.quieres-form input:focus,
+.quieres-form textarea:focus {
   outline: none;
   box-shadow: 1px 0 5px var(--coral-marca);
 }
 
 // Fila de consentimiento RGPD: checkbox pequeño a la izquierda del texto
-#quieres-form .form-group--consentimiento {
+.quieres-form .form-group--consentimiento {
   flex-direction: row;
   align-items: center;
   gap: 0.6rem;
 }
 
-#quieres-form .form-group--consentimiento input[type="checkbox"] {
+.quieres-form .form-group--consentimiento input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   flex-shrink: 0;
-  // !important para ganar la especificidad de #quieres-form input
+  // !important para ganar la especificidad de .quieres-form input
   padding: 0 !important;
   width: 1.6rem !important;
   height: 1.6rem !important;
@@ -326,7 +323,7 @@ body.modo-oscuro #modal-quieres .modal-body .lead {
   }
 }
 
-#quieres-form .form-consentimiento__label {
+.quieres-form .form-consentimiento__label {
   font-size: v.$font-size-small;
   color: var(--coral-marca);
   cursor: pointer;
@@ -353,7 +350,7 @@ body.modo-oscuro #modal-quieres .modal-body .lead {
   
 /* Responsive */
 @media (max-width: 480px) {
-  #modal-quieres .modal-content {
+  .modal-quieres .modal-content {
     width: 90%;
     padding: 1rem;
   }

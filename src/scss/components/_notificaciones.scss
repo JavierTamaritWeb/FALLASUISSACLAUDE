@@ -33,6 +33,12 @@
 #notificacion.mostrar {
     opacity: 1;
     visibility: visible;
+
+  // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
+  & {
+
+      animation: fadeInNotificacion 0.5s forwards;
+  }
 }
 
 /* Un keyframe para animar la entrada. Nombre propio: con "fadeIn" colisionaba
@@ -43,6 +49,3 @@
     to { transform: translateX(-50%) translateY(0); opacity: 1; }
 }
 
-#notificacion.mostrar {
-    animation: fadeInNotificacion 0.5s forwards;
-}

@@ -358,6 +358,12 @@
 .actual-temp {
   color: var(--coral-marca);
   font-size: 2.8rem;
+
+  // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
+  & {
+
+    font-size: 10rem !important;
+  }
 }
 
 .actual-desc {
@@ -388,10 +394,18 @@
 
 .forecast-desc {
   font-weight: bold;
+  text-transform: none; // antes en _forecast.scss (auditoría SCSS 2.3, v4.39.2)
 }
 
 .forecast-temp {
   color: var(--coral-marca) !important;
+
+  // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
+  & {
+
+
+    font-size: 2.5rem;
+  }
 }
 
 .valor-pronostico {
@@ -406,10 +420,6 @@
   font-size: 2rem;
 }
 
-.forecast-temp{
-
-  font-size: 2.5rem;
-}
 #current-feels-like{
   color: v.$secondary-color;
 }
@@ -500,7 +510,9 @@
   */
 }
 
-/* --- Icono principal grande (current-icon-img) --- */
+/* --- Icono principal grande (current-icon-img) ---
+   Se mantiene el id (auditoría SCSS 2.6, v4.39.2): meteo.js gestiona estos elementos y sus
+   reglas por clase perdían frente a `.weather-current .current-wrapper .current-icon img`. */
 #current-icon-img {
   width: 8rem;  // Tamaño para pantallas grandes (768px+)
   height: auto;
@@ -529,9 +541,6 @@
   .forecast-info {
     font-size: 1.3rem;
   }
-}
-.actual-temp {
-  font-size: 10rem !important;
 }
 /* --- Desde 1200px --- */
 @media (min-width: 1200px) {

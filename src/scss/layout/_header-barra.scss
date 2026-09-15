@@ -1,0 +1,307 @@
+// scss/layout/_header-barra.scss
+// Barra fija de .header y .header-inner: cristal, rejilla móvil, botones de tema/idioma,
+// notificación en línea y estado --scrolled.
+@use '../abstracts/variables' as v;
+
+.header__barra,
+.header-inner__barra {
+  position: fixed;        // Barra fija en la parte superior
+  top: 1rem;
+  top: calc(env(safe-area-inset-top) + 1rem);
+  left: 0;
+  right: 0;               // Asegura que ocupe todo el ancho posible
+  max-width: 100rem;      // Nunca excede 120 rem
+  width: 100%;            // Se adapta a pantallas menores
+  margin: 0 auto;         // Se centra cuando la pantalla sea mayor de 120rem
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem; // Unifica padding para consistencia inicial, luego sobrescrito
+  background: transparent; // Fondo real transparente para dejar ver el ::before
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra más suave
+  border-radius: 2rem;
+  z-index: 2000;
+  
+  // Pseudo-elemento estilo glassmorphism (transparencia)
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    // Gradiente con opacidad 0.25 para translucidez equilibrada
+    background: linear-gradient(135deg, rgba(10, 75, 141, 0.25) 0%, rgba(2, 66, 122, 0.25) 60%, rgba(0, 51, 102, 0.25) 100%);
+    backdrop-filter: blur(15px); // Mayor desenfoque para compensar la alta transparencia
+    -webkit-backdrop-filter: blur(15px); // Safari
+    z-index: -1; // Detrás del contenido
+    border-radius: inherit; // Heredar border-radius del padre
+    transition: opacity var(--theme-transition);
+  }
+
+  @media (max-width: 767px) {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "botones notificacion menu";
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 0.3rem !important;       // Padding más compacto en móviles
+    border-radius: 1.5rem; // Radio más pequeño
+  }
+
+  @media (min-width: 768px) {
+    justify-content: space-between;
+  }
+
+  // Fusionado desde el segundo bloque de la barra (auditoría SCSS 2.2, v4.39.2)
+  & {
+
+    // Fondo transparente en modo claro - solo se ve el gradiente del ::before
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    // SIN backdrop-filter en la propia barra (v4.23.6): el ::before ya difumina
+    // su fondo (blur 15px). Si la barra lleva backdrop-filter se convierte en
+    // "backdrop root" y el desplegable .navegacion (hijo suyo) solo puede
+    // difuminar el contenido de la barra, nunca la página: el menú quedaba
+    // transparente sin blur. Ver restricción *Desplegable de cristal*.
+    z-index: 2000;
+    // NO usar overflow:hidden - recorta el menú desplegable en móvil
+    // Transición sincronizada con el tema (2.4s)
+    transition: background 2.4s ease-in-out, box-shadow 2.4s ease-in-out, border-color 2.4s ease-in-out;
+
+    // Asegurar que el contenido esté por encima del pseudo-elemento.
+    // Excluimos .navegacion (position:absolute, dropdown) y .nav-backdrop
+    // (position:fixed a pantalla completa; si entrara en el flujo flex
+    // desplazaría el botón hamburguesa y no captaría los clics fuera).
+    // Desde v4.29.0 también se excluye .buscador (panel absoluto del buscador).
+    > *:not(.navegacion):not(.nav-backdrop):not(.buscador):not(.header__botones) {
+      position: relative;
+      z-index: 1;
+    }
+
+    // El grupo de botones (idioma, tema y lupa del buscador) queda por encima del
+    // backdrop del menú (1500), como el botón hamburguesa (2600): así el buscador
+    // se puede abrir con el menú desplegado y viceversa (v4.29.0).
+    > .header__botones {
+      position: relative;
+      z-index: 2600;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  // Móvil: notificación inline entre botones y menú (misma altura)
+  .header__barra .header__botones,
+  .header-inner__barra .header__botones {
+    grid-area: botones;
+    margin-left: 0;
+    padding-left: 0.35rem;
+  }
+
+  .header__barra .header__menu-toggle,
+  .header-inner__barra .header__menu-toggle {
+    grid-area: menu;
+    margin-right: 0.15rem;
+    justify-self: end;
+  }
+
+  .header__barra #notificacion,
+  .header-inner__barra #notificacion {
+    grid-area: notificacion;
+    // Desactivar comportamiento "toast" (fixed) en móvil y que no cree hueco si no se muestra
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    transform: none;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0 0.35rem;
+    padding: 0.35rem 0.75rem;
+    min-height: 44px;
+    border-radius: 0.8rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    justify-self: center;
+
+    background-color: rgba(0, 0, 0, 0.55);
+    color: v.$blanco;
+
+    // Evita el keyframe que usa translateX(-50%) del toast
+    animation: none;
+  }
+
+  .header__barra #notificacion.mostrar,
+  .header-inner__barra #notificacion.mostrar {
+    display: inline-flex;
+  }
+}
+
+
+.header__barra--fixed,
+.header-inner__barra--fixed {
+  position: fixed;
+  top: 1rem;
+  top: calc(env(safe-area-inset-top) + 1rem);
+  left: 0;
+  z-index: 2000;
+}
+
+// ---------------------------------------------------------
+// Botones de Modo Oscuro para .header y .header-inner
+// ---------------------------------------------------------
+.header__modo-boton,
+.header-inner__modo-boton {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 51, 102, 0.85);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  padding: 0.5rem;
+  min-height: 44px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--theme-transition), border-color var(--theme-transition), box-shadow var(--theme-transition);
+  outline: 2px solid transparent; // Outline personalizado más accesible
+  border-radius: 0.5rem;
+  
+  @media (max-width: 767px) {
+    padding: 0.3rem;      // Padding más compacto en móviles
+    
+    // Hacer el ícono más pequeño en móviles
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  &:hover {
+    background-color: rgba(0, 51, 102, 0.15);
+    border-color: rgba(0, 51, 102, 0.95);
+  }
+  
+  &:focus-visible {
+    background-color: rgba(0, 51, 102, 0.18);
+    outline: 2px solid rgba(0, 51, 102, 0.95); // Focus visible para accesibilidad
+    outline-offset: 2px;
+  }
+  
+  &:active {
+    transform: scale(0.95) translateY(2px); // Efecto de presionado
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35); // Sombra interior
+  }
+  
+  // Animación de "presionado" cuando cambia el modo
+  &.pressed {
+    animation: buttonPress 0.3s ease;
+  }
+}
+
+// ---------------------------------------------------------
+// Relieve de botones en modo oscuro
+// ---------------------------------------------------------
+body.modo-oscuro {
+  .header__modo-boton,
+  .header-inner__modo-boton,
+  .header__lang-switcher,
+  .header__menu-toggle {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(70, 70, 70, 0.95);
+    box-shadow:
+      0 2px 0 rgba(0, 0, 0, 0.5),
+      0 10px 20px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  .header__modo-boton:hover,
+  .header-inner__modo-boton:hover,
+  .header__lang-switcher:hover,
+  .header__menu-toggle:hover,
+  .header__modo-boton:focus-visible,
+  .header-inner__modo-boton:focus-visible,
+  .header__lang-switcher:focus-visible,
+  .header__menu-toggle:focus-visible {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(90, 90, 90, 0.95);
+  }
+
+  .header__modo-boton:focus-visible,
+  .header-inner__modo-boton:focus-visible {
+    outline-color: rgba(90, 90, 90, 0.95);
+  }
+
+  .header__modo-boton:active,
+  .header-inner__modo-boton:active,
+  .header__lang-switcher:active,
+  .header__menu-toggle:active {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+}
+
+// Keyframe para el efecto de presionado
+@keyframes buttonPress {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9) translateY(3px);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
+
+// ---------------------------------------------------------
+// Notificaciones para .header y .header-inner
+// ---------------------------------------------------------
+.header__notificacion,
+.header-inner__notificacion {
+  color: v.$blanco;
+}
+
+// ---------------------------------------------------------
+// Estilos de Navegación (Segunda versión)
+// ---------------------------------------------------------
+
+// Botón hamburguesa (todos los tamaños desde v4.14.0: la nav siempre es un desplegable)
+
+.header__barra--scrolled,
+.header-inner__barra--scrolled {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  // Gradiente un poco más opaco al hacer scroll
+  &::before {
+    background: linear-gradient(
+      135deg,
+      rgba(10, 75, 141, 0.30),
+      rgba(2, 66, 122, 0.30) 60%,
+      rgba(0, 51, 102, 0.30) 100%
+    );
+  }
+
+  // Móvil: mismo comportamiento
+  @media (max-width: 767px) {
+    &::before {
+      background: rgba(10, 75, 141, 0.30);
+    }
+  }
+}

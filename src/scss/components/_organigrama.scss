@@ -4,7 +4,10 @@
 @use '../abstracts/mixins' as m;
 
 
-:root {
+// Custom properties del componente, acotadas a su contenedor (antes en :root, fugaban a
+// todo el documento; auditoría SCSS 2.5, v4.39.2).
+.organigrama-contenedor,
+.organigrama {
       --primary-color: var(--coral-marca);
       --secondary-color: #{v.$secondary-color};
       --background-color: #F4F4F9;
@@ -313,7 +316,8 @@ body:not(.modo-oscuro) .organigrama-contenedor {
 
     /* Responsive: Adaptación de tipografías, bordes y grid */
     @media (max-width: 480px) {
-      :root {
+      .organigrama-contenedor,
+      .organigrama {
           --font-base: 0.65rem;
           --font-lg: 0.8rem;
           --font-xl: 0.95rem;
@@ -332,7 +336,8 @@ body:not(.modo-oscuro) .organigrama-contenedor {
     }
 
     @media (min-width: 481px) and (max-width: 767px) {
-      :root {
+      .organigrama-contenedor,
+      .organigrama {
           --font-base: 0.8rem;
           --font-lg: 1rem;
           --font-xl: 1.2rem;
@@ -349,7 +354,8 @@ body:not(.modo-oscuro) .organigrama-contenedor {
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {
-      :root {
+      .organigrama-contenedor,
+      .organigrama {
           --font-base: 0.85rem;
           --font-lg: 1.1rem;
           --font-xl: 1.3rem;
@@ -366,7 +372,8 @@ body:not(.modo-oscuro) .organigrama-contenedor {
     }
 
     @media (min-width: 1025px) and (max-width: 1200px) {
-      :root {
+      .organigrama-contenedor,
+      .organigrama {
           --font-base: 0.9rem;
           --font-lg: 1.15rem;
           --font-xl: 1.35rem;
@@ -399,10 +406,6 @@ body:not(.modo-oscuro) .organigrama-contenedor {
   }
   
   // Específico para la sección de Delegación Infantil
-  .organigrama__section[data-section="Delegación Infantil"] {
-    padding: 0.5rem; // Ajusta según sea necesario
-    overflow: hidden;
-  }
   
   // Si usas flex, establece también flex-shrink y width
   .organigrama__section {

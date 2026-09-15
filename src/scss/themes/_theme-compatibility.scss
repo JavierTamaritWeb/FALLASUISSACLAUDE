@@ -19,6 +19,22 @@ html {
   &:has(body.modo-oscuro) {
     -webkit-theme-color: var(--theme-color-dark);
   }
+
+  // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
+  & {
+
+    color-scheme: light;
+    
+    &.modo-oscuro,
+    &:has(body.modo-oscuro) {
+      color-scheme: dark;
+    }
+    
+    &.modo-claro,
+    &:has(body.modo-claro) {
+      color-scheme: light;
+    }
+  }
 }
 
 // Soporte adicional para modo oscuro
@@ -35,19 +51,6 @@ html {
 }
 
 // Para navegadores que soportan color-scheme
-html {
-  color-scheme: light;
-  
-  &.modo-oscuro,
-  &:has(body.modo-oscuro) {
-    color-scheme: dark;
-  }
-  
-  &.modo-claro,
-  &:has(body.modo-claro) {
-    color-scheme: light;
-  }
-}
 
 // Forzar repaint en iOS cuando cambia el tema
 body.modo-oscuro,

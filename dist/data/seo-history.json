@@ -84,7 +84,7 @@
     "modified": "2026-09-14"
   },
   "https://fallasuissa.es/": {
-    "hash": "20e59cf8c10dbde19fd423449d257fc9804be54f7c692a44c24fffe449f75d5b",
+    "hash": "df6a80fb1849964586bf1bc40713f34cd245f7f1f66191cd329758c63280e37d",
     "modified": "2026-09-15"
   },
   "https://fallasuissa.es/lafalla.html": {
@@ -96,12 +96,12 @@
     "modified": "2026-09-14"
   },
   "https://fallasuissa.es/mapa.html": {
-    "hash": "b449d295326e103b2d7ddb2df2df5a221cfb82a22b709097b6d122248be3fa46",
-    "modified": "2026-09-14"
+    "hash": "00164e3094d3268cb3d3e8cf0b44dfe6e1e404ba2ecd88623408fd4784d5db85",
+    "modified": "2026-09-15"
   },
   "https://fallasuissa.es/meteo.html": {
     "hash": "a4ded76af70b55970dba64438353b51bf437c5577c0757b44ac456ddcf20be09",
-    "modified": "2026-09-14"
+    "modified": "2026-09-15"
   },
   "https://fallasuissa.es/nuevos-falleros.html": {
     "hash": "d23c8cd68a5d576c1f6d4d8406b871c4dd596abffc96aecdc9b1a302813c29aa",
@@ -204,7 +204,7 @@
     "modified": "2026-09-14"
   },
   "https://fallasuissa.es/va/": {
-    "hash": "0f12852864bbf2d223d5e89a99b6bee21aeb04c76e8166adb1362173f2465eb2",
+    "hash": "2bdf0a26111ffea1fe188f4cbf9f6958291d6169578e09c0ba4d5c933003a547",
     "modified": "2026-09-15"
   },
   "https://fallasuissa.es/va/lafalla.html": {
@@ -216,12 +216,12 @@
     "modified": "2026-09-14"
   },
   "https://fallasuissa.es/va/mapa.html": {
-    "hash": "c91a3638b7b01a3e0b1b73b45a8e4d3730018eebf5c7732122c843a0b3874264",
-    "modified": "2026-09-14"
+    "hash": "319cc132349f4d4495b60cb4f2d0019a35db2079e551322faf3f8971a3b32a4d",
+    "modified": "2026-09-15"
   },
   "https://fallasuissa.es/va/meteo.html": {
     "hash": "7a3123c5a711ba05096252d8816d9adf8fbc40a942af4e02a2a8871de901fd23",
-    "modified": "2026-09-14"
+    "modified": "2026-09-15"
   },
   "https://fallasuissa.es/va/nuevos-falleros.html": {
     "hash": "014a485ff6be5d893cc7409e7eb762d671516b7bf7e70bcd9b34de0f7591d969",

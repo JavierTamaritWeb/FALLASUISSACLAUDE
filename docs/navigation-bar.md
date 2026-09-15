@@ -10,7 +10,7 @@ Esta guía documenta **exactamente** cómo funciona la barra de navegación (nav
 
 ## ✅ Archivos implicados (fuente de verdad)
 
-- **Estilos (SCSS):** `src/scss/layout/_header.scss`
+- **Estilos (SCSS):** `src/scss/layout/_nav.scss`
 - **Menú móvil + scroll state (JS):** `src/js/nav-menu.js`
 - **Modo oscuro/claro (JS) + compat iOS:** `src/js/dark.js`
 - **Compatibilidad theme/iOS (SCSS):** `src/scss/themes/_theme-compatibility.scss`
@@ -95,7 +95,7 @@ La barra `.header__barra` y `.header-inner__barra` se comportan como **barra fij
 - `top: calc(env(safe-area-inset-top) + 1rem)`
 - `left/right: 0`, centrada con `margin: 0 auto` y `max-width`.
 
-Esto está en `src/scss/layout/_header.scss` dentro del bloque:
+Esto está en `src/scss/layout/_nav.scss` dentro del bloque:
 
 - `// Barras de Navegación Fijas para .header y .header-inner`
 
@@ -192,7 +192,7 @@ Para lograr una transición suave entre el modo claro (gradiente azul) y el modo
     *   El elemento anima su `background` de transparent → gris
     *   Ambas transiciones duran 2.4s = transición suave
 
-Esta lógica se aplica en `src/scss/layout/_header.scss` y `src/scss/themes/_modo-oscuro.scss`.
+Esta lógica se aplica en `src/scss/layout/_nav.scss` y `src/scss/themes/_modo-oscuro.scss`.
 
 ### 🔔 Notificación de cambio de tema (Toast)
 
@@ -263,7 +263,7 @@ Desde v4.6.15 tanto `.navegacion__enlace` (header) como `.footer__enlace` (foote
 
 ### Archivos fuente
 
-- `.navegacion__enlace` → `src/scss/layout/_header.scss` (bloque "Estilos de Navegación (Segunda versión)")
+- `.navegacion__enlace` → `src/scss/layout/_nav.scss` (bloque `.navegacion__enlace`; desde v4.39.2 la barra fija vive en `_header-barra.scss` y el hero en `_header.scss`)
 - `.footer__enlace` → `src/scss/layout/_footer.scss`
 
 ### Funciona igual en claro y oscuro
@@ -314,7 +314,7 @@ Toda la lógica está en `src/js/nav-menu.js`, **sin guardas por breakpoint** (n
 
 ### CSS del overlay
 
-En `src/scss/layout/_header.scss` (reglas **globales**, sin media query):
+En `src/scss/layout/_nav.scss` (reglas **globales**, sin media query):
 
 ```scss
 .navegacion {
@@ -383,7 +383,7 @@ En móvil, la barra usa un layout de 3 columnas (tipo grid) para evitar que el h
 - `.header__barra, .header-inner__barra` se configuran para disposición horizontal
 - Se asignan áreas/columnas para garantizar el orden visual: botones → notificación → menú
 
-Esto vive en `src/scss/layout/_header.scss`.
+Esto vive en `src/scss/layout/_nav.scss`.
 
 ### Notificación: inline (no "toast" flotante)
 
@@ -529,7 +529,7 @@ npm run build
 **Solución:** Se forzó un nuevo contexto de apilamiento para la navegación en desktop:
 
 ```scss
-// src/scss/layout/_header.scss
+// src/scss/layout/_nav.scss
 @media (min-width: 768px) {
   .navegacion {
     position: relative; // Antes static
@@ -553,4 +553,4 @@ npm run build
 - Hover/focus y activo usan ambos `v.$primary-color` tanto en el texto como en la línea del `::after`.
 - Test `tests/nav.e2e.spec.js` actualizado: ya no espera fondo blanco en el enlace activo móvil; ahora valida `color === rgb(255, 111, 97)` y que el `::after` tiene `opacity: 1` + `background-color` en coral.
 
-Última actualización: 15 de septiembre de 2026 - v4.39.1
+Última actualización: 15 de septiembre de 2026 - v4.39.2

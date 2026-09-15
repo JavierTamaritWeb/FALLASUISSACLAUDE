@@ -16,6 +16,14 @@ body {
   
 }
 
+// Los párrafos son hueso por defecto: herencia de los fondos azules de la home, y cada
+// sección clara los recolorea. Vivía escondido en components/_falla.scss; aquí queda como
+// valor base documentado (auditoría SCSS 2.4, v4.39.2). Deuda: acotarlo exigiría revisar
+// cada contenedor en claro y oscuro.
+p {
+  color: v.$blanco-hueso;
+}
+
 h1 {
   font-size: v.$font-size-large;
 }

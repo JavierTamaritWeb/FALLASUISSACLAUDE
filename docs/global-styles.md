@@ -226,7 +226,7 @@ body.modo-oscuro .falla::before {
 
 | Archivo | Contenido |
 | --- | --- |
-| `src/scss/components/_falla.scss` | Estilos modo claro |
+| `src/scss/components/_accordion.scss` (antes `_falla.scss`) | Estilos modo claro de Nosotros/Historia |
 | `src/scss/themes/_modo-oscuro.scss` | Estilos modo oscuro |
 | `src/img/elementos-UXUI/fondo_traje.png` | Imagen de fondo (traje regional) |
 
@@ -413,7 +413,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.39.1
+Última actualización: 15 de septiembre de 2026 - v4.39.2
 
 ## 🏛️ Componente Frieze (Cenefa)
 

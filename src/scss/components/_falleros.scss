@@ -1,0 +1,59 @@
+// scss/components/_falleros.scss
+// Bloque «Nosotros» (.falleros): contenedor de la Plana Mayor.
+@use '../abstracts/variables' as v;
+
+.falleros {
+  padding: 5rem 3rem !important;
+  margin: 0;
+
+  &__nosotros {
+    font-family: v.$font-family;
+    background-color: var(--coral-marca);
+    color: v.$blanco-hueso;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem 0;
+    border-radius: 1rem;
+    transition: background-color 0.3s ease;
+    @media (max-width: 480px) {
+      padding: 0 0.5rem;
+    }
+    @media (max-width: 767px) {
+      padding: 0 1rem;
+    }
+  }
+  // Contenedor de «Nosotros» (Plana Mayor, index/lafalla; v4.30.24): en modo
+  // claro fondo turquesa suave (v4.30.29-30; antes hueso) con borde azul
+  // institucional de 2px en lugar del coral.
+  // El contenedor HOPE de Colaboraciones comparte .falleros__nosotros y sigue
+  // en coral; el modo oscuro repone el coral en _modo-oscuro.scss.
+  &__nosotros--plana-mayor {
+    background-color: v.$turquesa-suave;
+    border: 2px solid v.$azul-titulo-seccion;
+
+    // Conjunto de acordeones de la Plana Mayor: borde turquesa de 1px (v4.30.25)
+    > .accordion {
+      border: 1px solid v.$turquesa;
+    }
+  }
+  &__titulo {
+    text-transform: none;
+    // «Nosotros»: azul institucional en claro, coral en oscuro (v4.30.24)
+    color: var(--titulo-seccion);
+  }
+  @media (max-width: 480px) {
+    padding: 1rem;
+    margin: 1rem;
+    &__titulo {
+      font-size: 1.8rem !important;
+    }
+  }
+  @media (max-width: 767px) {
+    padding: 1rem;
+    margin: 1rem;
+    &__titulo {
+      font-size: 2.2rem;
+    }
+  }
+}

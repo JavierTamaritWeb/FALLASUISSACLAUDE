@@ -139,17 +139,7 @@ button {
    DROPDOWN & MODAL ACCESSIBILITY
    =================================== */
 
-// Menús desplegables
-.header__lang-options {
-  &[aria-expanded="false"] {
-    display: none;
-  }
-  
-  &[aria-expanded="true"] {
-    display: block;
-    animation: dropdownOpen 0.2s ease-out;
-  }
-}
+// Los estados aria de .header__lang-options viven en layout/_header.scss (v4.39.2); aquí queda el keyframe.
 
 @keyframes dropdownOpen {
   from {
