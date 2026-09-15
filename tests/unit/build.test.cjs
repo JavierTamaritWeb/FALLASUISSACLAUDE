@@ -54,3 +54,27 @@ test('Sharp convierte PNG y JPEG a WebP y AVIF y conserva las dimensiones', asyn
     }
   }
 });
+
+test('el SCSS real compila sin avisos y dentro del presupuesto de peso (auditoría sep-2026)', async () => {
+  const sass = require('sass');
+  const zlib = require('node:zlib');
+  const avisos = [];
+  const logger = { warn: (message, options) => avisos.push(`${message} @ ${options?.span?.url ?? ''}:${options?.span?.start?.line ?? ''}`), debug: () => {} };
+  const entrada = path.resolve(__dirname, '../../src/scss/main.scss');
+  const { css } = sass.compile(entrada, { style: 'compressed', logger, loadPaths: [path.dirname(entrada)] });
+  assert.deepEqual(avisos, [], `Dart Sass emite avisos (deprecaciones o mezclas de reglas):\n${avisos.join('\n')}`);
+  const bytes = Buffer.byteLength(css);
+  const gz = zlib.gzipSync(css).length;
+  assert.ok(bytes <= 230 * 1024, `main.css comprimido por Sass pesa ${bytes} B (> 230 KB): revisa CSS muerto o duplicados`);
+  assert.ok(gz <= 42 * 1024, `main.css gzip pesa ${gz} B (> 42 KB)`);
+  // backdrop-filter siempre con su par -webkit- (browserslist + autoprefixer, 4.39.0)
+});
+
+test('autoprefixer genera -webkit-backdrop-filter para cada backdrop-filter (browserslist, 4.39.0)', () => {
+  const distCss = path.resolve(__dirname, '../../dist/css/main.css');
+  if (!require('node:fs').existsSync(distCss)) return; // sin build previo no hay nada que comprobar
+  const css = readFileSync(distCss, 'utf8');
+  const sinPrefijo = (css.match(/(?<![-\w])backdrop-filter:/g) || []).length;
+  const conPrefijo = (css.match(/-webkit-backdrop-filter:/g) || []).length;
+  assert.equal(conPrefijo, sinPrefijo, `dist/css/main.css: ${sinPrefijo} backdrop-filter y ${conPrefijo} -webkit-backdrop-filter; falta browserslist o autoprefixer`);
+});

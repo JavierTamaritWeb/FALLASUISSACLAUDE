@@ -1,6 +1,6 @@
 {
   "name": "web-falla",
-  "version": "4.38.2",
+  "version": "4.39.0",
   "description": "Proyecto Gulp para la Falla Suïssa - L'Alqueria del Favero",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,8 @@
     "seo:dist": "gulp seoDist",
     "seo:schema-report": "node scripts/schema-report.mjs",
     "test:e2e": "playwright test -c playwright.smoke.config.js",
-    "test:unit": "node --test tests/unit/*.test.cjs && node scripts/search-eval.mjs",
-    "audit:project": "npm run build && npm run test:unit && npm run search:eval && npm run test:e2e:full -- --workers=4 && npm audit --audit-level=high",
+    "test:unit": "npm run lint:scss && node --test tests/unit/*.test.cjs && node scripts/search-eval.mjs",
+    "audit:project": "npm run build && npm run lint:scss && npm run test:unit && npm run search:eval && npm run test:e2e:full -- --workers=4 && npm audit --audit-level=high",
     "test:e2e:full": "playwright test",
     "test:e2e:ui": "playwright test -c playwright.smoke.config.js --ui",
     "test:e2e:ui:full": "playwright test --ui",
@@ -22,7 +22,9 @@
     "generate:og": "node scripts/generate-og-image.mjs",
     "deploy": "bash tools/deploy.sh",
     "search:eval": "node scripts/search-eval.mjs",
-    "seo:verify:production": "node scripts/verify-seo-production.mjs"
+    "seo:verify:production": "node scripts/verify-seo-production.mjs",
+    "lint:scss": "node scripts/lint-scss.mjs",
+    "lint:scss:baseline": "node scripts/lint-scss.mjs --update-baseline && node scripts/scss-baseline.mjs --update"
   },
   "author": "TuNombre",
   "license": "MIT",
@@ -38,10 +40,17 @@
     "gulp-terser": "^2.1.0",
     "postcss": "^8.4.49",
     "sass": "^1.85.0",
-    "sharp": "^0.35.4"
+    "sharp": "^0.35.4",
+    "stylelint": "^17.15.0",
+    "stylelint-config-standard-scss": "^17.0.0"
   },
   "keywords": [],
   "dependencies": {
     "flatpickr": "^4.6.13"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "iOS >= 15",
+    "Safari >= 15"
+  ]
 }

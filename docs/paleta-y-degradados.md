@@ -145,4 +145,4 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.38.2
+Última actualización: 15 de septiembre de 2026 - v4.39.0

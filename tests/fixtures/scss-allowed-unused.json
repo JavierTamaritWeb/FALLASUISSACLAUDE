@@ -1,0 +1,10 @@
+{
+  "_comentario": "Clases que pueden existir en dist/css/main.css sin aparecer en HTML/JS/JSON/gulpfile: plantilla del visor de vídeo (docs/visor-video-plantilla.md), librerías y estados que añade el JS en runtime. Cualquier otra clase sin uso falla en tests/scss-guardrails (auditoría SCSS sep-2026).",
+  "prefijos": ["video-dron__", "swiper-", "flatpickr-", "leaflet-", "fp-", "ics-modal"],
+  "exactas": [
+    "modo-oscuro", "modo-claro", "transicion-a-claro", "ios-device", "ios-safari", "ios-chrome", "ios-firefox",
+    "is-visible", "visible", "revealed", "reveal-ready", "loaded", "active", "nav-open", "mostrar", "abierto", "open", "show",
+    "header__barra--scrolled", "header-inner__barra--scrolled", "nav-backdrop", "buscador", "buscador--abierto",
+    "sr-only", "visually-hidden"
+  ]
+}

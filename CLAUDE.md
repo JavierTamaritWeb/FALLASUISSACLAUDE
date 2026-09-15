@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.38.2 · **Última actualización:** 15 de septiembre de 2026
+**Versión:** 4.39.0 · **Última actualización:** 15 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -20,7 +20,8 @@ WEBFALLASUISSA es el sitio web oficial de Falla Suissa - L'Alqueria del Favero (
 ```bash
 npm run dev              # Build + watch de cambios
 npm run build            # Build de producción (salida a dist/)
-npm run test:unit        # Pruebas de build, watch, caché, servidor local y despliegue simulado
+npm run test:unit        # lint:scss + pruebas de build, watch, caché, servidor local y despliegue simulado + search:eval
+npm run lint:scss        # stylelint con presupuesto por regla (auditoría SCSS sep-2026); lint:scss:baseline consolida la deuda que baja
 npm run audit:project    # Build + pruebas unitarias + E2E completas + npm audit
 npm run test:e2e         # Ejecuta la suite smoke de Playwright E2E
 npm run test:e2e:full    # Ejecuta la suite completa de Playwright E2E
@@ -62,6 +63,7 @@ npx gulp searchIndex     # Regenera solo el índice del buscador
 - Ejecuta `npm run test:e2e:full` al tocar navegación, modo oscuro, transiciones de gradiente, metadatos OG, UI de meteo, Swiper o snapshots visuales
 - NUNCA edites archivos en `dist/` directamente (son generados)
 - NUNCA elimines ni renombres variables SCSS sin pasar `tests/scss-guardrails.e2e.spec.js` y `tests/color-tokens.e2e.spec.js`; desde v4.38.0 la guardia también rechaza variables sin uso y literales de color que ya tengan token (`#333`, `#fff`, `#000`, `#111`, `#444`, `#555`, `#f5f5f5`, `#fdf2e9`, `rgba(255,111,97|255,215,0|245,245,245,…)`) fuera de `@media print`: usa `v.$token` / `rgba(v.$token, a)` / `rgba(var(--coral-marca-rgb), a)`
+- NUNCA añadas deuda SCSS nueva: `npm run lint:scss` y las guardias de auditoría de `scss-guardrails` (duplicados, clases muertas, `!important`, `z-index`, media queries, etiquetas globales, cobertura de tema) comparan con una baseline que solo puede bajar. Ver restricción *Auditoría SCSS sep-2026*
 - NUNCA referencies `og-share.png` sin el cache-buster `?v=YYYYMMDD` (caché de WhatsApp)
 - NUNCA cambies fondos de gradiente a colores sólidos directamente — usa el patrón de opacidad con `::before` (ver `docs/global-styles.md`)
 - Al añadir traducciones: actualiza `src/data/translations.json` para AMBOS `es` y `va`
@@ -158,11 +160,13 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.38.2).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.39.0).
 
 ## Decisiones y restricciones de arquitectura
 
 Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problemas.
+
+- **Auditoría SCSS sep-2026 (v4.39.0):** registro y guardias en [`docs/auditoria-scss-2026-09.md`](docs/auditoria-scss-2026-09.md). Reglas: (1) `npm run lint:scss` debe pasar antes de cada commit que toque `src/scss/` (errores de stylelint = rojo; avisos con presupuesto por regla que no puede subir); (2) las guardias de `tests/scss-guardrails.e2e.spec.js` comparan con `tests/fixtures/scss-baseline.json`: NUNCA añadas un selector de nivel raíz duplicado, una clase sin uso, un `!important`, un `z-index` literal, una media query fuera de 480/767/768/1024/1025/1200/1201 (con espacio tras `:` y sin `screen and`), un selector de etiqueta sin ámbito en `components/` ni un fondo claro sin su regla en `themes/_modo-oscuro.scss`; si un hallazgo desaparece, consolida con `npm run lint:scss:baseline` (la baseline solo baja); (3) en `themes/` toda regla sin `body.modo-oscuro` va en `:where()` salvo que deba imponerse a los componentes (v4.38.2); (4) `browserslist` vive en `package.json`: no escribas prefijos `-webkit-` a mano, los pone autoprefixer.
 
 - **Auditoría 4.30.20:** errores y guardias documentados en [`docs/auditoria-2026-09-13.md`](docs/auditoria-2026-09-13.md). Las tareas Gulp propagan errores con `pipeline`; watch usa una cola completa e invalida el esquema cacheado; el SW consulta primero la red para HTML, actualiza la misma caché que lee y solo borra sus propios prefijos; el visor gestiona su cierre y restauración de foco; `--dry-run` no ejecuta mutaciones remotas, tampoco durante mantenimiento. Los wrappers PDF necesitan `object-src` y `frame-src` con origen propio. Ejecutar `npm run test:unit` al modificar estos contratos.
 
@@ -382,6 +386,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.39.0** — **Auditoría severa del SCSS (1/4): tooling, guardias y registro** (plan aprobado el 15-sep-2026; sin cambios de estilo). Registro completo en [`docs/auditoria-scss-2026-09.md`](docs/auditoria-scss-2026-09.md) (hallazgo → causa → corrección → guardia → estado). **stylelint** (`stylelint-config-standard-scss`, `.stylelintrc.json`) con `npm run lint:scss` (`scripts/lint-scss.mjs`): cualquier error rompe y los avisos tienen **presupuesto por regla** en `tests/fixtures/stylelint-baseline.json` (hoy 410: 254 `!important`, 87 `#id`, 27 selectores duplicados, 14 ceros con unidad, 8 propiedades obsoletas, 7 propiedades duplicadas, 3 `transition: all`, 2 `@extend`, 1 variable sin interpolar…) que solo puede bajar; forma parte de `test:unit` y `audit:project`. **browserslist** (`defaults`, `iOS >= 15`, `Safari >= 15`): autoprefixer añade ahora `-webkit-backdrop-filter` (los 6 sin par de `_deportes`, `_falla`, `_colaboraciones` y `_header`), `-webkit-backface-visibility` y `-webkit-hyphens`; es el único cambio del CSS compilado. **Guardias nuevas en `scss-guardrails`** (módulo `tests/scss-audit.cjs`, baseline `tests/fixtures/scss-baseline.json` que solo puede decrecer y se consolida con `npm run lint:scss:baseline`): selectores de nivel raíz duplicados (52), clases sin uso en HTML/JS/JSON/gulpfile (91; permitidas en `scss-allowed-unused.json`: plantilla `.video-dron__*`, librerías y estados del JS), `!important` por fichero fuera de print/reduced-motion (195), `z-index` literales (44), media queries fuera de la convención (22), rutas SCSS inexistentes en comentarios (0; corregidas 3), etiquetas globales en `components/` (4) y bloques con fondo claro sin regla oscura (5). `tests/unit/build.test.cjs` compila el `main.scss` real con la API de Sass (falla con cualquier aviso o si supera 230 KB / 42 KB gz) y comprueba los pares `backdrop-filter`. Hallazgo nuevo del linter: `--header-bar-bg: v.$gradiente-institucional` en `_header.scss:518` se emite sin interpolar (custom property inválida en claro), pendiente para 4.39.1. Siguientes: 4.39.1 errores visibles y accesibilidad · 4.39.2 duplicados, cascada, `#id` y troceado de `_falla`/`_header` · 4.39.3 CSS muerto, `!important`, escala `$z-*` y convenciones.
 
 - **4.38.2** — **SCSS (2/3): carpetas y orden de la cascada** (plan «reordenar el SCSS» del 15-sep-2026; sin cambios visuales). Nueva carpeta `src/scss/themes/` con `_theme-compatibility.scss` (antes en `components/`) y `_modo-oscuro.scss` (antes en `animaciones/`), cargada **la última** en `main.scss` (hasta ahora el tema oscuro se cargaba antes de `components/` y `sociales/`); `_buttons`, `_visor`, `_swiper` y `_mapa` pasan de `animaciones/` a `components/` y `_notificaciones` de `base/` a `components/` (`git mv`; los `@use '../abstracts/…'` no cambian); `animaciones/` queda con `_waves` y `_reveal`; se elimina el barrel huérfano `abstracts/_index.scss`. Orden nuevo: abstracts > base > optimization > layout > animaciones > components > sociales > themes. **Verificación** (el diff textual no basta porque cambia el orden de la cascada): comparación de estilos computados antes/después en 15 páginas × claro/oscuro × 390/1280 px con acordeones abiertos (17 propiedades por elemento más `::before`/`::after`): la comparación destapó dos reglas del tema que hasta ahora perdían por orden de cascada y con `themes/` al final habrían ganado — `body.modo-oscuro .historia__grid` (fondo negro y borde plateado, bloque duplicado; se deja solo el color porque el diseño oscuro de la rejilla vive en `_falla.scss`) y `body.modo-oscuro .board__note`, que pisaba el `$negro-casi` del empty-state del tablón (ahora `:not(.board__empty)`) —, ambas neutralizadas en `_modo-oscuro.scss` para que el resultado computado sea idéntico al de 4.38.1; y los tests de hover del acordeón y de transición de countdown/quieres-mas detectaron un tercer efecto invisible para el harness: la lista de **transiciones de tema sin ámbito** de `_modo-oscuro.scss` (84 selectores, `transition: … var(--theme-transition)`) pasaba a ganar a las transiciones propias de los componentes (hover del titular de 2,4 s, `::before` del countdown sin transición de opacidad). Los 72 selectores de componentes de esa lista van ahora en `:where()` (especificidad cero = seguir perdiendo frente al componente, como antes por orden) y los 12 de `body`, header, footer, `.boton`, `.visor` y bloc, que ya ganaban, conservan su especificidad. **Regla**: en `themes/` una transición o color sin `body.modo-oscuro` debe ir en `:where()` salvo que quiera imponerse a los componentes; smoke completa y regresión visual sin cambios de baseline. Rutas nuevas en CLAUDE.md, README y `docs/` (`global-styles`, `navigation-bar`, `architecture-constraints`, `scrollbar-theme`, `swiper-monumento`, `monumento-rotacion-anual`, `gestion-tablon`, `buscador`). Siguiente: 4.38.3 (trocear `_falla.scss` y `_header.scss`).
 

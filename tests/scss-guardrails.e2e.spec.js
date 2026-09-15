@@ -148,6 +148,70 @@ test.describe('SCSS guardrails (namespaces, mixins, variables)', () => {
     expect(offenders, `Literales con token existente:\n${offenders.join('\n')}`).toEqual([]);
   });
 
+  // ---------------------------------------------------------------------------
+  // Auditoría SCSS de sep-2026 (docs/auditoria-scss-2026-09.md): cada categoría se
+  // compara con tests/fixtures/scss-baseline.json. La deuda registrada solo puede
+  // bajar: un hallazgo nuevo falla; uno que desaparece se consolida con
+  // `npm run lint:scss:baseline`.
+  // ---------------------------------------------------------------------------
+  const audit = require('./scss-audit.cjs');
+  const baseline = JSON.parse(readUtf8(path.join(repoRoot, 'tests/fixtures/scss-baseline.json')));
+  const permitidos = JSON.parse(readUtf8(path.join(repoRoot, 'tests/fixtures/scss-allowed-unused.json')));
+  const nuevos = (actual, base) => actual.filter((x) => !base.includes(x));
+  const mensaje = (titulo, lista) => `${titulo} (no están en la baseline; corrige o justifica y actualiza con npm run lint:scss:baseline):\n${lista.join('\n')}`;
+
+  test('Auditoría: ningún selector de nivel raíz duplicado nuevo', () => {
+    const actual = audit.duplicados(scssFiles);
+    expect(nuevos(actual, baseline.duplicados), mensaje('Selectores duplicados nuevos', nuevos(actual, baseline.duplicados))).toEqual([]);
+  });
+
+  test('Auditoría: ninguna clase nueva sin uso en HTML/JS/JSON (CSS muerto)', () => {
+    const distCss = path.join(repoRoot, 'dist/css/main.css');
+    test.skip(!fs.existsSync(distCss), 'Requiere npm run build');
+    const actual = audit.clasesMuertas(distCss, permitidos);
+    expect(nuevos(actual, baseline.clasesMuertas), mensaje('Clases sin uso nuevas (o añádelas a scss-allowed-unused.json con motivo)', nuevos(actual, baseline.clasesMuertas))).toEqual([]);
+  });
+
+  test('Auditoría: el número de `!important` por fichero no sube (fuera de print y reduced-motion)', () => {
+    const actual = audit.importantPorFichero(scssFiles);
+    const excesos = Object.entries(actual).filter(([f, n]) => n > (baseline.important[f] || 0)).map(([f, n]) => `${f}: ${n} (baseline ${baseline.important[f] || 0})`);
+    expect(excesos, mensaje('Ficheros con más !important que la baseline', excesos)).toEqual([]);
+  });
+
+  test('Auditoría: ningún `z-index` literal nuevo (usa la escala $z-* de _variables.scss)', () => {
+    const actual = audit.zIndexLiterales(scssFiles);
+    expect(nuevos(actual, baseline.zIndex), mensaje('z-index literales nuevos', nuevos(actual, baseline.zIndex))).toEqual([]);
+  });
+
+  test('Auditoría: media queries dentro de la convención (480/767/768/1024/1025/1200/1201, con espacio tras los dos puntos, sin `screen and`)', () => {
+    const actual = audit.mediaQueries(scssFiles);
+    expect(nuevos(actual, baseline.mediaQueries), mensaje('Media queries fuera de convención nuevas', nuevos(actual, baseline.mediaQueries))).toEqual([]);
+  });
+
+  test('Auditoría: ningún comentario cita una ruta SCSS que no existe', () => {
+    expect(audit.rutasObsoletas(scssFiles)).toEqual([]);
+  });
+
+  test('Auditoría: ningún selector de etiqueta sin ámbito nuevo a nivel raíz en components/', () => {
+    const actual = audit.etiquetasGlobales(scssFiles);
+    expect(nuevos(actual, baseline.etiquetasGlobales), mensaje('Reglas de etiqueta globales nuevas en components/', nuevos(actual, baseline.etiquetasGlobales))).toEqual([]);
+  });
+
+  test('Auditoría: todo bloque de components/ con fondo claro tiene contrapartida en themes/_modo-oscuro.scss', () => {
+    const actual = audit.coberturaTema(scssFiles);
+    expect(nuevos(actual, baseline.coberturaTema), mensaje('Bloques con fondo claro sin regla oscura', nuevos(actual, baseline.coberturaTema))).toEqual([]);
+  });
+
+  test('Auditoría: la baseline no conserva deuda ya resuelta (consolidar con npm run lint:scss:baseline)', () => {
+    const datos = audit.analizarTodo();
+    const sobrantes = [];
+    for (const k of ['duplicados', 'clasesMuertas', 'zIndex', 'mediaQueries', 'etiquetasGlobales', 'coberturaTema']) {
+      for (const x of baseline[k]) if (!datos[k].includes(x)) sobrantes.push(`${k}: ${x}`);
+    }
+    for (const [f, n] of Object.entries(baseline.important)) if ((datos.important[f] || 0) < n) sobrantes.push(`important: ${f} ${datos.important[f] || 0} < ${n}`);
+    expect(sobrantes, `Entradas de la baseline que ya no ocurren:\n${sobrantes.join('\n')}`).toEqual([]);
+  });
+
   test('`src/scss/abstracts/_mixins.scss` contiene mixins esperados', () => {
     const mixinsFile = path.join(repoRoot, 'src/scss/abstracts/_mixins.scss');
     const content = stripScssComments(readUtf8(mixinsFile));
