@@ -1637,7 +1637,12 @@ async function imagesTask() {
   for (const variant of variants) {
     const output = path.join('dist', variant.output);
     await ensureDirForFile(output);
-    await sharp(path.join('src', variant.source))
+    // `extract` (opcional) recorta la fuente antes de escalar: la cenefa
+    // barroca lleva márgenes transparentes arriba y abajo que impedían que el
+    // motivo llenara la franja (v4.40.2).
+    let image = sharp(path.join('src', variant.source));
+    if (variant.extract) image = image.extract(variant.extract);
+    await image
       .resize({ width: variant.width, withoutEnlargement: true })
       .webp({ quality: 88, alphaQuality: 100 })
       .toFile(output);

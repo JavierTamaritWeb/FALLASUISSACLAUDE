@@ -427,13 +427,13 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 | Variable | Valor Defecto | Descripción |
 | --- | --- | --- |
-| `$frieze-img` | `url('../img/elementos-UXUI/cenefa-barroca-4.seo.webp')` | Cenefa barroca (v4.40.1); derivado WebP de 512 px que el build genera desde `cenefa-barroca-4.png` vía `src/data/image-variants.json` |
+| `$frieze-img` | `url('../img/elementos-UXUI/cenefa-barroca-4.seo.webp')` | Cenefa barroca (v4.40.1); derivado WebP de 512 px que el build genera desde `cenefa-barroca-4.png` vía `src/data/image-variants.json`, recortando con `extract` los márgenes transparentes verticales para que el motivo llene la franja (v4.40.2) |
 | `$frieze-bg` | `$blanco-hueso` (#F5F5F5) | Color de fondo de la banda (v4.1.3 cambio de transparent a hueso) |
 | `$frieze-size` | `clamp(30px, 8vw, 50px)` | Altura responsive |
 
 ---
 
-Última actualización: 16 de septiembre de 2026 - v4.40.1
+Última actualización: 16 de septiembre de 2026 - v4.40.2
 
 ## 🏛️ Componente Frieze (Cenefa)
 

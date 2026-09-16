@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 16 de septiembre de 2026 - v4.40.1 - **Cenefa barroca**: la franja de azulejos de las 30 páginas pasa de `cenefa_sin_fondo` a `cenefa-barroca-4` (derivado WebP de 512 px, 46 KB frente a 64 KB), en claro y oscuro.
+🆕 Última actualización: 16 de septiembre de 2026 - v4.40.2 - **Cenefa barroca a toda altura**: el derivado recorta los márgenes transparentes del PNG (campo `extract` en `image-variants.json`) para que el motivo llene la franja entre las rayas coral.
 
 ## 🌐 Vista Previa
 

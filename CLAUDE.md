@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.40.1 · **Última actualización:** 16 de septiembre de 2026
+**Versión:** 4.40.2 · **Última actualización:** 16 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -160,7 +160,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.40.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.40.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -386,6 +386,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.40.2** — **Cenefa barroca a toda altura**: el PNG de `cenefa-barroca-4` lleva 96 px transparentes arriba y 111 abajo, así que a 50 px de franja el motivo quedaba separado de las rayas coral. `imagesTask` admite ahora un campo opcional `extract` por entrada de `src/data/image-variants.json` (recorte con `sharp` antes de escalar) y la cenefa recorta solo lo vertical (`top: 96, height: 336`; los 7 px laterales marcan el ritmo de repetición). Derivado 512×106 px, 47 KB. 83 baselines visuales regenerados.
 
 - **4.40.1** — **Cenefa barroca**: la franja de azulejos `.frieze` (30 páginas, claro y oscuro) pasa de `cenefa_sin_fondo.svg` a `cenefa-barroca-4` (`$frieze-img` en `_variables.scss`; derivado `cenefa-barroca-4.seo.webp` de 512 px que el build genera desde el PNG vía `src/data/image-variants.json`, 46 KB frente a los 64 KB del anterior). Junto a ella entran, sin uso, `cenefa-barroca-2` y `-3` (PNG + SVG; nombres unificados en `fdac037a`); `cenefa_sin_fondo.svg` se conserva en `src/img/elementos-UXUI/` sin referencia (regla F del `.htaccess`). 82 baselines visuales regenerados (la cenefa cambia en todas las páginas).
 

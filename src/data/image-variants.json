@@ -2,6 +2,7 @@
   {
     "source": "img/elementos-UXUI/cenefa-barroca-4.png",
     "output": "img/elementos-UXUI/cenefa-barroca-4.seo.webp",
+    "extract": { "left": 0, "top": 96, "width": 1629, "height": 336 },
     "width": 512
   },
   {
