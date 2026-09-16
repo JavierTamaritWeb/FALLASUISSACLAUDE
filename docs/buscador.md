@@ -71,4 +71,4 @@ Relevo anual: al cambiar `member` en `schema-organization.json` las personas y l
 
 ---
 
-Última actualización: 16 de septiembre de 2026 - v4.41.5
+Última actualización: 16 de septiembre de 2026 - v4.41.6

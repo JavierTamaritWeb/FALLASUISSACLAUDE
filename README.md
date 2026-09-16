@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 16 de septiembre de 2026 - v4.41.5 - **Fix**: el color del navegador (`theme-color`, manifests, `dark.js`) pasa del azul institucional a blanco en claro y negro en oscuro, coherente con el hero celeste; guardia unitaria nueva.
+🆕 Última actualización: 16 de septiembre de 2026 - v4.41.6 - **Fix**: el color del navegador (`theme-color`, manifests, `dark.js`) pasa del azul institucional al celeste del borde superior del hero en claro (`$celeste-barra`) y negro en oscuro: la barra de estado del iPhone se funde con el hero; guardia unitaria nueva.
 
 ## 🌐 Vista Previa
 

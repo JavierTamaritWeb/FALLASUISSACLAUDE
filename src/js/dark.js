@@ -3,9 +3,9 @@
 // Colores del navegador (meta theme-color, msapplication-*) para cada modo.
 // Misma pareja que las metas de cada src/*.html, src/manifest.json,
 // src/img/favicon/site.webmanifest y --theme-color-* de _theme-compatibility.scss
-// (v4.41.5: blanco/negro; el hero claro es un degradado celeste y theme-color
-// solo admite un color plano). tests/unit/theme-color.test.cjs vigila la coherencia.
-const THEME_COLORS = { claro: '#ffffff', oscuro: '#000000' };
+// (v4.41.6: celeste medio del borde superior del hero, $celeste-barra, y negro;
+// theme-color solo admite un color plano). tests/unit/theme-color.test.cjs vigila la coherencia.
+const THEME_COLORS = { claro: '#d6e9f6', oscuro: '#000000' };
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {

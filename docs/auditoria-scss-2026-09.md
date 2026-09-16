@@ -97,4 +97,4 @@ Cierre de la deuda (4.40.0, 16-sep-2026): stylelint 318 → 233 avisos (0 errore
 
 Cierre de la auditoría (4.39.3, 16-sep-2026): stylelint 410 → 318 avisos (0 errores) · clases sin uso 91 → 0 · `!important` 195 → 181 · `z-index` literales 43 → 0 · media queries fuera de convención 22 → 3 · selectores raíz duplicados 52 → 0 · `#id` 87 → 30 · `main.css` 205,8 → 202,3 KB (34,7 → 33,7 KB gz) · SCSS 13.772 → 13.157 líneas en 63 ficheros. Todas las guardias comparan con baselines que solo pueden bajar.
 
-Última actualización: 16 de septiembre de 2026 - v4.41.5
+Última actualización: 16 de septiembre de 2026 - v4.41.6

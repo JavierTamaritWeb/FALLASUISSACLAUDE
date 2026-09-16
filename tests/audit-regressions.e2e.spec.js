@@ -80,11 +80,11 @@ test('el tema se inicializa aunque el navegador bloquee localStorage', async ({ 
   await expect(page.locator('body')).toHaveClass(/modo-claro/);
 });
 
-test('el toggle de modo oscuro sincroniza la meta theme-color (blanco/negro, v4.41.5)', async ({ page }) => {
+test('el toggle de modo oscuro sincroniza la meta theme-color (celeste del hero / negro, v4.41.6)', async ({ page }) => {
   await page.goto('/index.html');
   const meta = () => page.evaluate(() => document.querySelector('meta[name="theme-color"]:not([media])').content);
   const tile = () => page.evaluate(() => document.querySelector('meta[name="msapplication-TileColor"]').content);
-  expect(await meta()).toBe('#ffffff');
+  expect(await meta()).toBe('#d6e9f6');
   await page.evaluate(() => document.getElementById('botonModoOscuro').click());
   await expect(page.locator('body')).toHaveClass(/modo-oscuro/);
   expect(await meta()).toBe('#000000');
@@ -94,7 +94,7 @@ test('el toggle de modo oscuro sincroniza la meta theme-color (blanco/negro, v4.
   expect(await meta()).toBe('#000000');
   await page.evaluate(() => document.getElementById('botonModoOscuro').click());
   await expect(page.locator('body')).toHaveClass(/modo-claro/);
-  expect(await meta()).toBe('#ffffff');
+  expect(await meta()).toBe('#d6e9f6');
 });
 
 test('Escape en el botón del visor restaura el foco y desbloquea el scroll', async ({ page }) => {
