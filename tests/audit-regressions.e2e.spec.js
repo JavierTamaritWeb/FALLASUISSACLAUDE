@@ -80,6 +80,23 @@ test('el tema se inicializa aunque el navegador bloquee localStorage', async ({ 
   await expect(page.locator('body')).toHaveClass(/modo-claro/);
 });
 
+test('el toggle de modo oscuro sincroniza la meta theme-color (blanco/negro, v4.41.5)', async ({ page }) => {
+  await page.goto('/index.html');
+  const meta = () => page.evaluate(() => document.querySelector('meta[name="theme-color"]:not([media])').content);
+  const tile = () => page.evaluate(() => document.querySelector('meta[name="msapplication-TileColor"]').content);
+  expect(await meta()).toBe('#ffffff');
+  await page.evaluate(() => document.getElementById('botonModoOscuro').click());
+  await expect(page.locator('body')).toHaveClass(/modo-oscuro/);
+  expect(await meta()).toBe('#000000');
+  expect(await tile()).toBe('#000000');
+  await page.reload();
+  await expect(page.locator('body')).toHaveClass(/modo-oscuro/);
+  expect(await meta()).toBe('#000000');
+  await page.evaluate(() => document.getElementById('botonModoOscuro').click());
+  await expect(page.locator('body')).toHaveClass(/modo-claro/);
+  expect(await meta()).toBe('#ffffff');
+});
+
 test('Escape en el botón del visor restaura el foco y desbloquea el scroll', async ({ page }) => {
   await page.route('**/audit-lightbox.html', route => route.fulfill({ contentType: 'text/html', body: `
     <html><head><style>[aria-hidden="true"] { display: none; }</style></head><body><main>

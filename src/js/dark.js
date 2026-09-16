@@ -1,6 +1,11 @@
-// js/ dark.js
-
 // js/dark.js
+
+// Colores del navegador (meta theme-color, msapplication-*) para cada modo.
+// Misma pareja que las metas de cada src/*.html, src/manifest.json,
+// src/img/favicon/site.webmanifest y --theme-color-* de _theme-compatibility.scss
+// (v4.41.5: blanco/negro; el hero claro es un degradado celeste y theme-color
+// solo admite un color plano). tests/unit/theme-color.test.cjs vigila la coherencia.
+const THEME_COLORS = { claro: '#ffffff', oscuro: '#000000' };
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -69,7 +74,7 @@ function detectarNavegadorYConfigurar() {
  */
 function forzarActualizacionTemaIOS() {
   const isDarkMode = document.body.classList.contains('modo-oscuro');
-  const colorActual = isDarkMode ? '#333333' : '#0a4b8d';
+  const colorActual = isDarkMode ? THEME_COLORS.oscuro : THEME_COLORS.claro;
   
   // Método 1: Actualizar múltiples meta tags
   const metaTags = [
@@ -119,9 +124,7 @@ let transicionAClaroTimeoutId;
  */
 function actualizarThemeColor() {
   const isDarkMode = document.body.classList.contains('modo-oscuro');
-  const colorClaro = '#0a4b8d';
-  const colorOscuro = '#333333';
-  const colorActual = isDarkMode ? colorOscuro : colorClaro;
+  const colorActual = isDarkMode ? THEME_COLORS.oscuro : THEME_COLORS.claro;
   
   // Actualizar theme-color principal
   let metaThemeColor = document.querySelector('meta[name="theme-color"]:not([media])');
@@ -299,7 +302,7 @@ botonModoOscuro.addEventListener('click', () => {
  */
 function forzarActualizacionTema() {
   const isDarkMode = document.body.classList.contains('modo-oscuro');
-  const colorActual = isDarkMode ? '#333333' : '#0a4b8d';
+  const colorActual = isDarkMode ? THEME_COLORS.oscuro : THEME_COLORS.claro;
   
   // Crear un nuevo meta tag temporalmente para forzar actualización
   const tempMeta = document.createElement('meta');

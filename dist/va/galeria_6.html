@@ -13,10 +13,14 @@
   <!-- Configuración para web apps en iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-  <!-- Color de tema para navegadores compatibles -->
-  <meta name="theme-color" content="#0a4b8d">
+  <!-- Color de tema: blanco en claro, negro en oscuro; dark.js lo sincroniza con el toggle -->
+  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+  <meta name="msapplication-navbutton-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#ffffff">
 
   <!-- Datos estructurados -->
   <script type="application/ld+json">
@@ -572,7 +576,7 @@
 
   <!-- Swiper CSS -->
 <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="../css/main.css?v=9b9b88083b83">
+  <link rel="stylesheet" href="../css/main.css?v=456a63d0ad4c">
 
   <link rel="preload" as="font" type="font/woff2" href="../fonts/plus-jakarta-sans-v12-normal-latin.woff2" crossorigin>
 
@@ -735,14 +739,14 @@
     </nav>
   </footer>
 
-  <script src="../js/fullscreen.js?v=9b9b88083b83" defer></script>
-  <script src="../js/galeria.js?v=9b9b88083b83"></script>
-  <script src="../js/lang.js?v=9b9b88083b83"></script>
-  <script src="../js/dark.js?v=9b9b88083b83"></script>
-  <script src="../js/nav-menu.js?v=9b9b88083b83"></script>
-  <script src="../js/buscador.js?v=9b9b88083b83" defer></script>
-  <script src="../js/scroll-reveal.js?v=9b9b88083b83" defer></script>
+  <script src="../js/fullscreen.js?v=456a63d0ad4c" defer></script>
+  <script src="../js/galeria.js?v=456a63d0ad4c"></script>
+  <script src="../js/lang.js?v=456a63d0ad4c"></script>
+  <script src="../js/dark.js?v=456a63d0ad4c"></script>
+  <script src="../js/nav-menu.js?v=456a63d0ad4c"></script>
+  <script src="../js/buscador.js?v=456a63d0ad4c" defer></script>
+  <script src="../js/scroll-reveal.js?v=456a63d0ad4c" defer></script>
 
-  <script src="../js/cookie-banner.js?v=9b9b88083b83" defer></script>
+  <script src="../js/cookie-banner.js?v=456a63d0ad4c" defer></script>
 </body>
 </html>

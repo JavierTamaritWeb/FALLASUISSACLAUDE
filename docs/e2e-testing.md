@@ -1,12 +1,12 @@
 # 🧪 Tests E2E (Playwright)
 
-**Smoke por defecto: 25 specs / 414 casos** (`playwright.smoke.config.js`) | **Suite completa: 55 ficheros / 606 casos** | **Node: 22 pruebas** (`tests/unit/`)
+**Smoke por defecto: 25 specs / 414 casos** (`playwright.smoke.config.js`) | **Suite completa: 55 ficheros / 606 casos** | **Node: 38 pruebas** (`tests/unit/`)
 
 Esta guía documenta cómo ejecutar los tests end-to-end (E2E) del proyecto, qué validan y qué cobertura mínima se espera cuando cambias SEO técnico, scrollbars, navegación o componentes sensibles.
 
 ## Guardias de la auditoría 4.30.20
 
-`npm run test:unit` ejecuta los casos de compilación inválida, conversión de imágenes, regeneración durante watch, caché del service worker, rutas del servidor local y despliegue simulado. Los proyectos temporales y los sustitutos de SSH/rsync/curl evitan modificar fuentes o servidores reales. Playwright excluye `tests/unit/`; su descubrimiento no debe ejecutar el runner de Node.
+`npm run test:unit` ejecuta los casos de compilación inválida, conversión de imágenes, regeneración durante watch, caché del service worker, rutas del servidor local, despliegue simulado y la coherencia del color del navegador (`theme-color.test.cjs`: metas de todas las páginas, manifests y `THEME_COLORS` de `dark.js`, v4.41.5). Los proyectos temporales y los sustitutos de SSH/rsync/curl evitan modificar fuentes o servidores reales. Playwright excluye `tests/unit/`; su descubrimiento no debe ejecutar el runner de Node.
 
 `tests/audit-regressions.e2e.spec.js` protege el idioma guardado y su atributo `lang`, los textos de reserva, el tema sin almacenamiento, el reintento de EmailJS, el foco del visor y la CSP de documentos incrustados. Está incluido tanto en smoke como en full.
 
@@ -641,7 +641,7 @@ Guía técnica:
 
 ---
 
-Última actualización: 16 de septiembre de 2026 - v4.41.4
+Última actualización: 16 de septiembre de 2026 - v4.41.5
 
 ## Regresiones SEO v4.30.21
 

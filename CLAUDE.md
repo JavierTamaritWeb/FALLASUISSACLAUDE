@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.41.4 · **Última actualización:** 16 de septiembre de 2026
+**Versión:** 4.41.5 · **Última actualización:** 16 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -80,7 +80,7 @@ npx gulp searchIndex     # Regenera solo el índice del buscador
 - **Frontend**: HTML5, SCSS (BEM), módulos JavaScript ES6+
 - **Librerías (CDN)**: Swiper.js v11 (carruseles, jsDelivr), Anime.js v3.2.1 (animaciones, cdnjs), EmailJS v4 (formulario de contacto, jsDelivr)
 - **Librerías (npm)**: Flatpickr v4.6.13 (selector de fechas)
-- **Testing**: Playwright E2E (55 ficheros / 606 casos en la matriz completa, 25 specs / 414 casos smoke por defecto) y 22 pruebas de Node en `tests/unit/`. La suite smoke (`npm run test:e2e`) ejecuta: seo-regressions, audit-regressions, nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, escudo-enlace, galeria-9-album, galeria-pager, accordion-hover, schema-jsonld, scss-guardrails, buscador, color-tokens, auditoria-scss, desbordamiento-horizontal, header-mobile-layout
+- **Testing**: Playwright E2E (55 ficheros / 606 casos en la matriz completa, 25 specs / 414 casos smoke por defecto) y 38 pruebas de Node en `tests/unit/`. La suite smoke (`npm run test:e2e`) ejecuta: seo-regressions, audit-regressions, nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, escudo-enlace, galeria-9-album, galeria-pager, accordion-hover, schema-jsonld, scss-guardrails, buscador, color-tokens, auditoria-scss, desbordamiento-horizontal, header-mobile-layout
 
 ### Estructura de directorios
 
@@ -107,7 +107,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Patrones arquitectónicos clave
 
-**Modo oscuro** (`src/js/dark.js`): aplica las clases `.modo-oscuro`/`.modo-claro`. El CSS usa pseudo-elementos `::before` para las transiciones de gradiente a sólido porque CSS no puede animar directamente entre `linear-gradient` y un color sólido. El gradiente de fondo vive en `body::before` para permitir un cross-fade de opacidad a negro.
+**Modo oscuro** (`src/js/dark.js`): aplica las clases `.modo-oscuro`/`.modo-claro`. El CSS usa pseudo-elementos `::before` para las transiciones de gradiente a sólido porque CSS no puede animar directamente entre `linear-gradient` y un color sólido. El gradiente de fondo vive en `body::before` para permitir un cross-fade de opacidad a negro. **Color del navegador (v4.41.5)**: `THEME_COLORS = { claro: '#ffffff', oscuro: '#000000' }` en `dark.js` es la única fuente; `actualizarThemeColor()` escribe ese valor en la meta `theme-color` sin `media` y en las `msapplication-*` al alternar. Las 31 páginas llevan el mismo bloque de 5 metas (blanco/negro; `theme-color` no admite degradados), `manifest.json` y `img/favicon/site.webmanifest` el mismo `theme_color`, y `--theme-color-light/-dark` de `themes/_theme-compatibility.scss` la misma pareja; `tests/unit/theme-color.test.cjs` rompe si divergen. Un color nuevo se cambia en los cuatro sitios a la vez.
 
 **Multi-idioma** (`src/js/lang.js` + `src/js/initTranslations.js` + `gulpfile.js → prerenderTranslations`): los elementos usan `data-i18n="section.key"` (más `data-i18n-aria-label`, `data-i18n-placeholder`, `data-i18n-alt`, `data-i18n-title`, `data-i18n-content`, `data-i18n-format="paragraphs"`, `data-i18n-dynamic`). Carga `src/data/translations.json` al cargar la página y persiste la elección en localStorage. `lang.js` dispara `translationsReady` tras la carga y `langChanged` al cambiar. Los componentes dinámicos (board) deben comprobar `window.translations` primero; si no está listo, escuchar `translationsReady` antes de renderizar. Desde v4.6.23 el build **pre-renderiza el valenciano**: `dist/va/*.html` lleva el texto VA horneado en el body antes de que cargue JS (mejor SEO + accesibilidad sin JS). El toggle ES/VA del header sigue funcionando en runtime porque los atributos `data-i18n*` permanecen en el HTML; al alternar, se reescribe el DOM. Ver restricción *Pre-render i18n VA*.
 
@@ -161,7 +161,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.4).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.5).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -387,6 +387,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.41.5** — **Color del navegador coherente con la paleta**: las metas `theme-color`, `msapplication-navbutton-color` y `msapplication-TileColor` seguían en `#0a4b8d` (azul institucional que el hero dejó de usar en 4.30.45) y en oscuro `#333333` mientras el hero real es `$negro`. `theme-color` solo admite un color plano (no un degradado), así que, por decisión del usuario, **blanco `#ffffff` en claro y negro `#000000` en oscuro**: bloque de 5 metas idéntico en las 31 páginas del build (`theme-color` simple + variantes `prefers-color-scheme` + `msapplication-*`; antes solo `index.html` llevaba las variantes), `THEME_COLORS` como única constante en `js/dark.js` (sustituye a tres literales repetidos), `--theme-color-light` de `_theme-compatibility.scss` en `$blanco`, `manifest.json` y `img/favicon/site.webmanifest` con `theme_color`/`background_color` `#ffffff` (antes divergían). `apple-mobile-web-app-status-bar-style` pasa de `black-translucent` a `default` (en PWA el texto de la barra de estado iba en blanco sobre el hero claro). `llibret_2026.html` conserva su tema azul marino. Guardias: `tests/unit/theme-color.test.cjs` (metas de las 62 páginas, manifests y custom properties frente a `THEME_COLORS`) y un caso en `audit-regressions` (el toggle pasa la meta a negro, persiste tras recargar y vuelve a blanco). Sin cambios de CSS visibles.
 
 - **4.41.4** — Fix de 4.41.3: en móvil una notificación larga («Mejoras de accesibilidad cargadas», en la home) seguía sobresaliendo de su celda de la barra y pisaba la lupa y el menú; `.header__notificacion` lleva `max-width: 100%` en < 768 px y `.mostrar` pasa de `inline-flex` a `block` con `line-height` de 44 px (con flex y `justify-content: center` el texto largo se recortaba por la izquierda; en bloque `text-overflow: ellipsis` funciona). Verificado en Chrome real a 360 px.
 
