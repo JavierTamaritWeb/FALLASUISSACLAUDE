@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.40.0 · **Última actualización:** 16 de septiembre de 2026
+**Versión:** 4.40.1 · **Última actualización:** 16 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -160,7 +160,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.40.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.40.1).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -386,6 +386,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.40.1** — **Cenefa barroca**: la franja de azulejos `.frieze` (30 páginas, claro y oscuro) pasa de `cenefa_sin_fondo.svg` a `cenefa-barroca-4` (`$frieze-img` en `_variables.scss`; derivado `cenefa-barroca-4.seo.webp` de 512 px que el build genera desde el PNG vía `src/data/image-variants.json`, 46 KB frente a los 64 KB del anterior). Junto a ella entran, sin uso, `cenefa-barroca-2` y `-3` (PNG + SVG; nombres unificados en `fdac037a`); `cenefa_sin_fondo.svg` se conserva en `src/img/elementos-UXUI/` sin referencia (regla F del `.htaccess`). 82 baselines visuales regenerados (la cenefa cambia en todas las páginas).
 
 - **4.40.0** — **Deuda de la auditoría SCSS resuelta** (sección 6 de `docs/auditoria-scss-2026-09.md`; sin cambios visuales en pantalla ni en impresión: estilos computados idénticos a 4.39.3 en 390/600/1024/1280 px, claro y oscuro, y en modo print). **(1) Hover táctil**: los 118 bloques con `:hover` van dentro de `@media (hover: hover)` (en las listas mixtas el `:focus-visible` queda fuera y el hover se duplica dentro; `:not(:hover)` no cambia), así en móvil el hover ya no se queda pegado tras tocar; guardia nueva en `scss-guardrails`. **(2) `!important` de imágenes**: los 62 de `_image-optimization.scss` desaparecen: escudos e iconos usan `img.clase` (empatan con `img[width]`/`img[height]` y ganan por orden) y el icono de meteo entra en la exclusión de las imágenes fluidas. **(3) Media queries 480/767** de Historia y Nosotros reordenadas sin `!important` (el relleno móvil de `.falleros` que nunca se aplicaba se retira). **(4) `#id` fuera de los componentes**: `.current-*` (meteo) y `.header__notificacion`, corrigiendo en origen lo que solo ganaba por el id (`.current-icon img` borrada, temperatura grande en la regla del `h3`, notificación excluida del apilado `> *` de la barra, fondo negro móvil retirado); `selector-max-id` pasa a **error**. **(5) Selectores largos** simplificados salvo los `> thead > tr > td` de la hoja de autorización (tablas anidadas; lo detectó el harness). **(6) cssnano 7**. Los `!important` del bloque de impresión de las legales se mantienen por diseño (reset global de impresión) y queda anotado. Guardias de navegador nuevas en `tests/auditoria-scss.e2e.spec.js` (escudos, meteo, toast, impresión, títulos móviles). El harness de estilos computados compara ahora también 600 y 1024 px y tiene modo impresión. stylelint 318 → 233 avisos; `!important` fuera de print/reduced-motion 181 → 109; `main.css` 202,3 → 202,8 KB (las reglas de hover duplicadas).
 

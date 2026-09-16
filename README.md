@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 16 de septiembre de 2026 - v4.40.0 - **Deuda de la auditoría SCSS resuelta**: hover solo con puntero (`@media (hover: hover)`), sin `!important` en la optimización de imágenes, sin `#id` en componentes, media queries 480/767 ordenadas, cssnano 7. Sin cambios visuales.
+🆕 Última actualización: 16 de septiembre de 2026 - v4.40.1 - **Cenefa barroca**: la franja de azulejos de las 30 páginas pasa de `cenefa_sin_fondo` a `cenefa-barroca-4` (derivado WebP de 512 px, 46 KB frente a 64 KB), en claro y oscuro.
 
 ## 🌐 Vista Previa
 
