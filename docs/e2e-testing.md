@@ -196,6 +196,7 @@ Archivo de test:
 
 - `tests/scss-guardrails.e2e.spec.js`
 - `tests/desbordamiento-horizontal.e2e.spec.js`
+- `tests/header-mobile-layout.e2e.spec.js` (en la smoke desde v4.41.3)
 
 ### ✨ Reveal on Scroll Global
 
@@ -640,7 +641,7 @@ Guía técnica:
 
 ---
 
-Última actualización: 16 de septiembre de 2026 - v4.41.2
+Última actualización: 16 de septiembre de 2026 - v4.41.3
 
 ## Regresiones SEO v4.30.21
 

@@ -31,6 +31,7 @@ module.exports = defineConfig({
     '**/buscador.e2e.spec.js',
     '**/color-tokens.e2e.spec.js',
     '**/auditoria-scss.e2e.spec.js',
-    '**/desbordamiento-horizontal.e2e.spec.js'
+    '**/desbordamiento-horizontal.e2e.spec.js',
+    '**/header-mobile-layout.e2e.spec.js'
   ]
 });

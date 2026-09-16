@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.41.2 · **Última actualización:** 16 de septiembre de 2026
+**Versión:** 4.41.3 · **Última actualización:** 16 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -80,7 +80,7 @@ npx gulp searchIndex     # Regenera solo el índice del buscador
 - **Frontend**: HTML5, SCSS (BEM), módulos JavaScript ES6+
 - **Librerías (CDN)**: Swiper.js v11 (carruseles, jsDelivr), Anime.js v3.2.1 (animaciones, cdnjs), EmailJS v4 (formulario de contacto, jsDelivr)
 - **Librerías (npm)**: Flatpickr v4.6.13 (selector de fechas)
-- **Testing**: Playwright E2E (55 ficheros / 606 casos en la matriz completa, 25 specs / 414 casos smoke por defecto) y 22 pruebas de Node en `tests/unit/`. La suite smoke (`npm run test:e2e`) ejecuta: seo-regressions, audit-regressions, nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, escudo-enlace, galeria-9-album, galeria-pager, accordion-hover, schema-jsonld, scss-guardrails, buscador, color-tokens, auditoria-scss, desbordamiento-horizontal
+- **Testing**: Playwright E2E (55 ficheros / 606 casos en la matriz completa, 25 specs / 414 casos smoke por defecto) y 22 pruebas de Node en `tests/unit/`. La suite smoke (`npm run test:e2e`) ejecuta: seo-regressions, audit-regressions, nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, escudo-enlace, galeria-9-album, galeria-pager, accordion-hover, schema-jsonld, scss-guardrails, buscador, color-tokens, auditoria-scss, desbordamiento-horizontal, header-mobile-layout
 
 ### Estructura de directorios
 
@@ -161,7 +161,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.2).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.3).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -387,6 +387,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.41.3** — **Fix: la notificación de la barra móvil se solapaba con los botones** (`tests/header-mobile-layout` fallaba desde antes de 4.39.3). En < 768 px la notificación va en línea entre los botones y el menú (`grid-area: notificacion`, `position: static`), pero el `animation: none` que anulaba el keyframe del toast estaba en la regla `.header__barra .header__notificacion` (0,2,0) y perdía frente a `.header__notificacion.mostrar` de `components/_notificaciones.scss` (misma especificidad, cargada después): el keyframe `fadeInNotificacion` aplicaba `translateX(-50%)` y la notificación quedaba 60 px a la izquierda, sobre los botones. `animation: none` y `transform: none` pasan a la regla `.mostrar` de móvil (0,3,0). El spec entra en la smoke. Sin cambios en escritorio ni en las capturas visuales.
 
 - **4.41.2** — **Escudo y título del hero interior juntos** (detectado por el usuario en `galeria_10`): con el flex de dos items de 4.41.1, un título largo se quedaba con todo el hueco restante y centraba su texto dentro, dejando el escudo pegado al borde izquierdo. Ahora `.inner__titulo` es un bloque de texto centrado: en ≥ 768 px el escudo va en línea con el título (`inline-block`, 1,6 em del título con márgenes verticales negativos para no abrir hueco entre la primera y la segunda línea) y el bloque entero se centra; en < 768 px el escudo (1,8 em) va centrado encima del título. El tamaño del título vive en `--titulo-fs` (el `clamp()` de 4.41.1) y `.header-inner__grid` fija `min-height: 24.4rem` para conservar la altura del hero anterior (264 px). `tests/reveal-on-scroll` centra la tarjeta del calendario con `scrollIntoView({ block: 'center' })` (con `scrollIntoViewIfNeeded` una tarjeta medio visible no se desplazaba y no alcanzaba el umbral del observador). 97 baselines visuales regenerados. Verificado en Chrome real a 320, 390, 768, 1024 y 1280 px.
 

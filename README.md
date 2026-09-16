@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 16 de septiembre de 2026 - v4.41.2 - **Escudo y título del hero interior juntos**: en escritorio van en la misma línea y centrados; en móvil el escudo encima del título. Altura del hero conservada.
+🆕 Última actualización: 16 de septiembre de 2026 - v4.41.3 - **Fix**: la notificación de la barra móvil ya no se solapa con los botones (el keyframe del toast se colaba por orden de cascada); `header-mobile-layout` pasa y entra en la smoke.
 
 ## 🌐 Vista Previa
 

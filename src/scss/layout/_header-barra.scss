@@ -138,13 +138,18 @@
     // (el fondo negro translúcido que había aquí nunca ganaba al coral de _notificaciones; v4.40.0)
     color: v.$blanco;
 
-    // Evita el keyframe que usa translateX(-50%) del toast
-    animation: none;
   }
 
   .header__barra .header__notificacion.mostrar,
   .header-inner__barra .header__notificacion.mostrar {
     display: inline-flex;
+    // Evita el keyframe del toast (translateX(-50%)): debe ir en esta regla
+    // (0,3,0) y no en la anterior (0,2,0), que perdía frente a
+    // `.header__notificacion.mostrar` de components/_notificaciones.scss y
+    // dejaba la notificación 60 px a la izquierda, sobre los botones
+    // (tests/header-mobile-layout fallaba desde antes de 4.39.3; v4.41.3).
+    animation: none;
+    transform: none;
   }
 }
 
