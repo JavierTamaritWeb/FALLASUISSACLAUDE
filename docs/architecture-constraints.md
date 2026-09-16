@@ -493,6 +493,31 @@ npm run test:e2e   # tests/i18n-prerender.e2e.spec.js está en el smoke
 
 **Reglas:** un icono transparente nuevo con `loading="lazy"` entra en ambas listas de exclusión (o su página carga `accessibility.js`); nunca un `background` sólido global para imágenes lazy. Comprobación: en oscuro, `getComputedStyle(img).backgroundColor` de las imágenes lazy transparentes debe ser `rgba(0, 0, 0, 0)`.
 
+## 19. Barra del navegador: Safari tiñe con el `background-color` de `body`, no con `theme-color` (v4.41.5-v4.41.7)
+
+**Síntoma (16-sep-2026):** el usuario pidió que la barra de estado del iPhone se fundiera con el hero celeste. Las metas `theme-color`/`msapplication-*` seguían en `#0a4b8d` (azul institucional que el hero dejó de usar en 4.30.45). Se cambiaron a blanco (4.41.5) y al celeste del hero (4.41.6) y **en Safari no cambió nada**: la barra seguía azul.
+
+**Causa, comprobada en Safari de macOS con páginas de prueba** (`theme-color` + `body` de distintos colores, capturas de la ventana):
+
+| Página de prueba | Barra de Safari |
+| --- | --- |
+| meta `#0a4b8d`, `body` blanco | blanca |
+| meta `#d6e9f6`, `body` blanco | blanca |
+| sin meta, `body` celeste | celeste |
+| `body` azul con una franja celeste uniforme arriba | azul |
+| `html` celeste, `body` azul | azul |
+| `body` celeste con `::before` fijo azul encima (como producción) | celeste |
+
+Safari (macOS e iOS, WebKit) ignora la meta y usa el `background-color` computado de `body`: ni `html`, ni los píxeles renderizados, ni el hero. En producción `body` llevaba `background-color: #0a4b8d` como respaldo bajo el degradado fijo de `body::before`, y ese era el azul de la barra. Chrome y Android sí leen la meta. Playwright con WebKit **no** reproduce el tinte: hay que mirarlo en Safari real (`open -a Safari` + `screencapture`).
+
+**Solución (4.41.7):** `body { background-color: v.$celeste-barra }` en `abstracts/_globales.scss` (#D6E9F6, tono medio del borde superior de `$gradiente-celeste` medido a 390 px: va de #E8F3FA a #C3E4F6 por el brillo radial). El degradado azul sigue en `body::before` (fijo, cubre el viewport), así que la página no cambia; en oscuro `body` sigue en `$negro`. El mismo color va en `THEME_COLORS` de `js/dark.js`, en las 5 metas de cada página, en los dos manifests y en `--theme-color-light`. `theme-color` no admite degradados.
+
+**Reglas:**
+1. No devuelvas el `body` al azul institucional aunque «no se vea»: es lo único que Safari lee para su barra. Solo asoma al rebotar el scroll.
+2. Un cambio del color de la barra se hace en los cinco sitios a la vez y se comprueba en Safari de macOS real (y en iPhone si es posible: cerrar la pestaña y abrir una nueva, Safari solo relee el color al cargar).
+3. `apple-mobile-web-app-status-bar-style` queda en `default`; con `black-translucent` el texto de la barra iba en blanco sobre el hero claro en PWA.
+4. Guardias: `tests/unit/theme-color.test.cjs`, el caso del toggle en `tests/audit-regressions.e2e.spec.js` y `tests/background-gradient.e2e.spec.js` (acepta el degradado en `body::before`).
+
 ## 15. Qué hacer antes de tocar una zona sensible
 
 Checklist rápido:
