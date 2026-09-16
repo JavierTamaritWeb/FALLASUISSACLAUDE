@@ -16,7 +16,7 @@
     }
   
     
-    @media screen and (min-width: 768px) {
+    @media (min-width: 768px) {
         flex: 1;
         text-align: right;
         justify-content: flex-end;
@@ -26,7 +26,7 @@
         content: '';
         padding: 2rem;
         display: inline-block;
-        transition: all 0.3s ease;
+        transition: background-image 0.3s ease, background-size 0.3s ease, padding 0.3s ease;
         vertical-align: middle;
         background-repeat: no-repeat;
         background-position: center;

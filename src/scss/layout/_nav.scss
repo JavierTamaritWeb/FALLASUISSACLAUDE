@@ -8,11 +8,11 @@
   align-items: center;
   gap: 0.3rem;
 
-  @media screen and (max-width: 767px) {
+  @media (max-width: 767px) {
     gap: 0.2rem; // Gap más pequeño en móviles
   }
 
-  @media screen and (min-width: 768px) {
+  @media (min-width: 768px) {
     justify-content: flex-end;
     gap: 0.5rem;
   }
@@ -78,7 +78,7 @@
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 1.2rem;
       box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
-      z-index: 2500;
+      z-index: v.$z-nav;
       // Transición sincronizada con el tema (2.4s)
       transition: background 2.4s ease-in-out;
   }
@@ -95,7 +95,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 2600; // Por encima del menú (2500) y del backdrop (1500)
+  z-index: v.$z-nav-boton; // Por encima del menú (2500) y del backdrop (1500)
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(3, 49, 95, 0.95);
   color: v.$blanco;
@@ -240,7 +240,7 @@
   // Backdrop invisible visualmente pero funcional para clicks
   background: transparent;
   backdrop-filter: none;
-  z-index: 1500; // Capa intermedia
+  z-index: v.$z-nav-backdrop; // Capa intermedia
 }
 
 .nav-backdrop.is-active {
@@ -270,7 +270,7 @@
     right: 0.75rem;
     min-width: 26rem;
     max-width: 32rem;
-    z-index: 2500;
+    z-index: v.$z-nav;
   }
 }
 
@@ -353,7 +353,7 @@
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   padding: 0.5rem 0;
-  z-index: 1000;
+  z-index: v.$z-modal;
   min-width: 120px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 

@@ -6,7 +6,7 @@
   right: 1.25rem;
   bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
   width: min(36rem, calc(100vw - 2rem));
-  z-index: 1100;
+  z-index: v.$z-banner;
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -25,7 +25,7 @@
     top: 1rem;
     bottom: auto;
     width: min(42rem, calc(100vw - 1.5rem));
-    z-index: 4000;
+    z-index: v.$z-banner-escritorio;
     transform: translate(-50%, 0);
   }
 }
@@ -54,7 +54,7 @@
   right: 0.45rem;
   width: 2.25rem;
   height: 2.25rem;
-  z-index: 2;
+  z-index: v.$z-sobre;
   display: grid;
   place-items: center;
   font-size: 2rem;
@@ -91,7 +91,7 @@
     right: 0.75rem;
     bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
     width: auto;
-    z-index: 2100;
+    z-index: v.$z-banner-movil;
   }
 
   .banner-subvencion.banner-subvencion--forzado {

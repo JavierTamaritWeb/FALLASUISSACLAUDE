@@ -52,7 +52,7 @@ $icon-img-color: v.$turquesa;
     position: relative;
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
     transform: rotate(0.5deg);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: noteAppear 0.5s ease-out;
 
     // Pinza superior (gradiente)
@@ -74,7 +74,7 @@ $icon-img-color: v.$turquesa;
       box-shadow:
           0 3px 6px rgba(0,0,0,0.2),
           inset 0 -2px 2px rgba(255,255,255,0.2);
-      z-index: 2;
+      z-index: v.$z-sobre;
       transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
 
@@ -120,7 +120,7 @@ $icon-img-color: v.$turquesa;
       );
       border-radius: 50%;
       box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-      z-index: 3;
+      z-index: v.$z-sobre-2;
       transition: background 0.3s ease;
     }
 
@@ -284,18 +284,6 @@ $icon-img-color: v.$turquesa;
     }
   }
 
-  // Compatibilidad con clase antigua .board__file-text
-  &__file-text {
-    font-size: 1.4rem;
-    color: var(--coral-marca);
-    background-color: v.$blanco;
-    border-radius: 1rem;
-    padding: 0.8rem 1.2rem;
-    text-align: left;
-    margin: 0;
-    white-space: nowrap;
-    transition: color 0.3s ease, background-color 0.3s ease;
-  }
 }
 
 // Animación de aparición de nota

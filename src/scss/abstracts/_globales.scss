@@ -51,7 +51,7 @@ body {
     background-image: v.$gradiente-institucional;
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: -100; // Muy atrás
+    z-index: v.$z-fondo; // Muy atrás
     transition: opacity var(--theme-transition, 2.4s ease-in-out);
     pointer-events: none;
   }

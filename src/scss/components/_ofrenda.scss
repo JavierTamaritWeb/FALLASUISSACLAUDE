@@ -120,10 +120,6 @@
     font-size: v.$font-size-regular;
   }
 
-  .ofrenda__subtitulo {
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-  }
 }
 
 // =============================================================================
@@ -171,7 +167,7 @@
   &-texto {
     position: absolute;
     inset: 0;
-    z-index: 2;
+    z-index: v.$z-sobre;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -83,16 +83,7 @@
     z-index: 1;
   }
 
-  &__titulo {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    
-  }
 }
-
-
 
 /* ------------------------------------------------
    CLIMA ACTUAL (.weather-current)
@@ -120,10 +111,12 @@
     left: 2%; // Pegado a la izquierda
     
     // Dimensiones proporcionales y responsivas
+    // !important heredado: otra regla de .current-falleret fija el ancho y estos tamaños deben ganar
+    // (auditoría SCSS 4.1, deuda: consolidar en una sola regla)
     width: v.$falleret-size-mobile !important;
     min-width: 140px; // Asegura que nunca sea demasiado pequeño
     max-width: 250px; // Evita que sea gigantesco en pantallas normales
-    height: auto !important;
+    height: auto;
     max-height: 90%; // Evita que se salga por arriba/abajo si el widget es bajo
     object-fit: contain;
     
@@ -151,7 +144,7 @@
 
   .current-wrapper {
     position: relative; // Para z-index
-    z-index: 2;         // Texto por encima de la imagen
+    z-index: v.$z-sobre;         // Texto por encima de la imagen
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -207,13 +200,6 @@
       }
     }
 
-    &__humedad {
-      background-color: black;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-    }
   }
 
   .current-details {
@@ -239,6 +225,7 @@
         margin-bottom: 0.25rem;
       }
     }
+
 
     &__humedad {
       display: flex;
@@ -381,8 +368,6 @@
   font-size: 1.2rem;
 }
 
-
-
 .current-details {
   font-size: 1.2rem;
   color: v.$gris-oscuro;
@@ -402,7 +387,6 @@
 
   // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
   & {
-
 
     font-size: 2.5rem;
   }
@@ -587,10 +571,6 @@
     font-size: 1.3rem;
   }
 }
-
-
-
-
 
 // Texto de la previsión (auditoría SCSS 1.1, v4.39.1): antes se fijaba $secondary-color
 // en cinco sitios (uno con !important) y en oscuro quedaba #333 sobre gris oscuro.

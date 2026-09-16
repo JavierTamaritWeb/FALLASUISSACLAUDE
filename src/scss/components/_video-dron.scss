@@ -92,7 +92,7 @@
   cursor: pointer;
   border-radius: 0.75rem;
   transition: background 0.3s ease, opacity 0.3s ease;
-  z-index: 2;
+  z-index: v.$z-sobre;
 
   &:hover {
     background: rgba(var(--coral-marca-rgb), 0.92);
@@ -361,7 +361,7 @@
 .video-dron__fullscreen {
   position: fixed;
   inset: 0;
-  z-index: 3200;
+  z-index: v.$z-lightbox;
   background: rgba(1, 12, 28, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);

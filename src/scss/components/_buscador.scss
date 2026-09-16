@@ -83,7 +83,7 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 1.2rem;
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
-  z-index: 2500;
+  z-index: v.$z-nav;
   text-align: left;
   transition: background 2.4s ease-in-out;
 

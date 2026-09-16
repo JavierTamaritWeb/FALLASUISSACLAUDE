@@ -28,23 +28,13 @@
         "severity": "warning"
       }
     ],
-    "declaration-property-value-disallowed-list": [
-      {
-        "transition": [
-          "all",
-          "/^all\\s/"
-        ]
-      },
-      {
-        "severity": "warning"
-      }
-    ],
-    "scss/at-extend-no-missing-placeholder": [
-      true,
-      {
-        "severity": "warning"
-      }
-    ],
+    "declaration-property-value-disallowed-list": {
+      "transition": [
+        "all",
+        "/^all\\s/"
+      ]
+    },
+    "scss/at-extend-no-missing-placeholder": true,
     "media-feature-range-notation": "prefix",
     "selector-class-pattern": [
       "^(?:[a-z0-9]+(?:-[a-z0-9]+)*)(?:__[a-z0-9]+(?:-[a-z0-9]+)*)?(?:--[a-z0-9]+(?:-[a-z0-9]+)*)?$",
@@ -123,12 +113,7 @@
         "severity": "warning"
       }
     ],
-    "property-no-unknown": [
-      true,
-      {
-        "severity": "warning"
-      }
-    ],
+    "property-no-unknown": true,
     "scss/dollar-variable-no-missing-interpolation": [
       true,
       {

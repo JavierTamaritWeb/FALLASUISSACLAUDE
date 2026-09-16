@@ -61,18 +61,6 @@
         }
     }
 
-    &__cabecera {
-        text-align: center;
-        margin-bottom: 1.5rem;
-        position: relative;
-
-        &-titulo {
-        font-size: 2.5rem;
-        color: var(--titulo-seccion); // azul de sección en claro (v4.37.1), coral en oscuro
-        margin: 0;
-        }
-    }
-
     &__acciones {
         display: flex;
         justify-content: space-between;
@@ -208,18 +196,6 @@
         }
       }
   
-      &__control-fecha-borrar {
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        background: transparent;
-        border: none;
-        font-size: 1.2rem;
-        color: v.$secondary-color;
-        cursor: pointer;
-        transition: color v.$transicion;
-      }
     }
   
     &__leyenda {
@@ -308,7 +284,7 @@
           padding: 0.5rem 1rem;
           border-radius: 4px;
           transition: opacity 0.3s ease;
-          z-index: 10;
+          z-index: v.$z-local;
           white-space: nowrap;
         }
   
@@ -514,12 +490,6 @@
             color: v.$azul-marino;
         }
   
-      &__banda {
-        height: 4px;
-        width: 100%;
-        border-radius: 4px 4px 0 0;
-        margin-bottom: 0.5rem;
-      }
     }
   
     &.modo-sencillo {
@@ -530,7 +500,6 @@
 
   // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
   & {
-
 
       &__control{
 
@@ -584,8 +553,6 @@
   }
 }
 
-
-
 /* Sábado con fondo suave */
 .calendario-eventos__mini-dia.sabado {
     background-color: #fae9e8; /* Color claro rosado */
@@ -601,14 +568,12 @@
     cursor: pointer; /* opcional, para que el usuario sepa que es clicable */
 }
 
-
 .calendario-eventos__mini-dia:hover {
     background-color: #00909E;      /* Fondo azul verdoso */
     color: v.$negro-casi;           /* Texto oscuro: 4,9:1 (blanco daba 3,8) */
     font-weight: bold;              /* Texto en negrita */
     transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
 }
-
 
 .ics-modal {
     &.oculto {
@@ -618,7 +583,7 @@
     }
 
     position: fixed;
-    z-index: 9999;
+    z-index: v.$z-calendario-modal;
     left: 0;
     top: 0;
     width: 100%;
@@ -743,7 +708,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     .calendario-eventos__fila {
         grid-template-columns: repeat(3, minmax(150px, 1fr));
     }
@@ -768,7 +733,6 @@
     }
 }
   
-
 
 .flatpickr-calendar:not(.open) {
   display: none !important;

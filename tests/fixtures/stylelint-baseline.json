@@ -1,15 +1,12 @@
 {
-  "declaration-no-important": 253,
+  "declaration-no-important": 240,
   "selector-max-id": 30,
   "no-duplicate-selectors": 23,
-  "length-zero-no-unit": 14,
+  "length-zero-no-unit": 10,
   "property-no-deprecated": 7,
-  "declaration-property-value-disallowed-list": 3,
   "font-family-no-duplicate-names": 2,
   "declaration-block-no-shorthand-property-overrides": 2,
   "declaration-block-no-duplicate-properties": 2,
-  "scss/at-extend-no-missing-placeholder": 2,
   "selector-class-pattern": 1,
-  "declaration-property-value-keyword-no-deprecated": 1,
-  "property-no-unknown": 1
+  "declaration-property-value-keyword-no-deprecated": 1
 }

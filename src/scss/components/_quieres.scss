@@ -87,7 +87,7 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  z-index: 1000;
+  z-index: v.$z-modal;
 
   &.active {
     display: flex;

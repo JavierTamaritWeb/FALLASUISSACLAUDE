@@ -1,7 +1,5 @@
 /* components/visor.css */
 
-
-
 @use '../abstracts/variables' as v;
 @use '../abstracts/mixins' as m;
 
@@ -43,16 +41,6 @@
     border-radius: 10px;
     overflow: hidden;
   
-    &__sidebar {
-      content: "";
-      position: absolute;
-      left: -30px;
-      top: 0;
-      width: 30px;
-      height: 100%;
-      background: linear-gradient(to right, v.$blanco-hueso 0%, var(--coral-marca) 10%, v.$blanco-hueso 40%, var(--coral-marca) 50%, v.$blanco-hueso 60%, var(--coral-marca) 90%, v.$blanco-hueso 100%);
-      transition: width 0.3s ease;
-    }
   
     &__page {
       position: absolute;
@@ -70,7 +58,7 @@
       backface-visibility: hidden;
       transition: transform 0.5s ease, opacity 0.5s ease;
       opacity: 0;
-      z-index: 2;
+      z-index: v.$z-sobre;
   
       &::before {
         content: "";
@@ -87,7 +75,7 @@
       &--active {
         transform: none;
         opacity: 1;
-        z-index: 3;
+        z-index: v.$z-sobre-2;
       }
   
       &--flip-forward {
@@ -117,7 +105,7 @@
   
     &__caption {
       margin-top: 15px;
-      font-size: 22px;
+      font-size: 2.2rem;
       color: v.$gris-oscuro;
       text-align: center;
       padding: 0 10px;
@@ -133,7 +121,7 @@
       align-items: center;
       padding: 0 20px;
       gap: 10px;
-      z-index: 4;
+      z-index: v.$z-sobre-3;
     }
   
     &__button {
@@ -141,7 +129,7 @@
       border: 2px solid var(--coral-marca);
       padding: 10px 25px;
       font-family: inherit;
-      font-size: 16px;
+      font-size: 1.6rem;
       cursor: pointer;
       border-radius: 5px;
       transition: transform 0.3s ease;
@@ -159,7 +147,7 @@
     }
   
     &__indicator {
-      font-size: 18px;
+      font-size: 1.8rem;
       color: v.$gris;
       text-align: center;
       flex: 1;
@@ -168,7 +156,7 @@
   
     @media (max-width: 600px) {
       &__caption {
-        font-size: 18px;
+        font-size: 1.8rem;
       }
       &__navigation {
         flex-wrap: wrap;
@@ -176,19 +164,15 @@
       }
       &__button {
         padding: 8px 16px;
-        font-size: 14px;
+        font-size: 1.4rem;
       }
       &__indicator {
-        font-size: 14px;
+        font-size: 1.4rem;
       }
     }
   
     @media (max-width: 480px) {
       aspect-ratio: 3 / 4;
-      &__sidebar {
-        width: 20px;
-        left: -20px;
-      }
       &__page {
         padding: 10px;
   
@@ -198,18 +182,18 @@
         }
       }
       &__caption {
-        font-size: 16px;
+        font-size: 1.6rem;
       }
       &__navigation {
         gap: 8px;
         flex-direction: column;
       }
       &__button {
-        font-size: 13px;
+        font-size: 1.3rem;
         padding: 6px 12px;
       }
       &__indicator {
-        font-size: 13px;
+        font-size: 1.3rem;
       }
     }
 }
@@ -235,7 +219,7 @@
       width: 6rem;
       transform: translateX(-50%);
       pointer-events: none;
-      z-index: 3;
+      z-index: v.$z-sobre-2;
       background: linear-gradient(
         to right,
         rgba(0, 0, 0, 0) 0%,

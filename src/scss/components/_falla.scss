@@ -26,7 +26,6 @@
     background-repeat: repeat; // Repetir el patrón
   }
 
-
   // Overlay para el color de fondo (transición suave)
   &::before {
     content: '';
@@ -88,13 +87,6 @@
       padding: 1rem 1rem 1rem 3rem;
     }
   }
-  &__monumento-inner {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    text-transform: none;
-    padding-top: 2rem;
-  }
 }
 
 .monument {
@@ -103,7 +95,3 @@
   padding: 4rem 0;
 }
 
-.anexo-falla {
-  text-align: left;
-  padding-top: 8rem;
-}

@@ -863,15 +863,13 @@ body.modo-oscuro .board__file-link:hover {
 }
 
 // Nombre de archivo en modo oscuro
-body.modo-oscuro .board__file-name,
-body.modo-oscuro .board__file-text {
+body.modo-oscuro .board__file-name {
     color: v.$coral-claro; // 5,7:1 sobre #444 (v4.29.0)
     background-color: transparent;
 }
 
 // Hover en archivos en modo oscuro
-body.modo-oscuro .board__file-link:hover .board__file-name,
-body.modo-oscuro .board__file-link:hover .board__file-text {
+body.modo-oscuro .board__file-link:hover .board__file-name {
     color: v.$blanco;
 }
 

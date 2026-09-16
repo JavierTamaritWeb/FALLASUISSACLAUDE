@@ -248,7 +248,7 @@
     max-width: 48rem;
     text-align: center;
     position: relative;
-    z-index: 2;
+    z-index: v.$z-sobre;
   }
 
   &__image {

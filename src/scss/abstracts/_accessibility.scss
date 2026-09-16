@@ -153,12 +153,6 @@ button {
 }
 
 // Focus trap para modales
-.modal-open {
-  overflow: hidden;
-  
-  // El aria-hidden se aplicará via JavaScript
-  // no es una propiedad CSS válida
-}
 
 /* ===================================
    SCREEN READER UTILITIES
@@ -257,16 +251,6 @@ img[loading="lazy"]:not(.eventos__calendario):not(.forecast__termo):not(.blog__p
 }
 
 // Mensajes de error
-.error-message {
-  color: #d32f2f;
-  font-size: 0.875rem;
-  margin-top: 4px;
-  
-  &::before {
-    content: '⚠ ';
-    font-weight: bold;
-  }
-}
 
 /* ===================================
    PRINT STYLES

@@ -3,7 +3,6 @@
 @use '../abstracts/variables' as v;
 @use '../abstracts/mixins' as m;
 
-
 // Custom properties del componente, acotadas a su contenedor (antes en :root, fugaban a
 // todo el documento; auditoría SCSS 2.5, v4.39.2).
 .organigrama-contenedor,
@@ -47,21 +46,6 @@ body:not(.modo-oscuro) .organigrama-contenedor {
   }
 }
 
-.organigrama-container {
-      width: 100%;
-      max-width: 95rem;
-      margin: 0 auto;
-      padding: var(--spacing-md);
-      
-      @media (max-width: 1024px) {
-        max-width: 100%;
-        padding: 1rem;
-      }
-      
-      @media (max-width: 767px) {
-        padding: 0.5rem;
-      }
-    }
     /* Contenedor principal */
 .organigrama {
 
@@ -99,7 +83,7 @@ body:not(.modo-oscuro) .organigrama-contenedor {
         position: sticky;
         top: 0;
         background: v.$blanco-hueso;
-        z-index: 10;
+        z-index: v.$z-local;
      }
      /* Nivel 1: Presidente */
      &__top {
@@ -389,7 +373,6 @@ body:not(.modo-oscuro) .organigrama-contenedor {
       }
     }
 
-
     /* ARREGAR EN SAFARI EL BOX */
     // Fuerza que todos los elementos del organigrama usen border-box
   .organigrama,
@@ -424,12 +407,6 @@ body:not(.modo-oscuro) .organigrama-contenedor {
     }
   }
 
-
-
-
-
-
-
     .email-popup {
     position: relative;
     display: inline-block;
@@ -450,12 +427,11 @@ body:not(.modo-oscuro) .organigrama-contenedor {
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    font-size: 12px;
+    font-size: 1.2rem;
     transition: opacity 0.3s;
-    z-index: 100;
+    z-index: v.$z-flotante;
     text-transform: lowercase;
   }
-
 
   
   /* Se muestra al pasar el ratón o cuando se enfoca el elemento */

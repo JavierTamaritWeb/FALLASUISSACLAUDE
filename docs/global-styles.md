@@ -131,6 +131,26 @@ El archivo `_globales.scss` se importa en `main.scss` después de `normalize`:
 
 ### Orden de cascada
 
+## Escala de z-index (v4.39.3)
+
+Un token por capa en `src/scss/abstracts/_variables.scss` (bloque 9); `tests/scss-guardrails` rechaza cualquier literal distinto de `0`, `1`, `-1` o `auto`:
+
+| Token | Valor | Capa |
+| --- | --- | --- |
+| `$z-fondo` | −100 | `body::before` (degradado de fondo) |
+| `$z-sobre` … `$z-sobre-4` | 2 … 5 | contenido sobre un `::before` decorativo |
+| `$z-local` | 10 | cenefa, título sticky, capas internas de un componente |
+| `$z-flotante` | 100 | línea de tiempo lateral, tooltips |
+| `$z-header` | 500 | `.header` / `.header-inner` (contexto de barra y menú) |
+| `$z-modal` | 1000 | modal de contacto, opciones de idioma |
+| `$z-banner` / `$z-banner-movil` / `$z-banner-escritorio` | 1100 / 2100 / 4000 | tarjeta de subvención |
+| `$z-nav-backdrop` | 1500 | fondo del menú |
+| `$z-barra` | 2000 | barra fija |
+| `$z-nav` / `$z-nav-boton` | 2500 / 2600 | menú desplegable y buscador / hamburguesa y botones |
+| `$z-cookies` | 3100 | banner de cookies |
+| `$z-lightbox` | 3200 | visores a pantalla completa |
+| `$z-calendario-modal` / `$z-notificacion` | 9999 / 10000 | modal ICS / notificación |
+
 El archivo `_globales.scss` se carga temprano. El archivo `themes/_modo-oscuro.scss` se carga el último de la cascada (desde v4.38.2, vía `@use 'themes'` al final de `main.scss`) y sobrescribe el fondo cuando se activa `.modo-oscuro`.
 
 ### Altura del contenido
@@ -413,7 +433,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 ---
 
-Última actualización: 15 de septiembre de 2026 - v4.39.2
+Última actualización: 16 de septiembre de 2026 - v4.39.3
 
 ## 🏛️ Componente Frieze (Cenefa)
 

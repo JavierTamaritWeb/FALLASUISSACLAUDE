@@ -13,16 +13,18 @@
     color: var(--titulo-seccion);
   }
   @media (max-width: 480px) {
-    padding: 0rem !important;
-    margin: 0rem !important;
+    // !important heredados (auditoría SCSS 4.1, deuda): las media queries de 480 y 767 se solapan y
+    // sin ellos gana la de 767, que va después; quitarlos cambiaría el tamaño en móvil
+    padding: 0 !important;
+    margin: 0 !important;
     margin-top: 2rem !important;
     &__titulo {
       font-size: 1.8rem !important;
     }
   }
   @media (max-width: 767px) {
-    padding: 0rem !important;
-    margin: 0rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
     margin-top: 2rem !important;
     &__titulo {
       font-size: 2.2rem;
@@ -52,74 +54,13 @@
     }
   }
 
-  &__texto1,
-  &__texto2,
-  &__texto3,
-  &__texto4,
-  &__texto5,
-  &__texto6,
-  &__texto7 {
-    display: block;
-    margin: 0 ;
-    text-align: left;
-    text-indent: 3rem;
-    font-size: 1.6rem;
-    line-height: 1.2;
-    color: v.$blanco-hueso;
-    padding: 1rem;
-  }
-  &__author {
-    display: block;
-    margin-left: auto; // Esto desplaza el elemento a la derecha
-    text-align: right;
-    text-indent: 3rem;
-    font-size: 1.6rem;
-    line-height: 1.2;
-    color: v.$blanco-hueso;
-    padding: 1rem;
-  }
-
   @media (max-width: 480px) {
     padding: 1rem;
     margin: 1rem;
-    &__texto1,
-    &__texto2,
-    &__texto3,
-    &__texto4,
-    &__texto5,
-    &__texto6,
-    &__texto7 {
-      font-size: 1.4rem !important;
-    }
   }
   @media (max-width: 767px) {
     padding: 1rem;
     margin: 1rem;
-    &__texto1,
-    &__texto2,
-    &__texto3,
-    &__texto4,
-    &__texto5,
-    &__texto6,
-    &__texto7 {
-      font-size: 1.6rem;
-    }
-  }
-  &__prologo-titulo {
-    color: var(--coral-marca);
-    text-transform: none;
-    font-size: 2.4rem;
-    margin-bottom: 1rem;
-    padding-top: 2rem;
-    @media (max-width: 480px) {
-      font-size: 1.8rem;
-    }
-    @media (max-width: 767px) {
-      font-size: 2rem;
-    }
-    @media (min-width: 768px) {
-      font-size: 2.4rem;
-    }
   }
   
 

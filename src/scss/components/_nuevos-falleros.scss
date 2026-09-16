@@ -174,7 +174,7 @@
       right: 0;
       height: 2rem;
       background-color: var(--coral-marca);
-      z-index: 2;
+      z-index: v.$z-sobre;
       pointer-events: none;
     }
 

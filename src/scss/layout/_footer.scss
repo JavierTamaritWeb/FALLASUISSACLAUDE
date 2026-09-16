@@ -71,7 +71,7 @@
   }
   &__enlace {
     position: relative;
-    display: inline-flex !important;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
@@ -81,13 +81,13 @@
     // Mayúsculas como el menú del header (v4.23.2), solo por CSS
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    padding: 0.2rem 0.55rem !important;
-    min-height: 44px !important;
+    padding: 0.2rem 0.55rem;
+    min-height: 44px;
     width: auto;
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
     transition: color 300ms ease;
 
     // Subrayado animado (mismo patrón que .navegacion__enlace)

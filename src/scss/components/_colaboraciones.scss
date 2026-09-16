@@ -94,23 +94,6 @@
     }
   }
 
-  &__link {
-    color: var(--coral-marca);
-    margin-top: 2rem;
-    font-size: 1.6rem;
-    font-weight: 700;
-    text-align: center;
-    text-transform: none;
-    @include m.transition(color 200ms);
-    display: inline-block;
-    cursor: pointer;
-    text-shadow: 1px 1px 0 rgba(var(--coral-marca-rgb), 1);
-    text-decoration: none;
-
-    &:hover {
-      color: v.$dorado;
-    }
-  }
 }
 
 // Página colaboraciones.html
@@ -253,7 +236,7 @@ body:not(.modo-oscuro) .falleros__nosotros--plana-mayor .accordion__content {
       top: 0.85rem;
       transition: transform 0.3s ease, background-color 0.3s ease;
       width: 3.2rem;
-      z-index: 2;
+      z-index: v.$z-sobre;
     }
 
     // Solo background-color: un `background` completo borraria las barras
@@ -310,7 +293,7 @@ body.lightbox-open {
   position: fixed;
   transition: opacity 0.25s ease, visibility 0.25s ease;
   visibility: hidden;
-  z-index: 3200;
+  z-index: v.$z-lightbox;
 
   &.open,
   &[aria-hidden='false'] {
@@ -350,7 +333,7 @@ body.lightbox-open {
     top: clamp(0.8rem, 2vw, 1.2rem);
     transition: background-color 0.2s ease, transform 0.2s ease;
     width: 4.4rem;
-    z-index: 2;
+    z-index: v.$z-sobre;
 
     // La cruz se dibuja con dos barras giradas en vez de usar el glifo &times;
     // del HTML: ese glifo se apoyaba en la linea base y quedaba ~5px bajo

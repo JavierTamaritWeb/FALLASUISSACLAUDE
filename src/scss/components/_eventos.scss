@@ -2,13 +2,10 @@
 
 @use '../abstracts/variables' as v;
 
-
-
 .eventos {
   border-top: 1px solid var(--coral-marca);
   background-color: v.$rosa-acordeon; // rosa muy claro desde v4.32.5 (antes $naranja-suave); en oscuro lo repone _modo-oscuro.scss
   
-
 
   &__heading {
     display: flex;
@@ -54,11 +51,6 @@
 
     }
   }
-  &__icon{
-    height: 4rem;
-    width: 4rem;
-    margin: 2rem 0;
-  }
   &__title {
     font-size: v.$font-size-large;
     color: var(--titulo-seccion);
@@ -67,10 +59,10 @@
       
     }
   }
-  @media (max-width:480px) {
+  @media (max-width: 480px) {
     padding: 3rem 0;
   }
-  @media (min-width:768px) {
+  @media (min-width: 768px) {
     padding: 10rem 0;
   }
   
@@ -86,7 +78,7 @@
   padding: 2rem;
   margin: 2rem 6rem;
   box-shadow: 5px 5px 10px 2px rgba(51, 51, 51, 0.5);
-  transition: all 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
   
   &:hover {
     background-color: var(--coral-marca);
@@ -137,7 +129,6 @@
     
   }
 }
-
 
 // El componente .board canónico vive en _board.scss (multi-board v4.7.2).
 // El bloque legacy duplicado que vivía aquí se eliminó en v4.7.9; solo se

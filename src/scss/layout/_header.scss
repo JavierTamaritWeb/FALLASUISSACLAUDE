@@ -18,7 +18,7 @@
   // página es este. Con 10, la cenefa (10), el título sticky del organigrama (10),
   // el timeline (100) y los tooltips (100) se pintaban encima del menú abierto.
   // 500: por encima del contenido, por debajo de modales/banners (≥1000).
-  z-index: 500;
+  z-index: v.$z-header;
   
   // Pseudo-elemento para el fondo del hero (modo claro): degradado celeste de
   // 5 tonos (v4.30.45; antes el institucional azul)
@@ -92,7 +92,7 @@
   &__title {
     --hero-title-accent: #{v.$coral-texto};
     position: relative;
-    z-index: 2; // Mantener el texto por encima de la Fallereta decorativa.
+    z-index: v.$z-sobre; // Mantener el texto por encima de la Fallereta decorativa.
     max-width: 100%;
     margin: 2rem 0;
     padding: 0 1rem;
@@ -157,10 +157,10 @@
     display: block;
     margin: 0 auto;
     
-    @media screen and (min-width: 768px) {
+    @media (min-width: 768px) {
       max-width: 12rem;
     }
-    @media screen and (min-width: 1024px) {
+    @media (min-width: 1024px) {
       max-width: 15rem;
     }
   }
@@ -222,7 +222,7 @@
     width: 100%;
     overflow: hidden;
     line-height: 0;
-    z-index: 5; // Asegurar que estén por encima de la fallera
+    z-index: v.$z-sobre-4; // Asegurar que estén por encima de la fallera
   }
   &__botones {
     display: flex;
@@ -238,22 +238,6 @@
 // ---------------------------------------------------------
 // Estilos del Inner (.inner)
 // ---------------------------------------------------------
-.inner {
-  border-top: 1px solid var(--coral-marca);
-  background-color: v.$naranja-suave;
-  padding: 20rem 0;
-
-  &__titulo {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media (max-width: 480px) {
-    padding: 16rem 0;
-  }
-}
 
 // ---------------------------------------------------------
 // Animaciones
@@ -306,15 +290,6 @@
   max-height: 150px;
 }
 
-.header__wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-}
-
 // ---------------------------------------------------------
 // Estilos del Header Interno (.header-inner)
 // ---------------------------------------------------------
@@ -323,7 +298,7 @@
   background-color: transparent;
   padding: 0;
   position: relative;
-  z-index: 500; // Mismo motivo que .header (ver comentario arriba, v4.23.6)
+  z-index: v.$z-header; // Mismo motivo que .header (ver comentario arriba, v4.23.6)
   padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
 
   // Pseudo-elemento para el gradiente azul (transición suave)

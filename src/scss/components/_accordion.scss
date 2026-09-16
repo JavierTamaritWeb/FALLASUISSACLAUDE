@@ -420,7 +420,6 @@
   white-space: nowrap;
 }
 
-
 // Acordeón de «Nosotros» (Plana Mayor) en modo claro:
 // - v4.30.26: titulares y ▼ en turquesa.
 // - v4.30.27: filas en rosa $rosa-acordeon (#FDF0F3 desde v4.30.28) en lugar de $naranja-suave
@@ -476,8 +475,7 @@ body:not(.modo-oscuro) .historia {
     .representantes-grid__nombre {
       color: v.$coral-texto;
     }
-    .representantes-grid__cargo,
-    .representantes-grid__placeholder {
+    .representantes-grid__cargo {
       color: v.$negro-casi;
     }
     .representantes-grid__imagen {
