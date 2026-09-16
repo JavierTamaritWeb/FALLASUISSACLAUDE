@@ -18,19 +18,30 @@
   // La regla global de elementos interactivos (_accessibility.scss) eleva y
   // sombrea todo `a` en hover/focus: aquí dibujaría un rectángulo alrededor
   // del escudo. El feedback es un halo coral sobre la propia imagen.
-  &:hover,
   &:focus {
     transform: none;
     box-shadow: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
   }
 
   img {
     transition: filter 0.3s ease;
   }
 
-  &:hover img,
   &:focus-visible img {
     filter: drop-shadow(0 0 0.6rem rgba(var(--coral-marca-rgb), 0.65));
+  }
+
+  @media (hover: hover) {
+    &:hover img {
+      filter: drop-shadow(0 0 0.6rem rgba(var(--coral-marca-rgb), 0.65));
+    }
   }
 
   &:focus {

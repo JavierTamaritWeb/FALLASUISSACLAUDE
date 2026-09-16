@@ -37,9 +37,14 @@
     flex-shrink: 0;
   }
 
-  &:hover,
   &[aria-expanded="true"] {
     background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
   }
 
   &:focus-visible {
@@ -120,9 +125,11 @@
     margin-right: -0.6rem;
     color: rgba(255, 255, 255, 0.85);
 
-    &:hover {
-      color: v.$blanco;
-      background: rgba(255, 255, 255, 0.12);
+    @media (hover: hover) {
+      &:hover {
+        color: v.$blanco;
+        background: rgba(255, 255, 255, 0.12);
+      }
     }
 
     &:focus-visible {
@@ -182,9 +189,11 @@
     transform: translateY(-50%);
     color: v.$gris-medio-oscuro; // 7,5:1 sobre blanco
 
-    &:hover {
-      color: v.$negro-casi;
-      background: rgba(v.$negro-casi, 0.08);
+    @media (hover: hover) {
+      &:hover {
+        color: v.$negro-casi;
+        background: rgba(v.$negro-casi, 0.08);
+      }
     }
 
     &:focus-visible {
@@ -213,9 +222,14 @@
     text-underline-offset: 0.2em;
     font-weight: 700;
 
-    &:hover,
     &:focus-visible {
       color: v.$blanco;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        color: v.$blanco;
+      }
     }
   }
 
@@ -258,8 +272,10 @@
     font-weight: 700;
     cursor: pointer;
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.22);
+    @media (hover: hover) {
+      &:hover {
+        background: rgba(255, 255, 255, 0.22);
+      }
     }
 
     &:focus-visible {
@@ -306,11 +322,17 @@
     border: 1px solid transparent;
     transition: background-color 150ms ease, border-color 150ms ease;
 
-    &:hover,
     &:focus-visible,
     &.is-activo {
       background: rgba(255, 255, 255, 0.16);
       border-color: rgba(var(--coral-marca-rgb), 0.7);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: rgba(255, 255, 255, 0.16);
+        border-color: rgba(var(--coral-marca-rgb), 0.7);
+      }
     }
 
     // Opción activa por teclado (aria-activedescendant, el foco sigue en el campo)

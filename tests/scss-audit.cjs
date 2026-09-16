@@ -254,6 +254,29 @@ function coberturaTema(files) {
   return [...new Set(out)].sort();
 }
 
+// 9. Reglas :hover fuera de `@media (hover: hover)` (v4.40.0): en pantallas táctiles el hover
+// se queda pegado tras tocar; :not(:hover) no cuenta.
+function hoverSinMedia(files) {
+  const out = [];
+  for (const f of files) {
+    const lines = leer(f).split('\n');
+    lines.forEach((l, i) => {
+      const s = l.replace(/\/\/.*$/, '');
+      if (l.trim().startsWith('//') || !s.includes('{')) return;
+      if (!/:hover/.test(s.replace(/:not\([^)]*\)/g, ''))) return;
+      const ind = l.length - l.trimStart().length;
+      let dentro = false;
+      for (let k = i - 1; k >= 0; k--) {
+        const lk = lines[k]; const ik = lk.length - lk.trimStart().length;
+        if (ik < ind && /@media \(hover: hover\)/.test(lk)) { dentro = true; break; }
+        if (ik < ind && lk.trim() === '}') break;
+      }
+      if (!dentro) out.push(`${relativo(f)}:${i + 1}: ${l.trim().slice(0, 80)}`);
+    });
+  }
+  return out;
+}
+
 function analizarTodo() {
   const files = ficherosScss();
   const permitidos = JSON.parse(leer(path.join(repoRoot, 'tests/fixtures/scss-allowed-unused.json')));
@@ -266,7 +289,8 @@ function analizarTodo() {
     rutasObsoletas: rutasObsoletas(files),
     etiquetasGlobales: etiquetasGlobales(files),
     coberturaTema: coberturaTema(files),
+    hoverSinMedia: hoverSinMedia(files),
   };
 }
 
-module.exports = { repoRoot, ficherosScss, leer, sinComentarios, sinBloquesMedia, selectoresRaiz, duplicados, clasesMuertas, importantPorFichero, zIndexLiterales, mediaQueries, rutasObsoletas, etiquetasGlobales, coberturaTema, analizarTodo };
+module.exports = { repoRoot, ficherosScss, leer, sinComentarios, sinBloquesMedia, selectoresRaiz, duplicados, clasesMuertas, importantPorFichero, zIndexLiterales, mediaQueries, rutasObsoletas, etiquetasGlobales, coberturaTema, hoverSinMedia, analizarTodo };

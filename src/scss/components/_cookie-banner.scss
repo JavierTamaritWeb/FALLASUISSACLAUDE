@@ -50,8 +50,10 @@
     text-decoration: underline;
     font-weight: 500;
 
-    &:hover {
-      color: var(--coral-marca-claro10);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--coral-marca-claro10);
+      }
     }
   }
 }
@@ -85,9 +87,11 @@
     color: v.$blanco;
     border-color: var(--coral-marca);
 
-    &:hover {
-      background: var(--coral-marca-oscuro8);
-      transform: scale(1.04);
+    @media (hover: hover) {
+      &:hover {
+        background: var(--coral-marca-oscuro8);
+        transform: scale(1.04);
+      }
     }
   }
 
@@ -95,9 +99,11 @@
     background: transparent;
     color: rgba(255, 255, 255, 0.85);
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: scale(1.04);
+    @media (hover: hover) {
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.04);
+      }
     }
   }
 

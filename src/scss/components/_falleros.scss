@@ -3,9 +3,7 @@
 @use '../abstracts/variables' as v;
 
 .falleros {
-  // !important heredado: sin él ganaría la media query móvil de abajo (padding 1rem), que nunca
-  // ha llegado a aplicarse; quitarlo sería un cambio visual (auditoría SCSS 4.1, deuda)
-  padding: 5rem 3rem !important;
+  padding: 5rem 3rem;
   margin: 0;
 
   &__nosotros {
@@ -44,18 +42,17 @@
     // «Nosotros»: azul institucional en claro, coral en oscuro (v4.30.24)
     color: var(--titulo-seccion);
   }
-  @media (max-width: 480px) {
-    padding: 1rem;
-    margin: 1rem;
-    &__titulo {
-      font-size: 1.8rem !important; // media queries 480/767 solapadas (auditoría SCSS 4.1, deuda)
-    }
-  }
+  // El padding móvil de 1rem nunca llegó a aplicarse (lo tapaba un !important del bloque raíz) y se
+  // retira para no cambiar el diseño; el margin sí se aplicaba. La de 480 va después de la de 767 (v4.40.0).
   @media (max-width: 767px) {
-    padding: 1rem;
     margin: 1rem;
     &__titulo {
       font-size: 2.2rem;
+    }
+  }
+  @media (max-width: 480px) {
+    &__titulo {
+      font-size: 1.8rem;
     }
   }
 }

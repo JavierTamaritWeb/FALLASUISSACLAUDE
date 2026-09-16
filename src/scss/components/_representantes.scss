@@ -101,15 +101,26 @@
 
       // Mismo hover que Representantes (el trigger base aplica scale(1.03))
       // mas el oscurecido de las miniaturas ampliables (v4.15.1)
-      &:hover .representantes-grid__imagen,
       &:focus-visible .representantes-grid__imagen {
         filter: brightness(0.72);
         transform: translateY(-0.4rem);
       }
 
-      &:hover,
+      @media (hover: hover) {
+        &:hover .representantes-grid__imagen {
+          filter: brightness(0.72);
+          transform: translateY(-0.4rem);
+        }
+      }
+
       &:focus-visible {
         background: none;
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          background: none;
+        }
       }
 
       &:focus-visible {
@@ -165,9 +176,11 @@
     box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-    &:hover {
-      transform: translateY(-0.4rem);
-      box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.5);
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-0.4rem);
+        box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.5);
+      }
     }
   }
 
@@ -201,8 +214,10 @@
   .representantes-grid__imagen {
     transition: none;
 
-    &:hover {
-      transform: none;
+    @media (hover: hover) {
+      &:hover {
+        transform: none;
+      }
     }
   }
 }
@@ -235,8 +250,10 @@ body.modo-oscuro .accordion--representantes {
       border-color: var(--coral-marca);
       box-shadow: 0 0.3rem 0.8rem rgba(var(--coral-marca-rgb), 0.18);
 
-      &:hover {
-        box-shadow: 0 0.6rem 1.4rem rgba(var(--coral-marca-rgb), 0.32);
+      @media (hover: hover) {
+        &:hover {
+          box-shadow: 0 0.6rem 1.4rem rgba(var(--coral-marca-rgb), 0.32);
+        }
       }
     }
 

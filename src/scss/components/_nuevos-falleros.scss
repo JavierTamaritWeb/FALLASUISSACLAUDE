@@ -112,10 +112,16 @@
       background-color var(--theme-transition, 2.4s ease-in-out),
       border-color var(--theme-transition, 2.4s ease-in-out);
 
-    &:hover,
     &:focus-within {
       transform: translateY(-2px);
       box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.18);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.18);
+      }
     }
   }
 
@@ -257,9 +263,14 @@ body.modo-oscuro .nuevos-falleros {
     border-color: var(--coral-marca);
     box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.5);
 
-    &:hover,
     &:focus-within {
       box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.7);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.7);
+      }
     }
   }
 

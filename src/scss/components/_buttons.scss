@@ -61,7 +61,6 @@
     transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  &:hover,
   &:focus-visible {
     background: linear-gradient(
       135deg,
@@ -79,15 +78,45 @@
     transform: translateY(-3px);
   }
 
-  &:hover::before,
+  @media (hover: hover) {
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(var(--coral-marca-rgb), 0.98) 0%,
+        rgba(v.$rojo-salmon, 0.95) 100%
+      );
+      border-color: rgba(v.$rojo-salmon, 0.95);
+      box-shadow:
+        0 1.1rem 2.4rem rgba(var(--coral-marca-rgb), 0.24),
+        0 0.45rem 0.95rem rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+      color: v.$negro-casi;
+      filter: saturate(1.05) brightness(1.02);
+      text-decoration: none;
+      transform: translateY(-3px);
+    }
+  }
+
   &:focus-visible::before {
     opacity: 1;
     transform: translateX(135%);
   }
 
-  &:hover::after,
+  @media (hover: hover) {
+    &:hover::before {
+      opacity: 1;
+      transform: translateX(135%);
+    }
+  }
+
   &:focus-visible::after {
     transform: translateX(0.25rem);
+  }
+
+  @media (hover: hover) {
+    &:hover::after {
+      transform: translateX(0.25rem);
+    }
   }
 
   &:focus-visible {
@@ -157,9 +186,11 @@
   @include m.transition(background-color, color);
   cursor: pointer;
 
-  &:hover {
-    background-color: var(--coral-marca);
-    color: v.$blanco;
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--coral-marca);
+      color: v.$blanco;
+    }
   }
 }
 

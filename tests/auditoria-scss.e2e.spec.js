@@ -86,3 +86,52 @@ test.describe('Auditoría SCSS — errores visibles y accesibilidad (v4.39.1)', 
     expect(css).not.toMatch(/--header-bar-bg/);
   });
 });
+
+test.describe('Auditoría SCSS — deuda resuelta en 4.40.0 (guardias)', () => {
+  test('escudos e iconos conservan su tamaño sin !important (img.clase gana a img[width])', async ({ page }) => {
+    await page.goto('/index.html');
+    const escudo = await page.locator('img.header__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).width));
+    expect(escudo).toBeLessThanOrEqual(150);
+    expect(escudo).toBeGreaterThan(40);
+    const pie = await page.locator('img.footer__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).width));
+    expect(pie).toBeLessThanOrEqual(80);
+    await page.goto('/aviso-legal.html');
+    const interior = await page.locator('img.header-inner__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).width));
+    expect(interior).toBeLessThanOrEqual(100);
+    expect(interior).toBeGreaterThan(30);
+  });
+
+  test('meteo sin #id: temperatura grande e icono de 20rem en escritorio ancho', async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.goto('/meteo.html');
+    expect(await page.locator('#current-temp').evaluate((el) => getComputedStyle(el).fontSize)).toBe('50px');
+    expect(await page.locator('#current-icon-img').evaluate((el) => getComputedStyle(el).width)).toBe('200px');
+    await page.setViewportSize({ width: 390, height: 800 });
+    expect(await page.locator('#current-temp').evaluate((el) => getComputedStyle(el).fontSize)).toBe('20px');
+  });
+
+  test('la notificación de la barra sigue siendo un toast fijo por encima de todo (sin #id)', async ({ page }) => {
+    await page.goto('/index.html');
+    const n = page.locator('#notificacion');
+    expect(await n.evaluate((el) => getComputedStyle(el).position)).toBe('fixed');
+    expect(await n.evaluate((el) => getComputedStyle(el).zIndex)).toBe('10000');
+    await page.locator('.header__modo-boton').first().click();
+    await expect(n).toHaveClass(/mostrar/);
+    expect(await n.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(184, 63, 53)');
+  });
+
+  test('impresión de las legales: párrafo destacado sin fondo y escudo acotado', async ({ page }) => {
+    await page.emulateMedia({ media: 'print' });
+    await page.goto('/privacidad.html');
+    expect(await page.locator('.contenido-legal p').first().evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
+    expect(await page.locator('img.header-inner__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).maxWidth))).toBeLessThanOrEqual(100);
+  });
+
+  test('Nosotros e Historia en móvil: título de 1,8 rem sin !important (media queries ordenadas)', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 800 });
+    await page.goto('/lafalla.html');
+    expect(await page.locator('.falleros__titulo').first().evaluate((el) => getComputedStyle(el).fontSize)).toBe('18px');
+    expect(await page.locator('.historia__titulo').first().evaluate((el) => getComputedStyle(el).fontSize)).toBe('18px');
+    expect(await page.locator('.falleros').first().evaluate((el) => getComputedStyle(el).paddingTop)).toBe('50px');
+  });
+});

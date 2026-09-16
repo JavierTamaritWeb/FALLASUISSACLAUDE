@@ -74,7 +74,9 @@
     // (position:fixed a pantalla completa; si entrara en el flujo flex
     // desplazaría el botón hamburguesa y no captaría los clics fuera).
     // Desde v4.29.0 también se excluye .buscador (panel absoluto del buscador).
-    > *:not(.navegacion):not(.nav-backdrop):not(.buscador):not(.header__botones) {
+    // Desde v4.40.0 también se excluye .header__notificacion: es un toast fijo (antes lo
+  // protegía la especificidad del id #notificacion).
+  > *:not(.navegacion):not(.nav-backdrop):not(.buscador):not(.header__botones):not(.header__notificacion) {
       position: relative;
       z-index: 1;
     }
@@ -105,8 +107,8 @@
     justify-self: end;
   }
 
-  .header__barra #notificacion,
-  .header-inner__barra #notificacion {
+  .header__barra .header__notificacion,
+  .header-inner__barra .header__notificacion {
     grid-area: notificacion;
     // Desactivar comportamiento "toast" (fixed) en móvil y que no cree hueco si no se muestra
     position: static;
@@ -133,15 +135,15 @@
     text-align: center;
     justify-self: center;
 
-    background-color: rgba(0, 0, 0, 0.55);
+    // (el fondo negro translúcido que había aquí nunca ganaba al coral de _notificaciones; v4.40.0)
     color: v.$blanco;
 
     // Evita el keyframe que usa translateX(-50%) del toast
     animation: none;
   }
 
-  .header__barra #notificacion.mostrar,
-  .header-inner__barra #notificacion.mostrar {
+  .header__barra .header__notificacion.mostrar,
+  .header-inner__barra .header__notificacion.mostrar {
     display: inline-flex;
   }
 }
@@ -189,9 +191,11 @@
     }
   }
   
-  &:hover {
-    background-color: rgba(0, 51, 102, 0.15);
-    border-color: rgba(0, 51, 102, 0.95);
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(0, 51, 102, 0.15);
+      border-color: rgba(0, 51, 102, 0.95);
+    }
   }
   
   &:focus-visible {
@@ -227,14 +231,20 @@ body.modo-oscuro {
       inset 0 -1px 0 rgba(0, 0, 0, 0.4);
   }
 
-  .header__modo-boton:hover,
-  .header__lang-switcher:hover,
-  .header__menu-toggle:hover,
   .header__modo-boton:focus-visible,
   .header__lang-switcher:focus-visible,
   .header__menu-toggle:focus-visible {
     background-color: rgba(255, 255, 255, 0.08);
     border-color: rgba(90, 90, 90, 0.95);
+  }
+
+  @media (hover: hover) {
+    .header__modo-boton:hover,
+    .header__lang-switcher:hover,
+    .header__menu-toggle:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(90, 90, 90, 0.95);
+    }
   }
 
   .header__modo-boton:focus-visible {
@@ -275,9 +285,6 @@ body.modo-oscuro {
 // Botón hamburguesa (todos los tamaños desde v4.14.0: la nav siempre es un desplegable)
 
 // Notificación en la barra
-.header__notificacion {
-  color: v.$blanco;
-}
 
 // Fondo cuando se hace scroll (modo claro)
 .header__barra--scrolled,

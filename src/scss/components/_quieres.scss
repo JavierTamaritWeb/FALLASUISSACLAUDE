@@ -65,8 +65,10 @@
     display: inline-block;
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.35);
   
-    &:hover {
-      color: v.$dorado
+    @media (hover: hover) {
+      &:hover {
+        color: v.$dorado
+      }
     }
   }
 
@@ -123,10 +125,12 @@
     color 2.4s ease-in-out,
     border-color 2.4s ease-in-out;
 
-  &:hover {
-    background-color: v.$azul-verdoso;
-    // Texto oscuro sobre turquesa: en blanco el texto escrito desaparecía (1,8:1)
-    color: v.$negro-casi;
+  @media (hover: hover) {
+    &:hover {
+      background-color: v.$azul-verdoso;
+      // Texto oscuro sobre turquesa: en blanco el texto escrito desaparecía (1,8:1)
+      color: v.$negro-casi;
+    }
   }
 }
 
@@ -230,7 +234,7 @@
   }
 }
 
-body.modo-oscuro .modal-quieres .modal-body .lead {
+body.modo-oscuro .modal-quieres .lead {
   color: v.$blanco-hueso; // el modal-content pasa a fondo oscuro en modo oscuro
 }
 
@@ -334,9 +338,14 @@ body.modo-oscuro .modal-quieres .modal-body .lead {
     color: inherit;
     text-decoration: underline;
 
-    &:hover,
     &:focus-visible {
       opacity: 0.8;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 }

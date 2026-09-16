@@ -16,14 +16,9 @@
         "severity": "warning"
       }
     ],
-    "selector-max-id": [
-      0,
-      {
-        "severity": "warning"
-      }
-    ],
+    "selector-max-id": 0,
     "selector-max-compound-selectors": [
-      4,
+      3,
       {
         "severity": "warning"
       }

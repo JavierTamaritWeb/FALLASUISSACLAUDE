@@ -4,12 +4,13 @@
 @use '../abstracts/variables' as v;
 @use '../abstracts/mixins' as m;
 
-#notificacion {
+.header__notificacion {
+    color: v.$blanco; // antes en layout/_header-barra.scss (v4.40.0)
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    // !important: en móvil `.header__barra #notificacion` (layout/_header-barra.scss) pone un fondo negro translúcido
+    // !important: en móvil `.header__barra .header__notificacion` (layout/_header-barra.scss) pone un fondo negro translúcido
     // y este coral debe imponerse (auditoría SCSS 4.1: se mantiene; deuda: unificar ambas reglas)
     background-color: v.$coral-texto !important; // blanco sobre coral daba 2,7:1 (v4.29.0)
     color: v.$blanco;
@@ -23,16 +24,16 @@
 }
 
 /* Variantes de estado (v4.29.0): siempre con texto; el icono lo pone ::before */
-#notificacion.notificacion--exito { background-color: v.$estado-exito; }
-#notificacion.notificacion--error { background-color: v.$estado-error; }
-#notificacion.notificacion--aviso { background-color: v.$estado-aviso; }
-#notificacion.notificacion--info  { background-color: v.$estado-info; }
-#notificacion.notificacion--exito::before { content: '\2713\00A0'; }
-#notificacion.notificacion--error::before { content: '\26A0\FE0E\00A0'; }
-#notificacion.notificacion--aviso::before { content: '\26A0\FE0E\00A0'; }
+.header__notificacion.notificacion--exito { background-color: v.$estado-exito; }
+.header__notificacion.notificacion--error { background-color: v.$estado-error; }
+.header__notificacion.notificacion--aviso { background-color: v.$estado-aviso; }
+.header__notificacion.notificacion--info  { background-color: v.$estado-info; }
+.header__notificacion.notificacion--exito::before { content: '\2713\00A0'; }
+.header__notificacion.notificacion--error::before { content: '\26A0\FE0E\00A0'; }
+.header__notificacion.notificacion--aviso::before { content: '\26A0\FE0E\00A0'; }
 
 /* Clase que activa la animación */
-#notificacion.mostrar {
+.header__notificacion.mostrar {
     opacity: 1;
     visibility: visible;
 

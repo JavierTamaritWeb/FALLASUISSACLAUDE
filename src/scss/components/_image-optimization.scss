@@ -23,137 +23,140 @@ img {
   }
   
   // Aspecto ratio para imágenes sin dimensiones (excepto logos/escudos/iconos)
-  &:not([width]):not([height]):not(.header__escudo):not(.header-inner__escudo):not(.eventos__calendario):not(.forecast__termo):not(.blog__pluma):not(.galerias__camara):not(.quieres-mas__imagen):not(.footer__escudo) {
+  // .current-icon-img (icono meteo, lo redimensiona meteo.js) excluido desde v4.40.0, antes lo protegía su #id
+  &:not([width]):not([height]):not(.current-icon-img):not(.header__escudo):not(.header-inner__escudo):not(.eventos__calendario):not(.forecast__termo):not(.blog__pluma):not(.galerias__camara):not(.quieres-mas__imagen):not(.footer__escudo) {
     width: 100%;
     height: auto;
   }
 }
 
+// Sin !important desde v4.40.0: los selectores `img.clase` (0,1,1) empatan con `img[width]` /
+// `img[height]` de arriba y ganan por orden; antes se imponían con !important.
 // ---------------------------------------------------------
 // Excepciones para logos y escudos (mantener tamaños específicos)
 // ---------------------------------------------------------
-.header__escudo,
-.header-inner__escudo {
+img.header__escudo,
+img.header-inner__escudo {
   content-visibility: visible;
   contain-intrinsic-size: auto;
-  border-radius: 0 !important; // Los logos no necesitan border-radius
-  width: auto !important; // Mantener dimensiones naturales o las definidas en el header
-  height: auto !important;
-  max-width: 8rem !important; // Tamaño reducido para mobile
+  border-radius: 0; // Los logos no necesitan border-radius
+  width: auto; // Mantener dimensiones naturales o las definidas en el header
+  height: auto;
+  max-width: 8rem; // Tamaño reducido para mobile
   animation: mostrarEscudo 1s ease-in-out;
-  background: transparent !important;
-  opacity: 1 !important; // Completamente opaco, no transparente
+  background: transparent;
+  opacity: 1; // Completamente opaco, no transparente
   
   @media (min-width: 768px) {
-    max-width: 10rem !important; // Reducido de 12rem a 10rem
+    max-width: 10rem; // Reducido de 12rem a 10rem
   }
   @media (min-width: 1024px) {
-    max-width: 12rem !important; // Reducido de 15rem a 12rem
+    max-width: 12rem; // Reducido de 15rem a 12rem
   }
 }
 
 // Regla específica para header-inner__escudo (páginas internas)
-.header-inner__escudo {
-  max-width: 6rem !important; // Aún más pequeño para páginas internas
-  opacity: 1 !important; // Completamente visible
+img.header-inner__escudo {
+  max-width: 6rem; // Aún más pequeño para páginas internas
+  opacity: 1; // Completamente visible
   
   @media (min-width: 768px) {
-    max-width: 8rem !important;
+    max-width: 8rem;
   }
   @media (min-width: 1024px) {
-    max-width: 10rem !important;
+    max-width: 10rem;
   }
 }
 
 // ---------------------------------------------------------
 // Excepciones para iconos de calendario (mantener tamaños específicos)
 // ---------------------------------------------------------
-.eventos__calendario {
-  width: 4rem !important;
-  height: 4rem !important;
-  max-width: 4rem !important;
-  max-height: 4rem !important;
-  object-fit: contain !important;
-  opacity: 1 !important; // Siempre completamente visible
+img.eventos__calendario {
+  width: 4rem;
+  height: 4rem;
+  max-width: 4rem;
+  max-height: 4rem;
+  object-fit: contain;
+  opacity: 1; // Siempre completamente visible
 
   @media (min-width: 768px) {
-    width: 6rem !important;
-    height: 6rem !important;
-    max-width: 6rem !important;
-    max-height: 6rem !important;
+    width: 6rem;
+    height: 6rem;
+    max-width: 6rem;
+    max-height: 6rem;
   }
 }
 
 // ---------------------------------------------------------
 // Excepciones para iconos específicos (mantener tamaños diseñados)
 // ---------------------------------------------------------
-.forecast__termo {
-  width: 5rem !important;
-  height: 5rem !important;
-  max-width: 5rem !important;
-  max-height: 5rem !important;
-  object-fit: contain !important;
-  opacity: 1 !important;
+img.forecast__termo {
+  width: 5rem;
+  height: 5rem;
+  max-width: 5rem;
+  max-height: 5rem;
+  object-fit: contain;
+  opacity: 1;
 
   @media (min-width: 768px) {
-    width: 6rem !important;
-    height: 6rem !important;
-    max-width: 6rem !important;
-    max-height: 6rem !important;
+    width: 6rem;
+    height: 6rem;
+    max-width: 6rem;
+    max-height: 6rem;
   }
 }
 
-.blog__pluma {
-  width: 6rem !important;
-  height: 6rem !important;
-  max-width: 6rem !important;
-  max-height: 6rem !important;
-  object-fit: contain !important;
-  opacity: 1 !important;
+img.blog__pluma {
+  width: 6rem;
+  height: 6rem;
+  max-width: 6rem;
+  max-height: 6rem;
+  object-fit: contain;
+  opacity: 1;
 
   @media (min-width: 768px) {
-    width: 9rem !important;
-    height: 9rem !important;
-    max-width: 9rem !important;
-    max-height: 9rem !important;
+    width: 9rem;
+    height: 9rem;
+    max-width: 9rem;
+    max-height: 9rem;
   }
 }
 
-.galerias__camara {
-  width: 5rem !important;
-  height: 5rem !important;
-  max-width: 5rem !important;
-  max-height: 5rem !important;
-  object-fit: contain !important;
-  opacity: 1 !important;
+img.galerias__camara {
+  width: 5rem;
+  height: 5rem;
+  max-width: 5rem;
+  max-height: 5rem;
+  object-fit: contain;
+  opacity: 1;
 
   @media (min-width: 768px) {
-    width: 6rem !important;
-    height: 6rem !important;
-    max-width: 6rem !important;
-    max-height: 6rem !important;
+    width: 6rem;
+    height: 6rem;
+    max-width: 6rem;
+    max-height: 6rem;
   }
 }
 
-.quieres-mas__imagen {
-  width: 4rem !important;
-  height: 4rem !important;
-  max-width: 4rem !important;
-  max-height: 4rem !important;
-  object-fit: contain !important;
-  opacity: 1 !important;
+img.quieres-mas__imagen {
+  width: 4rem;
+  height: 4rem;
+  max-width: 4rem;
+  max-height: 4rem;
+  object-fit: contain;
+  opacity: 1;
 }
 
-.footer__escudo {
-  max-width: 5rem !important;
+img.footer__escudo {
+  max-width: 5rem;
   // La reserva global de 300×200 para lazy distorsionaba el pie fuera de vista.
   content-visibility: visible;
   contain-intrinsic-size: auto;
-  opacity: 1 !important;
-  background: transparent !important;
+  opacity: 1;
+  background: transparent;
   
   @media (min-width: 768px) {
-    max-width: 8rem !important;
+    max-width: 8rem;
   }
 }
 
@@ -249,8 +252,10 @@ img[fetchpriority="high"] {
 .gallery img {
   transition: transform $image-transition-duration ease;
   
-  &:hover {
-    transform: scale(1.05);
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
 
@@ -285,3 +290,14 @@ img[fetchpriority="high"] {
 // ---------------------------------------------------------
 // Preload hints CSS
 // ---------------------------------------------------------
+
+// Impresión: abstracts/_accessibility.scss aplica `* { background: white !important }` al imprimir y los
+// escudos (PNG con transparencia) salían con caja blanca; hasta 4.39.3 lo evitaba un !important en pantalla.
+// El !important aquí es legítimo (bloque print, fuera del presupuesto de la guardia) (v4.40.0).
+@media print {
+  img.header__escudo,
+  img.header-inner__escudo,
+  img.footer__escudo {
+    background: transparent !important;
+  }
+}

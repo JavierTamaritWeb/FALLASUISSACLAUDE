@@ -69,20 +69,32 @@ Estados: `pendiente` · `hecho (x.y.z)` · `deuda` (no se corrige; motivo en la 
 | 5.3 | `tests/unit/build.test.cjs` compila un SCSS sintético, no el real | Test que compila `src/scss/main.scss` con `sass.compile` y falla con avisos o si supera el presupuesto de peso (230 KB / 42 KB gz), más el par `backdrop-filter`/`-webkit-` en `dist/` | hecho (4.39.0) |
 | 5.4 | Sass 1.89 sin deprecaciones, sin `@import`, sin funciones globales | Nada que corregir; la guardia 5.3 lo mantiene | hecho (auditoría) |
 
-## Deuda documentada (no se corrige en 4.39.x)
+## 6. Deuda resuelta en 4.40.0 (16-sep-2026)
 
-- `:hover` sin `@media (hover: hover)` (131 usos, 0 % cubierto): cambiaría el comportamiento táctil de todo el sitio; decisión aparte.
-- Los 62 `!important` de `_image-optimization.scss` y los de `@media print`: funcionan y su retirada exige rediseñar el skeleton de imágenes.
-- `cssnano` 5 → 7: salto mayor; revisar con `npm audit` en una release propia.
+Cada punto lleva la guardia que impide que vuelva. Verificado con el harness de estilos computados en 390/600/1024/1280 px, claro y oscuro, y en modo impresión.
+
+| # | Deuda | Solución | Guardia | Estado |
+| --- | --- | --- | --- | --- |
+| 6.1 | 131 `:hover` sin `@media (hover: hover)` (en táctil el hover se quedaba pegado tras tocar) | 118 bloques envueltos en `@media (hover: hover)`; en las listas mixtas (`&:hover, &:focus-visible`) el foco queda fuera y el hover se duplica dentro (+2,5 % de CSS); `:not(:hover)` no se toca | `scss-guardrails`: «ningún `:hover` fuera de `@media (hover: hover)`» (sin baseline) | hecho (4.40.0) |
+| 6.2 | `!important` de la optimización de imágenes (62) | Retirados todos: los escudos e iconos usan `img.clase` (misma especificidad que `img[width]`/`img[height]`, ganan por orden) y `.current-icon-img` entra en la lista de exclusión de las imágenes fluidas. Único resto: un bloque `@media print` con `background: transparent !important` para los tres escudos, porque el reset de impresión de `_accessibility.scss` los pintaba con caja blanca (el harness en modo print lo detectó en la home) | presupuesto por fichero (`_image-optimization`: 0) | hecho (4.40.0) |
+| 6.3 | `!important` del bloque `@media print` de las legales (56) | **Se mantienen por diseño**: `abstracts/_accessibility.scss` aplica un reset de impresión `* { background !important; color !important }` y las reglas de impresión deben imponerse; comprobado que sin ellos el párrafo destacado y el escudo cambian al imprimir. Queda anotado en el propio bloque | test de impresión en `tests/auditoria-scss.e2e.spec.js` | decisión documentada |
+| 6.4 | Media queries 480/767 solapadas que dependían de `!important` (`_historia`, `_falleros`) | La de 480 va después de la de 767 y solo lleva lo que difiere (el título); los rellenos móviles que nunca se aplicaron (`padding: 1rem` de `.falleros` y dos bloques `padding: 1rem; margin: 1rem` de `.historia` tras el prólogo, que al caer el `!important` pasaban a ganar y estrechaban Archivos 40 px a 390 px) se retiran en vez de activarse (habría sido un cambio visual; lo detectó el harness) | caso de navegador (títulos de 18 px a 390 px) + presupuesto de `!important` | hecho (4.40.0) |
+| 6.5 | `#id` de meteo (`#current-*`) y de la notificación (`#notificacion`) | `.current-*` y `.header__notificacion`; las reglas que competían y solo perdían por el id se corrigen en origen: la regla `.current-icon img` (nunca ganaba) se borra, la temperatura grande vive en la regla del `h3` de la tarjeta, la notificación se excluye del apilado `> *` de la barra y el fondo negro móvil que nunca ganaba se retira. **Lección**: al quitar un `#id` no basta con verificar colores; anchos y tamaños de fuente entraron en el harness por esto | stylelint `selector-max-id: 0` **como error** + casos de navegador (icono 20rem, temperatura 5rem, toast fijo) | hecho (4.40.0) |
+| 6.6 | Selectores de más de tres compuestos | `body:not(.modo-oscuro) .falleros__nosotros--plana-mayor .accordion__content` (fusionado con el del HOPE de la home), `body.modo-oscuro .current-info__portada-desc`, `body.modo-oscuro .modal-quieres .lead`; los `> thead > tr > td` de la hoja de autorización **se mantienen**: hay tablas anidadas y `tbody td` alcanzaría las celdas del formulario (lo detectó el harness) | stylelint `selector-max-compound-selectors: 3` (aviso; baseline 1 justificado) | hecho parcial (4.40.0) |
+| 6.7 | cssnano 5 → 7 | Actualizado; el CSS solo cambia en el orden de declaraciones de 21 reglas, en la codificación de un SVG en data URL y en un redondeo de color que ahora es exacto (`rgba(17,17,17,.25)`) | `npm audit` en `audit:project` | hecho (4.40.0) |
+
+## Deuda documentada (queda tras 4.40.0)
+
+- Los `!important` del bloque `@media print` de `_contenido-legal.scss` y del reset de impresión de `_accessibility.scss` (por diseño, ver 6.3) y los del skeleton de carga (`_accessibility.scss`).
 - Patrones de tema `body:not(.modo-oscuro)` en 20 sitios: se aceptan como forma de acotar reglas solo claras; el central sigue siendo `themes/_modo-oscuro.scss`.
-- Media queries de 480 y 767 px solapadas en `_historia`/`_falleros` (la de 767 va después y ganaría sin `!important`): reordenarlas exige revisar el resto de propiedades de cada bloque.
-- Reglas por `#id` que gestiona `meteo.js` (`#current-*`) y `#notificacion`: ver 2.6.
-- Selectores de ≥ 4 compuestos (2.7) y los tres breakpoints propios (4.3).
+- Los tres breakpoints propios (600, 640, 1100; ver 4.3) y las celdas `> thead > tr > td` de la hoja de autorización (6.6).
 
 ---
 
 Guardias de la baseline (4.39.0, `tests/fixtures/scss-baseline.json`): 52 selectores raíz duplicados · 91 clases sin uso · 195 `!important` (fuera de print/reduced-motion) · 44 `z-index` literales · 22 media queries fuera de convención · 0 rutas obsoletas · 4 etiquetas globales en `components/` · 5 bloques sin cobertura de tema. stylelint: 410 avisos (`tests/fixtures/stylelint-baseline.json`).
 
+Cierre de la deuda (4.40.0, 16-sep-2026): stylelint 318 → 233 avisos (0 errores; `selector-max-id` pasa a error con 0 casos) · `!important` fuera de print/reduced-motion 181 → 109 · `:hover` fuera de `@media (hover: hover)` 131 → 0 · media queries fuera de convención 3 (las documentadas) · `main.css` 202,3 → 202,8 KB (33,7 → 33,3 KB gz) por los hover duplicados en las listas mixtas.
+
 Cierre de la auditoría (4.39.3, 16-sep-2026): stylelint 410 → 318 avisos (0 errores) · clases sin uso 91 → 0 · `!important` 195 → 181 · `z-index` literales 43 → 0 · media queries fuera de convención 22 → 3 · selectores raíz duplicados 52 → 0 · `#id` 87 → 30 · `main.css` 205,8 → 202,3 KB (34,7 → 33,7 KB gz) · SCSS 13.772 → 13.157 líneas en 63 ficheros. Todas las guardias comparan con baselines que solo pueden bajar.
 
-Última actualización: 16 de septiembre de 2026 - v4.39.3
+Última actualización: 16 de septiembre de 2026 - v4.40.0

@@ -144,13 +144,17 @@ $icon-img-color: v.$turquesa;
     }
 
     // Hover en nota
-    &:hover {
-      transform: rotate(-0.5deg) translateY(-3px);
+    @media (hover: hover) {
+      &:hover {
+        transform: rotate(-0.5deg) translateY(-3px);
+      }
     }
 
-    &:hover::before {
-      transform: translateX(-50%) translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    @media (hover: hover) {
+      &:hover::before {
+        transform: translateX(-50%) translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      }
     }
   }
 
@@ -232,12 +236,14 @@ $icon-img-color: v.$turquesa;
       outline-offset: 2px;
     }
 
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 
-      .board__file-icon {
-        transform: rotate(-5deg) scale(1.1);
+        .board__file-icon {
+          transform: rotate(-5deg) scale(1.1);
+        }
       }
     }
   }

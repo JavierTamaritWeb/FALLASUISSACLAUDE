@@ -106,9 +106,11 @@
         font-weight: 500;
         transition: color 0.3s ease;
 
-        &:hover {
-            color: v.$turquesa-texto;
-            text-decoration: underline;
+        @media (hover: hover) {
+          &:hover {
+              color: v.$turquesa-texto;
+              text-decoration: underline;
+          }
         }
     }
 
@@ -294,6 +296,10 @@
 
 // Salida de impresión optimizada (A4) para los formularios de autorización
 @media print {
+    // Los combinadores hijo (> tbody > tr > td) son necesarios: hay tablas anidadas y `tbody td` alcanzaría
+    // también las celdas del formulario (comprobado con el harness, v4.40.0).
+    // Los !important de este bloque son necesarios: abstracts/_accessibility.scss aplica un reset
+    // de impresión `* { background !important; color !important }` y estas reglas deben imponerse (v4.40.0).
     @page {
         size: A4;
         margin: 1.5cm;
@@ -310,7 +316,7 @@
     .frieze,
     .cookie-banner,
     .banner-subvencion,
-    #notificacion {
+    .header__notificacion {
         display: none !important;
     }
 

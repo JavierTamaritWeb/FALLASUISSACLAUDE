@@ -43,10 +43,16 @@
     transition: color 0.3s ease;
 
     // Sin elevación ni sombra global de _accessibility.scss
-    &:hover,
     &:focus {
       transform: none;
       box-shadow: none;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        transform: none;
+        box-shadow: none;
+      }
     }
 
     // Subrayado animado (mismo patrón que .footer__enlace)
@@ -63,10 +69,16 @@
       pointer-events: none;
     }
 
-    &:hover::after,
     &:focus-visible::after {
       width: 100%;
       opacity: 1;
+    }
+
+    @media (hover: hover) {
+      &:hover::after {
+        width: 100%;
+        opacity: 1;
+      }
     }
 
     &:focus-visible {
@@ -124,15 +136,26 @@
     text-decoration: none;
     transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
 
-    &:hover,
     &:focus {
       box-shadow: none; // neutraliza la sombra global de los enlaces
     }
 
-    &:hover,
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: none; // neutraliza la sombra global de los enlaces
+      }
+    }
+
     &:focus-visible {
       background-color: rgba(var(--coral-marca-rgb), 0.18);
       transform: translateY(-2px);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgba(var(--coral-marca-rgb), 0.18);
+        transform: translateY(-2px);
+      }
     }
 
     &:focus {
@@ -150,10 +173,16 @@
       color: v.$blanco;
       cursor: default;
 
-      &:hover,
       &:focus-visible {
         background-color: var(--coral-marca);
         transform: none;
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--coral-marca);
+          transform: none;
+        }
       }
     }
   }
@@ -186,8 +215,13 @@
   .galeria-pager__numero {
     transition: none;
   }
-  .galeria-pager__numero:hover,
   .galeria-pager__numero:focus-visible {
     transform: none;
+  }
+
+  @media (hover: hover) {
+    .galeria-pager__numero:hover {
+      transform: none;
+    }
   }
 }

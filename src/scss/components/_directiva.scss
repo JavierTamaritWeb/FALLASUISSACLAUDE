@@ -36,9 +36,11 @@
     box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-    &:hover {
-      transform: translateY(-0.3rem);
-      box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.5);
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-0.3rem);
+        box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.5);
+      }
     }
 
     // El presidente encabeza el bloque a todo el ancho
@@ -121,10 +123,16 @@
     transition: none;
   }
 
-  .accordion__titular:hover::before,
   .accordion__titular:focus-visible::before {
     opacity: 0.35;
     transform: none;
+  }
+
+  @media (hover: hover) {
+    .accordion__titular:hover::before {
+      opacity: 0.35;
+      transform: none;
+    }
   }
 
   // Tarjetas PDF de Archivos: mismo tratamiento que el titular
@@ -135,7 +143,6 @@
     transition: none;
   }
 
-  .historia__card:hover,
   .historia__card:focus-visible {
     transform: none;
 
@@ -149,11 +156,28 @@
     }
   }
 
+  @media (hover: hover) {
+    .historia__card:hover {
+      transform: none;
+
+      .historia__card-icon {
+        transform: none;
+      }
+
+      &::before {
+        opacity: 0.35;
+        transform: none;
+      }
+    }
+  }
+
   .directiva__card {
     transition: none;
 
-    &:hover {
-      transform: none;
+    @media (hover: hover) {
+      &:hover {
+        transform: none;
+      }
     }
   }
 }

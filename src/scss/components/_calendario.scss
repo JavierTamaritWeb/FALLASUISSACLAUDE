@@ -40,8 +40,10 @@
         cursor: pointer;
         transition: background-color v.$transicion, color v.$transicion;
 
-        &:hover {
-        background-color: v.$gris-muy-oscuro;
+        @media (hover: hover) {
+          &:hover {
+          background-color: v.$gris-muy-oscuro;
+          }
         }
     }
     &__modo-boton {
@@ -56,8 +58,10 @@
         cursor: pointer;
         transition: background-color v.$transicion, color v.$transicion;
 
-        &:hover {
-        background-color: v.$gris-muy-oscuro;
+        @media (hover: hover) {
+          &:hover {
+          background-color: v.$gris-muy-oscuro;
+          }
         }
     }
 
@@ -78,9 +82,11 @@
         cursor: pointer;
         transition: background-color v.$transicion, color v.$transicion;
 
-        &:hover {
-            background-color: v.$gris-muy-oscuro;
-            color: v.$blanco;
+        @media (hover: hover) {
+          &:hover {
+              background-color: v.$gris-muy-oscuro;
+              color: v.$blanco;
+          }
         }
         }
     }
@@ -134,13 +140,15 @@
       
         // Hover (v4.29.0): antes texto blanco sobre coral (2,7:1). Ahora el
         // texto sigue oscuro y el énfasis va en borde y halo coral.
-        &:hover &-texto,
-        &:hover &-fecha,
-        &:hover &-busqueda {
-          background-color: v.$blanco !important;
-          border-color: v.$coral-texto;
-          box-shadow: 0 0 0 2px rgba(var(--coral-marca-rgb), 0.35);
-          color: v.$negro-casi !important;
+        @media (hover: hover) {
+          &:hover &-texto,
+          &:hover &-fecha,
+          &:hover &-busqueda {
+            background-color: v.$blanco !important;
+            border-color: v.$coral-texto;
+            box-shadow: 0 0 0 2px rgba(var(--coral-marca-rgb), 0.35);
+            color: v.$negro-casi !important;
+          }
         }
       }
   
@@ -156,8 +164,10 @@
       cursor: pointer;
       transition: color v.$transicion;
   
-      &:hover {
-        color: v.$blanco;
+      @media (hover: hover) {
+        &:hover {
+          color: v.$blanco;
+        }
       }
     }
   
@@ -186,13 +196,15 @@
         }
       }
   
-      &:hover {
-        .calendario-eventos__control-fecha::-webkit-calendar-picker-indicator {
-          filter: invert(100%);
-        }
-  
-        .calendario-eventos__control-fecha-borrar {
-          color: v.$blanco;
+      @media (hover: hover) {
+        &:hover {
+          .calendario-eventos__control-fecha::-webkit-calendar-picker-indicator {
+            filter: invert(100%);
+          }
+
+          .calendario-eventos__control-fecha-borrar {
+            color: v.$blanco;
+          }
         }
       }
   
@@ -260,8 +272,10 @@
           transform 0.3s ease;
         cursor: pointer;
   
-        &:hover {
-          transform: scale(1.05);
+        @media (hover: hover) {
+          &:hover {
+            transform: scale(1.05);
+          }
         }
   
         &.seleccionado {
@@ -288,10 +302,12 @@
           white-space: nowrap;
         }
   
-        &:hover {
-          .calendario-eventos__tooltip {
-            visibility: visible;
-            opacity: 1;
+        @media (hover: hover) {
+          &:hover {
+            .calendario-eventos__tooltip {
+              visibility: visible;
+              opacity: 1;
+            }
           }
         }
       }
@@ -329,9 +345,11 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
   
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      @media (hover: hover) {
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
       }
   
       &-titulo {
@@ -514,8 +532,10 @@
                   color: v.$secondary-color;
                   transition: color v.$transicion;
               }
-              &:hover::placeholder {
-                  color: v.$gris-medio-oscuro;
+              @media (hover: hover) {
+                &:hover::placeholder {
+                    color: v.$gris-medio-oscuro;
+                }
               }
           }
           &-texto{
@@ -529,8 +549,10 @@
                   color: v.$secondary-color;
                   transition: color v.$transicion;
               }
-              &:hover::placeholder {
-                  color: v.$gris-medio-oscuro;
+              @media (hover: hover) {
+                &:hover::placeholder {
+                    color: v.$gris-medio-oscuro;
+                }
               }
 
           }
@@ -545,8 +567,10 @@
                   color: v.$secondary-color;
                   transition: color var(--transicion);
               }
-              &:hover::placeholder {
-                  color: v.$gris-medio-oscuro;
+              @media (hover: hover) {
+                &:hover::placeholder {
+                    color: v.$gris-medio-oscuro;
+                }
               }
           }
       }
@@ -568,11 +592,13 @@
     cursor: pointer; /* opcional, para que el usuario sepa que es clicable */
 }
 
-.calendario-eventos__mini-dia:hover {
-    background-color: #00909E;      /* Fondo azul verdoso */
-    color: v.$negro-casi;           /* Texto oscuro: 4,9:1 (blanco daba 3,8) */
-    font-weight: bold;              /* Texto en negrita */
-    transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
+@media (hover: hover) {
+  .calendario-eventos__mini-dia:hover {
+      background-color: #00909E;      /* Fondo azul verdoso */
+      color: v.$negro-casi;           /* Texto oscuro: 4,9:1 (blanco daba 3,8) */
+      font-weight: bold;              /* Texto en negrita */
+      transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
+  }
 }
 
 .ics-modal {
@@ -614,8 +640,10 @@
         color: v.$coral-texto;
         cursor: pointer;
 
-        &:hover {
-        color: v.$gris-muy-oscuro;
+        @media (hover: hover) {
+          &:hover {
+          color: v.$gris-muy-oscuro;
+          }
         }
     }
 
@@ -649,9 +677,11 @@
         color: #aaa;
         }
 
-        &:hover {
-        background-color: #00909E;
-        color: v.$negro;
+        @media (hover: hover) {
+          &:hover {
+          background-color: #00909E;
+          color: v.$negro;
+          }
         }
     }
 
@@ -668,8 +698,10 @@
         width: auto;
         text-align: center;
 
-        &:hover {
-        background-color: v.$gris-muy-oscuro;
+        @media (hover: hover) {
+          &:hover {
+          background-color: v.$gris-muy-oscuro;
+          }
         }
     }
 }

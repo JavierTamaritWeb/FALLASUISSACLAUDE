@@ -193,11 +193,18 @@
       line-height: 1;
     }
 
-    &:hover,
     &:focus-visible {
       background-color: var(--coral-marca-oscuro10);
       transform: translateY(-2px);
       text-decoration: none;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--coral-marca-oscuro10);
+        transform: translateY(-2px);
+        text-decoration: none;
+      }
     }
   }
 

@@ -39,8 +39,10 @@
     }
   
    
-    &:hover {
-      color: var(--coral-marca);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--coral-marca);
+      }
     }
     
     @media (min-width: 768px) {
@@ -117,8 +119,10 @@
     display: block;
   }
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.12);
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
   }
 
   &:focus {
@@ -169,15 +173,26 @@
 
   // Coral claro (v4.29.0): a 12px el coral de marca sobre el azul daba 3,2:1;
   // $coral-claro da 5,1:1. El subrayado ::after conserva el coral de marca.
-  &:hover,
   &:focus-visible {
     color: v.$coral-claro;
   }
 
-  &:hover::after,
+  @media (hover: hover) {
+    &:hover {
+      color: v.$coral-claro;
+    }
+  }
+
   &:focus-visible::after {
     width: calc(100% - 0.6rem);
     opacity: 1;
+  }
+
+  @media (hover: hover) {
+    &:hover::after {
+      width: calc(100% - 0.6rem);
+      opacity: 1;
+    }
   }
 
   // Enlace activo: subrayado permanente + texto en color primario (sin fondo)
@@ -206,11 +221,16 @@
         left: 0.85rem;
       }
 
-      &:hover::after,
       &:focus-visible::after,
       &.active::after,
       &[aria-current="page"]::after {
         width: calc(100% - 1.7rem);
+      }
+
+      @media (hover: hover) {
+        &:hover::after {
+          width: calc(100% - 1.7rem);
+        }
       }
 
       // Foco de teclado coral por dentro del panel (evita el anillo azul del navegador)
@@ -331,10 +351,16 @@
     justify-content: center;
   }
   
-  &:hover,
   &:focus-visible {
     // background-color: rgba(255, 255, 255, 0.2);
     background-color: rgba(var(--coral-marca-rgb), 0.7);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      // background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(var(--coral-marca-rgb), 0.7);
+    }
   }
 
   &:active {
@@ -385,11 +411,13 @@
   transition: background-color 0.3s ease, color 0.3s ease;
   text-transform: none;
   
-  &:hover {
-    // background-color: #f0f0f0;
-    background-color: var(--coral-marca);
-    color: v.$blanco-hueso;
-    font-weight: bold;
+  @media (hover: hover) {
+    &:hover {
+      // background-color: #f0f0f0;
+      background-color: var(--coral-marca);
+      color: v.$blanco-hueso;
+      font-weight: bold;
+    }
   }
 }
 

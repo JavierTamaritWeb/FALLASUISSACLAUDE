@@ -126,16 +126,6 @@
 // cuyo contenedor lleva ya el modificador --plana-mayor): fondo $turquesa-claro
 // en lugar del degradado azul y texto oscuro (el blanco no se lee sobre el
 // celeste). El modo oscuro no cambia.
-body:not(.modo-oscuro) .falleros__nosotros--plana-mayor .accordion__content {
-  background: v.$turquesa-claro;
-
-  // También los <p> generados por data-i18n-format="paragraphs": la regla
-  // global `p { color: $blanco-hueso }` de _falla.scss los dejaba en blanco.
-  .colaboraciones-page__texto,
-  .colaboraciones-page__texto p {
-    color: v.$negro-casi !important;
-  }
-}
 
 .colaboraciones-page__texto {
   color: v.$blanco !important;
@@ -192,9 +182,11 @@ body:not(.modo-oscuro) .falleros__nosotros--plana-mayor .accordion__content {
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-    &:hover {
-      box-shadow: 0 22px 42px rgba(1, 25, 52, 0.3);
-      transform: translateY(-0.3rem);
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: 0 22px 42px rgba(1, 25, 52, 0.3);
+        transform: translateY(-0.3rem);
+      }
     }
   }
 
@@ -240,15 +232,26 @@ body:not(.modo-oscuro) .falleros__nosotros--plana-mayor .accordion__content {
     }
 
     // Solo background-color: un `background` completo borraria las barras
-    &:hover::after,
     &:focus-visible::after {
       background-color: rgba(var(--coral-marca-rgb), 0.78); // v4.37.2: antes coral antiguo literal
       transform: scale(1.06);
     }
 
-    &:hover,
+    @media (hover: hover) {
+      &:hover::after {
+        background-color: rgba(var(--coral-marca-rgb), 0.78); // v4.37.2: antes coral antiguo literal
+        transform: scale(1.06);
+      }
+    }
+
     &:focus-visible {
       background: rgba(5, 24, 46, 0.24);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: rgba(5, 24, 46, 0.24);
+      }
     }
 
     &:focus-visible {
@@ -268,10 +271,16 @@ body:not(.modo-oscuro) .falleros__nosotros--plana-mayor .accordion__content {
 
     // En hover/foco la imagen se acerca y se oscurece (v4.15.1), para que
     // destaque el circulo del "+" y se lea como "ampliable"
-    &:hover img,
     &:focus-visible img {
       filter: brightness(0.72) drop-shadow(0 12px 18px rgba(1, 25, 52, 0.14));
       transform: scale(1.03);
+    }
+
+    @media (hover: hover) {
+      &:hover img {
+        filter: brightness(0.72) drop-shadow(0 12px 18px rgba(1, 25, 52, 0.14));
+        transform: scale(1.03);
+      }
     }
   }
 }
@@ -363,10 +372,16 @@ body.lightbox-open {
       transform: translate(-50%, -50%) rotate(-45deg);
     }
 
-    &:hover,
     &:focus-visible {
       background: rgba(var(--coral-marca-rgb), 0.92); // v4.37.2
       transform: scale(1.04);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: rgba(var(--coral-marca-rgb), 0.92); // v4.37.2
+        transform: scale(1.04);
+      }
     }
 
     &:focus-visible {

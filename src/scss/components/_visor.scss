@@ -97,8 +97,10 @@
         box-shadow: none;
         transition: transform 0.3s ease;
 
-        &:hover {
-            transform: scale(1.2); /* Aumenta el tamaño de la imagen al hacer hover */
+        @media (hover: hover) {
+          &:hover {
+              transform: scale(1.2); /* Aumenta el tamaño de la imagen al hacer hover */
+          }
         }
       }
     }
@@ -135,9 +137,11 @@
       transition: transform 0.3s ease;
       flex-shrink: 0;
   
-      &:hover:not(:disabled) {
-        transform: scale(1.1);
-        background: var(--coral-marca);
+      @media (hover: hover) {
+        &:hover:not(:disabled) {
+          transform: scale(1.1);
+          background: var(--coral-marca);
+        }
       }
   
       &:disabled {
@@ -240,8 +244,10 @@
         max-width: 92%;
         max-height: 100%;
 
-        &:hover {
-          transform: scale(1.06); // el 1.2 base se sale de media página
+        @media (hover: hover) {
+          &:hover {
+            transform: scale(1.06); // el 1.2 base se sale de media página
+          }
         }
       }
 

@@ -381,11 +381,13 @@ body.modo-oscuro .calendario-eventos__mini-dia.domingo {
   color: v.$coral-claro; // 11:1 sobre #111
 }
 
-body.modo-oscuro .calendario-eventos__mini-dia:hover {
-  background-color: v.$naranja-quemado;
-  color: v.$negro-casi; // 5,3:1 (blanco daba 3,5)
-  font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
+@media (hover: hover) {
+  body.modo-oscuro .calendario-eventos__mini-dia:hover {
+    background-color: v.$naranja-quemado;
+    color: v.$negro-casi; // 5,3:1 (blanco daba 3,5)
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
+  }
 }
 
 body.modo-oscuro .calendario-eventos__detalles-mes p {
@@ -471,7 +473,7 @@ body.modo-oscuro .actual-temp {
 }
 
 body.modo-oscuro .actual-desc,
-body.modo-oscuro .weather-current .current-wrapper .current-info__portada-desc {
+body.modo-oscuro .current-info__portada-desc {
   color: v.$blanco;
 }
 
@@ -503,13 +505,13 @@ body.modo-oscuro .forecast-clouds {
   color: v.$blanco-hueso;
 }
 
-body.modo-oscuro #current-feels-like {
+body.modo-oscuro .current-feels-like {
     color: v.$blanco-hueso;
 }
-body.modo-oscuro #current-minmax {
+body.modo-oscuro .current-minmax {
     color: v.$blanco-hueso;
 }
-body.modo-oscuro #current-humidity {
+body.modo-oscuro .current-humidity {
     color: v.$blanco-hueso;
 }
 
@@ -647,7 +649,6 @@ body.modo-oscuro .accordion__titular {
     );
   }
 
-  &:hover,
   &:focus-visible {
     background: linear-gradient(
       135deg,
@@ -662,6 +663,25 @@ body.modo-oscuro .accordion__titular {
     .accordion__icon,
     .accordion__icon--active {
       color: v.$negro-casi;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(v.$rojo-salmon, 0.98) 0%,
+        rgba(v.$amarillo-anaranjado, 0.94) 100%
+      );
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      color: v.$negro-casi;
+      filter: saturate(1.08) brightness(1.04);
+
+      .accordion__header,
+      .accordion__icon,
+      .accordion__icon--active {
+        color: v.$negro-casi;
+      }
     }
   }
 
@@ -710,8 +730,10 @@ body.modo-oscuro .directiva {
     border-color: var(--coral-marca);
     box-shadow: 0 0.3rem 0.8rem rgba(var(--coral-marca-rgb), 0.18);
 
-    &:hover {
-      box-shadow: 0 0.6rem 1.4rem rgba(var(--coral-marca-rgb), 0.32);
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: 0 0.6rem 1.4rem rgba(var(--coral-marca-rgb), 0.32);
+      }
     }
   }
 
@@ -857,9 +879,11 @@ body.modo-oscuro .board__file-link {
     border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-body.modo-oscuro .board__file-link:hover {
-    background-color: v.$gris-oscuro-medio;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.55);
+@media (hover: hover) {
+  body.modo-oscuro .board__file-link:hover {
+      background-color: v.$gris-oscuro-medio;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.55);
+  }
 }
 
 // Nombre de archivo en modo oscuro
@@ -869,8 +893,10 @@ body.modo-oscuro .board__file-name {
 }
 
 // Hover en archivos en modo oscuro
-body.modo-oscuro .board__file-link:hover .board__file-name {
-    color: v.$blanco;
+@media (hover: hover) {
+  body.modo-oscuro .board__file-link:hover .board__file-name {
+      color: v.$blanco;
+  }
 }
 
 /* ----------------------------------------------
@@ -937,7 +963,6 @@ body.modo-oscuro .boton {
     );
   }
 
-  &:hover,
   &:focus-visible {
     background: linear-gradient(
       135deg,
@@ -951,6 +976,23 @@ body.modo-oscuro .boton {
       inset 0 1px 0 rgba(255, 255, 255, 0.18);
     color: v.$negro-casi;
     filter: saturate(1.08) brightness(1.04);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(v.$rojo-salmon, 0.98) 0%,
+        rgba(v.$amarillo-anaranjado, 0.94) 100%
+      );
+      border-color: rgba(v.$amarillo-anaranjado, 0.76);
+      box-shadow:
+        0 1.2rem 2.6rem rgba(0, 0, 0, 0.52),
+        0 0.35rem 1rem rgba(var(--coral-marca-rgb), 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      color: v.$negro-casi;
+      filter: saturate(1.08) brightness(1.04);
+    }
   }
 }
 
@@ -967,10 +1009,10 @@ body.modo-oscuro :focus-visible {
   box-shadow: 0 0 0 2px v.$blanco-hueso;
 }
 
-body.modo-oscuro #notificacion.notificacion--exito { background-color: v.$estado-exito-oscuro !important; color: v.$negro-casi; }
-body.modo-oscuro #notificacion.notificacion--error { background-color: v.$estado-error-oscuro !important; color: v.$negro-casi; }
-body.modo-oscuro #notificacion.notificacion--aviso { background-color: v.$estado-aviso-oscuro !important; color: v.$negro-casi; }
-body.modo-oscuro #notificacion.notificacion--info  { background-color: v.$estado-info-oscuro !important; color: v.$negro-casi; }
+body.modo-oscuro .header__notificacion.notificacion--exito { background-color: v.$estado-exito-oscuro !important; color: v.$negro-casi; }
+body.modo-oscuro .header__notificacion.notificacion--error { background-color: v.$estado-error-oscuro !important; color: v.$negro-casi; }
+body.modo-oscuro .header__notificacion.notificacion--aviso { background-color: v.$estado-aviso-oscuro !important; color: v.$negro-casi; }
+body.modo-oscuro .header__notificacion.notificacion--info  { background-color: v.$estado-info-oscuro !important; color: v.$negro-casi; }
 
 body.modo-oscuro .boton:focus-visible {
   box-shadow:

@@ -66,16 +66,24 @@
     transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
   }
 
-  &:hover::before {
-    border-color: rgba(v.$blanco, 0.55);
+  @media (hover: hover) {
+    &:hover::before {
+      border-color: rgba(v.$blanco, 0.55);
+    }
   }
 
   // Anula la elevación y la sombra que _accessibility.scss pone a todo <button>
-  &:hover,
   &:focus,
   &:active {
     transform: none;
     box-shadow: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
   }
 
   &:focus-visible {
@@ -106,8 +114,10 @@
     border-color: rgba(v.$negro, 0.18);
   }
 
-  &:hover::before {
-    border-color: rgba(v.$negro, 0.4);
+  @media (hover: hover) {
+    &:hover::before {
+      border-color: rgba(v.$negro, 0.4);
+    }
   }
 
   &.is-active::before {

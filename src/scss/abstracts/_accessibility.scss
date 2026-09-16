@@ -89,10 +89,16 @@ select {
   min-width: 44px;
   
   // Mejoras de contraste en hover/focus
-  &:hover,
   &:focus {
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
   }
   
   &:active {
@@ -108,10 +114,16 @@ button {
     cursor: not-allowed;
     opacity: 0.6;
     
-    &:hover,
     &:focus {
       transform: none;
       box-shadow: none;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        transform: none;
+        box-shadow: none;
+      }
     }
   }
 }

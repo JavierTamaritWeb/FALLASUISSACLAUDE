@@ -80,10 +80,12 @@
   box-shadow: 5px 5px 10px 2px rgba(51, 51, 51, 0.5);
   transition: background-color 0.3s, color 0.3s, transform 0.3s;
   
-  &:hover {
-    background-color: var(--coral-marca);
-    color: v.$blanco;
-    transform: scale(1.1);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--coral-marca);
+      color: v.$blanco;
+      transform: scale(1.1);
+    }
   }
   
   // Responsive para pantallas pequeñas

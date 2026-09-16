@@ -3,22 +3,19 @@
   "clasesMuertas": [],
   "important": {
     "src/scss/abstracts/_accessibility.scss": 19,
-    "src/scss/components/_accordion.scss": 10,
+    "src/scss/components/_accordion.scss": 11,
     "src/scss/components/_calendario.scss": 6,
-    "src/scss/components/_colaboraciones.scss": 3,
+    "src/scss/components/_colaboraciones.scss": 2,
     "src/scss/components/_contenido-legal.scss": 5,
-    "src/scss/components/_falleros.scss": 2,
     "src/scss/components/_galeria.scss": 2,
-    "src/scss/components/_historia.scss": 7,
-    "src/scss/components/_image-optimization.scss": 62,
-    "src/scss/components/_meteo.scss": 22,
+    "src/scss/components/_meteo.scss": 19,
     "src/scss/components/_notificaciones.scss": 1,
     "src/scss/components/_ofrenda.scss": 1,
     "src/scss/components/_organigrama.scss": 2,
     "src/scss/components/_quieres.scss": 3,
     "src/scss/components/_swiper.scss": 1,
     "src/scss/components/_video-dron.scss": 1,
-    "src/scss/layout/_footer.scss": 6,
+    "src/scss/layout/_footer.scss": 8,
     "src/scss/layout/_header-barra.scss": 1,
     "src/scss/layout/_header.scss": 1,
     "src/scss/themes/_modo-oscuro.scss": 26
@@ -32,13 +29,14 @@
   "rutasObsoletas": [],
   "etiquetasGlobales": [
     "src/scss/components/_image-optimization.scss:15: img",
-    "src/scss/components/_image-optimization.scss:163: img[loading=\"lazy\"]",
-    "src/scss/components/_image-optimization.scss:237: img[fetchpriority=\"high\"]"
+    "src/scss/components/_image-optimization.scss:166: img[loading=\"lazy\"]",
+    "src/scss/components/_image-optimization.scss:240: img[fetchpriority=\"high\"]"
   ],
   "coberturaTema": [
     "src/scss/components/_buttons.scss: .boton-modal (fondo claro sin regla en themes/_modo-oscuro.scss)",
     "src/scss/components/_swiper.scss: .swiper (fondo claro sin regla en themes/_modo-oscuro.scss)",
     "src/scss/components/_swiper.scss: .swiper-pagination-bullet (fondo claro sin regla en themes/_modo-oscuro.scss)",
     "src/scss/components/_visor.scss: .notepad (fondo claro sin regla en themes/_modo-oscuro.scss)"
-  ]
+  ],
+  "hoverSinMedia": []
 }

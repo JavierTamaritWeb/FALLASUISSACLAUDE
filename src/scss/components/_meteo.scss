@@ -165,20 +165,6 @@
     .current-icon {
       margin-bottom: 1rem;
 
-      img {
-        width: 60px;
-        height: 60px;
-        
-        @media (max-width: 767px) {
-          width: 30px;  // Mucho más pequeño en móviles
-          height: 30px;
-        }
-        
-        @media (max-width: 480px) {
-          width: 25px;  // Aún más pequeño en pantallas muy pequeñas
-          height: 25px;
-        }
-      }
     }
 
     .current-info {
@@ -186,8 +172,13 @@
       margin-bottom: 1rem;
 
       h3 {
-        font-size: 2rem !important;
-        margin: 0.5rem 0;
+        font-size: 2rem;        margin: 0.5rem 0;
+
+        // Escritorio ancho: la temperatura grande (antes `#current-temp` con !important, v4.40.0)
+        @media (min-width: 1200px) {
+          font-size: 5rem;
+          color: var(--coral-marca);
+        }
       }
      
       &__portada-desc {
@@ -215,9 +206,11 @@
       border-radius: 8px;
       transition: transform 0.3s, background-color 0.3s;
 
-      &:hover {
-        transform: scale(1.05);
-        background-color: rgba(v.$negro, 0.3);
+      @media (hover: hover) {
+        &:hover {
+          transform: scale(1.05);
+          background-color: rgba(v.$negro, 0.3);
+        }
       }
 
       strong {
@@ -225,7 +218,6 @@
         margin-bottom: 0.25rem;
       }
     }
-
 
     &__humedad {
       display: flex;
@@ -285,9 +277,11 @@
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
 
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
     }
 
     &::after {
@@ -303,8 +297,10 @@
       transition: left 0.5s;
     }
 
-    &:hover::after {
-      left: 100%;
+    @media (hover: hover) {
+      &:hover::after {
+        left: 100%;
+      }
     }
 
     h3 {
@@ -346,11 +342,6 @@
   color: var(--coral-marca);
   font-size: 2.8rem;
 
-  // Fusionado desde el bloque duplicado del mismo fichero (auditoría SCSS 2.2, v4.39.2)
-  & {
-
-    font-size: 10rem !important;
-  }
 }
 
 .actual-desc {
@@ -404,10 +395,10 @@
   font-size: 2rem;
 }
 
-#current-feels-like{
+.current-feels-like{
   color: v.$secondary-color;
 }
-#current-minmax{
+.current-minmax{
   color: v.$secondary-color;
 }
 /* ------------------------------------------------
@@ -494,28 +485,27 @@
   */
 }
 
-/* --- Icono principal grande (current-icon-img) ---
-   Se mantiene el id (auditoría SCSS 2.6, v4.39.2): meteo.js gestiona estos elementos y sus
-   reglas por clase perdían frente a `.weather-current .current-wrapper .current-icon img`. */
-#current-icon-img {
+/* --- Icono principal grande (current-icon-img); la regla `.current-icon img` que competía
+   con el antiguo id nunca ganaba y se retiró (v4.40.0) --- */
+.current-icon-img {
   width: 8rem;  // Tamaño para pantallas grandes (768px+)
   height: auto;
 }
 
 @media (min-width: 1200px) {
-  #current-icon-img {
+  .current-icon-img {
     width: 20rem; // Doble de tamaño en pantallas muy grandes
   }
 }
 
 @media (max-width: 767px) {
-  #current-icon-img {
+  .current-icon-img {
     width: 9rem;  // Mucho más pequeño en móviles
   }
 }
 
 @media (max-width: 480px) {
-  #current-icon-img {
+  .current-icon-img {
     width: 7rem;  // Aún más pequeño en pantallas muy pequeñas
   }
 }
@@ -528,24 +518,21 @@
 }
 /* --- Desde 1200px --- */
 @media (min-width: 1200px) {
-  #current-temp {
+  .current-temp {
     font-size: 5rem !important;
     color: var(--coral-marca);
   }
-  #current-feels-like {
+  .current-feels-like {
     font-size: 1.6rem !important;
     padding-bottom: 0.5rem;
     
   }
 
-  #current-minmax {
+  .current-minmax {
     font-size: 1.4rem !important;
     
   }
 
-  .actual-temp {
-    font-size: 10rem !important;
-  }
   .actual-desc {
     font-size: 2.5rem;
     padding-bottom: 0.5rem;

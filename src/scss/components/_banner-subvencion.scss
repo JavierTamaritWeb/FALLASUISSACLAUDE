@@ -68,10 +68,16 @@
   line-height: 1;
   transition: color 2.4s ease-in-out, background-color 0.2s ease, transform 0.2s ease;
 
-  &:hover,
   &:focus-visible {
     background-color: rgba(var(--coral-marca-rgb), 0.16);
     transform: scale(1.04);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(var(--coral-marca-rgb), 0.16);
+      transform: scale(1.04);
+    }
   }
 }
 

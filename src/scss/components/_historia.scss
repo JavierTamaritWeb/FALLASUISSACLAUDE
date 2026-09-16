@@ -12,22 +12,18 @@
     // «Historia»: azul institucional en claro, coral en oscuro (v4.30.32)
     color: var(--titulo-seccion);
   }
-  @media (max-width: 480px) {
-    // !important heredados (auditoría SCSS 4.1, deuda): las media queries de 480 y 767 se solapan y
-    // sin ellos gana la de 767, que va después; quitarlos cambiaría el tamaño en móvil
-    padding: 0 !important;
-    margin: 0 !important;
-    margin-top: 2rem !important;
-    &__titulo {
-      font-size: 1.8rem !important;
-    }
-  }
+  // Móvil: la de 480 va después de la de 767 para ganar sin !important (v4.40.0)
   @media (max-width: 767px) {
-    padding: 0 !important;
-    margin: 0 !important;
-    margin-top: 2rem !important;
+    padding: 0;
+    margin: 0;
+    margin-top: 2rem;
     &__titulo {
       font-size: 2.2rem;
+    }
+  }
+  @media (max-width: 480px) {
+    &__titulo {
+      font-size: 1.8rem;
     }
   }
   &__prologo {
@@ -42,11 +38,7 @@
     border: 2px solid var(--coral-marca);
     margin: 0 auto;
     width: 100%;
-    @media (max-width: 480px) {
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 0.5rem;
-    }
+    // Un solo bloque móvil: el de 480 (padding 0 .5rem) iba antes y nunca ganaba (v4.40.0)
     @media (max-width: 767px) {
       padding: 0 1rem;
       margin: 0 auto;
@@ -54,15 +46,8 @@
     }
   }
 
-  @media (max-width: 480px) {
-    padding: 1rem;
-    margin: 1rem;
-  }
-  @media (max-width: 767px) {
-    padding: 1rem;
-    margin: 1rem;
-  }
-  
+  // Los bloques móviles «padding: 1rem; margin: 1rem» que había aquí nunca se aplicaban (los tapaba
+  // el !important del bloque de arriba) y se retiran para que el móvil no cambie (v4.40.0).
 
   &__archivos{
     background-color: v.$naranja-suave;
@@ -280,7 +265,6 @@
       transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
     }
 
-    &:hover,
     &:focus-visible {
       background: linear-gradient(
         135deg,
@@ -302,6 +286,32 @@
       // Efecto en el icono al hacer hover en la tarjeta
       .historia__card-icon {
         transform: rotate(-5deg) scale(1.1);
+      }
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(var(--coral-marca-rgb), 0.98) 0%,
+          rgba(v.$rojo-salmon, 0.95) 100%
+        );
+        box-shadow:
+          0 8px 12px rgba(0, 0, 0, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.28);
+        color: v.$negro-casi;
+        filter: saturate(1.05) brightness(1.02);
+        transform: translateY(-4px);
+
+        &::before {
+          opacity: 1;
+          transform: translateX(135%);
+        }
+
+        // Efecto en el icono al hacer hover en la tarjeta
+        .historia__card-icon {
+          transform: rotate(-5deg) scale(1.1);
+        }
       }
     }
 
@@ -329,7 +339,6 @@
         );
       }
 
-      &:hover,
       &:focus-visible {
         background: linear-gradient(
           135deg,
@@ -341,6 +350,21 @@
           0 10px 22px rgba(0, 0, 0, 0.34),
           inset 0 1px 0 rgba(255, 255, 255, 0.18);
         filter: saturate(1.08) brightness(1.04);
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          background: linear-gradient(
+            135deg,
+            rgba(v.$rojo-salmon, 0.98) 0%,
+            rgba(v.$amarillo-anaranjado, 0.94) 100%
+          );
+          border-color: rgba(var(--coral-marca-rgb), 0.18);
+          box-shadow:
+            0 10px 22px rgba(0, 0, 0, 0.34),
+            inset 0 1px 0 rgba(255, 255, 255, 0.18);
+          filter: saturate(1.08) brightness(1.04);
+        }
       }
 
       &:focus-visible {
@@ -416,14 +440,24 @@
 
   // El título vira a oscuro en hover, también en la variante digital (va tras
   // sus reglas para ganar por especificidad).
-  .historia__card:hover .historia__card-title,
   .historia__card:focus-visible .historia__card-title {
     color: v.$negro-casi;
   }
 
+  @media (hover: hover) {
+    .historia__card:hover .historia__card-title {
+      color: v.$negro-casi;
+    }
+  }
+
 }
 
-body.modo-oscuro .historia__card:hover .historia__card-title,
 body.modo-oscuro .historia__card:focus-visible .historia__card-title {
   color: v.$negro-casi;
+}
+
+@media (hover: hover) {
+  body.modo-oscuro .historia__card:hover .historia__card-title {
+    color: v.$negro-casi;
+  }
 }

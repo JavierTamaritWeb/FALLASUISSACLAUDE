@@ -202,6 +202,10 @@ test.describe('SCSS guardrails (namespaces, mixins, variables)', () => {
     expect(nuevos(actual, baseline.coberturaTema), mensaje('Bloques con fondo claro sin regla oscura', nuevos(actual, baseline.coberturaTema))).toEqual([]);
   });
 
+  test('Auditoría: ningún `:hover` fuera de `@media (hover: hover)` (v4.40.0)', () => {
+    expect(audit.hoverSinMedia(scssFiles)).toEqual([]);
+  });
+
   test('Auditoría: la baseline no conserva deuda ya resuelta (consolidar con npm run lint:scss:baseline)', () => {
     const datos = audit.analizarTodo();
     const sobrantes = [];
