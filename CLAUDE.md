@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.41.3 · **Última actualización:** 16 de septiembre de 2026
+**Versión:** 4.41.4 · **Última actualización:** 16 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -161,7 +161,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.3).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.4).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -387,6 +387,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.41.4** — Fix de 4.41.3: en móvil una notificación larga («Mejoras de accesibilidad cargadas», en la home) seguía sobresaliendo de su celda de la barra y pisaba la lupa y el menú; `.header__notificacion` lleva `max-width: 100%` en < 768 px y `.mostrar` pasa de `inline-flex` a `block` con `line-height` de 44 px (con flex y `justify-content: center` el texto largo se recortaba por la izquierda; en bloque `text-overflow: ellipsis` funciona). Verificado en Chrome real a 360 px.
 
 - **4.41.3** — **Fix: la notificación de la barra móvil se solapaba con los botones** (`tests/header-mobile-layout` fallaba desde antes de 4.39.3). En < 768 px la notificación va en línea entre los botones y el menú (`grid-area: notificacion`, `position: static`), pero el `animation: none` que anulaba el keyframe del toast estaba en la regla `.header__barra .header__notificacion` (0,2,0) y perdía frente a `.header__notificacion.mostrar` de `components/_notificaciones.scss` (misma especificidad, cargada después): el keyframe `fadeInNotificacion` aplicaba `translateX(-50%)` y la notificación quedaba 60 px a la izquierda, sobre los botones. `animation: none` y `transform: none` pasan a la regla `.mostrar` de móvil (0,3,0). El spec entra en la smoke. Sin cambios en escritorio ni en las capturas visuales.
 

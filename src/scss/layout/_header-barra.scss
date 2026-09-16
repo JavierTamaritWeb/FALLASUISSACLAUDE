@@ -124,6 +124,7 @@
 
     flex: 1 1 auto;
     min-width: 0;
+    max-width: 100%; // nunca más ancha que su celda: un texto largo se recorta con «…» (v4.41.4)
     margin: 0 0.35rem;
     padding: 0.35rem 0.75rem;
     min-height: 44px;
@@ -142,7 +143,11 @@
 
   .header__barra .header__notificacion.mostrar,
   .header-inner__barra .header__notificacion.mostrar {
-    display: inline-flex;
+    // Bloque (no flex): con flex + justify-content: center un texto más largo
+    // que la celda se recortaba por la izquierda; en bloque `text-overflow:
+    // ellipsis` funciona y `line-height` centra la única línea en los 44 px.
+    display: block;
+    line-height: calc(44px - 0.7rem);
     // Evita el keyframe del toast (translateX(-50%)): debe ir en esta regla
     // (0,3,0) y no en la anterior (0,2,0), que perdía frente a
     // `.header__notificacion.mostrar` de components/_notificaciones.scss y
