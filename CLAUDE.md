@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.41.1 · **Última actualización:** 16 de septiembre de 2026
+**Versión:** 4.41.2 · **Última actualización:** 16 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -161,7 +161,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.1).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.2).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -387,6 +387,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.41.2** — **Escudo y título del hero interior juntos** (detectado por el usuario en `galeria_10`): con el flex de dos items de 4.41.1, un título largo se quedaba con todo el hueco restante y centraba su texto dentro, dejando el escudo pegado al borde izquierdo. Ahora `.inner__titulo` es un bloque de texto centrado: en ≥ 768 px el escudo va en línea con el título (`inline-block`, 1,6 em del título con márgenes verticales negativos para no abrir hueco entre la primera y la segunda línea) y el bloque entero se centra; en < 768 px el escudo (1,8 em) va centrado encima del título. El tamaño del título vive en `--titulo-fs` (el `clamp()` de 4.41.1) y `.header-inner__grid` fija `min-height: 24.4rem` para conservar la altura del hero anterior (264 px). `tests/reveal-on-scroll` centra la tarjeta del calendario con `scrollIntoView({ block: 'center' })` (con `scrollIntoViewIfNeeded` una tarjeta medio visible no se desplazaba y no alcanzaba el umbral del observador). 97 baselines visuales regenerados. Verificado en Chrome real a 320, 390, 768, 1024 y 1280 px.
 
 - **4.41.1** — **El título del hero interior cabe en todas las pantallas** (detectado por el usuario en `galeria_10`: «Festividad del Santísimo Cristo de Nazaret 2026» salía cortado). `.heading-inner` llevaba `white-space: nowrap !important` y 7rem fijos desde 1024 px, y el enlace del escudo (`width: 100%`) se quedaba con la mitad del hero como item flex: 8 páginas desbordaban con scroll horizontal (las dos autorizaciones, galerías 2, 5, 8 y 9, organigrama y calendario a 320 px) sin que ninguna prueba lo midiera (el harness de la auditoría compara estilos computados entre versiones y las capturas visuales solo cubren páginas con títulos cortos). Ahora el título salta de línea (`text-wrap: balance`, `overflow-wrap: break-word`), el enlace del escudo mide lo que mide el escudo (el escudo no se mueve) y el tamaño es fluido `clamp(2.5rem, 1rem + 4.7vw, 7rem)` (25 px en 320, 46 en 768, 70 desde 1280; antes 20/50/70 con saltos y sin regla entre 481 y 767 px). **Guardia nueva en la smoke**: `tests/desbordamiento-horizontal.e2e.spec.js` recorre las 63 páginas a 5 anchos y falla ante cualquier desbordamiento horizontal; al estrenarse destapó tres más, corregidos: el tooltip del correo del organigrama (`nowrap` → `max-width: calc(100vw - 2rem)`), la tabla de finalidades de las autorizaciones en valenciano (`width: 100%` + `overflow-wrap: anywhere`) y la rejilla del calendario (`minmax(min(280px, 100%), 1fr)`). Un `!important` menos (108) y stylelint 233. 44 baselines visuales regenerados (hero de todas las interiores). Pendiente y anterior a esta release: `tests/header-mobile-layout.e2e.spec.js` (suite completa, no smoke) falla desde antes de 4.39.3 porque espera la notificación entre los botones y el menú de la barra móvil.
 

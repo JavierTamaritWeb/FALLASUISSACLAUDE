@@ -640,7 +640,7 @@ Guía técnica:
 
 ---
 
-Última actualización: 16 de septiembre de 2026 - v4.41.1
+Última actualización: 16 de septiembre de 2026 - v4.41.2
 
 ## Regresiones SEO v4.30.21
 

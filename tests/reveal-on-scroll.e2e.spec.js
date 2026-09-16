@@ -95,7 +95,9 @@ test.describe('Reveal on scroll global', () => {
     const firstEvent = page.locator('#lista-anuncios .calendario-eventos__item').first();
     await expectReveal(firstEvent, false);
 
-    await firstEvent.scrollIntoViewIfNeeded();
+    // Centrado en la ventana: con scrollIntoViewIfNeeded una tarjeta medio
+    // visible no se desplaza y no alcanza el umbral del IntersectionObserver.
+    await firstEvent.evaluate((el) => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
     await expectReveal(firstEvent, true);
 
     await page.fill('#filtro-busqueda', 'zzzzzzzz');
@@ -116,7 +118,9 @@ test.describe('Reveal on scroll global', () => {
       return className || '';
     }).toContain('reveal');
 
-    await refreshedEvent.scrollIntoViewIfNeeded();
+    // Centrado en la ventana: con scrollIntoViewIfNeeded una tarjeta medio
+    // visible no se desplaza y no alcanza el umbral del IntersectionObserver.
+    await refreshedEvent.evaluate((el) => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
     await expectReveal(refreshedEvent, true);
   });
 

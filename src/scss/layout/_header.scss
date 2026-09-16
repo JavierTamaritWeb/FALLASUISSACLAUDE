@@ -363,6 +363,12 @@
     justify-content: center;
     padding-top: 7rem;
     width: 100%;
+
+    // Altura del hero anterior (26,4 rem = 24,4 rem + relleno superior con el escudo de 9rem y los márgenes
+    // del h1): se conserva aunque escudo y título vayan ahora en línea (v4.41.2).
+    @media (min-width: 768px) {
+      min-height: 24.4rem;
+    }
     
     // Asegurar que el contenido interno se comporte correctamente
     .inner__titulo {
@@ -391,35 +397,59 @@
 // Estilos de Títulos Internos (.heading-inner)
 // ---------------------------------------------------------
 
-// Contenedor del título interno
+// Contenedor del título interno (v4.41.2). Con un flex de dos items, un
+// título largo se quedaba con todo el hueco restante y centraba su texto
+// dentro, dejando el escudo pegado al borde izquierdo. Ahora:
+// - ≥ 768 px: escudo y título comparten la misma línea de texto; el bloque
+//   entero se centra y el escudo (1,3 em del título) acompaña a la primera
+//   línea sin agrandarla.
+// - < 768 px: escudo centrado encima del título.
 .inner__titulo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: auto; // Ajustar al contenido en lugar de 100%
-  max-width: 100%; // Nunca más ancho que el hero: el título salta de línea (v4.41.1)
+  --titulo-fs: clamp(2.5rem, 1rem + 4.7vw, 7rem);
+  display: block;
+  width: auto;
+  max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
   padding-inline: 1.5rem;
-  gap: 2rem;
+  text-align: center;
+  text-wrap: balance;
 
-  // El enlace del escudo es `width: 100%` (_escudo-enlace.scss) y, como item
-  // flex, se quedaba con la mitad del hero: el título solo disponía de la otra
-  // mitad y saltaba en tres líneas. Aquí mide lo que mide el escudo (v4.41.1).
   > .escudo-enlace {
-    flex: 0 0 auto;
+    display: block;
     width: auto;
+    margin: 0 auto 0.5rem;
+
+    @media (min-width: 768px) {
+      display: inline-block;
+      vertical-align: middle;
+      // Mide 1,6 em del título pero solo aporta 1 em a la caja de línea
+      // (márgenes negativos): así no abre hueco entre la primera y la
+      // segunda línea de un título largo.
+      margin: -0.3em 3rem -0.3em 0;
+      font-size: var(--titulo-fs);
+    }
+
+    .header-inner__escudo {
+      width: auto;
+      height: calc(var(--titulo-fs) * 1.8);
+      margin: 0;
+      padding: 0;
+
+      @media (min-width: 768px) {
+        height: 1.6em;
+      }
+    }
   }
-  
-  // En móvil: reducir gap para pantallas pequeñas
-  @media (max-width: 767px) {
-    gap: 1.5rem;
-  }
-  
-  // En desktop: mantener el mismo layout pero con más espacio
-  @media (min-width: 768px) {
-    gap: 3rem;
+
+  > .heading-inner {
+    display: block;
+    margin-right: 0;
+
+    @media (min-width: 768px) {
+      display: inline;
+      vertical-align: middle;
+    }
   }
 }
 
@@ -444,7 +474,7 @@
   // Tamaño fluido (v4.41.1): antes 2rem ≤ 480 px, 5rem ≥ 768 px y 7rem
   // ≥ 1024 px, con saltos bruscos y sin regla entre 481 y 767 px. Ahora crece
   // de 2,5rem en 320 px a 7rem en 1280 px (1rem + 4,7vw) sin escalones.
-  font-size: clamp(2.5rem, 1rem + 4.7vw, 7rem);
+  font-size: var(--titulo-fs, clamp(2.5rem, 1rem + 4.7vw, 7rem));
   line-height: 1.15;
 
   &__span {
