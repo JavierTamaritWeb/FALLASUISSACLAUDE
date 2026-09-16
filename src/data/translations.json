@@ -303,6 +303,8 @@
       "galeria8-texto": "Galería de imágenes de los Representantes 2026-27",
       "galeria9": "Fallera Mayor Infantil 2026-27",
       "galeria9-texto": "Galería de la proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27",
+      "galeria10": "Festividad del Santísimo Cristo de Nazaret 2026",
+      "galeria10-texto": "Galería de los representantes 2026-27 en la Festividad del Santísimo Cristo de Nazaret",
       "galeria9Video": {
         "titulo": "Vídeo de la proclamación",
         "pie": "Proclamación de Sofía Gómez Medina, Fallera Mayor Infantil 2026-27",
@@ -785,6 +787,10 @@
         "description": "Galería de la proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27 de la Falla Suïssa - L'Alqueria del Favero: 40 fotos y vídeo del acto.",
         "videoName": "Vídeo de la proclamación",
         "videoDescription": "Proclamación de Sofía Gómez Medina, Fallera Mayor Infantil 2026-27"
+      },
+      "galeria_10": {
+        "title": "Festividad del Santísimo Cristo de Nazaret 2026 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Los representantes 2026-27 de la Falla Suïssa - L'Alqueria del Favero en la Festividad del Santísimo Cristo de Nazaret 2026: 8 fotos del acto y del photocall."
       }
     },
     "legalDocuments": {
@@ -1090,6 +1096,16 @@
         "p38": "Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, con la familia y la comisión tras la proclamación (foto 38)",
         "p39": "Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, con la familia y la comisión tras la proclamación (foto 39)",
         "p40": "Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, con la familia y la comisión tras la proclamación (foto 40)"
+      },
+      "g10": {
+        "p1": "Representantes de las comisiones falleras en el escenario de la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 1 de 8.",
+        "p2": "Lucía Gutiérrez Martín, Sofía Gómez Medina y Diego Gómez Medina en el escenario con las falleras mayores de la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 2 de 8.",
+        "p3": "Lucía Gutiérrez Martín, José Santos Quilis, Sofía Gómez Medina y Diego Gómez Medina en el escenario de la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 3 de 8.",
+        "p4": "Los cuatro representantes 2026-27 de la Falla Suïssa ante el photocall de la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 4 de 8.",
+        "p5": "José Santos Quilis, Lucía Gutiérrez Martín, Sofía Gómez Medina y Diego Gómez Medina ante el photocall de la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 5 de 8.",
+        "p6": "Diego Gómez Medina, Sofía Gómez Medina, Lucía Gutiérrez Martín y José Santos Quilis, representantes 2026-27 de la Falla Suïssa, en la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 6 de 8.",
+        "p7": "José Santos Quilis, Lucía Gutiérrez Martín y Sofía Gómez Medina ante el photocall de la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 7 de 8.",
+        "p8": "Lucía Gutiérrez Martín, Fallera Mayor, y Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, ante el photocall de la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 8 de 8."
       }
     }
   },
@@ -1397,6 +1413,8 @@
       "galeria8-texto": "Galeria d'imatges dels Representants 2026-27",
       "galeria9": "Fallera Major Infantil 2026-27",
       "galeria9-texto": "Galeria de la proclamació de Sofía Gómez Medina com a Fallera Major Infantil 2026-27",
+      "galeria10": "Festivitat del Santíssim Crist de Natzaret 2026",
+      "galeria10-texto": "Galeria dels representants 2026-27 en la Festivitat del Santíssim Crist de Natzaret",
       "galeria9Video": {
         "titulo": "Vídeo de la proclamació",
         "pie": "Proclamació de Sofía Gómez Medina, Fallera Major Infantil 2026-27",
@@ -1879,6 +1897,10 @@
         "description": "Galeria de fotografies de Fallera Major Infantil 2026-27 de la Falla Suïssa - L'Alqueria del Favero.",
         "videoName": "Vídeo de la proclamació",
         "videoDescription": "Proclamació de Sofía Gómez Medina, Fallera Major Infantil 2026-27"
+      },
+      "galeria_10": {
+        "title": "Festivitat del Santíssim Crist de Natzaret 2026 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "Els representants 2026-27 de la Falla Suïssa - L'Alqueria del Favero en la Festivitat del Santíssim Crist de Natzaret 2026: 8 fotos de l'acte i del photocall."
       }
     },
     "legalDocuments": {
@@ -2184,6 +2206,16 @@
         "p38": "Fallera Major Infantil 2026-27. Fotografia 38 de 40.",
         "p39": "Fallera Major Infantil 2026-27. Fotografia 39 de 40.",
         "p40": "Fallera Major Infantil 2026-27. Fotografia 40 de 40."
+      },
+      "g10": {
+        "p1": "Representants de les comissions falleres a l'escenari de la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 1 de 8.",
+        "p2": "Lucía Gutiérrez Martín, Sofía Gómez Medina i Diego Gómez Medina a l'escenari amb les falleres majors de la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 2 de 8.",
+        "p3": "Lucía Gutiérrez Martín, José Santos Quilis, Sofía Gómez Medina i Diego Gómez Medina a l'escenari de la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 3 de 8.",
+        "p4": "Els quatre representants 2026-27 de la Falla Suïssa davant el photocall de la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 4 de 8.",
+        "p5": "José Santos Quilis, Lucía Gutiérrez Martín, Sofía Gómez Medina i Diego Gómez Medina davant el photocall de la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 5 de 8.",
+        "p6": "Diego Gómez Medina, Sofía Gómez Medina, Lucía Gutiérrez Martín i José Santos Quilis, representants 2026-27 de la Falla Suïssa, en la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 6 de 8.",
+        "p7": "José Santos Quilis, Lucía Gutiérrez Martín i Sofía Gómez Medina davant el photocall de la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 7 de 8.",
+        "p8": "Lucía Gutiérrez Martín, Fallera Major, i Sofía Gómez Medina, Fallera Major Infantil 2026-27, davant el photocall de la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 8 de 8."
       }
     }
   },

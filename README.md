@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 16 de septiembre de 2026 - v4.40.2 - **Cenefa barroca a toda altura**: el derivado recorta los márgenes transparentes del PNG (campo `extract` en `image-variants.json`) para que el motivo llene la franja entre las rayas coral.
+🆕 Última actualización: 16 de septiembre de 2026 - v4.41.0 - **Nueva galería «Festividad del Santísimo Cristo de Nazaret 2026»** (`galeria_10`): 8 fotos de los representantes 2026-27 en el acto y el photocall; tarjeta en Galerías y en la home.
 
 ## 🌐 Vista Previa
 

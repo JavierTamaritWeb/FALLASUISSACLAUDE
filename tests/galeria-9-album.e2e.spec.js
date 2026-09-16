@@ -2,8 +2,8 @@
 // Galería Fallera Mayor Infantil 2026-27 (galeria_9, v4.24.0): bloc en modo
 // álbum (dos páginas a partir de 1200px, una por debajo) y vídeo vertical
 // nativo con botón de ampliar y descarga. Desde v4.25.0 el modo álbum lo
-// comparten las 9 galerías (js/galeria.js): el último bloque lo comprueba en
-// galeria_1–galeria_8. Corre contra dist/ (npm run build).
+// comparten las 10 galerías (js/galeria.js): el último bloque lo comprueba en
+// galeria_1–galeria_8 y galeria_10. Corre contra dist/ (npm run build).
 
 const { test, expect } = require('@playwright/test');
 
@@ -56,7 +56,7 @@ test.describe('galeria_9 — álbum a doble página (≥1200px)', () => {
 
   test('muestra 40 páginas, dos activas lado a lado y el indicador de rango', async ({ page }) => {
     await abrirGaleria(page);
-    // Nombre de la galería sobre el bloc (v4.24.2, en las 9 galerías)
+    // Nombre de la galería sobre el bloc (v4.24.2, en las 10 galerías)
     await expect(page.locator('.visor__titulo')).toHaveText('Fallera Mayor Infantil 2026-27');
     const s = await estadoAlbum(page);
     expect(s.total).toBe(TOTAL);
@@ -221,8 +221,8 @@ test.describe('galeria_9 — /va/ pre-renderizado', () => {
   });
 });
 
-test.describe('modo álbum compartido (js/galeria.js) en galeria_1–galeria_8', () => {
-  for (const n of [1, 2, 3, 4, 5, 6, 7, 8]) {
+test.describe('modo álbum compartido (js/galeria.js) en galeria_1–galeria_8 y galeria_10', () => {
+  for (const n of [1, 2, 3, 4, 5, 6, 7, 8, 10]) {
     test(`galeria_${n}: dos páginas a 1280px, una a 1024px, JSON propio`, async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 900 });
       const fuentes = [];

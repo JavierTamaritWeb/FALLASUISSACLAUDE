@@ -126,7 +126,7 @@ test('los sitemaps solo anuncian páginas canónicas indexables y todas las foto
   await page.setContent('<body></body>');
   const errors = await page.evaluate(value => new DOMParser().parseFromString(value, 'text/xml').querySelectorAll('parsererror').length, images);
   expect(errors).toBe(0);
-  for (let n = 1; n <= 9; n++) {
+  for (let n = 1; n <= 10; n++) {
     const html = fs.readFileSync(path.join(root, `dist/galeria_${n}.html`), 'utf8');
     const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
     for (const photo of graph.find(node => node['@type'] === 'ImageGallery').associatedMedia) expect(images).toContain(`<image:loc>${photo.contentUrl}</image:loc>`);
