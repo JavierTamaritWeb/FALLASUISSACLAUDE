@@ -29,11 +29,15 @@ test.describe('Background Gradient - Modo Claro', () => {
 
       // También verificar si hay un pseudo-elemento
       const bodyBefore = window.getComputedStyle(body, '::before').backgroundColor;
+      // Desde v4.41.7 el degradado azul vive solo en body::before (el color de
+      // body es el celeste que Safari usa para teñir su barra)
+      const bodyBeforeImage = window.getComputedStyle(body, '::before').backgroundImage;
 
       return {
         body: bodyBg,
         html: htmlBg,
         bodyBefore: bodyBefore,
+        bodyBeforeImage,
         // Obtener el color en un punto específico de la página
         bodyBgImage: window.getComputedStyle(body).backgroundImage,
         htmlBgImage: window.getComputedStyle(html).backgroundImage
@@ -47,7 +51,8 @@ test.describe('Background Gradient - Modo Claro', () => {
                         bgColor.htmlBgImage.includes('gradient');
     const hasBlueColor = bgColor.body.includes('10, 75, 141') || // rgb de #0a4b8d
                          bgColor.html.includes('10, 75, 141') ||
-                         bgColor.bodyBefore.includes('10, 75, 141');
+                         bgColor.bodyBefore.includes('10, 75, 141') ||
+                         bgColor.bodyBeforeImage.includes('10, 75, 141');
 
     expect(hasGradient || hasBlueColor).toBeTruthy();
   });
@@ -103,6 +108,9 @@ test.describe('Background Gradient - Modo Claro', () => {
       return {
         bodyBg: window.getComputedStyle(body).backgroundColor,
         bodyBgImage: window.getComputedStyle(body).backgroundImage,
+        // El degradado vive en body::before (patrón overlay); desde v4.41.7 el
+        // background-color de body es el celeste que Safari usa para su barra
+        bodyBeforeImage: window.getComputedStyle(body, '::before').backgroundImage,
         htmlBg: window.getComputedStyle(html).backgroundColor,
         htmlBgImage: window.getComputedStyle(html).backgroundImage
       };
@@ -112,6 +120,7 @@ test.describe('Background Gradient - Modo Claro', () => {
 
     // Debe seguir teniendo el gradiente o color azul
     const hasBackground = bgAfterScroll.bodyBgImage.includes('gradient') ||
+                          bgAfterScroll.bodyBeforeImage.includes('gradient') ||
                           bgAfterScroll.htmlBgImage.includes('gradient') ||
                           bgAfterScroll.bodyBg.includes('10, 75, 141') ||
                           bgAfterScroll.htmlBg.includes('10, 75, 141');

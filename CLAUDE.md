@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.41.6 · **Última actualización:** 16 de septiembre de 2026
+**Versión:** 4.41.7 · **Última actualización:** 16 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -107,7 +107,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Patrones arquitectónicos clave
 
-**Modo oscuro** (`src/js/dark.js`): aplica las clases `.modo-oscuro`/`.modo-claro`. El CSS usa pseudo-elementos `::before` para las transiciones de gradiente a sólido porque CSS no puede animar directamente entre `linear-gradient` y un color sólido. El gradiente de fondo vive en `body::before` para permitir un cross-fade de opacidad a negro. **Color del navegador (v4.41.5)**: `THEME_COLORS = { claro: '#d6e9f6', oscuro: '#000000' }` en `dark.js` es la única fuente (claro = `$celeste-barra`, tono medio del borde superior del hero, v4.41.6); `actualizarThemeColor()` escribe ese valor en la meta `theme-color` sin `media` y en las `msapplication-*` al alternar. Las 31 páginas llevan el mismo bloque de 5 metas (celeste/negro; `theme-color` no admite degradados), `manifest.json` y `img/favicon/site.webmanifest` el mismo `theme_color`, y `--theme-color-light/-dark` de `themes/_theme-compatibility.scss` la misma pareja; `tests/unit/theme-color.test.cjs` rompe si divergen. Un color nuevo se cambia en los cuatro sitios a la vez.
+**Modo oscuro** (`src/js/dark.js`): aplica las clases `.modo-oscuro`/`.modo-claro`. El CSS usa pseudo-elementos `::before` para las transiciones de gradiente a sólido porque CSS no puede animar directamente entre `linear-gradient` y un color sólido. El gradiente de fondo vive en `body::before` para permitir un cross-fade de opacidad a negro. **Color del navegador (v4.41.5)**: `THEME_COLORS = { claro: '#d6e9f6', oscuro: '#000000' }` en `dark.js` es la única fuente (claro = `$celeste-barra`, tono medio del borde superior del hero, v4.41.6); `actualizarThemeColor()` escribe ese valor en la meta `theme-color` sin `media` y en las `msapplication-*` al alternar. Las 31 páginas llevan el mismo bloque de 5 metas (celeste/negro; `theme-color` no admite degradados), `manifest.json` y `img/favicon/site.webmanifest` el mismo `theme_color`, y `--theme-color-light/-dark` de `themes/_theme-compatibility.scss` la misma pareja; `tests/unit/theme-color.test.cjs` rompe si divergen. Un color nuevo se cambia en los cuatro sitios a la vez **y en el `background-color` de `body` de `_globales.scss`: Safari (macOS e iOS) ignora la meta y tiñe su barra con ese color de `body` (v4.41.7)**.
 
 **Multi-idioma** (`src/js/lang.js` + `src/js/initTranslations.js` + `gulpfile.js → prerenderTranslations`): los elementos usan `data-i18n="section.key"` (más `data-i18n-aria-label`, `data-i18n-placeholder`, `data-i18n-alt`, `data-i18n-title`, `data-i18n-content`, `data-i18n-format="paragraphs"`, `data-i18n-dynamic`). Carga `src/data/translations.json` al cargar la página y persiste la elección en localStorage. `lang.js` dispara `translationsReady` tras la carga y `langChanged` al cambiar. Los componentes dinámicos (board) deben comprobar `window.translations` primero; si no está listo, escuchar `translationsReady` antes de renderizar. Desde v4.6.23 el build **pre-renderiza el valenciano**: `dist/va/*.html` lleva el texto VA horneado en el body antes de que cargue JS (mejor SEO + accesibilidad sin JS). El toggle ES/VA del header sigue funcionando en runtime porque los atributos `data-i18n*` permanecen en el HTML; al alternar, se reescribe el DOM. Ver restricción *Pre-render i18n VA*.
 
@@ -161,7 +161,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.6).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.7).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -387,6 +387,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.41.7** — **Safari tiñe su barra con el `background-color` de `body`, no con la meta** (comprobado en Safari de macOS con páginas de prueba: con meta azul y `body` blanco la barra sale blanca; con `body` celeste bajo el degradado fijo, celeste; ignora también el hero renderizado). Por eso 4.41.5-4.41.6 no cambiaban nada en Safari: la barra seguía en el `#0a4b8d` de respaldo de `body`. Ahora `body` lleva `background-color: v.$celeste-barra` (`abstracts/_globales.scss`); el degradado azul sigue en `body::before` (fijo, cubre el viewport) y en oscuro `body` sigue en `$negro`. Solo se ve al rebotar el scroll en Safari. Chrome/Android siguen usando la meta (mismo color). `tests/background-gradient` acepta el degradado en `body::before`. Verificado en Safari macOS: barra `#e5f7ff` en home, `galeria_10` y `/va/`, también con scroll.
 
 - **4.41.6** — **La barra de estado del iPhone se funde con el hero** (croquis del usuario): el blanco de 4.41.5 no era lo pedido; el `theme-color` claro pasa a `$celeste-barra` #D6E9F6, tono medio del borde superior del hero medido en Chrome a 390 px (va de #E8F3FA a #C3E4F6 por el brillo radial de `$gradiente-celeste`), en las 31 páginas, `THEME_COLORS` de `dark.js`, `--theme-color-light` y los dos manifests (`theme_color` y `background_color`). Oscuro sigue en negro. Sin cambios visuales en la página.
 

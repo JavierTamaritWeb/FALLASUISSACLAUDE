@@ -47,7 +47,7 @@ Para permitir transiciones suaves de opacidad entre el modo claro (gradiente) y 
 
 **Implementación (Patrón Overlay `::before`):**
 
-- **Body**: Actúa como contenedor base con un color de fondo de respaldo (`#0a4b8d`).
+- **Body**: Actúa como contenedor base con un color de fondo de respaldo (`$celeste-barra` #D6E9F6 desde v4.41.7; antes `#0a4b8d`). Safari ignora la meta `theme-color` y tiñe su barra con este color, por eso es el celeste del borde superior del hero.
 - **Body**: Tiene `position: relative`.
 - **Pseudo-elemento `::before`**: Contiene el gradiente lineal.
 - **Pseudo-elemento `::before`**: Usa `position: fixed` para que no scrollee y cubra todo.
@@ -56,7 +56,7 @@ Para permitir transiciones suaves de opacidad entre el modo claro (gradiente) y 
 ```scss
 body {
   // Configuración base
-  background-color: #0a4b8d; 
+  background-color: v.$celeste-barra; // Safari tiñe su barra con este color
   position: relative;
   
   // Capa del gradiente
@@ -433,7 +433,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 ---
 
-Última actualización: 16 de septiembre de 2026 - v4.41.6
+Última actualización: 16 de septiembre de 2026 - v4.41.7
 
 ## 🏛️ Componente Frieze (Cenefa)
 

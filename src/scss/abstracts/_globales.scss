@@ -38,7 +38,11 @@ html {
 }
 body {
   min-height: 100%;
-  background-color: #0a4b8d; // Color de respaldo: primer stop de v.$gradiente-institucional
+  // Color de respaldo bajo el degradado fijo del ::before. Safari (macOS e iOS) ignora la meta
+  // theme-color y tiñe su barra con ESTE color, así que va en el celeste del borde superior
+  // del hero (v4.41.7; antes #0a4b8d). El degradado azul sigue en el ::before; en oscuro,
+  // _modo-oscuro.scss lo pone en $negro. Solo se ve al rebotar el scroll en Safari.
+  background-color: v.$celeste-barra;
   position: relative;
   
   // Gradiente suave en pseudo-elemento para transición dark mode

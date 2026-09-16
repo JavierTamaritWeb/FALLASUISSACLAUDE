@@ -142,8 +142,8 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 3. No renombres variables con uso ni borres ninguna sin pasar `scss-guardrails` (que desde v4.38.0 también rechaza variables sin uso y literales con token); cada color nuevo entra en su bloque de `_variables.scss` con su papel y su ratio en comentario.
 4. Todo cambio de color de un componente incluye su bloque en `_modo-oscuro.scss` (los fondos cambian de claro a `#111`/`#444`, y un coral oscuro se vuelve ilegible).
 5. `.accordion__titular` copia el hover de `.boton`: cambiar uno exige revisar el otro.
-6. El color del navegador (`theme-color`, `msapplication-*`, `theme_color` de los manifests, `THEME_COLORS` de `dark.js`, `--theme-color-*`) es **`$celeste-barra` #D6E9F6 en claro y negro en oscuro** desde v4.41.6 (tono medio del borde superior del hero, para que la barra de estado del móvil se funda con él): `theme-color` no admite degradados y el hero claro es `$gradiente-celeste`. No lo vuelvas al azul institucional; `tests/unit/theme-color.test.cjs` exige que los cuatro sitios coincidan.
+6. El color del navegador (`theme-color`, `msapplication-*`, `theme_color` de los manifests, `THEME_COLORS` de `dark.js`, `--theme-color-*`) es **`$celeste-barra` #D6E9F6 en claro y negro en oscuro** desde v4.41.6 (tono medio del borde superior del hero, para que la barra de estado del móvil se funda con él): `theme-color` no admite degradados y el hero claro es `$gradiente-celeste`. **Safari ignora la meta** y tiñe su barra con el `background-color` de `body`, que por eso es también `$celeste-barra` (v4.41.7). No lo vuelvas al azul institucional; `tests/unit/theme-color.test.cjs` exige que los cuatro sitios coincidan.
 
 ---
 
-Última actualización: 16 de septiembre de 2026 - v4.41.6
+Última actualización: 16 de septiembre de 2026 - v4.41.7
