@@ -333,7 +333,9 @@
   
     &__lista {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      // min(280px, 100%): con 280 px fijos la columna desbordaba 2 px a 320 px
+      // (guardia desbordamiento-horizontal, v4.41.1).
+      grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
       gap: 1.5rem;
     }
   

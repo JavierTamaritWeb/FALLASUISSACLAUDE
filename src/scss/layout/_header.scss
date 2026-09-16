@@ -398,7 +398,19 @@
   align-items: center;
   justify-content: center;
   width: auto; // Ajustar al contenido en lugar de 100%
+  max-width: 100%; // Nunca más ancho que el hero: el título salta de línea (v4.41.1)
+  min-width: 0;
+  box-sizing: border-box;
+  padding-inline: 1.5rem;
   gap: 2rem;
+
+  // El enlace del escudo es `width: 100%` (_escudo-enlace.scss) y, como item
+  // flex, se quedaba con la mitad del hero: el título solo disponía de la otra
+  // mitad y saltaba en tres líneas. Aquí mide lo que mide el escudo (v4.41.1).
+  > .escudo-enlace {
+    flex: 0 0 auto;
+    width: auto;
+  }
   
   // En móvil: reducir gap para pantallas pequeñas
   @media (max-width: 767px) {
@@ -416,24 +428,27 @@
   text-transform: none;
   display: inline-block; // Permite que se pongan en línea
   margin-right: 1rem; // Espacio entre elementos
-  white-space: nowrap !important; // FUERZA el texto a permanecer en una línea
-  
-  
+  // El título debe caber en cualquier pantalla (v4.41.1): antes iba con
+  // `white-space: nowrap !important` y los títulos largos («Festividad del
+  // Santísimo Cristo de Nazaret 2026», «Autorización de derechos de imagen»)
+  // desbordaban el hero con scroll horizontal en 8 páginas. Se permite el salto
+  // de línea equilibrado y, solo si una palabra no cabe, el corte dentro de ella.
+  white-space: normal;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  min-width: 0;
+  max-width: 100%;
+  text-align: center;
+
+
+  // Tamaño fluido (v4.41.1): antes 2rem ≤ 480 px, 5rem ≥ 768 px y 7rem
+  // ≥ 1024 px, con saltos bruscos y sin regla entre 481 y 767 px. Ahora crece
+  // de 2,5rem en 320 px a 7rem en 1280 px (1rem + 4,7vw) sin escalones.
+  font-size: clamp(2.5rem, 1rem + 4.7vw, 7rem);
+  line-height: 1.15;
 
   &__span {
     color: v.$blanco;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 2rem;
-    // display: block; // En móvil, uno debajo del otro
-    
-  }
-  @media (min-width: 768px) {
-    font-size: 5rem;
-  }
-  @media (min-width: 1024px) {
-    font-size: 7rem;
   }
 }
 

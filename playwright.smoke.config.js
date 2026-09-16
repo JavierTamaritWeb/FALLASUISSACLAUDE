@@ -30,6 +30,7 @@ module.exports = defineConfig({
     '**/scss-guardrails.e2e.spec.js',
     '**/buscador.e2e.spec.js',
     '**/color-tokens.e2e.spec.js',
-    '**/auditoria-scss.e2e.spec.js'
+    '**/auditoria-scss.e2e.spec.js',
+    '**/desbordamiento-horizontal.e2e.spec.js'
   ]
 });

@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 16 de septiembre de 2026 - v4.41.0 - **Nueva galería «Festividad del Santísimo Cristo de Nazaret 2026»** (`galeria_10`): 8 fotos de los representantes 2026-27 en el acto y el photocall; tarjeta en Galerías y en la home.
+🆕 Última actualización: 16 de septiembre de 2026 - v4.41.1 - **Título del hero interior responsivo** (salto de línea y tamaño fluido; desbordaba en 8 páginas) y guardia nueva `desbordamiento-horizontal` en la smoke (63 páginas × 5 anchos).
 
 ## 🌐 Vista Previa
 

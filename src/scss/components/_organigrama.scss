@@ -430,7 +430,11 @@ body:not(.modo-oscuro) .organigrama-contenedor {
     bottom: 125%; /* Ubicación arriba del elemento */
     left: 50%;
     transform: translateX(-50%);
-    white-space: nowrap;
+    // Oculto sigue ocupando sitio: con `nowrap` la dirección de correo hacía
+    // 10 px de scroll horizontal a 320 px (guardia desbordamiento-horizontal, v4.41.1).
+    white-space: normal;
+    max-width: calc(100vw - 2rem);
+    overflow-wrap: anywhere;
     font-size: 1.2rem;
     transition: opacity 0.3s;
     z-index: v.$z-flotante;

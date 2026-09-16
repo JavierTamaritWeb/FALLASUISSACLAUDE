@@ -195,6 +195,7 @@ Archivo de test:
 Archivo de test:
 
 - `tests/scss-guardrails.e2e.spec.js`
+- `tests/desbordamiento-horizontal.e2e.spec.js`
 
 ### ✨ Reveal on Scroll Global
 
@@ -533,6 +534,7 @@ Smoke suite por defecto:
 - `tests/scss-guardrails.e2e.spec.js` (desde v4.39.0 también las guardias de la auditoría SCSS con baseline en `tests/fixtures/scss-baseline.json` — selectores raíz duplicados, clases muertas, `!important` por fichero, `z-index` literales, media queries, rutas en comentarios, etiquetas globales, cobertura de tema — sobre el módulo `tests/scss-audit.cjs`; namespaces `v`/`m`, sin `@use as *`, sin variables duplicadas, `@mixin` solo en `_mixins.scss`; desde v4.38.0 además **ninguna variable de `_variables.scss` sin uso** en `src/scss/**` y **ningún literal de color que ya tenga token** —`#333`, `#fff`, `#000`, `#111`, `#444`, `#555`, `#f5f5f5`, `#fdf2e9`, `rgba(255,111,97,…)`, `rgba(255,215,0,…)`, `rgba(245,245,245,…)`— fuera de `_variables`/`_globales` y de los bloques `@media print`)
 - `tests/buscador.e2e.spec.js` (v4.29.0, en la smoke; ampliado en v4.33.0-v4.37.2 con guardias de calidad del índice —descripciones, VA real, personas, keywords huérfanas, eventos futuros con `?dia=`, un llibret por ejercicio—, el hash real de la meta, resaltado, combobox/`aria-activedescendant`, Enter, foco tras «Mostrar más», errata corregida, hash malformado y altura en móvil; 17 tests): índice `dist/data/search-index.json` con todos los tipos, sin ids de prueba (`evt:23-25/48/49`), sin festivos ni páginas standalone, títulos VA; `<meta name="search-index" content="data/search-index.json?v=<hash>">` y `<script src="js/buscador.js">` en las 29 páginas ES y `/va/`; destinos `url#id` existentes en `dist/`; en navegador: botón lupa visible con panel cerrado, apertura con foco en el campo, estado inicial con ejemplos, «calendari» con interfaz ES → «Calendario» (un solo resultado por página lógica) y anuncio `aria-live`, Escape devuelve el foco, menú y buscador excluyentes, estados `minimo`/`vacio` a 375 px, `/va/` con textos VA y destino `/va/galeria_6.html`, deep link `lafalla.html#ofrenda-2026-lafalla` que abre el panel (`acc.js`), consulta conservada al reabrir (`sessionStorage`), sugerencias y «Mostrar más» que repintan el cuerpo sin cerrar el panel (y un resultado sí lo cierra y navega), y las dos aspas (v4.29.1): «Cerrar buscador» sin círculo, borrar oculta con el campo vacío (`display: none`), dentro del campo con texto y sin invadirlo, borrar mantiene el panel y el foco, y el campo tiene un único anillo de foco.
 - `tests/color-tokens.e2e.spec.js` (v4.29.0, en la smoke; desde v4.30.0 con un test de navegador que activa el modo oscuro y comprueba `--coral-marca` = `#b83f35`, el borde del countdown en `rgb(184, 63, 53)` y que ningún elemento computa `rgb(255, 111, 97)`, esperando a las transiciones de tema de 2,4 s): los tokens aditivos de `_variables.scss` existen, el degradado institucional solo vive en `$gradiente-institucional` (ninguna copia literal en `src/scss`), 18 pares de texto normal ≥ 4,5:1 (`hex()` resuelve un nivel de alias como `$coral-texto: $primary-color`, v4.38.0) y 5 colores sobre el stop más claro del degradado (`#0a4b8d`) ≥ 4,5:1, y el coral de marca solo válido como texto grande sobre azul (≥ 3:1) y no como texto normal sobre blanco.
+- `tests/desbordamiento-horizontal.e2e.spec.js` (v4.41.1, en la smoke): las 63 páginas de `dist/` (ES y `/va/`, sin las standalone) a 320/390/768/1024/1280 px no pueden ser más anchas que la ventana: ni `scrollWidth` del documento mayor que el viewport ni ningún elemento visible que sobresalga (se ignoran los ocultos o transparentes, también por herencia, los `position: fixed` y los recortados por un ancestro con `overflow`). Nació del título del hero interior con `white-space: nowrap !important`, que desbordaba en 8 páginas sin que ninguna prueba lo midiera; al estrenarse destapó además el tooltip del organigrama, la tabla de las autorizaciones en valenciano y la rejilla del calendario a 320 px.
 
 Suite completa:
 
@@ -638,7 +640,7 @@ Guía técnica:
 
 ---
 
-Última actualización: 16 de septiembre de 2026 - v4.41.0
+Última actualización: 16 de septiembre de 2026 - v4.41.1
 
 ## Regresiones SEO v4.30.21
 

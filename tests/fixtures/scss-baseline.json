@@ -17,7 +17,6 @@
     "src/scss/components/_video-dron.scss": 1,
     "src/scss/layout/_footer.scss": 8,
     "src/scss/layout/_header-barra.scss": 1,
-    "src/scss/layout/_header.scss": 1,
     "src/scss/themes/_modo-oscuro.scss": 26
   },
   "zIndex": [],

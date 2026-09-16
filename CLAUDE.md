@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.41.0 · **Última actualización:** 16 de septiembre de 2026
+**Versión:** 4.41.1 · **Última actualización:** 16 de septiembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -62,6 +62,7 @@ npx gulp searchIndex     # Regenera solo el índice del buscador
 - SIEMPRE ejecuta `npm run test:e2e` tras cambios en CSS/JS
 - Ejecuta `npm run test:e2e:full` al tocar navegación, modo oscuro, transiciones de gradiente, metadatos OG, UI de meteo, Swiper o snapshots visuales
 - NUNCA edites archivos en `dist/` directamente (son generados)
+- NUNCA fijes `white-space: nowrap` ni un tamaño de fuente sin `clamp()` en un texto que depende del contenido (títulos de página, nombres, tarjetas): tiene que caber en 320 px con el texto más largo que exista en ES y VA. `tests/desbordamiento-horizontal.e2e.spec.js` (smoke) falla si cualquier página desborda en horizontal; al añadir una página o un título largo, pásalo (v4.41.1)
 - NUNCA elimines ni renombres variables SCSS sin pasar `tests/scss-guardrails.e2e.spec.js` y `tests/color-tokens.e2e.spec.js`; desde v4.38.0 la guardia también rechaza variables sin uso y literales de color que ya tengan token (`#333`, `#fff`, `#000`, `#111`, `#444`, `#555`, `#f5f5f5`, `#fdf2e9`, `rgba(255,111,97|255,215,0|245,245,245,…)`) fuera de `@media print`: usa `v.$token` / `rgba(v.$token, a)` / `rgba(var(--coral-marca-rgb), a)`
 - NUNCA añadas deuda SCSS nueva: `npm run lint:scss` y las guardias de auditoría de `scss-guardrails` (duplicados, clases muertas, `!important`, `z-index`, media queries, etiquetas globales, cobertura de tema) comparan con una baseline que solo puede bajar. Ver restricción *Auditoría SCSS sep-2026*
 - NUNCA referencies `og-share.png` sin el cache-buster `?v=YYYYMMDD` (caché de WhatsApp)
@@ -79,7 +80,7 @@ npx gulp searchIndex     # Regenera solo el índice del buscador
 - **Frontend**: HTML5, SCSS (BEM), módulos JavaScript ES6+
 - **Librerías (CDN)**: Swiper.js v11 (carruseles, jsDelivr), Anime.js v3.2.1 (animaciones, cdnjs), EmailJS v4 (formulario de contacto, jsDelivr)
 - **Librerías (npm)**: Flatpickr v4.6.13 (selector de fechas)
-- **Testing**: Playwright E2E (55 ficheros / 606 casos en la matriz completa, 25 specs / 414 casos smoke por defecto) y 22 pruebas de Node en `tests/unit/`. La suite smoke (`npm run test:e2e`) ejecuta: seo-regressions, audit-regressions, nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, escudo-enlace, galeria-9-album, galeria-pager, accordion-hover, schema-jsonld, scss-guardrails, buscador, color-tokens, auditoria-scss
+- **Testing**: Playwright E2E (55 ficheros / 606 casos en la matriz completa, 25 specs / 414 casos smoke por defecto) y 22 pruebas de Node en `tests/unit/`. La suite smoke (`npm run test:e2e`) ejecuta: seo-regressions, audit-regressions, nav, i18n, i18n-prerender, html-integrity, board, reveal-on-scroll, countdown, banner-subvencion, index-colaboraciones, historia-monumentos, historia-ofrendas, historia-representantes, nosotros-plana-mayor, nosotros-directiva, accordion-sin-recorte, escudo-enlace, galeria-9-album, galeria-pager, accordion-hover, schema-jsonld, scss-guardrails, buscador, color-tokens, auditoria-scss, desbordamiento-horizontal
 
 ### Estructura de directorios
 
@@ -160,7 +161,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.41.1).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -386,6 +387,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.41.1** — **El título del hero interior cabe en todas las pantallas** (detectado por el usuario en `galeria_10`: «Festividad del Santísimo Cristo de Nazaret 2026» salía cortado). `.heading-inner` llevaba `white-space: nowrap !important` y 7rem fijos desde 1024 px, y el enlace del escudo (`width: 100%`) se quedaba con la mitad del hero como item flex: 8 páginas desbordaban con scroll horizontal (las dos autorizaciones, galerías 2, 5, 8 y 9, organigrama y calendario a 320 px) sin que ninguna prueba lo midiera (el harness de la auditoría compara estilos computados entre versiones y las capturas visuales solo cubren páginas con títulos cortos). Ahora el título salta de línea (`text-wrap: balance`, `overflow-wrap: break-word`), el enlace del escudo mide lo que mide el escudo (el escudo no se mueve) y el tamaño es fluido `clamp(2.5rem, 1rem + 4.7vw, 7rem)` (25 px en 320, 46 en 768, 70 desde 1280; antes 20/50/70 con saltos y sin regla entre 481 y 767 px). **Guardia nueva en la smoke**: `tests/desbordamiento-horizontal.e2e.spec.js` recorre las 63 páginas a 5 anchos y falla ante cualquier desbordamiento horizontal; al estrenarse destapó tres más, corregidos: el tooltip del correo del organigrama (`nowrap` → `max-width: calc(100vw - 2rem)`), la tabla de finalidades de las autorizaciones en valenciano (`width: 100%` + `overflow-wrap: anywhere`) y la rejilla del calendario (`minmax(min(280px, 100%), 1fr)`). Un `!important` menos (108) y stylelint 233. 44 baselines visuales regenerados (hero de todas las interiores). Pendiente y anterior a esta release: `tests/header-mobile-layout.e2e.spec.js` (suite completa, no smoke) falla desde antes de 4.39.3 porque espera la notificación entre los botones y el menú de la barra móvil.
 
 - **4.41.0** — **Nueva galería «Festividad del Santísimo Cristo de Nazaret 2026»** (`galeria_10`, décima galería): 8 fotos de los representantes 2026-27 (Lucía Gutiérrez Martín, José Santos Quilis, Sofía Gómez Medina y Diego Gómez Medina) en el acto (3, escenario) y ante el photocall (5), en `src/img/cristo-nazaret/cristo-nazaret-2026/cristo-nazaret-2026-001…008.jpeg` (los 5 PNG «mejorados» de 3 MB pasan a JPEG q85; 2,5 MB en total; el build genera AVIF/WebP). `src/galeria_10.html` clonado de `galeria_8` (bloc `notepad--album`, `data-source="data/dataPages10.json"`, marcador del pager, `ImageGallery` con `associatedMedia: []`), `dataPages10.json` con `altKey` → `galleryAlts.g10.p1…p8` (nombres y cargos, ES/VA), `galeria.galeria10`/`galeria10-texto` y `seo.galeria_10` ES/VA, tarjeta tras la de galeria_9 en `galerias.html` e `index.html` (miniatura `-004.jpeg`, los cuatro representantes). Automático: paginación 1…10, registro `gal:10` del buscador (`search-eval` gana dos consultas críticas ES/VA), `ItemList` de 10, 8 `ImageObject` completos, sitemaps (62 URL, 8 fotos en `sitemap-images.xml`). Tests: `galeria-9-album` cubre `galeria_10`, `seo-regressions` recorre 10 galerías; 14 baselines visuales regenerados (`index`, `galerias` y `galeria_1` tablet/móvil, donde la tira 1…10 pasa a dos filas). Sin cambios de SCSS ni JS.
 

@@ -194,6 +194,14 @@
         }
     }
 
+    // La tabla de finalidades nunca es más ancha que la hoja: en valenciano
+    // («No autoritze») sobresalía 2 px a 320 px (guardia desbordamiento-horizontal, v4.41.1).
+    &__tabla {
+        width: 100%;
+        max-width: 100%;
+        overflow-wrap: anywhere; // heredado por las celdas
+    }
+
     &__label {
         font-size: 0.9rem;
         font-weight: 600;
