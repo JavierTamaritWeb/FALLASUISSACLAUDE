@@ -431,21 +431,9 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 | `$frieze-bg` | `$blanco-hueso` (#F5F5F5) | Color de fondo de la banda (v4.1.3 cambio de transparent a hueso) |
 | `$frieze-size` | `clamp(30px, 8vw, 50px)` | Altura responsive |
 
-### Cenefa de la cuenta atrás (v4.43.0)
-
-La franja de la cuenta atrás de la portada lleva un adorno a cada lado del contador con una cenefa **distinta**, la variante 2 (medallones con paisaje y figuras), para no repetir el motivo de `.frieze`, que aparece justo debajo de la franja.
-
-| Variable | Valor | Descripción |
-| --- | --- | --- |
-| `$cenefa-countdown-img` | `url('../img/elementos-UXUI/cenefa-barroca-2.seo.webp')` | Derivado WebP de 512 px que genera el build desde `cenefa-barroca-2.png` con `extract` (`top: 140, height: 276`), recortando los márgenes transparentes verticales |
-
-Se aplica en `.countdown::before` / `::after` (`src/scss/components/_countdown.scss`), solo desde 1024 px, con el derecho reflejado mediante `scaleX(-1)`. Su borde interior se ancla con `calc(50% + 20rem)` en lugar de un ancho en porcentaje: así los adornos crecen con la pantalla y nunca invaden la caja del contador, ni siquiera a 1024 px. Por debajo de 1024 px no caben y se ocultan.
-
-**No pongas un remate horizontal encima de la franja**: se probó en v4.43.0 y el usuario lo retiró, porque quedaban dos cenefas muy juntas con la `.frieze` que ya cierra la franja por abajo.
-
 ---
 
-Última actualización: 17 de septiembre de 2026 - v4.43.0
+Última actualización: 17 de septiembre de 2026 - v4.42.0
 
 ## 🏛️ Componente Frieze (Cenefa)
 

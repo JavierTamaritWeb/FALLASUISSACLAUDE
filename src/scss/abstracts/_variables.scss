@@ -133,11 +133,6 @@ $frieze-bg: $blanco-hueso;
 $frieze-bg-dark: $gris-muy-oscuro;
 $frieze-size: clamp(30px, 8vw, 50px);
 
-// Cenefa barroca que flanquea la cuenta atrás (v4.43.0): un adorno a cada lado
-// del contador. Es la variante 2 (medallones con paisaje y figuras), distinta
-// de la cenefa general $frieze-img, que ya aparece justo debajo de la franja.
-$cenefa-countdown-img: url('../img/elementos-UXUI/cenefa-barroca-2.seo.webp');
-
 $falleret-size-mobile: 55%;
 $falleret-size-tablet: 30%;
 $falleret-size-desktop: 25%;

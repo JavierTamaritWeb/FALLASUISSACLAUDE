@@ -142,4 +142,4 @@ Nota: si tu despliegue publica **solo** la carpeta `dist/`, entonces rutas como 
 
 ---
 
-Configuración optimizada para Falla Suïssa - Última actualización: 17 de septiembre de 2026 - v4.43.0
+Configuración optimizada para Falla Suïssa - Última actualización: 17 de septiembre de 2026 - v4.42.0

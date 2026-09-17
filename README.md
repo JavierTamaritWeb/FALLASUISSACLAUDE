@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 17 de septiembre de 2026 - v4.43.0 - **Nuevo**: la cuenta atrás de la portada se compacta y se enmarca con la cenefa barroca 2: remate superior a todo lo ancho y adornos a ambos lados del contador.
+🆕 Última actualización: 17 de septiembre de 2026 - v4.42.0 - **Nuevo**: botón «Inicio» con icono de casa en la barra fija de las 31 páginas, pegado a la izquierda del menú hamburguesa; enlace relativo a `index.html` que conserva el idioma en `/va/`.
 
 ## 🌐 Vista Previa
 
