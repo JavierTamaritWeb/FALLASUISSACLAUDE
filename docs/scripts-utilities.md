@@ -128,4 +128,4 @@ npx playwright test tests/scss-guardrails.e2e.spec.js
 
 ---
 
-Última actualización: 17 de septiembre de 2026 - v4.42.0
+Última actualización: 17 de septiembre de 2026 - v4.43.0

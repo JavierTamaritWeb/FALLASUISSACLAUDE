@@ -6,6 +6,12 @@
     "width": 512
   },
   {
+    "source": "img/elementos-UXUI/cenefa-barroca-2.png",
+    "output": "img/elementos-UXUI/cenefa-barroca-2.seo.webp",
+    "extract": { "left": 0, "top": 140, "width": 1629, "height": 276 },
+    "width": 512
+  },
+  {
     "source": "img/logos/logo-ask.svg",
     "output": "img/logos/logo-ask.seo.webp",
     "width": 256
