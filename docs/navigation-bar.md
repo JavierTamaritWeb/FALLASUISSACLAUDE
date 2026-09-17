@@ -30,6 +30,7 @@ Dentro de cada página, en el header existe:
   - Botón: `.header__lang-switcher#langSwitcher`
   - Menú: `.header__lang-options#langOptions`
 - Botón modo oscuro/claro: `.header__modo-boton#botonModoOscuro` (o `.header-inner__modo-boton`)
+- Botón Inicio (v4.42.0): `a.header__inicio` con icono de casa, **estático en el HTML** entre `#notificacion` y la `nav`; `href="index.html"` relativo (desde `/va/` va a `/va/index.html`), `data-i18n-aria-label="nav.escudoInicio"` y `aria-current="page"` solo en `index.html`. `nav-menu.js` inserta el hamburguesa justo antes de la `nav`, así que queda a la derecha del enlace
 - Navegación: `.navegacion` con enlaces `.navegacion__enlace`
 
 > Nota importante: `#notificacion` debe ser **único** en el documento. Si se duplica por accidente (por ejemplo, por copiar/pegar secciones), el comportamiento puede ser ambiguo. Los tests E2E seleccionan la notificación dentro de la barra para ser robustos, pero lo recomendado es mantener IDs únicos.
@@ -231,6 +232,7 @@ Los controles interactivos principales cumplen objetivo táctil:
 
 - `.header__modo-boton` / `.header-inner__modo-boton`
 - `.header__lang-switcher`
+- `.header__inicio` (enlace Inicio, comparte relieve y estados con el hamburguesa en `_nav.scss`)
 - `.header__menu-toggle` (hamburguesa)
 - `.navegacion__enlace`
 
@@ -368,22 +370,22 @@ Dos detalles imprescindibles para que funcione **dentro de la barra** (v4.14.0):
 
 ---
 
-## 📐 Layout móvil: una sola fila (3 zonas)
+## 📐 Layout móvil: una sola fila (4 zonas)
 
 Objetivo en móvil (<768px): mantener el header **en una sola línea** con:
 
 - izquierda: `.header__botones` (idioma + modo)
 - centro: `#notificacion` (cuando está visible)
-- derecha: `.header__menu-toggle` (hamburguesa)
+- derecha: `a.header__inicio` (casa, v4.42.0) y `.header__menu-toggle` (hamburguesa)
 
 ### Implementación (SCSS)
 
-En móvil, la barra usa un layout de 3 columnas (tipo grid) para evitar que el header vuelva a apilarse:
+En móvil, la barra usa un layout de 4 columnas (grid `auto minmax(0, 1fr) auto auto`, áreas `"botones notificacion inicio menu"`) para evitar que el header vuelva a apilarse:
 
 - `.header__barra, .header-inner__barra` se configuran para disposición horizontal
-- Se asignan áreas/columnas para garantizar el orden visual: botones → notificación → menú
+- Se asignan áreas/columnas para garantizar el orden visual: botones → notificación → Inicio → menú
 
-Esto vive en `src/scss/layout/_nav.scss`.
+Esto vive en `src/scss/layout/_header-barra.scss` (desde v4.39.2; el relieve de Inicio y hamburguesa en `_nav.scss`). En escritorio la barra es flex con `space-between` y `.header__inicio { margin-left: auto }` lo pega al hamburguesa.
 
 ### Notificación: inline (no "toast" flotante)
 
@@ -466,7 +468,8 @@ Los tests E2E validan la navbar (desktop vs móvil) y el comportamiento del over
 - Suites:
   - `tests/nav.e2e.spec.js` - Comportamiento general
   - `tests/header-bar-bg.e2e.spec.js` - Fondo translúcido y transiciones
-  - `tests/header-mobile-layout.e2e.spec.js` - Layout móvil
+  - `tests/header-mobile-layout.e2e.spec.js` - Layout móvil (botones · notificación · Inicio · menú)
+  - `tests/nav.e2e.spec.js` › «Botón Inicio de la barra» - enlace visible, pegado al menú, `aria-label` ES/VA, destino en ES y `/va/`, clicable con el menú abierto
   - `tests/nav-transition.e2e.spec.js` - Transiciones de enlaces
 
 Recomendación de flujo:
@@ -491,6 +494,7 @@ npm run test:e2e:full
    - JS usa `matchMedia('(max-width: 767px)')`
 6) **¿Patrón overlay?** No usar `overflow: hidden` en la barra
 7) **¿Selector `> *`?** Siempre excluir `.navegacion` con `:not(.navegacion)`
+8) **¿Control nuevo a la derecha?** Colócalo en el HTML antes de la `nav` (el hamburguesa se inserta después), dale `grid-area` propia en móvil y exclúyelo de la regla `> *:not(…)` de `_header-barra.scss`, que le daría `z-index: 1` bajo el backdrop del menú (el enlace Inicio recibe `v.$z-nav-boton` en la regla de `.header__botones`)
 
 ### Recompilar
 
@@ -553,4 +557,4 @@ npm run build
 - Hover/focus y activo usan ambos `v.$primary-color` tanto en el texto como en la línea del `::after`.
 - Test `tests/nav.e2e.spec.js` actualizado: ya no espera fondo blanco en el enlace activo móvil; ahora valida `color === rgb(255, 111, 97)` y que el `::after` tiene `opacity: 1` + `background-color` en coral.
 
-Última actualización: 16 de septiembre de 2026 - v4.41.7
+Última actualización: 17 de septiembre de 2026 - v4.42.0

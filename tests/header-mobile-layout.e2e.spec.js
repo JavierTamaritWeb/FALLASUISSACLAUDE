@@ -29,7 +29,7 @@ function centerY(box) {
 
 test.describe('Header móvil: botones/notificación/menú en una fila', () => {
   for (const pageName of PAGES) {
-    test(`${pageName} (mobile): botones izquierda, notificación centrada, menú derecha`, async ({ page }) => {
+    test(`${pageName} (mobile): botones izquierda, notificación centrada, Inicio y menú a la derecha`, async ({ page }) => {
       await page.setViewportSize({ width: 360, height: 740 });
 
       if (pageName === 'mapa.html') {
@@ -49,6 +49,10 @@ test.describe('Header móvil: botones/notificación/menú en una fila', () => {
       const menuToggle = bar.locator('button.header__menu-toggle').first();
       await expect(menuToggle).toBeVisible();
 
+      // Botón Inicio (v4.42.0): entre la notificación y el menú.
+      const inicio = bar.locator('a.header__inicio').first();
+      await expect(inicio).toBeVisible();
+
       // Forzamos una notificación real (la UI solo la muestra cuando tiene `.mostrar`).
       const modo = bar.locator('#botonModoOscuro').first();
       await expect(modo).toBeVisible();
@@ -62,6 +66,8 @@ test.describe('Header móvil: botones/notificación/menú en una fila', () => {
       const botonesBox = await botones.boundingBox();
       const notifBox = await notificacion.boundingBox();
       const menuBox = await menuToggle.boundingBox();
+      const inicioBox = await inicio.boundingBox();
+      expect(inicioBox).toBeTruthy();
 
       expect(botonesBox).toBeTruthy();
       expect(notifBox).toBeTruthy();
@@ -72,7 +78,8 @@ test.describe('Header móvil: botones/notificación/menú en una fila', () => {
 
       // Orden horizontal: izquierda -> centro -> derecha.
       expect(botonesRight).toBeLessThan(notifBox.x + 1);
-      expect(notifBox.x + notifBox.width).toBeLessThan(menuLeft + menuBox.width);
+      expect(notifBox.x + notifBox.width).toBeLessThan(inicioBox.x + 1);
+      expect(inicioBox.x + inicioBox.width).toBeLessThan(menuLeft + 1);
 
       // Misma fila (alineación vertical): centros Y muy parecidos.
       const yBotones = centerY(botonesBox);
@@ -80,9 +87,10 @@ test.describe('Header móvil: botones/notificación/menú en una fila', () => {
       const yMenu = centerY(menuBox);
       expect(Math.abs(yBotones - yNotif)).toBeLessThanOrEqual(6);
       expect(Math.abs(yBotones - yMenu)).toBeLessThanOrEqual(6);
+      expect(Math.abs(yBotones - centerY(inicioBox))).toBeLessThanOrEqual(6);
 
-      // Notificación centrada entre el borde derecho de los botones y el borde izquierdo del menú.
-      const midBetween = (botonesRight + menuLeft) / 2;
+      // Notificación centrada entre el borde derecho de los botones y el borde izquierdo del botón Inicio.
+      const midBetween = (botonesRight + inicioBox.x) / 2;
       expect(Math.abs(centerX(notifBox) - midBetween)).toBeLessThanOrEqual(14);
 
       // Altura comparable a los botones (min-height similar).

@@ -92,6 +92,10 @@
 // Valores efectivos tras fusionar el bloque de animaciones/_waves.scss (v4.39.2):
 // ese fichero cargaba después y ganaba en width/height; aquí queda el resultado.
 
+// Botón Inicio (enlace a la home, v4.42.0) y hamburguesa comparten el relieve:
+// el enlace va en el HTML justo antes de la nav y nav-menu.js inserta el
+// hamburguesa entre ambos, así que quedan pegados en el borde derecho.
+.header__inicio,
 .header__menu-toggle {
   display: inline-flex;
   align-items: center;
@@ -133,6 +137,14 @@
     transform: scale(0.96);
     box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
   }
+}
+
+// El enlace Inicio se pega al hamburguesa: en escritorio la barra es flex con
+// space-between y el margen automático absorbe el hueco (v4.42.0).
+.header__inicio {
+  margin-left: auto;
+  margin-right: 0.6rem;
+  text-decoration: none;
 }
 
 .navegacion__enlace {

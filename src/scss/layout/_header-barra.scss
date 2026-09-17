@@ -40,8 +40,8 @@
 
   @media (max-width: 767px) {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    grid-template-areas: "botones notificacion menu";
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    grid-template-areas: "botones notificacion inicio menu"; // inicio = enlace a la home (v4.42.0)
     align-items: center;
     flex-wrap: nowrap;
     padding: 0.3rem !important;       // Padding más compacto en móviles
@@ -75,16 +75,19 @@
     // desplazaría el botón hamburguesa y no captaría los clics fuera).
     // Desde v4.29.0 también se excluye .buscador (panel absoluto del buscador).
     // Desde v4.40.0 también se excluye .header__notificacion: es un toast fijo (antes lo
-  // protegía la especificidad del id #notificacion).
-  > *:not(.navegacion):not(.nav-backdrop):not(.buscador):not(.header__botones):not(.header__notificacion) {
+  // protegía la especificidad del id #notificacion). Desde v4.42.0 también .header__inicio
+  // (recibe su z-index en la regla siguiente; la lista de :not gana en especificidad).
+  > *:not(.navegacion):not(.nav-backdrop):not(.buscador):not(.header__botones):not(.header__notificacion):not(.header__inicio) {
       position: relative;
       z-index: 1;
     }
 
     // El grupo de botones (idioma, tema y lupa del buscador) queda por encima del
     // backdrop del menú (1500), como el botón hamburguesa (2600): así el buscador
-    // se puede abrir con el menú desplegado y viceversa (v4.29.0).
-    > .header__botones {
+    // se puede abrir con el menú desplegado y viceversa (v4.29.0). El enlace Inicio
+    // (v4.42.0) también: la regla anterior le daría z-index 1 y el backdrop lo taparía.
+    > .header__botones,
+    > .header__inicio {
       position: relative;
       z-index: v.$z-nav-boton;
     }
@@ -104,6 +107,14 @@
   .header-inner__barra .header__menu-toggle {
     grid-area: menu;
     margin-right: 0.15rem;
+    justify-self: end;
+  }
+
+  .header__barra .header__inicio,
+  .header-inner__barra .header__inicio {
+    grid-area: inicio;
+    margin-left: 0;
+    margin-right: 0.3rem;
     justify-self: end;
   }
 
@@ -231,6 +242,7 @@
 body.modo-oscuro {
   .header__modo-boton,
   .header__lang-switcher,
+  .header__inicio,
   .header__menu-toggle {
     background: rgba(255, 255, 255, 0.04);
     border-color: rgba(70, 70, 70, 0.95);
@@ -243,6 +255,7 @@ body.modo-oscuro {
 
   .header__modo-boton:focus-visible,
   .header__lang-switcher:focus-visible,
+  .header__inicio:focus-visible,
   .header__menu-toggle:focus-visible {
     background-color: rgba(255, 255, 255, 0.08);
     border-color: rgba(90, 90, 90, 0.95);
@@ -251,6 +264,7 @@ body.modo-oscuro {
   @media (hover: hover) {
     .header__modo-boton:hover,
     .header__lang-switcher:hover,
+    .header__inicio:hover,
     .header__menu-toggle:hover {
       background-color: rgba(255, 255, 255, 0.08);
       border-color: rgba(90, 90, 90, 0.95);
@@ -263,6 +277,7 @@ body.modo-oscuro {
 
   .header__modo-boton:active,
   .header__lang-switcher:active,
+  .header__inicio:active,
   .header__menu-toggle:active {
     background-color: rgba(255, 255, 255, 0.12);
   }

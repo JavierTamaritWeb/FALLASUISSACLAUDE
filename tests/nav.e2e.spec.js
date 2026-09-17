@@ -242,3 +242,69 @@ test.describe('Navbar responsive + idioma', () => {
     expect(await page.evaluate(() => getComputedStyle(document.querySelector('.header-inner')).zIndex)).toBe('500');
   });
 });
+
+// Botón Inicio (v4.42.0): enlace estático con icono de casa a la izquierda del
+// hamburguesa (nav-menu.js inserta el toggle justo antes de la nav, es decir,
+// después del enlace). href relativo para conservar /va/.
+test.describe('Botón Inicio de la barra', () => {
+  const LABEL_ES = 'Ir a la página de inicio de la Falla Suïssa';
+  const LABEL_VA = "Anar a la pàgina d'inici de la Falla Suïssa";
+
+  for (const [pageName, label] of [['lafalla.html', LABEL_ES], ['galeria_1.html', LABEL_ES], ['va/galeria_1.html', LABEL_VA]]) {
+    for (const width of [1280, 375]) {
+      test(`${pageName} a ${width}px: visible, pegado al menú y con aria-label traducido`, async ({ page }) => {
+        await page.setViewportSize({ width, height: 800 });
+        await page.goto(`/${pageName}`);
+
+        const inicio = page.locator('a.header__inicio');
+        await expect(inicio).toBeVisible();
+        await expect(inicio).toHaveAttribute('aria-label', label);
+        await expect(inicio).toHaveAttribute('href', 'index.html');
+        await expect(inicio.locator('svg')).toHaveCount(1);
+
+        const toggle = page.locator('button.header__menu-toggle');
+        await expect(toggle).toBeVisible();
+        expect(await inicio.evaluate((a) => a.nextElementSibling && a.nextElementSibling.classList.contains('header__menu-toggle'))).toBe(true);
+
+        const [cajaInicio, cajaMenu] = await Promise.all([inicio.boundingBox(), toggle.boundingBox()]);
+        expect(cajaInicio.height).toBeGreaterThanOrEqual(44);
+        expect(cajaInicio.width).toBeGreaterThanOrEqual(44);
+        const hueco = cajaMenu.x - (cajaInicio.x + cajaInicio.width);
+        expect(hueco).toBeGreaterThanOrEqual(0);
+        expect(hueco).toBeLessThanOrEqual(16);
+        expect(Math.abs((cajaInicio.y + cajaInicio.height / 2) - (cajaMenu.y + cajaMenu.height / 2))).toBeLessThanOrEqual(2);
+      });
+    }
+  }
+
+  test('desde lafalla.html lleva a la home ES; desde /va/ se queda en /va/', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/lafalla.html');
+    await page.locator('a.header__inicio').click();
+    await expect(page).toHaveURL(/\/index\.html$/);
+
+    await page.goto('/va/galeria_1.html');
+    await page.locator('a.header__inicio').click();
+    await expect(page).toHaveURL(/\/va\/index\.html$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ca');
+  });
+
+  test('sigue siendo clicable con el menú abierto (por encima del backdrop) y en index lleva aria-current', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/index.html');
+    await expect(page.locator('a.header__inicio')).toHaveAttribute('aria-current', 'page');
+
+    await page.goto('/eventos.html');
+    await page.locator('button.header__menu-toggle').click();
+    await expect(page.locator('nav.navegacion')).toBeVisible();
+    const encima = await page.evaluate(() => {
+      const a = document.querySelector('a.header__inicio');
+      const r = a.getBoundingClientRect();
+      const el = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+      return a.contains(el);
+    });
+    expect(encima).toBe(true);
+    await page.locator('a.header__inicio').click();
+    await expect(page).toHaveURL(/\/index\.html$/);
+  });
+});

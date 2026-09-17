@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 16 de septiembre de 2026 - v4.41.7 - **Fix**: la barra del navegador se funde con el hero: `theme-color`, manifests y `dark.js` en el celeste `$celeste-barra` (Chrome) y el `background-color` de `body` también, porque Safari tiñe su barra con ese color y no con la meta.
+🆕 Última actualización: 17 de septiembre de 2026 - v4.42.0 - **Nuevo**: botón «Inicio» con icono de casa en la barra fija de las 31 páginas, pegado a la izquierda del menú hamburguesa; enlace relativo a `index.html` que conserva el idioma en `/va/`.
 
 ## 🌐 Vista Previa
 
