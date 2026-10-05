@@ -50,6 +50,13 @@ Build recomendado:
 - `ai-crawl.html`
   - Página auxiliar orientada a rastreo/IA.
 
+## 🤖 Descubrimiento para asistentes de IA (raíz pública, v4.43.0)
+
+- `src/robots.txt` — único robots: grupos explícitos que permiten a los rastreadores de IA de búsqueda, asistente y entrenamiento, bloqueo de scrapers SEO comerciales y Bytespider, `Content-Signal` y las dos directivas `Sitemap:`. Ver `docs/robots-configuration.md`.
+- `src/llms.txt` — resumen curado del sitio según llmstxt.org (se mantiene a mano; `tests/unit/robots.test.cjs` exige que toda página publicable aparezca en él o esté declarada opcional).
+- `dist/llms-full.txt` — lo genera el build (`scripts/seo-artifacts.cjs → buildLlmsFull`) con el título y la descripción de las 62 páginas ES/VA más esta guía; no se edita.
+- `src/indexnow.txt` — clave pública de IndexNow; `tools/deploy.sh` notifica las URL cambiadas tras cada deploy (`docs/seo-indexnow.md`).
+
 ## 🔄 Mantenimiento recomendado
 
 - Si cambia la estructura del sitio (nuevas páginas/rutas), revisa:
@@ -66,4 +73,4 @@ Build recomendado:
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.21
+Última actualización: 5 de octubre de 2026 - v4.43.0

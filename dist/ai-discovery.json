@@ -54,8 +54,10 @@
     "es",
     "va"
   ],
-  "last_updated": "2026-09-13",
+  "last_updated": "2026-10-05",
   "ai_friendly_urls": [
+    "/llms.txt",
+    "/llms-full.txt",
     "/seo/ai-training-data.md",
     "/seo/ai-enhanced-schema.json",
     "/seo/ai-crawl.html",
@@ -82,6 +84,8 @@
     "responsive_design": true
   },
   "ai_crawl_instructions": {
+    "overview": "/llms.txt",
+    "page_inventory": "/llms-full.txt",
     "priority_content": "/seo/ai-training-data.md",
     "structured_info": "/seo/ai-enhanced-schema.json",
     "organization_details": "/organigrama.html",

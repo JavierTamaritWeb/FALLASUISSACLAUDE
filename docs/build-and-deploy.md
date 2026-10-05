@@ -21,7 +21,7 @@ El modo desarrollo ejecuta un build inicial y deja watchers activos.
 npm run dev
 ```
 
-Qué observa (watch): cambios en `src/scss/`, `src/js/`, `src/data/`, `src/pdf/`, `src/img/`, `src/favicon_io/`, `src/fonts/`, `src/seo/` y ficheros públicos en `src/` (robots, plantillas sitemap, manifest, `src/google*.html`, etc.). Desde v4.6.24 todo el source vive bajo `src/`.
+Qué observa (watch): cambios en `src/scss/`, `src/js/`, `src/data/`, `src/pdf/`, `src/img/`, `src/favicon_io/`, `src/fonts/`, `src/seo/` y ficheros públicos en `src/` (robots, llms.txt, indexnow.txt, manifest, `src/google*.html`, etc.). Desde v4.6.24 todo el source vive bajo `src/`.
 
 ## 🧱 Build de producción
 
@@ -92,7 +92,7 @@ El build ejecuta `scripts/seo-artifacts.cjs → generateSeoArtifacts` después d
 
 `src/data/seo-history.json` guarda hash y fecha por URL. Un cambio significativo de HTML (incluidas traducciones y JSON-LD) actualiza lastmod; recompilar sin cambios conserva la fecha. Los hashes de CSS/JS y el año del copyright no rejuvenecen el contenido. Este registro se versiona y está excluido del watch para que el build no se dispare a sí mismo. No se usa mtime ni una zona horaria fija inventada.
 
-Los archivos sitemap de `src/` son plantillas de compatibilidad; su contenido final lo produce el generador. No mantener inventarios paralelos a mano. Si se publican noticias recientes, reconstruir y desplegar al publicar y al expirar su ventana de 48 horas; una web estática no se regenera sola por el paso del tiempo.
+Desde 4.43.0 no hay plantillas `src/sitemap*.xml`: el generador es la única fuente (`SITEMAP_FILES` en `scripts/seo-artifacts.cjs`). `sitemap-index.xml` lleva `<lastmod>` por sitemap (la fecha más reciente de sus páginas). El historial guarda además `published` (primera fecha en que la URL entró) y el build escribe `dateModified`/`datePublished` en el nodo de página del JSON-LD; `contentHash` neutraliza esas claves y, si el historial cambia, `seoArtifactsTask` repite `htmlTask` (segunda pasada) para que el HTML lleve la fecha nueva. También genera `dist/llms-full.txt` (ver `robots-configuration.md`). No mantener inventarios paralelos a mano. Si se publican noticias recientes, reconstruir y desplegar al publicar y al expirar su ventana de 48 horas; una web estática no se regenera sola por el paso del tiempo.
 
 **`rsync --checksum` (v4.26.2):** el espejo compara por contenido, no por fecha+tamaño: `gulp dest` conserva la fecha del fuente en `dist/` y el token `?v=` de los assets no cambia el tamaño del HTML, así que sin `--checksum` las páginas no editadas no se subían y seguían enlazando el CSS/JS anterior (cacheado un año). Además rsync va sin `-t` (`-rlpgoDvz`, v4.26.3): si conserva la fecha del fuente, Apache responde `304` a la revalidación de la CDN y esta sigue sirviendo el HTML antiguo. Verificación tras el deploy: el `?v=` de `main.css` en una página no tocada (con `?nc=$RANDOM`) debe coincidir con el de `dist/`.
 
@@ -125,7 +125,7 @@ Qué hace, en orden:
 1. `npm run build` (regenera `dist/`).
 2. Comprueba la conexión SSH y que `rsync` existe en el servidor; crea el directorio remoto si falta.
 3. Pide confirmación (porque sincroniza en modo **espejo con `--delete`**: borra en el servidor lo que ya no esté en `dist/`).
-4. `rsync -avz --delete` de `dist/` → `~/domains/fallasuissa.es/public_html/` (incluye dotfiles como `.htaccess` y `.well-known/`; excluye `.DS_Store`).
+4. `rsync -rlpgoDvz --checksum --delete` (es `-a` sin `-t`, comparando por contenido; ver §14 de `architecture-constraints.md`) de `dist/` → `~/domains/fallasuissa.es/public_html/` (incluye dotfiles como `.htaccess` y `.well-known/`; excluye `.DS_Store`).
 5. Verifica que `https://fallasuissa.es` responde **HTTP 200**.
 
 **Flags** (pásalas tras `--` con npm, p. ej. `npm run deploy -- --dry-run`):
@@ -255,7 +255,7 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 17 de septiembre de 2026 - v4.42.0
+Última actualización: 5 de octubre de 2026 - v4.43.0
 
 ## Guardias de compilación y despliegue (13-09-2026)
 
@@ -269,9 +269,9 @@ Registro completo: [auditoría del 13-09-2026](auditoria-2026-09-13.md).
 
 `src/data/image-variants.json` declara los originales SVG, la ruta de salida y el ancho máximo. `imagesTask` produce WebP transparentes para la presentación; mantiene los originales. Los nombres `.seo.webp` evitan reutilizar las antiguas respuestas SVG inmutables. Los tamaños y el presupuesto acumulado se comprueban en `tests/seo-regressions.e2e.spec.js`. No editar los derivados de `dist/`.
 
-### Verificación SEO tras publicar (v4.30.21)
+### Verificación SEO tras publicar (v4.30.21; automática desde v4.43.0)
 
-Ejecutar `npm run seo:verify:production` después del despliegue. Consulta producción en modo lectura y exige que los HTML y sitemaps publicados coincidan con `dist/`; comprueba 301, 404/410 y que `Accept: text/markdown` no sustituya la portada. Puede guardar evidencia con `-- --output /tmp/seo-publicado.json`. No equivale a inspeccionar la indexación real en Search Console.
+`tools/deploy.sh` la ejecuta solo tras el `200` de producción (paso 6; `--skip-verify` la salta) y, si pasa, notifica a IndexNow las URL cambiadas (paso 7; `--no-indexnow` lo salta; detalle en [`seo-indexnow.md`](./seo-indexnow.md)). El snapshot del historial desplegado queda en `.cache/seo-history.deployed.json`. `src/data/seo-history.json` cambia en cada build con contenido nuevo y se commitea con la release. También puede lanzarse a mano: `npm run seo:verify:production` después del despliegue. Consulta producción en modo lectura y exige que los HTML y sitemaps publicados coincidan con `dist/`; comprueba 301, 404/410 y que `Accept: text/markdown` no sustituya la portada. Puede guardar evidencia con `-- --output /tmp/seo-publicado.json`. No equivale a inspeccionar la indexación real en Search Console.
 
 Al cambiar el pipeline, reiniciar `npm run dev`: un watcher ya abierto mantiene en memoria el Gulp anterior y puede sobrescribir los nuevos artefactos. No ejecutar dos watchers del mismo checkout.
 

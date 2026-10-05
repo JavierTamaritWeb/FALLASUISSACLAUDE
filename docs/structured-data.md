@@ -1,6 +1,6 @@
 # 🧩 Datos Estructurados (JSON-LD) y SEO Técnico
 
-Esta guía documenta cómo se genera el `application/ld+json` de las 30 páginas publicables (ES y `/va/`), qué parte vive en cada `src/*.html`, qué añade el build y cómo se valida.
+Esta guía documenta cómo se genera el `application/ld+json` de las 31 páginas publicables (62 URL: ES y `/va/`), qué parte vive en cada `src/*.html`, qué añade el build y cómo se valida.
 
 ## 🎯 Resumen
 
@@ -10,12 +10,14 @@ Desde v4.28.0 el JSON-LD lo **completa el build** (`gulpfile.js → processJsonL
 - Cada `src/*.html` lleva **solo sus nodos propios** dentro de `{"@context":"https://schema.org","@graph":[…]}`: el nodo de página (`WebPage`, `AboutPage`, `CollectionPage`, `ImageGallery`…) y, si los tiene, `BlogPosting`, `VideoObject`, `CreativeWork`, `Blog`, `ItemList`, `WebPageElement`.
 - El build **completa** el nodo de página (`name` = `<title>`, `description` = meta description, `primaryImageOfPage` = `og:image`, `isPartOf`, `inLanguage`), añade el **`BreadcrumbList`**, rellena las **galerías** (un `ImageObject` por foto de `dataPagesN.json`), la **lista de galerías** de `galerias.html`, fusiona los **`Event` del tablón** (`board.json`, en `index`/`eventos`) y, en `/va/`, reescribe las URL de página a `/va/…` e `inLanguage` a `ca-ES`.
 - Siempre queda **un solo** `<script type="application/ld+json">` por página.
+- **v4.43.0**: la Organization lleva `legalName`, `taxID`, `identifier` (nº 396), `additionalType` NGO, `knowsLanguage`, `areaServed`; el WebSite `copyrightYear`, `about` y un `SearchAction` (`?q=` abre el buscador; en `/va/` apunta a `/va/?q=`). Los textos de la fuente pueden ser `{ "es": "…", "ca": "…" }` y el build los resuelve por idioma (`resolveLang`): descripción de Organization y WebSite, `caption` del logo, nombre del casal, `contactType`, `areaServed`. El nodo de página lleva `dateModified`/`datePublished` (del historial `src/data/seo-history.json`, o del `BlogPosting` en los posts), toda página tiene `primaryImageOfPage` (las legales y autorizaciones ganaron `og:image`) y todo `ImageObject` propio lleva `width`/`height`/`encodingFormat` leídos del original de `src/img` con `sharp` (fotos de galería, imagen principal, imágenes de los posts). En `/va/` también se localizan `relatedLink`/`significantLink`, `ItemList.name`, los `headline` de `Blog.blogPost`, el `CreativeWork` HOPE (`seo.colaboraciones.hopeName/hopeDescription`) y el nombre del `DigitalDocument` de las autorizaciones.
 
 ## 📍 Fuentes de verdad
 
 | Archivo | Papel |
 | -------- | ------- |
-| `src/seo/schema-organization.json` | Organization (`#organization`, con `founder`, `member` = directiva y delegados vigentes, `address`, `location` `#place`, `logo` `#logo`, `sameAs`, `memberOf` JCF) y WebSite (`#website`) |
+| `src/seo/schema-organization.json` | Organization (`#organization`, con `legalName`, `taxID`, `identifier` 396, `founder`, `member` = directiva y delegados vigentes, `address` (solo calle: el piso del domicilio social no se publica en el schema), `location` `#place`, `logo` `#logo`, `sameAs` ≥ 3 con Facebook/Instagram/TikTok obligatorios, `memberOf` JCF, `areaServed`, `knowsLanguage`) y WebSite (`#website`, con `SearchAction`). Textos traducibles como `{es, ca}`. No convertir `@type` en array: `scripts/seo-artifacts.cjs` filtra la Organization por igualdad estricta al construir el sitemap de imágenes; usa `additionalType` |
+| `src/data/seo-history.json` | hash, `modified` y `published` por URL canónica → `dateModified`/`datePublished` del nodo de página y `lastmod` de los sitemaps (lo escribe el build; se commitea) |
 | `src/*.html` | nodos propios de cada página (ver tabla) |
 | `src/data/dataPagesN.json` | fotos (`src`, `alt`) → `ImageObject` de `galeria_N.html` |
 | `src/data/translations.json` | nombres del breadcrumb (`nav.*`, `galeria.galeriaN`, `blog.*.cardTitle`) y de la lista de galerías, en ES y VA |
@@ -35,12 +37,17 @@ Los antiguos `ld-json-enhanced.json` y `advanced-schema-graph.json` se **elimina
 | `organigrama.html` | `AboutPage` (`mainEntity` → `#organization`) | — (las personas viven en `member` de la fuente) |
 | `eventos.html` | `WebPage` (`mainEntity` → `#organization`) | `Event` del tablón (los añade el build) |
 | `galerias.html` | `CollectionPage` | `ItemList` `#lista` (lo rellena el build con todas las galerías) |
-| `galeria_1..9.html` | `ImageGallery` (`name`/`description` = `galeria.galeriaN`/`-texto`) | `associatedMedia: []` (lo rellena el build); `galeria_9` además `VideoObject` `#video` |
+| `galeria_1..10.html` | `ImageGallery` (`name`/`description` = `galeria.galeriaN`/`-texto`) | `associatedMedia: []` (lo rellena el build); `galeria_9` además `VideoObject` `#video` |
 | `blog.html` | `CollectionPage` | `Blog` `#blog` con `blogPost` (resumen de cada post) |
 | `blog-*.html` | `WebPage` (`mainEntity` → `#article`) | `BlogPosting` `#article` completo (`headline`, `description`, `image`, `datePublished`, `dateModified`, `inLanguage`, `articleSection`, `author`, `publisher` → ref) |
 | `mapa.html` | `WebPage` (`mainEntity` → `#place`) | — |
 | `llibret_2026.html` | `WebPage` (`inLanguage` multi) | `["CreativeWork","Book"]` `#llibre` + 10 `WebPageElement` |
-| resto (`meteo`, `calendario`, `deportes`, `ofrenda`, `nuevos-falleros`, legales, autorizaciones) | `WebPage` | `about` → `#organization`; `genre` en legales/formularios |
+| `calendario.html` | `WebPage` | `significantLink` → `eventos.html` |
+| `deportes.html` | `WebPage` | `mentions` Junta Central Fallera (anidado, sin `@id`) |
+| `ofrenda.html` | `WebPage` | `keywords` + `significantLink` al panel Ofrenda 2026 de Archivos (sin `Event`: solo `board.json` los genera) |
+| legales (`aviso-legal`, `privacidad`, `cookies`) | `WebPage` | `genre`, `publisher` → ref, `isAccessibleForFree` |
+| `autorizacion-imagen*.html` | `WebPage` (`mainEntity` → `#documento`) | `DigitalDocument` `#documento` (`encodingFormat text/html`, `audience`, `publisher`; `name` del idioma vía `nuevosFalleros.form*.titulo`) |
+| resto (`meteo`, `nuevos-falleros`) | `WebPage` | `about` → `#organization`; `relatedLink` en Nuevos Falleros |
 
 Convenciones:
 
@@ -56,7 +63,8 @@ Convenciones:
 
 1. `extractFirstJsonLd`: lee el primer `<script ld+json>` (nodo suelto, array o `@graph`). JSON inválido en `src` → el build falla.
 2. `normalizeGraph`: descarta Organization/WebSite propios y convierte `publisher`/`isPartOf`/`creator`… inline en `{ "@id" }`.
-3. `ensurePageNode`: localiza o crea el nodo de página y lo completa.
+3. `ensurePageNode`: localiza o crea el nodo de página y lo completa; `applyPageDates` añade `dateModified`/`datePublished` del historial (clave `/va/…` en la variante VA) o del `BlogPosting` principal; la imagen principal recibe `width`/`height`/`encodingFormat` (`imageMeta`, memoizado, precargado por `collectSchemaImagePaths` al inicio de `htmlTask`).
+   - **Segunda pasada**: el historial lo escribe `generateSeoArtifacts` después del HTML, así que `seoArtifactsTask` compara el archivo antes/después y, si cambió (URL nueva o contenido nuevo), repite `htmlTask`. Es idempotente porque `contentHash` elimina las claves `dateModified`/`datePublished` antes de calcular el hash (una página recién entrada en el historial da el mismo hash con y sin fechas). Comprobación: dos `npm run build` seguidos dejan `src/data/seo-history.json` sin cambios.
 4. `buildBreadcrumb` (todas menos la home): Inicio › [Galería | Blog | Nuevos Falleros | La Falla] › página, con nombres de `translations.json` en el idioma de la variante.
 5. `fillImageGallery` / `fillGaleriasList`: galerías (solo entradas de `dataPagesN.json` con `src` bajo `img/`; `contentUrl` apunta al JPEG/PNG original si existe en `src/img/`).
 6. `mergeEventNodes`: `Event` del tablón en `index.html` y `eventos.html`.
@@ -95,7 +103,7 @@ Search Console avisaba de que los `ImageObject` no llevaban `creator`, `copyrigh
 
 ---
 
-Última actualización: 17 de septiembre de 2026 - v4.42.0
+Última actualización: 5 de octubre de 2026 - v4.43.0
 
 ## Actualización SEO v4.30.21
 

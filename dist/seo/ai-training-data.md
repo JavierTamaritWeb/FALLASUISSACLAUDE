@@ -16,6 +16,7 @@ Los cargos, los representantes y el programa de actividades deben consultarse en
 
 ## Recursos estructurados
 
+- [llms.txt: resumen y enlaces clave del sitio](https://fallasuissa.es/llms.txt) y [llms-full.txt: inventario de páginas con título y descripción en ES y VA](https://fallasuissa.es/llms-full.txt).
 - [Fuente institucional de la organización](https://fallasuissa.es/seo/schema-organization.json).
 - [Tablón de avisos](https://fallasuissa.es/data/board.json).
 - [Tablón deportivo](https://fallasuissa.es/data/sports-board.json).

@@ -21,7 +21,8 @@
 | [`gestion-tablon.md`](./gestion-tablon.md) | Guía canónica del tablón dinámico (`src/data/board.json`, adjuntos, filtrado de inválidos, validación y troubleshooting) | 04/05/2026 |
 | [`meteo-ui.md`](./meteo-ui.md) | Meteo: estructura del widget, animaciones, sincronización con i18n y estabilidad visual | 20/03/2026 |
 | [`google-search-console.md`](./google-search-console.md) | Verificación en GSC + procedimiento ante avisos "Duplicada (sin canónica)" y "No se ha encontrado (404)" (301/410 en `.htaccess`) | 18/05/2026 |
-| [`robots-configuration.md`](./robots-configuration.md) | Configuración de `robots.txt` y variantes para bots | 20/03/2026 |
+| [`robots-configuration.md`](./robots-configuration.md) | `robots.txt` único (IA permitida, scrapers bloqueados), `llms.txt`/`llms-full.txt` y caché de xml/txt | 05/10/2026 |
+| [`seo-indexnow.md`](./seo-indexnow.md) | IndexNow tras cada deploy: clave `indexnow.txt`, `scripts/indexnow-submit.mjs`, pasos 6-7 de `deploy.sh`, respuestas del servicio | 05/10/2026 |
 | [`well-known-agent-readiness.md`](./well-known-agent-readiness.md) | Carpeta `.well-known/`: `api-catalog` (RFC 9727), `agent-skills/index.json` (v0.2), pipeline `wellKnownTask`, descubrimiento por agentes IA y reglas de mantenimiento | 16/05/2026 |
 | [`swiper-monumento.md`](./swiper-monumento.md) | Swiper "El Monumento": anti-cropping, autoheight y hook temporal de la foto real 2026 | 20/03/2026 |
 | [`monumento-rotacion-anual.md`](./monumento-rotacion-anual.md) | Checklist anual para cambiar imágenes del monumento y decidir si el hook temporal debe mantenerse o eliminarse | 20/03/2026 |
@@ -36,7 +37,8 @@
 - [`structured-data.md`](./structured-data.md): JSON-LD inline, grafos compartidos, HOPE-INCLIVA y validación técnica.
 - [`open-graph-whatsapp.md`](./open-graph-whatsapp.md): `og-share.png`, cache-buster y controles anti-regresión.
 - [`google-search-console.md`](./google-search-console.md): verificación y alta en Search Console.
-- [`robots-configuration.md`](./robots-configuration.md): robots, variantes y relación con sitemaps.
+- [`robots-configuration.md`](./robots-configuration.md): robots único, llms.txt y relación con sitemaps.
+- [`seo-indexnow.md`](./seo-indexnow.md): aviso a buscadores tras publicar (IndexNow).
 - [`well-known-agent-readiness.md`](./well-known-agent-readiness.md): `.well-known/`, `api-catalog` (RFC 9727) y skills agent-ready (Agent Skills v0.2) para asistentes IA.
 - Índice SEO/IA de la carpeta `src/seo/`: [`../seo/README.md`](../src/seo/README.md).
 
@@ -74,7 +76,7 @@ Actualiza estas guías cuando cambies:
 - scripts de `package.json` o utilidades en `scripts/`
 - tareas exportadas en `gulpfile.js`
 - estructura o artefactos críticos de `dist/`
-- archivos SEO de raíz (`robots*.txt`, `sitemap*.xml`, verificaciones `google*.html`)
+- archivos SEO de raíz (`robots.txt`, `llms.txt`, `indexnow.txt`, verificaciones `google*.html`; los sitemaps los genera el build)
 - JSON-LD inline, metadatos OG/Twitter o referencias a HOPE-INCLIVA
 - scrollbars, modo oscuro, gradientes, reveal on scroll o compatibilidad Safari/WebKit/Firefox
 - geometría o set de imágenes del Swiper del monumento (rotación anual: `docs/monumento-rotacion-anual.md`)

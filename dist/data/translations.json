@@ -56,9 +56,18 @@
         "persona": "Persona"
       },
       "registros": {
-        "contacto": { "titulo": "Contacto", "desc": "Escríbenos desde el formulario «¿Quieres saber más sobre nuestra Falla?» de la portada: nombre, correo electrónico, teléfono y mensaje." },
-        "redes": { "titulo": "Redes sociales", "desc": "Síguenos en Facebook, Instagram, TikTok y YouTube: los enlaces están en el pie de todas las páginas." },
-        "subvencion": { "titulo": "Subvención del Ajuntament de València", "desc": "Aviso de la subvención concedida por el Ajuntament de València a la comisión, en la portada." }
+        "contacto": {
+          "titulo": "Contacto",
+          "desc": "Escríbenos desde el formulario «¿Quieres saber más sobre nuestra Falla?» de la portada: nombre, correo electrónico, teléfono y mensaje."
+        },
+        "redes": {
+          "titulo": "Redes sociales",
+          "desc": "Síguenos en Facebook, Instagram, TikTok y YouTube: los enlaces están en el pie de todas las páginas."
+        },
+        "subvencion": {
+          "titulo": "Subvención del Ajuntament de València",
+          "desc": "Aviso de la subvención concedida por el Ajuntament de València a la comisión, en la portada."
+        }
       }
     },
     "cookieBanner": {
@@ -680,7 +689,9 @@
       },
       "colaboraciones": {
         "title": "Colaboración con HOPE-INCLIVA | Falla Suïssa - L'Alqueria del Favero",
-        "description": "Colaboración solidaria de Falla Suïssa - L'Alqueria del Favero con HOPE-INCLIVA en Valencia para apoyar la investigación del Linfoma No Hodgkin Pediátrico."
+        "description": "Colaboración solidaria de Falla Suïssa - L'Alqueria del Favero con HOPE-INCLIVA en Valencia para apoyar la investigación del Linfoma No Hodgkin Pediátrico.",
+        "hopeName": "Colaboración con HOPE-INCLIVA",
+        "hopeDescription": "Página de colaboraciones de Falla Suïssa - L'Alqueria del Favero dedicada a la iniciativa solidaria vinculada a HOPE-INCLIVA en Valencia."
       },
       "organigrama": {
         "title": "Falla Suïssa - L'Alqueria del Favero - Organigrama",
@@ -1166,9 +1177,18 @@
         "persona": "Persona"
       },
       "registros": {
-        "contacto": { "titulo": "Contacte", "desc": "Escriu-nos des del formulari «Vols saber més sobre la nostra Falla?» de la portada: nom, correu electrònic, telèfon i missatge." },
-        "redes": { "titulo": "Xarxes socials", "desc": "Segueix-nos a Facebook, Instagram, TikTok i YouTube: els enllaços són al peu de totes les pàgines." },
-        "subvencion": { "titulo": "Subvenció de l'Ajuntament de València", "desc": "Avís de la subvenció concedida per l'Ajuntament de València a la comissió, a la portada." }
+        "contacto": {
+          "titulo": "Contacte",
+          "desc": "Escriu-nos des del formulari «Vols saber més sobre la nostra Falla?» de la portada: nom, correu electrònic, telèfon i missatge."
+        },
+        "redes": {
+          "titulo": "Xarxes socials",
+          "desc": "Segueix-nos a Facebook, Instagram, TikTok i YouTube: els enllaços són al peu de totes les pàgines."
+        },
+        "subvencion": {
+          "titulo": "Subvenció de l'Ajuntament de València",
+          "desc": "Avís de la subvenció concedida per l'Ajuntament de València a la comissió, a la portada."
+        }
       }
     },
     "cookieBanner": {
@@ -1790,7 +1810,9 @@
       },
       "colaboraciones": {
         "title": "Col·laboració amb HOPE-INCLIVA | Falla Suïssa - L'Alqueria del Favero",
-        "description": "Col·laboració solidària de la Falla Suïssa - L'Alqueria del Favero amb HOPE-INCLIVA a València per a donar suport a la investigació del Limfoma No Hodgkin Pediàtric."
+        "description": "Col·laboració solidària de la Falla Suïssa - L'Alqueria del Favero amb HOPE-INCLIVA a València per a donar suport a la investigació del Limfoma No Hodgkin Pediàtric.",
+        "hopeName": "Col·laboració amb HOPE-INCLIVA",
+        "hopeDescription": "Pàgina de col·laboracions de la Falla Suïssa - L'Alqueria del Favero dedicada a la iniciativa solidària vinculada a HOPE-INCLIVA a València."
       },
       "organigrama": {
         "title": "Organigrama 2026-27 | Falla Suïssa - L'Alqueria del Favero",

@@ -11,6 +11,9 @@
 # Opciones:
 #   --dry-run            Ensayo: muestra qué haría rsync SIN tocar el servidor.
 #   --skip-build         Salta "npm run build" (sube el dist/ actual tal cual).
+#   --skip-verify        Salta la verificación SEO de producción (npm run seo:verify:production)
+#                        que se ejecuta tras el deploy (v4.43.0).
+#   --no-indexnow        No notifica a IndexNow las URL cambiadas tras el deploy (v4.43.0).
 #   -y, --yes            No pide confirmación antes de sincronizar (--delete borra
 #                        archivos huérfanos en producción; úsalo con cabeza).
 #   --maintenance on     Activa el modo mantenimiento (sube el centinela .maintenance:
@@ -90,6 +93,8 @@ usage() { awk 'NR==1{next} /^#/{sub(/^# ?/,""); print; next} {exit}' "${BASH_SOU
 # --- Parseo de flags --------------------------------------------------------
 DRY_RUN=0
 SKIP_BUILD=0
+SKIP_VERIFY=0
+NO_INDEXNOW=0
 ASSUME_YES="${ASSUME_YES:-0}"
 MAINTENANCE=""
 
@@ -97,6 +102,8 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --dry-run)    DRY_RUN=1 ;;
     --skip-build) SKIP_BUILD=1 ;;
+    --skip-verify) SKIP_VERIFY=1 ;;
+    --no-indexnow) NO_INDEXNOW=1 ;;
     -y|--yes)     ASSUME_YES=1 ;;
     --maintenance)
       shift
@@ -222,6 +229,10 @@ rsync "${RSYNC_FLAGS[@]}" \
 
 if [[ "$DRY_RUN" -eq 1 ]]; then
   ok "Dry-run terminado (no se subió nada). Revisa la lista de cambios arriba."
+  info "DRY-RUN: tras un deploy real se verificaría producción (seo:verify:production) y se notificarían por IndexNow las URL cambiadas:"
+  if [[ "$NO_INDEXNOW" -eq 0 && -f "$REPO_ROOT/scripts/indexnow-submit.mjs" ]]; then
+    ( cd "$REPO_ROOT" && node scripts/indexnow-submit.mjs --changed --dry-run ) || true
+  fi
   exit 0
 fi
 ok "Archivos sincronizados."
@@ -238,4 +249,36 @@ if [[ "$code" == "200" ]]; then
 else
   fail "Deploy subido, pero $SITE_URL devolvió HTTP $code (revisa manualmente)."
   exit 1
+fi
+
+# --- 6. Verificación SEO de producción (v4.43.0) ----------------------------
+# Compara lo publicado con dist/ (sitemaps, robots, llms, páginas, assets, 301).
+# Si falla, no se avisa a los buscadores: la CDN aún podría servir la versión
+# anterior. Repite con --skip-build cuando la CDN haya refrescado.
+if [[ "$SKIP_VERIFY" -eq 0 && -f "$REPO_ROOT/scripts/verify-seo-production.mjs" ]]; then
+  info "Verificando el SEO publicado (npm run seo:verify:production)…"
+  if ( cd "$REPO_ROOT" && node scripts/verify-seo-production.mjs ); then
+    ok "Producción idéntica a dist/ (sitemaps, robots, páginas y redirecciones)."
+  else
+    die "La verificación SEO de producción falló: no se notifica a IndexNow. Revisa la CDN y relanza con --skip-build (o --skip-verify)."
+  fi
+fi
+
+# --- 7. IndexNow: solo las URL cuyo contenido cambió desde el último deploy ---
+# El snapshot del seo-history desplegado vive en .cache/ (ignorado por git). Sin
+# snapshot (primer deploy con IndexNow) se envían todas las URL del sitemap.
+# Google no participa en IndexNow: descubre por robots.txt y Search Console.
+DEPLOYED_HISTORY="$REPO_ROOT/.cache/seo-history.deployed.json"
+if [[ "$NO_INDEXNOW" -eq 0 && -f "$REPO_ROOT/scripts/indexnow-submit.mjs" ]]; then
+  info "Notificando los cambios a IndexNow…"
+  if [[ -f "$DEPLOYED_HISTORY" ]]; then
+    ( cd "$REPO_ROOT" && node scripts/indexnow-submit.mjs --changed --previous "$DEPLOYED_HISTORY" ) \
+      || fail "IndexNow devolvió un aviso (ver arriba); el deploy es correcto. Relanza con: npm run seo:indexnow -- --changed --previous .cache/seo-history.deployed.json"
+  else
+    info "Primer deploy con IndexNow: se envían todas las URL del sitemap."
+    ( cd "$REPO_ROOT" && node scripts/indexnow-submit.mjs --all ) \
+      || fail "IndexNow devolvió un aviso (ver arriba); el deploy es correcto. Relanza con: npm run seo:indexnow -- --all"
+  fi
+  mkdir -p "$REPO_ROOT/.cache" && cp "$REPO_ROOT/src/data/seo-history.json" "$DEPLOYED_HISTORY"
+  ok "Snapshot del historial desplegado guardado en .cache/seo-history.deployed.json."
 fi

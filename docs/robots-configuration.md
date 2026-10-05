@@ -1,145 +1,38 @@
-# 🤖 Robots.txt - Configuración Avanzada
+# 🤖 robots.txt, llms.txt y descubrimiento para IA
 
-## 📋 Configuración Optimizada para SEO
+**Versión:** 4.43.0 · **Última actualización:** 5 de octubre de 2026
 
-### 🎯 **Directivas Principales**
+Desde 4.43.0 el sitio publica **un único** `robots.txt` (`src/robots.txt`, copiado tal cual a `dist/` por `rootFilesTask`). El antiguo `robots-ai-optimized.txt` se retiró: los rastreadores solo leen `/robots.txt`, así que sus grupos por bot viven ahora ahí; la URL antigua responde `301 → /robots.txt` (regla E2 del `.htaccess`).
 
-```txt
-User-agent: *
-Allow: /
-```
+## Política
 
-Permite a todos los bots rastrear el sitio web por defecto.
+Decisión del usuario del 5 de octubre de 2026: **las IA no maliciosas leen todo el proyecto con facilidad**; se bloquean únicamente los scrapers SEO comerciales y Bytespider.
 
-### 📁 **Recursos Permitidos**
+| Grupo | Bots | Regla | Motivo |
+|---|---|---|---|
+| Buscadores y asistentes de IA | Googlebot, Google-Extended, Bingbot, GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, Claude-User, anthropic-ai, PerplexityBot, Perplexity-User, Applebot, Applebot-Extended, DuckDuckBot, DuckAssistBot, CCBot, Amazonbot, meta-externalagent, meta-externalfetcher, FacebookBot, cohere-ai, MistralAI-User, YouBot, Diffbot, Yandex, Seznam, Naver | `Allow: /` | Búsqueda, citación y entrenamiento permitidos: es contenido cultural público que busca difusión |
+| Scrapers SEO y Bytespider | AhrefsBot, SemrushBot, MJ12bot, DotBot, BLEXBot, DataForSeoBot, PetalBot, Bytespider | `Disallow: /` | Consumen ancho de banda sin aportar visitas; Bytespider suele ignorar robots y no aporta tráfico |
+| Resto (`*`) | cualquier otro | `Allow: /` + `Content-Signal: search=yes, ai-train=yes, ai-input=yes` | Abierto; solo oculta `?preview=` (bypass de mantenimiento), `?lang=` (301 al idioma) y `mantenimiento.html` |
 
-```txt
-# Archivos esenciales para renderizado
-Allow: /*.js$          # JavaScript
-Allow: /*.css$         # Hojas de estilo
-Allow: /*.woff2$       # Fuentes web
-Allow: /*.webp$        # Imágenes modernas
-Allow: /*.avif$        # Imágenes nueva generación
+Sin `Crawl-delay` (Google lo ignora y Bing lo trata como sugerencia). Dos directivas `Sitemap:` (`sitemap-index.xml` y `sitemap.xml`). `Content-Signal` se conserva a propósito aunque Lighthouse lo marque como directiva desconocida (auditoría 4.30.21).
 
-# Directorios de contenido
-Allow: /img/           # Imágenes
-Allow: /pdf/           # Documentos
-```
+## Cómo cambiar la política
 
-### 🚫 **Directorios Bloqueados**
+- **Readmitir un bot bloqueado**: borra su línea `User-agent:` del grupo de bloqueo. Si un bot deja de aparecer en el grupo de IA, pasa a regirse por `*` (también abierto), así que el grupo de IA es explícito, no restrictivo.
+- **Bloquear un bot nuevo**: añade `User-agent: Nombre` al grupo de bloqueo (una línea por nombre; las reglas del grupo se aplican a todos sus agentes).
+- **Cerrar el entrenamiento de IA**: cambia `ai-train=yes` por `ai-train=no` y mueve `Google-Extended`, `GPTBot`, `ClaudeBot`, `anthropic-ai`, `CCBot`, `Applebot-Extended` y `meta-externalagent` al grupo de bloqueo (son los agentes de entrenamiento; los de búsqueda/asistente siguen abiertos).
+- Después: `npm run test:unit` (`tests/unit/robots.test.cjs` parsea el archivo, exige los bots de IA permitidos y los scrapers bloqueados, ningún `Disallow` sobre `/css /js /img /data /pdf /seo /va/ /.well-known`, sitemaps que genera el build y salto de línea final).
 
-```txt
-# Archivos de desarrollo
-Disallow: /scss/           # Código fuente SCSS
-Disallow: /node_modules/   # Dependencias Node.js
-Disallow: /.git/           # Control de versiones
-Disallow: /gulpfile.js     # Configuración build
-Disallow: /package*.json   # Configuración npm
-```
+## llms.txt y llms-full.txt
 
-**Razón:** Estos archivos no aportan valor SEO y pueden revelar información técnica.
+- `src/llms.txt` (llmstxt.org): H1, resumen en blockquote y secciones con enlaces a las páginas clave en ES y `/va/`, los datos estructurados y los documentos. **Se mantiene a mano**; el test exige que toda página publicable aparezca en él o esté declarada en `OPCIONALES_FUERA_DE_LLMS` (galerías, posts, autorizaciones). Al añadir una página, añádela a `llms.txt`.
+- `dist/llms-full.txt` lo genera el build (`scripts/seo-artifacts.cjs → buildLlmsFull`): título y descripción de las 62 páginas ES/VA leídos del HTML publicado, más `src/seo/ai-training-data.md` como contexto. No se edita.
+- Están enlazados desde `robots.txt` (comentario), `ai-discovery.json`, `.well-known/api-catalog`, la skill `llms-txt` de `.well-known/agent-skills/index.json` y `seo/ai-training-data.md`.
 
-### ⏱️ **Crawl Delay**
+## Caché y verificación
 
-```txt
-# General - Ser amigable con el servidor
-Crawl-delay: 1
+- `.htaccess`: `*.xml` y `*.txt` se sirven con `Cache-Control: public, max-age=0, must-revalidate`, igual que el HTML y los JSON, para que la CDN de Hostinger no retenga un sitemap o un robots anterior.
+- `npm run seo:verify:production` comprueba tras el deploy que `robots.txt`, `llms.txt`, `llms-full.txt`, `indexnow.txt` y los sitemaps publicados son idénticos a `dist/` y que `/robots-ai-optimized.txt` redirige.
+- Google Search Console → *Configuración → robots.txt* muestra la última versión leída y los errores de sintaxis.
 
-# Google - Sin delay (prioridad)
-User-agent: Googlebot
-Crawl-delay: 0
-```
-
-### 🗺️ **Sitemaps**
-
-```txt
-Sitemap: https://fallasuissa.es/sitemap-index.xml
-```
-
-### 🎯 **Bots Específicos Permitidos**
-
-| Bot | Propósito | Configuración |
-|-----|-----------|---------------|
-| **Googlebot** | Búsqueda Google | Sin delay, acceso completo |
-| **Bingbot** | Búsqueda Bing | Delay 1s, acceso completo |
-| **facebookexternalhit** | Previews Facebook | Acceso completo |
-| **Twitterbot** | Cards Twitter | Acceso completo |
-| **LinkedInBot** | Previews LinkedIn | Acceso completo |
-| **WhatsApp** | Previews WhatsApp | Acceso completo |
-
-### 🚫 **Bots Bloqueados**
-
-```txt
-# Bots de herramientas SEO
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: AhrefsBot  
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-```
-
-**Razón:** Estos bots consumen recursos sin aportar valor directo al SEO.
-
-### 📊 **Mejores Prácticas Implementadas**
-
-#### ✅ **SEO-Friendly**
-- Permite recursos críticos para renderizado
-- Sitemaps declarados correctamente
-- Bots sociales habilitados
-
-#### ✅ **Performance**
-- Bloquea archivos innecesarios
-- Crawl-delay apropiado
-- Prioriza Googlebot
-
-#### ✅ **Seguridad**
-- Oculta archivos de configuración
-- Bloquea directorios sensibles
-- Evita bots agresivos
-
-### 🔧 **Validación**
-
-Para validar tu robots.txt:
-
-1. **Google Search Console:**
-   - Herramientas → Probador de robots.txt
-   - Verifica que Googlebot puede acceder a páginas importantes
-
-2. **Online Validators:**
-   - [robots-txt.com](https://www.robots-txt.com/robots-txt-checker/)
-   - [SEO Site Checkup](https://seositecheckup.com/tools/robots-txt-validator)
-
-### 📁 **Ubicación del Archivo**
-
-```txt
-https://fallasuissa.es/robots.txt
-```
-
-**Crítico:** Debe estar en la raíz del dominio para que los bots lo encuentren.
-
-### 🔄 **Versiones del Archivo**
-
-| Archivo | Propósito |
-|---------|-----------|
-| `robots.txt` | Versión en producción (activa) |
-| `robots-ai-optimized.txt` | Variante avanzada (incluye bots de IA y directivas extra) |
-
-### 🧩 Relación con el build (`dist/`)
-
-En este repo, los archivos de la raíz (incluyendo `robots.txt`, `robots-ai-optimized.txt`, `sitemap*.xml` y `google*.html`) se copian a `dist/` durante `gulp build` mediante la tarea `rootFilesTask`.
-
-Nota: si tu despliegue publica **solo** la carpeta `dist/`, entonces rutas como `/scss/` o `/node_modules/` no existirán en producción. Mantenerlas como `Disallow` no rompe nada, pero no aportan protección adicional (robots.txt no es un mecanismo de seguridad).
-
-### ⚠️ **Consideraciones**
-
-- **No es una seguridad:** robots.txt es público y sugiere, no obliga
-- **Tiempo de caché:** Los bots pueden cachear durante horas
-- **Sintaxis crítica:** Un error puede bloquear todo el sitio
-- **Mayúsculas importan:** Los user-agents son case-sensitive
-
----
-
-Configuración optimizada para Falla Suïssa - Última actualización: 17 de septiembre de 2026 - v4.42.0
+Relacionado: [`seo-indexnow.md`](./seo-indexnow.md) (aviso a buscadores tras publicar), [`structured-data.md`](./structured-data.md) (JSON-LD), [`well-known-agent-readiness.md`](./well-known-agent-readiness.md).

@@ -125,6 +125,12 @@ ErrorDocument 503 /mantenimiento.html
     <FilesMatch "\.json$">
         Header set Cache-Control "public, max-age=0, must-revalidate"
     </FilesMatch>
+    # robots.txt, llms*.txt, indexnow.txt y los sitemaps cambian con cada deploy y
+    # no llevan ?v=: se revalidan siempre para que la CDN de Hostinger no retenga
+    # un sitemap o un robots anterior (v4.43.0)
+    <FilesMatch "\.(?:xml|txt)$">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </FilesMatch>
 
     <Files "sw.js">
         Header set Cache-Control "no-cache, no-store, must-revalidate"
@@ -235,6 +241,10 @@ ErrorDocument 503 /mantenimiento.html
     # E) base.html era una plantilla interna publicada por error (indexable y
     #    sin entrada en sitemap); desde v4.7.9 se excluye del build -> 410 Gone
     RewriteRule ^(va/)?base\.html$ - [R=410,L]
+
+    # E2) robots-ai-optimized.txt (v4.43.0): los grupos por bot viven ahora en
+    #     /robots.txt (el único que leen los rastreadores); 301 por cortesía.
+    RewriteRule ^robots-ai-optimized\.txt$ /robots.txt [R=301,L]
 
     # F) Imágenes de interfaz movidas a /img/UI/ en v4.30.2 (carpeta renombrada a
     #    /img/elementos-UXUI/ en v4.30.17; ver regla N) (og-share.png,

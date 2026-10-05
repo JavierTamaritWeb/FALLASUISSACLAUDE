@@ -5,7 +5,7 @@
     "name": "Falla Suïssa - L'Alqueria del Favero",
     "url": "https://fallasuissa.es/"
   },
-  "updated": "2026-09-29",
+  "updated": "2026-10-05",
   "skills": [
     {
       "name": "falla-discovery",
@@ -13,7 +13,15 @@
       "description": "Metadata de descubrimiento (idiomas, branding, social, ubicación, categorías) de la Falla Suïssa.",
       "url": "https://fallasuissa.es/ai-discovery.json",
       "contentType": "application/json",
-      "sha256": "dcf6f9081d63af7d6268c2579ec11a4881b41591348e38f05d383b8679dad224"
+      "sha256": "fca65cb2581ff941fc99e7a2c08bc6bf5287fb9992ad3211c69977dd6eb0f14b"
+    },
+    {
+      "name": "llms-txt",
+      "type": "document",
+      "description": "Resumen del sitio y enlaces clave para modelos de lenguaje (llmstxt.org); el inventario completo está en /llms-full.txt.",
+      "url": "https://fallasuissa.es/llms.txt",
+      "contentType": "text/plain",
+      "sha256": "1500b65bc687f3386232bf1f65d8c9a8fd1c4b8c868411c15a25a106570df561"
     },
     {
       "name": "ai-context",
@@ -21,7 +29,7 @@
       "description": "Guía de contexto en Markdown para asistentes de IA sobre la Falla, las Fallas y el sitio web.",
       "url": "https://fallasuissa.es/seo/ai-training-data.md",
       "contentType": "text/markdown",
-      "sha256": "318f474afe80381e9244513c3bcba4bc72c864c34cb8e236a677dd8fa47fd828"
+      "sha256": "848850002d9a2cb7e2f024b9b91b05d66e23742963035770c1b9c92949670771"
     },
     {
       "name": "events-board",
@@ -61,7 +69,7 @@
       "description": "Grafo Schema.org enriquecido de la organización, eventos y contenido cultural.",
       "url": "https://fallasuissa.es/seo/ai-enhanced-schema.json",
       "contentType": "application/ld+json",
-      "sha256": "904d62a726d4ac50e29db2b44cff0b2b74dd92a33113df61db0a057a96395115"
+      "sha256": "f7517babd17bf2f3bf14e2c32df958669ffbd0a8328c0b9d907a7032774fef5d"
     }
   ]
 }

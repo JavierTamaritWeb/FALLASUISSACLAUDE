@@ -13,6 +13,7 @@ const SITE_ID = `${ORIGIN}/#website`;
 const PAGE_TYPES = new Set(['WebPage', 'CollectionPage', 'AboutPage', 'ImageGallery', 'ItemPage', 'ContactPage', 'ProfilePage', 'MediaGallery']);
 const EXCLUDED = new Set(['ai-info.html', 'mantenimiento.html', 'base.html']);
 const PROHIBIDOS = ['Quiles', 'Marta Soriano', 'Santos Ramos, "jobTitle": "Fallera', '0000-00-00T', "fallasuïssal'alqueriadelfavero"];
+const FUENTE = JSON.parse(fs.readFileSync(path.resolve('src/seo/schema-organization.json'), 'utf8'));
 
 const hasType = (n, t) => n && (Array.isArray(n['@type']) ? n['@type'].includes(t) : n['@type'] === t);
 
@@ -28,6 +29,8 @@ function collect(value, ids, refs, imgs) {
     imgs.count++;
     // Metadatos de licencia que pide Search Console (v4.31.1)
     if (!value.creator || !value.copyrightNotice || !value.license || !value.acquireLicensePage) imgs.sinLicencia++;
+    // Dimensiones (v4.43.0): solo se exigen a las imágenes propias con url/contentUrl
+    if ((value.contentUrl || value.url) && (typeof value.width !== 'number' || typeof value.height !== 'number')) imgs.sinDimensiones++;
   }
   keys.forEach((k) => collect(value[k], ids, refs, imgs));
 }
@@ -58,17 +61,26 @@ for (const rel of listPages()) {
   } catch (e) {
     problemas.push(`JSON inválido: ${e.message}`);
   }
-  const ids = new Set(); const refs = []; const imgs = { count: 0, sinLicencia: 0 };
+  const ids = new Set(); const refs = []; const imgs = { count: 0, sinLicencia: 0, sinDimensiones: 0 };
   collect(graph, ids, refs, imgs);
   const sinResolver = [...new Set(refs.filter((r) => !ids.has(r) && !r.startsWith('https://hope-incliva.com')))];
   if (sinResolver.length) problemas.push(`refs sin resolver: ${sinResolver.join(', ')}`);
   if (!graph.some((n) => n['@id'] === ORG_ID && hasType(n, 'Organization'))) problemas.push('falta #organization');
   if (!graph.some((n) => n['@id'] === SITE_ID && hasType(n, 'WebSite'))) problemas.push('falta #website');
+  // Textos de la Organization en el idioma de la página (v4.43.0)
+  const orgNode = graph.find((n) => n['@id'] === ORG_ID && hasType(n, 'Organization'));
+  const idioma = rel.startsWith('va/') ? 'ca' : 'es';
+  if (orgNode && FUENTE.organization.description && typeof FUENTE.organization.description === 'object' && orgNode.description !== FUENTE.organization.description[idioma]) problemas.push(`org.description no está en ${idioma}`);
+  if (orgNode && (!orgNode.legalName || !orgNode.taxID)) problemas.push('org sin legalName/taxID');
   const pageNode = graph.find((n) => [...PAGE_TYPES].some((t) => hasType(n, t)) && typeof n['@id'] === 'string' && n['@id'].endsWith('#webpage'));
   const canonical = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
   if (!pageNode) problemas.push('sin nodo de página #webpage');
   else {
     if (pageNode.url !== canonical) problemas.push(`url ${pageNode.url} ≠ canonical ${canonical}`);
+    // Fechas por contenido (v4.43.0)
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(pageNode.dateModified))) problemas.push('sin dateModified');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(pageNode.datePublished))) problemas.push('sin datePublished');
+    if (!pageNode.primaryImageOfPage) problemas.push('sin primaryImageOfPage');
     const esperado = rel.startsWith('va/') ? 'ca-ES' : 'es-ES';
     if (pageNode.inLanguage !== esperado && !Array.isArray(pageNode.inLanguage)) problemas.push(`inLanguage ${pageNode.inLanguage} ≠ ${esperado}`);
   }
@@ -77,6 +89,7 @@ for (const rel of listPages()) {
   if (/"(?:contentUrl|url|item)":\s*"[^"]*\.\.\//.test(texto)) problemas.push('URL relativa (../) en el JSON-LD');
   if (/"contentUrl":\s*"[^"]*\?v=/.test(texto)) problemas.push('contentUrl con ?v=');
   if (imgs.sinLicencia) problemas.push(`${imgs.sinLicencia} ImageObject sin creator/copyrightNotice/license/acquireLicensePage`);
+  if (imgs.sinDimensiones) problemas.push(`${imgs.sinDimensiones} ImageObject sin width/height`);
   if (problemas.length) errores++;
   filas.push({ rel, scripts: scripts.length, types: [...new Set(graph.map((n) => Array.isArray(n['@type']) ? n['@type'].join('+') : n['@type']))].join(','), page: pageNode ? pageNode['@id'] : '-', lang: pageNode ? String(pageNode.inLanguage) : '-', imgs: imgs.count, problemas });
 }

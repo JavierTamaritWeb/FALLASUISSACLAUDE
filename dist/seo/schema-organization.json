@@ -1,13 +1,39 @@
 {
-  "$comment": "FUENTE ÚNICA del JSON-LD Organization + WebSite. El build (gulpfile.js → processJsonLd) inyecta estos dos nodos en el @graph de TODAS las páginas (ES y /va/). NO copies Organization ni WebSite inline en src/*.html: el build los descarta con aviso. Al relevar cargos, edita `member` aquí y el organigrama (index.html, lafalla.html, organigrama.html). Ver docs/structured-data.md.",
+  "$comment": "FUENTE ÚNICA del JSON-LD Organization + WebSite. El build (gulpfile.js → processJsonLd) inyecta estos dos nodos en el @graph de TODAS las páginas (ES y /va/). NO copies Organization ni WebSite inline en src/*.html: el build los descarta con aviso. Al relevar cargos, edita `member` aquí y el organigrama (index.html, lafalla.html, organigrama.html). Textos traducibles (v4.43.0): un valor { \"es\": \"…\", \"ca\": \"…\" } se resuelve por idioma en el build (resolveLang); el endpoint seo/ai-enhanced-schema.json usa el ES. No conviertas @type en array (scripts/seo-artifacts.cjs filtra la Organization por igualdad estricta); usa additionalType. Ver docs/structured-data.md.",
   "organization": {
     "@type": "Organization",
     "@id": "https://fallasuissa.es/#organization",
     "name": "Falla Suïssa - L'Alqueria del Favero",
+    "legalName": "Asociación Cultural Falla Suïssa - L'Alqueria del Favero",
     "alternateName": "Falla Suïssa",
+    "additionalType": "https://schema.org/NGO",
     "url": "https://fallasuissa.es/",
-    "description": "Falla Suïssa - L'Alqueria del Favero (comisión nº 396) es una comisión fallera del barrio de les Moreres, en València. Promueve la cultura y las tradiciones valencianas mediante actividades comunitarias, culturales y solidarias.",
+    "description": {
+      "es": "Falla Suïssa - L'Alqueria del Favero (comisión nº 396) es una comisión fallera del barrio de les Moreres, en València. Promueve la cultura y las tradiciones valencianas mediante actividades comunitarias, culturales y solidarias.",
+      "ca": "Falla Suïssa - L'Alqueria del Favero (comissió núm. 396) és una comissió fallera del barri de les Moreres, a València. Promou la cultura i les tradicions valencianes mitjançant activitats comunitàries, culturals i solidàries."
+    },
+    "taxID": "G19961085",
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "Número de comisión (Junta Central Fallera)",
+      "value": "396"
+    },
     "foundingDate": "2024",
+    "knowsLanguage": [
+      "es",
+      "ca"
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": {
+        "es": "Barrio de les Moreres, València",
+        "ca": "Barri de les Moreres, València"
+      },
+      "containedInPlace": {
+        "@type": "City",
+        "name": "València"
+      }
+    },
     "founder": {
       "@type": "Person",
       "name": "José Santos Quilis",
@@ -20,16 +46,28 @@
       "contentUrl": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png",
       "width": 640,
       "height": 793,
-      "caption": "Escudo de la Falla Suïssa - L'Alqueria del Favero"
+      "caption": {
+        "es": "Escudo de la Falla Suïssa - L'Alqueria del Favero",
+        "ca": "Escut de la Falla Suïssa - L'Alqueria del Favero"
+      }
     },
-    "image": { "@id": "https://fallasuissa.es/#logo" },
+    "image": {
+      "@id": "https://fallasuissa.es/#logo"
+    },
     "email": "info@fallasuissa.es",
     "contactPoint": [
       {
         "@type": "ContactPoint",
-        "contactType": "Información general",
+        "contactType": {
+          "es": "Información general",
+          "ca": "Informació general"
+        },
         "email": "info@fallasuissa.es",
-        "availableLanguage": ["es", "ca"]
+        "availableLanguage": [
+          "es",
+          "ca"
+        ],
+        "url": "https://fallasuissa.es/nuevos-falleros.html"
       }
     ],
     "address": {
@@ -43,7 +81,10 @@
     "location": {
       "@type": "Place",
       "@id": "https://fallasuissa.es/#place",
-      "name": "Casal de la Falla Suïssa - L'Alqueria del Favero",
+      "name": {
+        "es": "Casal de la Falla Suïssa - L'Alqueria del Favero",
+        "ca": "Casal de la Falla Suïssa - L'Alqueria del Favero"
+      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Calle Suïssa",
@@ -77,31 +118,131 @@
       "Colaboraciones solidarias en Valencia"
     ],
     "member": [
-      { "@type": "Person", "name": "José Santos Quilis", "jobTitle": "Presidente" },
-      { "@type": "Person", "name": "Lucía Gutiérrez Martín", "jobTitle": "Fallera Mayor" },
-      { "@type": "Person", "name": "Sofía Gómez Medina", "jobTitle": "Fallera Mayor Infantil" },
-      { "@type": "Person", "name": "Diego Gómez Medina", "jobTitle": "Presidente Infantil" },
-      { "@type": "Person", "name": "Maite Cabezuelo", "jobTitle": "Vicepresidenta" },
-      { "@type": "Person", "name": "Prados Santos Ramos", "jobTitle": "Vicepresidenta" },
-      { "@type": "Person", "name": "Pablo Cortés", "jobTitle": "Vicepresidente" },
-      { "@type": "Person", "name": "Paula Peiró", "jobTitle": "Secretaria" },
-      { "@type": "Person", "name": "David Gómez", "jobTitle": "Área Económica" },
-      { "@type": "Person", "name": "Miguel Ángel Pallardó", "jobTitle": "Área Económica" },
-      { "@type": "Person", "name": "Sara Medina", "jobTitle": "Delegada de Infantil" },
-      { "@type": "Person", "name": "Delia Caravantes", "jobTitle": "Delegada de Infantil" },
-      { "@type": "Person", "name": "Marta Pastor", "jobTitle": "Delegada de Infantil" },
-      { "@type": "Person", "name": "Eusebio Martinez", "jobTitle": "Delegado de Eventos" },
-      { "@type": "Person", "name": "Ada Palerm", "jobTitle": "Delegada de Eventos" },
-      { "@type": "Person", "name": "Pablo Pallardó", "jobTitle": "Delegado Deportes" },
-      { "@type": "Person", "name": "Pepe Palerm", "jobTitle": "Delegado Festejos" },
-      { "@type": "Person", "name": "Vicente Portolés", "jobTitle": "Delegado Festejos" },
-      { "@type": "Person", "name": "Carles Santamaria", "jobTitle": "Delegado Festejos" },
-      { "@type": "Person", "name": "Guille Roa", "jobTitle": "Delegado Festejos" },
-      { "@type": "Person", "name": "Salva Lopez", "jobTitle": "Delegado Festejos" },
-      { "@type": "Person", "name": "Israel Lopez", "jobTitle": "Delegado Festejos" },
-      { "@type": "Person", "name": "Rodrigo Sobero", "jobTitle": "Delegado Festejos" },
-      { "@type": "Person", "name": "Miguel Castillo", "jobTitle": "Delegado Festejos" },
-      { "@type": "Person", "name": "Javier Tamarit", "jobTitle": "Delegado Web" }
+      {
+        "@type": "Person",
+        "name": "José Santos Quilis",
+        "jobTitle": "Presidente"
+      },
+      {
+        "@type": "Person",
+        "name": "Lucía Gutiérrez Martín",
+        "jobTitle": "Fallera Mayor"
+      },
+      {
+        "@type": "Person",
+        "name": "Sofía Gómez Medina",
+        "jobTitle": "Fallera Mayor Infantil"
+      },
+      {
+        "@type": "Person",
+        "name": "Diego Gómez Medina",
+        "jobTitle": "Presidente Infantil"
+      },
+      {
+        "@type": "Person",
+        "name": "Maite Cabezuelo",
+        "jobTitle": "Vicepresidenta"
+      },
+      {
+        "@type": "Person",
+        "name": "Prados Santos Ramos",
+        "jobTitle": "Vicepresidenta"
+      },
+      {
+        "@type": "Person",
+        "name": "Pablo Cortés",
+        "jobTitle": "Vicepresidente"
+      },
+      {
+        "@type": "Person",
+        "name": "Paula Peiró",
+        "jobTitle": "Secretaria"
+      },
+      {
+        "@type": "Person",
+        "name": "David Gómez",
+        "jobTitle": "Área Económica"
+      },
+      {
+        "@type": "Person",
+        "name": "Miguel Ángel Pallardó",
+        "jobTitle": "Área Económica"
+      },
+      {
+        "@type": "Person",
+        "name": "Sara Medina",
+        "jobTitle": "Delegada de Infantil"
+      },
+      {
+        "@type": "Person",
+        "name": "Delia Caravantes",
+        "jobTitle": "Delegada de Infantil"
+      },
+      {
+        "@type": "Person",
+        "name": "Marta Pastor",
+        "jobTitle": "Delegada de Infantil"
+      },
+      {
+        "@type": "Person",
+        "name": "Eusebio Martinez",
+        "jobTitle": "Delegado de Eventos"
+      },
+      {
+        "@type": "Person",
+        "name": "Ada Palerm",
+        "jobTitle": "Delegada de Eventos"
+      },
+      {
+        "@type": "Person",
+        "name": "Pablo Pallardó",
+        "jobTitle": "Delegado Deportes"
+      },
+      {
+        "@type": "Person",
+        "name": "Pepe Palerm",
+        "jobTitle": "Delegado Festejos"
+      },
+      {
+        "@type": "Person",
+        "name": "Vicente Portolés",
+        "jobTitle": "Delegado Festejos"
+      },
+      {
+        "@type": "Person",
+        "name": "Carles Santamaria",
+        "jobTitle": "Delegado Festejos"
+      },
+      {
+        "@type": "Person",
+        "name": "Guille Roa",
+        "jobTitle": "Delegado Festejos"
+      },
+      {
+        "@type": "Person",
+        "name": "Salva Lopez",
+        "jobTitle": "Delegado Festejos"
+      },
+      {
+        "@type": "Person",
+        "name": "Israel Lopez",
+        "jobTitle": "Delegado Festejos"
+      },
+      {
+        "@type": "Person",
+        "name": "Rodrigo Sobero",
+        "jobTitle": "Delegado Festejos"
+      },
+      {
+        "@type": "Person",
+        "name": "Miguel Castillo",
+        "jobTitle": "Delegado Festejos"
+      },
+      {
+        "@type": "Person",
+        "name": "Javier Tamarit",
+        "jobTitle": "Delegado Web"
+      }
     ]
   },
   "website": {
@@ -110,9 +251,31 @@
     "url": "https://fallasuissa.es/",
     "name": "Falla Suïssa - L'Alqueria del Favero",
     "alternateName": "Falla Suïssa",
-    "description": "Sitio web oficial de la Falla Suïssa - L'Alqueria del Favero (València): la Falla, eventos, galerías, blog y colaboraciones.",
-    "inLanguage": ["es-ES", "ca-ES"],
-    "publisher": { "@id": "https://fallasuissa.es/#organization" },
-    "copyrightHolder": { "@id": "https://fallasuissa.es/#organization" }
+    "description": {
+      "es": "Sitio web oficial de la Falla Suïssa - L'Alqueria del Favero (València): la Falla, eventos, galerías, blog y colaboraciones.",
+      "ca": "Lloc web oficial de la Falla Suïssa - L'Alqueria del Favero (València): la Falla, esdeveniments, galeries, blog i col·laboracions."
+    },
+    "inLanguage": [
+      "es-ES",
+      "ca-ES"
+    ],
+    "publisher": {
+      "@id": "https://fallasuissa.es/#organization"
+    },
+    "copyrightHolder": {
+      "@id": "https://fallasuissa.es/#organization"
+    },
+    "copyrightYear": 2024,
+    "about": {
+      "@id": "https://fallasuissa.es/#organization"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://fallasuissa.es/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
   }
 }

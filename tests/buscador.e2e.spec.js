@@ -369,6 +369,18 @@ test.describe('buscador — panel en el navegador', () => {
     expect(estilos.maxH).toBeLessThanOrEqual(700 - estilos.rect);
   });
 
+  test('v4.43.0: ?q=consulta abre el panel con resultados y limpia la URL (destino del SearchAction)', async ({ page }) => {
+    await page.goto('/?q=ofrenda');
+    const panel = page.locator('#siteSearch');
+    await expect(panel).toBeVisible();
+    await expect(panel.locator('.buscador__input')).toHaveValue('ofrenda');
+    await expect(panel.locator('[role="option"]').first()).toBeVisible();
+    await expect.poll(() => page.evaluate(() => window.location.search)).toBe('');
+    await page.goto('/va/?q=ofrena');
+    await expect(page.locator('#siteSearch .buscador__input')).toHaveValue('ofrena');
+    await expect(page.locator('#siteSearch [role="option"]').first()).toContainText(/Ofrena/i);
+  });
+
   test('la consulta se conserva al reabrir el panel en la misma pestaña', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/index.html');

@@ -6,7 +6,28 @@
   <title data-i18n="seo.aviso-legal.title">Aviso Legal | Falla Suïssa - L'Alqueria del Favero</title>
   <meta name="description" content="Aviso legal e identificación del titular del sitio web de la Falla Suïssa - L&#x27;Alqueria del Favero." data-i18n-content="seo.aviso-legal.description">
   <meta name="robots" content="index, follow">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Aviso Legal | Falla Suïssa - L&#x27;Alqueria del Favero" data-i18n-content="seo.aviso-legal.title">
+  <meta property="og:description" content="Aviso legal e identificación del titular del sitio web de la Falla Suïssa - L&#x27;Alqueria del Favero." data-i18n-content="seo.aviso-legal.description">
+  <meta property="og:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
+  <meta property="og:image:secure_url" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
+  <meta property="og:url" content="https://fallasuissa.es/aviso-legal.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aviso Legal | Falla Suïssa - L&#x27;Alqueria del Favero" data-i18n-content="seo.aviso-legal.title">
+  <meta name="twitter:description" content="Aviso legal e identificación del titular del sitio web de la Falla Suïssa - L&#x27;Alqueria del Favero." data-i18n-content="seo.aviso-legal.description">
+  <meta name="twitter:image" content="https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122">
+  <meta name="twitter:image:alt" content="Escudo de la Falla Suïssa - L'Alqueria del Favero">
+  <meta name="twitter:image:type" content="image/png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Color de tema: celeste del hero en claro, negro en oscuro; dark.js lo sincroniza con el toggle -->
   <meta name="theme-color" content="#d6e9f6">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#d6e9f6">
@@ -23,7 +44,7 @@
   <link rel="manifest" href="manifest.json">
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="css/main.css?v=fc5d7965a964">
+  <link rel="stylesheet" href="css/main.css?v=f80f2d36db60">
   <!-- JSON-LD de la página (Organization/WebSite, breadcrumb y primaryImageOfPage los añade el build) -->
   <script type="application/ld+json">
   {
@@ -33,10 +54,30 @@
         "@type": "Organization",
         "@id": "https://fallasuissa.es/#organization",
         "name": "Falla Suïssa - L'Alqueria del Favero",
+        "legalName": "Asociación Cultural Falla Suïssa - L'Alqueria del Favero",
         "alternateName": "Falla Suïssa",
+        "additionalType": "https://schema.org/NGO",
         "url": "https://fallasuissa.es/",
         "description": "Falla Suïssa - L'Alqueria del Favero (comisión nº 396) es una comisión fallera del barrio de les Moreres, en València. Promueve la cultura y las tradiciones valencianas mediante actividades comunitarias, culturales y solidarias.",
+        "taxID": "G19961085",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "Número de comisión (Junta Central Fallera)",
+          "value": "396"
+        },
         "foundingDate": "2024",
+        "knowsLanguage": [
+          "es",
+          "ca"
+        ],
+        "areaServed": {
+          "@type": "Place",
+          "name": "Barrio de les Moreres, València",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "València"
+          }
+        },
         "founder": {
           "@type": "Person",
           "name": "José Santos Quilis",
@@ -72,7 +113,8 @@
             "availableLanguage": [
               "es",
               "ca"
-            ]
+            ],
+            "url": "https://fallasuissa.es/nuevos-falleros.html"
           }
         ],
         "address": {
@@ -263,6 +305,18 @@
         },
         "copyrightHolder": {
           "@id": "https://fallasuissa.es/#organization"
+        },
+        "copyrightYear": 2024,
+        "about": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://fallasuissa.es/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
         }
       },
       {
@@ -274,11 +328,33 @@
           "@id": "https://fallasuissa.es/#organization"
         },
         "genre": "Aviso legal",
+        "publisher": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "isAccessibleForFree": true,
         "name": "Aviso Legal | Falla Suïssa - L'Alqueria del Favero",
         "description": "Aviso legal e identificación del titular del sitio web de la Falla Suïssa - L'Alqueria del Favero.",
         "isPartOf": {
           "@id": "https://fallasuissa.es/#website"
         },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122",
+          "width": 1200,
+          "height": 630,
+          "encodingFormat": "image/png",
+          "creator": {
+            "@type": "Organization",
+            "name": "Falla Suïssa - L'Alqueria del Favero",
+            "url": "https://fallasuissa.es/"
+          },
+          "creditText": "Falla Suïssa - L'Alqueria del Favero",
+          "copyrightNotice": "© 2026 Falla Suïssa - L'Alqueria del Favero",
+          "license": "https://fallasuissa.es/aviso-legal.html#propiedad-intelectual",
+          "acquireLicensePage": "https://fallasuissa.es/aviso-legal.html#propiedad-intelectual"
+        },
+        "datePublished": "2026-09-17",
+        "dateModified": "2026-10-05",
         "breadcrumb": {
           "@id": "https://fallasuissa.es/aviso-legal.html#breadcrumb"
         }
@@ -312,7 +388,7 @@
   <link rel="alternate" hreflang="es" href="https://fallasuissa.es/aviso-legal.html">
   <link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/aviso-legal.html">
   <link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/aviso-legal.html">
-  <meta name="search-index" content="data/search-index.json?v=a892e5adcb57">
+  <meta name="search-index" content="data/search-index.json?v=8bd7c3e3da4d">
 </head>
 <body>
   <header class="header-inner">
@@ -454,10 +530,10 @@
     </nav>
   </footer>
 
-  <script src="js/cookie-banner.js?v=fc5d7965a964" defer></script>
-  <script src="js/lang.js?v=fc5d7965a964"></script>
-  <script src="js/dark.js?v=fc5d7965a964"></script>
-  <script src="js/nav-menu.js?v=fc5d7965a964"></script>
-  <script src="js/buscador.js?v=fc5d7965a964" defer></script>
+  <script src="js/cookie-banner.js?v=f80f2d36db60" defer></script>
+  <script src="js/lang.js?v=f80f2d36db60"></script>
+  <script src="js/dark.js?v=f80f2d36db60"></script>
+  <script src="js/nav-menu.js?v=f80f2d36db60"></script>
+  <script src="js/buscador.js?v=f80f2d36db60" defer></script>
 </body>
 </html>

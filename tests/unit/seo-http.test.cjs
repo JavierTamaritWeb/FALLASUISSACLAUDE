@@ -22,6 +22,8 @@ test('Apache: URL canónicas, errores HTTP y portada independiente de Accept', {
   fs.writeFileSync(path.join(docroot, 'va/index.html'), '<h1>Inici HTML</h1>');
   fs.writeFileSync(path.join(docroot, 'blog.html'), '<h1>Blog</h1>');
   fs.writeFileSync(path.join(docroot, 'seo/ai-training-data.md'), '# Guía independiente');
+  fs.writeFileSync(path.join(docroot, 'robots.txt'), 'User-agent: *\nAllow: /\n');
+  fs.writeFileSync(path.join(docroot, 'sitemap.xml'), '<?xml version="1.0"?><urlset/>');
   const cert = spawnSync('openssl', ['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', path.join(dir, 'key.pem'), '-out', path.join(dir, 'cert.pem'), '-days', '1', '-subj', '/CN=localhost'], { encoding: 'utf8' });
   assert.equal(cert.status, 0, 'No se pudo crear el certificado efímero de la prueba');
   const socket = net.createServer();
@@ -62,7 +64,7 @@ Require all granted
   const request = (url, accept = 'text/html') => new Promise((resolve, reject) => {
     const req = https.get({ hostname: '127.0.0.1', port, path: url, rejectUnauthorized: false, headers: { Host: 'fallasuissa.es', Accept: accept } }, response => {
       let body = ''; response.on('data', data => { body += data; });
-      response.on('end', () => resolve({ status: response.statusCode, location: response.headers.location, body }));
+      response.on('end', () => resolve({ status: response.statusCode, location: response.headers.location, headers: response.headers, body }));
     });
     req.on('error', reject);
   });
@@ -77,12 +79,18 @@ Require all granted
     assert.equal(response.status, 200, response.body);
     assert.match(response.body, /Portada HTML/);
   }
-  for (const [url, target] of [['/index.html', '/'], ['/va/index.html', '/va/'], ['/blog', '/blog.html'], ['/?lang=ca', '/va/'], ['/va/?lang=es', '/']]) {
+  for (const [url, target] of [['/index.html', '/'], ['/va/index.html', '/va/'], ['/blog', '/blog.html'], ['/?lang=ca', '/va/'], ['/va/?lang=es', '/'], ['/robots-ai-optimized.txt', '/robots.txt']]) {
     const response = await request(url);
     assert.equal(response.status, 301, url);
     const location = new URL(response.location);
     assert.equal(location.pathname, target, url);
     assert.equal(location.search, '', url);
+  }
+  // robots.txt y sitemaps se revalidan siempre (v4.43.0): la CDN no debe retener un sitemap anterior.
+  for (const url of ['/robots.txt', '/sitemap.xml']) {
+    const response = await request(url);
+    assert.equal(response.status, 200, url);
+    assert.match(response.headers['cache-control'] || '', /must-revalidate/, `${url} Cache-Control`);
   }
   assert.equal((await request('/no-existe.html')).status, 404);
   assert.equal((await request('/base.html')).status, 410);

@@ -13,9 +13,9 @@
   <meta name="author" content="Falla Suïssa - L'Alqueria del Favero">
   <meta name="language" content="es-ES">
   <meta name="geo.region" content="ES-VC">
-  <meta name="geo.placename" content="Valencia, España">
-  <meta name="geo.position" content="39.4699;-0.3763">
-  <meta name="ICBM" content="39.4699, -0.3763">
+  <meta name="geo.placename" content="València, España">
+  <meta name="geo.position" content="39.4537245;-0.3376502">
+  <meta name="ICBM" content="39.4537245, -0.3376502">
   <!-- canonical + hreflang los inyecta el build (gulpfile → modifyHtmlStream); NO añadir aquí (ver restricción SEO multi-idioma) -->
 
   <!-- Open Graph / Facebook -->
@@ -97,10 +97,30 @@
         "@type": "Organization",
         "@id": "https://fallasuissa.es/#organization",
         "name": "Falla Suïssa - L'Alqueria del Favero",
+        "legalName": "Asociación Cultural Falla Suïssa - L'Alqueria del Favero",
         "alternateName": "Falla Suïssa",
+        "additionalType": "https://schema.org/NGO",
         "url": "https://fallasuissa.es/",
-        "description": "Falla Suïssa - L'Alqueria del Favero (comisión nº 396) es una comisión fallera del barrio de les Moreres, en València. Promueve la cultura y las tradiciones valencianas mediante actividades comunitarias, culturales y solidarias.",
+        "description": "Falla Suïssa - L'Alqueria del Favero (comissió núm. 396) és una comissió fallera del barri de les Moreres, a València. Promou la cultura i les tradicions valencianes mitjançant activitats comunitàries, culturals i solidàries.",
+        "taxID": "G19961085",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "Número de comisión (Junta Central Fallera)",
+          "value": "396"
+        },
         "foundingDate": "2024",
+        "knowsLanguage": [
+          "es",
+          "ca"
+        ],
+        "areaServed": {
+          "@type": "Place",
+          "name": "Barri de les Moreres, València",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "València"
+          }
+        },
         "founder": {
           "@type": "Person",
           "name": "José Santos Quilis",
@@ -113,7 +133,7 @@
           "contentUrl": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png",
           "width": 640,
           "height": 793,
-          "caption": "Escudo de la Falla Suïssa - L'Alqueria del Favero",
+          "caption": "Escut de la Falla Suïssa - L'Alqueria del Favero",
           "creator": {
             "@type": "Organization",
             "name": "Falla Suïssa - L'Alqueria del Favero",
@@ -131,12 +151,13 @@
         "contactPoint": [
           {
             "@type": "ContactPoint",
-            "contactType": "Información general",
+            "contactType": "Informació general",
             "email": "info@fallasuissa.es",
             "availableLanguage": [
               "es",
               "ca"
-            ]
+            ],
+            "url": "https://fallasuissa.es/nuevos-falleros.html"
           }
         ],
         "address": {
@@ -317,7 +338,7 @@
         "url": "https://fallasuissa.es/",
         "name": "Falla Suïssa - L'Alqueria del Favero",
         "alternateName": "Falla Suïssa",
-        "description": "Sitio web oficial de la Falla Suïssa - L'Alqueria del Favero (València): la Falla, eventos, galerías, blog y colaboraciones.",
+        "description": "Lloc web oficial de la Falla Suïssa - L'Alqueria del Favero (València): la Falla, esdeveniments, galeries, blog i col·laboracions.",
         "inLanguage": [
           "es-ES",
           "ca-ES"
@@ -327,6 +348,18 @@
         },
         "copyrightHolder": {
           "@id": "https://fallasuissa.es/#organization"
+        },
+        "copyrightYear": 2024,
+        "about": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://fallasuissa.es/va/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
         }
       },
       {
@@ -355,6 +388,9 @@
         "primaryImageOfPage": {
           "@type": "ImageObject",
           "url": "https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122",
+          "width": 1200,
+          "height": 630,
+          "encodingFormat": "image/png",
           "creator": {
             "@type": "Organization",
             "name": "Falla Suïssa - L'Alqueria del Favero",
@@ -364,7 +400,9 @@
           "copyrightNotice": "© 2026 Falla Suïssa - L'Alqueria del Favero",
           "license": "https://fallasuissa.es/va/aviso-legal.html#propiedad-intelectual",
           "acquireLicensePage": "https://fallasuissa.es/va/aviso-legal.html#propiedad-intelectual"
-        }
+        },
+        "datePublished": "2026-09-17",
+        "dateModified": "2026-10-05"
       },
       {
         "@type": "WebSite",
@@ -391,7 +429,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="../css/main.css?v=fc5d7965a964">
+  <link rel="stylesheet" href="../css/main.css?v=f80f2d36db60">
 
   <!-- Preload LCP Images -->
   <link rel="preload" as="image" href="../img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif" fetchpriority="high">
@@ -403,7 +441,7 @@
   <link rel="alternate" hreflang="es" href="https://fallasuissa.es/">
   <link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/">
   <link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/">
-  <meta name="search-index" content="data/search-index.json?v=a892e5adcb57">
+  <meta name="search-index" content="data/search-index.json?v=8bd7c3e3da4d">
 </head>
 <body>
 
@@ -419,7 +457,7 @@
     </div>
   </div>
   <!-- El banner no espera a Swiper ni al resto de scripts diferidos. -->
-  <script src="../js/banner-subvencion.js?v=fc5d7965a964"></script>
+  <script src="../js/banner-subvencion.js?v=f80f2d36db60"></script>
 
   <header class="header" data-index="0">
     
@@ -1963,18 +2001,18 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
   <!-- Scripts JavaScript -->
    
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
-  <script src="../js/swiper.js?v=fc5d7965a964" defer></script>
-  <script src="../js/meteo.js?v=fc5d7965a964" defer></script>
-  <script src="../js/dark.js?v=fc5d7965a964" defer></script>
-  <script src="../js/lang.js?v=fc5d7965a964" defer></script>
-  <script src="../js/nav-menu.js?v=fc5d7965a964" defer></script>
-  <script src="../js/buscador.js?v=fc5d7965a964" defer></script>
-  <script src="../js/scroll-reveal.js?v=fc5d7965a964" defer></script>
-  <script src="../js/board.js?v=fc5d7965a964" defer></script>
-  <script src="../js/countdown.js?v=fc5d7965a964" defer></script>
-  <script src="../js/colaboraciones-lightbox.js?v=fc5d7965a964" defer></script>
-  <script src="../js/accessibility.js?v=fc5d7965a964" defer></script>
-  <script src="../js/home-deferred.js?v=fc5d7965a964" defer></script>
+  <script src="../js/swiper.js?v=f80f2d36db60" defer></script>
+  <script src="../js/meteo.js?v=f80f2d36db60" defer></script>
+  <script src="../js/dark.js?v=f80f2d36db60" defer></script>
+  <script src="../js/lang.js?v=f80f2d36db60" defer></script>
+  <script src="../js/nav-menu.js?v=f80f2d36db60" defer></script>
+  <script src="../js/buscador.js?v=f80f2d36db60" defer></script>
+  <script src="../js/scroll-reveal.js?v=f80f2d36db60" defer></script>
+  <script src="../js/board.js?v=f80f2d36db60" defer></script>
+  <script src="../js/countdown.js?v=f80f2d36db60" defer></script>
+  <script src="../js/colaboraciones-lightbox.js?v=f80f2d36db60" defer></script>
+  <script src="../js/accessibility.js?v=f80f2d36db60" defer></script>
+  <script src="../js/home-deferred.js?v=f80f2d36db60" defer></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -1997,7 +2035,7 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
       });
     }
   </script>
-  <script src="../js/envia.js?v=fc5d7965a964" defer></script>
-  <script src="../js/cookie-banner.js?v=fc5d7965a964" defer></script>
+  <script src="../js/envia.js?v=f80f2d36db60" defer></script>
+  <script src="../js/cookie-banner.js?v=f80f2d36db60" defer></script>
 </body>
 </html>

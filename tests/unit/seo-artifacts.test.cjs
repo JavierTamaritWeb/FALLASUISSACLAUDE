@@ -15,10 +15,31 @@ test('el inventario excluye HTML retirado y noindex sin depender del orden de at
   await fs.writeFile(path.join(root, 'dist/index.html'), page(''));
   await fs.writeFile(path.join(root, 'dist/privada.html'), page('privada.html') + '<meta content="noindex, follow" name="robots">');
   await fs.writeFile(path.join(root, 'dist/retirada.html'), page('retirada.html'));
-  assert.equal((await generateSeoArtifacts({ root })).pages, 1);
+  assert.equal((await generateSeoArtifacts({ root, now: new Date('2026-10-05') })).pages, 1);
   const main = await fs.readFile(path.join(root, 'dist/sitemap.xml'), 'utf8');
   assert.doesNotMatch(main, /privada|retirada/);
   assert.equal(await fs.readFile(path.join(root, 'dist/sitemap-ai-optimized.xml'), 'utf8'), main);
+  const { SITEMAP_FILES } = require('../../scripts/seo-artifacts.cjs');
+  for (const name of [...SITEMAP_FILES, 'llms-full.txt']) assert.ok((await fs.stat(path.join(root, 'dist', name))).isFile(), `${name} generado sin plantillas en src/`);
+  const index = await fs.readFile(path.join(root, 'dist/sitemap-index.xml'), 'utf8');
+  assert.match(index, /<loc>https:\/\/fallasuissa\.es\/sitemap\.xml<\/loc><lastmod>2026-10-05<\/lastmod>/, 'el índice lleva lastmod por sitemap');
+  const history = JSON.parse(await fs.readFile(path.join(root, 'src/data/seo-history.json'), 'utf8'));
+  assert.equal(history['https://fallasuissa.es/'].published, '2026-10-05');
+});
+
+test('llms-full.txt lista título y descripción por idioma y adjunta el contexto sin su H1', () => {
+  const { buildLlmsFull } = require('../../scripts/seo-artifacts.cjs');
+  const pages = [
+    { url: 'https://fallasuissa.es/va/', file: 'index.html', lang: 'ca', title: 'Inici', description: 'Resum' },
+    { url: 'https://fallasuissa.es/zeta.html', file: 'zeta.html', lang: 'es', title: 'Zeta', description: 'Última' },
+    { url: 'https://fallasuissa.es/', file: 'index.html', lang: 'es', title: 'Inicio', description: 'Resumen & más' }
+  ];
+  const text = buildLlmsFull(pages, '# Guía\n\nContexto útil.');
+  assert.match(text, /^# Falla Suïssa - L'Alqueria del Favero\n\n> Resumen & más\n/);
+  assert.ok(text.indexOf('- [Inicio](https://fallasuissa.es/): Resumen & más') < text.indexOf('- [Zeta]'), 'index primero');
+  assert.match(text, /## Pàgines \(valencià\)\n\n- \[Inici\]\(https:\/\/fallasuissa\.es\/va\/\): Resum/);
+  assert.match(text, /## Contexto\n\nContexto útil\.\n$/);
+  assert.doesNotMatch(text, /# Guía/);
 });
 
 test('noticias: excluye fechas futuras, inválidas y artículos de hace 48 horas', () => {
@@ -44,4 +65,8 @@ test('lastmod conserva la fecha en rebuilds y cambia al modificar el contenido t
   assert.equal(rebuilt[page.url].modified, '2026-09-13');
   const changed = updateHistory(rebuilt, [{ ...page, html: page.html.replace('Inici', 'Nova informació') }], new Date('2027-01-02'));
   assert.equal(changed[page.url].modified, '2027-01-02');
+  assert.equal(changed[page.url].published, '2026-09-13', 'published se fija en la primera generación y no cambia');
+  const dated = updateHistory(changed, [{ ...page, html: page.html.replace('Inici', 'Nova informació') + '<script>{"dateModified": "2027-01-02", "datePublished": "2026-09-13"}</script>' }], new Date('2027-02-01'));
+  const redated = updateHistory(dated, [{ ...page, html: page.html.replace('Inici', 'Nova informació') + '<script>{"dateModified": "2027-02-01", "datePublished": "2026-09-13"}</script>' }], new Date('2027-03-01'));
+  assert.equal(redated[page.url].modified, dated[page.url].modified, 'las fechas que escribe el build en el JSON-LD no rejuvenecen la página');
 });

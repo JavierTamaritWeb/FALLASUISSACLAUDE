@@ -25,7 +25,7 @@ async function identical(route, relative) {
 }
 
 const main = await identical('/sitemap.xml', 'sitemap.xml');
-for (const name of ['sitemap-index.xml', 'sitemap-google.xml', 'sitemap-ai-optimized.xml', 'sitemap-images.xml', 'sitemap-news.xml', 'sw.js', 'robots.txt', 'seo/ai-crawl.html', 'seo/ai-enhanced-schema.json', 'seo/ai-training-data.md', 'ai-discovery.json', '.well-known/agent-skills/index.json', 'data/translations.json']) await identical('/' + name, name);
+for (const name of ['sitemap-index.xml', 'sitemap-google.xml', 'sitemap-ai-optimized.xml', 'sitemap-images.xml', 'sitemap-news.xml', 'sw.js', 'robots.txt', 'llms.txt', 'llms-full.txt', 'indexnow.txt', 'seo/ai-crawl.html', 'seo/ai-enhanced-schema.json', 'seo/ai-training-data.md', 'ai-discovery.json', '.well-known/agent-skills/index.json', 'data/translations.json']) await identical('/' + name, name);
 const urls = [...main.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => new URL(match[1]));
 assert.ok(urls.length > 0, 'Sitemap vacío');
 assert.ok(urls.every(url => url.origin === origin), 'Origen inesperado en el sitemap');
@@ -49,7 +49,7 @@ const markdown = await request('/', { Accept: 'text/markdown' });
 assert.equal(markdown.response.status, 200);
 assert.match(markdown.response.headers.get('content-type'), /text\/html/);
 assert.equal(markdown.body, await fs.readFile(path.join(root, 'dist/index.html'), 'utf8'));
-for (const [route, target] of [['/index.html', '/'], ['/va/index.html', '/va/'], ['/blog', '/blog.html'], ['/?lang=ca', '/va/'], ['/?lang=es', '/'], ['/va/?lang=es', '/']]) {
+for (const [route, target] of [['/index.html', '/'], ['/va/index.html', '/va/'], ['/blog', '/blog.html'], ['/?lang=ca', '/va/'], ['/?lang=es', '/'], ['/va/?lang=es', '/'], ['/robots-ai-optimized.txt', '/robots.txt']]) {
   const { response } = await request(route);
   assert.equal(response.status, 301, route);
   assert.equal(new URL(response.headers.get('location'), origin).href, origin + target, route);

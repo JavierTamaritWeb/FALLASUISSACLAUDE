@@ -71,4 +71,8 @@ Relevo anual: al cambiar `member` en `schema-organization.json` las personas y l
 
 ---
 
-Última actualización: 17 de septiembre de 2026 - v4.42.0
+Última actualización: 5 de octubre de 2026 - v4.43.0
+
+## Enlace profundo `?q=` y SearchAction (v4.43.0)
+
+`index.html?q=consulta` (también `/va/?q=`) abre el panel con esa consulta: `buscador.js` lee el parámetro al iniciar, lo guarda en `sessionStorage`, lo retira de la URL con `history.replaceState` (recargar o compartir no reabre el panel) y llama a `abrir()`. Es el destino del `SearchAction` del nodo `WebSite` del JSON-LD (`src/seo/schema-organization.json → website.potentialAction`, `urlTemplate https://fallasuissa.es/?q={search_term_string}`, que el build pasa a `/va/?q=` en la variante valenciana). La regla `?lang=` del `.htaccess` es exacta (`^lang=…$`) y no afecta a `?q=`. Test: caso «?q=consulta abre el panel» de `tests/buscador.e2e.spec.js`.

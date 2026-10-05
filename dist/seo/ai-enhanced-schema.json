@@ -3,10 +3,30 @@
   "@type": "Organization",
   "@id": "https://fallasuissa.es/#organization",
   "name": "Falla Suïssa - L'Alqueria del Favero",
+  "legalName": "Asociación Cultural Falla Suïssa - L'Alqueria del Favero",
   "alternateName": "Falla Suïssa",
+  "additionalType": "https://schema.org/NGO",
   "url": "https://fallasuissa.es/",
   "description": "Falla Suïssa - L'Alqueria del Favero (comisión nº 396) es una comisión fallera del barrio de les Moreres, en València. Promueve la cultura y las tradiciones valencianas mediante actividades comunitarias, culturales y solidarias.",
+  "taxID": "G19961085",
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "Número de comisión (Junta Central Fallera)",
+    "value": "396"
+  },
   "foundingDate": "2024",
+  "knowsLanguage": [
+    "es",
+    "ca"
+  ],
+  "areaServed": {
+    "@type": "Place",
+    "name": "Barrio de les Moreres, València",
+    "containedInPlace": {
+      "@type": "City",
+      "name": "València"
+    }
+  },
   "founder": {
     "@type": "Person",
     "name": "José Santos Quilis",
@@ -33,7 +53,8 @@
       "availableLanguage": [
         "es",
         "ca"
-      ]
+      ],
+      "url": "https://fallasuissa.es/nuevos-falleros.html"
     }
   ],
   "address": {

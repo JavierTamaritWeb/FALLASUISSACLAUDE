@@ -27,10 +27,30 @@
         "@type": "Organization",
         "@id": "https://fallasuissa.es/#organization",
         "name": "Falla Suïssa - L'Alqueria del Favero",
+        "legalName": "Asociación Cultural Falla Suïssa - L'Alqueria del Favero",
         "alternateName": "Falla Suïssa",
+        "additionalType": "https://schema.org/NGO",
         "url": "https://fallasuissa.es/",
-        "description": "Falla Suïssa - L'Alqueria del Favero (comisión nº 396) es una comisión fallera del barrio de les Moreres, en València. Promueve la cultura y las tradiciones valencianas mediante actividades comunitarias, culturales y solidarias.",
+        "description": "Falla Suïssa - L'Alqueria del Favero (comissió núm. 396) és una comissió fallera del barri de les Moreres, a València. Promou la cultura i les tradicions valencianes mitjançant activitats comunitàries, culturals i solidàries.",
+        "taxID": "G19961085",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "Número de comisión (Junta Central Fallera)",
+          "value": "396"
+        },
         "foundingDate": "2024",
+        "knowsLanguage": [
+          "es",
+          "ca"
+        ],
+        "areaServed": {
+          "@type": "Place",
+          "name": "Barri de les Moreres, València",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "València"
+          }
+        },
         "founder": {
           "@type": "Person",
           "name": "José Santos Quilis",
@@ -43,7 +63,7 @@
           "contentUrl": "https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png",
           "width": 640,
           "height": 793,
-          "caption": "Escudo de la Falla Suïssa - L'Alqueria del Favero",
+          "caption": "Escut de la Falla Suïssa - L'Alqueria del Favero",
           "creator": {
             "@type": "Organization",
             "name": "Falla Suïssa - L'Alqueria del Favero",
@@ -61,12 +81,13 @@
         "contactPoint": [
           {
             "@type": "ContactPoint",
-            "contactType": "Información general",
+            "contactType": "Informació general",
             "email": "info@fallasuissa.es",
             "availableLanguage": [
               "es",
               "ca"
-            ]
+            ],
+            "url": "https://fallasuissa.es/nuevos-falleros.html"
           }
         ],
         "address": {
@@ -247,7 +268,7 @@
         "url": "https://fallasuissa.es/",
         "name": "Falla Suïssa - L'Alqueria del Favero",
         "alternateName": "Falla Suïssa",
-        "description": "Sitio web oficial de la Falla Suïssa - L'Alqueria del Favero (València): la Falla, eventos, galerías, blog y colaboraciones.",
+        "description": "Lloc web oficial de la Falla Suïssa - L'Alqueria del Favero (València): la Falla, esdeveniments, galeries, blog i col·laboracions.",
         "inLanguage": [
           "es-ES",
           "ca-ES"
@@ -257,6 +278,18 @@
         },
         "copyrightHolder": {
           "@id": "https://fallasuissa.es/#organization"
+        },
+        "copyrightYear": 2024,
+        "about": {
+          "@id": "https://fallasuissa.es/#organization"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://fallasuissa.es/va/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
         }
       },
       {
@@ -275,6 +308,9 @@
         "primaryImageOfPage": {
           "@type": "ImageObject",
           "url": "https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122",
+          "width": 1200,
+          "height": 630,
+          "encodingFormat": "image/png",
           "creator": {
             "@type": "Organization",
             "name": "Falla Suïssa - L'Alqueria del Favero",
@@ -285,6 +321,8 @@
           "license": "https://fallasuissa.es/va/aviso-legal.html#propiedad-intelectual",
           "acquireLicensePage": "https://fallasuissa.es/va/aviso-legal.html#propiedad-intelectual"
         },
+        "datePublished": "2025-03-01",
+        "dateModified": "2025-03-01",
         "breadcrumb": {
           "@id": "https://fallasuissa.es/va/blog-somni.html#breadcrumb"
         }
@@ -299,7 +337,22 @@
         "headline": "Somni",
         "description": "Somni: la història de com huit persones il·lusionades fundaren la Falla Suïssa - L'Alqueria del Favero, la comissió número 396, al barri de les Moreres, València.",
         "image": [
-          "https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122"
+          {
+            "@type": "ImageObject",
+            "url": "https://fallasuissa.es/img/elementos-UXUI/og-share.png?v=20260122",
+            "width": 1200,
+            "height": 630,
+            "encodingFormat": "image/png",
+            "creator": {
+              "@type": "Organization",
+              "name": "Falla Suïssa - L'Alqueria del Favero",
+              "url": "https://fallasuissa.es/"
+            },
+            "creditText": "Falla Suïssa - L'Alqueria del Favero",
+            "copyrightNotice": "© 2026 Falla Suïssa - L'Alqueria del Favero",
+            "license": "https://fallasuissa.es/va/aviso-legal.html#propiedad-intelectual",
+            "acquireLicensePage": "https://fallasuissa.es/va/aviso-legal.html#propiedad-intelectual"
+          }
         ],
         "datePublished": "2025-03-01",
         "dateModified": "2025-03-01",
@@ -374,7 +427,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
   <link rel="manifest" href="../manifest.json">
-<link rel="stylesheet" href="../css/main.css?v=fc5d7965a964">
+<link rel="stylesheet" href="../css/main.css?v=f80f2d36db60">
   <link rel="preload" as="font" type="font/woff2" href="../fonts/plus-jakarta-sans-v12-normal-latin.woff2" crossorigin>
 
   <!-- SEO multi-idioma (canonical autoreferencial + hreflang bidireccional) -->
@@ -382,7 +435,7 @@
   <link rel="alternate" hreflang="es" href="https://fallasuissa.es/blog-somni.html">
   <link rel="alternate" hreflang="ca" href="https://fallasuissa.es/va/blog-somni.html">
   <link rel="alternate" hreflang="x-default" href="https://fallasuissa.es/blog-somni.html">
-  <meta name="search-index" content="data/search-index.json?v=a892e5adcb57">
+  <meta name="search-index" content="data/search-index.json?v=8bd7c3e3da4d">
 </head>
 <body>
   <header class="header-inner">
@@ -505,11 +558,11 @@
       <a href="cookies.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.cookies">Cookies</a>
     </nav>
   </footer>
-  <script src="../js/dark.js?v=fc5d7965a964"></script>
-  <script src="../js/lang.js?v=fc5d7965a964"></script>
-  <script src="../js/nav-menu.js?v=fc5d7965a964"></script>
-  <script src="../js/buscador.js?v=fc5d7965a964" defer></script>
-  <script src="../js/scroll-reveal.js?v=fc5d7965a964" defer></script>
-  <script src="../js/cookie-banner.js?v=fc5d7965a964" defer></script>
+  <script src="../js/dark.js?v=f80f2d36db60"></script>
+  <script src="../js/lang.js?v=f80f2d36db60"></script>
+  <script src="../js/nav-menu.js?v=f80f2d36db60"></script>
+  <script src="../js/buscador.js?v=f80f2d36db60" defer></script>
+  <script src="../js/scroll-reveal.js?v=f80f2d36db60" defer></script>
+  <script src="../js/cookie-banner.js?v=f80f2d36db60" defer></script>
 </body>
 </html>

@@ -28,6 +28,7 @@ const FB_INVALIDO = "fallasuïssal'alqueriadelfavero";
 
 const fuente = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'seo', 'schema-organization.json'), 'utf8'));
 const translations = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'data', 'translations.json'), 'utf8'));
+const historial = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'data', 'seo-history.json'), 'utf8'));
 
 const hasType = (n, t) => Boolean(n) && (Array.isArray(n['@type']) ? n['@type'].includes(t) : n['@type'] === t);
 
@@ -71,8 +72,18 @@ test.describe('JSON-LD — todas las páginas (dist/, ES y /va/)', () => {
       expect(org.name).toBe(NOMBRE);
       expect(org.alternateName).toBe('Falla Suïssa');
       expect(org.url).toBe(`${ORIGIN}/`);
-      expect(org.sameAs).toEqual(SAME_AS);
+      expect(org.sameAs).toEqual(expect.arrayContaining(SAME_AS));
       expect(org.founder.name).toBe('José Santos Quilis');
+      // Identidad legal y textos en el idioma de la página (v4.43.0)
+      expect(org.legalName).toBe("Asociación Cultural Falla Suïssa - L'Alqueria del Favero");
+      expect(org.taxID).toBe('G19961085');
+      expect(org.identifier.value).toBe('396');
+      expect(org.additionalType).toBe('https://schema.org/NGO');
+      expect(org.knowsLanguage).toEqual(['es', 'ca']);
+      const idioma = rel.startsWith('va/') ? 'ca' : 'es';
+      expect(org.description).toBe(fuente.organization.description[idioma]);
+      expect(org.logo.caption).toBe(fuente.organization.logo.caption[idioma]);
+      expect(typeof org.description).toBe('string');
       const nombres = org.member.map((m) => m.name);
       expect(nombres).toContain('José Santos Quilis');
       expect(nombres).toContain('Lucía Gutiérrez Martín');
@@ -80,7 +91,13 @@ test.describe('JSON-LD — todas las páginas (dist/, ES y /va/)', () => {
       expect(nombres).toContain('Diego Gómez Medina');
       expect(nombres).toContain('Delia Caravantes');
       expect(org.employee).toBeUndefined();
-      expect(graph.filter((n) => hasType(n, 'WebSite') && n['@id'] === SITE_ID)).toHaveLength(1);
+      const sites = graph.filter((n) => hasType(n, 'WebSite') && n['@id'] === SITE_ID);
+      expect(sites).toHaveLength(1);
+      expect(sites[0].description).toBe(fuente.website.description[idioma]);
+      // SearchAction (v4.43.0): el buscador abre con ?q= en el idioma de la página
+      expect(sites[0].potentialAction['@type']).toBe('SearchAction');
+      expect(sites[0].potentialAction.target.urlTemplate).toBe(`${ORIGIN}/${rel.startsWith('va/') ? 'va/' : ''}?q={search_term_string}`);
+      expect(sites[0].about).toEqual({ '@id': ORG_ID });
       // Ningún otro Organization/WebSite propio inline
       expect(graph.filter((n) => (hasType(n, 'Organization') || hasType(n, 'WebSite')) && !/hope-incliva/.test(n['@id'] || '') && ![ORG_ID, SITE_ID].includes(n['@id']))).toHaveLength(0);
 
@@ -96,6 +113,21 @@ test.describe('JSON-LD — todas las páginas (dist/, ES y /va/)', () => {
       }
       expect(page.name).toBeTruthy();
       expect(page.description).toBeTruthy();
+      // Fechas por contenido desde src/data/seo-history.json (v4.43.0)
+      expect(page.dateModified, 'dateModified').toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(page.datePublished, 'datePublished').toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(page.datePublished <= page.dateModified).toBeTruthy();
+      if (!rel.includes('blog-')) {
+        expect(page.dateModified).toBe(historial[canonical].modified);
+        expect(page.datePublished).toBe(historial[canonical].published);
+      }
+      // Toda página tiene imagen principal con dimensiones (og-share o la del artículo)
+      expect(page.primaryImageOfPage, 'primaryImageOfPage').toBeTruthy();
+      const primaria = page.primaryImageOfPage['@id'] ? null : page.primaryImageOfPage;
+      if (primaria) {
+        expect(typeof primaria.width).toBe('number');
+        expect(typeof primaria.height).toBe('number');
+      }
       if (rel.endsWith('index.html')) {
         expect(page.breadcrumb).toBeUndefined();
       } else {
@@ -140,9 +172,14 @@ test.describe('JSON-LD — nodos propios', () => {
         expect(gal, `${f}: ImageGallery`).toBeTruthy();
         expect(gal.name).toBe(tabla.galeria[`galeria${n}`]);
         expect(gal.associatedMedia).toHaveLength(fotos.length);
+        expect(gal.numberOfItems).toBe(fotos.length);
         gal.associatedMedia.forEach((img, i) => {
           expect(img['@type']).toBe('ImageObject');
           expect(img.contentUrl).toMatch(new RegExp(`^${ORIGIN}/img/`));
+          // Dimensiones y formato desde el original de src/img (sharp, v4.43.0)
+          expect(typeof img.width, `${f} foto ${i + 1} width`).toBe('number');
+          expect(typeof img.height).toBe('number');
+          expect(img.encodingFormat).toMatch(/^image\//);
           // Metadatos de licencia de imagen (Search Console, v4.31.1)
           expect(img.creator?.name).toBeTruthy();
           expect(img.copyrightNotice).toMatch(/^© \d{4} /);
@@ -166,6 +203,7 @@ test.describe('JSON-LD — nodos propios', () => {
       const lista = graph.find((node) => hasType(node, 'ItemList'));
       const total = fs.readdirSync(DIST).filter((f) => /^galeria_\d+\.html$/.test(f)).length;
       expect(lista.itemListElement).toHaveLength(total);
+      expect(lista.name).toBe(tabla.seo.galerias.title);
       expect(lista.itemListElement[0]).toMatchObject({ position: 1, name: tabla.galeria.galeria1, url: `${pref}galeria_1.html` });
       expect(lista.itemListElement.at(-1).name).toBe(tabla.galeria[`galeria${total}`]);
     });
@@ -181,6 +219,13 @@ test.describe('JSON-LD — nodos propios', () => {
           expect(art[campo], `${post}: ${campo}`).toBeTruthy();
         }
         expect(art.author.name).toBeTruthy();
+        for (const img of [].concat(art.image)) {
+          expect(img['@type']).toBe('ImageObject');
+          expect(typeof img.width).toBe('number');
+        }
+        const pagina = graph.find((node) => hasType(node, 'WebPage'));
+        expect(pagina.datePublished).toBe(art.datePublished);
+        expect(pagina.dateModified).toBe(art.dateModified);
         expect(art.publisher).toEqual({ '@id': ORG_ID });
         expect(art.mainEntityOfPage).toEqual({ '@id': `${pref}${post}#webpage` });
         expect(graph.find((node) => hasType(node, 'WebPage')).mainEntity).toEqual({ '@id': art['@id'] });
@@ -200,6 +245,25 @@ test.describe('JSON-LD — nodos propios', () => {
       expect(llibret.some((n) => hasType(n, 'Event'))).toBeFalsy();
       expect(llibret.find((n) => hasType(n, 'Book'))['@id']).toBe(`${pref}llibret_2026.html#llibre`);
       expect(llibret.filter((n) => hasType(n, 'WebPageElement'))).toHaveLength(10);
+      // Páginas antes mínimas (v4.43.0)
+      expect(g('calendario.html').find((n) => hasType(n, 'WebPage')).significantLink).toEqual([`${pref}eventos.html`]);
+      expect(g('deportes.html').find((n) => hasType(n, 'WebPage')).mentions.name).toBe('Junta Central Fallera');
+      expect(g('ofrenda.html').find((n) => hasType(n, 'WebPage')).keywords.length).toBeGreaterThan(1);
+      for (const legal of ['aviso-legal.html', 'privacidad.html', 'cookies.html']) {
+        const pagina = g(legal).find((n) => hasType(n, 'WebPage'));
+        expect(pagina.publisher).toEqual({ '@id': ORG_ID });
+        expect(pagina.isAccessibleForFree).toBe(true);
+      }
+      for (const [form, clave] of [['autorizacion-imagen.html', 'formMayores'], ['autorizacion-imagen-menor.html', 'formMenores']]) {
+        const grafo = g(form);
+        const doc = grafo.find((n) => hasType(n, 'DigitalDocument'));
+        expect(doc['@id']).toBe(`${pref}${form}#documento`);
+        expect(doc.name).toBe(tabla.nuevosFalleros[clave].titulo);
+        expect(grafo.find((n) => hasType(n, 'WebPage')).mainEntity).toEqual({ '@id': doc['@id'] });
+      }
+      const hope = g('colaboraciones.html').find((n) => hasType(n, 'CreativeWork'));
+      expect(hope.name).toBe(tabla.seo.colaboraciones.hopeName);
+      expect(g('blog.html').find((n) => hasType(n, 'Blog')).blogPost[0].headline).toBe(tabla.blog.somni.cardTitle);
     });
   }
 
@@ -207,6 +271,8 @@ test.describe('JSON-LD — nodos propios', () => {
     const ai = JSON.parse(fs.readFileSync(path.join(DIST, 'seo', 'ai-enhanced-schema.json'), 'utf8'));
     const org = fuente.organization;
     expect(ai.name).toBe(org.name);
+    expect(ai.description).toBe(org.description.es);
+    expect(ai.taxID).toBe(org.taxID);
     expect(ai.url).toBe(org.url);
     expect(ai.sameAs).toEqual(org.sameAs);
     expect(ai.address).toEqual(org.address);

@@ -44,6 +44,15 @@ test('dry-run de despliegue no crea directorios remotos', () => {
   assert.match(result.commands, /rsync .* -n /);
 });
 
+test('dry-run no notifica a IndexNow ni guarda el snapshot del historial (v4.43.0)', () => {
+  const result = simulate(['--dry-run', '--skip-build']);
+  assert.equal(result.status, 0);
+  assert.doesNotMatch(result.commands, /indexnow|verify-seo/);
+  assert.match(result.stdout, /IndexNow/);
+  const flags = simulate(['--dry-run', '--skip-build', '--skip-verify', '--no-indexnow']);
+  assert.equal(flags.status, 0, flags.stderr);
+});
+
 test('mantenimiento reconoce HTTP 503 sin concatenar un segundo código', () => {
   const result = simulate(['--maintenance', 'on'], { code: '503' });
   assert.equal(result.status, 0);

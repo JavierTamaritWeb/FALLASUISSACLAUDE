@@ -788,6 +788,22 @@
 
     pintarTextos();
     pintarInicial();
+
+    // Enlace profundo ?q=consulta (v4.43.0): es el destino del SearchAction del
+    // JSON-LD (WebSite.potentialAction). Abre el panel con la consulta y limpia el
+    // parámetro de la URL para que recargar o compartir no vuelva a abrirlo.
+    try {
+      var parametros = new URLSearchParams(window.location.search);
+      var consultaInicial = (parametros.get('q') || '').trim().slice(0, 100);
+      if (consultaInicial) {
+        input.value = consultaInicial;
+        guardarConsulta(consultaInicial);
+        parametros.delete('q');
+        var restoQuery = parametros.toString();
+        window.history.replaceState(null, '', window.location.pathname + (restoQuery ? '?' + restoQuery : '') + window.location.hash);
+        abrir();
+      }
+    } catch (e) { /* sin URLSearchParams o history: el buscador funciona igual */ }
   }
 
   if (document.readyState === 'loading') {

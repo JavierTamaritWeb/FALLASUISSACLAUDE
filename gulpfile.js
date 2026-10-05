@@ -15,6 +15,8 @@ const crypto = require('crypto');
 const terser = require('gulp-terser');
 const { pipeline } = require('stream/promises');
 const { generateSeoArtifacts } = require('./scripts/seo-artifacts.cjs');
+// Historial de fechas por contenido (lo escribe generateSeoArtifacts; lo lee htmlTask para dateModified/datePublished)
+const SEO_HISTORY_PATH = path.join(__dirname, 'src', 'data', 'seo-history.json');
 
 const EVENT_BASE_URL = 'https://fallasuissa.es/eventos.html';
 const EVENT_IMAGE_URL = 'https://fallasuissa.es/img/escudo-falla/Escudo-Oficial-Falla.png';
@@ -40,8 +42,9 @@ const paths = {
   html: { src: ['src/*.html', '!src/google*.html', '!src/ai-info.html', '!src/base.html', '!src/mantenimiento.html'], dest: 'dist' },
   root: {
     src: [
-      'src/robots*.txt',
-      'src/sitemap*.xml',
+      'src/robots.txt',
+      'src/llms.txt',
+      'src/indexnow.txt',
       'src/.htaccess',
       'src/sw.js',
       'src/manifest.json',
@@ -232,6 +235,86 @@ const BREADCRUMB_NAV_KEY = {
   'nuevos-falleros.html': 'nuevosFalleros'
 };
 
+const REQUIRED_SAME_AS = [
+  'https://www.facebook.com/FallaSuissaLalqueriadelFavero',
+  'https://www.instagram.com/fallasuissa_lalqueriadelfavero/',
+  'https://tiktok.com/@fallasuissaalqueria'
+];
+
+// Textos traducibles de la fuente (v4.43.0): { "es": "…", "ca": "…" } → cadena del idioma.
+const LOCALIZED_KEYS = new Set(['es', 'ca']);
+function isLocalizedText(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const keys = Object.keys(value);
+  return keys.length > 0 && keys.every((k) => LOCALIZED_KEYS.has(k) && typeof value[k] === 'string') && typeof value.es === 'string';
+}
+function resolveLang(value, lang) {
+  if (Array.isArray(value)) return value.map((v) => resolveLang(v, lang));
+  if (!value || typeof value !== 'object') return value;
+  if (isLocalizedText(value)) return value[lang] || value.es;
+  const out = {};
+  for (const k of Object.keys(value)) out[k] = resolveLang(value[k], lang);
+  return out;
+}
+
+// Fechas del nodo de página (v4.43.0): dateModified/datePublished salen del historial
+// por hash de contenido (src/data/seo-history.json). Como el historial se escribe tras
+// htmlTask, seoArtifactsTask repite htmlTask cuando cambia (ver la tarea).
+async function readSeoHistory() {
+  try { return JSON.parse(await fs.readFile(SEO_HISTORY_PATH, 'utf8')); }
+  catch (error) { if (error.code === 'ENOENT') return {}; throw error; }
+}
+function applyPageDates(page, nodes, entry) {
+  const mainId = page.mainEntity && page.mainEntity['@id'];
+  const article = mainId && nodes.find((n) => hasType(n, 'BlogPosting') && n['@id'] === mainId);
+  const published = (article && article.datePublished) || (entry && entry.published);
+  const modified = (article && article.dateModified) || (entry && entry.modified);
+  if (!page.datePublished && published) page.datePublished = published;
+  if (!page.dateModified && modified) page.dateModified = modified;
+}
+
+// Dimensiones y formato de las imágenes del JSON-LD (v4.43.0), con sharp sobre src/.
+const IMAGE_MIME = { jpeg: 'image/jpeg', jpg: 'image/jpeg', png: 'image/png', webp: 'image/webp', avif: 'image/avif', gif: 'image/gif', svg: 'image/svg+xml' };
+const imageMetaCache = new Map();
+async function imageMeta(relPath) {
+  const clean = String(relPath).replace(/^https:\/\/fallasuissa\.es\//, '').replace(/[?#].*$/, '');
+  if (imageMetaCache.has(clean)) return imageMetaCache.get(clean);
+  let meta = null;
+  try {
+    const info = await sharp(path.join(__dirname, 'src', clean)).metadata();
+    if (info.width && info.height) meta = { width: info.width, height: info.height, encodingFormat: IMAGE_MIME[info.format] || undefined };
+  } catch (_) { meta = null; }
+  imageMetaCache.set(clean, meta);
+  return meta;
+}
+function withImageMeta(node, relPath, imageMetaMap) {
+  const meta = imageMetaMap && imageMetaMap.get(String(relPath).replace(/^https:\/\/fallasuissa\.es\//, '').replace(/[?#].*$/, ''));
+  if (!meta) return node;
+  if (!node.width) node.width = meta.width;
+  if (!node.height) node.height = meta.height;
+  if (!node.encodingFormat && meta.encodingFormat) node.encodingFormat = meta.encodingFormat;
+  return node;
+}
+// Rutas de imagen que aparecen en los og:image y en los ld+json de src/*.html (para precargar sus metadatos).
+async function collectSchemaImagePaths(galleryImages) {
+  const paths = new Set();
+  for (const file of await glob('src/*.html')) {
+    const html = await fs.readFile(file, 'utf8');
+    for (const m of html.matchAll(/property="og:image"\s+content="([^"]+)"/g)) paths.add(m[1]);
+    const block = html.match(SCHEMA_SCRIPT_RE);
+    if (block) for (const m of block[1].matchAll(/https:\/\/fallasuissa\.es\/img\/[^"\s]+/g)) paths.add(m[0]);
+  }
+  for (const fotos of galleryImages.values()) for (const foto of fotos) paths.add(foto.src);
+  const map = new Map();
+  for (const p of paths) {
+    const clean = p.replace(/^https:\/\/fallasuissa\.es\//, '').replace(/[?#].*$/, '');
+    if (!/\.(?:jpe?g|png|webp|avif|gif|svg)$/i.test(clean)) continue;
+    const meta = await imageMeta(clean);
+    if (meta) map.set(clean, meta);
+  }
+  return map;
+}
+
 let baseSchemaCache = null;
 async function loadBaseSchema() {
   if (baseSchemaCache) return baseSchemaCache;
@@ -242,8 +325,10 @@ async function loadBaseSchema() {
   if (!org || org['@id'] !== ORG_ID) fallo(`organization.@id debe ser ${ORG_ID}`);
   if (!site || site['@id'] !== SITE_ID) fallo(`website.@id debe ser ${SITE_ID}`);
   if (org.name !== "Falla Suïssa - L'Alqueria del Favero") fallo('organization.name no es el canónico');
-  if (!Array.isArray(org.sameAs) || org.sameAs.length !== 3) fallo('organization.sameAs debe tener 3 redes');
+  if (!Array.isArray(org.sameAs) || org.sameAs.length < 3 || !REQUIRED_SAME_AS.every((u) => org.sameAs.includes(u))) fallo('organization.sameAs debe incluir Facebook, Instagram y TikTok');
   if (!Array.isArray(org.member) || !org.member.some((m) => m.name === 'José Santos Quilis')) fallo('organization.member debe incluir al Presidente');
+  if (!org.legalName || !org.taxID) fallo('organization.legalName y taxID son obligatorios (v4.43.0)');
+  if (!isLocalizedText(org.description) && typeof org.description !== 'string') fallo('organization.description debe ser texto o { es, ca }');
   baseSchemaCache = { organization: org, website: site };
   return baseSchemaCache;
 }
@@ -367,7 +452,7 @@ function ensurePageNode(nodes, meta) {
   if (!page.inLanguage) page.inLanguage = 'es-ES';
   page.isPartOf = { '@id': SITE_ID };
   if (!page.primaryImageOfPage && meta.ogImage) {
-    page.primaryImageOfPage = { '@type': 'ImageObject', url: meta.ogImage };
+    page.primaryImageOfPage = withImageMeta({ '@type': 'ImageObject', url: meta.ogImage }, meta.ogImage, meta.imageMeta);
   }
   return page;
 }
@@ -402,7 +487,7 @@ function buildBreadcrumb(fileName, mainUrl, page, table, lang) {
   };
 }
 
-function fillImageGallery(nodes, fileName, mainUrl, galleryImages, table) {
+function fillImageGallery(nodes, fileName, mainUrl, galleryImages, table, imageMetaMap) {
   const m = fileName.match(/^galeria_(\d+)\.html$/);
   if (!m) return;
   const gallery = nodes.find((node) => hasType(node, 'ImageGallery'));
@@ -412,7 +497,7 @@ function fillImageGallery(nodes, fileName, mainUrl, galleryImages, table) {
     return;
   }
   gallery.name = table?.galeria?.[`galeria${m[1]}`] || gallery.name;
-  gallery.associatedMedia = fotos.map((foto, i) => ({
+  gallery.associatedMedia = fotos.map((foto, i) => withImageMeta({
     '@type': 'ImageObject',
     '@id': `${mainUrl}#img-${String(i + 1).padStart(3, '0')}`,
     contentUrl: `${SITE_ORIGIN}/${foto.src}`,
@@ -422,13 +507,15 @@ function fillImageGallery(nodes, fileName, mainUrl, galleryImages, table) {
     representativeOfPage: i === 0,
     creditText: "Falla Suïssa - L'Alqueria del Favero",
     copyrightHolder: { '@id': ORG_ID }
-  }));
+  }, foto.src, imageMetaMap));
+  gallery.numberOfItems = fotos.length;
   if (fotos.length) gallery.primaryImageOfPage = { '@id': `${mainUrl}#img-001` };
 }
 
-function fillGaleriasList(nodes, mainUrl, galerias, table, esTable) {
+function fillGaleriasList(nodes, mainUrl, galerias, table, esTable, pageTitle) {
   const list = nodes.find((node) => hasType(node, 'ItemList'));
   if (!list) return;
+  if (pageTitle) list.name = pageTitle;
   const base = mainUrl.replace(/galerias\.html$/, '');
   list.itemListElement = galerias.map((g, i) => ({
     '@type': 'ListItem',
@@ -492,6 +579,7 @@ function localizeGraph(nodes, lang) {
       for (const key of Object.keys(value)) {
         const v = value[key];
         if ((key === '@id' || key === 'url' || key === 'item' || key === 'mainEntityOfPage') && typeof v === 'string') out[key] = rewriteUrl(v);
+        else if (key === 'relatedLink' || key === 'significantLink') out[key] = Array.isArray(v) ? v.map(rewriteUrl) : rewriteUrl(v);
         else if (key === 'inLanguage' && (v === 'es-ES' || v === 'es')) out[key] = 'ca-ES';
         else out[key] = walk(v);
       }
@@ -527,15 +615,23 @@ function toJsonLdScript(graph) {
 }
 
 function processJsonLd(html, ctx) {
-  const { fileName, lang, mainUrl, base, schemaEvents, galleryImages, galerias, langTable, esTable } = ctx;
+  const { fileName, lang, mainUrl, base, schemaEvents, galleryImages, galerias, langTable, esTable, history = {}, imageMeta: imageMetaMap } = ctx;
   const table = lang === 'ca' && langTable ? langTable : esTable;
   const meta = readHeadMeta(html);
   const { found, nodes: rawNodes } = extractFirstJsonLd(html, fileName);
   let nodes = normalizeGraph(rawNodes, fileName);
-  const page = ensurePageNode(nodes, { ...meta, mainUrl });
+  const page = ensurePageNode(nodes, { ...meta, mainUrl, imageMeta: imageMetaMap });
   // Los nombres y descripciones editoriales comparten la traducción del head.
   page.name = meta.title;
   page.description = meta.description;
+  // Fechas por contenido (v4.43.0): la clave del historial es la URL canónica (ES o /va/).
+  const historyKey = lang === 'ca' ? mainUrl.replace(`${SITE_ORIGIN}/`, `${SITE_ORIGIN}/va/`) : mainUrl;
+  applyPageDates(page, nodes, history[historyKey]);
+  // Imagen principal declarada inline (p. ej. la foto del artículo): dimensiones y formato
+  if (page.primaryImageOfPage && !page.primaryImageOfPage['@id'] && typeof page.primaryImageOfPage.url === 'string') {
+    withImageMeta(page.primaryImageOfPage, page.primaryImageOfPage.url, imageMetaMap);
+  }
+  const seoTable = table && table.seo ? table.seo : {};
   for (const node of nodes) {
     if (hasType(node, 'VideoObject')) {
       const video = table?.seo?.[fileName.replace(/\.html$/, '')];
@@ -547,10 +643,34 @@ function processJsonLd(html, ctx) {
       if (post) node.headline = post.cardTitle || post.title;
       node.description = meta.description;
       if (lang === 'ca') node.articleSection = fileName === 'blog-somni.html' ? 'Història de la Falla' : 'El barri';
+      // Imágenes del artículo como ImageObject con dimensiones (antes cadenas sueltas)
+      if (node.image) {
+        node.image = [].concat(node.image).map((img) => (typeof img === 'string' && img.startsWith(`${SITE_ORIGIN}/`)
+          ? withImageMeta({ '@type': 'ImageObject', url: img }, img, imageMetaMap)
+          : img));
+      }
     }
     if (hasType(node, 'Blog')) {
       node.name = meta.title;
       node.description = meta.description;
+      // Resúmenes de los posts en el idioma de la página
+      for (const post of [].concat(node.blogPost || [])) {
+        const slug = String(post['@id'] || '').match(/blog-([a-z0-9-]+)\.html/);
+        const entry = slug && table && table.blog && table.blog[slug[1]];
+        if (entry && (entry.cardTitle || entry.title)) post.headline = entry.cardTitle || entry.title;
+      }
+    }
+    // Colaboración HOPE: nombre y descripción del idioma (seo.colaboraciones.hopeName/hopeDescription)
+    if (hasType(node, 'CreativeWork') && String(node['@id'] || '').endsWith('#hope-collaboration')) {
+      if (seoTable.colaboraciones && seoTable.colaboraciones.hopeName) node.name = seoTable.colaboraciones.hopeName;
+      if (seoTable.colaboraciones && seoTable.colaboraciones.hopeDescription) node.description = seoTable.colaboraciones.hopeDescription;
+    }
+    // Formularios imprimibles (autorizaciones): nombre del documento en el idioma
+    if (hasType(node, 'DigitalDocument')) {
+      const titleKey = SEARCH_PAGE_TITLE_KEY[fileName];
+      const localized = titleKey && getNestedKey(table, titleKey);
+      if (localized) node.name = localized;
+      if (!node.description && meta.description) node.description = meta.description;
     }
   }
   if (fileName !== 'index.html') {
@@ -558,13 +678,18 @@ function processJsonLd(html, ctx) {
     page.breadcrumb = { '@id': breadcrumb['@id'] };
     nodes.push(breadcrumb);
   }
-  fillImageGallery(nodes, fileName, mainUrl, galleryImages, table);
-  if (fileName === 'galerias.html') fillGaleriasList(nodes, mainUrl, galerias, table, esTable);
+  fillImageGallery(nodes, fileName, mainUrl, galleryImages, table, imageMetaMap);
+  if (fileName === 'galerias.html') fillGaleriasList(nodes, mainUrl, galerias, table, esTable, meta.title);
   if (fileName === 'index.html' || fileName === 'eventos.html') {
     nodes = mergeEventNodes(nodes, schemaEvents, fileName === 'index.html' ? isManagedBoardEventNode : null);
   }
   nodes = localizeGraph(nodes, lang);
-  const graph = [structuredClone(base.organization), structuredClone(base.website), ...nodes];
+  // Organization/WebSite en el idioma de la página; el buscador (?q=) también en /va/.
+  const organization = resolveLang(structuredClone(base.organization), lang);
+  const website = resolveLang(structuredClone(base.website), lang);
+  const target = website.potentialAction && website.potentialAction.target;
+  if (lang === 'ca' && target && typeof target.urlTemplate === 'string') target.urlTemplate = target.urlTemplate.replace(`${SITE_ORIGIN}/`, `${SITE_ORIGIN}/va/`);
+  const graph = [organization, website, ...nodes];
   completeImageObjects(graph, lang);
   assertUniqueIds(graph, fileName);
   const script = toJsonLdScript(graph);
@@ -1428,18 +1553,20 @@ function modifyHtmlStream(schemaCtx, lang, assetVersion, langTable, missingKeyTr
 async function htmlTask() {
   // Los cambios de la fuente SEO deben reflejarse también durante gulp watch.
   baseSchemaCache = null;
-  const [events, translationsRaw, assetVersion, baseSchema, galleryImages] = await Promise.all([
+  const [events, translationsRaw, assetVersion, baseSchema, galleryImages, seoHistory] = await Promise.all([
     getSchemaEvents(),
     fs.readFile(path.join(__dirname, 'src', 'data', 'translations.json'), 'utf8'),
     getAssetVersionToken(),
     loadBaseSchema(),
-    loadGalleryImages()
+    loadGalleryImages(),
+    readSeoHistory()
   ]);
+  const imageMetaMap = process.env.DISABLE_SCHEMA_INJECT === '1' ? new Map() : await collectSchemaImagePaths(galleryImages);
 
   // Kill switch: DISABLE_SCHEMA_INJECT=1 deja los bloques ld+json inline tal cual.
   const schemaCtx = process.env.DISABLE_SCHEMA_INJECT === '1'
     ? null
-    : { base: baseSchema, schemaEvents: events, galleryImages };
+    : { base: baseSchema, schemaEvents: events, galleryImages, history: seoHistory, imageMeta: imageMetaMap };
   if (!schemaCtx) {
     console.warn('[schema] inyección de JSON-LD desactivada por DISABLE_SCHEMA_INJECT=1');
   }
@@ -1506,7 +1633,7 @@ async function seoTask() {
   await pipeline(src(paths.seo.src, { encoding: false, allowEmpty: true }), dest(paths.seo.dest));
   // El endpoint histórico para agentes comparte los mismos datos institucionales.
   const base = await loadBaseSchema();
-  await fs.writeFile('dist/seo/ai-enhanced-schema.json', JSON.stringify({ '@context': 'https://schema.org', ...base.organization }, null, 2) + '\n');
+  await fs.writeFile('dist/seo/ai-enhanced-schema.json', JSON.stringify({ '@context': 'https://schema.org', ...resolveLang(base.organization, 'es') }, null, 2) + '\n');
 }
 
 // Favicon - Copia
@@ -1541,6 +1668,14 @@ async function wellKnownTask() {
       url: `${SITE_BASE}/ai-discovery.json`,
       distPath: 'dist/ai-discovery.json',
       contentType: 'application/json'
+    },
+    {
+      name: 'llms-txt',
+      type: 'document',
+      description: 'Resumen del sitio y enlaces clave para modelos de lenguaje (llmstxt.org); el inventario completo está en /llms-full.txt.',
+      url: `${SITE_BASE}/llms.txt`,
+      distPath: 'dist/llms.txt',
+      contentType: 'text/plain'
     },
     {
       name: 'ai-context',
@@ -1691,6 +1826,20 @@ function devTask(done) {
   done();
 }
 
+// Sitemaps + historial de fechas + llms-full.txt (v4.43.0). Si el historial cambia
+// (contenido nuevo o URL nueva), el HTML ya escrito lleva la fecha del build anterior:
+// se repite htmlTask para que dateModified/datePublished coincidan con el sitemap.
+// Es idempotente porque contentHash neutraliza esas fechas (scripts/seo-artifacts.cjs).
+async function seoArtifactsTask() {
+  const before = await fs.readFile(SEO_HISTORY_PATH, 'utf8').catch(() => '');
+  await generateSeoArtifacts();
+  const after = await fs.readFile(SEO_HISTORY_PATH, 'utf8').catch(() => '');
+  if (before !== after) {
+    console.log('[seo] seo-history.json cambió: segunda pasada de HTML para fijar dateModified/datePublished');
+    await htmlTask();
+  }
+}
+
 // Build
 const build = series(
   cssTask,
@@ -1703,7 +1852,7 @@ const build = series(
   htmlTask,
   rootFilesTask,
   seoTask,
-  generateSeoArtifacts,
+  seoArtifactsTask,
   wellKnownTask,
 );
 
@@ -1724,7 +1873,8 @@ exports.seo = seoTask;
 exports.seoDist = seoTask;
 exports.wellKnown = wellKnownTask;
 // Alias histórico: ahora mantiene fechas por contenido y genera todos los sitemaps.
-exports.updateDistSitemapsLastmod = generateSeoArtifacts;
+exports.updateDistSitemapsLastmod = seoArtifactsTask;
+exports.seoArtifacts = seoArtifactsTask;
 exports.dev = devTask;
 exports.build = build;
 exports.default = series(build, devTask);

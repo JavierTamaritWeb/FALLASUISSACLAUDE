@@ -158,7 +158,7 @@ WEBFALLASUISSA/
 ├── 📄 gulpfile.js             # Configuración Gulp
 ├── 📄 package.json            # Dependencias npm
 ├── 📄 robots.txt              # SEO crawlers
-└── 📄 sitemap*.xml            # Mapas del sitio
+└── 📄 (sitemaps: los genera el build en dist/)
 ```
 
 ### Páginas Disponibles
@@ -200,7 +200,8 @@ WEBFALLASUISSA/
 
 ```text
 ├── 📄 robots.txt              # Optimizado para Googlebot
-├── 📄 robots-ai-optimized.txt # Variante avanzada (bots IA + directivas extra)
+├── 📄 llms.txt                # Resumen para modelos de lenguaje (llmstxt.org)
+├── 📄 indexnow.txt            # Clave pública de IndexNow
 ├── 📄 sitemap.xml             # Sitemap principal corregido
 ├── 📄 sitemap-google.xml      # Alias del inventario canónico principal
 ├── 📄 sitemap-images.xml      # Mapa de imágenes
@@ -328,7 +329,7 @@ dist/
 ├── 📂 favicon_io/    # Iconos, favicons y manifest
 ├── 📄 *.html         # Páginas HTML optimizadas
 ├── 📄 robots.txt     # Configuración para web crawlers
-└── 📄 sitemap*.xml   # Mapas del sitio para SEO
+└── 📄 (sitemap*.xml los genera el build en dist/)
 ```
 
 ## 🎯 Funcionalidades Principales
@@ -640,7 +641,8 @@ Archivos creados:
 ├── 📄 ai-enhanced-schema.json   # Schema.org ampliado con knowsAbout
 └── 📄 ai-crawl.html             # Página específica para crawlers IA
 
-📄 robots-ai-optimized.txt       # Robots.txt con bots de IA específicos
+📄 llms.txt                      # Resumen del sitio para IA (llms-full.txt lo genera el build)
+📄 indexnow.txt                  # Clave IndexNow (aviso a buscadores tras el deploy)
 📄 sitemap-ai-optimized.xml      # Sitemap con contenido para IA
 ```
 
@@ -789,7 +791,7 @@ Nueva estructura organizada:
 ```text
 ├── 📄 .htaccess                   # Debe estar en raíz (Apache requirement)
 ├── 📄 robots.txt                  # Debe estar en raíz (SEO standard)
-├── 📄 sitemap*.xml                # Deben estar en raíz (Google requirement)
+├── 📄 sitemap*.xml                # Generados por el build (6 archivos, lastmod por contenido)
 └── 📂 seo/                        # Archivos auxiliares organizados
     ├── 📄 ai-crawl.html           # Página para IA crawlers
     └── 📄 schema-organization.json # Fuente única del JSON-LD (Organization + WebSite)

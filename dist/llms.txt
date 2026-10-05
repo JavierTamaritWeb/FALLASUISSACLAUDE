@@ -1,0 +1,52 @@
+# Falla Suïssa - L'Alqueria del Favero
+
+> Web oficial de la comisión fallera Suïssa - L'Alqueria del Favero (nº 396) de València, en el barrio de les Moreres: tradición desde 2024, el monumento, la Plana Mayor, la historia y los archivos de la comisión, el calendario y los eventos del ejercicio, galerías de fotos, blog, colaboración solidaria con HOPE-INCLIVA e información para nuevos falleros. Contenido en español (/) y valenciano (/va/).
+
+Todas las páginas llevan un único bloque JSON-LD (Organization, WebSite y el nodo de la página: WebPage, ImageGallery, BlogPosting, VideoObject…) inyectado por el build, canonical autorreferencial y hreflang es/ca. Los cargos y fechas vigentes son los de las páginas; los paneles de Archivos indican su ejercicio (AAAA-AA). El inventario completo de páginas con título y descripción en ambos idiomas está en /llms-full.txt.
+
+## Información institucional
+
+- [La Falla: monumento, Plana Mayor, historia y archivos](https://fallasuissa.es/lafalla.html): representantes, directiva, organigrama, llibrets, monumentos y ofrendas de cada ejercicio
+- [Organigrama 2026-27](https://fallasuissa.es/organigrama.html): representantes, junta directiva y delegaciones del ejercicio en curso
+- [Mapa y ubicación del casal](https://fallasuissa.es/mapa.html)
+- [Nuevos falleros](https://fallasuissa.es/nuevos-falleros.html): documentación de interés y formularios de autorización de derechos de imagen
+
+## Actividad
+
+- [Eventos y tablón de anuncios](https://fallasuissa.es/eventos.html): próximos actos, avisos y convocatorias
+- [Calendario del ejercicio](https://fallasuissa.es/calendario.html): actos falleros por mes, día o categoría
+- [Próxima Ofrenda](https://fallasuissa.es/ofrenda.html): Ofrenda a la Virgen de los Desamparados
+- [Deportes](https://fallasuissa.es/deportes.html): torneos y tablón JCF
+- [Colaboración con HOPE-INCLIVA](https://fallasuissa.es/colaboraciones.html): apoyo a la investigación del Linfoma No Hodgkin Pediátrico
+- [Llibret 2025-2026](https://fallasuissa.es/llibret_2026.html): llibret digital multilingüe con editorial, memoria del barrio y programa de actos
+
+## Galerías y blog
+
+- [Galerías de imágenes](https://fallasuissa.es/galerias.html): Apuntá, nombramientos, monumento, proclamación, Ofrenda, Cremá y más
+- [Blog de la Falla](https://fallasuissa.es/blog.html): historias, crónicas y noticias de la comisión
+
+## Datos estructurados y legibles por máquina
+
+- [Inventario de páginas con título y descripción (ES y VA)](https://fallasuissa.es/llms-full.txt)
+- [Organización en JSON-LD](https://fallasuissa.es/seo/ai-enhanced-schema.json)
+- [Guía de contexto para IA (Markdown)](https://fallasuissa.es/seo/ai-training-data.md)
+- [Metadatos de descubrimiento](https://fallasuissa.es/ai-discovery.json)
+- [Catálogo de recursos RFC 9727](https://fallasuissa.es/.well-known/api-catalog)
+- [Tablón de anuncios (JSON)](https://fallasuissa.es/data/board.json)
+- [Eventos del ejercicio (JSON)](https://fallasuissa.es/data/eventos.json)
+- [Índice de sitemaps](https://fallasuissa.es/sitemap-index.xml)
+
+## Valencià
+
+- [Inici](https://fallasuissa.es/va/)
+- [La Falla](https://fallasuissa.es/va/lafalla.html)
+- [Esdeveniments i tauler](https://fallasuissa.es/va/eventos.html)
+- [Galeries](https://fallasuissa.es/va/galerias.html)
+- [Nous Fallers](https://fallasuissa.es/va/nuevos-falleros.html)
+
+## Optional
+
+- [Meteo en València](https://fallasuissa.es/meteo.html)
+- [Aviso legal](https://fallasuissa.es/aviso-legal.html)
+- [Política de privacidad](https://fallasuissa.es/privacidad.html)
+- [Política de cookies](https://fallasuissa.es/cookies.html)
