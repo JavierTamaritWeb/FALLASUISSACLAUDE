@@ -24,12 +24,28 @@ async function preparar(page, ruta) {
   await page.waitForLoadState('networkidle');
 }
 
+// Espera a que el elemento deje de moverse (las secciones .reveal de la home se
+// desplazan con translateY tras el scroll: si el ratón llega antes, el hover
+// empieza tarde y la medición pilla la transición del fondo a medias) y, tras
+// mover el ratón, a que el color de fondo se estabilice (transición 0,3 s; brillo 520 ms).
+async function esperarEstable(leer, { intervalo = 150, intentos = 30 } = {}) {
+  let previo = await leer();
+  for (let i = 0; i < intentos; i++) {
+    await new Promise((r) => setTimeout(r, intervalo));
+    const actual = await leer();
+    if (actual === previo) return actual;
+    previo = actual;
+  }
+  return previo;
+}
+
 async function pasarRaton(page, titular) {
   await titular.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(200);
+  await esperarEstable(async () => JSON.stringify(await titular.boundingBox()));
   const bb = await titular.boundingBox();
   await page.mouse.move(bb.x + bb.width / 2, bb.y + bb.height / 2);
-  await page.waitForTimeout(700); // brillo 520 ms + margen
+  await page.waitForTimeout(600); // brillo 520 ms + margen
+  await esperarEstable(() => titular.evaluate((el) => getComputedStyle(el).backgroundColor));
 }
 
 function estilos(titular) {
