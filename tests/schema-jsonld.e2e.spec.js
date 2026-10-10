@@ -194,7 +194,8 @@ test.describe('JSON-LD — nodos propios', () => {
       const video = g9.find((node) => hasType(node, 'VideoObject'));
       expect(video.contentUrl).toBe(`${ORIGIN}/img/fallera-mayor-infantil/fmi-2026-27/video/fmi-2026-27.mp4`);
       expect(video.thumbnailUrl).toMatch(/fmi-2026-27-poster\.jpeg$/);
-      expect(video.uploadDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      // Search Console exige fecha y hora con zona horaria en uploadDate (aviso del 10-oct-2026)
+      expect(video.uploadDate).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})$/);
       expect(g9.find((node) => hasType(node, 'ImageGallery')).video).toEqual({ '@id': video['@id'] });
     });
 
@@ -239,6 +240,7 @@ test.describe('JSON-LD — nodos propios', () => {
       const lafalla = g('lafalla.html');
       expect(lafalla.find((n) => hasType(n, 'AboutPage')).mainEntity).toEqual({ '@id': ORG_ID });
       expect(lafalla.find((n) => hasType(n, 'VideoObject')).contentUrl).toMatch(/ofrenda-2026\.mp4$/);
+      expect(lafalla.find((n) => hasType(n, 'VideoObject')).uploadDate).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})$/);
       expect(g('mapa.html').find((n) => hasType(n, 'WebPage')).mainEntity).toEqual({ '@id': `${ORIGIN}/#place` });
       expect(g('eventos.html').find((n) => hasType(n, 'WebPage')).mainEntity).toEqual({ '@id': ORG_ID });
       const llibret = g('llibret_2026.html');

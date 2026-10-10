@@ -17,6 +17,9 @@ const FUENTE = JSON.parse(fs.readFileSync(path.resolve('src/seo/schema-organizat
 
 const hasType = (n, t) => n && (Array.isArray(n['@type']) ? n['@type'].includes(t) : n['@type'] === t);
 
+// Fecha y hora ISO 8601 con zona horaria (Search Console, Vídeos: uploadDate)
+const FECHA_HORA_ZONA = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:\d{2})$/;
+
 function collect(value, ids, refs, imgs) {
   if (Array.isArray(value)) return value.forEach((v) => collect(v, ids, refs, imgs));
   if (!value || typeof value !== 'object') return;
@@ -32,6 +35,7 @@ function collect(value, ids, refs, imgs) {
     // Dimensiones (v4.43.0): solo se exigen a las imágenes propias con url/contentUrl
     if ((value.contentUrl || value.url) && (typeof value.width !== 'number' || typeof value.height !== 'number')) imgs.sinDimensiones++;
   }
+  if (hasType(value, 'VideoObject') && (!FECHA_HORA_ZONA.test(String(value.uploadDate)) || Number.isNaN(Date.parse(value.uploadDate)))) imgs.videoSinFecha++;
   keys.forEach((k) => collect(value[k], ids, refs, imgs));
 }
 
@@ -61,7 +65,7 @@ for (const rel of listPages()) {
   } catch (e) {
     problemas.push(`JSON inválido: ${e.message}`);
   }
-  const ids = new Set(); const refs = []; const imgs = { count: 0, sinLicencia: 0, sinDimensiones: 0 };
+  const ids = new Set(); const refs = []; const imgs = { count: 0, sinLicencia: 0, sinDimensiones: 0, videoSinFecha: 0 };
   collect(graph, ids, refs, imgs);
   const sinResolver = [...new Set(refs.filter((r) => !ids.has(r) && !r.startsWith('https://hope-incliva.com')))];
   if (sinResolver.length) problemas.push(`refs sin resolver: ${sinResolver.join(', ')}`);
@@ -90,6 +94,7 @@ for (const rel of listPages()) {
   if (/"contentUrl":\s*"[^"]*\?v=/.test(texto)) problemas.push('contentUrl con ?v=');
   if (imgs.sinLicencia) problemas.push(`${imgs.sinLicencia} ImageObject sin creator/copyrightNotice/license/acquireLicensePage`);
   if (imgs.sinDimensiones) problemas.push(`${imgs.sinDimensiones} ImageObject sin width/height`);
+  if (imgs.videoSinFecha) problemas.push(`${imgs.videoSinFecha} VideoObject con uploadDate sin hora y zona horaria`);
   if (problemas.length) errores++;
   filas.push({ rel, scripts: scripts.length, types: [...new Set(graph.map((n) => Array.isArray(n['@type']) ? n['@type'].join('+') : n['@type']))].join(','), page: pageNode ? pageNode['@id'] : '-', lang: pageNode ? String(pageNode.inLanguage) : '-', imgs: imgs.count, problemas });
 }
