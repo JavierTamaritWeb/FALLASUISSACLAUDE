@@ -71,7 +71,7 @@ Relevo anual: al cambiar `member` en `schema-organization.json` las personas y l
 
 ---
 
-Última actualización: 5 de octubre de 2026 - v4.43.0
+Última actualización: 25 de octubre de 2026 - v4.44.0
 
 ## Enlace profundo `?q=` y SearchAction (v4.43.0)
 

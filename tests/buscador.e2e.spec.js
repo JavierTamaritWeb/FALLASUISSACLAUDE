@@ -52,7 +52,7 @@ test.describe('buscador — índice y meta generados por el build', () => {
     for (const r of regs) expect(r.desc.es, `${r.id} sin descripción`).not.toBe('');
     // Título VA distinto del ES salvo personas, eventos (solo ES), documentos
     // (nombres propios de PDF) y títulos idénticos en ambas lenguas
-    const iguales = new Set(['HOPE', 'Somni', 'Blog', 'La Falla', 'Organigrama de la Falla']);
+    const iguales = new Set(['HOPE', 'Somni', 'Blog', 'La Falla', 'Organigrama de la Falla', 'Mig any de Falles 2026']);
     for (const r of regs) {
       if (['persona', 'evento', 'documento'].includes(r.tipo) || iguales.has(r.titulo.es)) continue;
       expect(r.titulo.va, `${r.id} sin título VA`).not.toBe(r.titulo.es);

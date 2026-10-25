@@ -103,7 +103,7 @@ Search Console avisaba de que los `ImageObject` no llevaban `creator`, `copyrigh
 
 ---
 
-Última actualización: 5 de octubre de 2026 - v4.43.0
+Última actualización: 25 de octubre de 2026 - v4.44.0
 
 ## Actualización SEO v4.30.21
 

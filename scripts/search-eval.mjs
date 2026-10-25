@@ -69,6 +69,8 @@ const CASOS = [
   ['paella', 'es', 'gal:7', {}],
   ['cristo de nazaret', 'es', 'gal:10', { critico: true }],
   ['crist de natzaret', 'va', 'gal:10', { critico: true, titulo: /Natzaret 2026$/ }],
+  ['mig any', 'es', 'gal:11', { critico: true }],
+  ['mig any de falles', 'va', 'gal:11', { critico: true, titulo: /^Mig any de Falles 2026$/ }],
   ['proclamació 2025', 'va', 'gal:4', {}],
   ['representantes 2024-25', 'es', 'sec:representantes-2024-25', { critico: true }],
   ['representantes 2025', 'es', 'sec:representantes-2025-26', {}],

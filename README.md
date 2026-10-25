@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 17 de septiembre de 2026 - v4.42.0 - **Nuevo**: botón «Inicio» con icono de casa en la barra fija de las 31 páginas, pegado a la izquierda del menú hamburguesa; enlace relativo a `index.html` que conserva el idioma en `/va/`.
+🆕 Última actualización: 25 de octubre de 2026 - v4.44.0 - **Nuevo**: galería «Mig any de Falles 2026» (`galeria_11`, 17 fotos de la pancarta de los representantes infantiles, las falleras y el concurso de paellas).
 
 ## 🌐 Vista Previa
 

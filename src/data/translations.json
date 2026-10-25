@@ -314,6 +314,8 @@
       "galeria9-texto": "Galería de la proclamación de Sofía Gómez Medina como Fallera Mayor Infantil 2026-27",
       "galeria10": "Festividad del Santísimo Cristo de Nazaret 2026",
       "galeria10-texto": "Galería de los representantes 2026-27 en la Festividad del Santísimo Cristo de Nazaret",
+      "galeria11": "Mig any de Falles 2026",
+      "galeria11-texto": "Galería del Mig any de Falles 2026: pancarta de los representantes infantiles, falleras y concurso de paellas",
       "galeria9Video": {
         "titulo": "Vídeo de la proclamación",
         "pie": "Proclamación de Sofía Gómez Medina, Fallera Mayor Infantil 2026-27",
@@ -802,6 +804,10 @@
       "galeria_10": {
         "title": "Festividad del Santísimo Cristo de Nazaret 2026 | Falla Suïssa - L'Alqueria del Favero",
         "description": "Los representantes 2026-27 de la Falla Suïssa - L'Alqueria del Favero en la Festividad del Santísimo Cristo de Nazaret 2026: 8 fotos del acto y del photocall."
+      },
+      "galeria_11": {
+        "title": "Mig any de Falles 2026 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "El Mig any de Falles 2026 de la Falla Suïssa - L'Alqueria del Favero: 17 fotos de la pancarta infantil, las falleras y el concurso de paellas."
       }
     },
     "legalDocuments": {
@@ -1117,6 +1123,25 @@
         "p6": "Diego Gómez Medina, Sofía Gómez Medina, Lucía Gutiérrez Martín y José Santos Quilis, representantes 2026-27 de la Falla Suïssa, en la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 6 de 8.",
         "p7": "José Santos Quilis, Lucía Gutiérrez Martín y Sofía Gómez Medina ante el photocall de la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 7 de 8.",
         "p8": "Lucía Gutiérrez Martín, Fallera Mayor, y Sofía Gómez Medina, Fallera Mayor Infantil 2026-27, ante el photocall de la Festividad del Santísimo Cristo de Nazaret 2026. Fotografía 8 de 8."
+      },
+      "g11": {
+        "p1": "Familia de la Fallera Mayor Infantil y del Presidente Infantil 2026-27 con su pancarta en el Mig any de Falles 2026. Fotografía 1 de 17.",
+        "p2": "Miembros de la Falla Suïssa con la pancarta de la Fallera Mayor Infantil y del Presidente Infantil 2026-27 en el Mig any de Falles 2026. Fotografía 2 de 17.",
+        "p3": "La pancarta de los representantes infantiles 2026-27 de la Falla Suïssa en el Mig any de Falles 2026. Fotografía 3 de 17.",
+        "p4": "Grupo de falleras con el traje de labradora en el Mig any de Falles 2026. Fotografía 4 de 17.",
+        "p5": "Falleras con el traje de labradora posando juntas en el Mig any de Falles 2026. Fotografía 5 de 17.",
+        "p6": "Falleras abrazadas con el traje de labradora en el Mig any de Falles 2026. Fotografía 6 de 17.",
+        "p7": "Falleras de la Falla Suïssa abrazadas en el Mig any de Falles 2026. Fotografía 7 de 17.",
+        "p8": "Falleras y amigas de la Falla Suïssa en el Mig any de Falles 2026. Fotografía 8 de 17.",
+        "p9": "Cocinando la paella en el Mig any de Falles 2026. Fotografía 9 de 17.",
+        "p10": "Ambiente entre las paellas de la Falla Suïssa en el Mig any de Falles 2026. Fotografía 10 de 17.",
+        "p11": "Removiendo el arroz de la paella en el Mig any de Falles 2026. Fotografía 11 de 17.",
+        "p12": "Sirviendo la paella a los falleros en el Mig any de Falles 2026. Fotografía 12 de 17.",
+        "p13": "Fallera y fallero infantiles con el traje tradicional valenciano en el Mig any de Falles 2026. Fotografía 13 de 17.",
+        "p14": "Los niños de la Falla Suïssa junto a las paellas del concurso del Mig any de Falles 2026. Fotografía 14 de 17.",
+        "p15": "Niños y cocineros de la Falla Suïssa con sus paellas en el Mig any de Falles 2026. Fotografía 15 de 17.",
+        "p16": "Paellas del concurso del Mig any de Falles 2026. Fotografía 16 de 17.",
+        "p17": "Paella recién hecha en el Mig any de Falles 2026. Fotografía 17 de 17."
       }
     }
   },
@@ -1435,6 +1460,8 @@
       "galeria9-texto": "Galeria de la proclamació de Sofía Gómez Medina com a Fallera Major Infantil 2026-27",
       "galeria10": "Festivitat del Santíssim Crist de Natzaret 2026",
       "galeria10-texto": "Galeria dels representants 2026-27 en la Festivitat del Santíssim Crist de Natzaret",
+      "galeria11": "Mig any de Falles 2026",
+      "galeria11-texto": "Galeria del Mig any de Falles 2026: pancarta dels representants infantils, falleres i concurs de paelles",
       "galeria9Video": {
         "titulo": "Vídeo de la proclamació",
         "pie": "Proclamació de Sofía Gómez Medina, Fallera Major Infantil 2026-27",
@@ -1923,6 +1950,10 @@
       "galeria_10": {
         "title": "Festivitat del Santíssim Crist de Natzaret 2026 | Falla Suïssa - L'Alqueria del Favero",
         "description": "Els representants 2026-27 de la Falla Suïssa - L'Alqueria del Favero en la Festivitat del Santíssim Crist de Natzaret 2026: 8 fotos de l'acte i del photocall."
+      },
+      "galeria_11": {
+        "title": "Mig any de Falles 2026 | Falla Suïssa - L'Alqueria del Favero",
+        "description": "El Mig any de Falles 2026 de la Falla Suïssa - L'Alqueria del Favero: 17 fotos de la pancarta infantil, les falleres i el concurs de paelles."
       }
     },
     "legalDocuments": {
@@ -2238,6 +2269,25 @@
         "p6": "Diego Gómez Medina, Sofía Gómez Medina, Lucía Gutiérrez Martín i José Santos Quilis, representants 2026-27 de la Falla Suïssa, en la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 6 de 8.",
         "p7": "José Santos Quilis, Lucía Gutiérrez Martín i Sofía Gómez Medina davant el photocall de la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 7 de 8.",
         "p8": "Lucía Gutiérrez Martín, Fallera Major, i Sofía Gómez Medina, Fallera Major Infantil 2026-27, davant el photocall de la Festivitat del Santíssim Crist de Natzaret 2026. Fotografia 8 de 8."
+      },
+      "g11": {
+        "p1": "Família de la Fallera Major Infantil i del President Infantil 2026-27 amb la seua pancarta en el Mig any de Falles 2026. Fotografia 1 de 17.",
+        "p2": "Membres de la Falla Suïssa amb la pancarta de la Fallera Major Infantil i del President Infantil 2026-27 en el Mig any de Falles 2026. Fotografia 2 de 17.",
+        "p3": "La pancarta dels representants infantils 2026-27 de la Falla Suïssa en el Mig any de Falles 2026. Fotografia 3 de 17.",
+        "p4": "Grup de falleres amb el vestit de llauradora en el Mig any de Falles 2026. Fotografia 4 de 17.",
+        "p5": "Falleres amb el vestit de llauradora posant juntes en el Mig any de Falles 2026. Fotografia 5 de 17.",
+        "p6": "Falleres abraçades amb el vestit de llauradora en el Mig any de Falles 2026. Fotografia 6 de 17.",
+        "p7": "Falleres de la Falla Suïssa abraçades en el Mig any de Falles 2026. Fotografia 7 de 17.",
+        "p8": "Falleres i amigues de la Falla Suïssa en el Mig any de Falles 2026. Fotografia 8 de 17.",
+        "p9": "Cuinant la paella en el Mig any de Falles 2026. Fotografia 9 de 17.",
+        "p10": "Ambient entre les paelles de la Falla Suïssa en el Mig any de Falles 2026. Fotografia 10 de 17.",
+        "p11": "Remenant l'arròs de la paella en el Mig any de Falles 2026. Fotografia 11 de 17.",
+        "p12": "Servint la paella als fallers en el Mig any de Falles 2026. Fotografia 12 de 17.",
+        "p13": "Fallera i faller infantils amb el vestit tradicional valencià en el Mig any de Falles 2026. Fotografia 13 de 17.",
+        "p14": "Els xiquets de la Falla Suïssa al costat de les paelles del concurs del Mig any de Falles 2026. Fotografia 14 de 17.",
+        "p15": "Xiquets i cuiners de la Falla Suïssa amb les seues paelles en el Mig any de Falles 2026. Fotografia 15 de 17.",
+        "p16": "Paelles del concurs del Mig any de Falles 2026. Fotografia 16 de 17.",
+        "p17": "Paella acabada de fer en el Mig any de Falles 2026. Fotografia 17 de 17."
       }
     }
   },
