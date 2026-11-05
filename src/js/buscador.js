@@ -281,7 +281,7 @@
   var FALLBACK = {
     abrir: 'Buscar', cerrar: 'Cerrar buscador', etiqueta: 'Buscar en la web', placeholder: '¿Qué es lo que buscas?',
     borrar: 'Borrar la búsqueda', ayuda: 'Para filtrar los actos por día o categoría usa el', ayudaEnlace: 'calendario',
-    ejemplosTitulo: 'Prueba con:', ejemplos: ['Ofrenda 2026', 'Fallera Mayor', 'galería Cremá', 'calendario'],
+    ejemplosTitulo: 'Prueba con:', ejemplos: ['Ofrenda 2026', 'Fallera Mayor', 'galería Cremá', 'Deportes'],
     minimo: 'Escribe al menos 2 letras.', cargando: 'Cargando el índice…', resultados: '{n} resultados', resultado: '1 resultado',
     resultadosPara: '{n} resultados para «{q}»', resultadoPara: '1 resultado para «{q}»', corregido: 'Mostrando resultados para «{q}»',
     listaAria: 'Resultados de la búsqueda',
@@ -427,7 +427,7 @@
       '<circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.8-3.8"></path></svg>' +
       '  <button type="button" class="buscador__borrar" aria-label="" hidden><span aria-hidden="true">&times;</span></button>' +
       '</div>' +
-      '<p class="buscador__ayuda"><span class="buscador__ayuda-texto"></span> <a class="buscador__ayuda-enlace" href="#"></a>.</p>' +
+      '<p class="buscador__ayuda" hidden><span class="buscador__ayuda-texto"></span> <a class="buscador__ayuda-enlace" href="#"></a>.</p>' +
       '<p class="buscador__estado sr-only" aria-live="polite" aria-atomic="true"></p>' +
       '<div class="buscador__cuerpo" data-estado="inicial"></div>';
     headerBar.appendChild(panel);
@@ -532,7 +532,8 @@
       setEstado('error');
       cuerpo.innerHTML = '<p class="buscador__mensaje buscador__mensaje--error">' + escapar(t('error')) + '</p>' +
         '<p class="buscador__acciones"><button type="button" class="buscador__reintentar">' + escapar(t('reintentar')) + '</button> ' +
-        '<a class="buscador__enlace-secundario" href="' + escapar(resolverUrl('calendario.html')) + '">' + escapar(t('ayudaEnlace')) + '</a></p>';
+        // Enlace al calendario retirado mientras esté oculto (v4.48.0); la ayuda lleva hidden arriba
+        '</p>';
       anunciar(t('error'));
     }
 

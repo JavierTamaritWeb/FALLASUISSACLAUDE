@@ -24,15 +24,14 @@ const HOY = process.env.SEARCH_EVAL_HOY || idx.generado || new Date().toISOStrin
 //   critico: debe ir en el top 1 · titulo: regex del título mostrado en el idioma de la UI
 const CASOS = [
   // Páginas y navegación
-  ['calendari', 'es', 'page:calendario', { critico: true, titulo: /^Calendario$/ }],
-  ['calendario', 'va', 'page:calendario', { critico: true, titulo: /^Calendari$/ }],
+  ['esports', 'es', 'page:deportes', { critico: true, titulo: /^Deportes$/ }],
   ['organigrama', 'es', 'page:organigrama', { critico: true }],
   ['tiempo valencia', 'es', 'page:meteo', { critico: true }],
   ['oratge', 'va', 'page:meteo', { critico: true }],
   ['mapa', 'va', 'page:mapa', { critico: true, titulo: /^Mapa i ubicació$/ }],
   ['on estem', 'va', 'page:mapa', {}],
   ['suissa', 'es', /^page:(index|lafalla)$/, {}],
-  ['blog', 'es', 'page:blog', { critico: true }],
+  ['blog', 'es', null, {}], // blog oculto del buscador (v4.48.0)
   ['esports', 'va', 'page:deportes', { critico: true, titulo: /^Esports$/ }],
   // Nuevos falleros
   ['apuntarme', 'es', 'page:nuevos-falleros', { critico: true }],
@@ -75,7 +74,7 @@ const CASOS = [
   ['hope', 'es', 'sec:hope', { critico: true }],
   ['fotos', 'es', 'page:galerias', {}],
   // Erratas (v4.34.0)
-  ['calendrio', 'es', 'page:calendario', { critico: true }],
+  ['depotres', 'es', 'page:deportes', { critico: true }],
   ['organigrma', 'es', /^(page:organigrama|doc:organigrama-2026)$/, {}],
   // Sin coincidencias
   ['xyz123', 'es', null, {}],

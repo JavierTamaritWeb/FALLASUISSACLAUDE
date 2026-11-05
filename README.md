@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 5 de noviembre de 2026 - v4.47.0 - **Cambios**: pie y barra a todo el ancho, campo de búsqueda en la barra (píldora con lupa) y retirada de las páginas legales, del banner de cookies, del banner de subvención y de los formularios de autorización de imagen de Nuevos Falleros (las URL responden 410).
+🆕 Última actualización: 5 de noviembre de 2026 - v4.48.0 - **Cambios**: pie y barra a todo el ancho, campo de búsqueda en la barra (píldora con lupa) y retirada de las páginas legales, del banner de cookies, del banner de subvención y de los formularios de autorización de imagen de Nuevos Falleros (las URL responden 410).
 
 ## 🌐 Vista Previa
 

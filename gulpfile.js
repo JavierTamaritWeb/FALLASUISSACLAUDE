@@ -1116,6 +1116,10 @@ const EVENTOS_EXCLUIDOS_DEL_INDICE = new Set([23, 24, 25, 48, 49]);
 const CATEGORIAS_EVENTOS_EXCLUIDAS = new Set(['Festivo']);
 // Páginas que no entran como "página" (llibret_2026 entra como documento)
 const PAGINAS_EXCLUIDAS_DEL_INDICE = new Set(['llibret_2026.html']);
+// Blog y calendario ocultos a petición del usuario (5-nov-2026, v4.48.0): sus páginas
+// siguen publicadas pero no aparecen en el buscador. Quitarlas del Set para mostrarlas;
+// con calendario.html oculto tampoco entran los eventos (enlazan a calendario.html?dia=).
+const PAGINAS_OCULTAS_DEL_BUSCADOR = new Set(['blog.html', 'blog-somni.html', 'blog-anima.html', 'calendario.html']);
 // Páginas standalone fuera del glob de htmlTask (sin /va/, sin canonical)
 const STANDALONE_HTML = new Set(['ai-info.html', 'base.html', 'mantenimiento.html']);
 // Clave i18n del título de cada página (para el título VA); el resto usa el <title> ES
@@ -1259,7 +1263,7 @@ async function buildSearchIndex({ translations, galerias }) {
   // glob() no aplica las exclusiones '!…' del array de gulp: se filtran a mano
   const htmlFiles = (await glob('src/*.html')).map((f) => path.basename(f)).filter((f) => !/^google/.test(f)).sort();
   for (const fileName of htmlFiles) {
-    if (PAGINAS_EXCLUIDAS_DEL_INDICE.has(fileName) || STANDALONE_HTML.has(fileName)) continue;
+    if (PAGINAS_EXCLUIDAS_DEL_INDICE.has(fileName) || PAGINAS_OCULTAS_DEL_BUSCADOR.has(fileName) || STANDALONE_HTML.has(fileName)) continue;
     const html = await fs.readFile(path.join(__dirname, 'src', fileName), 'utf8');
     const meta = readHeadMeta(html);
     const slug = fileName.replace(/\.html$/, '');
@@ -1366,7 +1370,7 @@ async function buildSearchIndex({ translations, galerias }) {
   try {
     const ev = JSON.parse(await fs.readFile(path.join(__dirname, 'src', 'data', 'eventos.json'), 'utf8'));
     const vistos = new Set();
-    for (const e of (ev.eventos || [])) {
+    for (const e of (PAGINAS_OCULTAS_DEL_BUSCADOR.has('calendario.html') ? [] : (ev.eventos || []))) {
       if (EVENTOS_EXCLUIDOS_DEL_INDICE.has(Number(e.id)) || CATEGORIAS_EVENTOS_EXCLUIDAS.has(e.category)) continue;
       if (!e.date || e.date < hoy) continue;
       const clave = `${String(e.title || '').trim().toLowerCase()}|${e.date}`;
@@ -1403,7 +1407,12 @@ async function buildSearchIndex({ translations, galerias }) {
     for (const [id, val] of Object.entries(kws)) {
       if (id.startsWith('$')) continue;
       const r = porId.get(id);
-      if (!r) { console.warn(`[buscador] search-keywords.json: id desconocido "${id}"`); continue; }
+      if (!r) {
+        // Las palabras clave de las páginas ocultas se conservan sin avisar
+        const oculta = [...PAGINAS_OCULTAS_DEL_BUSCADOR].some((f) => id === `page:${f.replace(/\.html$/, '')}` || id === `post:${f.replace(/^blog-|\.html$/g, '')}`);
+        if (!oculta) console.warn(`[buscador] search-keywords.json: id desconocido "${id}"`);
+        continue;
+      }
       r.kw = [...new Set([...r.kw, ...(val.es || []), ...(val.va || [])])];
     }
   } catch (err) {

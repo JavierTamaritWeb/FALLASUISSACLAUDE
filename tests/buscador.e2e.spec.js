@@ -17,16 +17,22 @@ const INDEX_HASH = crypto.createHash('sha1').update(INDEX_RAW).digest('hex').sli
 test.describe('buscador — índice y meta generados por el build', () => {
   test('el índice tiene registros de todos los tipos y sin contenido de prueba', () => {
     const tipos = new Set(INDEX.registros.map((r) => r.tipo));
-    for (const t of ['pagina', 'seccion', 'galeria', 'post', 'documento', 'persona']) {
+    for (const t of ['pagina', 'seccion', 'galeria', 'documento', 'persona']) {
       expect(tipos.has(t), `tipo ${t}`).toBe(true);
     }
+    // Blog oculto del buscador (v4.48.0): ni el listado ni los artículos
+    expect(tipos.has('post')).toBe(false);
+    expect(INDEX.registros.some((r) => /^blog/.test(r.url))).toBe(false);
     expect(tipos.has('formulario')).toBe(false); // autorizaciones retiradas (v4.46.0)
     // Eventos (v4.33.0): solo futuros, sin duplicados y con enlace al día; el tipo
     // aparece únicamente si eventos.json tiene actos futuros que no sean festivos
     const eventosJson = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'eventos.json'), 'utf8')).eventos;
     const futuros = eventosJson.filter((e) => e.category !== 'Festivo' && e.date >= INDEX.generado);
     const eventos = INDEX.registros.filter((r) => r.tipo === 'evento');
-    expect(eventos.length > 0).toBe(futuros.length > 0);
+    // Con el calendario oculto del buscador (v4.48.0) no entra ningún evento;
+    // al mostrarlo de nuevo, volver a: expect(eventos.length > 0).toBe(futuros.length > 0)
+    expect(eventos.length).toBe(0);
+    void futuros;
     for (const e of eventos) {
       expect(e.fecha >= INDEX.generado, e.id).toBe(true);
       expect(e.url, e.id).toBe(`calendario.html?dia=${e.fecha}`);
@@ -41,8 +47,10 @@ test.describe('buscador — índice y meta generados por el build', () => {
     // Bilingüe: las galerías llevan título VA distinto del ES
     const g6 = INDEX.registros.find((r) => r.id === 'gal:6');
     expect(g6.titulo.va).toBe('Cremà 2025-26');
-    const cal = INDEX.registros.find((r) => r.id === 'page:calendario');
-    expect(cal.titulo.va).toBe('Calendari');
+    const dep = INDEX.registros.find((r) => r.id === 'page:deportes');
+    expect(dep.titulo.va).toBe('Esports');
+    // Calendario oculto del buscador (v4.48.0), con sus eventos
+    expect(INDEX.registros.some((r) => /^calendario\.html/.test(r.url))).toBe(false);
     // Tamaño acotado
     expect(fs.statSync(path.join(DIST, 'data', 'search-index.json')).size).toBeLessThan(120 * 1024);
   });
@@ -72,7 +80,9 @@ test.describe('buscador — índice y meta generados por el build', () => {
     // Todo id de search-keywords.json existe en el índice
     const kws = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'search-keywords.json'), 'utf8'));
     const ids = new Set(regs.map((r) => r.id));
-    for (const id of Object.keys(kws)) if (!id.startsWith('$')) expect(ids.has(id), `keyword huérfana ${id}`).toBe(true);
+    // Blog y calendario ocultos del buscador (v4.48.0): sus palabras clave se conservan
+    const OCULTOS = new Set(['page:blog', 'post:somni', 'post:anima', 'page:calendario']);
+    for (const id of Object.keys(kws)) if (!id.startsWith('$') && !OCULTOS.has(id)) expect(ids.has(id), `keyword huérfana ${id}`).toBe(true);
     // Un solo registro por llibret y ejercicio
     expect(regs.filter((r) => /^llibret/i.test(r.titulo.es) && r.ejercicio === '2025-26').map((r) => r.id)).toEqual(['doc:llibret-2025-26-digital']);
     expect(ids.has('sec:llibrets-2025-26') || ids.has('doc:llibret-2025-26')).toBe(false);
@@ -123,13 +133,13 @@ test.describe('buscador — panel en el navegador', () => {
     await expect(page.locator('.buscador__cuerpo')).toHaveAttribute('data-estado', 'inicial');
     await expect(page.locator('.buscador__ejemplo').first()).toBeVisible();
 
-    await page.fill('#siteSearchInput', 'calendari');
+    await page.fill('#siteSearchInput', 'esports');
     await expect(page.locator('.buscador__cuerpo')).toHaveAttribute('data-estado', 'resultados');
     const primero = page.locator('.buscador__resultado').first();
-    await expect(primero.locator('.buscador__titulo')).toHaveText('Calendario');
-    await expect(primero).toHaveAttribute('href', /\/calendario\.html$/);
+    await expect(primero.locator('.buscador__titulo')).toHaveText('Deportes');
+    await expect(primero).toHaveAttribute('href', /\/deportes\.html$/);
     // Un solo resultado por página lógica (no duplica ES/VA)
-    expect(await page.locator('.buscador__titulo', { hasText: /^Calendario$/ }).count()).toBe(1);
+    expect(await page.locator('.buscador__titulo', { hasText: /^Deportes$/ }).count()).toBe(1);
     // El estado accesible anuncia el recuento
     await expect(page.locator('.buscador__estado')).toContainText(/resultado/);
   });
@@ -351,10 +361,10 @@ test.describe('buscador — panel en el navegador', () => {
     await page.keyboard.press('Enter');
     await expect(page.locator('#siteSearchOpcion11')).toBeFocused();
     expect(await page.locator('.buscador__resultado').count()).toBeGreaterThan(10);
-    // Errata: «calendrio» → aviso de consulta corregida y resultado
-    await page.fill('#siteSearchInput', 'calendrio');
-    await expect(page.locator('.buscador__corregido')).toContainText('calendario');
-    await expect(page.locator('.buscador__resultado').first().locator('.buscador__titulo')).toHaveText('Calendario');
+    // Errata: «depotres» → aviso de consulta corregida y resultado
+    await page.fill('#siteSearchInput', 'depotres');
+    await expect(page.locator('.buscador__corregido')).toContainText('deportes');
+    await expect(page.locator('.buscador__resultado').first().locator('.buscador__titulo')).toHaveText('Deportes');
   });
 
   test('v4.35.0: un hash malformado no rompe los acordeones de lafalla.html', async ({ page }) => {

@@ -557,4 +557,4 @@ npm run build
 - Hover/focus y activo usan ambos `v.$primary-color` tanto en el texto como en la línea del `::after`.
 - Test `tests/nav.e2e.spec.js` actualizado: ya no espera fondo blanco en el enlace activo móvil; ahora valida `color === rgb(255, 111, 97)` y que el `::after` tiene `opacity: 1` + `background-color` en coral.
 
-Última actualización: 5 de noviembre de 2026 - v4.47.0
+Última actualización: 5 de noviembre de 2026 - v4.48.0
