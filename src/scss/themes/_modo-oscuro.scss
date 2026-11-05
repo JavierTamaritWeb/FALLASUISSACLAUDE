@@ -1229,6 +1229,17 @@ body.modo-oscuro .buscador__mark {
   background: rgba(v.$amarillo-anaranjado, 0.35);
 }
 
+// Campo del buscador en la barra (v4.44.5): mismo gris que los botones oscuros
+body.modo-oscuro .buscador__campo.buscador__campo--barra .buscador__input {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(70, 70, 70, 0.95);
+}
+
+body.modo-oscuro .buscador__campo.buscador__campo--barra .buscador__input:focus-visible {
+  outline: 2px solid v.$amarillo-anaranjado;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
 body.modo-oscuro .header__search-toggle {
   background: rgba(255, 255, 255, 0.04);
   border-color: rgba(70, 70, 70, 0.95);

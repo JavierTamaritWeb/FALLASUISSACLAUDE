@@ -392,6 +392,7 @@
     var ultimosResultados = [];
     var debounce = null;
     var activo = -1; // índice del resultado activo (aria-activedescendant)
+    var sinReabrir = false;
 
     // Botón lupa + «Buscar»: el nombre accesible es su texto visible (WCAG 2.5.3);
     // el estado lo da aria-expanded, sin cambiar el nombre a «Cerrar»
@@ -436,6 +437,38 @@
     var estado = panel.querySelector('.buscador__estado');
     var borrar = panel.querySelector('.buscador__borrar');
     var cerrar = panel.querySelector('.buscador__cerrar');
+    var campo = panel.querySelector('.buscador__campo');
+    var ayuda = panel.querySelector('.buscador__ayuda');
+
+    // Campo en la barra (v4.44.5): desde 768 px el campo del buscador (el mismo
+    // <input> combobox, con sus eventos) se coloca en .header__botones en lugar
+    // del botón, y los resultados se despliegan debajo; en móvil vuelve al panel
+    // y la lupa lo abre. Se mueve el nodo, no se duplica: un único combobox.
+    var mqBarra = window.matchMedia('(min-width: 768px)');
+    function enBarra() { return mqBarra.matches; }
+    function colocarCampo() {
+      if (enBarra()) {
+        if (campo.parentNode !== botones) botones.appendChild(campo);
+        campo.classList.add('buscador__campo--barra');
+      } else {
+        if (campo.parentNode !== panel) panel.insertBefore(campo, ayuda);
+        campo.classList.remove('buscador__campo--barra');
+      }
+    }
+    colocarCampo();
+    if (typeof mqBarra.addEventListener === 'function') mqBarra.addEventListener('change', colocarCampo);
+    else if (typeof mqBarra.addListener === 'function') mqBarra.addListener(colocarCampo);
+
+    // En escritorio el panel se alinea bajo el campo de la barra
+    function alinearPanel() {
+      if (!enBarra()) { panel.style.left = ''; panel.style.right = ''; return; }
+      var barra = headerBar.getBoundingClientRect();
+      var r = campo.getBoundingClientRect();
+      var ancho = panel.offsetWidth;
+      var izquierda = Math.max(0, Math.min(r.left - barra.left, barra.width - ancho));
+      panel.style.left = izquierda + 'px';
+      panel.style.right = 'auto';
+    }
 
     function pintarTextos() {
       // Píldora de la barra (v4.44.4): el texto visible es la pregunta del campo y
@@ -660,7 +693,8 @@
       var previa = leerConsulta();
       if (previa && !input.value) input.value = previa;
       ejecutar(input.value);
-      input.focus({ preventScroll: true });
+      if (document.activeElement !== input) input.focus({ preventScroll: true });
+      alinearPanel();
       ajustarAltura();
       cargarIndice().catch(function () { /* se pinta al buscar */ });
     }
@@ -673,7 +707,16 @@
       panel.style.maxHeight = '';
       toggle.setAttribute('aria-expanded', 'false');
       setActivo(-1);
-      if (devolverFoco) toggle.focus({ preventScroll: true });
+      if (devolverFoco) {
+        if (enBarra()) {
+          // Devolver el foco al campo de la barra sin que su `focus` reabra el panel
+          sinReabrir = true;
+          input.focus({ preventScroll: true });
+          sinReabrir = false;
+        } else {
+          toggle.focus({ preventScroll: true });
+        }
+      }
     }
 
     // Ir a un resultado: si es un ancla de esta misma página con el hash ya
@@ -703,12 +746,27 @@
       ejecutar('');
       input.focus();
     });
+    // Campo en la barra: enfocarlo, pulsarlo o escribir abre los resultados
+    input.addEventListener('focus', function () {
+      cargarIndice().catch(function () {});
+      if (enBarra() && !sinReabrir) abrir();
+    });
+    input.addEventListener('click', function () {
+      if (enBarra() && !abierto()) abrir();
+    });
     input.addEventListener('input', function () {
+      if (enBarra() && !abierto()) abrir();
       window.clearTimeout(debounce);
       debounce = window.setTimeout(function () { ejecutar(input.value); }, 150);
     });
     input.addEventListener('keydown', function (e) {
       var ops;
+      // Escape cierra y conserva el texto: sin preventDefault, el type="search"
+      // vacía el campo, su evento `input` reabría el panel en la barra (v4.44.5)
+      if (e.key === 'Escape') {
+        if (abierto()) { e.preventDefault(); e.stopPropagation(); cerrarPanel(true); }
+        return;
+      }
       if (e.key === 'Enter') {
         e.preventDefault();
         ops = opciones();
@@ -755,6 +813,16 @@
       var siguiente = focusables[i + (e.key === 'ArrowDown' ? 1 : -1)];
       if (siguiente) siguiente.focus();
     });
+    // Escritorio: si el foco sale del campo y del panel (Tab), se cierran los resultados
+    function alSalirFoco(e) {
+      if (!enBarra() || !abierto()) return;
+      var destino = e.relatedTarget;
+      if (destino && (campo.contains(destino) || panel.contains(destino))) return;
+      if (!destino) return; // clic en zona sin foco: lo resuelve el clic exterior
+      cerrarPanel(false);
+    }
+    campo.addEventListener('focusout', alSalirFoco);
+    panel.addEventListener('focusout', alSalirFoco);
     panel.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { e.stopPropagation(); cerrarPanel(true); }
     });
@@ -766,9 +834,9 @@
     // (ejemplo, reintentar) ya no está en el DOM y panel.contains(target) cerraba el panel.
     function clicDentro(e) {
       var ruta = typeof e.composedPath === 'function' ? e.composedPath() : [];
-      if (ruta.indexOf(panel) !== -1 || ruta.indexOf(toggle) !== -1) return true;
+      if (ruta.indexOf(panel) !== -1 || ruta.indexOf(toggle) !== -1 || ruta.indexOf(campo) !== -1) return true;
       var target = e.target instanceof Element ? e.target : null;
-      return !!target && (panel.contains(target) || toggle.contains(target));
+      return !!target && (panel.contains(target) || toggle.contains(target) || campo.contains(target));
     }
     document.addEventListener('click', function (e) {
       if (!abierto()) return;

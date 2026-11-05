@@ -6,27 +6,20 @@
 @use '../abstracts/variables' as v;
 @use '../abstracts/mixins' as m;
 
-// Botón del buscador en la barra: píldora ancha con la lupa a la izquierda y
-// «¿Qué es lo que buscas?» (v4.44.4), con el fondo, borde y relieve de los
-// botones de la barra (.header__menu-toggle)
+// Lupa de la barra en móvil (< 768 px): abre el panel con el campo. Desde 768 px
+// no se muestra: el campo vive en la propia barra (v4.44.5, .buscador__campo--barra)
 .header__search-toggle {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 0.8rem;
+  justify-content: center;
   min-height: 44px;
-  min-width: 24rem;
-  padding: 0.45rem 2rem 0.45rem 1.4rem;
+  padding: 0.45rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(3, 49, 95, 0.95);
-  border-radius: 999px;
+  border-radius: 0.8rem;
   color: v.$blanco;
   cursor: pointer;
   font-family: v.$font-family;
-  font-size: 1.4rem;
-  font-weight: 600;
-  text-align: left;
-  white-space: nowrap;
   box-shadow:
     0 2px 0 rgba(0, 0, 0, 0.22),
     0 8px 18px rgba(0, 0, 0, 0.18),
@@ -39,6 +32,11 @@
     height: 20px;
     display: block;
     flex-shrink: 0;
+  }
+
+  // El texto sigue en el DOM para el nombre accesible
+  .header__search-toggle-texto {
+    @include m.visualmente-oculto;
   }
 
   &[aria-expanded="true"] {
@@ -62,21 +60,75 @@
   }
 
   @media (min-width: 768px) {
-    margin-left: 0.8rem; // separada del botón de tema
+    display: none;
   }
+}
+
+// Campo del buscador en la barra (≥ 768 px, v4.44.5): píldora con la lupa a la
+// izquierda y «¿Qué es lo que buscas?», con el fondo translúcido, el borde y el
+// relieve de los botones de la barra. Es el mismo .buscador__campo del panel,
+// que buscador.js mueve aquí; estas reglas solo ganan con el modificador.
+.buscador__campo.buscador__campo--barra {
+  width: 24rem;
+  margin-left: 0.8rem;
 
   @media (min-width: 1200px) {
-    min-width: 30rem;
+    width: 30rem;
   }
 
-  // En móvil solo el icono; el texto sigue en el DOM para el nombre accesible
-  @media (max-width: 767px) {
-    min-width: 0;
-    padding: 0.45rem;
-    border-radius: 0.8rem;
+  .buscador__input {
+    min-height: 44px;
+    padding: 0.45rem 3.8rem 0.45rem 4rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: v.$blanco;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(3, 49, 95, 0.95);
+    box-shadow:
+      0 2px 0 rgba(0, 0, 0, 0.22),
+      0 8px 18px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+    transition: background-color var(--theme-transition), border-color var(--theme-transition);
 
-    .header__search-toggle-texto {
-      @include m.visualmente-oculto;
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.92);
+      opacity: 1;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.12);
+      }
+    }
+
+    &:focus-visible {
+      background-color: rgba(255, 255, 255, 0.12);
+      border-color: rgba(3, 49, 95, 0.95);
+      outline: 2px solid var(--coral-marca);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 2px v.$negro-casi;
+    }
+  }
+
+  .buscador__lupa {
+    left: 1.3rem;
+    color: v.$blanco;
+  }
+
+  .buscador__borrar {
+    color: v.$blanco;
+
+    @media (hover: hover) {
+      &:hover {
+        color: v.$blanco;
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    &:focus-visible {
+      color: v.$blanco;
+      outline: 2px solid v.$blanco-hueso;
     }
   }
 }

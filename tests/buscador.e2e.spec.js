@@ -101,19 +101,23 @@ test.describe('buscador — índice y meta generados por el build', () => {
 });
 
 test.describe('buscador — panel en el navegador', () => {
-  test('desktop: botón visible, panel cerrado, «calendari» con interfaz ES muestra «Calendario»', async ({ page }) => {
+  test('desktop (v4.44.5): el campo está en la barra, sin botón; al pulsarlo se abren los resultados', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/index.html');
-    const toggle = page.locator('.header__search-toggle');
-    await expect(toggle).toBeVisible();
-    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
-    await expect(toggle).toHaveText('¿Qué es lo que buscas?');
+    const input = page.locator('#siteSearchInput');
+    // El campo vive en la barra, en lugar del botón
+    await expect(page.locator('.header__botones .buscador__campo--barra #siteSearchInput')).toBeVisible();
+    await expect(page.locator('.header__search-toggle')).toBeHidden();
+    await expect(input).toHaveAttribute('placeholder', '¿Qué es lo que buscas?');
+    await expect(input).toHaveAccessibleName('Buscar en la web');
     await expect(page.locator('#siteSearch')).toBeHidden();
 
-    await toggle.click();
+    await input.click();
     await expect(page.locator('#siteSearch')).toBeVisible();
-    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-    await expect(page.locator('#siteSearchInput')).toBeFocused();
+    await expect(input).toBeFocused();
+    // El panel se despliega bajo el campo
+    const [campoX, panelX] = await page.evaluate(() => [document.querySelector('.buscador__campo').getBoundingClientRect().left, document.getElementById('siteSearch').getBoundingClientRect().left]);
+    expect(Math.abs(campoX - panelX)).toBeLessThanOrEqual(2);
     // Estado inicial con ejemplos
     await expect(page.locator('.buscador__cuerpo')).toHaveAttribute('data-estado', 'inicial');
     await expect(page.locator('.buscador__ejemplo').first()).toBeVisible();
@@ -129,20 +133,28 @@ test.describe('buscador — panel en el navegador', () => {
     await expect(page.locator('.buscador__estado')).toContainText(/resultado/);
   });
 
-  test('teclado: Escape cierra y devuelve el foco al botón; el menú y el buscador son excluyentes', async ({ page }) => {
+  test('teclado: Escape cierra y deja el foco en el campo de la barra conservando el texto; el menú y el buscador son excluyentes', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/eventos.html');
-    await page.locator('.header__search-toggle').focus();
-    await page.keyboard.press('Enter');
+    await page.locator('#siteSearchInput').focus();
     await expect(page.locator('#siteSearch')).toBeVisible();
+    await page.keyboard.type('falla');
     await page.keyboard.press('Escape');
     await expect(page.locator('#siteSearch')).toBeHidden();
-    await expect(page.locator('.header__search-toggle')).toBeFocused();
+    await expect(page.locator('#siteSearchInput')).toBeFocused();
+    await expect(page.locator('#siteSearchInput')).toHaveValue('falla');
+    // Escribir de nuevo reabre los resultados
+    await page.keyboard.type('s');
+    await expect(page.locator('#siteSearch')).toBeVisible();
+    // Tab fuera del campo y del panel los cierra
+    await page.keyboard.press('Escape');
+    await page.locator('.header__inicio').focus();
+    await expect(page.locator('#siteSearch')).toBeHidden();
 
     // Abrir el buscador cierra el menú
     await page.click('.header__menu-toggle');
     await expect(page.locator('nav.navegacion')).toBeVisible();
-    await page.click('.header__search-toggle');
+    await page.click('#siteSearchInput');
     await expect(page.locator('#siteSearch')).toBeVisible();
     await expect(page.locator('nav.navegacion')).toBeHidden();
     // Y abrir el menú cierra el buscador
@@ -169,7 +181,7 @@ test.describe('buscador — panel en el navegador', () => {
     // El banner de cookies tapa el pie del panel (donde va «Mostrar más»)
     await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
     await page.goto('/index.html');
-    await page.click('.header__search-toggle');
+    await page.click('#siteSearchInput');
     const panel = page.locator('#siteSearch');
     const cuerpo = page.locator('.buscador__cuerpo');
     await expect(panel).toBeVisible();
@@ -203,7 +215,8 @@ test.describe('buscador — panel en el navegador', () => {
   });
 
   test('dos aspas con papeles distintos: borrar solo con texto y sin cerrar; cerrar sin círculo', async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
+    // Móvil: el campo va dentro del panel (en escritorio está en la barra, v4.44.5)
+    await page.setViewportSize({ width: 390, height: 800 });
     await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
     await page.goto('/index.html');
     await page.click('.header__search-toggle');
@@ -267,9 +280,9 @@ test.describe('buscador — panel en el navegador', () => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.addInitScript(() => { try { localStorage.removeItem('lang'); } catch (e) { /* noop */ } });
     await page.goto('/va/lafalla.html');
-    const toggle = page.locator('.header__search-toggle');
-    await expect(toggle).toHaveText('Què és el que busques?');
-    await toggle.click();
+    const input = page.locator('#siteSearchInput');
+    await expect(input).toHaveAttribute('placeholder', 'Què és el que busques?');
+    await input.click();
     await expect(page.locator('.buscador__etiqueta')).toHaveText('Cercar en la web');
     await page.fill('#siteSearchInput', 'cremà');
     const primero = page.locator('.buscador__resultado').first();
@@ -297,7 +310,7 @@ test.describe('buscador — panel en el navegador', () => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
     await page.goto('/index.html');
-    await page.click('.header__search-toggle');
+    await page.click('#siteSearchInput');
     const input = page.locator('#siteSearchInput');
     await expect(input).toHaveAttribute('role', 'combobox');
     await expect(input).toHaveAttribute('aria-expanded', 'false');
@@ -334,7 +347,7 @@ test.describe('buscador — panel en el navegador', () => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
     await page.goto('/index.html');
-    await page.click('.header__search-toggle');
+    await page.click('#siteSearchInput');
     await page.fill('#siteSearchInput', 'falla');
     const mas = page.locator('.buscador__mas');
     await expect(mas).toBeVisible();
@@ -373,22 +386,22 @@ test.describe('buscador — panel en el navegador', () => {
     await page.goto('/?q=ofrenda');
     const panel = page.locator('#siteSearch');
     await expect(panel).toBeVisible();
-    await expect(panel.locator('.buscador__input')).toHaveValue('ofrenda');
+    await expect(page.locator('#siteSearchInput')).toHaveValue('ofrenda');
     await expect(panel.locator('[role="option"]').first()).toBeVisible();
     await expect.poll(() => page.evaluate(() => window.location.search)).toBe('');
     await page.goto('/va/?q=ofrena');
-    await expect(page.locator('#siteSearch .buscador__input')).toHaveValue('ofrena');
+    await expect(page.locator('#siteSearchInput')).toHaveValue('ofrena');
     await expect(page.locator('#siteSearch [role="option"]').first()).toContainText(/Ofrena/i);
   });
 
   test('la consulta se conserva al reabrir el panel en la misma pestaña', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/index.html');
-    await page.click('.header__search-toggle');
+    await page.click('#siteSearchInput');
     await page.fill('#siteSearchInput', 'organigrama');
     await expect(page.locator('.buscador__resultado').first()).toBeVisible();
     await page.keyboard.press('Escape');
-    await page.click('.header__search-toggle');
+    await page.click('#siteSearchInput');
     await expect(page.locator('#siteSearchInput')).toHaveValue('organigrama');
     await expect(page.locator('.buscador__cuerpo')).toHaveAttribute('data-estado', 'resultados');
   });
