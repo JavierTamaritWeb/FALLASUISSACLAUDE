@@ -10,7 +10,7 @@ Guía de las fuentes oficiales de la comisión fallera número 396, en el barrio
 - [Eventos y avisos](https://fallasuissa.es/eventos.html).
 - [Deportes](https://fallasuissa.es/deportes.html).
 - [Colaboración solidaria con HOPE-INCLIVA](https://fallasuissa.es/colaboraciones.html).
-- [Galerías](https://fallasuissa.es/galerias.html) y [blog](https://fallasuissa.es/blog.html).
+- [Galerías](https://fallasuissa.es/galerias.html).
 
 Los cargos, los representantes y el programa de actividades deben consultarse en esas páginas. Los archivos históricos identifican su ejercicio; no deben confundirse con la información vigente.
 

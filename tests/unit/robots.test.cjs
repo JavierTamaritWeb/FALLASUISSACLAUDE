@@ -14,7 +14,8 @@ const BOTS_IA = ['Googlebot', 'Google-Extended', 'Bingbot', 'GPTBot', 'OAI-Searc
 const BLOQUEADOS = ['AhrefsBot', 'SemrushBot', 'MJ12bot', 'DotBot', 'Bytespider'];
 const RUTAS_PUBLICAS = ['/css/', '/js/', '/img/', '/data/', '/pdf/', '/seo/', '/va/', '/.well-known/', '/llms.txt', '/sitemap.xml'];
 // Páginas publicables que no tienen por qué figurar en el resumen curado (sí en llms-full.txt).
-const OPCIONALES_FUERA_DE_LLMS = /^(galeria_\d+|blog-[a-z0-9-]+)\.html$/;
+// Blog y calendario, ocultos desde el 5-nov-2026 (v4.49.0), no figuran en ninguno de los dos.
+const OPCIONALES_FUERA_DE_LLMS = /^(galeria_\d+|blog(-[a-z0-9-]+)?|calendario)\.html$/;
 
 function parseRobots(text) {
   const groups = [];

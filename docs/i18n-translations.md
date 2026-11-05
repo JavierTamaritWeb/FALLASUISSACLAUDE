@@ -283,7 +283,7 @@ Guía de ejecución: [`e2e-testing.md`](./e2e-testing.md)
 
 ---
 
-Última actualización: 5 de noviembre de 2026 - v4.48.0
+Última actualización: 5 de noviembre de 2026 - v4.49.0
 
 ## Guardias SEO de v4.30.21
 

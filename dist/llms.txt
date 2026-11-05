@@ -1,8 +1,8 @@
 # Falla Suïssa - L'Alqueria del Favero
 
-> Web oficial de la comisión fallera Suïssa - L'Alqueria del Favero (nº 396) de València, en el barrio de les Moreres: tradición desde 2024, el monumento, la Plana Mayor, la historia y los archivos de la comisión, el calendario y los eventos del ejercicio, galerías de fotos, blog, colaboración solidaria con HOPE-INCLIVA e información para nuevos falleros. Contenido en español (/) y valenciano (/va/).
+> Web oficial de la comisión fallera Suïssa - L'Alqueria del Favero (nº 396) de València, en el barrio de les Moreres: tradición desde 2024, el monumento, la Plana Mayor, la historia y los archivos de la comisión, los eventos del ejercicio, galerías de fotos, colaboración solidaria con HOPE-INCLIVA e información para nuevos falleros. Contenido en español (/) y valenciano (/va/).
 
-Todas las páginas llevan un único bloque JSON-LD (Organization, WebSite y el nodo de la página: WebPage, ImageGallery, BlogPosting, VideoObject…) inyectado por el build, canonical autorreferencial y hreflang es/ca. Los cargos y fechas vigentes son los de las páginas; los paneles de Archivos indican su ejercicio (AAAA-AA). El inventario completo de páginas con título y descripción en ambos idiomas está en /llms-full.txt.
+Todas las páginas llevan un único bloque JSON-LD (Organization, WebSite y el nodo de la página: WebPage, ImageGallery, VideoObject…) inyectado por el build, canonical autorreferencial y hreflang es/ca. Los cargos y fechas vigentes son los de las páginas; los paneles de Archivos indican su ejercicio (AAAA-AA). El inventario completo de páginas con título y descripción en ambos idiomas está en /llms-full.txt.
 
 ## Información institucional
 
@@ -14,16 +14,14 @@ Todas las páginas llevan un único bloque JSON-LD (Organization, WebSite y el n
 ## Actividad
 
 - [Eventos y tablón de anuncios](https://fallasuissa.es/eventos.html): próximos actos, avisos y convocatorias
-- [Calendario del ejercicio](https://fallasuissa.es/calendario.html): actos falleros por mes, día o categoría
 - [Próxima Ofrenda](https://fallasuissa.es/ofrenda.html): Ofrenda a la Virgen de los Desamparados
 - [Deportes](https://fallasuissa.es/deportes.html): torneos y tablón JCF
 - [Colaboración con HOPE-INCLIVA](https://fallasuissa.es/colaboraciones.html): apoyo a la investigación del Linfoma No Hodgkin Pediátrico
 - [Llibret 2025-2026](https://fallasuissa.es/llibret_2026.html): llibret digital multilingüe con editorial, memoria del barrio y programa de actos
 
-## Galerías y blog
+## Galerías
 
 - [Galerías de imágenes](https://fallasuissa.es/galerias.html): Apuntá, nombramientos, monumento, proclamación, Ofrenda, Cremá y más
-- [Blog de la Falla](https://fallasuissa.es/blog.html): historias, crónicas y noticias de la comisión
 
 ## Datos estructurados y legibles por máquina
 

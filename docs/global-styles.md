@@ -366,7 +366,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 ---
 
-Última actualización: 5 de noviembre de 2026 - v4.48.0
+Última actualización: 5 de noviembre de 2026 - v4.49.0
 
 ## 🏛️ Componente Frieze (Cenefa)
 

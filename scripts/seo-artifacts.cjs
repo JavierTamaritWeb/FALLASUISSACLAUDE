@@ -6,6 +6,10 @@ const crypto = require('node:crypto');
 
 const ORIGIN = 'https://fallasuissa.es';
 const SITE_NAME = "Falla Suïssa - L'Alqueria del Favero";
+// Páginas publicadas que no se anuncian en los sitemaps ni en llms-full.txt: blog y
+// calendario ocultos a petición del usuario (5-nov-2026, v4.49.0). Siguen en el historial.
+const FUERA_DE_SITEMAPS = new Set(['blog.html', 'blog-somni.html', 'blog-anima.html', 'calendario.html']);
+
 // Los seis sitemaps que publica el build (robots.txt y los tests los referencian).
 const SITEMAP_FILES = ['sitemap.xml', 'sitemap-google.xml', 'sitemap-ai-optimized.xml', 'sitemap-images.xml', 'sitemap-news.xml', 'sitemap-index.xml'];
 const escapeXml = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -102,8 +106,9 @@ async function generateSeoArtifacts({ root = process.cwd(), now = new Date() } =
   const historyText = JSON.stringify(history, null, 2) + '\n';
   if (JSON.stringify(previous) !== JSON.stringify(history)) await fs.writeFile(historyPath, historyText);
   await fs.writeFile(path.join(dist, 'data/seo-history.json'), historyText);
+  const sitemapPages = pages.filter(page => !FUERA_DE_SITEMAPS.has(page.file));
   const latest = list => list.map(url => history[url]?.modified).filter(Boolean).sort().pop();
-  const urlMap = xml('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + pages.map(page => {
+  const urlMap = xml('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + sitemapPages.map(page => {
     const suffix = page.file === 'index.html' ? '' : page.file;
     const alternates = [['es', `${ORIGIN}/${suffix}`], ['ca', `${ORIGIN}/va/${suffix}`], ['x-default', `${ORIGIN}/${suffix}`]];
     return `  <url><loc>${page.url}</loc><lastmod>${history[page.url].modified}</lastmod>${alternates.map(([lang, url]) => `<xhtml:link rel="alternate" hreflang="${lang}" href="${url}"/>`).join('')}</url>`;
@@ -112,7 +117,7 @@ async function generateSeoArtifacts({ root = process.cwd(), now = new Date() } =
   for (const name of ['sitemap.xml', 'sitemap-google.xml', 'sitemap-ai-optimized.xml']) await fs.writeFile(path.join(dist, name), urlMap);
   const images = [];
   const imagePages = [];
-  for (const page of pages) {
+  for (const page of sitemapPages) {
     const urls = new Set();
     const walk = value => {
       if (Array.isArray(value)) return value.forEach(walk);
@@ -131,18 +136,18 @@ async function generateSeoArtifacts({ root = process.cwd(), now = new Date() } =
     }
   }
   await fs.writeFile(path.join(dist, 'sitemap-images.xml'), xml('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + images.join('\n') + '\n</urlset>'));
-  const articles = pages.flatMap(page => page.graph.filter(node => node['@type'] === 'BlogPosting').map(node => ({ ...node, lang: page.lang, pageUrl: page.url })));
+  const articles = sitemapPages.flatMap(page => page.graph.filter(node => node['@type'] === 'BlogPosting').map(node => ({ ...node, lang: page.lang, pageUrl: page.url })));
   const news = buildNewsSitemap(articles, now);
   await fs.writeFile(path.join(dist, 'sitemap-news.xml'), news);
   // El índice lleva el lastmod de cada sitemap: la fecha más reciente de las páginas que anuncia.
-  const maps = [['sitemap.xml', latest(pages.map(page => page.url))], ['sitemap-images.xml', latest(imagePages)]];
+  const maps = [['sitemap.xml', latest(sitemapPages.map(page => page.url))], ['sitemap-images.xml', latest(imagePages)]];
   if (news.includes('<news:news>')) maps.push(['sitemap-news.xml', latest(articles.map(article => article.pageUrl))]);
   await fs.writeFile(path.join(dist, 'sitemap-index.xml'), xml('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + maps.map(([file, lastmod]) => `  <sitemap><loc>${ORIGIN}/${file}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</sitemap>`).join('\n') + '\n</sitemapindex>'));
   let aiContext = '';
   try { aiContext = await fs.readFile(path.join(root, 'src/seo/ai-training-data.md'), 'utf8'); }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
-  await fs.writeFile(path.join(dist, 'llms-full.txt'), buildLlmsFull(pages, aiContext));
+  await fs.writeFile(path.join(dist, 'llms-full.txt'), buildLlmsFull(pages.filter(page => !FUERA_DE_SITEMAPS.has(page.file)), aiContext));
   return { pages: pages.length, articles: articles.length };
 }
 
-module.exports = { ORIGIN, SITEMAP_FILES, buildNewsSitemap, buildLlmsFull, contentHash, updateHistory, generateSeoArtifacts };
+module.exports = { ORIGIN, SITEMAP_FILES, FUERA_DE_SITEMAPS, buildNewsSitemap, buildLlmsFull, contentHash, updateHistory, generateSeoArtifacts };

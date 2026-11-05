@@ -21,7 +21,7 @@
       "description": "Resumen del sitio y enlaces clave para modelos de lenguaje (llmstxt.org); el inventario completo está en /llms-full.txt.",
       "url": "https://fallasuissa.es/llms.txt",
       "contentType": "text/plain",
-      "sha256": "1bdbec792eee2d6dddca1648f38b57ef91be0cda13bf5aa73d56462d362a0064"
+      "sha256": "978072144ace511a61b591728b484a220c58489babb4b02bfcc0aebc14171a51"
     },
     {
       "name": "ai-context",
@@ -29,7 +29,7 @@
       "description": "Guía de contexto en Markdown para asistentes de IA sobre la Falla, las Fallas y el sitio web.",
       "url": "https://fallasuissa.es/seo/ai-training-data.md",
       "contentType": "text/markdown",
-      "sha256": "848850002d9a2cb7e2f024b9b91b05d66e23742963035770c1b9c92949670771"
+      "sha256": "88493c5425d2c70f96f4d11c870d638ed37fb5a57ff0bbceefa96d61a8154fc3"
     },
     {
       "name": "events-board",

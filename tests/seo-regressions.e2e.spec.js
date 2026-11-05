@@ -91,7 +91,10 @@ test('la fotografía editorial y los metadatos cambian de idioma en runtime', as
 test('los sitemaps solo anuncian páginas canónicas indexables y todas las fotos de galerías', async ({ page }) => {
   const main = fs.readFileSync(path.join(root, 'dist/sitemap.xml'), 'utf8');
   const urls = [...main.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-  expect(urls).toHaveLength(pages.length * 2);
+  // Blog y calendario fuera de los sitemaps (v4.49.0): FUERA_DE_SITEMAPS de seo-artifacts.cjs
+  const { FUERA_DE_SITEMAPS } = require('../scripts/seo-artifacts.cjs');
+  expect(urls).toHaveLength(pages.filter(p => !FUERA_DE_SITEMAPS.has(`${p}.html`) && !FUERA_DE_SITEMAPS.has(p)).length * 2);
+  expect(urls.some(url => /\/(blog|calendario)[^/]*\.html$/.test(url))).toBe(false);
   for (const url of urls) {
     const relative = new URL(url).pathname.replace(/^\//, '') || 'index.html';
     const html = fs.readFileSync(path.join(root, 'dist', relative.endsWith('/') ? `${relative}index.html` : relative), 'utf8');
