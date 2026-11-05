@@ -279,7 +279,7 @@
   // visibles del botón/panel en VA para el primer pintado en /va/ (evita el
   // parpadeo en castellano antes de que carguen las traducciones)
   var FALLBACK = {
-    abrir: 'Buscar', cerrar: 'Cerrar buscador', etiqueta: 'Buscar en la web', placeholder: 'Escribe qué buscas…',
+    abrir: 'Buscar', cerrar: 'Cerrar buscador', etiqueta: 'Buscar en la web', placeholder: '¿Qué es lo que buscas?',
     borrar: 'Borrar la búsqueda', ayuda: 'Para filtrar los actos por día o categoría usa el', ayudaEnlace: 'calendario',
     ejemplosTitulo: 'Prueba con:', ejemplos: ['Ofrenda 2026', 'autorización menores', 'galería Cremá', 'calendario'],
     minimo: 'Escribe al menos 2 letras.', cargando: 'Cargando el índice…', resultados: '{n} resultados', resultado: '1 resultado',
@@ -290,7 +290,7 @@
     mostrarMas: 'Mostrar más resultados', pasado: 'Pasado',
     tipo: { pagina: 'Página', seccion: 'Sección', galeria: 'Galería', post: 'Blog', evento: 'Evento', anuncio: 'Anuncio', documento: 'Documento', formulario: 'Formulario', legal: 'Legal', persona: 'Persona' }
   };
-  var FALLBACK_VA = { abrir: 'Cercar', cerrar: 'Tancar cercador', etiqueta: 'Cercar en la web', placeholder: 'Escriu què busques…', borrar: 'Esborrar la cerca' };
+  var FALLBACK_VA = { abrir: 'Cercar', cerrar: 'Tancar cercador', etiqueta: 'Cercar en la web', placeholder: 'Què és el que busques?', borrar: 'Esborrar la cerca' };
   var POR_PAGINA = 10;
   var MIN_LETRAS = 2;
   var ESPERA_TRAS_ERROR = 3000;
@@ -421,6 +421,9 @@
       '<div class="buscador__campo">' +
       '  <input id="siteSearchInput" class="buscador__input" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search"' +
       '    role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="siteSearchLista" aria-haspopup="listbox">' +
+      // Lupa decorativa dentro del campo, a la izquierda (v4.44.2); va tras el input para pintarse encima de su fondo; el nombre lo da la etiqueta
+      '  <svg class="buscador__lupa" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' +
+      '<circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.8-3.8"></path></svg>' +
       '  <button type="button" class="buscador__borrar" aria-label="" hidden><span aria-hidden="true">&times;</span></button>' +
       '</div>' +
       '<p class="buscador__ayuda"><span class="buscador__ayuda-texto"></span> <a class="buscador__ayuda-enlace" href="#"></a>.</p>' +

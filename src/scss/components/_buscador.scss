@@ -146,17 +146,37 @@
     align-items: center;
   }
 
+  // Lupa dentro del campo, a la izquierda (v4.44.2)
+  &__lupa {
+    position: absolute;
+    top: 50%;
+    left: 1.6rem;
+    width: 2rem;
+    height: 2rem;
+    transform: translateY(-50%);
+    color: v.$secondary-color; // 12,6:1 sobre el gris del campo
+    pointer-events: none;
+  }
+
+  // Campo en píldora gris claro (v4.44.2) con el relieve de los botones de la barra:
+  // borde azul oscuro y brillo interior superior, como .header__menu-toggle
   &__input {
     flex: 1 1 auto;
     min-width: 0;
-    // El padding derecho reserva el sitio del aspa de borrar: el texto nunca pasa por debajo
-    padding: 1rem 4.2rem 1rem 1.2rem;
+    min-height: 4.8rem;
+    // Izquierda: sitio de la lupa; derecha: sitio del aspa de borrar
+    padding: 1.1rem 4.4rem 1.1rem 4.6rem;
     font-family: v.$font-family;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     color: v.$negro-casi;
-    background: v.$blanco;
-    border: 1px solid rgba(v.$negro-casi, 0.25);
-    border-radius: 0.9rem;
+    background: v.$blanco-hueso;
+    border: 1px solid rgba(3, 49, 95, 0.95);
+    border-radius: 999px;
+    box-shadow:
+      0 2px 0 rgba(0, 0, 0, 0.22),
+      0 8px 18px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
     appearance: none;
     -webkit-appearance: none;
 
@@ -183,7 +203,7 @@
     --aspa-largo: 1.1rem;
     position: absolute;
     top: 50%;
-    right: 0.5rem;
+    right: 0.8rem;
     width: 3rem;
     height: 3rem;
     transform: translateY(-50%);
