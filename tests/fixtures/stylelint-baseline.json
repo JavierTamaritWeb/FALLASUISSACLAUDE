@@ -1,12 +1,10 @@
 {
-  "declaration-no-important": 164,
-  "no-duplicate-selectors": 36,
+  "declaration-no-important": 108,
+  "no-duplicate-selectors": 35,
   "length-zero-no-unit": 10,
-  "property-no-deprecated": 7,
-  "declaration-block-no-duplicate-properties": 3,
-  "selector-max-compound-selectors": 3,
+  "property-no-deprecated": 5,
   "font-family-no-duplicate-names": 2,
   "declaration-block-no-shorthand-property-overrides": 2,
-  "selector-class-pattern": 1,
-  "declaration-property-value-keyword-no-deprecated": 1
+  "declaration-block-no-duplicate-properties": 2,
+  "selector-class-pattern": 1
 }

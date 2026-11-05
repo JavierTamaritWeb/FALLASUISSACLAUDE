@@ -460,7 +460,7 @@
   margin-right: 1rem; // Espacio entre elementos
   // El título debe caber en cualquier pantalla (v4.41.1): antes iba con
   // `white-space: nowrap !important` y los títulos largos («Festividad del
-  // Santísimo Cristo de Nazaret 2026», «Autorización de derechos de imagen»)
+  // Santísimo Cristo de Nazaret 2026»)
   // desbordaban el hero con scroll horizontal en 8 páginas. Se permite el salto
   // de línea equilibrado y, solo si una palabra no cabe, el corte dentro de ella.
   white-space: normal;

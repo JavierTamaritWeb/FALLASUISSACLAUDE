@@ -10,7 +10,7 @@ Desde v4.28.0 el JSON-LD lo **completa el build** (`gulpfile.js → processJsonL
 - Cada `src/*.html` lleva **solo sus nodos propios** dentro de `{"@context":"https://schema.org","@graph":[…]}`: el nodo de página (`WebPage`, `AboutPage`, `CollectionPage`, `ImageGallery`…) y, si los tiene, `BlogPosting`, `VideoObject`, `CreativeWork`, `Blog`, `ItemList`, `WebPageElement`.
 - El build **completa** el nodo de página (`name` = `<title>`, `description` = meta description, `primaryImageOfPage` = `og:image`, `isPartOf`, `inLanguage`), añade el **`BreadcrumbList`**, rellena las **galerías** (un `ImageObject` por foto de `dataPagesN.json`), la **lista de galerías** de `galerias.html`, fusiona los **`Event` del tablón** (`board.json`, en `index`/`eventos`) y, en `/va/`, reescribe las URL de página a `/va/…` e `inLanguage` a `ca-ES`.
 - Siempre queda **un solo** `<script type="application/ld+json">` por página.
-- **v4.43.0**: la Organization lleva `legalName`, `taxID`, `identifier` (nº 396), `additionalType` NGO, `knowsLanguage`, `areaServed`; el WebSite `copyrightYear`, `about` y un `SearchAction` (`?q=` abre el buscador; en `/va/` apunta a `/va/?q=`). Los textos de la fuente pueden ser `{ "es": "…", "ca": "…" }` y el build los resuelve por idioma (`resolveLang`): descripción de Organization y WebSite, `caption` del logo, nombre del casal, `contactType`, `areaServed`. El nodo de página lleva `dateModified`/`datePublished` (del historial `src/data/seo-history.json`, o del `BlogPosting` en los posts), toda página tiene `primaryImageOfPage` (las legales y autorizaciones ganaron `og:image`) y todo `ImageObject` propio lleva `width`/`height`/`encodingFormat` leídos del original de `src/img` con `sharp` (fotos de galería, imagen principal, imágenes de los posts). En `/va/` también se localizan `relatedLink`/`significantLink`, `ItemList.name`, los `headline` de `Blog.blogPost`, el `CreativeWork` HOPE (`seo.colaboraciones.hopeName/hopeDescription`) y el nombre del `DigitalDocument` de las autorizaciones.
+- **v4.43.0**: la Organization lleva `legalName`, `taxID`, `identifier` (nº 396), `additionalType` NGO, `knowsLanguage`, `areaServed`; el WebSite `copyrightYear`, `about` y un `SearchAction` (`?q=` abre el buscador; en `/va/` apunta a `/va/?q=`). Los textos de la fuente pueden ser `{ "es": "…", "ca": "…" }` y el build los resuelve por idioma (`resolveLang`): descripción de Organization y WebSite, `caption` del logo, nombre del casal, `contactType`, `areaServed`. El nodo de página lleva `dateModified`/`datePublished` (del historial `src/data/seo-history.json`, o del `BlogPosting` en los posts), toda página tiene `primaryImageOfPage` (las legales y autorizaciones, retiradas en v4.45.0-v4.46.0, ganaron entonces `og:image`) y todo `ImageObject` propio lleva `width`/`height`/`encodingFormat` leídos del original de `src/img` con `sharp` (fotos de galería, imagen principal, imágenes de los posts). En `/va/` también se localizan `relatedLink`/`significantLink`, `ItemList.name`, los `headline` de `Blog.blogPost`, el `CreativeWork` HOPE (`seo.colaboraciones.hopeName/hopeDescription`) y el nombre del `DigitalDocument` de las autorizaciones.
 
 ## 📍 Fuentes de verdad
 
@@ -45,7 +45,6 @@ Los antiguos `ld-json-enhanced.json` y `advanced-schema-graph.json` se **elimina
 | `calendario.html` | `WebPage` | `significantLink` → `eventos.html` |
 | `deportes.html` | `WebPage` | `mentions` Junta Central Fallera (anidado, sin `@id`) |
 | `ofrenda.html` | `WebPage` | `keywords` + `significantLink` al panel Ofrenda 2026 de Archivos (sin `Event`: solo `board.json` los genera) |
-| `autorizacion-imagen*.html` | `WebPage` (`mainEntity` → `#documento`) | `DigitalDocument` `#documento` (`encodingFormat text/html`, `audience`, `publisher`; `name` del idioma vía `nuevosFalleros.form*.titulo`) |
 | resto (`meteo`, `nuevos-falleros`) | `WebPage` | `about` → `#organization`; `relatedLink` en Nuevos Falleros |
 
 Convenciones:
@@ -102,7 +101,7 @@ Search Console avisaba de que los `ImageObject` no llevaban `creator`, `copyrigh
 
 ---
 
-Última actualización: 5 de noviembre de 2026 - v4.45.0
+Última actualización: 5 de noviembre de 2026 - v4.46.0
 
 ## Actualización SEO v4.30.21
 

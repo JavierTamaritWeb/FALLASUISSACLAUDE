@@ -242,9 +242,10 @@ ErrorDocument 503 /mantenimiento.html
     #    sin entrada en sitemap); desde v4.7.9 se excluye del build -> 410 Gone
     RewriteRule ^(va/)?base\.html$ - [R=410,L]
 
-    # E3) Páginas legales y banners retirados en v4.45.0 (decisión del usuario):
+    # E3) Páginas legales y banners retirados en v4.45.0 y formularios de autorización
+    #     de imagen en v4.46.0 (decisiones del usuario):
     #     410 Gone para que los buscadores las saquen del índice, no un 404 temporal
-    RewriteRule "^(va/)?(aviso-legal|privacidad|cookies)\.html$" - [R=410,L]
+    RewriteRule "^(va/)?(aviso-legal|privacidad|cookies|autorizacion-imagen|autorizacion-imagen-menor)\.html$" - [R=410,L]
     RewriteRule "^js/(cookie-banner|banner-subvencion)\.js$" - [R=410,L]
     RewriteRule "^img/(subvenciones/.*|subvencion\.(png|avif|webp)|(elementos-UXUI/)?subvencion\.svg)$" - [R=410,L]
 

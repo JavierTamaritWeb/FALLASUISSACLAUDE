@@ -53,7 +53,7 @@ function collect(value, ids, refs) {
 }
 
 const PAGINAS = paginas();
-expect(PAGINAS.length).toBeGreaterThanOrEqual(58); // las 6 páginas legales (ES y VA) se retiraron en v4.45.0
+expect(PAGINAS.length).toBeGreaterThanOrEqual(54); // legales (v4.45.0) y autorizaciones (v4.46.0) retiradas
 
 test.describe('JSON-LD — todas las páginas (dist/, ES y /va/)', () => {
   for (const rel of PAGINAS) {
@@ -252,13 +252,6 @@ test.describe('JSON-LD — nodos propios', () => {
       expect(g('calendario.html').find((n) => hasType(n, 'WebPage')).significantLink).toEqual([`${pref}eventos.html`]);
       expect(g('deportes.html').find((n) => hasType(n, 'WebPage')).mentions.name).toBe('Junta Central Fallera');
       expect(g('ofrenda.html').find((n) => hasType(n, 'WebPage')).keywords.length).toBeGreaterThan(1);
-      for (const [form, clave] of [['autorizacion-imagen.html', 'formMayores'], ['autorizacion-imagen-menor.html', 'formMenores']]) {
-        const grafo = g(form);
-        const doc = grafo.find((n) => hasType(n, 'DigitalDocument'));
-        expect(doc['@id']).toBe(`${pref}${form}#documento`);
-        expect(doc.name).toBe(tabla.nuevosFalleros[clave].titulo);
-        expect(grafo.find((n) => hasType(n, 'WebPage')).mainEntity).toEqual({ '@id': doc['@id'] });
-      }
       const hope = g('colaboraciones.html').find((n) => hasType(n, 'CreativeWork'));
       expect(hope.name).toBe(tabla.seo.colaboraciones.hopeName);
       expect(g('blog.html').find((n) => hasType(n, 'Blog')).blogPost[0].headline).toBe(tabla.blog.somni.cardTitle);

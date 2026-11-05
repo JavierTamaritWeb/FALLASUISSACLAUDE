@@ -210,7 +210,7 @@ Cobertura concreta:
 
 Archivo de test:
 
-- `tests/visual-regression.e2e.spec.js` — desde v4.37.2 cubre 17 páginas (index, lafalla, eventos, meteo, blog, blog-somni, blog-anima, galerias, calendario, mapa, organigrama, ofrenda, colaboraciones, deportes, nuevos-falleros, galeria_1 y, desde v4.45.0, autorizacion-imagen en lugar de aviso-legal) × 3 anchos × claro/oscuro, más los componentes (header, footer, menú, countdown, calendario)
+- `tests/visual-regression.e2e.spec.js` — desde v4.46.0 cubre 16 páginas (index, lafalla, eventos, meteo, blog, blog-somni, blog-anima, galerias, calendario, mapa, organigrama, ofrenda, colaboraciones, deportes, nuevos-falleros, y galeria_1; aviso-legal salió en v4.45.0 y autorizacion-imagen en v4.46.0) × 3 anchos × claro/oscuro, más los componentes (header, footer, menú, countdown, calendario)
 
 Snapshots:
 
@@ -615,7 +615,7 @@ Guía técnica:
 
 ---
 
-Última actualización: 5 de noviembre de 2026 - v4.45.0
+Última actualización: 5 de noviembre de 2026 - v4.46.0
 
 ## Regresiones SEO v4.30.21
 

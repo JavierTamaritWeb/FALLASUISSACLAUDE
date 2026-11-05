@@ -30,7 +30,7 @@ function paginas(dir) {
 test('todas las páginas de dist/ llevan las metas de color con los valores de dark.js', () => {
   const { claro, oscuro } = coloresDeDarkJs();
   const ficheros = [...paginas(dist), ...paginas(path.join(dist, 'va'))];
-  assert.ok(ficheros.length >= 56, `se esperaban al menos 56 páginas (28 ES + 28 VA desde v4.45.0), hay ${ficheros.length}`);
+  assert.ok(ficheros.length >= 52, `se esperaban al menos 52 páginas (26 ES + 26 VA desde v4.46.0), hay ${ficheros.length}`);
   const esperadas = [
     `<meta name="theme-color" content="${claro}">`,
     `<meta name="theme-color" media="(prefers-color-scheme: light)" content="${claro}">`,

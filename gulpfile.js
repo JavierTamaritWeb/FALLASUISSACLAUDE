@@ -225,7 +225,6 @@ const SCHEMA_SCRIPT_RE = /<script type="application\/ld\+json">([\s\S]*?)<\/scri
 const BREADCRUMB_PARENT = {
   'galeria_': { file: 'galerias.html', nav: 'galeria' },
   'blog-': { file: 'blog.html', nav: 'blog' },
-  'autorizacion-': { file: 'nuevos-falleros.html', nav: 'nuevosFalleros' },
   'organigrama.html': { file: 'lafalla.html', nav: 'lafalla' }
 };
 // Nombre de página en el breadcrumb: clave nav.* cuando existe
@@ -659,13 +658,6 @@ function processJsonLd(html, ctx) {
     if (hasType(node, 'CreativeWork') && String(node['@id'] || '').endsWith('#hope-collaboration')) {
       if (seoTable.colaboraciones && seoTable.colaboraciones.hopeName) node.name = seoTable.colaboraciones.hopeName;
       if (seoTable.colaboraciones && seoTable.colaboraciones.hopeDescription) node.description = seoTable.colaboraciones.hopeDescription;
-    }
-    // Formularios imprimibles (autorizaciones): nombre del documento en el idioma
-    if (hasType(node, 'DigitalDocument')) {
-      const titleKey = SEARCH_PAGE_TITLE_KEY[fileName];
-      const localized = titleKey && getNestedKey(table, titleKey);
-      if (localized) node.name = localized;
-      if (!node.description && meta.description) node.description = meta.description;
     }
   }
   if (fileName !== 'index.html') {
@@ -1132,18 +1124,11 @@ const SEARCH_PAGE_TITLE_KEY = {
   'eventos.html': 'nav.eventos', 'deportes.html': 'nav.deportes', 'blog.html': 'nav.blog',
   'meteo.html': 'nav.meteo', 'galerias.html': 'nav.galeria', 'colaboraciones.html': 'nav.colaboraciones',
   'nuevos-falleros.html': 'nav.nuevosFalleros', 'calendario.html': 'calendario.titulo',
-  'organigrama.html': 'organigrama.titulo',
-  'autorizacion-imagen.html': 'nuevosFalleros.formMayores.titulo',
-  'autorizacion-imagen-menor.html': 'nuevosFalleros.formMenores.titulo'
+  'organigrama.html': 'organigrama.titulo'
 };
-const SEARCH_PAGE_DESC_KEY = {
-  'autorizacion-imagen.html': 'nuevosFalleros.formMayores.desc',
-  'autorizacion-imagen-menor.html': 'nuevosFalleros.formMenores.desc'
-};
+const SEARCH_PAGE_DESC_KEY = {};
 // Título/descripción VA de las demás páginas: translations.va.seo.<slug>.{title,description} (v4.33.0)
-const SEARCH_PAGE_TYPE = {
-  'autorizacion-imagen.html': 'formulario', 'autorizacion-imagen-menor.html': 'formulario'
-};
+const SEARCH_PAGE_TYPE = {};
 // Secciones de Archivos (paneles de acordeón): un registro cada una, apuntando a
 // lafalla.html (la home tiene copia). El id es el del .accordion__content.
 // `descKeys`: claves i18n cuyos valores, unidos con « · », forman la descripción ES/VA
@@ -1210,7 +1195,7 @@ function cargoVa(cargo) {
 function slugPersona(nombre) {
   return String(nombre).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
-const SEARCH_PRIO = { pagina: 1, persona: 1, seccion: 2, formulario: 2, galeria: 3, post: 3, documento: 3, evento: 4, anuncio: 4 };
+const SEARCH_PRIO = { pagina: 1, persona: 1, seccion: 2, galeria: 3, post: 3, documento: 3, evento: 4, anuncio: 4 };
 
 function tituloSinMarca(title) {
   return String(title || '')

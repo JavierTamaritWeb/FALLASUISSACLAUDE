@@ -81,12 +81,11 @@ test.describe('Integridad del HTML generado', () => {
 });
 
 // v4.45.0: las páginas legales, el banner de cookies y el de subvención se
-// retiraron sin dejar rastro. Solo el .htaccess las nombra (410 Gone).
-test('sin rastro de las páginas legales ni de los banners retirados (v4.45.0)', () => {
-
-
+// retiraron sin dejar rastro; v4.46.0: también los formularios de autorización
+// de imagen de Nuevos Falleros. Solo el .htaccess los nombra (410 Gone).
+test('sin rastro de las páginas legales, los banners ni las autorizaciones retiradas', () => {
   const dist = path.join(__dirname, '..', 'dist');
-  const RASTRO = /aviso-legal|privacidad\.html|cookies\.html|banner-subvencion|cookie-banner|subvencion-2026|cookieConsent|bannerSubvencion|footer__legal|propiedad-intelectual/;
+  const RASTRO = /aviso-legal|privacidad\.html|cookies\.html|banner-subvencion|cookie-banner|subvencion-2026|cookieConsent|bannerSubvencion|footer__legal|propiedad-intelectual|autorizacion-imagen|autorizacionImagen|contenido-legal|formulariosTitulo|formMayores|formMenores|nuevos-falleros__card|DigitalDocument/;
   const recorrer = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
     const ruta = path.join(dir, e.name);
     if (e.isDirectory()) return e.name === 'img' || e.name === 'pdf' || e.name === 'fonts' ? [] : recorrer(ruta);
@@ -94,7 +93,7 @@ test('sin rastro de las páginas legales ni de los banners retirados (v4.45.0)',
   });
   const conRastro = recorrer(dist).filter((f) => RASTRO.test(fs.readFileSync(f, 'utf8')));
   expect(conRastro.map((f) => path.relative(dist, f))).toEqual([]);
-  for (const f of ['aviso-legal.html', 'privacidad.html', 'cookies.html', 'va/aviso-legal.html', 'js/cookie-banner.js', 'js/banner-subvencion.js', 'img/subvenciones']) {
+  for (const f of ['aviso-legal.html', 'privacidad.html', 'cookies.html', 'va/aviso-legal.html', 'js/cookie-banner.js', 'js/banner-subvencion.js', 'img/subvenciones', 'autorizacion-imagen.html', 'autorizacion-imagen-menor.html', 'va/autorizacion-imagen.html', 'va/autorizacion-imagen-menor.html']) {
     expect(fs.existsSync(path.join(dist, f)), f).toBe(false);
   }
 });

@@ -32,9 +32,7 @@ const PAGES = [
   { name: 'colaboraciones', path: '/colaboraciones.html' },
   { name: 'deportes', path: '/deportes.html' },
   { name: 'nuevos-falleros', path: '/nuevos-falleros.html' },
-  { name: 'galeria_1', path: '/galeria_1.html' },
-  // v4.45.0: las páginas legales se retiraron; la autorización usa el mismo .contenido-legal
-  { name: 'autorizacion-imagen', path: '/autorizacion-imagen.html' }
+  { name: 'galeria_1', path: '/galeria_1.html' }
 ];
 
 const VIEWPORTS = [

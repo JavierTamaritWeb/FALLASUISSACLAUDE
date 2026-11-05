@@ -24,7 +24,7 @@
     ['foto', 'imagen', 'imatge', 'fotografia'], ['video', 'vídeo'], ['mayor', 'major'], ['monumento', 'monument'],
     ['ofrenda', 'ofrena'], ['tiempo', 'temps', 'oratge', 'meteo'], ['evento', 'esdeveniment', 'acto', 'acte'],
     ['deporte', 'esport'], ['nino', 'xiquet'], ['nina', 'xiqueta'], ['ayuntamiento', 'ajuntament'],
-    ['inscripcion', 'inscripcio'], ['autorizacion', 'autoritzacio'], ['boceto', 'esbos'], ['hoguera', 'foguera'],
+    ['inscripcion', 'inscripcio'], ['boceto', 'esbos'], ['hoguera', 'foguera'],
     ['noche', 'nit'], ['ano', 'any'], ['sorteo', 'sorteig'], ['direccion', 'adreca'], ['mapa', 'ubicacion', 'ubicacio']
   ];
   var SINONIMOS = {};
@@ -281,14 +281,14 @@
   var FALLBACK = {
     abrir: 'Buscar', cerrar: 'Cerrar buscador', etiqueta: 'Buscar en la web', placeholder: '¿Qué es lo que buscas?',
     borrar: 'Borrar la búsqueda', ayuda: 'Para filtrar los actos por día o categoría usa el', ayudaEnlace: 'calendario',
-    ejemplosTitulo: 'Prueba con:', ejemplos: ['Ofrenda 2026', 'autorización menores', 'galería Cremá', 'calendario'],
+    ejemplosTitulo: 'Prueba con:', ejemplos: ['Ofrenda 2026', 'Fallera Mayor', 'galería Cremá', 'calendario'],
     minimo: 'Escribe al menos 2 letras.', cargando: 'Cargando el índice…', resultados: '{n} resultados', resultado: '1 resultado',
     resultadosPara: '{n} resultados para «{q}»', resultadoPara: '1 resultado para «{q}»', corregido: 'Mostrando resultados para «{q}»',
     listaAria: 'Resultados de la búsqueda',
     sinResultados: 'Sin coincidencias para «{q}».', sinResultadosAyuda: 'Revisa la ortografía o prueba con una de estas búsquedas:',
     error: 'No se ha podido cargar el buscador.', reintentar: 'Reintentar', verGalerias: 'Ver todas las galerías',
     mostrarMas: 'Mostrar más resultados', pasado: 'Pasado',
-    tipo: { pagina: 'Página', seccion: 'Sección', galeria: 'Galería', post: 'Blog', evento: 'Evento', anuncio: 'Anuncio', documento: 'Documento', formulario: 'Formulario', persona: 'Persona' }
+    tipo: { pagina: 'Página', seccion: 'Sección', galeria: 'Galería', post: 'Blog', evento: 'Evento', anuncio: 'Anuncio', documento: 'Documento', persona: 'Persona' }
   };
   var FALLBACK_VA = { abrir: 'Cercar', cerrar: 'Tancar cercador', etiqueta: 'Cercar en la web', placeholder: 'Què és el que busques?', borrar: 'Esborrar la cerca' };
   var POR_PAGINA = 10;

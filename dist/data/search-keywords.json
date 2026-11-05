@@ -20,30 +20,6 @@
       "formar part"
     ]
   },
-  "page:autorizacion-imagen-menor": {
-    "es": [
-      "menores",
-      "autorización imagen menor",
-      "consentimiento padres"
-    ],
-    "va": [
-      "menors",
-      "autorització imatge menor",
-      "consentiment pares"
-    ]
-  },
-  "page:autorizacion-imagen": {
-    "es": [
-      "mayores de edad",
-      "derechos de imagen",
-      "rgpd"
-    ],
-    "va": [
-      "majors d'edat",
-      "drets d'imatge",
-      "rgpd"
-    ]
-  },
   "page:calendario": {
     "es": [
       "agenda",

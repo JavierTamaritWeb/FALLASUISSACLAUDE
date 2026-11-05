@@ -20,7 +20,7 @@ Buscador bilingüe (ES/VA) para el sitio estático: **panel** desplegable bajo l
 
 | Tipo (`tipo`) | Fuente | id | URL |
 | --- | --- | --- | --- |
-| `pagina`, `formulario`, `legal` | `src/*.html` publicables (`<title>`, `meta description` en ES; en VA `nav.*`, `calendario.titulo`, `organigrama.titulo`, `nuevosFalleros.form*.titulo` o, para el resto, `seo.<slug>.{title,description}` desde v4.33.0: ninguna página sale en castellano en `/va/`) | `page:<slug>` | `<slug>.html` |
+| `pagina` | `src/*.html` publicables (`<title>`, `meta description` en ES; en VA `nav.*`, `calendario.titulo`, `organigrama.titulo` o, para el resto, `seo.<slug>.{title,description}` desde v4.33.0: ninguna página sale en castellano en `/va/`) | `page:<slug>` | `<slug>.html` |
 | `persona` (v4.33.0) | `member` de `src/seo/schema-organization.json` (fuente única de cargos): nombre como título, cargo ES/VA como descripción y palabra clave | `per:<nombre-slug>` | Plana Mayor → `lafalla.html#nosotros-<cargo>-lafalla`; directiva (Presidente, vicepresidencias, secretaría, área económica, delegación infantil) → `lafalla.html#nosotros-directiva-lafalla`; resto de delegados → `organigrama.html` |
 | `galeria` | `galeria.galeriaN` / `galeriaN-texto` (ES/VA) | `gal:N` | `galeria_N.html` |
 | `post` | `blog.<slug>.cardTitle`, `article:published_time` | `post:<slug>` | `blog-<slug>.html` |
@@ -31,7 +31,7 @@ Buscador bilingüe (ES/VA) para el sitio estático: **panel** desplegable bajo l
 
 Excluidas: `ai-info`, `base`, `mantenimiento`, `google*`; `llibret_2026.html` como página (entra como documento); el contenido interno de PDF/Drive.
 
-Cada registro: `id`, `tipo`, `prio` (desde v4.33.0: 1 páginas/personas · 2 secciones/formularios · 3 galerías/posts/documentos · 4 legales/eventos/anuncios; así «fallera mayor» devuelve primero el panel de la Fallera Mayor y no las galerías de la Infantil), `titulo{es,va}`, `desc{es,va}`, `seccion` (clave `nav.*`), `url` (relativa; el cliente antepone `SITE_ROOT` y `va/` si procede; `pdf/` y `llibret_` solo en raíz), `fecha`, `ejercicio` (`AAAA-AA`; de septiembre a agosto), `hasta`, `kw`. Un registro por página lógica (ES y VA en el mismo).
+Cada registro: `id`, `tipo`, `prio` (desde v4.33.0: 1 páginas/personas · 2 secciones · 3 galerías/posts/documentos · 4 eventos/anuncios; desde v4.46.0 ya no hay tipos `legal` ni `formulario`; así «fallera mayor» devuelve primero el panel de la Fallera Mayor y no las galerías de la Infantil), `titulo{es,va}`, `desc{es,va}`, `seccion` (clave `nav.*`), `url` (relativa; el cliente antepone `SITE_ROOT` y `va/` si procede; `pdf/` y `llibret_` solo en raíz), `fecha`, `ejercicio` (`AAAA-AA`; de septiembre a agosto), `hasta`, `kw`. Un registro por página lógica (ES y VA en el mismo).
 
 ## Relevancia (explicable)
 
@@ -63,7 +63,7 @@ No hay nada que mantener a mano: una galería, un post o una página nuevos entr
 
 Desde v4.37.2 el evaluador tiene 52 casos (50 con destino, 2 sin coincidencias), 30 marcados como críticos (top 1 obligatorio) y 8 con comprobación del título en el idioma de la interfaz (`calendari`/`calendario`, `cookies`, `avís legal`, `mapa`, `esports`, `fallera mayor`/`major`, `xarxes socials`, `cremà`). Resultado el 14-sep-2026: 50/50 en el top 3, 0 críticas fuera del top 1, 0 títulos en otro idioma, 0 destinos rotos.
 
-Histórico (desde v4.45.0 sin las consultas «cookies», «avís legal», «privacidad» ni «subvención», cuyas páginas y secciones se retiraron): `npm run search:eval` cubre: «autorización menores», «apuntarme», «llibrets», «ofrenda 2026», «calendari» (UI ES), «cremà», «sant joan», «fallera mayor infantil», «proclamació 2025», «representantes 2024-25», «suissa», «organigrama», «tiempo valencia», «paella» (→ San Juan) y, desde v4.33.0, «lucía», «lucia gutierrez», «presidente», «fallera mayor», «pablo cortés», «directiva», «contacto», «email», «instagram», «vídeo dron», «fútbol», «pádel»; sin coincidencias «xyz123». y desde v4.37.2 «calendrio», «ofrena», «presidenta», «representantes 2025», «fallas 2027», «fotos», «nuevos fallers». Resultado el 14-sep-2026: 36/36 en el top 3 (objetivo ≥ 80 %).
+Histórico (desde v4.45.0 sin las consultas «cookies», «avís legal», «privacidad» ni «subvención», y desde v4.46.0 sin «autorización menores»/«autorització menors», cuyas páginas y secciones se retiraron): `npm run search:eval` cubre: «apuntarme», «llibrets», «ofrenda 2026», «calendari» (UI ES), «cremà», «sant joan», «fallera mayor infantil», «proclamació 2025», «representantes 2024-25», «suissa», «organigrama», «tiempo valencia», «paella» (→ San Juan) y, desde v4.33.0, «lucía», «lucia gutierrez», «presidente», «fallera mayor», «pablo cortés», «directiva», «contacto», «email», «instagram», «vídeo dron», «fútbol», «pádel»; sin coincidencias «xyz123». y desde v4.37.2 «calendrio», «ofrena», «presidenta», «representantes 2025», «fallas 2027», «fotos», «nuevos fallers». Resultado el 14-sep-2026: 36/36 en el top 3 (objetivo ≥ 80 %).
 
 Pendientes editoriales: traducir al valenciano título y descripción de los eventos de `eventos.json`; **`eventos.json` no tiene actos posteriores al 14-sep-2026**, así que hoy el índice no lleva ningún evento (aparecerán solos al añadirlos); no existe una página de inscripción («apuntarme» lleva a Nuevos Falleros; el formulario «¿Quieres formar parte?» es un modal de la home).
 
@@ -71,7 +71,7 @@ Relevo anual: al cambiar `member` en `schema-organization.json` las personas y l
 
 ---
 
-Última actualización: 5 de noviembre de 2026 - v4.45.0
+Última actualización: 5 de noviembre de 2026 - v4.46.0
 
 ## Enlace profundo `?q=` y SearchAction (v4.43.0)
 

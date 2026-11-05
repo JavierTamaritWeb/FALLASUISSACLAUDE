@@ -9,7 +9,7 @@ Todas las páginas llevan un único bloque JSON-LD (Organization, WebSite y el n
 - [La Falla: monumento, Plana Mayor, historia y archivos](https://fallasuissa.es/lafalla.html): representantes, directiva, organigrama, llibrets, monumentos y ofrendas de cada ejercicio
 - [Organigrama 2026-27](https://fallasuissa.es/organigrama.html): representantes, junta directiva y delegaciones del ejercicio en curso
 - [Mapa y ubicación del casal](https://fallasuissa.es/mapa.html)
-- [Nuevos falleros](https://fallasuissa.es/nuevos-falleros.html): documentación de interés y formularios de autorización de derechos de imagen
+- [Nuevos falleros](https://fallasuissa.es/nuevos-falleros.html): documentación de interés general para nuevas incorporaciones
 
 ## Actividad
 

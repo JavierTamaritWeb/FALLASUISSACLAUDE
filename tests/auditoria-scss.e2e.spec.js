@@ -89,7 +89,7 @@ test.describe('Auditoría SCSS — deuda resuelta en 4.40.0 (guardias)', () => {
     expect(escudo).toBeGreaterThan(40);
     const pie = await page.locator('img.footer__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).width));
     expect(pie).toBeLessThanOrEqual(80);
-    await page.goto('/autorizacion-imagen.html');
+    await page.goto('/organigrama.html');
     const interior = await page.locator('img.header-inner__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).width));
     expect(interior).toBeLessThanOrEqual(100);
     expect(interior).toBeGreaterThan(30);
@@ -112,13 +112,6 @@ test.describe('Auditoría SCSS — deuda resuelta en 4.40.0 (guardias)', () => {
     await page.locator('.header__modo-boton').first().click();
     await expect(n).toHaveClass(/mostrar/);
     expect(await n.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(184, 63, 53)');
-  });
-
-  test('impresión de la autorización: párrafo destacado sin fondo y escudo acotado', async ({ page }) => {
-    await page.emulateMedia({ media: 'print' });
-    await page.goto('/autorizacion-imagen.html');
-    expect(await page.locator('.contenido-legal p').first().evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
-    expect(await page.locator('img.header-inner__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).maxWidth))).toBeLessThanOrEqual(100);
   });
 
   test('Nosotros e Historia en móvil: título de 1,8 rem sin !important (media queries ordenadas)', async ({ page }) => {

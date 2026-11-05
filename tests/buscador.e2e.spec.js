@@ -17,9 +17,10 @@ const INDEX_HASH = crypto.createHash('sha1').update(INDEX_RAW).digest('hex').sli
 test.describe('buscador — índice y meta generados por el build', () => {
   test('el índice tiene registros de todos los tipos y sin contenido de prueba', () => {
     const tipos = new Set(INDEX.registros.map((r) => r.tipo));
-    for (const t of ['pagina', 'seccion', 'galeria', 'post', 'documento', 'formulario', 'persona']) {
+    for (const t of ['pagina', 'seccion', 'galeria', 'post', 'documento', 'persona']) {
       expect(tipos.has(t), `tipo ${t}`).toBe(true);
     }
+    expect(tipos.has('formulario')).toBe(false); // autorizaciones retiradas (v4.46.0)
     // Eventos (v4.33.0): solo futuros, sin duplicados y con enlace al día; el tipo
     // aparece únicamente si eventos.json tiene actos futuros que no sean festivos
     const eventosJson = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'eventos.json'), 'utf8')).eventos;
@@ -79,7 +80,7 @@ test.describe('buscador — índice y meta generados por el build', () => {
 
   test('todas las páginas ES y /va/ llevan la meta search-index con hash y el script', () => {
     const paginas = fs.readdirSync(DIST).filter((f) => /\.html$/.test(f) && !/^(ai-info|base|mantenimiento|google)/.test(f) && f !== 'llibret_2026.html');
-    expect(paginas.length).toBeGreaterThanOrEqual(28);
+    expect(paginas.length).toBeGreaterThanOrEqual(26);
     for (const f of paginas) {
       for (const rel of [f, path.join('va', f)]) {
         const html = fs.readFileSync(path.join(DIST, rel), 'utf8');
@@ -185,11 +186,11 @@ test.describe('buscador — panel en el navegador', () => {
     await expect(panel).toBeVisible();
 
     // Sugerencia: el botón pulsado desaparece al repintar; el panel debe seguir abierto
-    const sugerencia = page.locator('.buscador__ejemplo', { hasText: 'autorización menores' });
+    const sugerencia = page.locator('.buscador__ejemplo', { hasText: 'Fallera Mayor' });
     await sugerencia.click();
     await expect(cuerpo).toHaveAttribute('data-estado', 'resultados');
     await expect(panel).toBeVisible();
-    await expect(page.locator('#siteSearchInput')).toHaveValue('autorización menores');
+    await expect(page.locator('#siteSearchInput')).toHaveValue('Fallera Mayor');
     await expect(page.locator('#siteSearchInput')).toBeFocused();
 
     // «Mostrar más»: consulta con más de 10 resultados
@@ -236,7 +237,7 @@ test.describe('buscador — panel en el navegador', () => {
     })).toEqual({ bg: 'rgba(0, 0, 0, 0)', border: 'none', aspa: '""', alto: '2px' });
 
     // Con texto aparece el aspa dentro del campo, a la derecha y sin que el texto la invada
-    await page.fill('#siteSearchInput', 'autorización menores');
+    await page.fill('#siteSearchInput', 'Fallera Mayor');
     await expect(borrar).toBeVisible();
     await expect(borrar).toHaveAttribute('aria-label', 'Borrar la búsqueda');
     const [ri, rb, padRight] = await Promise.all([

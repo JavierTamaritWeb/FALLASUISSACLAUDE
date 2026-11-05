@@ -1,14 +1,4 @@
 {
-  "https://fallasuissa.es/autorizacion-imagen-menor.html": {
-    "hash": "05d84ceae3a12352cef0a8cfb3dcfe7107cdba36101870b2166fa80f9d1af1d7",
-    "modified": "2026-11-05",
-    "published": "2026-09-17"
-  },
-  "https://fallasuissa.es/autorizacion-imagen.html": {
-    "hash": "effcd7e20a402d97953caa9eb3ea20ca2c5dcac0d12c94e8d55017b2e584d473",
-    "modified": "2026-11-05",
-    "published": "2026-09-17"
-  },
   "https://fallasuissa.es/blog-anima.html": {
     "hash": "1c8e1012a9d3f45d5cabd4f130c41d74986881d0ebee7360fef726d4a6ff8d60",
     "modified": "2026-11-05",
@@ -130,7 +120,7 @@
     "published": "2026-09-17"
   },
   "https://fallasuissa.es/nuevos-falleros.html": {
-    "hash": "f37a7534b70b02855476729131ac8dfababcd772f1145948ce06ba54349961a9",
+    "hash": "dac405ec0c4f0a83d0756fae94b9241068f96e4ee63bb80b886b4f5e8d160b51",
     "modified": "2026-11-05",
     "published": "2026-09-17"
   },
@@ -141,16 +131,6 @@
   },
   "https://fallasuissa.es/organigrama.html": {
     "hash": "88fea81029e8dffc8f21e9002147607af1cff5198b7f5d032c8d644f27a1331b",
-    "modified": "2026-11-05",
-    "published": "2026-09-17"
-  },
-  "https://fallasuissa.es/va/autorizacion-imagen-menor.html": {
-    "hash": "369da149016d725dae3586f045ea332204534bba222e2b2d950048b1fdb429c6",
-    "modified": "2026-11-05",
-    "published": "2026-09-17"
-  },
-  "https://fallasuissa.es/va/autorizacion-imagen.html": {
-    "hash": "375df2209aae6804a911edf44e2e2a15a796b72aa0536a5dcbbcadd5ccb7de72",
     "modified": "2026-11-05",
     "published": "2026-09-17"
   },
@@ -275,7 +255,7 @@
     "published": "2026-09-17"
   },
   "https://fallasuissa.es/va/nuevos-falleros.html": {
-    "hash": "a32d9e9cbf0d91b00c73b00368cbbe11dc8bc005367b53909311aaa39d7a4032",
+    "hash": "566f7fd43d850fad7b3f9099a5dcc89e3c99413a4e37526b7c49d755a9213440",
     "modified": "2026-11-05",
     "published": "2026-09-17"
   },

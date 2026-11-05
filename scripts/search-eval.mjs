@@ -34,9 +34,7 @@ const CASOS = [
   ['suissa', 'es', /^page:(index|lafalla)$/, {}],
   ['blog', 'es', 'page:blog', { critico: true }],
   ['esports', 'va', 'page:deportes', { critico: true, titulo: /^Esports$/ }],
-  // Nuevos falleros y formularios
-  ['autorización menores', 'es', 'page:autorizacion-imagen-menor', { critico: true }],
-  ['autorització menors', 'va', 'page:autorizacion-imagen-menor', { critico: true }],
+  // Nuevos falleros
   ['apuntarme', 'es', 'page:nuevos-falleros', { critico: true }],
   ['nuevos fallers', 'va', 'page:nuevos-falleros', {}],
   ['inscripció', 'va', 'page:nuevos-falleros', {}],

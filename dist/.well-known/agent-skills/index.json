@@ -21,7 +21,7 @@
       "description": "Resumen del sitio y enlaces clave para modelos de lenguaje (llmstxt.org); el inventario completo está en /llms-full.txt.",
       "url": "https://fallasuissa.es/llms.txt",
       "contentType": "text/plain",
-      "sha256": "3921369c8986bf977a2eb66e3a9209f75fde5b748e8339e72097c5747ccb6467"
+      "sha256": "1bdbec792eee2d6dddca1648f38b57ef91be0cda13bf5aa73d56462d362a0064"
     },
     {
       "name": "ai-context",

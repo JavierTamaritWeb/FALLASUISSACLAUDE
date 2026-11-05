@@ -1,7 +1,7 @@
 // components/_escudo-enlace.scss
 // Enlace a la home (https://fallasuissa.es/) alrededor de todos los escudos de
 // la Falla (v4.23.2): header, header-inner, footer, paneles del acordeón,
-// encabezado "La Falla" y cabecera de las autorizaciones.
+// encabezado "La Falla" y portada del Llibret.
 // El <a> envuelve al <picture>, que no admite hijos intermedios, así que la
 // caja del enlace replica la del `picture` global de _image-optimization.scss
 // (block al 100 %) para que el layout no se mueva ni un píxel.
