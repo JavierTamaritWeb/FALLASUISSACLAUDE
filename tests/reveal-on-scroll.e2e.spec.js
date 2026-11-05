@@ -26,7 +26,8 @@ test.describe('Reveal on scroll global', () => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto('/index.html');
 
-    const blogCard = page.locator('.blog__post').first();
+    // El blog de la home está oculto desde el 5-nov-2026: se usa una tarjeta de galería
+    const blogCard = page.locator('.galerias .galeria.reveal').first();
 
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
     await expectReveal(blogCard, false);
@@ -126,9 +127,10 @@ test.describe('Reveal on scroll global', () => {
 
   test('prefers-reduced-motion evita el estado oculto persistente', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/blog.html');
+    // El listado de blog.html está oculto desde el 5-nov-2026: se usa galerias.html
+    await page.goto('/galerias.html');
 
-    const blogCard = page.locator('.blog__post').first();
+    const blogCard = page.locator('.galeria.reveal').first();
     await expect(blogCard).toBeVisible();
 
     await expect.poll(async () => {

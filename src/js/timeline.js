@@ -13,7 +13,8 @@ function initTimeline() {
   // Secciones con data-index 1 en adelante (las que generan dots)
   var seccionesDots = [];
   secciones.forEach(function (sec) {
-    if (sec.getAttribute('data-index') !== '0') {
+    // Las secciones ocultas con hidden (p. ej. el blog) no generan punto
+    if (sec.getAttribute('data-index') !== '0' && !sec.hidden) {
       seccionesDots.push(sec);
     }
   });

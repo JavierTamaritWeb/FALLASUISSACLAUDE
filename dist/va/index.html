@@ -425,7 +425,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Hojas de estilo -->
-  <link rel="stylesheet" href="../css/main.css?v=1f65795e5290">
+  <link rel="stylesheet" href="../css/main.css?v=ecf28f6f823e">
 
   <!-- Preload LCP Images -->
   <link rel="preload" as="image" href="../img/escudo-falla/Escudo-Oficial-Falla.avif" type="image/avif" fetchpriority="high">
@@ -485,7 +485,7 @@
           <a class="navegacion__enlace" data-i18n="nav.eventos" href="eventos.html">Esdeveniments</a>
           <a class="navegacion__enlace" data-i18n="nav.deportes" href="deportes.html">Esports</a>
           <a class="navegacion__enlace" data-i18n="nav.meteo" href="meteo.html">Oratge</a>
-          <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html">Blog</a>
+          <!-- Blog oculto (5-nov-2026): <a class="navegacion__enlace" data-i18n="nav.blog" href="blog.html">Blog</a> -->
           <a class="navegacion__enlace" data-i18n="nav.galeria" href="galerias.html">Galeria</a>
           <a class="navegacion__enlace" data-i18n="nav.nuevosFalleros" href="nuevos-falleros.html">Nous Fallers</a>
         </nav>
@@ -1665,6 +1665,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
           <h2 class="eventos__heading-texto" data-i18n="eventos.titulo">Esdeveniments</h2>
         </div>
 
+        <!-- Calendario oculto a petición del usuario (5-nov-2026): quitar el comentario para mostrarlo
         <div class="eventos__titulo-calendario reveal reveal--soft">
           <img class="eventos__calendario" width="64" height="64" src="../img/elementos-UXUI/calendario.png" alt="Icono de calendario para eventos falleros" loading="lazy" decoding="async">
           <h3 class="eventos__title" data-i18n="eventos.calendario">Calendari</h3>
@@ -1676,6 +1677,7 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
             <p class="eventos-nota-calendario" data-i18n="calendario.nota2">Tot està pensat perquè mantenir al dia la vostra agenda fallera sigui tan còmode com amè!</p>
           </a>
         </div>
+        -->
 
         <h3 class="tablon-titulo reveal reveal--soft" data-i18n="eventos.tablon">Tauler d'anuncis</h3>
         <div class="marco-tablon">
@@ -1745,9 +1747,10 @@ Viu cada acte amb emoció i orgull, amb moltes ganes de representar la nostra co
 
   </section>
 
-  <hr class="seccion-hr">
+  <!-- Blog oculto a petición del usuario (5-nov-2026): se conserva el marcado; quitar los hidden para mostrarlo -->
+  <!-- <hr class="seccion-hr"> -->
 
-  <section class="blog" data-index="10">
+  <section class="blog" data-index="10" hidden>
     <div class="contenedor">
       <div class="blog__titulo">
         <img class="blog__pluma" width="80" height="80" src="../img/logos/logo-pluma.seo.webp" alt="Icono decorativo de pluma para blog" loading="lazy" decoding="async" aria-hidden="true">
@@ -1945,7 +1948,7 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
           <a class="footer__enlace" href="eventos.html" data-i18n="nav.eventos">Esdeveniments</a>
           <a class="footer__enlace" href="deportes.html" data-i18n="nav.deportes">Esports</a>
           <a class="footer__enlace" href="meteo.html" data-i18n="nav.meteo">Oratge</a>
-          <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a>
+          <!-- Blog oculto (5-nov-2026): <a class="footer__enlace" href="blog.html" data-i18n="nav.blog">Blog</a> -->
           <a class="footer__enlace" href="galerias.html" data-i18n="nav.galeria">Galeria</a>
           <a class="footer__enlace" href="nuevos-falleros.html" data-i18n="nav.nuevosFalleros">Nous Fallers</a>
         </nav>
@@ -1979,18 +1982,18 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
   <!-- Scripts JavaScript -->
    
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
-  <script src="../js/swiper.js?v=1f65795e5290" defer></script>
-  <script src="../js/meteo.js?v=1f65795e5290" defer></script>
-  <script src="../js/dark.js?v=1f65795e5290" defer></script>
-  <script src="../js/lang.js?v=1f65795e5290" defer></script>
-  <script src="../js/nav-menu.js?v=1f65795e5290" defer></script>
-  <script src="../js/buscador.js?v=1f65795e5290" defer></script>
-  <script src="../js/scroll-reveal.js?v=1f65795e5290" defer></script>
-  <script src="../js/board.js?v=1f65795e5290" defer></script>
-  <script src="../js/countdown.js?v=1f65795e5290" defer></script>
-  <script src="../js/colaboraciones-lightbox.js?v=1f65795e5290" defer></script>
-  <script src="../js/accessibility.js?v=1f65795e5290" defer></script>
-  <script src="../js/home-deferred.js?v=1f65795e5290" defer></script>
+  <script src="../js/swiper.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/meteo.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/dark.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/lang.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/nav-menu.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/buscador.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/scroll-reveal.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/board.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/countdown.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/colaboraciones-lightbox.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/accessibility.js?v=ecf28f6f823e" defer></script>
+  <script src="../js/home-deferred.js?v=ecf28f6f823e" defer></script>
   <script>
     // Agregar la clase 'clickable' al elemento si aún no la tiene
     const organigramaElement = document.querySelector('.organigrama');
@@ -2013,6 +2016,6 @@ Un dia vam tenir un somni que no sabíem que compartíem amb més gent. Vivint a
       });
     }
   </script>
-  <script src="../js/envia.js?v=1f65795e5290" defer></script>
+  <script src="../js/envia.js?v=ecf28f6f823e" defer></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.46.0 · **Última actualización:** 5 de noviembre de 2026
+**Versión:** 4.47.0 · **Última actualización:** 5 de noviembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -154,6 +154,8 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 **Navegación Timeline** (`src/js/timeline.js` + `src/scss/components/_timeline.scss`): indicador de progreso lateral con un punto por cada sección `[data-index]` (salta el hero en el índice 0). Solo desktop (≥768px), oculto cuando el hero es visible. Construye un `<nav class="timeline">` con puntos clicables + líneas conectoras; el punto activo se rastrea vía IntersectionObserver. **Puntos discretos (v4.30.22)**: cada `.timeline__dot` es un `<button>` de 24 px sin borde (área de clic, mínimo WCAG 2.2 AA) y el punto visible lo dibuja su `::before` con 8 px (10 px relleno de coral el activo, sin halo); líneas conectoras de 6 px. En pantallas de más de 1200 px (`min-width: 1201px`) los círculos miden 25 px (botón y círculo; el activo solo cambia de color) con líneas de 8 px, a petición del usuario. Debe fijar `min-width`/`min-height` y anular `transform`/`box-shadow` en hover/focus, porque la regla global de `_accessibility.scss` da 44 px y elevación a todo `<button>` (por eso los círculos se veían de 44 px).
 
+**Blog y calendario ocultos (v4.47.0)**: por decisión del usuario (5-nov-2026) están **ocultos, no borrados**: la sección `.blog` de `index.html` (con `hidden`; su `<hr class="seccion-hr">` previo comentado) y el listado `.blog` de `blog.html` (`hidden`), los enlaces «Blog» del menú (`.navegacion__enlace`) y del pie (`.footer__enlace`) en las 27 páginas (comentados) y el bloque «Calendario» de Eventos (`.eventos__titulo-calendario` + `.eventos__calentario-info`, comentados) en `index.html` y `eventos.html`. Se comentan en lugar de `hidden` donde la clase fija su propio `display` (pisaría `[hidden]`). `timeline.js` no crea punto para las secciones `hidden`. Las páginas `blog*.html` y `calendario.html` siguen publicadas, en sitemaps y en el buscador. Para mostrarlo de nuevo: quitar los `hidden` y los comentarios marcados «oculto (5-nov-2026)», y devolver `tests/reveal-on-scroll` a `.blog__post`.
+
 **Páginas legales, banners y autorizaciones retirados (v4.45.0-v4.46.0)**: por decisión del usuario (5-nov-2026) no existen las páginas Aviso Legal, Privacidad y Cookies (ES y `/va/`), los enlaces `.footer__legal` del pie, el banner de cookies (`cookie-banner.js`), el banner de subvención de la home (`banner-subvencion.js`, imagen `subvenciones/subvencion-2026`) ni la casilla «He leído y acepto la Política de Privacidad» del formulario de contacto. El pie termina en la franja coral `.derechos` (copyright, 1,2 rem arriba y abajo). Las URL retiradas responden **410 Gone** (regla E3 del `.htaccess`). Desde v4.46.0 tampoco existen la subsección «Formularios descargables» de `nuevos-falleros.html` ni los formularios imprimibles `autorizacion-imagen.html`/`autorizacion-imagen-menor.html` (ES y `/va/`, también 410), con sus traducciones (`autorizacionImagen`, `nuevosFalleros.{formulariosTitulo,formMayores,formMenores}`, `seo.autorizacion-imagen*`), el tipo `formulario` del buscador, el `DigitalDocument` del JSON-LD, `_contenido-legal.scss`, las tarjetas `.nuevos-falleros__card`/`__grid` y `tests/autorizacion-print-header`. Guardia: `tests/html-integrity.e2e.spec.js` falla si queda cualquier rastro en `dist/`. Plan y decisiones pendientes (qué información legal poner): `docs/propuestas/plan-retirar-legales-y-banners.md`.
 
 **Visor de imagen a pantalla completa** (`src/js/fullscreen.js`): las imágenes tipo bloc de la galería se pueden ampliar vía la Fullscreen API nativa (Chrome, Firefox, Safari macOS); en iPhone Safari (sin API) cae a un lightbox overlay dinámico. Tests: `tests/fullscreen-fallback.e2e.spec.js`.
@@ -162,7 +164,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.46.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.47.0).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -382,6 +384,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.47.0** — **Blog y calendario ocultos sin borrarlos** (petición del usuario del 5-nov-2026): sección «Blog de nuestra Falla» de la home y listado de `blog.html` con `hidden`; enlaces «Blog» del menú y del pie (27 páginas) y bloque «Calendario» de Eventos (`index.html`, `eventos.html`) comentados en el HTML; `timeline.js` omite las secciones `hidden` (12 puntos). `tests/reveal-on-scroll` mide tarjetas de galería en vez de las del blog; capturas de `index`, `eventos`, `blog` y del menú abierto regeneradas. Smoke 480 casos y regresión visual en verde. Ver *Blog y calendario ocultos*.
 
 - **4.46.0** — **Formularios de autorización de imagen retirados sin rastro** (petición del usuario del 5-nov-2026): sale la subsección «Formularios descargables» de `nuevos-falleros.html` (el `id="nuevos-falleros-title"` pasa al subtítulo «Documentos de interés general»; metas y `relatedLink` del JSON-LD sin los formularios) y se borran `autorizacion-imagen.html` y `autorizacion-imagen-menor.html` (ES y `/va/`), `_contenido-legal.scss` con su bloque oscuro, las tarjetas `.nuevos-falleros__grid`/`__card*` (claro y oscuro), las traducciones `autorizacionImagen`, `nuevosFalleros.{formulariosTitulo,formMayores,formMenores}`, `seo.autorizacion-imagen*` y `buscador.tipo.formulario`, y el párrafo de la intro que mandaba firmar el formulario (ES/VA/EN/FR). **Build**: fuera del breadcrumb, del índice del buscador (tipo `formulario`, `SEARCH_PAGE_*`, palabras clave y el sinónimo «autorización»; 78 registros), del `DigitalDocument` de `processJsonLd`, de sitemaps, `llms.txt`/`llms-full.txt` y `seo-history.json`; el ejemplo «autorización menores» del buscador pasa a «Fallera Mayor»/«Fallera Major». `.htaccess`: las dos páginas responden **410** (regla E3). **Pruebas**: se borra `tests/autorizacion-print-header` y los 6 baselines `autorizacion-imagen-*`; `auditoria-scss` mide el escudo interior en `organigrama.html` y pierde el caso de impresión; `schema-jsonld` sin el bucle de `DigitalDocument` (≥ 54 páginas), `theme-color` ≥ 52, `buscador` ≥ 26 páginas y sin tipo `formulario`, `search:eval` 48/48, `robots` sin la excepción de las autorizaciones; la guardia anti-rastro de `html-integrity` cubre también las autorizaciones; baselines de `nuevos-falleros` regenerados. Baseline SCSS a la baja (165 avisos de stylelint, 99 `!important`). Smoke 482 casos y regresión visual en verde.
 
