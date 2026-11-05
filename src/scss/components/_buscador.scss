@@ -72,8 +72,9 @@
   width: 24rem;
   margin-left: 0.8rem;
 
-  @media (min-width: 1200px) {
-    width: 30rem;
+  // Más largo en pantallas grandes (v4.44.6): crece con el ancho hasta 60 rem
+  @media (min-width: 1201px) {
+    width: clamp(36rem, 34vw, 60rem);
   }
 
   .buscador__input {
