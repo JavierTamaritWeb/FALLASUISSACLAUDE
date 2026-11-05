@@ -6,23 +6,27 @@
 @use '../abstracts/variables' as v;
 @use '../abstracts/mixins' as m;
 
-// Botón lupa + «Buscar» (mismo relieve que .header__menu-toggle)
+// Botón del buscador en la barra: píldora ancha con la lupa a la izquierda y
+// «¿Qué es lo que buscas?» (v4.44.4), con el fondo, borde y relieve de los
+// botones de la barra (.header__menu-toggle)
 .header__search-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  justify-content: flex-start;
+  gap: 0.8rem;
   min-height: 44px;
-  padding: 0.45rem 0.7rem;
+  min-width: 24rem;
+  padding: 0.45rem 2rem 0.45rem 1.4rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(3, 49, 95, 0.95);
-  border-radius: 0.8rem;
+  border-radius: 999px;
   color: v.$blanco;
   cursor: pointer;
   font-family: v.$font-family;
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
   box-shadow:
     0 2px 0 rgba(0, 0, 0, 0.22),
     0 8px 18px rgba(0, 0, 0, 0.18),
@@ -57,9 +61,19 @@
     transform: scale(0.96);
   }
 
+  @media (min-width: 768px) {
+    margin-left: 0.8rem; // separada del botón de tema
+  }
+
+  @media (min-width: 1200px) {
+    min-width: 30rem;
+  }
+
   // En móvil solo el icono; el texto sigue en el DOM para el nombre accesible
   @media (max-width: 767px) {
+    min-width: 0;
     padding: 0.45rem;
+    border-radius: 0.8rem;
 
     .header__search-toggle-texto {
       @include m.visualmente-oculto;

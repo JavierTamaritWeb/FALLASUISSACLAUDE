@@ -107,7 +107,7 @@ test.describe('buscador — panel en el navegador', () => {
     const toggle = page.locator('.header__search-toggle');
     await expect(toggle).toBeVisible();
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
-    await expect(toggle).toContainText(/Buscar/);
+    await expect(toggle).toHaveText('¿Qué es lo que buscas?');
     await expect(page.locator('#siteSearch')).toBeHidden();
 
     await toggle.click();
@@ -268,7 +268,7 @@ test.describe('buscador — panel en el navegador', () => {
     await page.addInitScript(() => { try { localStorage.removeItem('lang'); } catch (e) { /* noop */ } });
     await page.goto('/va/lafalla.html');
     const toggle = page.locator('.header__search-toggle');
-    await expect(toggle).toContainText(/Cercar/);
+    await expect(toggle).toHaveText('Què és el que busques?');
     await toggle.click();
     await expect(page.locator('.buscador__etiqueta')).toHaveText('Cercar en la web');
     await page.fill('#siteSearchInput', 'cremà');
@@ -301,7 +301,7 @@ test.describe('buscador — panel en el navegador', () => {
     const input = page.locator('#siteSearchInput');
     await expect(input).toHaveAttribute('role', 'combobox');
     await expect(input).toHaveAttribute('aria-expanded', 'false');
-    // El botón conserva su nombre visible («Buscar») también abierto (WCAG 2.5.3)
+    // El botón conserva su nombre visible («¿Qué es lo que buscas?») también abierto (WCAG 2.5.3)
     await expect(page.locator('.header__search-toggle')).not.toHaveAttribute('aria-label', /.+/);
     await page.fill('#siteSearchInput', 'representantes 2025');
     await expect(page.locator('.buscador__cuerpo')).toHaveAttribute('data-estado', 'resultados');

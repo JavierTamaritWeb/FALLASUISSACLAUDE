@@ -438,7 +438,9 @@
     var cerrar = panel.querySelector('.buscador__cerrar');
 
     function pintarTextos() {
-      toggle.querySelector('.header__search-toggle-texto').textContent = t('abrir');
+      // Píldora de la barra (v4.44.4): el texto visible es la pregunta del campo y
+      // sigue siendo el nombre accesible del botón (WCAG 2.5.3)
+      toggle.querySelector('.header__search-toggle-texto').textContent = t('placeholder');
       panel.querySelector('.buscador__etiqueta').textContent = t('etiqueta');
       input.placeholder = t('placeholder');
       borrar.setAttribute('aria-label', t('borrar'));
