@@ -368,7 +368,7 @@ Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de
 
 **Accesibilidad:** El banner oculto debe arrancar con `inert` además de `aria-hidden`, y el contenedor se expone como una región etiquetada. Cuando se cierre desde JavaScript, primero hay que retirar el foco del botón de cierre y después restaurar `inert`/`aria-hidden` para evitar advertencias del navegador y estados focuseables incoherentes.
 
-**Comportamiento actual:** El banner se muestra en cada carga de `index.html`. Si el usuario lo cierra, desaparece solo en esa vista actual y reaparece al volver a la home, recargarla o abrir otra pestaña de `index.html`.
+**Comportamiento actual (v4.44.3):** El banner se muestra **una vez por sesión del navegador**: la primera carga de `index.html` lo abre y fija la cookie de sesión `bannerSubvencionSesion=1` (sin `Max-Age`); mientras dure la sesión no vuelve a salir (ni al recargar, ni al volver a la home, ni en otra pestaña). Al cerrar el navegador la cookie se borra y vuelve a mostrarse. `?forzarBanner=1` o `?resetBanner=1` borran la cookie y lo muestran de nuevo.
 
 **Depuración manual:** `?resetBanner=1` limpia estado legado antes de mostrar la home y `?forzarBanner=1` además aplica `banner-subvencion--forzado` para elevar visibilidad y z-index durante diagnóstico.
 
@@ -379,7 +379,7 @@ Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de
 | `src/scss/components/_banner-subvencion.scss` | Estilos base + transición filter |
 | `src/scss/themes/_modo-oscuro.scss` | Regla `filter: invert(1) hue-rotate(180deg)` |
 | `index.html` | Markup accesible del banner con cierre y `<picture>` AVIF/WebP/PNG |
-| `src/js/banner-subvencion.js` | Apertura en cada carga de la home, cierre accesible y helpers de depuración |
+| `src/js/banner-subvencion.js` | Apertura una vez por sesión (cookie de sesión), cierre accesible y helpers de depuración |
 
 ### Forzar reflow en JavaScript
 

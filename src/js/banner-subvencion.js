@@ -1,8 +1,10 @@
-// Banner de subvención - tarjeta flotante mostrada en cada carga de la home
+// Banner de subvención - tarjeta flotante que se muestra una vez por sesión del
+// navegador (v4.44.3, decisión del usuario): una cookie de sesión, sin caducidad,
+// recuerda que ya se vio y se borra al cerrar el navegador
 // Se ejecuta directamente (sin DOMContentLoaded) porque el script se carga justo después del HTML del banner
 (function() {
   const banner = document.getElementById('banner-subvencion');
-  const legacySessionCookie = 'bannerSubvencionSesion';
+  const cookieSesion = 'bannerSubvencionSesion';
   const esNavegadorAutomatizado = window.navigator.webdriver === true;
   const urlActual = new URL(window.location.href);
   const resetearBannerDesdeUrl = urlActual.searchParams.get('resetBanner') === '1';
@@ -10,11 +12,9 @@
   const resetearEstadoDesdeUrl = resetearBannerDesdeUrl || forzarBannerDesdeUrl;
   if (!banner) return;
 
-  // Limpiamos cualquier cookie legado de la versión anterior por sesión.
-  borrarCookie(legacySessionCookie);
-
   if (resetearEstadoDesdeUrl) {
     limpiarBannerCerrado();
+    borrarCookie(cookieSesion);
 
     urlActual.searchParams.delete('resetBanner');
     urlActual.searchParams.delete('forzarBanner');
@@ -33,7 +33,14 @@
     return;
   }
 
-  // Mostrar el banner
+  // Ya se mostró en esta sesión del navegador: no vuelve a salir
+  if (leerCookie(cookieSesion) === '1') {
+    banner.remove();
+    return;
+  }
+
+  // Mostrar el banner y recordarlo para el resto de la sesión
+  escribirCookieSesion(cookieSesion);
   banner.removeAttribute('inert');
   banner.classList.remove('oculto');
   banner.setAttribute('aria-hidden', 'false');
@@ -65,6 +72,17 @@
     banner.setAttribute('inert', '');
     banner.setAttribute('aria-hidden', 'true');
     setTimeout(() => banner.remove(), 300);
+  }
+
+  function leerCookie(clave) {
+    const nombre = `${encodeURIComponent(clave)}=`;
+    const par = document.cookie.split('; ').find((c) => c.startsWith(nombre));
+    return par ? decodeURIComponent(par.slice(nombre.length)) : null;
+  }
+
+  // Sin Max-Age ni Expires: cookie de sesión
+  function escribirCookieSesion(clave) {
+    document.cookie = `${encodeURIComponent(clave)}=1; path=/; SameSite=Lax`;
   }
 
   function borrarCookie(clave) {

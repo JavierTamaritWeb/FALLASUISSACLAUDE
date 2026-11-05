@@ -152,7 +152,7 @@ Persistencia:
 Regla:
 
 - el cierre del banner no debe persistirse en `localStorage`
-- el comportamiento funcional muestra el banner en cada carga de `index.html`
+- el comportamiento funcional muestra el banner una vez por sesión del navegador (cookie de sesión `bannerSubvencionSesion`, v4.44.3; antes en cada carga de `index.html`)
 - `localStorage.bannerSubvencionCerrado` queda reservado para Playwright
 - cualquier cookie legado de sesión debe ignorarse y no puede gobernar la visibilidad
 

@@ -54,28 +54,37 @@ test.describe('Banner de subvención', () => {
     });
   });
 
-  test('index lo muestra en cada carga de la home', async ({ page, context }) => {
+  test('index lo muestra una vez por sesión del navegador', async ({ page, context, browser }) => {
     const banner = page.locator('#banner-subvencion');
 
     await page.goto('/index.html');
     await expect(banner).toBeVisible();
+    const cookies = await context.cookies();
+    const sesion = cookies.find((c) => c.name === 'bannerSubvencionSesion');
+    expect(sesion?.value).toBe('1');
+    expect(sesion?.expires).toBe(-1); // cookie de sesión, sin caducidad
 
-    await banner.locator('.banner-subvencion__cerrar').click();
+    // Misma sesión: ni al recargar, ni al volver, ni en otra pestaña
+    await page.reload();
     await expect(page.locator('#banner-subvencion')).toHaveCount(0);
-
     await page.goto('/lafalla.html');
     await page.goto('/index.html');
-    await expect(banner).toBeVisible();
-
-    await banner.locator('.banner-subvencion__cerrar').click();
     await expect(page.locator('#banner-subvencion')).toHaveCount(0);
+    const otraPestana = await context.newPage();
+    await otraPestana.goto('/index.html');
+    await expect(otraPestana.locator('#banner-subvencion')).toHaveCount(0);
 
-    await page.reload();
-    await expect(banner).toBeVisible();
+    // ?forzarBanner=1 lo vuelve a mostrar
+    await page.goto('/index.html?forzarBanner=1');
+    await expect(page.locator('#banner-subvencion')).toBeVisible();
 
-    const secondPage = await context.newPage();
-    await secondPage.goto('/index.html');
-    await expect(secondPage.locator('#banner-subvencion')).toBeVisible();
+    // Sesión nueva (otro contexto): vuelve a salir
+    const nuevo = await browser.newContext({ baseURL: test.info().project.use.baseURL });
+    await nuevo.addInitScript(() => localStorage.setItem('bannerSubvencionCerrado', 'false'));
+    const p2 = await nuevo.newPage();
+    await p2.goto('/index.html');
+    await expect(p2.locator('#banner-subvencion')).toBeVisible();
+    await nuevo.close();
   });
 
   test('index permite cerrar el banner con la X en móvil', async ({ page }) => {

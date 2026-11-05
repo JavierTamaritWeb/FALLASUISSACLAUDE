@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.44.2 · **Última actualización:** 5 de noviembre de 2026
+**Versión:** 4.44.3 · **Última actualización:** 5 de noviembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -164,7 +164,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.44.2).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.44.3).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -320,7 +320,7 @@ Estas restricciones surgen de bugs pasados. Violarlas reintroducirá los problem
 - **Animaciones de notificación (v4.2.7):** solo UNA regla de animación para notificaciones. `_notificaciones.scss` es dueño de `#notificacion.mostrar`. NO añadas una regla competidora en `_accessibility.scss` para `.header__notificacion:not(:empty)` — provoca un flash de notificación fantasma.
 
 - **Banner subvención (v4.2.11-4.2.16):**
-  - **Visible en cada carga de home**: `banner-subvencion.js` NO persiste el cierre en `localStorage` ni debe usar una cookie de sesión para condicionar la visibilidad real del usuario. La comprobación `localStorage.getItem('bannerSubvencionCerrado')` existe únicamente para los tests de Playwright. NO reañadas `localStorage.setItem` en `cerrarBanner()`.
+  - **Una vez por sesión del navegador (v4.44.3, decisión del usuario del 5-nov-2026; antes en cada carga)**: al mostrarse, `banner-subvencion.js` fija la cookie de sesión `bannerSubvencionSesion=1` (sin `Max-Age`/`Expires`, se borra al cerrar el navegador) y, si existe, no vuelve a mostrarlo en ninguna pestaña; `?forzarBanner=1`/`?resetBanner=1` la borran. NO uses `localStorage` (lo haría permanente) ni le pongas caducidad a la cookie. La comprobación `localStorage.getItem('bannerSubvencionCerrado')` existe únicamente para los tests de Playwright. NO reañadas `localStorage.setItem` en `cerrarBanner()`.
   - **Tarjeta no-modal**: una tarjeta flotante, no un modal bloqueante a pantalla completa con backdrop. NO lo reviertas a un overlay bloqueante.
   - **Secuencia de ocultado accesible**: el estado oculto usa `inert` + `aria-hidden="true"`. Al cerrar, mueve el foco fuera del botón de cierre antes de aplicar `aria-hidden` al ancestro, o Chromium loguea un warning de accesibilidad.
   - **Imagen en modo oscuro**: usa `filter: invert(1) hue-rotate(180deg)` — NO `invert(1)` solo (vuelve verde el escudo rojo del Ajuntament). `hue-rotate(180deg)` restaura los tonos rojos.
@@ -393,6 +393,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.44.3** — **Banner de subvención una vez por sesión** (decisión del usuario): deja de abrirse en cada carga de la home; `banner-subvencion.js` fija al mostrarlo la cookie de sesión `bannerSubvencionSesion=1` (sin caducidad, `SameSite=Lax`) y no vuelve a salir en esa sesión del navegador, tampoco en otras pestañas; al cerrar el navegador vuelve a mostrarse, y `?forzarBanner=1`/`?resetBanner=1` borran la cookie. El banner de cookies no cambia (una vez elegido no reaparece). `tests/banner-subvencion` reescribe el caso principal (recarga, vuelta a la home, otra pestaña, forzado y sesión nueva). Restricción *Banner subvención* y `docs/global-styles.md`/`architecture-constraints.md` actualizados.
 
 - **4.44.2** — **Campo del buscador en píldora con lupa** (a partir de la referencia del usuario): `.buscador__input` pasa del rectángulo blanco a una píldora gris claro (`$blanco-hueso`, `border-radius: 999px`, 4,8 rem de alto, texto 1,7 rem) con el borde azul oscuro y el relieve (sombra + brillo interior) de los botones de la barra; lupa decorativa `.buscador__lupa` (SVG `aria-hidden`, `$secondary-color`) dentro del campo a la izquierda, colocada tras el `<input>` en el HTML que genera `buscador.js` para que se pinte encima de su fondo sin `z-index`; el aspa de borrar se separa un poco más del borde. Texto de ejemplo nuevo `buscador.placeholder`: ES «¿Qué es lo que buscas?», VA «Què és el que busques?» (`translations.json` y reserva de `buscador.js`). El panel de cristal, su cabecera, el foco y el modo oscuro no cambian. Verificado en Chromium a 1280 y 390 px, ES/VA, claro y oscuro.
 
