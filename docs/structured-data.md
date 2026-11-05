@@ -45,7 +45,6 @@ Los antiguos `ld-json-enhanced.json` y `advanced-schema-graph.json` se **elimina
 | `calendario.html` | `WebPage` | `significantLink` → `eventos.html` |
 | `deportes.html` | `WebPage` | `mentions` Junta Central Fallera (anidado, sin `@id`) |
 | `ofrenda.html` | `WebPage` | `keywords` + `significantLink` al panel Ofrenda 2026 de Archivos (sin `Event`: solo `board.json` los genera) |
-| legales (`aviso-legal`, `privacidad`, `cookies`) | `WebPage` | `genre`, `publisher` → ref, `isAccessibleForFree` |
 | `autorizacion-imagen*.html` | `WebPage` (`mainEntity` → `#documento`) | `DigitalDocument` `#documento` (`encodingFormat text/html`, `audience`, `publisher`; `name` del idioma vía `nuevosFalleros.form*.titulo`) |
 | resto (`meteo`, `nuevos-falleros`) | `WebPage` | `about` → `#organization`; `relatedLink` en Nuevos Falleros |
 
@@ -99,11 +98,11 @@ Validación externa opcional: pegar el `<script ld+json>` de `dist/<página>.htm
 
 ## Metadatos de licencia de imagen (Search Console, v4.33.0)
 
-Search Console avisaba de que los `ImageObject` no llevaban `creator`, `copyrightNotice`, `license` ni `acquireLicensePage`. El build (`gulpfile.js → completeImageObjects`) recorre el `@graph` completo de cada página y completa esos campos (más `creditText`) en todo `ImageObject` que no los defina: logo de la Organization, `primaryImageOfPage`, las fotos de las 9 galerías y las imágenes de los posts. Valores: `creator` = Organization con el nombre de la Falla, `copyrightNotice` = `© <año del build> Falla Suïssa - L'Alqueria del Favero`, `license` y `acquireLicensePage` = `aviso-legal.html#propiedad-intelectual` (en `/va/`, la versión valenciana). Si una imagen tiene otro autor o licencia, escribe esos campos en el HTML y el build los respeta. `npm run seo:schema-report` marca como problema cualquier `ImageObject` incompleto y `tests/schema-jsonld.e2e.spec.js` lo comprueba en las galerías.
+Search Console avisaba de que los `ImageObject` no llevaban `creator`, `copyrightNotice`, `license` ni `acquireLicensePage`. El build (`gulpfile.js → completeImageObjects`) recorre el `@graph` completo de cada página y completa `creator`, `creditText` y `copyrightNotice` en todo `ImageObject` que no los defina: logo de la Organization, `primaryImageOfPage`, las fotos de las 9 galerías y las imágenes de los posts. Valores: `creator` = Organization con el nombre de la Falla, `copyrightNotice` = `© <año del build> Falla Suïssa - L'Alqueria del Favero`. Hasta v4.44.6 también `license` y `acquireLicensePage` = `aviso-legal.html#propiedad-intelectual`; se dejaron de emitir al retirar el aviso legal en v4.45.0 (vuelven a ser posibles cuando haya una página de licencia). Si una imagen tiene otro autor o licencia, escribe esos campos en el HTML y el build los respeta. `npm run seo:schema-report` marca como problema cualquier `ImageObject` sin `creator` o `copyrightNotice` y `tests/schema-jsonld.e2e.spec.js` lo comprueba en las galerías.
 
 ---
 
-Última actualización: 25 de octubre de 2026 - v4.44.0
+Última actualización: 5 de noviembre de 2026 - v4.45.0
 
 ## Actualización SEO v4.30.21
 

@@ -145,100 +145,14 @@ Verificación recomendada:
 - revisión manual del panel de notificación en home y páginas internas
 - smoke suite si el cambio afecta al header
 
-## 6. Banner de subvención: persistencia y renderizado
+## 6. Banner de subvención y banner de cookies (retirados en v4.45.0)
 
-Persistencia:
+Ambos banners, las páginas legales (Aviso Legal, Privacidad, Cookies) y los enlaces del pie se retiraron por decisión del usuario el 5-nov-2026; las URL responden 410 (regla E3 del `.htaccess`) y `tests/html-integrity.e2e.spec.js` falla si queda rastro en `dist/`. No los reintroduzcas sin decidir antes el contenido legal (plan en `docs/propuestas/plan-retirar-legales-y-banners.md`). Lecciones que siguen valiendo para cualquier banner futuro:
 
-Regla:
-
-- el cierre del banner no debe persistirse en `localStorage`
-- el comportamiento funcional muestra el banner una vez por sesión del navegador (cookie de sesión `bannerSubvencionSesion`, v4.44.3; antes en cada carga de `index.html`)
-- `localStorage.bannerSubvencionCerrado` queda reservado para Playwright
-- cualquier cookie legado de sesión debe ignorarse y no puede gobernar la visibilidad
-
-Por qué:
-
-- el banner debe mostrarse siempre al abrir o recargar la home
-- debe reaparecer al volver a `index.html` desde otra página o al abrir una pestaña nueva de la home
-- la suite general de Playwright debe seguir pudiendo ocultarlo mediante `localStorage.bannerSubvencionCerrado`
-
-Renderizado:
-
-Regla:
-
-- mantenerlo como tarjeta flotante no modal
-- no volver a un overlay fullscreen que bloquee la página
-
-Por qué:
-
-- el contenido institucional sigue visible, pero reduce fricción y no interrumpe la navegación principal
-- el cierre manual es más predecible que un modal intrusivo o un auto-dismiss agresivo
-
-Accesibilidad del cierre:
-
-Regla:
-
-- el estado oculto debe combinar `inert` y `aria-hidden="true"`
-- antes de ocultar el banner, hay que sacar el foco del botón de cierre si sigue dentro del contenedor
-
-Por qué:
-
-- aplicar `aria-hidden` sobre un ancestro que todavía contiene el foco dispara una advertencia de accesibilidad en Chromium
-- `inert` evita que el banner oculto siga siendo focuseable o interactivo mientras termina su transición y antes de ser eliminado del DOM
-
-Interacción móvil y stacking:
-
-Regla:
-
-- el botón de cierre debe conservar un área táctil real mínima de `44x44`
-- aplicar `touch-action: manipulation`
-- mantener su `z-index` por encima de la cabecera fija y de las capas visuales internas del banner
-
-Por qué:
-
-- en móvil, el header fijo y la capa gráfica del banner pueden interceptar el click si el botón queda demasiado justo o por detrás de otra capa
-- el test E2E valida el hit target real, no solo que el icono sea visible en pantalla
-
-Renderizado y compatibilidad Safari:
-
-Regla:
-
-- mantener `<picture>` con variantes AVIF/WebP/PNG
-- no volver a un SVG filtrado directamente
-
-Por qué:
-
-- Safari/WebKit tiene problemas de composición con SVGs que incluyen ciertos filtros internos
-
-Modo oscuro:
-
-Regla:
-
-- mantener `filter: invert(1) hue-rotate(180deg)` en la imagen institucional
-
-Por qué:
-
-- `invert(1)` a secas altera el escudo y rompe los tonos rojos
-
-Archivos implicados:
-
-- `src/js/banner-subvencion.js`
-- HTML de la home
-- estilos del banner
-
-Verificación recomendada:
-
-```bash
-npm run build
-npx playwright test tests/banner-subvencion.e2e.spec.js
-```
-
-Ayudas de depuración manual:
-
-- `index.html?resetBanner=1` para limpiar estado legado antes de cargar la home
-- `index.html?forzarBanner=1` para elevar el banner y confirmar si el problema es visual o de stacking
-
-Si además tocas navegación, tema o snapshots, ejecuta `npm run test:e2e:full`.
+- el HTML debe entregarse visible sin depender de JavaScript (si el script falla, el aviso se ve igual);
+- al cerrar, quita el foco del botón antes de poner `aria-hidden`/`inert` en el ancestro (Chromium avisa de descendientes enfocados ocultos);
+- todo acceso a `localStorage` va en `try/catch` (Safari lanza `SecurityError` con el almacenamiento bloqueado);
+- una transición CSS añadida en el mismo frame que la inserción en el DOM no se anima en Safari: usa `setTimeout(…, 50)`.
 
 ## 7. Modal "Quieres formar parte": DOM estable y dependencia externa opcional
 
@@ -542,4 +456,4 @@ Checklist rápido:
 
 ---
 
-Última actualización: 25 de octubre de 2026 - v4.44.0
+Última actualización: 5 de noviembre de 2026 - v4.45.0

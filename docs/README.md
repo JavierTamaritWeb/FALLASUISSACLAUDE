@@ -66,7 +66,7 @@
 
 ## 📝 Notas de Mantenimiento
 
-- La versión funcional documentada del proyecto es `v4.42.0` y `package.json`/`package-lock.json` están sincronizados con esa release.
+- La versión funcional documentada del proyecto es `v4.45.0` y `package.json`/`package-lock.json` están sincronizados con esa release.
 - Si una guía entra en conflicto con [`../CLAUDE.md`](../CLAUDE.md), prevalece `CLAUDE.md` como fuente operativa del repositorio.
 
 ## 🔄 Cuándo actualizar esta carpeta
@@ -80,7 +80,7 @@ Actualiza estas guías cuando cambies:
 - JSON-LD inline, metadatos OG/Twitter o referencias a HOPE-INCLIVA
 - scrollbars, modo oscuro, gradientes, reveal on scroll o compatibilidad Safari/WebKit/Firefox
 - geometría o set de imágenes del Swiper del monumento (rotación anual: `docs/monumento-rotacion-anual.md`)
-- navegación fija, overlay móvil, z-index o banner de subvención
+- navegación fija, overlay móvil o z-index
 - sistema de traducciones (`src/data/translations.json`, claves `data-i18n`, renderizado por párrafos en `src/js/lang.js`, pre-render VA en `gulpfile.js → prerenderTranslations`)
 - coordinación entre i18n y módulos dinámicos como `src/js/meteo.js`
 - sección de colaboraciones, lightbox HOPE, copy responsive y grid compartido

@@ -79,7 +79,6 @@ test.describe('color-tokens — paleta funcional', () => {
   });
 
   test('modo oscuro (v4.30.0): todo el coral de marca pasa a $coral-texto vía --coral-marca', async ({ page }) => {
-    await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
     await page.goto('/index.html');
     const leer = () => page.evaluate(() => ({
       coral: getComputedStyle(document.body).getPropertyValue('--coral-marca').trim(),

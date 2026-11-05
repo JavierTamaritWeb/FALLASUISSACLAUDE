@@ -60,12 +60,6 @@ test.describe('Auditoría SCSS — errores visibles y accesibilidad (v4.39.1)', 
     expect(await page.locator('.accordion__titular').first().evaluate((el) => getComputedStyle(el).userSelect)).not.toBe('none');
   });
 
-  test('1.9 los enlaces legales del pie miden al menos 12 px', async ({ page }) => {
-    await page.goto('/index.html');
-    const px = await page.locator('.footer__legal a').first().evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
-    expect(px).toBeGreaterThanOrEqual(12);
-  });
-
   test('1.10 con colores forzados los controles conservan un borde y el foco un contorno', async ({ browser }) => {
     const context = await browser.newContext({ forcedColors: 'active' });
     const page = await context.newPage();
@@ -95,7 +89,7 @@ test.describe('Auditoría SCSS — deuda resuelta en 4.40.0 (guardias)', () => {
     expect(escudo).toBeGreaterThan(40);
     const pie = await page.locator('img.footer__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).width));
     expect(pie).toBeLessThanOrEqual(80);
-    await page.goto('/aviso-legal.html');
+    await page.goto('/autorizacion-imagen.html');
     const interior = await page.locator('img.header-inner__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).width));
     expect(interior).toBeLessThanOrEqual(100);
     expect(interior).toBeGreaterThan(30);
@@ -120,9 +114,9 @@ test.describe('Auditoría SCSS — deuda resuelta en 4.40.0 (guardias)', () => {
     expect(await n.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(184, 63, 53)');
   });
 
-  test('impresión de las legales: párrafo destacado sin fondo y escudo acotado', async ({ page }) => {
+  test('impresión de la autorización: párrafo destacado sin fondo y escudo acotado', async ({ page }) => {
     await page.emulateMedia({ media: 'print' });
-    await page.goto('/privacidad.html');
+    await page.goto('/autorizacion-imagen.html');
     expect(await page.locator('.contenido-legal p').first().evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
     expect(await page.locator('img.header-inner__escudo').first().evaluate((el) => parseFloat(getComputedStyle(el).maxWidth))).toBeLessThanOrEqual(100);
   });

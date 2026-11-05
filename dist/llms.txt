@@ -47,6 +47,3 @@ Todas las páginas llevan un único bloque JSON-LD (Organization, WebSite y el n
 ## Optional
 
 - [Meteo en València](https://fallasuissa.es/meteo.html)
-- [Aviso legal](https://fallasuissa.es/aviso-legal.html)
-- [Política de privacidad](https://fallasuissa.es/privacidad.html)
-- [Política de cookies](https://fallasuissa.es/cookies.html)

@@ -148,19 +148,6 @@
 </head>
 <body>
 
-  <!-- Banner de subvención (se muestra en cada carga de la home) -->
-  <div id="banner-subvencion" class="banner-subvencion" role="region" aria-label="Información de subvención" aria-hidden="false">
-    <div class="banner-subvencion__contenido">
-      <button class="banner-subvencion__cerrar" aria-label="Cerrar banner">&times;</button>
-      <picture>
-        <source srcset="img/subvenciones/subvencion-2026.avif" type="image/avif">
-        <source srcset="img/subvenciones/subvencion-2026.webp" type="image/webp">
-        <img class="banner-subvencion__imagen" fetchpriority="high" width="1024" height="718" src="img/subvenciones/subvencion-2026.png" alt="Información de subvención">
-      </picture>
-    </div>
-  </div>
-  <!-- El banner no espera a Swiper ni al resto de scripts diferidos. -->
-  <script src="js/banner-subvencion.js"></script>
 
   <header class="header" data-index="0">
     
@@ -1671,13 +1658,6 @@ Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra
           <label for="quieres-mensaje" data-i18n="quieres.mensaje">Mensaje</label>
           <textarea id="quieres-mensaje" class="quieres-form__campo" name="mensaje" maxlength="300" required placeholder="Introduce un mensaje" data-i18n-placeholder="quieres.mensajePlaceholder"></textarea>
         </div>
-        <div class="form-group form-group--consentimiento">
-          <input type="checkbox" id="quieres-privacidad" name="privacidad" required>
-          <label for="quieres-privacidad" class="form-consentimiento__label">
-            <span data-i18n="quieres.privacidadTexto">He leído y acepto la</span>
-            <a href="privacidad.html" target="_blank" rel="noopener noreferrer" data-i18n="quieres.privacidadEnlace">Política de Privacidad</a>.
-          </label>
-        </div>
         <span class="wrapper-inline">
           <button class="boton-modal" data-i18n="quieres.aceptar">Aceptar</button>
         </span>
@@ -1729,11 +1709,6 @@ Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra
       </div>
     </div>
           <p class="derechos" data-i18n="footer.derechos">&copy; 2026 Falla Suïssa - L'Alqueria del Favero. Todos los derechos reservados.</p>
-    <nav class="footer__legal">
-      <a href="aviso-legal.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.aviso">Aviso Legal</a>
-      <a href="privacidad.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.privacidad">Privacidad</a>
-      <a href="cookies.html" target="_blank" rel="noopener noreferrer" data-i18n="legal.cookies">Cookies</a>
-    </nav>
   </footer>
   
   <!-- Scripts JavaScript -->
@@ -1774,6 +1749,5 @@ Vive cada acto con emoción y orgullo, con muchas ganas de representar a nuestra
     }
   </script>
   <script src="js/envia.js" defer></script>
-  <script src="js/cookie-banner.js" defer></script>
 </body>
 </html>

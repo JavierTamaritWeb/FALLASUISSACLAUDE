@@ -17,7 +17,7 @@
   // (z 2000/2500) viven DENTRO de este contexto, así que su z-index efectivo en la
   // página es este. Con 10, la cenefa (10), el título sticky del organigrama (10),
   // el timeline (100) y los tooltips (100) se pintaban encima del menú abierto.
-  // 500: por encima del contenido, por debajo de modales/banners (≥1000).
+  // 500: por encima del contenido, por debajo de los modales (≥1000).
   z-index: v.$z-header;
   
   // Pseudo-elemento para el fondo del hero (modo claro): degradado celeste de

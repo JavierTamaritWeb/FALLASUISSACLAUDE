@@ -12,12 +12,11 @@
     "src/scss/components/_notificaciones.scss": 1,
     "src/scss/components/_ofrenda.scss": 1,
     "src/scss/components/_organigrama.scss": 2,
-    "src/scss/components/_quieres.scss": 3,
     "src/scss/components/_swiper.scss": 1,
     "src/scss/components/_video-dron.scss": 1,
     "src/scss/layout/_footer.scss": 8,
     "src/scss/layout/_header-barra.scss": 1,
-    "src/scss/themes/_modo-oscuro.scss": 26
+    "src/scss/themes/_modo-oscuro.scss": 25
   },
   "zIndex": [],
   "mediaQueries": [

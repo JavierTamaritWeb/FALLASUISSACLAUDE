@@ -14,7 +14,7 @@ let translations = window.translations && typeof window.translations === 'object
 // idioma pre-renderizado de la página en vez de pisarlo con 'es'.
 const pageLang = document.documentElement.lang === 'ca' ? 'va' : 'es';
 // try/catch obligatorio: Safari lanza SecurityError con localStorage bloqueado
-// y, a nivel de módulo, abortaría todo el sistema i18n (ver cookie-banner.js).
+// y, a nivel de módulo, abortaría todo el sistema i18n.
 let currentLang = pageLang;
 try {
   const savedLang = localStorage.getItem('lang');

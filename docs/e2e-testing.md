@@ -155,29 +155,9 @@ Guía técnica:
 
 - [`structured-data.md`](./structured-data.md)
 
-### 🏷️ Banner de subvención
+### 🏷️ Banners retirados (v4.45.0)
 
-El banner de subvención (`#banner-subvencion`) se muestra cada vez que se carga `index.html`. Si el usuario lo cierra, desaparece de esa vista actual, pero vuelve a aparecer al regresar a la home, recargarla o abrir una pestaña nueva de `index.html`.
-
-El comportamiento del usuario no persiste en `localStorage` ni depende de una cookie funcional de sesión. El script solo reserva `localStorage.bannerSubvencionCerrado` para automatización y limpia cualquier cookie legado que ya no gobierna la visibilidad real.
-
-Para depuración manual existen dos parámetros útiles sobre la home:
-
-- `?resetBanner=1`: limpia estado legado y carga la página sin el parámetro en la URL final.
-- `?forzarBanner=1`: además de limpiar estado legado, añade `banner-subvencion--forzado` para subir el banner al frente visual durante diagnóstico.
-
-Para evitar que interfiera con los tests generales, `playwright.config.js` pre-setea `localStorage.bannerSubvencionCerrado = 'true'` via `storageState`. El script `banner-subvencion.js` lee esa clave y hace `banner.remove()` antes de mostrarlo.
-
-**Importante:** El cierre del banner por el usuario NO escribe en `localStorage`. La clave solo la setean los tests.
-
-**Accesibilidad:** El contenedor arranca oculto con `aria-hidden="true"` e `inert`. Al mostrarse, se elimina `inert`; al cerrarse, el script desenfoca primero el botón de cierre si conserva el foco y solo después vuelve a aplicar `inert` y `aria-hidden`. Esto evita la advertencia del navegador sobre descendientes enfocados dentro de un ancestro oculto para tecnologías asistivas.
-
-**Interacción móvil:** la spec también protege que el botón de cierre conserve un hit target real suficiente y no quede tapado por la cabecera fija ni por capas internas del propio banner.
-
-Archivos de test:
-
-- `tests/banner-subvencion.e2e.spec.js`
-- `tests/index-colaboraciones.e2e.spec.js` (convive con la home)
+El banner de subvención y el de cookies ya no existen, así que la configuración de Playwright no siembra ninguna clave en `localStorage` para ocultarlos. `tests/html-integrity.e2e.spec.js` comprueba que no queda ningún rastro de ellos ni de las páginas legales en `dist/`.
 
 ### 🎨 Header bar background
 
@@ -230,7 +210,7 @@ Cobertura concreta:
 
 Archivo de test:
 
-- `tests/visual-regression.e2e.spec.js` — desde v4.37.2 cubre 17 páginas (index, lafalla, eventos, meteo, blog, blog-somni, blog-anima, galerias, calendario, mapa, organigrama, ofrenda, colaboraciones, deportes, nuevos-falleros, galeria_1, aviso-legal) × 3 anchos × claro/oscuro, más los componentes (header, footer, menú, countdown, calendario)
+- `tests/visual-regression.e2e.spec.js` — desde v4.37.2 cubre 17 páginas (index, lafalla, eventos, meteo, blog, blog-somni, blog-anima, galerias, calendario, mapa, organigrama, ofrenda, colaboraciones, deportes, nuevos-falleros, galeria_1 y, desde v4.45.0, autorizacion-imagen en lugar de aviso-legal) × 3 anchos × claro/oscuro, más los componentes (header, footer, menú, countdown, calendario)
 
 Snapshots:
 
@@ -517,12 +497,11 @@ Smoke suite por defecto:
 - `tests/board.e2e.spec.js` (data-driven desde v4.12.3: lee `board.json`/`sports-board.json` y valida empty-state o render según el contenido real de cada tablón)
 - `tests/reveal-on-scroll.e2e.spec.js`
 - `tests/countdown.e2e.spec.js`
-- `tests/banner-subvencion.e2e.spec.js`
 - `tests/index-colaboraciones.e2e.spec.js`
 - `tests/galeria-pager.e2e.spec.js` (v4.26.0, en la smoke): paginación entre galerías generada por el build — para cada `dist/galeria_N.html` y `dist/va/galeria_N.html` (lista leída de `dist/`) comprueba un único `nav.galeria-pager`, la tira numérica en orden con `href` relativos, `aria-current` en la actual, nombres ES/VA en `aria-label`/`title`, vecinas con `rel="prev"/"next"` o `<span aria-disabled>` en los extremos y el enlace traducido a `galerias.html`; en navegador: Siguiente desde `galeria_1`, salto desde `/va/` permaneciendo en `/va/`, última galería con Siguiente deshabilitado, tira sin scroll horizontal a 375 px y cambio ES→VA en runtime.
 - `tests/galeria-9-album.e2e.spec.js` (v4.24.0, en la smoke; desde v4.25.0 también recorre galeria_1–8: dos páginas a 1280 px, una a 1024 px y carga de su propio `dataPagesN.json` vía `data-source`): galería Fallera Mayor Infantil 2026-27 — a 1280 px dos páginas activas lado a lado (mitad izquierda/derecha del bloc, lomo `::after`), indicador "Páginas 1-2 de 40", paso de dos en dos hasta 39-40 (Siguiente deshabilitado), realineado al bajar a 1024 px y volver, ampliación con el fallback de `fullscreen.js`; a 375 px una página e indicador clásico; `<video>` vertical 9:16 ≤360 px con `controls`/`preload="none"`/`playsinline`/póster, `readyState 0`, `HEAD` del MP4 → `video/mp4`, botón ampliar y enlace `download`; `/va/` pre-renderizado con assets `../img/` y sin peticiones a `/va/img/`.
 - `tests/escudo-enlace.e2e.spec.js` (v4.23.2, en la smoke): recorre el HTML servido de todas las páginas de `dist/` y `dist/va/` y exige que cada escudo (`Escudo-Oficial-Falla.*`, `logo-escudo-cutty.svg`) esté dentro de un `<a href="https://fallasuissa.es/">` con `aria-label` (pre-renderizado en valenciano en `/va/`); además hace clic en el escudo del pie (con la home de producción respondida por `page.route`, sin salir a internet) y activa con Enter el del header.
-- `tests/schema-jsonld.e2e.spec.js` (v4.28.0, en la smoke): lee las 60 páginas de `dist/` (30 ES + 30 `/va/`) y exige un solo `<script ld+json>` con `@graph`, los nodos `#organization` (nombre canónico, 3 `sameAs`, `member` con los cargos vigentes, sin `employee`) y `#website` de la fuente, nodo de página `#webpage` con `url` = canonical e `inLanguage` `es-ES`/`ca-ES`, `BreadcrumbList` enlazado, `@id` únicos y referencias `{ "@id" }` resueltas, y ausencia de datos obsoletos (`Quiles`, `Marta Soriano`) y de la URL de Facebook inválida en el HTML; además `ImageGallery` con tantos `ImageObject` como fotos en `dataPagesN.json`, `VideoObject` de `galeria_9`, `ItemList` de `galerias.html` (nombres VA en `/va/`), `Blog`/`BlogPosting` completos, llibret sin `Event`, `ai-enhanced-schema.json` alineado con la fuente y un caso en navegador (`/va/galeria_9.html`). Informe manual: `npm run seo:schema-report`.
+- `tests/schema-jsonld.e2e.spec.js` (v4.28.0, en la smoke): lee las 58 páginas de `dist/` (ES + `/va/`; 6 menos desde v4.45.0) y exige un solo `<script ld+json>` con `@graph`, los nodos `#organization` (nombre canónico, 3 `sameAs`, `member` con los cargos vigentes, sin `employee`) y `#website` de la fuente, nodo de página `#webpage` con `url` = canonical e `inLanguage` `es-ES`/`ca-ES`, `BreadcrumbList` enlazado, `@id` únicos y referencias `{ "@id" }` resueltas, y ausencia de datos obsoletos (`Quiles`, `Marta Soriano`) y de la URL de Facebook inválida en el HTML; además `ImageGallery` con tantos `ImageObject` como fotos en `dataPagesN.json`, `VideoObject` de `galeria_9`, `ItemList` de `galerias.html` (nombres VA en `/va/`), `Blog`/`BlogPosting` completos, llibret sin `Event`, `ai-enhanced-schema.json` alineado con la fuente y un caso en navegador (`/va/galeria_9.html`). Informe manual: `npm run seo:schema-report`.
 - `tests/accordion-hover.e2e.spec.js` (v4.27.0, en la smoke): los titulares de acordeón replican el hover de `.boton` — en `index.html` (Nosotros y el `<button>` de Representantes) y `colaboraciones.html` (HOPE) comprueba reposo sin degradado y título coral, hover con degradado coral→salmón (salmón→amarillo en `body.modo-oscuro`), título e icono en `$negro-casi`, brillo `::before` desplazado, ▼ desplazado (y girado si la sección está abierta), fila sin moverse (`transform: none`, mismo `offsetTop`), foco por ratón sin contorno azul y foco por teclado con anillo coral, y `prefers-reduced-motion` sin transiciones.
 - `tests/accordion-sin-recorte.e2e.spec.js` (v4.23.1, en la smoke): recorre todas las `.accordion__section` de `colaboraciones.html` (ES y `/va/`), `index.html` y `lafalla.html` a 375/768/1280 px — alto 0 cerrado, `max-height: none` tras abrir (fijado por `acc.js`), alto de layout del interior (`offsetHeight`, ignora el `translateY` de los `.reveal`) ≤ alto visible, y vuelta a 0 al cerrar.
 - `tests/nosotros-directiva.e2e.spec.js` (v4.23.0, en la smoke): panel La Directiva como tarjetas por cargo — 5 tarjetas con icono, 8 nombres en orden, chips sin viñeta y presidente en coral, grid 1→3 columnas, modo oscuro y pre-render VA.
@@ -617,11 +596,6 @@ Guía técnica:
   - Ejecuta `npm run build` antes de `npm run test:e2e`
   - Si el cambio toca layout, dark mode, reveal, OG, meteo o snapshots, ejecuta también `npm run test:e2e:full`
 
-- El banner de subvención no aparece en una comprobación manual:
-  - Abre `index.html?resetBanner=1`
-  - Si necesitas aislar un posible problema visual o de stacking, usa `index.html?forzarBanner=1`
-  - Comprueba que no estás reutilizando un contexto automatizado con `localStorage.bannerSubvencionCerrado = 'true'`
-
 - Los tests del modal fallan o dejan de abrir la home:
   - Verifica que el modal sigue estando en `index.html` y que `src/js/envia.js` no volvió a depender de `fetch('modal-content.html')`
   - Comprueba que no hay un `emailjs.init(...)` en top-level rompiendo el registro de listeners cuando falla la CDN
@@ -641,7 +615,7 @@ Guía técnica:
 
 ---
 
-Última actualización: 25 de octubre de 2026 - v4.44.0
+Última actualización: 5 de noviembre de 2026 - v4.45.0
 
 ## Regresiones SEO v4.30.21
 

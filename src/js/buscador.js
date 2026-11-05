@@ -288,7 +288,7 @@
     sinResultados: 'Sin coincidencias para «{q}».', sinResultadosAyuda: 'Revisa la ortografía o prueba con una de estas búsquedas:',
     error: 'No se ha podido cargar el buscador.', reintentar: 'Reintentar', verGalerias: 'Ver todas las galerías',
     mostrarMas: 'Mostrar más resultados', pasado: 'Pasado',
-    tipo: { pagina: 'Página', seccion: 'Sección', galeria: 'Galería', post: 'Blog', evento: 'Evento', anuncio: 'Anuncio', documento: 'Documento', formulario: 'Formulario', legal: 'Legal', persona: 'Persona' }
+    tipo: { pagina: 'Página', seccion: 'Sección', galeria: 'Galería', post: 'Blog', evento: 'Evento', anuncio: 'Anuncio', documento: 'Documento', formulario: 'Formulario', persona: 'Persona' }
   };
   var FALLBACK_VA = { abrir: 'Cercar', cerrar: 'Tancar cercador', etiqueta: 'Cercar en la web', placeholder: 'Què és el que busques?', borrar: 'Esborrar la cerca' };
   var POR_PAGINA = 10;

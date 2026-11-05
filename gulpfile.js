@@ -543,24 +543,19 @@ function mergeEventNodes(nodes, schemaEvents, managedEventFilter) {
 // (hope-incliva.com) no cambian: son la misma entidad en ambos idiomas.
 // Metadatos de licencia de imagen (Search Console, v4.31.1): todo ImageObject
 // del @graph (logo de la Organization, primaryImageOfPage, fotos de galería,
-// posts…) lleva creator, creditText, copyrightNotice, license y
-// acquireLicensePage si el HTML no los define. La licencia apunta al apartado
-// de propiedad intelectual del aviso legal (localizado en /va/).
-const IMAGE_LICENSE_PAGE = 'aviso-legal.html#propiedad-intelectual';
-function completeImageObjects(value, lang, seen = new Set()) {
-  if (Array.isArray(value)) return value.forEach((v) => completeImageObjects(v, lang, seen));
+// posts…) lleva creator, creditText y copyrightNotice si el HTML no los define.
+// Desde v4.45.0 sin license/acquireLicensePage: apuntaban al aviso legal, retirado.
+function completeImageObjects(value, seen = new Set()) {
+  if (Array.isArray(value)) return value.forEach((v) => completeImageObjects(v, seen));
   if (!value || typeof value !== 'object' || seen.has(value)) return;
   seen.add(value);
   const types = [].concat(value['@type'] || []);
   if (types.includes('ImageObject')) {
-    const licencia = `${SITE_ORIGIN}/${lang === 'ca' ? 'va/' : ''}${IMAGE_LICENSE_PAGE}`;
     if (!value.creator) value.creator = { '@type': 'Organization', name: SITE_NAME, url: `${SITE_ORIGIN}/` };
     if (!value.creditText) value.creditText = SITE_NAME;
     if (!value.copyrightNotice) value.copyrightNotice = `© ${new Date().getFullYear()} ${SITE_NAME}`;
-    if (!value.license) value.license = licencia;
-    if (!value.acquireLicensePage) value.acquireLicensePage = licencia;
   }
-  for (const k of Object.keys(value)) if (k !== 'creator') completeImageObjects(value[k], lang, seen);
+  for (const k of Object.keys(value)) if (k !== 'creator') completeImageObjects(value[k], seen);
 }
 
 function localizeGraph(nodes, lang) {
@@ -690,7 +685,7 @@ function processJsonLd(html, ctx) {
   const target = website.potentialAction && website.potentialAction.target;
   if (lang === 'ca' && target && typeof target.urlTemplate === 'string') target.urlTemplate = target.urlTemplate.replace(`${SITE_ORIGIN}/`, `${SITE_ORIGIN}/va/`);
   const graph = [organization, website, ...nodes];
-  completeImageObjects(graph, lang);
+  completeImageObjects(graph);
   assertUniqueIds(graph, fileName);
   const script = toJsonLdScript(graph);
   if (found) return { html: html.replace(SCHEMA_SCRIPT_RE, () => script), script: null };
@@ -1147,8 +1142,7 @@ const SEARCH_PAGE_DESC_KEY = {
 };
 // Título/descripción VA de las demás páginas: translations.va.seo.<slug>.{title,description} (v4.33.0)
 const SEARCH_PAGE_TYPE = {
-  'autorizacion-imagen.html': 'formulario', 'autorizacion-imagen-menor.html': 'formulario',
-  'aviso-legal.html': 'legal', 'privacidad.html': 'legal', 'cookies.html': 'legal'
+  'autorizacion-imagen.html': 'formulario', 'autorizacion-imagen-menor.html': 'formulario'
 };
 // Secciones de Archivos (paneles de acordeón): un registro cada una, apuntando a
 // lafalla.html (la home tiene copia). El id es el del .accordion__content.
@@ -1177,10 +1171,9 @@ const SEARCH_SECTIONS = [
   { id: 'sec:nosotros-fallera-mayor-infantil', url: 'lafalla.html#nosotros-fallera-mayor-infantil-lafalla', padre: 'falla.nosotros.titulo', key: 'falla.nosotros.falleraMI', ejercicio: '2026-27', cargo: 'Fallera Mayor Infantil' },
   { id: 'sec:nosotros-presidente-infantil', url: 'lafalla.html#nosotros-presidente-infantil-lafalla', padre: 'falla.nosotros.titulo', key: 'falla.nosotros.presidenteI', ejercicio: '2026-27', cargo: 'Presidente Infantil' },
   { id: 'sec:nosotros-directiva', url: 'lafalla.html#nosotros-directiva-lafalla', padre: 'falla.nosotros.titulo', key: 'falla.nosotros.directiva', ejercicio: '2026-27', directiva: true },
-  // Home: contacto, redes sociales y subvención (textos en buscador.registros.*)
+  // Home: contacto y redes sociales (textos en buscador.registros.*)
   { id: 'sec:contacto', url: '#quieres-mas', seccion: '', key: 'buscador.registros.contacto.titulo', ejercicio: '', descKeys: ['buscador.registros.contacto.desc'] },
-  { id: 'sec:redes', url: '#redes-sociales', seccion: '', key: 'buscador.registros.redes.titulo', ejercicio: '', descKeys: ['buscador.registros.redes.desc'] },
-  { id: 'sec:subvencion', url: '#banner-subvencion', seccion: '', key: 'buscador.registros.subvencion.titulo', ejercicio: '', descKeys: ['buscador.registros.subvencion.desc'] }
+  { id: 'sec:redes', url: '#redes-sociales', seccion: '', key: 'buscador.registros.redes.titulo', ejercicio: '', descKeys: ['buscador.registros.redes.desc'] }
 ];
 // PDFs sin wrapper HTML que entran como documento (v4.33.0). Los que tienen
 // wrapper (Llibrets/*.html, Presentaciones/*.html) entran por el wrapper.
@@ -1217,7 +1210,7 @@ function cargoVa(cargo) {
 function slugPersona(nombre) {
   return String(nombre).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
-const SEARCH_PRIO = { pagina: 1, persona: 1, seccion: 2, formulario: 2, galeria: 3, post: 3, documento: 3, legal: 4, evento: 4, anuncio: 4 };
+const SEARCH_PRIO = { pagina: 1, persona: 1, seccion: 2, formulario: 2, galeria: 3, post: 3, documento: 3, evento: 4, anuncio: 4 };
 
 function tituloSinMarca(title) {
   return String(title || '')

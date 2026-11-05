@@ -242,7 +242,7 @@ body.modo-oscuro .falla::before {
 - `background-attachment: fixed` crea efecto parallax suave
 - La imagen se centra y cubre toda la sección sin duplicar declaraciones entre temas
 
-### Archivos relacionados del banner
+### Archivos relacionados del fondo
 
 | Archivo | Contenido |
 | --- | --- |
@@ -310,76 +310,9 @@ body.modo-oscuro .quieres-mas::before {
 5. Para elementos con `border-radius`, añadir `overflow: hidden` al padre
 6. Para **imágenes** dentro de componentes con overlay `::before`, el `<figure>` debe tener `z-index: 2` (no 1) para asegurar stacking correcto sobre el gradiente
 
-## 🖼️ Inversión de Imagen con CSS Filter (Banner Subvención)
+## 🖼️ Inversión de imagen con CSS filter (lección del banner retirado)
 
-**Problema:** El banner de subvención muestra una imagen con texto negro sobre fondo blanco. En modo oscuro, CSS `color` no afecta al contenido interno de una imagen raster.
-
-**Solución:** Usar `filter: invert(1) hue-rotate(180deg)` en modo oscuro:
-
-- `invert(1)`: Invierte todos los colores (blanco→negro, negro→blanco)
-- `hue-rotate(180deg)`: Rota el tono 180° para restaurar los rojos (el escudo del Ajuntament se mantiene rojo)
-
-**Importante:** No usar `invert(1)` solo — convierte el rojo del escudo en verde.
-
-### Implementación
-
-```scss
-// En _banner-subvencion.scss
-.banner-subvencion__imagen {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  transition: filter 2.4s ease-in-out;
-}
-
-// En _modo-oscuro.scss
-body.modo-oscuro .banner-subvencion__imagen {
-  filter: invert(1) hue-rotate(180deg);
-}
-```
-
-### Formato de imagen: `<picture>` con AVIF/WebP/PNG
-
-Originalmente se usaba `<img src="subvencion.svg">`, pero Safari tiene un bug de WebKit ([Bug 246106](https://bugs.webkit.org/show_bug.cgi?id=246106)) donde CSS `filter` no se compone correctamente sobre un `<img>` que carga un SVG con filtros internos (`feColorMatrix`, máscaras). La solución es usar formatos raster mediante `<picture>`:
-
-**Mejora de rendimiento:**
-
-| Formato | Tamaño | Reducción vs SVG |
-| --- | --- | --- |
-| SVG (original) | 289 KB | — |
-| AVIF | 25 KB | -91% |
-| WebP | 61 KB | -79% |
-| PNG (fallback) | 159 KB | -45% |
-
-```html
-<div id="banner-subvencion" class="banner-subvencion oculto" role="region" aria-label="Información de subvención" aria-hidden="true" inert>
-  <div class="banner-subvencion__contenido">
-    <button class="banner-subvencion__cerrar" aria-label="Cerrar banner">&times;</button>
-    <picture>
-      <source srcset="img/subvenciones/subvencion-2026.avif" type="image/avif">
-      <source srcset="img/subvenciones/subvencion-2026.webp" type="image/webp">
-      <img class="banner-subvencion__imagen" src="img/subvenciones/subvencion-2026.png" alt="Información de subvención">
-    </picture>
-  </div>
-</div>
-```
-
-**Importante:** No revertir a `<img src="subvencion.svg">` — rompe el filtro en Safari.
-
-**Accesibilidad:** El banner oculto debe arrancar con `inert` además de `aria-hidden`, y el contenedor se expone como una región etiquetada. Cuando se cierre desde JavaScript, primero hay que retirar el foco del botón de cierre y después restaurar `inert`/`aria-hidden` para evitar advertencias del navegador y estados focuseables incoherentes.
-
-**Comportamiento actual (v4.44.3):** El banner se muestra **una vez por sesión del navegador**: la primera carga de `index.html` lo abre y fija la cookie de sesión `bannerSubvencionSesion=1` (sin `Max-Age`); mientras dure la sesión no vuelve a salir (ni al recargar, ni al volver a la home, ni en otra pestaña). Al cerrar el navegador la cookie se borra y vuelve a mostrarse. `?forzarBanner=1` o `?resetBanner=1` borran la cookie y lo muestran de nuevo.
-
-**Depuración manual:** `?resetBanner=1` limpia estado legado antes de mostrar la home y `?forzarBanner=1` además aplica `banner-subvencion--forzado` para elevar visibilidad y z-index durante diagnóstico.
-
-### Archivos relacionados
-
-| Archivo | Contenido |
-| --- | --- |
-| `src/scss/components/_banner-subvencion.scss` | Estilos base + transición filter |
-| `src/scss/themes/_modo-oscuro.scss` | Regla `filter: invert(1) hue-rotate(180deg)` |
-| `index.html` | Markup accesible del banner con cierre y `<picture>` AVIF/WebP/PNG |
-| `src/js/banner-subvencion.js` | Apertura una vez por sesión (cookie de sesión), cierre accesible y helpers de depuración |
+El banner de subvención usaba esta técnica hasta que se retiró en v4.45.0. Si vuelve una imagen raster con texto negro sobre blanco que deba verse en modo oscuro, usa `filter: invert(1) hue-rotate(180deg)`: `invert(1)` solo convierte los rojos en verdes. Safari no aplica `filter` CSS sobre un SVG con filtros internos (WebKit [#246106](https://bugs.webkit.org/show_bug.cgi?id=246106)): sirve la imagen como `<picture>` AVIF/WebP/PNG.
 
 ### Forzar reflow en JavaScript
 
@@ -433,7 +366,7 @@ La web incluye una banda decorativa (`.frieze`) que se utiliza como separador vi
 
 ---
 
-Última actualización: 25 de octubre de 2026 - v4.44.0
+Última actualización: 5 de noviembre de 2026 - v4.45.0
 
 ## 🏛️ Componente Frieze (Cenefa)
 

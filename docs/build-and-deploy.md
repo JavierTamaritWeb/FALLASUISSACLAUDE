@@ -213,7 +213,6 @@ Guía completa: [`e2e-testing.md`](./e2e-testing.md).
 
 Guía técnica (modo oscuro + scrollbar Safari/WebKit): [`scrollbar-theme.md`](./scrollbar-theme.md).
 
-Si el cambio toca el banner de subvención, recuerda que la validación real ocurre sobre `dist/`. Para comprobaciones manuales rápidas en la home servida puedes usar `index.html?resetBanner=1` o `index.html?forzarBanner=1`.
 
 ## 🟦 Open Graph (WhatsApp): imagen y cache-buster
 
@@ -255,7 +254,7 @@ Los PDFs en `src/pdf/` se copian al build como `dist/pdf/`. Si añades un PDF nu
 
 ---
 
-Última actualización: 25 de octubre de 2026 - v4.44.0
+Última actualización: 5 de noviembre de 2026 - v4.45.0
 
 ## Guardias de compilación y despliegue (13-09-2026)
 
@@ -285,4 +284,4 @@ Los escudos de cabecera se cargan con `loading="eager"` y `width`/`height` reale
 
 Las fuentes y los derivados de imagen tienen caché larga. Si cambia su contenido en una versión futura, cambiar también el nombre público (`file`/`output` del manifiesto) y sus referencias para no reutilizar una URL inmutable con bytes distintos.
 
-El banner de subvención se entrega visible desde `src/index.html`, con `aria-hidden="false"` y sin `oculto` ni `inert`. No ocultarlo esperando JavaScript: retrasa su pintura e impide verlo si falla el script. El cierre y la excepción de Playwright siguen gestionados por `banner-subvencion.js`.
+El banner de subvención y el de cookies se retiraron en v4.45.0, junto a las páginas legales; sus URL responden 410 (regla E3 del `.htaccess`). Tras el deploy, envía esas URL a IndexNow y pide su retirada en Search Console (ver `docs/google-search-console.md`).

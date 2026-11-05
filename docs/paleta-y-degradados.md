@@ -65,7 +65,7 @@ Desde v4.38.1 `_variables.scss` va sin comentarios por token; los ratios WCAG qu
 | Texto principal / secundario | `$secondary-color` / `$gris-oscuro` | `$blanco-hueso` / `$gris-muy-claro` |
 | Enlace en contenido | `$color-azul-falla` | `$azul-enlace-oscuro` |
 | Acción principal (`.boton`) | fondo blanco 0,94, texto `$coral-texto`, borde coral; hover degradado coral→salmón con texto `$negro-casi` | fondo negro 0,88, texto coral; hover salmón→ámbar |
-| Acción secundaria (`.boton-modal`, `.cookie-banner__btn--rechazar`) | blanco, texto `$coral-texto`, borde coral | transparente, texto claro |
+| Acción secundaria (`.boton-modal`) | blanco, texto `$coral-texto`, borde coral | transparente, texto claro |
 | Acción destacada (`.ics-modal__boton`, `.calendario-eventos__boton-quitar`) | fondo coral, texto `$negro-casi` (6,9:1) | fondo `$rojo-salmon`, texto `$negro-casi` |
 | Deshabilitado (`.boton:disabled`, `[aria-disabled]`) | borde discontinuo gris, texto `$gris-medio-oscuro`, `opacity .7`, sin brillo | borde `$gris-oscuro`, texto `$gris-plateado` |
 | Foco (`:focus-visible` global) | anillo coral 3 px + anillo interior `$negro-casi` 2 px (`box-shadow`) | anillo `$amarillo-anaranjado` + interior `$blanco-hueso` |
@@ -146,4 +146,4 @@ Contraste real sobre translúcidos e imágenes: barra `.25/.30` sobre el hero, d
 
 ---
 
-Última actualización: 25 de octubre de 2026 - v4.44.0
+Última actualización: 5 de noviembre de 2026 - v4.45.0

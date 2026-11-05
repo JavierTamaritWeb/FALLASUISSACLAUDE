@@ -17,7 +17,7 @@ const INDEX_HASH = crypto.createHash('sha1').update(INDEX_RAW).digest('hex').sli
 test.describe('buscador — índice y meta generados por el build', () => {
   test('el índice tiene registros de todos los tipos y sin contenido de prueba', () => {
     const tipos = new Set(INDEX.registros.map((r) => r.tipo));
-    for (const t of ['pagina', 'seccion', 'galeria', 'post', 'documento', 'formulario', 'legal', 'persona']) {
+    for (const t of ['pagina', 'seccion', 'galeria', 'post', 'documento', 'formulario', 'persona']) {
       expect(tipos.has(t), `tipo ${t}`).toBe(true);
     }
     // Eventos (v4.33.0): solo futuros, sin duplicados y con enlace al día; el tipo
@@ -79,7 +79,7 @@ test.describe('buscador — índice y meta generados por el build', () => {
 
   test('todas las páginas ES y /va/ llevan la meta search-index con hash y el script', () => {
     const paginas = fs.readdirSync(DIST).filter((f) => /\.html$/.test(f) && !/^(ai-info|base|mantenimiento|google)/.test(f) && f !== 'llibret_2026.html');
-    expect(paginas.length).toBeGreaterThanOrEqual(29);
+    expect(paginas.length).toBeGreaterThanOrEqual(28);
     for (const f of paginas) {
       for (const rel of [f, path.join('va', f)]) {
         const html = fs.readFileSync(path.join(DIST, rel), 'utf8');
@@ -178,8 +178,6 @@ test.describe('buscador — panel en el navegador', () => {
 
   test('las sugerencias y «Mostrar más» repintan el cuerpo sin cerrar el panel', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
-    // El banner de cookies tapa el pie del panel (donde va «Mostrar más»)
-    await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
     await page.goto('/index.html');
     await page.click('#siteSearchInput');
     const panel = page.locator('#siteSearch');
@@ -217,7 +215,6 @@ test.describe('buscador — panel en el navegador', () => {
   test('dos aspas con papeles distintos: borrar solo con texto y sin cerrar; cerrar sin círculo', async ({ page }) => {
     // Móvil: el campo va dentro del panel (en escritorio está en la barra, v4.44.5)
     await page.setViewportSize({ width: 390, height: 800 });
-    await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
     await page.goto('/index.html');
     await page.click('.header__search-toggle');
     const panel = page.locator('#siteSearch');
@@ -308,7 +305,6 @@ test.describe('buscador — panel en el navegador', () => {
 
   test('v4.35.0: resaltado, combobox con ↑/↓ sin mover el foco, Enter abre el activo, anuncio con la consulta', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
     await page.goto('/index.html');
     await page.click('#siteSearchInput');
     const input = page.locator('#siteSearchInput');
@@ -345,7 +341,6 @@ test.describe('buscador — panel en el navegador', () => {
 
   test('v4.35.0: «Mostrar más» conserva el foco en el primer resultado nuevo; errata corregida visible', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.addInitScript(() => { localStorage.setItem('cookieConsent', 'all'); });
     await page.goto('/index.html');
     await page.click('#siteSearchInput');
     await page.fill('#siteSearchInput', 'falla');

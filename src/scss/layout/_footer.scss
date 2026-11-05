@@ -193,39 +193,12 @@
 
 
 
-// Franja coral del pie (copyright + enlaces legales): línea blanca de 2px
-// arriba y más aire arriba (aquí) y abajo (en .footer__legal)
+// Franja coral del pie (copyright): línea blanca de 2px arriba y el mismo aire
+// arriba y abajo
 .derechos {
   font-size: 1.3rem;
   margin: 0;
-  padding: 1.2rem 1rem 0.4rem;
+  padding: 1.2rem 1rem;
   border-top: 2px solid v.$blanco;
   background-color: var(--coral-marca);
-}
-
-.footer__legal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 0.3rem 0 1.2rem;
-  background-color: var(--coral-marca);
-  font-size: 1.2rem; // antes 0.8rem = 8 px (auditoría SCSS 1.9, v4.39.1)
-  line-height: 1;
-
-  a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.2s ease;
-    min-height: auto;
-    min-width: auto;
-    padding: 0.2rem 0;
-
-    @media (hover: hover) {
-      &:hover {
-        color: v.$blanco;
-        text-decoration: underline;
-      }
-    }
-  }
 }

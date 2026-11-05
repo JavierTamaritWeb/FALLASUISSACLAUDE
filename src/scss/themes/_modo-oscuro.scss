@@ -125,10 +125,7 @@ body,
 :where(.modal-title),
 :where(.close-modal),
 :where(.quieres-form label),
-:where(.quieres-form__campo),
-:where(.banner-subvencion__contenido),
-:where(.banner-subvencion__cerrar),
-:where(.banner-subvencion__imagen) {
+:where(.quieres-form__campo) {
   transition:
     transform 0.5s ease,
     opacity 0.5s ease,
@@ -193,17 +190,6 @@ body.transicion-a-claro .header-inner__barra::before {
 // Transición para el menú desplegable (todos los tamaños)
 body.transicion-a-claro .navegacion {
   transition: background 2.4s ease-in-out !important;
-}
-
-// Transición de oscuro a claro para el banner subvención
-body.transicion-a-claro .banner-subvencion__contenido,
-body.transicion-a-claro .banner-subvencion__cerrar,
-body.transicion-a-claro .banner-subvencion__imagen {
-  transition:
-    background-color 2.4s ease-in-out,
-    color 2.4s ease-in-out,
-    border-color 2.4s ease-in-out,
-    filter 2.4s ease-in-out !important;
 }
 
 // Transición de oscuro a claro para el modal "quieres"
@@ -1074,7 +1060,7 @@ body.modo-oscuro .ofrenda {
 }
 
 /* ----------------------------------------------
-   MODO OSCURO CONTENIDO LEGAL
+   MODO OSCURO CONTENIDO LEGAL (formularios de autorización)
 ------------------------------------------------ */
 body.modo-oscuro .contenido-legal {
   background-color: v.$negro;
@@ -1171,25 +1157,6 @@ body.modo-oscuro .quieres-form__campo {
   background-color: v.$gris-muy-oscuro;
   color: v.$blanco;
   border-color: v.$gris-medio-oscuro;
-}
-
-/* ----------------------------------------------
-   MODO OSCURO BANNER SUBVENCION
------------------------------------------------- */
-body.modo-oscuro .banner-subvencion__contenido {
-  background-color: v.$secondary-color;
-  color: v.$blanco;
-  border-color: rgba(var(--coral-marca-rgb), 0.3);
-  box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.4);
-}
-
-body.modo-oscuro .banner-subvencion__cerrar {
-  color: v.$blanco;
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-body.modo-oscuro .banner-subvencion__imagen {
-  filter: invert(1) hue-rotate(180deg);
 }
 
 

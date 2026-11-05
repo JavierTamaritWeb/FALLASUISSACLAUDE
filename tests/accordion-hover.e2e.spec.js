@@ -15,10 +15,6 @@ const ROSA_HOVER = 'rgb(255, 90, 142)';
 const TURQUESA_SUAVE = 'rgb(224, 242, 243)';
 
 async function preparar(page, ruta) {
-  await page.addInitScript(() => {
-    localStorage.setItem('bannerSubvencionCerrado', 'true');
-    localStorage.setItem('cookieConsent', 'all');
-  });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto(ruta);
   await page.waitForLoadState('networkidle');

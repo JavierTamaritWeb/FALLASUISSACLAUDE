@@ -162,8 +162,11 @@ RewriteRule "^img/(icono_(facebook|instagram|tiktok|youtube)[0-9a-z-]*\.svg|logo
 # G) Favicons movidos a /img/favicon/ (v4.30.4)
 RewriteRule "^img/(favicon\.ico|favicon-16x16\.png|favicon-32x32\.png|apple-touch-icon\.png|android-chrome-…)$" /img/favicon/$1 [R=301,L,QSA]
 
-# I) Imagen del banner de subvención → /img/subvenciones/subvencion-2026.* (v4.30.9)
-RewriteRule "^img/subvencion\.(png|avif|webp)$" /img/subvenciones/subvencion-2026.$1 [R=301,L,QSA]
+# E3) Páginas legales, scripts e imágenes de los banners retirados en v4.45.0 → 410
+RewriteRule "^(va/)?(aviso-legal|privacidad|cookies)\.html$" - [R=410,L]
+RewriteRule "^js/(cookie-banner|banner-subvencion)\.js$" - [R=410,L]
+RewriteRule "^img/(subvenciones/.*|subvencion\.(png|avif|webp)|(elementos-UXUI/)?subvencion\.svg)$" - [R=410,L]
+# (la antigua regla I, 301 de la imagen de la subvención, se retiró en v4.45.0)
 
 # J) Fotos oficiales de los representantes → /img/representantes/foto-oficiales-representantes/ (v4.30.11),
 #    renombradas con el ejercicio en v4.30.13 (un solo 301 al nombre nuevo)
@@ -220,8 +223,8 @@ curl -sI https://fallasuissa.es/pdf/migany2025.pdf | grep -E '^HTTP'
 
 ## Datos estructurados de metadatos de imagen (14-sep-2026, v4.33.0)
 
-Aviso «Falta el campo creator / copyrightNotice / acquireLicensePage / license» (no crítico). Resuelto en el build: `completeImageObjects` añade esos campos a todo `ImageObject` (ver `docs/structured-data.md`). Tras el deploy, en Search Console → Mejoras → *Metadatos de imagen* → **Validar corrección**; la revalidación tarda días.
+Aviso «Falta el campo creator / copyrightNotice / acquireLicensePage / license» (no crítico). El build añade `creator`, `creditText` y `copyrightNotice` a todo `ImageObject`; desde v4.45.0 ya no emite `license`/`acquireLicensePage` (apuntaban al aviso legal retirado), así que Search Console puede volver a mostrar ese aviso no crítico hasta que exista una página de licencia (ver `docs/structured-data.md`). Tras el deploy, en Search Console → Mejoras → *Metadatos de imagen* → **Validar corrección**; la revalidación tarda días.
 
 ---
 
-Última actualización: 13 de septiembre de 2026 - v4.30.21
+Última actualización: 5 de noviembre de 2026 - v4.45.0

@@ -101,14 +101,6 @@ window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/
     observer.observe(trigger);
   }
 
-  function loadAfterPaint(scriptList) {
-    window.requestAnimationFrame(() => {
-      window.setTimeout(() => {
-        loadScripts(scriptList).catch(reportDeferredError);
-      }, 0);
-    });
-  }
-
   function loadOnIdle(scriptList) {
     const startLoad = () => {
       loadScripts(scriptList).catch(reportDeferredError);
@@ -124,7 +116,6 @@ window.SITE_ROOT = window.SITE_ROOT || window.location.pathname.replace(/[^/]*$/
 
   function initDeferredHomeScripts() {
     const root = window.SITE_ROOT;
-    loadAfterPaint([root + 'js/cookie-banner.js']);
     loadOnIdle([root + 'js/timeline.js', root + 'js/acc.js']);
     // Visor de vídeo (plantilla, v4.17.0): la sección .video-dron se retiró de la
     // home; para reactivar un visor con js/video-dron.js, ver docs/visor-video-plantilla.md

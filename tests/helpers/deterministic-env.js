@@ -61,18 +61,15 @@ const MAP_TILE_SVG = `
 async function setDeterministicClientState(page, options = {}) {
   const {
     lang = 'es',
-    darkMode = 'false',
-    bannerSubvencionCerrado = 'true'
+    darkMode = 'false'
   } = options;
 
-  await page.addInitScript(({ initialLang, initialDarkMode, initialBannerState }) => {
+  await page.addInitScript(({ initialLang, initialDarkMode }) => {
     localStorage.setItem('lang', initialLang);
     localStorage.setItem('darkMode', initialDarkMode);
-    localStorage.setItem('bannerSubvencionCerrado', initialBannerState);
   }, {
     initialLang: lang,
-    initialDarkMode: darkMode,
-    initialBannerState: bannerSubvencionCerrado
+    initialDarkMode: darkMode
   });
 }
 

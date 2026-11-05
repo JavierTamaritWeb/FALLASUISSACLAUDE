@@ -29,9 +29,6 @@ const CASOS = [
   ['organigrama', 'es', 'page:organigrama', { critico: true }],
   ['tiempo valencia', 'es', 'page:meteo', { critico: true }],
   ['oratge', 'va', 'page:meteo', { critico: true }],
-  ['cookies', 'va', 'page:cookies', { critico: true, titulo: /galetes|cookies/i }],
-  ['avís legal', 'va', 'page:aviso-legal', { critico: true, titulo: /^Avís legal$/ }],
-  ['privacidad', 'es', 'page:privacidad', { critico: true }],
   ['mapa', 'va', 'page:mapa', { critico: true, titulo: /^Mapa i ubicació$/ }],
   ['on estem', 'va', 'page:mapa', {}],
   ['suissa', 'es', /^page:(index|lafalla)$/, {}],
@@ -54,12 +51,11 @@ const CASOS = [
   ['pablo cortés', 'es', 'per:pablo-cortes', { critico: true }],
   ['directiva', 'es', 'sec:nosotros-directiva', { critico: true }],
   ['delegat web', 'va', 'per:javier-tamarit', {}],
-  // Home: contacto, redes, subvención
+  // Home: contacto y redes
   ['contacto', 'es', 'sec:contacto', { critico: true }],
   ['email', 'es', 'sec:contacto', {}],
   ['instagram', 'es', 'sec:redes', { critico: true }],
   ['xarxes socials', 'va', 'sec:redes', { critico: true, titulo: /^Xarxes socials$/ }],
-  ['subvención', 'es', 'sec:subvencion', { critico: true }],
   // Archivos, galerías, documentos
   ['llibrets', 'es', /^doc:llibret/, { critico: true }],
   ['ofrenda 2026', 'es', 'sec:ofrenda-2026', { critico: true }],

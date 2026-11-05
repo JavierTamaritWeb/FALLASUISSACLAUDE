@@ -34,29 +34,6 @@ test('la portada no descarga las fotografías de los archivos cerrados', async (
   await expect(pending.first()).toHaveCSS('content-visibility', 'hidden');
 });
 
-test('el banner se entrega visible sin JavaScript y no espera a Swiper', async ({ browser }) => {
-  const staticPage = await browser.newPage({ javaScriptEnabled: false, serviceWorkers: 'block' });
-  try {
-    await staticPage.goto('/');
-    await expect(staticPage.locator('#banner-subvencion')).toBeVisible();
-    await expect(staticPage.locator('#banner-subvencion')).toHaveAttribute('aria-hidden', 'false');
-  } finally {
-    await staticPage.close();
-  }
-  const page = await browser.newPage({ storageState: { cookies: [], origins: [] }, serviceWorkers: 'block' });
-  let release;
-  const pending = new Promise(resolve => { release = resolve; });
-  await page.route('**/swiper-bundle.min.js', async route => { await pending; await route.abort(); });
-  try {
-    await page.goto('/', { waitUntil: 'commit' });
-    await expect(page.locator('#banner-subvencion')).toHaveAttribute('aria-hidden', 'false');
-    await expect(page.locator('#banner-subvencion')).toBeVisible();
-  } finally {
-    release();
-    await page.close();
-  }
-});
-
 for (const lang of ['es', 'va']) {
   for (const slug of pages) {
     test(`SEO sin JavaScript: ${lang}/${slug}`, async ({ browser }) => {

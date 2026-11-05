@@ -1,5 +1,7 @@
 // Componente: Contenido Legal
-// Descripción: Estilos para páginas legales (aviso-legal.html, privacidad.html, cookies.html)
+// Descripción: caja de documento de los formularios de autorización de imagen
+// (autorizacion-imagen.html y autorizacion-imagen-menor.html) y su hoja de
+// impresión A4. Las páginas legales que también la usaban se retiraron en v4.45.0.
 // v4.37.2: paleta de la home en claro (página rosa muy claro, títulos azules,
 // cajas destacadas turquesa); el modo oscuro vive en _modo-oscuro.scss.
 
@@ -318,12 +320,10 @@
         color: #000 !important;
     }
 
-    // Ocultar cromo de la web: header, footer, banners, frisos
+    // Ocultar cromo de la web: header, footer, frisos
     .header-inner,
     .footer,
     .frieze,
-    .cookie-banner,
-    .banner-subvencion,
     .header__notificacion {
         display: none !important;
     }

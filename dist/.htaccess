@@ -242,6 +242,12 @@ ErrorDocument 503 /mantenimiento.html
     #    sin entrada en sitemap); desde v4.7.9 se excluye del build -> 410 Gone
     RewriteRule ^(va/)?base\.html$ - [R=410,L]
 
+    # E3) Páginas legales y banners retirados en v4.45.0 (decisión del usuario):
+    #     410 Gone para que los buscadores las saquen del índice, no un 404 temporal
+    RewriteRule "^(va/)?(aviso-legal|privacidad|cookies)\.html$" - [R=410,L]
+    RewriteRule "^js/(cookie-banner|banner-subvencion)\.js$" - [R=410,L]
+    RewriteRule "^img/(subvenciones/.*|subvencion\.(png|avif|webp)|(elementos-UXUI/)?subvencion\.svg)$" - [R=410,L]
+
     # E2) robots-ai-optimized.txt (v4.43.0): los grupos por bot viven ahora en
     #     /robots.txt (el único que leen los rastreadores); 301 por cortesía.
     RewriteRule ^robots-ai-optimized\.txt$ /robots.txt [R=301,L]
@@ -251,7 +257,7 @@ ErrorDocument 503 /mantenimiento.html
     #    fondo del traje, cenefa, iconos de sección, imágenes del modal…).
     #    Las vistas previas ya compartidas en WhatsApp/Facebook y el HTML
     #    cacheado siguen pidiendo la ruta antigua; QSA conserva el ?v=.
-    RewriteRule "^img/((og-share|fondo_traje|calendario|camara|error|exito|pluma|termometro|Eventos|Masclet2|preguntar|Preguntar)\.(png|PNG|jpg|jpeg|avif|webp)|cenefa_sin_fondo\.svg|blocK\.svg|Calendario\.svg|subvencion\.svg)$" /img/elementos-UXUI/$1 [R=301,L,QSA]
+    RewriteRule "^img/((og-share|fondo_traje|calendario|camara|error|exito|pluma|termometro|Eventos|Masclet2|preguntar|Preguntar)\.(png|PNG|jpg|jpeg|avif|webp)|cenefa_sin_fondo\.svg|blocK\.svg|Calendario\.svg)$" /img/elementos-UXUI/$1 [R=301,L,QSA]
 
     # G) Favicons movidos a /img/favicon/ en v4.30.4 (los navegadores cachean
     #    el favicon y el HTML cacheado por la CDN sigue pidiendo /img/favicon-*)
@@ -263,9 +269,7 @@ ErrorDocument 503 /mantenimiento.html
     #    un main.css antiguo cacheado seguiría pidiendo /img/icono_*.svg)
     RewriteRule "^img/(icono_(facebook|instagram|tiktok|youtube)[0-9a-z-]*\.svg|logo_falla\.svg)$" /img/iconos-redes-sociales/$1 [R=301,L,QSA]
 
-    # I) Imagen del banner de subvención movida a /img/subvenciones/ y
-    #    renombrada con el año en v4.30.9 (HTML de la home cacheado por la CDN)
-    RewriteRule "^img/subvencion\.(png|avif|webp)$" /img/subvenciones/subvencion-2026.$1 [R=301,L,QSA]
+    # I) (retirada en v4.45.0: la imagen del banner de subvención da 410, regla E3)
 
     # J) Fotos oficiales de los representantes movidas a
     #    /img/representantes/foto-oficiales-representantes/ en v4.30.11

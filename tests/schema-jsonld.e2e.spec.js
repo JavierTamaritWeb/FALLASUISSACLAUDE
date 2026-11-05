@@ -53,7 +53,7 @@ function collect(value, ids, refs) {
 }
 
 const PAGINAS = paginas();
-expect(PAGINAS.length).toBeGreaterThanOrEqual(60);
+expect(PAGINAS.length).toBeGreaterThanOrEqual(58); // las 6 páginas legales (ES y VA) se retiraron en v4.45.0
 
 test.describe('JSON-LD — todas las páginas (dist/, ES y /va/)', () => {
   for (const rel of PAGINAS) {
@@ -180,11 +180,12 @@ test.describe('JSON-LD — nodos propios', () => {
           expect(typeof img.width, `${f} foto ${i + 1} width`).toBe('number');
           expect(typeof img.height).toBe('number');
           expect(img.encodingFormat).toMatch(/^image\//);
-          // Metadatos de licencia de imagen (Search Console, v4.31.1)
+          // Autoría de la imagen (v4.31.1); sin license/acquireLicensePage desde v4.45.0
+          // (apuntaban al aviso legal, retirado)
           expect(img.creator?.name).toBeTruthy();
           expect(img.copyrightNotice).toMatch(/^© \d{4} /);
-          expect(img.license).toBe(`${pref}aviso-legal.html#propiedad-intelectual`);
-          expect(img.acquireLicensePage).toBe(img.license);
+          expect(img.license).toBeUndefined();
+          expect(img.acquireLicensePage).toBeUndefined();
           const expectedAlt = fotos[i].altKey?.split('.').reduce((value, key) => value?.[key], tabla) || fotos[i].alt;
           expect(img.name).toBe(expectedAlt);
         });
@@ -251,11 +252,6 @@ test.describe('JSON-LD — nodos propios', () => {
       expect(g('calendario.html').find((n) => hasType(n, 'WebPage')).significantLink).toEqual([`${pref}eventos.html`]);
       expect(g('deportes.html').find((n) => hasType(n, 'WebPage')).mentions.name).toBe('Junta Central Fallera');
       expect(g('ofrenda.html').find((n) => hasType(n, 'WebPage')).keywords.length).toBeGreaterThan(1);
-      for (const legal of ['aviso-legal.html', 'privacidad.html', 'cookies.html']) {
-        const pagina = g(legal).find((n) => hasType(n, 'WebPage'));
-        expect(pagina.publisher).toEqual({ '@id': ORG_ID });
-        expect(pagina.isAccessibleForFree).toBe(true);
-      }
       for (const [form, clave] of [['autorizacion-imagen.html', 'formMayores'], ['autorizacion-imagen-menor.html', 'formMenores']]) {
         const grafo = g(form);
         const doc = grafo.find((n) => hasType(n, 'DigitalDocument'));

@@ -24,7 +24,7 @@ una primera línea tipográfica con mayor presencia, «L’Alqueria del Favero»
 una segunda línea más ligera y un separador coral adaptable. La guía técnica
 está documentada en [`docs/global-styles.md`](./docs/global-styles.md).
 
-🆕 Última actualización: 25 de octubre de 2026 - v4.44.0 - **Nuevo**: galería «Mig any de Falles 2026» (`galeria_11`, 17 fotos de la pancarta de los representantes infantiles, las falleras y el concurso de paellas).
+🆕 Última actualización: 5 de noviembre de 2026 - v4.45.0 - **Cambios**: pie y barra a todo el ancho, campo de búsqueda en la barra (píldora con lupa) y retirada de las páginas legales, del banner de cookies y del banner de subvención (las URL responden 410).
 
 ## 🌐 Vista Previa
 
@@ -138,7 +138,6 @@ WEBFALLASUISSA/
 │   ├── nav-menu.js            # Menú móvil (hamburguesa + overlay)
 │   ├── board.js               # Tablón dinámico y adjuntos validados
 │   ├── scroll-reveal.js       # Reveal on scroll global
-│   ├── banner-subvencion.js   # Tarjeta institucional flotante visible en cada carga de la home
 │   ├── colaboraciones-lightbox.js # Lightbox accesible para HOPE
 │   ├── meteo.js               # Integración meteorológica
 │   ├── galeria_[1-4].js       # Galerías especializadas
@@ -165,7 +164,7 @@ WEBFALLASUISSA/
 
 | Página | Descripción | Funcionalidades |
 | -------- | ------------- | ----------------- |
-| `index.html` | Página principal | Historia, organigrama, cuenta atrás, colaboraciones, banner institucional |
+| `index.html` | Página principal | Historia, organigrama, cuenta atrás, colaboraciones |
 | `lafalla.html` | Información detallada | Falleras mayores, presidentes |
 | `colaboraciones.html` | Colaboraciones | Proyecto HOPE, grid fotográfico y lightbox |
 | `eventos.html` | Sistema de eventos | Calendario, tablón, PDFs |

@@ -21,13 +21,6 @@ const listar = (dir) => fs.readdirSync(path.join(root, 'dist', dir))
 const paginas = [...listar(''), ...listar('va')];
 
 test.describe('ninguna página desborda en horizontal', () => {
-  test.beforeEach(async ({ context }) => {
-    await context.addInitScript(() => {
-      localStorage.setItem('bannerSubvencionCerrado', 'true');
-      localStorage.setItem('cookieConsent', 'necessary');
-    });
-  });
-
   for (const ancho of ANCHOS) {
     test(`${paginas.length} páginas a ${ancho} px`, async ({ page }) => {
       test.setTimeout(240000);

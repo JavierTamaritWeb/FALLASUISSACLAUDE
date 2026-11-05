@@ -79,3 +79,22 @@ test.describe('Integridad del HTML generado', () => {
     expect(badRequests).toEqual([]);
   });
 });
+
+// v4.45.0: las páginas legales, el banner de cookies y el de subvención se
+// retiraron sin dejar rastro. Solo el .htaccess las nombra (410 Gone).
+test('sin rastro de las páginas legales ni de los banners retirados (v4.45.0)', () => {
+
+
+  const dist = path.join(__dirname, '..', 'dist');
+  const RASTRO = /aviso-legal|privacidad\.html|cookies\.html|banner-subvencion|cookie-banner|subvencion-2026|cookieConsent|bannerSubvencion|footer__legal|propiedad-intelectual/;
+  const recorrer = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+    const ruta = path.join(dir, e.name);
+    if (e.isDirectory()) return e.name === 'img' || e.name === 'pdf' || e.name === 'fonts' ? [] : recorrer(ruta);
+    return /\.(html|xml|txt|json|js|css|md)$/.test(e.name) ? [ruta] : [];
+  });
+  const conRastro = recorrer(dist).filter((f) => RASTRO.test(fs.readFileSync(f, 'utf8')));
+  expect(conRastro.map((f) => path.relative(dist, f))).toEqual([]);
+  for (const f of ['aviso-legal.html', 'privacidad.html', 'cookies.html', 'va/aviso-legal.html', 'js/cookie-banner.js', 'js/banner-subvencion.js', 'img/subvenciones']) {
+    expect(fs.existsSync(path.join(dist, f)), f).toBe(false);
+  }
+});

@@ -30,8 +30,8 @@ function collect(value, ids, refs, imgs) {
   }
   if (hasType(value, 'ImageObject')) {
     imgs.count++;
-    // Metadatos de licencia que pide Search Console (v4.31.1)
-    if (!value.creator || !value.copyrightNotice || !value.license || !value.acquireLicensePage) imgs.sinLicencia++;
+    // Autoría de la imagen (v4.31.1; sin license/acquireLicensePage desde v4.45.0)
+    if (!value.creator || !value.copyrightNotice) imgs.sinLicencia++;
     // Dimensiones (v4.43.0): solo se exigen a las imágenes propias con url/contentUrl
     if ((value.contentUrl || value.url) && (typeof value.width !== 'number' || typeof value.height !== 'number')) imgs.sinDimensiones++;
   }
@@ -92,7 +92,7 @@ for (const rel of listPages()) {
   for (const p of PROHIBIDOS) if (texto.includes(p) || (p.includes('fallasuïssal') && html.includes(p))) problemas.push(`contiene "${p}"`);
   if (/"(?:contentUrl|url|item)":\s*"[^"]*\.\.\//.test(texto)) problemas.push('URL relativa (../) en el JSON-LD');
   if (/"contentUrl":\s*"[^"]*\?v=/.test(texto)) problemas.push('contentUrl con ?v=');
-  if (imgs.sinLicencia) problemas.push(`${imgs.sinLicencia} ImageObject sin creator/copyrightNotice/license/acquireLicensePage`);
+  if (imgs.sinLicencia) problemas.push(`${imgs.sinLicencia} ImageObject sin creator/copyrightNotice`);
   if (imgs.sinDimensiones) problemas.push(`${imgs.sinDimensiones} ImageObject sin width/height`);
   if (imgs.videoSinFecha) problemas.push(`${imgs.videoSinFecha} VideoObject con uploadDate sin hora y zona horaria`);
   if (problemas.length) errores++;
