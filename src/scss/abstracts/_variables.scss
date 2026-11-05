@@ -127,6 +127,7 @@ $espaciado: 1rem;
 $border-radius: 1rem;
 $box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 $transicion: 0.3s ease;
+$margen-lateral-ancho: clamp(1.6rem, 3vw, 4rem); // pie y barra a todo el ancho (v4.44.1)
 
 $frieze-img: url('../img/elementos-UXUI/cenefa-barroca-4.seo.webp');
 $frieze-bg: $blanco-hueso;

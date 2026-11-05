@@ -12,12 +12,8 @@
     align-items: center;
   
     @media (min-width: 768px) {
-      justify-self: end; // a la derecha en escritorio
-    }
-  
-    
-    @media (min-width: 768px) {
-        flex: 1;
+        justify-self: end; // a la derecha en escritorio
+        min-width: 0;
         text-align: right;
         justify-content: flex-end;
     }

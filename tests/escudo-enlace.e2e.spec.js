@@ -65,3 +65,32 @@ test.describe('Escudos enlazados a la home', () => {
     await Promise.all([page.waitForURL(HOME), page.keyboard.press('Enter')]);
   });
 });
+
+// v4.44.1: el pie ocupa todo el ancho y el escudo queda en su centro exacto
+test.describe('Pie a todo el ancho con el escudo centrado', () => {
+  for (const pagina of ['/index.html', '/galeria_11.html']) {
+    for (const ancho of [390, 768, 1280, 2000]) {
+      test(`${pagina} a ${ancho} px`, async ({ page }) => {
+        await page.setViewportSize({ width: ancho, height: 900 });
+        await page.goto(pagina);
+        const escudo = page.locator('.footer__escudo');
+        await escudo.scrollIntoViewIfNeeded();
+        await expect(escudo).toBeVisible();
+        const m = await page.evaluate(() => {
+          const caja = (s) => document.querySelector(s).getBoundingClientRect();
+          const pie = caja('.footer');
+          const cont = caja('.footer__contenedor');
+          const esc = caja('.footer__escudo');
+          return {
+            anchoPie: pie.width,
+            anchoCont: cont.width,
+            centroPie: pie.left + pie.width / 2,
+            centroEscudo: esc.left + esc.width / 2,
+          };
+        });
+        expect(Math.abs(m.anchoCont - m.anchoPie)).toBeLessThanOrEqual(1);
+        expect(Math.abs(m.centroEscudo - m.centroPie)).toBeLessThanOrEqual(1);
+      });
+    }
+  }
+});

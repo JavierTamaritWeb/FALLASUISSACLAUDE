@@ -8,11 +8,12 @@
   position: fixed;        // Barra fija en la parte superior
   top: 1rem;
   top: calc(env(safe-area-inset-top) + 1rem);
+  // Todo el ancho de la pantalla (v4.44.1; antes tope de 100rem centrado):
+  // en móvil de borde a borde y desde 768 px con el mismo margen lateral que el pie
   left: 0;
-  right: 0;               // Asegura que ocupe todo el ancho posible
-  max-width: 100rem;      // Nunca excede 120 rem
-  width: 100%;            // Se adapta a pantallas menores
-  margin: 0 auto;         // Se centra cuando la pantalla sea mayor de 120rem
+  right: 0;
+  width: auto;
+  margin: 0;
 
   display: flex;
   flex-direction: row;
@@ -50,6 +51,8 @@
 
   @media (min-width: 768px) {
     justify-content: space-between;
+    left: v.$margen-lateral-ancho;
+    right: v.$margen-lateral-ancho;
   }
 
   // Fusionado desde el segundo bloque de la barra (auditoría SCSS 2.2, v4.39.2)
@@ -174,7 +177,6 @@
   position: fixed;
   top: 1rem;
   top: calc(env(safe-area-inset-top) + 1rem);
-  left: 0;
   z-index: v.$z-barra;
 }
 

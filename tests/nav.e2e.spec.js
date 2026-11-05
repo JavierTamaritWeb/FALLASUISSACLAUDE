@@ -308,3 +308,24 @@ test.describe('Botón Inicio de la barra', () => {
     await expect(page).toHaveURL(/\/index\.html$/);
   });
 });
+
+// v4.44.1: la barra fija ocupa todo el ancho (antes tope de 100rem centrado);
+// en móvil de borde a borde y desde 768 px con el mismo margen que el pie
+test.describe('Barra principal a todo el ancho', () => {
+  for (const pagina of ['/index.html', '/galeria_11.html']) {
+    for (const ancho of [390, 768, 1280, 2000]) {
+      test(`${pagina} a ${ancho} px`, async ({ page }) => {
+        await page.setViewportSize({ width: ancho, height: 900 });
+        await page.goto(pagina);
+        const m = await page.evaluate(() => {
+          const barra = document.querySelector('.header__barra, .header-inner__barra').getBoundingClientRect();
+          const gutter = parseFloat(getComputedStyle(document.querySelector('.footer__contenedor')).paddingLeft);
+          return { izq: barra.left, der: innerWidth - barra.right, gutter };
+        });
+        const esperado = ancho < 768 ? 0 : m.gutter;
+        expect(Math.abs(m.izq - esperado)).toBeLessThanOrEqual(1);
+        expect(Math.abs(m.der - esperado)).toBeLessThanOrEqual(1);
+      });
+    }
+  }
+});

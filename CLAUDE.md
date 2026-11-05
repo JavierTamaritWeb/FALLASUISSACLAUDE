@@ -2,7 +2,7 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) al trabajar con el código de este repositorio.
 
-**Versión:** 4.44.0 · **Última actualización:** 25 de octubre de 2026
+**Versión:** 4.44.1 · **Última actualización:** 5 de noviembre de 2026
 
 > El historial de versiones está en el **Changelog** al final. El comportamiento del estado actual se documenta en **Arquitectura** y **Restricciones**.
 
@@ -164,7 +164,7 @@ Todo el código fuente vive bajo `src/`; la raíz del repo solo contiene tooling
 
 ### Nota de versión
 
-`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.44.0).
+`package.json` y `package-lock.json` están sincronizados con la versión de release actual (4.44.1).
 
 ## Decisiones y restricciones de arquitectura
 
@@ -393,6 +393,8 @@ Usa wrappers HTML (ver `src/pdf/Llibrets/`). Incluye favicon, Open Graph, Twitte
 ## Changelog
 
 Los detalles del estado actual están en **Arquitectura** y **Restricciones**; esto es el índice cronológico.
+
+- **4.44.1** — **Pie y barra principal a todo el ancho, con el escudo del pie en el centro exacto** (31 páginas, claro y oscuro). **Barra fija** (`.header__barra`/`.header-inner__barra`, `_header-barra.scss`): deja el tope `max-width: 100rem` centrado; en < 768 px va de borde a borde como antes y desde 768 px se separa de los bordes con el token nuevo `$margen-lateral-ancho` (`clamp(1.6rem, 3vw, 4rem)`, bloque 9 de `_variables.scss`), el mismo que el pie, así los bordes de la barra y del contenido del pie quedan alineados; `.header__barra--fixed` ya no repite `left: 0` (pisaba el margen). **Pie**: `.footer__contenedor` deja `width: 95%; max-width: 120rem` y pasa a `width: 100%` con margen lateral `$margen-lateral-ancho`; en ≥ 768 px la rejilla de `.footer__contenido` pasa de `1fr auto 1fr` a `minmax(0, 1fr) auto minmax(0, 1fr)` (las columnas del menú y de las redes miden siempre lo mismo, así el escudo cae en el centro geométrico aunque crezca su contenido) y el enlace del escudo lleva `justify-self: center; width: auto`. En `_sociales.scss` se funden los dos `@media (min-width: 768px)` y sale el `flex: 1` (sin efecto en un item de grid). Guardia nueva en `tests/escudo-enlace.e2e.spec.js` (smoke): en `index` y `galeria_11` a 390/768/1280/2000 px el contenedor mide lo que el pie y el centro del escudo coincide con el del pie (± 1 px); y en `tests/nav.e2e.spec.js` la barra va de borde a borde en móvil y con el margen del pie desde 768 px. Baseline visual `galerias-desktop-light` regenerado (el resto queda bajo la tolerancia del 1 %).
 
 - **4.44.0** — **Nueva galería «Mig any de Falles 2026»** (`galeria_11`, undécima galería; mismo nombre en ES y VA por decisión del usuario): 17 fotos del 24 y 25 de octubre de 2026 —pancarta de la Fallera Mayor Infantil y el Presidente Infantil 2026-27, falleras con el traje de labradora, fallera y fallero infantiles y concurso de paellas— en `src/img/mig-any/mig-any-2026/mig-any-2026-001…017.jpeg` (JPEG q85 sin metadatos, ≤2048 px, 8,5 MB; el build genera AVIF/WebP). `src/galeria_11.html` clonado de `galeria_10`, `dataPages11.json` con `altKey` → `galleryAlts.g11.p1…p17` (ES/VA), `galeria.galeria11`/`galeria11-texto` y `seo.galeria_11` ES/VA, tarjeta tras la de galeria_10 en `galerias.html` e `index.html` (miniatura `-002.jpeg`), palabras clave `gal:11` en `search-keywords.json` («mig any», «concurso de paellas»). Automático: paginación 1…11, registro del buscador, `ItemList` de 11, 17 `ImageObject`, sitemaps (64 URL). Tests: `galeria-9-album` cubre `galeria_11`, `seo-regressions` recorre 11 galerías, `search-eval` gana dos consultas críticas (54/54; «paella» pasa a dar `gal:11` primero y `gal:7` segundo, dentro del top 3 exigido), `buscador.e2e` admite el título igual en ambas lenguas; 9 baselines visuales regenerados (`index` y `galerias`). Verificado con Playwright a 1280 y 390 px, ES y `/va/`, sin errores de consola. Sin cambios de SCSS ni JS.
 
